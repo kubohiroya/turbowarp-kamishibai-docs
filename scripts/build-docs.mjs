@@ -11,7 +11,7 @@ import {
   staffDocumentConfig,
   workshopDocumentConfig,
 } from '../docs/config.mjs';
-import sourceSnapshot from '../sources/tm-kamishibai.json' with {type: 'json'};
+import sourceSnapshot from '../sources/turbowarp-kamishibai-app.json' with {type: 'json'};
 import {
   collectSourceInputs,
   copyFileIfStale,
@@ -51,7 +51,7 @@ const commonPublicationInputs = [
   path.join(projectRoot, 'docs/fonts'),
   path.join(projectRoot, 'site/document-toc.css'),
   path.join(projectRoot, 'site/document-toc.js'),
-  path.join(projectRoot, 'sources/tm-kamishibai.json'),
+  path.join(projectRoot, 'sources/turbowarp-kamishibai-app.json'),
   path.join(projectRoot, 'package.json'),
   path.join(projectRoot, 'pnpm-lock.yaml'),
 ];
@@ -208,7 +208,7 @@ function rewriteMarkdownLinks(source, document, htmlPath) {
     }
 
     const repositoryPath = path.relative(projectRoot, targetSourcePath).split(path.sep).join('/');
-    return `href="https://github.com/kubohiroya/tm-kamishibai-docs/blob/main/${repositoryPath}${hash}"`;
+    return `href="https://github.com/kubohiroya/turbowarp-kamishibai-docs/blob/main/${repositoryPath}${hash}"`;
   });
 }
 
@@ -277,8 +277,8 @@ async function writeStaticSiteHtml(sourcePath, outputPath) {
   const relativePath = path.relative(distRoot, outputPath).split(path.sep).join('/');
   const pathname =
     relativePath === 'index.html'
-      ? '/tm-kamishibai-docs/'
-      : `/tm-kamishibai-docs/${relativePath.replace(/(?:index\.html)?$/u, '')}`;
+      ? '/turbowarp-kamishibai-docs/'
+      : `/turbowarp-kamishibai-docs/${relativePath.replace(/(?:index\.html)?$/u, '')}`;
   await writeFileIfChanged(outputPath, injectSiteAppBar(source, assetBase, {pathname}));
 }
 

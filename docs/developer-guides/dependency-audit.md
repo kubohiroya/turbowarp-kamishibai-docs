@@ -1,13 +1,13 @@
-# TM紙芝居 3.2 依存関係監査記録
+# TurboWarp紙芝居 3.2 依存関係監査記録
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-対象アプリ: TM Kamishibai 3.2.x\
+対象アプリ: TurboWarp-Kamishibai 3.2.x\
 対象DSL系列: `kamishibai=3.1`、`kamishibai=3.2`
 
-> この記録は、2026-08-03時点のTM Kamishibai本体リポジトリを対象にした監査結果です。
+> この記録は、2026-08-03時点のTurboWarp-Kamishibai本体リポジトリを対象にした監査結果です。
 > 2026-08-04のリポジトリ分離で、Vivliostyle、rubygana、文書ビルド用overrideは
-> `tm-kamishibai-docs`へ移されました。本体にはSB3、VM、ビルダーに必要な依存だけを残します。
+> `turbowarp-kamishibai-docs`へ移されました。本体にはSB3、VM、ビルダーに必要な依存だけを残します。
 
 ## 監査基準
 

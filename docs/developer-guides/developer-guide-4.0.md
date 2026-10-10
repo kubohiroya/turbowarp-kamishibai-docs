@@ -3,7 +3,7 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 公開プレリリース`4.0.0-rc.8`の固定実装基準を説明する保守資料\
-調査基準: TM Kamishibai `29c0dea`、2026年8月20日
+調査基準: TurboWarp-Kamishibai `29c0dea`、2026年8月20日
 
 > **配布状態との区別:** `v4.0.0-rc.8`はnpm `next`、GitHub prerelease、Pagesのダウンロード導線として
 > 公開済みです。安定版の推奨は`3.2.3`で、正式版`v4.0.0`は未公開です。
@@ -13,14 +13,14 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 [台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)へ進んでください。本書で使う内部用語は、先に
 [内部仕様書の用語表](internal-specification-4.0.md#terminology)で確認できます。
 
-このガイドは、TM紙芝居のDSL 4.0 source frontend、runtime、platform adapter、preview、ビルド、
+このガイドは、TurboWarp紙芝居のDSL 4.0 source frontend、runtime、platform adapter、preview、ビルド、
 リリースを変更・検証・公開するソフトウェア開発者向けの作業資料です。対象となる実装基準は
-`kubohiroya/tm-kamishibai`のコミット
-[`29c0deadcb98badf94a0244c479ca896dc71f842`](https://github.com/kubohiroya/tm-kamishibai/tree/29c0deadcb98badf94a0244c479ca896dc71f842)
+`kubohiroya/turbowarp-kamishibai-app`のコミット
+[`29c0deadcb98badf94a0244c479ca896dc71f842`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/29c0deadcb98badf94a0244c479ca896dc71f842)
 です。本書中のpath、command、artifact名は、このコミットで確認しています。
 
-本書では、`kubohiroya/tm-kamishibai`を「本体リポジトリ」、
-`kubohiroya/tm-kamishibai-docs`を「文書リポジトリ」と呼びます。DSLのfieldとactionを調べる場合は
+本書では、`kubohiroya/turbowarp-kamishibai-app`を「本体リポジトリ」、
+`kubohiroya/turbowarp-kamishibai-docs`を「文書リポジトリ」と呼びます。DSLのfieldとactionを調べる場合は
 [紙芝居DSL 4.0 Schemaリファレンス](../dsl-author-guides/dsl-4.0-schema-reference.md)、作品の配置と記述方法を
 調べる場合は[紙芝居DSL 4.0 台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)を参照してください。
 
@@ -83,7 +83,7 @@ DSL 4.0の構造仕様は、本体リポジトリの`schema/dsl-4.schema.json`�
 
 ```bash
 pnpm docs:dsl4:sync -- \
-  --repository ../tm-kamishibai \
+  --repository ../turbowarp-kamishibai-app \
   --commit 29c0deadcb98badf94a0244c479ca896dc71f842
 pnpm docs:dsl4:check
 git diff -- \
@@ -142,7 +142,7 @@ pnpm test
 | `src/builder/dsl4-build-output.js`           | disk candidateの再検証とatomic 導入                               |
 | `src/builder/dsl4-local-preview-command.js`  | `preview-dsl4 --watch`のlifecycle                                 |
 | `src/builder/dsl4-local-preview-host.js`     | loopback transport、session token、watcher                        |
-| `bin/tm-kamishibai.mjs`                      | 公開CLI entrypoint                                                |
+| `bin/turbowarp-kamishibai.mjs`               | 公開CLI entrypoint                                                |
 | `release-metadata/4.0.0-rc.8.json`           | rc.8の状態、source identity、artifact、公開先                     |
 | `scripts/sb3/dsl4-downloadable-release.mjs`  | Standard Runtime release sourceの決定的生成と検査                 |
 | `scripts/download-catalog.mjs`               | `kamishibai-4.0.0-rc.8.sb3`のバージョン、source identity、SHA-256 |

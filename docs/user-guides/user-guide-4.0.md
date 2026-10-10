@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-この説明書は、TM紙芝居4.0のサンプル作品を初めてプレイする方と、進行を手伝う方のための案内です。
+この説明書は、TurboWarp紙芝居4.0のサンプル作品を初めてプレイする方と、進行を手伝う方のための案内です。
 まずは「浦島太郎」を開き、作品を始める、進める、終えるという一連の操作を試します。
 
 > **現在利用できるもの**
@@ -13,7 +13,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## まず遊んでみる
 
-1. [浦島太郎 Web版](https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/web-4.0/)を開く
+1. [浦島太郎 Web版](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/web-4.0/)を開く
 2. 読み込みが終わるまで待つ
 3. タイトル画面に4.0と表示されていることを確かめ、右上の「×」を押す
 4. 最初の場面が表示されたら、画面の案内に従って進める
@@ -57,7 +57,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 ## 終える・もう一度見る
 
 - 同じ作品を最初から見る: ページを再読み込みし、タイトル画面から始める
-- 別の作品を見る: [作品一覧](https://kubohiroya.github.io/tm-kamishibai-samples/)へ戻る
+- 別の作品を見る: [作品一覧](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)へ戻る
 - 完全に終了する: タブを閉じ、カメラ使用中の表示が消えたことを確かめる
 
 別のタブでも同じ作品を開いていると、カメラが動き続けることがあります。その場合は同じ作品を開いている
@@ -80,7 +80,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 自分の台本を試す
 
-自分で台本を作っている方は、[私の浦島太郎 Web版](https://kubohiroya.github.io/tm-kamishibai-samples/stories/my-urashima/web-4.0/)で
+自分で台本を作っている方は、[私の浦島太郎 Web版](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/web-4.0/)で
 台本ファイルを選んで試せます。
 
 YAMLは、場面や登場人物を項目ごとに記述するテキスト形式です。4.0の台本ファイルは`.k4.yml`という名前で

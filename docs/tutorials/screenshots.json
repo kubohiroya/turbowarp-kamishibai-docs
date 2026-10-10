@@ -9,35 +9,35 @@
     "sourceIdentity": "sha256:a6c4be01405af1b3070f6d02dc584a55bd2b45844ae48761aa3d4141ef474ca4",
     "sb3Sha256": "2494b43f43f7b7acbd1ce9d307fcff383d239931aa46de550f76c3eb3ec40f3c",
     "npmUrl": "https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.5",
-    "githubReleaseUrl": "https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.5",
-    "pagesUrl": "https://kubohiroya.github.io/tm-kamishibai/downloads/",
+    "githubReleaseUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.5",
+    "pagesUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/",
     "evidence": [
-      "https://github.com/kubohiroya/tm-kamishibai/issues/583",
-      "https://github.com/kubohiroya/tm-kamishibai/pull/596"
+      "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/583",
+      "https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/596"
     ]
   },
   "implementationBaseline": {
-    "repository": "kubohiroya/tm-kamishibai",
+    "repository": "kubohiroya/turbowarp-kamishibai-app",
     "commit": "f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6",
     "reviewedAt": "2026-08-15",
     "screenshotContract": {
-      "design": "https://github.com/kubohiroya/tm-kamishibai/blob/f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6/docs/design/dsl-4-preview-reload-overlay.md#tutorial-screenshot-handoff",
-      "fixture": "https://github.com/kubohiroya/tm-kamishibai/blob/f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6/test/fixtures/dsl4/preview-reload-overlay-screenshot.json"
+      "design": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6/docs/design/dsl-4-preview-reload-overlay.md#tutorial-screenshot-handoff",
+      "fixture": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6/test/fixtures/dsl4/preview-reload-overlay-screenshot.json"
     }
   },
   "browserAuthoringBaseline": {
     "version": "4.0.0-rc.5",
     "state": "published-prerelease",
-    "issue": "https://github.com/kubohiroya/tm-kamishibai/issues/555",
-    "documentationIssue": "https://github.com/kubohiroya/tm-kamishibai-docs/issues/118",
+    "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/555",
+    "documentationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/118",
     "captureFixture": "test/fixtures/dsl4/browser-authoring-menu.html"
   },
   "sampleBaseline": {
     "runtimeVersion": "4.0.0-rc.3",
     "differsFromReleaseBaseline": true,
-    "repository": "kubohiroya/tm-kamishibai-samples",
+    "repository": "kubohiroya/turbowarp-kamishibai-samples",
     "commit": "919565243adc3800ebe8271cc4af6f7b68110ef2",
-    "pullRequest": "https://github.com/kubohiroya/tm-kamishibai-samples/pull/107",
+    "pullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/107",
     "pullRequestState": "merged",
     "publicationCommit": "919565243adc3800ebe8271cc4af6f7b68110ef2",
     "pagesDeploymentRun": 31660773675,
@@ -52,27 +52,27 @@
     "publicSurfaceManifest": "../../sources/dsl4/user-guide-4.0-public-surfaces.json",
     "publicSamples": {
       "urashima": {
-        "detailUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/",
-        "webUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/web-4.0/",
-        "yamlUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/urashima.k4.yml",
-        "sb3Url": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/urashima-4.0.sb3",
+        "detailUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/",
+        "webUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/web-4.0/",
+        "yamlUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima.k4.yml",
+        "sb3Url": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima-4.0.sb3",
         "sb3Sha256": "4516f543c25fe8d96edfa639cf789a174fd898199c5e34a1a29e079ceecbc6cb",
         "webSha256": "d0a605d0f7838fd52f1ceb71507ad0385435d0ad32cd7ebc8ae4798bed8e37ce"
       },
       "myUrashima": {
-        "detailUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/my-urashima/",
-        "webUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/my-urashima/web-4.0/",
+        "detailUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/",
+        "webUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/web-4.0/",
         "sb3Sha256": "7cbb6084b42d11c61473649db45950e293cf806ce1f54bace61f9c17ad7f33f3",
         "webSha256": "c1952f90e1cd25502d0dfcbe379f9493183d8af308c6338e1afe716540404c10"
       },
       "tutorial": {
-        "detailUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/",
-        "webUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/web-4.0/",
-        "yamlUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/story.kamishibai.yaml",
-        "sb3Url": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/tutorial-4.0.sb3",
-        "starterUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip",
-        "additionKitUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/tutorial-story-addition-kit-4.0.zip",
-        "manifestUrl": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/public-surfaces.json",
+        "detailUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/",
+        "webUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/web-4.0/",
+        "yamlUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/story.kamishibai.yaml",
+        "sb3Url": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-4.0.sb3",
+        "starterUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip",
+        "additionKitUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-addition-kit-4.0.zip",
+        "manifestUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json",
         "sb3Sha256": "518fe92750a2e05a4711d8c9ad646256e9b21b9fa7161275174d12cca3a4dc7b",
         "webSha256": "ff9553c797e4b613f8c03dbbe5c9cdec1b3493e927b13df8ddf975666a6ec513"
       }
@@ -96,7 +96,7 @@
     "rc5AuthoringFrameIds": ["C-02", "C-03", "C-11", "C-12", "C-14"],
     "browser": "Google Chrome 151.0.7922.137 (headless Chromium)",
     "provenance": {
-      "publishedSurface": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/",
+      "publishedSurface": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/",
       "runtimeCommit": "f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6",
       "sampleCommit": "919565243adc3800ebe8271cc4af6f7b68110ef2",
       "fixtureSource": "scripts/fixtures/tutorial-screenshot.html",
@@ -141,12 +141,12 @@
       "ready": true,
       "progressStatus": "published",
       "description": "DSL 4.0.0-rc.5が公開プレリリースとして固定され、npm next、GitHub prerelease、PagesのversionとSHA-256が照合されている",
-      "dependencies": ["https://github.com/kubohiroya/tm-kamishibai/issues/583"],
+      "dependencies": ["https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/583"],
       "evidence": [
         "https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.5",
-        "https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.5",
-        "https://kubohiroya.github.io/tm-kamishibai/downloads/",
-        "https://github.com/kubohiroya/tm-kamishibai/pull/596"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.5",
+        "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/596"
       ],
       "remaining": []
     },
@@ -156,17 +156,17 @@
       "progressStatus": "published",
       "description": "最小チュートリアル作品、starter、addition kit、Web版、SB3が4.0.0-rc.3の同じ入力から公開され、実artifactのsize、integrity、licenseがmanifestと照合されている",
       "dependencies": [
-        "https://github.com/kubohiroya/tm-kamishibai-samples/issues/94",
-        "https://github.com/kubohiroya/tm-kamishibai-samples/issues/100",
-        "https://github.com/kubohiroya/tm-kamishibai-samples/issues/102",
-        "https://github.com/kubohiroya/tm-kamishibai-samples/issues/104"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/94",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/100",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/102",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/104"
       ],
       "evidence": [
         "../../sources/dsl4/user-guide-4.0-public-surfaces.json",
-        "https://github.com/kubohiroya/tm-kamishibai-samples/pull/107",
-        "https://github.com/kubohiroya/tm-kamishibai-samples/actions/runs/31660773675",
-        "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/",
-        "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/public-surfaces.json"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/107",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/31660773675",
+        "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/",
+        "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json"
       ],
       "remaining": []
     },
@@ -176,12 +176,12 @@
       "progressStatus": "published",
       "description": "rc.3基準の公開サンプルWeb版でLoading、版・ライセンス、再生、ポーズfeedbackの配置と文言を確認している",
       "dependencies": [
-        "https://github.com/kubohiroya/tm-kamishibai/issues/265",
-        "https://github.com/kubohiroya/tm-kamishibai/issues/336"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/265",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/336"
       ],
       "evidence": [
-        "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/web-4.0/",
-        "https://github.com/kubohiroya/tm-kamishibai/commit/087dfa526e967bb2cc38af3f5b5a795355de7739",
+        "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/web-4.0/",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/087dfa526e967bb2cc38af3f5b5a795355de7739",
         "../developer-guides/dsl4-implementation-walkthrough.md"
       ],
       "remaining": []
@@ -192,18 +192,18 @@
       "progressStatus": "implemented",
       "description": "非埋め込みStandard SB3のdirectory open、自動validation、reload、last-known-good診断と復旧を公開starterと固定fixtureで追試している",
       "dependencies": [
-        "https://github.com/kubohiroya/tm-kamishibai/issues/258",
-        "https://github.com/kubohiroya/tm-kamishibai/issues/266",
-        "https://github.com/kubohiroya/tm-kamishibai/issues/390",
-        "https://github.com/kubohiroya/tm-kamishibai/issues/391",
-        "https://github.com/kubohiroya/tm-kamishibai/issues/394"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/258",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/266",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/390",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/391",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/394"
       ],
       "evidence": [
-        "https://github.com/kubohiroya/tm-kamishibai/blob/v4.0.0-rc.5/README.md",
-        "https://github.com/kubohiroya/tm-kamishibai-samples/pull/101",
-        "https://github.com/kubohiroya/tm-kamishibai/commit/3668573",
-        "https://github.com/kubohiroya/tm-kamishibai/commit/c0921e4",
-        "https://github.com/kubohiroya/tm-kamishibai/commit/315c5e7"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.5/README.md",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/101",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/3668573",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/c0921e4",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/315c5e7"
       ],
       "remaining": []
     },
@@ -213,14 +213,14 @@
       "progressStatus": "published",
       "description": "公開プレリリース4.0.0-rc.5の作者用メニューで配布用SB3 build、保存、fresh TurboWarp実行までを追試している",
       "dependencies": [
-        "https://github.com/kubohiroya/tm-kamishibai/issues/555",
-        "https://github.com/kubohiroya/tm-kamishibai-docs/issues/118"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/555",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/118"
       ],
       "evidence": [
         "test/fixtures/dsl4/browser-authoring-menu.html",
         "docs/images/tutorials/dsl4/create/tutorial-create-14-build-menu.png",
-        "https://kubohiroya.github.io/tm-kamishibai/downloads/kamishibai-4.0.0-rc.5.sb3",
-        "https://github.com/kubohiroya/tm-kamishibai/pull/556"
+        "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/kamishibai-4.0.0-rc.5.sb3",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/556"
       ],
       "remaining": []
     },
@@ -230,12 +230,12 @@
       "progressStatus": "published",
       "description": "rc.3基準の公開サンプルWeb版でポーズ認識度とチャージ表示を確認し、人物を含まないfixtureで状態を固定している",
       "dependencies": [
-        "https://github.com/kubohiroya/tm-kamishibai/issues/383",
-        "https://github.com/kubohiroya/tm-kamishibai/issues/413"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/383",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/413"
       ],
       "evidence": [
-        "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/web-4.0/",
-        "https://github.com/kubohiroya/tm-kamishibai/commit/087dfa526e967bb2cc38af3f5b5a795355de7739",
+        "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/web-4.0/",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/087dfa526e967bb2cc38af3f5b5a795355de7739",
         "../developer-guides/dsl4-implementation-walkthrough.md"
       ],
       "remaining": []
@@ -245,10 +245,10 @@
       "ready": true,
       "progressStatus": "published",
       "description": "4.0.0-rc.3ではcamera previewと明示的なcamera control予約領域を採用し、reload statusとの衝突回避を固定fixtureで確認している",
-      "dependencies": ["https://github.com/kubohiroya/tm-kamishibai/issues/388"],
+      "dependencies": ["https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/388"],
       "evidence": [
-        "https://github.com/kubohiroya/tm-kamishibai/commit/1af226f",
-        "https://github.com/kubohiroya/tm-kamishibai/blob/087dfa526e967bb2cc38af3f5b5a795355de7739/test/fixtures/dsl4/preview-reload-overlay-screenshot.json"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/1af226f",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/087dfa526e967bb2cc38af3f5b5a795355de7739/test/fixtures/dsl4/preview-reload-overlay-screenshot.json"
       ],
       "remaining": []
     },
@@ -258,13 +258,13 @@
       "progressStatus": "published",
       "description": "4.0.0-rc.5のvalidate-dsl4、preview-dsl4 --watch、build-dsl4と有限resource limitをrc.3基準の公開starterで追試している",
       "dependencies": [
-        "https://github.com/kubohiroya/tm-kamishibai/issues/258",
-        "https://github.com/kubohiroya/tm-kamishibai/issues/266"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/258",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/266"
       ],
       "evidence": [
-        "https://github.com/kubohiroya/tm-kamishibai/blob/v4.0.0-rc.5/README.md",
-        "https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.5",
-        "https://github.com/kubohiroya/tm-kamishibai-samples/pull/101"
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.5/README.md",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.5",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/101"
       ],
       "remaining": []
     },
@@ -275,7 +275,7 @@
       "description": "Google Chrome 151.0.7922.137（Chromium）、1280×720、DPR 1、ja-JP、固定motionとし、実人物と実カメラを使わない合成fixtureで個人情報を除去している",
       "dependencies": [],
       "evidence": [
-        "https://github.com/kubohiroya/tm-kamishibai/blob/087dfa526e967bb2cc38af3f5b5a795355de7739/test/fixtures/dsl4/preview-reload-overlay-screenshot.json",
+        "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/087dfa526e967bb2cc38af3f5b5a795355de7739/test/fixtures/dsl4/preview-reload-overlay-screenshot.json",
         "docs/images/tutorials/dsl4/play/",
         "docs/images/tutorials/dsl4/create/"
       ],

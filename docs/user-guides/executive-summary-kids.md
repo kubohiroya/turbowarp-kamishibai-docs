@@ -34,7 +34,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## どうやって使うの？
 
-できあがった作品で遊ぶときは、[サンプルサイト](https://kubohiroya.github.io/tm-kamishibai-samples/)からWeb版を開くのがかんたんです。
+できあがった作品で遊ぶときは、[サンプルサイト](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)からWeb版を開くのがかんたんです。
 
 1. 遊びたい作品のWeb版を開きます。
 2. タイトル画面をクリックします。
@@ -171,4 +171,4 @@ action=Urashima:pose:Urashima-help-1:help:SquishPop
 - [`history.md`](../dsl-author-guides/history.md): 紙しばいDSL 2.0から3.2への変わり方
 - [`developer-guide.md`](../developer-guides/developer-guide.md): 紙しばいアプリ3.2を開発する人向けの説明
 - [`internal-specification.md`](../developer-guides/internal-specification.md): 紙しばいアプリ3.2の中のしくみを調べる人向けの説明
-- [サンプルサイト](https://kubohiroya.github.io/tm-kamishibai-samples/): Web版や台本を開く
+- [サンプルサイト](https://kubohiroya.github.io/turbowarp-kamishibai-samples/): Web版や台本を開く

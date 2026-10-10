@@ -9,7 +9,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 実装基準: annotated tag `v4.0.0-rc.8`のcommit `29c0dea`
 
 この文書は4.0の正式リリースを保証するものではありません。利用するSB3に
-`broadcastMessageAndWait`が含まれることを[公開元](https://github.com/kubohiroya/tm-kamishibai/releases)で
+`broadcastMessageAndWait`が含まれることを[公開元](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases)で
 確認してください。
 
 DSL 4.0の`broadcastMessageAndWait`は、台本からTurboWarpへ処理を依頼し、その処理が終わってから台本の

@@ -1,4 +1,4 @@
-# TM紙芝居ドキュメント表記ガイド
+# TurboWarp紙芝居ドキュメント表記ガイド
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
@@ -37,16 +37,16 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 通常本文では現行名称だけを使い、旧称や旧slugは履歴、migration input、source provenanceで必要な場合だけ
 code表記または明示的な履歴説明として残します。
 
-| 区分               | 現行表記                | 使う場所                                |
-| ------------------ | ----------------------- | --------------------------------------- |
-| 英語製品名         | TM Kamishibai           | 英語本文、公開サイト、repository説明    |
-| 日本語一般名称     | TM紙芝居                | 日本語本文、文書タイトル、公開サイト    |
-| 認識拡張の名称     | TurboWarp TM            | ポーズ認識拡張を人間向けに説明する本文  |
-| Extension ID       | `kubohiroyatm`          | SB3、migration guide、互換性matrix      |
-| Opcode prefix      | `kubohiroyatm_...`      | SB3内部、migration guide、tool出力      |
-| アプリrepository   | `tm-kamishibai`         | GitHub URL、Pages URL、clone先directory |
-| 文書repository     | `tm-kamishibai-docs`    | このrepositoryと文書Pages               |
-| サンプルrepository | `tm-kamishibai-samples` | サンプル台本、Web版、公開manifest       |
+| 区分               | 現行表記                       | 使う場所                                |
+| ------------------ | ------------------------------ | --------------------------------------- |
+| 英語製品名         | TurboWarp-Kamishibai           | 英語本文、公開サイト、repository説明    |
+| 日本語一般名称     | TurboWarp紙芝居                | 日本語本文、文書タイトル、公開サイト    |
+| 認識拡張の名称     | TurboWarp TM                   | ポーズ認識拡張を人間向けに説明する本文  |
+| Extension ID       | `kubohiroyatm`                 | SB3、migration guide、互換性matrix      |
+| Opcode prefix      | `kubohiroyatm_...`             | SB3内部、migration guide、tool出力      |
+| アプリrepository   | `turbowarp-kamishibai-app`     | GitHub URL、Pages URL、clone先directory |
+| 文書repository     | `turbowarp-kamishibai-docs`    | このrepositoryと文書Pages               |
+| サンプルrepository | `turbowarp-kamishibai-samples` | サンプル台本、Web版、公開manifest       |
 
 - 一般本文で旧製品名を現在の入口として使わない
 - current URLとhistorical URLを区別し、historical linkには履歴・移設元・固定snapshotの説明を添える

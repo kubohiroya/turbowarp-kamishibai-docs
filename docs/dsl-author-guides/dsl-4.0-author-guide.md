@@ -25,7 +25,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 ## 公開プレリリースと文書基準
 
 文書状態: 公開プレリリースrc.8の固定実装基準を説明する台本作成ガイド\
-調査基準: TM Kamishibai `29c0dea`（`v4.0.0-rc.8`）、2026年8月20日
+調査基準: TurboWarp-Kamishibai `29c0dea`（`v4.0.0-rc.8`）、2026年8月20日
 
 > **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
 > 正式な`v4.0.0`ではありません。ポーズoverlayはrc.8と、同版がexact pinするTurboWarp TM 1.12.0で利用できます。
@@ -1499,7 +1499,7 @@ runtime接続後は、action、scene、branch、port、戻り値などの実行�
 
 ここから先は、公開状況や実装の追跡が必要な方のための付録です。台本を書くうえでは読み飛ばせます。
 
-2026年8月20日のrc.8固定基準では、次の実装がTM Kamishibaiへ入っています。
+2026年8月20日のrc.8固定基準では、次の実装がTurboWarp-Kamishibaiへ入っています。
 
 - 制限付きYAMLの解析、JSON Schema検証、参照関係の意味検証
 - 行・列とStory Pathを保持するSource Map、`K4-*`診断
@@ -1524,18 +1524,18 @@ builder、TurboWarp runtime surface、ブラウザー／CLIプレビューを含
 
 ### 実装根拠を確認する場合
 
-仕様の正本は、`tm-kamishibai`リポジトリの
-[紙芝居DSL 4.0 表層仕様](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/docs/design/dsl-4-surface.md)と
-[JSON Schema](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/schema/dsl-4.schema.json)です。
-カメラプレビュー操作UIは[Issue #388](https://github.com/kubohiroya/tm-kamishibai/issues/388)、
-ポーズoverlayは[Issue #624](https://github.com/kubohiroya/tm-kamishibai/issues/624)、
-`bubbleStyles`は[Issue #476](https://github.com/kubohiroya/tm-kamishibai/issues/476)以降、
-`Actor.moveTo.easing`は[Issue #398](https://github.com/kubohiroya/tm-kamishibai/issues/398)、
-`Actor.setTransparency`は[Issue #406](https://github.com/kubohiroya/tm-kamishibai/issues/406)、
-include文の複数ファイル対応は[Issue #417](https://github.com/kubohiroya/tm-kamishibai/issues/417)から
+仕様の正本は、`turbowarp-kamishibai-app`リポジトリの
+[紙芝居DSL 4.0 表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/docs/design/dsl-4-surface.md)と
+[JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/schema/dsl-4.schema.json)です。
+カメラプレビュー操作UIは[Issue #388](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/388)、
+ポーズoverlayは[Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624)、
+`bubbleStyles`は[Issue #476](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/476)以降、
+`Actor.moveTo.easing`は[Issue #398](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/398)、
+`Actor.setTransparency`は[Issue #406](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/406)、
+include文の複数ファイル対応は[Issue #417](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/417)から
 上記commitまでにmergeされています。プロジェクトディレクトリ選択とYAML live reloadは
-[Issue #390](https://github.com/kubohiroya/tm-kamishibai/issues/390)、ローカルアセットの追加・内容更新のlive reloadは
-[Issue #391](https://github.com/kubohiroya/tm-kamishibai/issues/391)で実装されています。
+[Issue #390](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/390)、ローカルアセットの追加・内容更新のlive reloadは
+[Issue #391](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/391)で実装されています。
 
 ## 関連資料
 
@@ -1543,8 +1543,8 @@ include文の複数ファイル対応は[Issue #417](https://github.com/kubohiro
 - [DSL 4.0ランタイム変数ガイド](dsl-4.0-runtime-variable-guide.md): 実行中に参照できる変数と、その扱い方
 - [3系作品の変換ガイド](dsl-3.2-to-4.0-conversion-guide.md): 3系の台本を4.0のYAMLへ変換する手順
 - [紙芝居DSL 4.0 リリース履歴](dsl-4.0-history.md): 版ごとの追加機能と変更点
-- [DSL 4.0表層仕様](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/docs/design/dsl-4-surface.md): 4.0の規範的な作者向け構文
-- [DSL 4.0 JSON Schema](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/schema/dsl-4.schema.json): 機械可読な構造仕様
-- [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
-- [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/tm-kamishibai/issues/624): Schema、TurboWarp TM 1.12.0 composition API mapping、YAML opt-in、rollback
-- [DSL 4.0総合fixture](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例
+- [DSL 4.0表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/docs/design/dsl-4-surface.md): 4.0の規範的な作者向け構文
+- [DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/schema/dsl-4.schema.json): 機械可読な構造仕様
+- [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
+- [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624): Schema、TurboWarp TM 1.12.0 composition API mapping、YAML opt-in、rollback
+- [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例

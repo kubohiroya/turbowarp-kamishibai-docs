@@ -54,7 +54,8 @@ export const documentCollections = [
         sourceFilename: 'executive-summary-adult.md',
         title: '紙芝居アプリ 3.2 概要説明書 大人向け',
         audience: '保護者・教員・運営者',
-        description: 'TM紙芝居3.2の価値、仕組み、利用場面、教育的な意義を簡潔にまとめています。',
+        description:
+          'TurboWarp紙芝居3.2の価値、仕組み、利用場面、教育的な意義を簡潔にまとめています。',
       },
       {
         sourceFilename: 'executive-summary-adult-4.0.md',
@@ -62,13 +63,13 @@ export const documentCollections = [
         title: '紙芝居アプリ 4.0 概要説明書 大人向け',
         audience: '初めての方・保護者・教員・教材作成者・運営者',
         description:
-          'TM紙芝居4.0でできること、遊ぶ・作る流れ、人とAIの役割、カメラを使う際の安全、教育利用を初めての方向けに説明します。',
+          'TurboWarp紙芝居4.0でできること、遊ぶ・作る流れ、人とAIの役割、カメラを使う際の安全、教育利用を初めての方向けに説明します。',
       },
       {
         sourceFilename: 'executive-summary-kids.md',
         title: '紙芝居アプリ 3.2 概要説明書 子供向け',
         audience: '子供・初めての方',
-        description: 'TM紙芝居3.2でできることや安全な使い方を、やさしい言葉で紹介します。',
+        description: 'TurboWarp紙芝居3.2でできることや安全な使い方を、やさしい言葉で紹介します。',
         addFurigana: true,
       },
       {
@@ -77,14 +78,15 @@ export const documentCollections = [
         title: '紙芝居アプリ 4.0 概要説明書 子供向け',
         audience: '子供・初めての方',
         description:
-          'TM紙芝居4.0で「見る・動く・作る」方法と、カメラ、個人情報、まわりの安全、困ったときの行動をやさしい言葉で説明します。',
+          'TurboWarp紙芝居4.0で「見る・動く・作る」方法と、カメラ、個人情報、まわりの安全、困ったときの行動をやさしい言葉で説明します。',
         addFurigana: true,
       },
       {
         sourceFilename: 'user-guide.md',
         title: '紙芝居アプリ 3.2 操作説明書',
         audience: 'アプリを使う方',
-        description: 'TM紙芝居3.2の台本読み込み、再生、ポーズ認識、本番前の確認方法を説明します。',
+        description:
+          'TurboWarp紙芝居3.2の台本読み込み、再生、ポーズ認識、本番前の確認方法を説明します。',
       },
       {
         sourceFilename: 'user-guide-4.0.md',
@@ -185,14 +187,14 @@ export const documentCollections = [
   {
     id: 'tutorials',
     version: '4.0',
-    title: 'TM紙芝居 4.0 チュートリアル',
+    title: 'TurboWarp紙芝居 4.0 チュートリアル',
     documents: [
       {
         sourceFilename: 'play.md',
         publicationBasename: 'play',
         listedOnVersionTop: true,
         title: '紙芝居を遊ぶ',
-        audience: '初めてTM紙芝居を再生する方',
+        audience: '初めてTurboWarp紙芝居を再生する方',
         description: '公開サンプルを開き、ポーズを使って物語を最後まで進める手順を説明します。',
       },
       {
@@ -242,7 +244,7 @@ export const documentCollections = [
       {
         sourceFilename: 'application-materials-guide.md',
         outputDirectory: 'user-guides',
-        title: 'TM紙芝居 3.2 アプリ・教材・ツールチェインガイド',
+        title: 'TurboWarp紙芝居 3.2 アプリ・教材・ツールチェインガイド',
         audience: 'DSL 3.2のアプリ、教材、ツールチェインを把握する方',
         description:
           'DSL 3.2系列のアプリ、浦島太郎、体験会教材、台本、sb3-toolchainを図解付き・全8ページで紹介します。',
@@ -250,7 +252,7 @@ export const documentCollections = [
       {
         sourceFilename: 'application-materials-guide-4.0.md',
         version: '4.0',
-        title: 'TM紙芝居 4.0 アプリ・教材・ツールチェインガイド',
+        title: 'TurboWarp紙芝居 4.0 アプリ・教材・ツールチェインガイド',
         audience: '教材・ワークショップ設計者、制作環境担当者、プレビュー／ビルド確認者',
         description:
           '概要説明の次に全員が読む文書ではなく、教材設計、制作環境、検証・プレビュー・ビルドを具体化するための全8ページの詳細ガイドです。',
@@ -258,45 +260,45 @@ export const documentCollections = [
       {
         sourceFilename: 'developer-guide.md',
         title: '紙芝居アプリ 3.2 ソフトウェアメンテナンスガイド',
-        audience: 'TM紙芝居3.2を保守するソフトウェア開発者',
+        audience: 'TurboWarp紙芝居3.2を保守するソフトウェア開発者',
         description:
-          'TM紙芝居3.2の成果物とビルダー、アプリ本体、SB3、ドキュメントの変更、検証、公開手順を案内します。',
+          'TurboWarp紙芝居3.2の成果物とビルダー、アプリ本体、SB3、ドキュメントの変更、検証、公開手順を案内します。',
       },
       {
         sourceFilename: 'developer-guide-4.0.md',
         version: '4.0',
         title: '紙芝居アプリ 4.0 ソフトウェアメンテナンスガイド',
-        audience: 'TM紙芝居4.0の実装と公開手順を保守する開発者',
+        audience: 'TurboWarp紙芝居4.0の実装と公開手順を保守する開発者',
         description:
           '実装の変更箇所とテスト、開発環境、プレビュー、完成ファイル、公開、切り戻しの手順を案内します。',
       },
       {
         sourceFilename: 'internal-specification.md',
         title: '紙芝居アプリ 3.2 内部仕様書',
-        audience: 'TM紙芝居3.2の実装を調査・変更する方',
+        audience: 'TurboWarp紙芝居3.2の実装を調査・変更する方',
         description:
-          'TM紙芝居3.2の汎用アプリSB3におけるtarget、変数、block、message、呼出し関係、状態遷移を記録します。',
+          'TurboWarp紙芝居3.2の汎用アプリSB3におけるtarget、変数、block、message、呼出し関係、状態遷移を記録します。',
       },
       {
         sourceFilename: 'internal-specification-4.0.md',
         version: '4.0',
         title: '紙芝居アプリ 4.0 内部仕様書',
-        audience: 'TM紙芝居4.0の実装を調査・変更する方',
+        audience: 'TurboWarp紙芝居4.0の実装を調査・変更する方',
         description:
           '台本の読み込みから実行環境までの内部構造、責任分担、状態の切り替えを、用語表と実装経路に対応させて記録します。',
       },
       {
         sourceFilename: 'extension-guide.md',
-        title: 'TM紙芝居 3.2 機能拡張ガイド',
-        audience: 'TM紙芝居3.2の依存機能を調査・変更する方',
+        title: 'TurboWarp紙芝居 3.2 機能拡張ガイド',
+        audience: 'TurboWarp紙芝居3.2の依存機能を調査・変更する方',
         description:
-          'TM紙芝居3.2が利用する16個の依存機能拡張を1拡張2ページで図解し、sb3-toolchainによるbundle構成も説明する全34ページのガイドです。',
+          'TurboWarp紙芝居3.2が利用する16個の依存機能拡張を1拡張2ページで図解し、sb3-toolchainによるbundle構成も説明する全34ページのガイドです。',
       },
       {
         sourceFilename: 'extension-guide-4.0.md',
         version: '4.0',
-        title: 'TM紙芝居 4.0 機能拡張・プラットフォーム統合ガイド',
-        audience: 'TM紙芝居4.0と外部機能の接続を調査・変更する開発者',
+        title: 'TurboWarp紙芝居 4.0 機能拡張・プラットフォーム統合ガイド',
+        audience: 'TurboWarp紙芝居4.0と外部機能の接続を調査・変更する開発者',
         description:
           '実行部分と外部機能の責任分担、利用環境ごとの違い、権限、失敗時の代替動作、配布境界を説明します。',
       },
@@ -317,10 +319,10 @@ export const documentCollections = [
       },
       {
         sourceFilename: 'dependency-audit.md',
-        title: 'TM紙芝居 3.2 依存関係監査記録',
-        audience: 'TM紙芝居3.2の依存更新とsecurity overrideを保守する方',
+        title: 'TurboWarp紙芝居 3.2 依存関係監査記録',
+        audience: 'TurboWarp紙芝居3.2の依存更新とsecurity overrideを保守する方',
         description:
-          'TM紙芝居3.2について2026年8月に実施した依存更新、脆弱性監査、overrideの理由と解除条件を記録します。',
+          'TurboWarp紙芝居3.2について2026年8月に実施した依存更新、脆弱性監査、overrideの理由と解除条件を記録します。',
       },
       {
         sourceFilename: 'release-smoke.md',
@@ -341,7 +343,7 @@ export const documentCollections = [
         sourceFilename: 'tm-extension-id-migration.md',
         version: '4.0',
         title: 'TurboWarp TM Extension ID 移行ガイド',
-        audience: 'TM紙芝居とSB3を新しい認識拡張IDへ移行する開発者',
+        audience: 'TurboWarp紙芝居とSB3を新しい認識拡張IDへ移行する開発者',
         description:
           'TurboWarp TMのExtension IDをkubohiroyatmへ統一し、SB3移行、確認、rollback、旧識別子の扱いを日本語と英語で説明します。',
       },
@@ -349,15 +351,16 @@ export const documentCollections = [
         sourceFilename: 'turbowarp-ecosystem.md',
         version: '4.0',
         title: 'TurboWarp extension and toolchain overview',
-        audience: 'TurboWarp機能拡張、toolchain、TM Kamishibaiの関係を把握する開発者・教材作者',
+        audience:
+          'TurboWarp機能拡張、toolchain、TurboWarp-Kamishibaiの関係を把握する開発者・教材作者',
         description:
-          'ScratchからTurboWarp機能拡張、Composition API、SB3 Toolchain、TM Kamishibaiへ進む道筋と、各repositoryの責務・surface・license境界を正本dataから説明します。',
+          'ScratchからTurboWarp機能拡張、Composition API、SB3 Toolchain、TurboWarp-Kamishibaiへ進む道筋と、各repositoryの責務・surface・license境界を正本dataから説明します。',
       },
       {
         sourceFilename: 'upstream-fork-policy.md',
         version: '4.0',
         title: 'upstream fork管理方針',
-        audience: 'TM Kamishibai ecosystemの上流forkを評価・同期・撤回する開発者',
+        audience: 'TurboWarp-Kamishibai ecosystemの上流forkを評価・同期・撤回する開発者',
         description:
           'scratch-renderを独自productではなく上流検証用forkとして扱い、差分、license、issue routing、exact commit pinを記録します。',
       },
@@ -366,7 +369,7 @@ export const documentCollections = [
 ];
 
 export const documentationConfig = {
-  title: 'TM紙芝居 ドキュメント',
+  title: 'TurboWarp紙芝居 ドキュメント',
   author: 'Hiroya Kubo',
   tocSectionDepth: 3,
   standaloneHtmlFilename: 'index.html',

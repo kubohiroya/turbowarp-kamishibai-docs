@@ -34,7 +34,7 @@ test('pins the published rc.8 source and distributable artifacts by checksum', (
   assert.match(candidate.runtime.packageTarball.integrity, /^sha512-/u);
   assert.equal(candidate.publicSamples.version, '4.0.0-rc.8');
   assert.match(candidate.publicSamples.status, /rc\.8-derived-artifacts/u);
-  assert.match(candidate.publicSamples.pullRequest, /tm-kamishibai-samples\/pull\/126/u);
+  assert.match(candidate.publicSamples.pullRequest, /turbowarp-kamishibai-samples\/pull\/126/u);
   assert.equal(
     candidate.publicSamples.publicationCommit,
     '236fe4ac09e17aaaaa0fb0fd1f8ebdc173073c7f',

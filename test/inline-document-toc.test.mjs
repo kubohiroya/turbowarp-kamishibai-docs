@@ -49,7 +49,7 @@ test('keeps the existing main landmark when the shared AppBar is installed', () 
     stylesheetHref: '../../../document-toc.css',
   });
   const withAppBar = injectSiteAppBar(combined, '../../../', {
-    pathname: '/tm-kamishibai-docs/4.0/guides/example/',
+    pathname: '/turbowarp-kamishibai-docs/4.0/guides/example/',
   });
 
   assert.equal((withAppBar.match(/id="main-content"/gu) ?? []).length, 1);

@@ -3,19 +3,19 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 固定実装基準を説明する内部仕様（正式リリース済みの意味ではない）\
-調査基準: TM Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
+調査基準: TurboWarp-Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
 
 > **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
 > 正式な`v4.0.0`ではありません。本書はrc.8固定コミットの内部構造を説明します。
 
-この文書は、TM紙芝居4.0のsource frontend、実行中間表現、runtime、platform adapter、
+この文書は、TurboWarp紙芝居4.0のsource frontend、実行中間表現、runtime、platform adapter、
 preview transactionの責務境界を、完成実装に対応させて記録します。作者向けのYAML構文は
 [紙芝居DSL 4.0 台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)、fieldの型と制約は
 [紙芝居DSL 4.0 Schemaリファレンス](../dsl-author-guides/dsl-4.0-schema-reference.md)を参照してください。
 
-対象アプリ: TM Kamishibai 4.0.x\
+対象アプリ: TurboWarp-Kamishibai 4.0.x\
 受理するDSL宣言: `kamishibai: '4.0'`\
-実装固定commit: [`29c0dea`](https://github.com/kubohiroya/tm-kamishibai/commit/29c0deadcb98badf94a0244c479ca896dc71f842)（2026年8月20日、`v4.0.0-rc.8`）
+実装固定commit: [`29c0dea`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/29c0deadcb98badf94a0244c479ca896dc71f842)（2026年8月20日、`v4.0.0-rc.8`）
 
 本書のpath、型、関数、event、flagは、このcommitのsourceとtestを基準にしています。
 配布成果物を調査して推測した名称ではありません。
@@ -665,11 +665,11 @@ runtime側の仕様変更では、表に示した固定commitの対応testも更
 
 ## 固定実装への参照 {#implementation-links .unnumbered}
 
-- [source frontend](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-frontend.js)
-- [Source Graph](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-graph.js)と[graph frontend](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-graph-frontend.js)
-- [StoryDocument](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/story-document.js)と[semantic validator](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/semantic-validator.js)
-- [runtime controller](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/runtime-controller.js)と[navigation session](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/navigation-session.js)
-- [Action Context](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/action-context-turbowarp.js)と[custom action invocation](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/action-invocation-adapter.js)
-- [TurboWarp runtime host](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/platform/turbowarp-runtime-host.js)
-- [live reload session](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/live-reload-session.js)と[asset reload transaction](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/asset-reload-transaction.js)
-- [feature flags](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/feature-flags.js)
+- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-frontend.js)
+- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-graph.js)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-graph-frontend.js)
+- [StoryDocument](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/story-document.js)と[semantic validator](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/semantic-validator.js)
+- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/runtime-controller.js)と[navigation session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/navigation-session.js)
+- [Action Context](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/action-context-turbowarp.js)と[custom action invocation](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/action-invocation-adapter.js)
+- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/platform/turbowarp-runtime-host.js)
+- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/live-reload-session.js)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/asset-reload-transaction.js)
+- [feature flags](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/feature-flags.js)

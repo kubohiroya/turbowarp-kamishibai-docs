@@ -4,24 +4,24 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 更新日: 2026-08-26
 
-文書状態: TM Kamishibai `v4.0.0-rc.8` 文書群から公開するTurboWarp ecosystem overview
+文書状態: TurboWarp-Kamishibai `v4.0.0-rc.8` 文書群から公開するTurboWarp ecosystem overview
 
 この文書は `sources/turbowarp-ecosystem.json` を正本として生成しています。repository、package、guide link、利用surface、関係図のnodeがずれた場合は、正本dataと生成検査を更新してください。
 
 ## Concept
 
-Scratchでの創作からTypeScriptの機能拡張、Composition API、SB3の再現可能なbuild、TM Kamishibaiの統合applicationまでを一つの道筋として説明する。
+Scratchでの創作からTypeScriptの機能拡張、Composition API、SB3の再現可能なbuild、TurboWarp-Kamishibaiの統合applicationまでを一つの道筋として説明する。
 
 - Scratchでの創作
 - TurboWarpと既存機能拡張の利用
 - TypeScriptによる独自機能拡張
 - Composition APIによる機能の合成
 - SB3のsource管理と再現可能なbuild
-- TM Kamishibaiという統合application
+- TurboWarp-Kamishibaiという統合application
 
 このecosystemは、Scratch作品をいきなり別言語へ移すためのものではありません。TurboWarpのblock UIで試せるStandalone extensionと、host applicationから組み合わせるComposition APIを分け、同じ機能を学習・制作・配布の流れへ接続するためのものです。
 
-機能は一枚岩にせず、camera、recognition、input、state、asset、text、bubble、diagnostic、networkへ分けます。個々のrepositoryは小さく検証可能な責務を持ち、TM Kamishibaiはそれらを教材・作品・Web配布へ接続する統合applicationとして扱います。
+機能は一枚岩にせず、camera、recognition、input、state、asset、text、bubble、diagnostic、networkへ分けます。個々のrepositoryは小さく検証可能な責務を持ち、TurboWarp-Kamishibaiはそれらを教材・作品・Web配布へ接続する統合applicationとして扱います。
 
 ## Relationship Flow
 
@@ -39,7 +39,7 @@ flowchart LR
   asset --> bubble[Bubble]
   text[Text Lines] --> bubble
   svg[TurboWarp-SVG-Text] --> bubble
-  async --> app[TM Kamishibai]
+  async --> app[TurboWarp-Kamishibai]
   asset --> app
   kvs[TurboWarp KVS] --> app
   expression[TurboWarp-Runtime-Expression] --> app
@@ -50,12 +50,12 @@ flowchart LR
   app --> samples[Samples]
 ```
 
-図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp TMとjsQRへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TM Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
+図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp TMとjsQRへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
 
 ## Inventory Policy
 
 - product name、package name、repository slug、Extension ID、opcodeは同じものとして扱わない。
-- current entryではTM Kamishibai、TM紙芝居、TurboWarp TM、`tm-kamishibai`を使う。
+- current entryではTurboWarp-Kamishibai、TurboWarp紙芝居、TurboWarp TM、`turbowarp-kamishibai-app`を使う。
 - old product name、old repository slug、old Extension ID、old opcode prefixはHistory、Migration、source provenanceだけに限定する。
 - version numberを本文に固定する場合はinventoryまたはrelease記録と一致検査できる場所へ置く。
 - docsとして扱う本文と独自図はCC BY-SA 4.0、build scriptとsite codeはMPL-2.0、第三者素材は個別noticeに従う。
@@ -80,7 +80,7 @@ flowchart LR
 - Input: camera frame, pose model output
 - Output: motion state, TM events
 - Direct dependencies: turbowarp-camera-source
-- Optional integrations: turbowarp-async-input, tm-kamishibai
+- Optional integrations: turbowarp-async-input, turbowarp-kamishibai-app
 - Representative use case: 身体の動きで紙芝居やScratch作品を進める。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -107,7 +107,7 @@ flowchart LR
 - Input: video frame source
 - Output: QR payload
 - Direct dependencies: turbowarp-camera-source
-- Optional integrations: tm-kamishibai
+- Optional integrations: turbowarp-kamishibai-app
 - Representative use case: 会場や教材でQR codeから作品・台本・設定を選ぶ。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -133,7 +133,7 @@ flowchart LR
 - Input: TM event, device event, application event
 - Output: queued input state
 - Direct dependencies: none
-- Optional integrations: turbowarp-tm, turbowarp-webusb-pasori, tm-kamishibai
+- Optional integrations: turbowarp-tm, turbowarp-webusb-pasori, turbowarp-kamishibai-app
 - Representative use case: 複数入力を作品側の分岐条件へ安定して渡す。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -146,7 +146,7 @@ flowchart LR
 - Input: message request, status request
 - Output: notification UI state
 - Direct dependencies: none
-- Optional integrations: tm-kamishibai
+- Optional integrations: turbowarp-kamishibai-app
 - Representative use case: 入力待ち、完了、警告を作品利用者に伝える。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -159,7 +159,7 @@ flowchart LR
 - Input: WebRTC message
 - Output: peer message event
 - Direct dependencies: none
-- Optional integrations: tm-kamishibai
+- Optional integrations: turbowarp-kamishibai-app
 - Representative use case: 複数端末を使う作品や会場運用で状態を共有する。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -195,7 +195,7 @@ flowchart LR
 - Input: asset URL, asset manifest
 - Output: resolved asset, asset loading state
 - Direct dependencies: turbowarp-named-data
-- Optional integrations: turbowarp-bubble, turbowarp-svg-text, tm-kamishibai
+- Optional integrations: turbowarp-bubble, turbowarp-svg-text, turbowarp-kamishibai-app
 - Representative use case: 作品の場面や台詞に対応する素材を再現可能に読み込む。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -208,7 +208,7 @@ flowchart LR
 - Input: namespace, key, binary value
 - Output: stored value, session binary backing
 - Direct dependencies: none
-- Optional integrations: turbowarp-asset-cache, tm-kamishibai
+- Optional integrations: turbowarp-asset-cache, turbowarp-kamishibai-app
 - Representative use case: asset本体とは独立したbinary stateをsessionまたは永続storageへ保存する。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -221,7 +221,7 @@ flowchart LR
 - Input: text asset, line selection
 - Output: line text, cursor state
 - Direct dependencies: none
-- Optional integrations: turbowarp-bubble, tm-kamishibai
+- Optional integrations: turbowarp-bubble, turbowarp-kamishibai-app
 - Representative use case: 紙芝居の台詞を一行ずつ表示・進行する。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -234,7 +234,7 @@ flowchart LR
 - Input: runtime variable, expression
 - Output: evaluated value
 - Direct dependencies: none
-- Optional integrations: tm-kamishibai
+- Optional integrations: turbowarp-kamishibai-app
 - Representative use case: 台本変数とTurboWarpの状態を同じ条件判断に使う。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -255,7 +255,7 @@ flowchart LR
 - Input: text, font setting, layout setting
 - Output: SVG text asset
 - Direct dependencies: none
-- Optional integrations: turbowarp-bubble, tm-kamishibai
+- Optional integrations: turbowarp-bubble, turbowarp-kamishibai-app
 - Representative use case: 紙芝居の台詞や見出しを画像素材として整える。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -269,7 +269,7 @@ flowchart LR
 - Input: line text, speaker state, asset state
 - Output: bubble rendering request
 - Direct dependencies: turbowarp-svg-text
-- Optional integrations: turbowarp-text-lines, turbowarp-asset-cache, tm-kamishibai
+- Optional integrations: turbowarp-text-lines, turbowarp-asset-cache, turbowarp-kamishibai-app
 - Representative use case: 紙芝居の登場人物の台詞を画面に表示する。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -282,7 +282,7 @@ flowchart LR
 - Input: diagnostic event, runtime status
 - Output: overlay message
 - Direct dependencies: none
-- Optional integrations: tm-kamishibai
+- Optional integrations: turbowarp-kamishibai-app
 - Representative use case: 会場運用や開発中に、止まった理由を画面で確認する。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -329,23 +329,23 @@ flowchart LR
 - Input: SB3 source tree, extension manifest, migration plan
 - Output: validated SB3, build report
 - Direct dependencies: none
-- Optional integrations: tm-kamishibai, turbowarp-extension-template
+- Optional integrations: turbowarp-kamishibai-app, turbowarp-extension-template
 - Representative use case: 作品や教材をソース管理し、同じ入力から同じSB3を生成する。
 - License policy: MPL-2.0 for software.
 - Status: current
 
 ## 統合application／content
 
-| Product                                                                     | Surface          | Responsibility                                                                                         | Package                             |
-| --------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------- |
-| [TM Kamishibai](https://github.com/kubohiroya/tm-kamishibai)                | Application, CLI | 複数のTurboWarp機能拡張、台本、素材、build手順を統合し、Web配布できる紙芝居applicationとして提供する。 | `@kubohiroya/tm-kamishibai`         |
-| [TM紙芝居ドキュメント](https://github.com/kubohiroya/tm-kamishibai-docs)    | Docs             | TM Kamishibaiの利用者、台本作者、開発者、workshop運営者向け文書を公開する。                            | `@kubohiroya/tm-kamishibai-docs`    |
-| [TM紙芝居 作品library](https://github.com/kubohiroya/tm-kamishibai-samples) | Samples          | TM Kamishibaiで試せる作品、教材、配布用sampleを整理して公開する。                                      | `@kubohiroya/tm-kamishibai-samples` |
+| Product                                                                                   | Surface          | Responsibility                                                                                         | Package                                    |
+| ----------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
+| [TurboWarp-Kamishibai](https://github.com/kubohiroya/turbowarp-kamishibai-app)            | Application, CLI | 複数のTurboWarp機能拡張、台本、素材、build手順を統合し、Web配布できる紙芝居applicationとして提供する。 | `@kubohiroya/turbowarp-kamishibai-app`     |
+| [TurboWarp紙芝居ドキュメント](https://github.com/kubohiroya/turbowarp-kamishibai-docs)    | Docs             | TurboWarp-Kamishibaiの利用者、台本作者、開発者、workshop運営者向け文書を公開する。                     | `@kubohiroya/turbowarp-kamishibai-docs`    |
+| [TurboWarp紙芝居 作品library](https://github.com/kubohiroya/turbowarp-kamishibai-samples) | Samples          | TurboWarp-Kamishibaiで試せる作品、教材、配布用sampleを整理して公開する。                               | `@kubohiroya/turbowarp-kamishibai-samples` |
 
-### TM Kamishibai
+### TurboWarp-Kamishibai
 
-- Repository: [kubohiroya/tm-kamishibai](https://github.com/kubohiroya/tm-kamishibai)
-- Package: `@kubohiroya/tm-kamishibai`
+- Repository: [kubohiroya/turbowarp-kamishibai-app](https://github.com/kubohiroya/turbowarp-kamishibai-app)
+- Package: `@kubohiroya/turbowarp-kamishibai-app`
 - Surface: Application, CLI
 - Input: script, asset, extension bundle, runtime setting
 - Output: web application, SB3 artifact, publication artifact
@@ -355,28 +355,28 @@ flowchart LR
 - License policy: Software is MPL-2.0; documents and content follow their own notices.
 - Status: current
 
-### TM紙芝居ドキュメント
+### TurboWarp紙芝居ドキュメント
 
-- Repository: [kubohiroya/tm-kamishibai-docs](https://github.com/kubohiroya/tm-kamishibai-docs)
-- Package: `@kubohiroya/tm-kamishibai-docs`
+- Repository: [kubohiroya/turbowarp-kamishibai-docs](https://github.com/kubohiroya/turbowarp-kamishibai-docs)
+- Package: `@kubohiroya/turbowarp-kamishibai-docs`
 - Surface: Docs
 - Input: Markdown source, publication metadata
 - Output: HTML publication, PDF where applicable
 - Direct dependencies: @vivliostyle/cli
-- Optional integrations: tm-kamishibai, tm-kamishibai-samples
+- Optional integrations: turbowarp-kamishibai-app, turbowarp-kamishibai-samples
 - Representative use case: 利用者の入口と開発者向けの正規ガイドをまとめる。
 - License policy: Documents are CC BY-SA 4.0 unless another notice applies; site code is MPL-2.0.
 - Status: current
 
-### TM紙芝居 作品library
+### TurboWarp紙芝居 作品library
 
-- Repository: [kubohiroya/tm-kamishibai-samples](https://github.com/kubohiroya/tm-kamishibai-samples)
-- Package: `@kubohiroya/tm-kamishibai-samples`
+- Repository: [kubohiroya/turbowarp-kamishibai-samples](https://github.com/kubohiroya/turbowarp-kamishibai-samples)
+- Package: `@kubohiroya/turbowarp-kamishibai-samples`
 - Surface: Samples
 - Input: sample source, asset, metadata
 - Output: sample catalog, playable publication
-- Direct dependencies: tm-kamishibai
-- Optional integrations: tm-kamishibai-docs
+- Direct dependencies: turbowarp-kamishibai-app
+- Optional integrations: turbowarp-kamishibai-docs
 - Representative use case: 初めての利用者が動く作品から試し、教材作者が出発点を選ぶ。
 - License policy: Each sample declares its own rights notice.
 - Status: current
@@ -395,7 +395,7 @@ flowchart LR
 - Input: upstream Scratch renderer source
 - Output: patch verification branch
 - Direct dependencies: none
-- Optional integrations: tm-kamishibai
+- Optional integrations: turbowarp-kamishibai-app
 - Representative use case: 上流挙動の確認と、必要なpatchの検証を行う。
 - License policy: Follows upstream license terms.
 - Status: upstream fork
@@ -407,5 +407,5 @@ flowchart LR
 - TurboWarp機能拡張: READMEからこのoverviewへ一文で案内する。
 - templateとVite plugin: 新規機能拡張を作る開発者向けに、このoverviewを設計背景として案内する。
 - SB3 Toolchain: manifest、migration plan、reproducible buildの説明からこのoverviewへ接続する。
-- TM Kamishibai: applicationが統合するpackage群をこのoverviewへ委譲し、READMEには利用者向け導線を残す。
+- TurboWarp-Kamishibai: applicationが統合するpackage群をこのoverviewへ委譲し、READMEには利用者向け導線を残す。
 - DocsとSamples: 公開siteの入口から、このoverview、チュートリアル、作品libraryを行き来できるようにする。

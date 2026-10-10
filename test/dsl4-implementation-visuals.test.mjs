@@ -180,7 +180,10 @@ test('preserves rc5 visual evidence while the walkthrough targets rc8', () => {
   assert.match(record, /f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6/u);
   assert.match(record, /\| samples repository\s+\| 使用せず/u);
   assert.match(implementationWalkthrough, /公開プレリリース`4\.0\.0-rc\.8`/u);
-  assert.match(implementationWalkthrough, /tm-kamishibai-samples`は取得・build・変更しません/u);
+  assert.match(
+    implementationWalkthrough,
+    /turbowarp-kamishibai-samples`は取得・build・変更しません/u,
+  );
   assert.doesNotMatch(record, /8ea06bfd|dc9f6626/u);
 });
 

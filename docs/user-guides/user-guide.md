@@ -21,12 +21,12 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 | 利用形態 | 開き方 | 台本と作品固有アセット | 主な用途 |
 |---|---|---|---|
-| Web版 | [サンプルサイト](https://kubohiroya.github.io/tm-kamishibai-samples/)から作品を開く | Webページに組み込み済み | すぐに作品を再生する |
+| Web版 | [サンプルサイト](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)から作品を開く | Webページに組み込み済み | すぐに作品を再生する |
 | `player`（再生用SB3） | サンプルサイトから作品のSB3を取得し、TurboWarpで開く | SB3に組み込み済み | 配布・再生、Web版の生成 |
 | `editor`（編集用SB3） | サンプルサイトの作品詳細から `_作品名.sb3` を取得し、TurboWarpで開く | アセットは組み込み済み、台本は外部TXT | 台本を編集しながら確認する |
-| `generic`（汎用SB3） | [ダウンロードページ](https://kubohiroya.github.io/tm-kamishibai/downloads/)から `kamishibai.sb3` を取得し、TurboWarpで開く | 台本は外部TXT、アセットは台本の指定に従う | 新しい作品を作る |
+| `generic`（汎用SB3） | [ダウンロードページ](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)から `kamishibai.sb3` を取得し、TurboWarpで開く | 台本は外部TXT、アセットは台本の指定に従う | 新しい作品を作る |
 
-[浦島太郎の公開ページ](https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/)では、Web版、再生用SB3、編集用SB3、[公開台本 `urashima.txt`](https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/urashima.txt)を取得できます。
+[浦島太郎の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/)では、Web版、再生用SB3、編集用SB3、[公開台本 `urashima.txt`](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima.txt)を取得できます。
 
 共通して、次の点を確認してください。
 

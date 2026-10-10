@@ -86,7 +86,7 @@ test('publishes each document only from its version-specific top page', () => {
       assert.match(
         versionIndex,
         new RegExp(
-          `tm-kamishibai-docs/${document.publicationOutputDirectory}/publication\\.json`,
+          `turbowarp-kamishibai-docs/${document.publicationOutputDirectory}/publication\\.json`,
           'u',
         ),
       );
@@ -150,7 +150,7 @@ test('keeps the two version tops independent', () => {
   const dsl40Content = dsl40Index.replace(/<nav class="version-switch"[\s\S]*?<\/nav>/u, '');
 
   assert.match(dsl32Index, /<h1>紙芝居DSL 3\.2 ドキュメント<\/h1>/u);
-  assert.match(dsl40Index, /<h1>TM紙芝居 4\.0 ドキュメント<\/h1>/u);
+  assert.match(dsl40Index, /<h1>TurboWarp紙芝居 4\.0 ドキュメント<\/h1>/u);
   assert.doesNotMatch(dsl32Index, /kamishibai: '4\.0'|Source Graph/u);
   assert.match(dsl40Content, /href="dsl-author-guides\/dsl-3\.2-to-4\.0-conversion-guide\/"/u);
   assert.doesNotMatch(
@@ -299,13 +299,13 @@ test('provides the workshop menu in every static AppBar', () => {
   for (const index of [rootIndex, dsl32Index, dsl40Index, workshopIndex, licensesIndex]) {
     assert.match(
       index,
-      /href="https:\/\/kubohiroya\.github\.io\/tm-kamishibai-docs\/workshops\/"/u,
+      /href="https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-docs\/workshops\/"/u,
     );
     assert.match(index, /<main id="main-content"[^>]*tabindex="-1"/u);
   }
   assert.match(
     workshopIndex,
-    /href="https:\/\/kubohiroya\.github\.io\/tm-kamishibai-docs\/workshops\/"\s+aria-current="page"/u,
+    /href="https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-docs\/workshops\/"\s+aria-current="page"/u,
   );
 });
 
@@ -320,7 +320,7 @@ test('provides one rights-aware footer on every static page', () => {
     assert.match(footer, /各文書・作品・素材には個別の利用条件が適用されます。/u);
     assert.match(
       footer,
-      /href="https:\/\/kubohiroya\.github\.io\/tm-kamishibai-docs\/licenses\/"/u,
+      /href="https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-docs\/licenses\/"/u,
     );
     assert.doesNotMatch(footer, /github\.com/u);
   }

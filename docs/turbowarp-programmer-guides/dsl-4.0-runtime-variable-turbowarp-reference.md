@@ -3,9 +3,9 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: DSL 4.0のランタイム変数をTurboWarp blockから利用する方\
-現行公開仕様の基準: TM Kamishibai 4.0.0-rc.8（`29c0dea`）、2026年8月20日
+現行公開仕様の基準: TurboWarp-Kamishibai 4.0.0-rc.8（`29c0dea`）、2026年8月20日
 
-文書状態: **受け入れ済み・実装済み利用契約（既定OFF）**。[実装Issue #597](https://github.com/kubohiroya/tm-kamishibai/issues/597)で
+文書状態: **受け入れ済み・実装済み利用契約（既定OFF）**。[実装Issue #597](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/597)で
 source実装とtestを追加しています。3つのfeature flagは既定OFFのため、追加surfaceは4.0.0-rc.8の現行公開APIには含まれません。\
 現行仕様: [DSL 4.0ランタイム ブロックリファレンス](dsl-4.0-runtime-block-reference.md)
 
@@ -278,8 +278,8 @@ custom actionの名前・対象・引数・完了／失敗は、action実行中�
 
 ## 調査根拠
 
-- [`runtime-controller.js`](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/runtime-controller.js): snapshot、台本変数、generation、診断、event
-- [`pose-feedback-policy.js`](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/pose-feedback-policy.js): pose state eventの6 field
-- [`navigation-session.js`](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/navigation-session.js): navigation snapshot
-- [`dsl4-runtime-extension-entry.js`](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/scripts/sb3/dsl4-runtime-extension-entry.js): rc.8の非表示reporter
-- [`release-metadata/4.0.0-rc.8.json`](https://github.com/kubohiroya/tm-kamishibai/blob/29c0deadcb98badf94a0244c479ca896dc71f842/release-metadata/4.0.0-rc.8.json): 現行SB3の固定versionとartifact metadata
+- [`runtime-controller.js`](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/runtime-controller.js): snapshot、台本変数、generation、診断、event
+- [`pose-feedback-policy.js`](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/pose-feedback-policy.js): pose state eventの6 field
+- [`navigation-session.js`](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/navigation-session.js): navigation snapshot
+- [`dsl4-runtime-extension-entry.js`](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/scripts/sb3/dsl4-runtime-extension-entry.js): rc.8の非表示reporter
+- [`release-metadata/4.0.0-rc.8.json`](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/release-metadata/4.0.0-rc.8.json): 現行SB3の固定versionとartifact metadata

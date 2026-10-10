@@ -1,4 +1,4 @@
-# TM紙芝居 3.2 アプリ・教材・ツールチェインガイド
+# TurboWarp紙芝居 3.2 アプリ・教材・ツールチェインガイド
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
@@ -6,17 +6,17 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 <p class="application-page-label">1 / 8　アプリ概要</p>
 
-TM紙芝居は、TurboWarpで作られた紙芝居にカメラ映像を重ね、
+TurboWarp紙芝居は、TurboWarpで作られた紙芝居にカメラ映像を重ね、
 参加者のポーズやキー入力・タッチ入力で物語を進める「参加型」AI紙芝居アプリです。
 作品はテキストの`kamishibai=3.2`台本として記述し、絵・音・動き・分岐を組み合わせます。3.2.xは既存の`kamishibai=3.1`台本も読み込めます。
 
-<figure class="application-hero"><img src="../images/image60.png" alt="参加型AI紙芝居 Version 3.1.9と表示されたTM紙芝居のタイトル画面"><figcaption>3.1.9時点の画面例。3.2.0でも、同じアプリに台本と素材を読み込むことで異なる物語をプレイします。</figcaption></figure>
+<figure class="application-hero"><img src="../images/image60.png" alt="参加型AI紙芝居 Version 3.1.9と表示されたTurboWarp紙芝居のタイトル画面"><figcaption>3.1.9時点の画面例。3.2.0でも、同じアプリに台本と素材を読み込むことで異なる物語をプレイします。</figcaption></figure>
 
 <div class="application-value-grid"><section><strong>見る</strong><span>絵・台詞・音・アニメーションで物語を伝える</span></section><section><strong>動く</strong><span>カメラの前でポーズを取り、登場人物へ働きかける</span></section><section><strong>作る</strong><span>台本と素材を差し替え、自分たちの作品へ育てる</span></section></div>
 
 <p class="application-callout"><strong>中心となる考え:</strong> AIはポーズを認識し、プログラムは判定結果を物語のシーンへ接続します。参加者自身の動きが、次の場面を開く入力になります。</p>
 
-<p class="application-source">出典: <a href="https://kubohiroya.github.io/tm-kamishibai/">TM紙芝居 公式サイト</a>、<a href="https://github.com/kubohiroya/tm-kamishibai">tm-kamishibai README</a></p>
+<p class="application-source">出典: <a href="https://kubohiroya.github.io/turbowarp-kamishibai-app/">TurboWarp紙芝居 公式サイト</a>、<a href="https://github.com/kubohiroya/turbowarp-kamishibai-app">turbowarp-kamishibai-app README</a></p>
 
 ## 一つの台本を四つの形で届ける {#application-delivery .application-sheet .unnumbered}
 
@@ -40,13 +40,13 @@ TM紙芝居は、TurboWarpで作られた紙芝居にカメラ映像を重ね、
 公開サンプル「浦島太郎」では、観客がカメラの前で物語に合うポーズを取り、
 主人公や登場人物の行動に参加します。画面の「ポーズをとろう！」が、見る時間から動く時間への合図です。
 
-<figure class="application-hero application-urashima-hero"><img src="../images/image01.png" alt="カメラ映像に浦島太郎とカメを重ね、ポーズをとろう！と表示しているTM紙芝居のアプリ画面"><figcaption>カメラ映像、背景、アクター、認識UIを同じステージ上へ重ねたプレイ画面。</figcaption></figure>
+<figure class="application-hero application-urashima-hero"><img src="../images/image01.png" alt="カメラ映像に浦島太郎とカメを重ね、ポーズをとろう！と表示しているTurboWarp紙芝居のアプリ画面"><figcaption>カメラ映像、背景、アクター、認識UIを同じステージ上へ重ねたプレイ画面。</figcaption></figure>
 
 <div class="application-storyline"><span>カメを助ける</span><b>→</b><span>カメに乗る</span><b>→</b><span>竜宮城で踊る</span><b>→</b><span>玉手箱を開く</span><b>→</b><span>結末を演じる</span></div>
 
 <p class="application-callout"><strong>具体例の役割:</strong> 昔話の順序は保ちながら、要所をポーズ入力に置き換えます。物語を知っている人にも、アプリが「何を認識し、何を変えるか」が伝わります。</p>
 
-<p class="application-source">出典: <a href="https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/">浦島太郎 公開サンプル</a>、<a href="https://kubohiroya.github.io/tm-kamishibai/">TM紙芝居 公式サイト</a></p>
+<p class="application-source">出典: <a href="https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/">浦島太郎 公開サンプル</a>、<a href="https://kubohiroya.github.io/turbowarp-kamishibai-app/">TurboWarp紙芝居 公式サイト</a></p>
 
 ## ポーズをシーンの出来事へ変換する {#urashima-script .application-sheet .unnumbered}
 
@@ -65,7 +65,7 @@ action=scene:dragon-palace</code></pre><p>シーン、ポーズ名、信頼度�
 
 <p class="application-callout"><strong>演出の要点:</strong> 一つのポーズを長く待つ場面では、案内表示や効果音で「今何をすればよいか」を伝えます。キー入力・タッチ入力も併設できるため、会場条件に合わせた代替操作を用意できます。</p>
 
-<p class="application-source">出典: <a href="https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/urashima.txt">浦島太郎 台本</a>、<a href="../dsl-author-guides/dsl-manual.md">紙芝居DSL 3.2 ファイル作成マニュアル</a></p>
+<p class="application-source">出典: <a href="https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima.txt">浦島太郎 台本</a>、<a href="../dsl-author-guides/dsl-manual.md">紙芝居DSL 3.2 ファイル作成マニュアル</a></p>
 
 ## 体験会教材が結ぶ三つの技術 {#workshop-concepts .application-sheet .unnumbered}
 

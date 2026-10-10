@@ -24,7 +24,7 @@ test('separates the tutorial learning path from the author guide reference role'
 test('defines tutorial scope, canonical sample ownership, and release stages', () => {
   assert.match(tutorialReadme, /## 台本作成ガイドとの役割分担/u);
   assert.match(tutorialReadme, /最初の作品を完成させるための最短経路/u);
-  assert.match(tutorialReadme, /`tm-kamishibai-samples`を正本/u);
+  assert.match(tutorialReadme, /`turbowarp-kamishibai-samples`を正本/u);
   assert.match(tutorialReadme, /完全なsample YAMLや\s*配布物を複製して保守しません/u);
   assert.match(tutorialReadme, /固定commit、\s*starter version、artifact URL、integrity、license/u);
   assert.match(tutorialReadme, /`browser-authoring` gateを`published`、`ready: true`/u);
