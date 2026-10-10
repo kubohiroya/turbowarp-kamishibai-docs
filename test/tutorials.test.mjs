@@ -97,27 +97,27 @@ test('defines the active five-item AppBar and current-section rules', () => {
       ['downloads', 'ダウンロード'],
     ],
   );
-  assert.equal(navigationContract.contractVersion, '1.0.0');
+  assert.equal(navigationContract.contractVersion, '2.0.0');
   assert.deepEqual(Object.keys(navigationContract.siteSettings).sort(), [
-    'tm-kamishibai',
-    'tm-kamishibai-docs',
-    'tm-kamishibai-samples',
+    'turbowarp-kamishibai-app',
+    'turbowarp-kamishibai-docs',
+    'turbowarp-kamishibai-samples',
   ]);
 
   const itemIds = new Set(navigationContract.items.map(({id}) => id));
   for (const rule of navigationContract.currentSectionRules) assert(itemIds.has(rule.current));
   const workshopRuleIndex = navigationContract.currentSectionRules.findIndex(
-    ({site, current}) => site === 'tm-kamishibai-docs' && current === 'workshops',
+    ({site, current}) => site === 'turbowarp-kamishibai-docs' && current === 'workshops',
   );
   const documentRuleIndex = navigationContract.currentSectionRules.findIndex(
-    ({site, current}) => site === 'tm-kamishibai-docs' && current === 'documents',
+    ({site, current}) => site === 'turbowarp-kamishibai-docs' && current === 'documents',
   );
   assert(workshopRuleIndex >= 0 && workshopRuleIndex < documentRuleIndex);
 
   assert.deepEqual(navigationContract.changeLocations.map(({repository}) => repository).sort(), [
-    'kubohiroya/tm-kamishibai',
-    'kubohiroya/tm-kamishibai-docs',
-    'kubohiroya/tm-kamishibai-samples',
+    'kubohiroya/turbowarp-kamishibai-app',
+    'kubohiroya/turbowarp-kamishibai-docs',
+    'kubohiroya/turbowarp-kamishibai-samples',
   ]);
   for (const location of navigationContract.changeLocations) assert(location.paths.length > 0);
 });
@@ -160,7 +160,10 @@ test('fixes the versioned tutorial publication plan without adding an AppBar ite
       new RegExp(`href="tutorials/${entrySource.replace(/\.md$/u, '')}/"`, 'u'),
     );
   }
-  assert.doesNotMatch(listingSource, /<h3>[\s\S]*?TM紙芝居 4\.0 チュートリアル[\s\S]*?<\/h3>/u);
+  assert.doesNotMatch(
+    listingSource,
+    /<h3>[\s\S]*?TurboWarp紙芝居 4\.0 チュートリアル[\s\S]*?<\/h3>/u,
+  );
   assert.deepEqual(
     publicationPlan.pages.map(({source, publicPath, role}) => [source, publicPath, role]),
     [
@@ -205,8 +208,8 @@ test('fixes the versioned tutorial publication plan without adding an AppBar ite
   assert(
     navigationContract.currentSectionRules.some(
       ({site, pathPrefix, current}) =>
-        site === 'tm-kamishibai-docs' &&
-        pathPrefix === '/tm-kamishibai-docs/' &&
+        site === 'turbowarp-kamishibai-docs' &&
+        pathPrefix === '/turbowarp-kamishibai-docs/' &&
         current === 'documents',
     ),
   );
@@ -229,11 +232,12 @@ test('maps every planned screenshot to a draft marker and a release gate', () =>
     sourceIdentity: 'sha256:a6c4be01405af1b3070f6d02dc584a55bd2b45844ae48761aa3d4141ef474ca4',
     sb3Sha256: '2494b43f43f7b7acbd1ce9d307fcff383d239931aa46de550f76c3eb3ec40f3c',
     npmUrl: 'https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.5',
-    githubReleaseUrl: 'https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.5',
-    pagesUrl: 'https://kubohiroya.github.io/tm-kamishibai/downloads/',
+    githubReleaseUrl:
+      'https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.5',
+    pagesUrl: 'https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/',
     evidence: [
-      'https://github.com/kubohiroya/tm-kamishibai/issues/583',
-      'https://github.com/kubohiroya/tm-kamishibai/pull/596',
+      'https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/583',
+      'https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/596',
     ],
   });
   assert.equal(
@@ -243,8 +247,8 @@ test('maps every planned screenshot to a draft marker and a release gate', () =>
   assert.deepEqual(screenshotManifest.browserAuthoringBaseline, {
     version: '4.0.0-rc.5',
     state: 'published-prerelease',
-    issue: 'https://github.com/kubohiroya/tm-kamishibai/issues/555',
-    documentationIssue: 'https://github.com/kubohiroya/tm-kamishibai-docs/issues/118',
+    issue: 'https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/555',
+    documentationIssue: 'https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/118',
     captureFixture: 'test/fixtures/dsl4/browser-authoring-menu.html',
   });
   assert.equal(
@@ -261,34 +265,35 @@ test('maps every planned screenshot to a draft marker and a release gate', () =>
   assert.equal(screenshotManifest.sampleBaseline.status, 'tutorial-sample-published');
   assert.deepEqual(screenshotManifest.sampleBaseline.publicSamples, {
     urashima: {
-      detailUrl: 'https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/',
-      webUrl: 'https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/web-4.0/',
+      detailUrl: 'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/',
+      webUrl: 'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/web-4.0/',
       yamlUrl:
-        'https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/urashima.k4.yml',
+        'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima.k4.yml',
       sb3Url:
-        'https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/urashima-4.0.sb3',
+        'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima-4.0.sb3',
       sb3Sha256: '4516f543c25fe8d96edfa639cf789a174fd898199c5e34a1a29e079ceecbc6cb',
       webSha256: 'd0a605d0f7838fd52f1ceb71507ad0385435d0ad32cd7ebc8ae4798bed8e37ce',
     },
     myUrashima: {
-      detailUrl: 'https://kubohiroya.github.io/tm-kamishibai-samples/stories/my-urashima/',
-      webUrl: 'https://kubohiroya.github.io/tm-kamishibai-samples/stories/my-urashima/web-4.0/',
+      detailUrl: 'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/',
+      webUrl:
+        'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/web-4.0/',
       sb3Sha256: '7cbb6084b42d11c61473649db45950e293cf806ce1f54bace61f9c17ad7f33f3',
       webSha256: 'c1952f90e1cd25502d0dfcbe379f9493183d8af308c6338e1afe716540404c10',
     },
     tutorial: {
-      detailUrl: 'https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/',
-      webUrl: 'https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/web-4.0/',
+      detailUrl: 'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/',
+      webUrl: 'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/web-4.0/',
       yamlUrl:
-        'https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/story.kamishibai.yaml',
+        'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/story.kamishibai.yaml',
       sb3Url:
-        'https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/tutorial-4.0.sb3',
+        'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-4.0.sb3',
       starterUrl:
-        'https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip',
+        'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip',
       additionKitUrl:
-        'https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/tutorial-story-addition-kit-4.0.zip',
+        'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-addition-kit-4.0.zip',
       manifestUrl:
-        'https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/public-surfaces.json',
+        'https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json',
       sb3Sha256: '518fe92750a2e05a4711d8c9ad646256e9b21b9fa7161275174d12cca3a4dc7b',
       webSha256: 'ff9553c797e4b613f8c03dbbe5c9cdec1b3493e927b13df8ddf975666a6ec513',
     },
@@ -400,27 +405,27 @@ test('maps every planned screenshot to a draft marker and a release gate', () =>
   assert(
     screenshotManifest.gates
       .find(({id}) => id === 'preview-flow')
-      .dependencies.includes('https://github.com/kubohiroya/tm-kamishibai/issues/394'),
+      .dependencies.includes('https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/394'),
   );
   const releaseGate = screenshotManifest.gates.find(({id}) => id === 'dsl4-release');
   assert.equal(releaseGate.ready, true);
   assert.equal(releaseGate.progressStatus, 'published');
   assert.deepEqual(releaseGate.dependencies, [
-    'https://github.com/kubohiroya/tm-kamishibai/issues/583',
+    'https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/583',
   ]);
   assert.match(releaseGate.description, /4\.0\.0-rc\.5/u);
   assert.equal(releaseGate.remaining.length, 0);
   const tutorialSampleGate = screenshotManifest.gates.find(({id}) => id === 'tutorial-sample');
   assert.equal(tutorialSampleGate.ready, true);
   assert.deepEqual(tutorialSampleGate.dependencies, [
-    'https://github.com/kubohiroya/tm-kamishibai-samples/issues/94',
-    'https://github.com/kubohiroya/tm-kamishibai-samples/issues/100',
-    'https://github.com/kubohiroya/tm-kamishibai-samples/issues/102',
-    'https://github.com/kubohiroya/tm-kamishibai-samples/issues/104',
+    'https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/94',
+    'https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/100',
+    'https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/102',
+    'https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/104',
   ]);
   assert(
     tutorialSampleGate.evidence.includes(
-      'https://github.com/kubohiroya/tm-kamishibai-samples/pull/107',
+      'https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/107',
     ),
   );
   assert.match(tutorialSampleGate.description, /starter、addition kit、Web版、SB3/u);
@@ -520,7 +525,7 @@ test('keeps the published prerelease reviewable with its fixed captures', () => 
   const advancedCli = tutorialSources['create.md'].indexOf('## 高度な利用者・CI向けのCLI（任意）');
   assert(advancedCli > 0);
   const generalAuthorFlow = tutorialSources['create.md'].slice(0, advancedCli);
-  assert.doesNotMatch(generalAuthorFlow, /```bash|pnpm exec tm-kamishibai/u);
+  assert.doesNotMatch(generalAuthorFlow, /```bash|pnpm exec turbowarp-kamishibai-app/u);
   assert.match(generalAuthorFlow, /緑の旗[\s\S]*台本を開く[\s\S]*tutorial-story/u);
   assert.match(generalAuthorFlow, /配布用SB3を作る/u);
   assert.doesNotMatch(
@@ -533,14 +538,14 @@ test('keeps the published prerelease reviewable with its fixed captures', () => 
 test('routes general users and script authors before implementation details', () => {
   assert.match(
     tutorialSources['play.md'],
-    /入口: \[TM紙芝居 4\.0 ドキュメント\]\(https:\/\/kubohiroya\.github\.io\/tm-kamishibai-docs\/4\.0\/\)/u,
+    /入口: \[TurboWarp紙芝居 4\.0 ドキュメント\]\(https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-docs\/4\.0\/\)/u,
   );
   assert.match(tutorialSources['play.md'], /## 最初にやること/u);
   assert.match(tutorialSources['play.md'], /台本やコマンドを入力する必要はありません/u);
 
   assert.match(
     tutorialSources['create.md'],
-    /入口: \[TM紙芝居 4\.0 ドキュメント\]\(https:\/\/kubohiroya\.github\.io\/tm-kamishibai-docs\/4\.0\/\)/u,
+    /入口: \[TurboWarp紙芝居 4\.0 ドキュメント\]\(https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-docs\/4\.0\/\)/u,
   );
   assert.match(tutorialSources['create.md'], /## 最初のゴール/u);
   assert.match(tutorialSources['create.md'], /ここではまだ編集せず、Step 1から順番に進めます/u);
@@ -620,7 +625,10 @@ test('keeps the reproducible implementation walkthrough in the developer guide',
   );
   assert.match(implementationWalkthrough, /開発者向け追試手順/u);
   assert.match(implementationWalkthrough, /29c0deadcb98badf94a0244c479ca896dc71f842/u);
-  assert.match(implementationWalkthrough, /tm-kamishibai-samples`は取得・build・変更しません/u);
+  assert.match(
+    implementationWalkthrough,
+    /turbowarp-kamishibai-samples`は取得・build・変更しません/u,
+  );
   assert.match(implementationWalkthrough, /preview-dsl4 --watch/u);
   assert.match(implementationWalkthrough, /K4-VERSION-001/u);
   assert.match(

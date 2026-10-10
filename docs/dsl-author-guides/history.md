@@ -23,7 +23,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ### 3.2.0リリース
 
-新規台本のDSL宣言を`kamishibai=3.2`へ更新します。TM Kamishibai 3.2.xは互換性のため`kamishibai=3.1`も正式に受理するので、既存の3.1台本は冒頭を書き換えずに実行できます。3.2の主な変更は、旧Text Assetをすぐに削除せず、deprecatedな互換機能として維持しながら新しいSVG Textへ段階移行する方針を明文化したことです。
+新規台本のDSL宣言を`kamishibai=3.2`へ更新します。TurboWarp-Kamishibai 3.2.xは互換性のため`kamishibai=3.1`も正式に受理するので、既存の3.1台本は冒頭を書き換えずに実行できます。3.2の主な変更は、旧Text Assetをすぐに削除せず、deprecatedな互換機能として維持しながら新しいSVG Textへ段階移行する方針を明文化したことです。
 
 対応宣言は3.1と3.2を明示的に列挙しており、`kamishibai=3.0`や`kamishibai=3.3`を前方一致で受理するものではありません。3.1宣言の台本で旧Text Assetを使用した場合も`LEGACY_TEXT_ASSET_DEPRECATED`警告は出ます。
 
@@ -45,7 +45,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 #### SVG Textへの段階移行
 
-移行先はnpmで公開した[`@kubohiroya/turbowarp-svg-text@0.1.0`](https://github.com/kubohiroya/turbowarp-svg-text)です。TM Kamishibai 3.2.0へ組み込まれているため、既存台本の旧Text Assetを動かしたまま、新規部分からSVG Textへ置き換えられます。
+移行先はnpmで公開した[`@kubohiroya/turbowarp-svg-text@0.1.0`](https://github.com/kubohiroya/turbowarp-svg-text)です。TurboWarp-Kamishibai 3.2.0へ組み込まれているため、既存台本の旧Text Assetを動かしたまま、新規部分からSVG Textへ置き換えられます。
 
 3.2で追加したDSLは次の2つです。
 

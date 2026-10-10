@@ -234,7 +234,7 @@ body
   > section.level1:has(> .extension-overview-kicker)
   > section.level2:has(> h2.extension-sheet-right)
   > h2.extension-sheet-right:first-child::before {
-  content: 'TM紙芝居での利用例';
+  content: 'TurboWarp紙芝居での利用例';
 }
 
 .extension-meta {

@@ -11,17 +11,17 @@
         "publishedAt": "2026-08-26T05:27:27+09:00",
         "gitTag": "v4.0.0-rc.10",
         "tagCommit": "65f5e705921b6c92ba6ec5373ec13eff5101f2c6",
-        "githubRelease": "https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.10",
+        "githubRelease": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.10",
         "npmVersion": "4.0.0-rc.10",
         "npmUrl": "https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.10",
         "npmDistTag": "next",
-        "pagesUrl": "https://kubohiroya.github.io/tm-kamishibai/downloads/",
+        "pagesUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/",
         "pagesCommit": "ce397b4be9a0f26ad2392e4193afa701b2834cb8",
         "recommendedStableRelease": "v3.2.3",
         "officialDsl4Release": null
       },
       "source": {
-        "repository": "https://github.com/kubohiroya/tm-kamishibai",
+        "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
         "releaseIssue": 661,
         "releasePreparationPullRequest": 663,
         "releasePreparationMergeCommit": "235b0bfce403fd8a6e3026bd23b6562b53c132e5",
@@ -83,7 +83,7 @@
         "standardSb3": {
           "publicationState": "published",
           "filename": "kamishibai-4.0.0-rc.10.sb3",
-          "url": "https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.10/kamishibai-4.0.0-rc.10.sb3",
+          "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.10/kamishibai-4.0.0-rc.10.sb3",
           "size": 6787273,
           "sha256": "a8620868f5da118c142cf2a11db6679ce7fab8b8ef84f5e6cce26887d61e94ec"
         },
@@ -113,8 +113,8 @@
         "commands": ["pnpm verify:full", "pnpm release:check"],
         "githubActions": null,
         "publishedArtifactHashMatch": true,
-        "samplesPullRequest": "https://github.com/kubohiroya/tm-kamishibai-samples/pull/131",
-        "samplesPagesDeployment": "https://github.com/kubohiroya/tm-kamishibai-samples/actions/runs/32901209798",
+        "samplesPullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/131",
+        "samplesPagesDeployment": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/32901209798",
         "physicalCameraAndPose": "previous-camera-context-measurement-only; rc.10 physical-rerun-not-recorded"
       },
       "rollback": {
@@ -132,17 +132,17 @@
         "publishedAt": "2026-08-20T21:02:39+09:00",
         "gitTag": "v4.0.0-rc.8",
         "tagCommit": "29c0deadcb98badf94a0244c479ca896dc71f842",
-        "githubRelease": "https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.8",
+        "githubRelease": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.8",
         "npmVersion": "4.0.0-rc.8",
         "npmUrl": "https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.8",
         "npmDistTag": "next",
-        "pagesUrl": "https://kubohiroya.github.io/tm-kamishibai/downloads/",
+        "pagesUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/",
         "pagesCommit": "ff3867cfe32b3ff7c0c7cc9314e71459df55419d",
         "recommendedStableRelease": "v3.2.3",
         "officialDsl4Release": null
       },
       "source": {
-        "repository": "https://github.com/kubohiroya/tm-kamishibai",
+        "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
         "releaseIssue": 647,
         "releasePreparationPullRequest": 648,
         "releasePreparationMergeCommit": "ad244910b6bf579b8eb7c7af70d72b7ca4b1fff6",
@@ -203,7 +203,7 @@
         "standardSb3": {
           "publicationState": "published",
           "filename": "kamishibai-4.0.0-rc.8.sb3",
-          "url": "https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3",
+          "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3",
           "size": 6749955,
           "sha256": "91d7f594aaf922450fba359a90c7c26e7c1dfda51cf002534cb4605dbb0d7041"
         },
@@ -236,7 +236,7 @@
         "commands": ["pnpm release:dsl4:check", "pnpm verify:full", "pnpm release:check"],
         "unitTests": 1161,
         "chromiumTests": 13,
-        "githubActions": "https://github.com/kubohiroya/tm-kamishibai/actions/runs/32361658847/job/96402336784",
+        "githubActions": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/32361658847/job/96402336784",
         "publishedArtifactHashMatch": true,
         "physicalCameraAndPose": "previous-camera-context-measurement; recognition-and-overlay-browser-verified"
       },
@@ -255,17 +255,17 @@
         "publishedAt": "2026-08-16T19:36:45+09:00",
         "gitTag": "v4.0.0-rc.7",
         "tagCommit": "3a5f31d2519dfb2b9dab32b2c377762c774d5844",
-        "githubRelease": "https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.7",
+        "githubRelease": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.7",
         "npmVersion": "4.0.0-rc.7",
         "npmUrl": "https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.7",
         "npmDistTag": "next",
-        "pagesUrl": "https://kubohiroya.github.io/tm-kamishibai/downloads/",
+        "pagesUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/",
         "pagesCommit": "a7f377d4675a9bf9acc8691a11d269ff3d78118b",
         "recommendedStableRelease": "v3.2.3",
         "officialDsl4Release": null
       },
       "source": {
-        "repository": "https://github.com/kubohiroya/tm-kamishibai",
+        "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
         "releaseIssue": 630,
         "releasePreparationPullRequest": 633,
         "releasePreparationMergeCommit": "449eea670e4616b4ea155e9f42cae4742ba1cd1a",
@@ -325,7 +325,7 @@
         "standardSb3": {
           "publicationState": "published",
           "filename": "kamishibai-4.0.0-rc.7.sb3",
-          "url": "https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.7/kamishibai-4.0.0-rc.7.sb3",
+          "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.7/kamishibai-4.0.0-rc.7.sb3",
           "size": 6684157,
           "sha256": "3ad25911b9255d51273b37f24fa0d056e6ec72418f314e97c743ad52300380f8"
         },
@@ -358,7 +358,7 @@
         "commands": ["pnpm release:dsl4:check", "pnpm verify:full", "pnpm release:check"],
         "unitTests": 1159,
         "chromiumTests": 13,
-        "githubActions": "https://github.com/kubohiroya/tm-kamishibai/actions/runs/31941807053/job/95151986429",
+        "githubActions": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/31941807053/job/95151986429",
         "publishedArtifactHashMatch": true,
         "physicalCameraAndPose": "camera-context-measured; recognition-and-overlay-browser-verified"
       },
@@ -377,17 +377,17 @@
         "publishedAt": "2026-08-16T16:08:31+09:00",
         "gitTag": "v4.0.0-rc.6",
         "tagCommit": "4c360cd9845f9dcdbf7ecbffaa2fe4c1462af8b6",
-        "githubRelease": "https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.6",
+        "githubRelease": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.6",
         "npmVersion": "4.0.0-rc.6",
         "npmUrl": "https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.6",
         "npmDistTag": "next",
-        "pagesUrl": "https://kubohiroya.github.io/tm-kamishibai/downloads/",
+        "pagesUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/",
         "pagesCommit": "bc922280f022f3f894d51079b7571cce3170136d",
         "recommendedStableRelease": "v3.2.3",
         "officialDsl4Release": null
       },
       "source": {
-        "repository": "https://github.com/kubohiroya/tm-kamishibai",
+        "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
         "releaseIssue": 624,
         "releasePreparationPullRequest": 625,
         "releasePreparationMergeCommit": "4efec1963af04b50c080bef7095f598da928ac84",
@@ -447,7 +447,7 @@
         "standardSb3": {
           "publicationState": "published",
           "filename": "kamishibai-4.0.0-rc.6.sb3",
-          "url": "https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.6/kamishibai-4.0.0-rc.6.sb3",
+          "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.6/kamishibai-4.0.0-rc.6.sb3",
           "size": 6684010,
           "sha256": "be0e38d6179873894db2363751955ccd68b971a829a5b09c048e54986fbd7796"
         },
@@ -482,7 +482,7 @@
         "commands": ["pnpm release:dsl4:check", "pnpm verify:full", "pnpm release:check"],
         "unitTests": 1212,
         "chromiumTests": 13,
-        "githubActions": "https://github.com/kubohiroya/tm-kamishibai/actions/runs/31931898431/job/95127903375",
+        "githubActions": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/31931898431/job/95127903375",
         "publishedArtifactHashMatch": true,
         "physicalCameraAndPose": "camera-context-measured; overlay-browser-verified"
       },
@@ -501,17 +501,17 @@
         "publishedAt": "2026-08-15T03:55:40+09:00",
         "gitTag": "v4.0.0-rc.5",
         "tagCommit": "f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6",
-        "githubRelease": "https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.5",
+        "githubRelease": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.5",
         "npmVersion": "4.0.0-rc.5",
         "npmUrl": "https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.5",
         "npmDistTag": "next",
-        "pagesUrl": "https://kubohiroya.github.io/tm-kamishibai/downloads/",
+        "pagesUrl": "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/",
         "pagesCommit": "7af1416e2f48cedae0a9a5d82c598da3b2ad9d5c",
         "recommendedStableRelease": "v3.2.3",
         "officialDsl4Release": null
       },
       "source": {
-        "repository": "https://github.com/kubohiroya/tm-kamishibai",
+        "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
         "releaseIssue": 583,
         "releasePreparationPullRequest": 593,
         "releasePreparationMergeCommit": "9b3895638edba009ee4558a6c0594f077d9fbd6b",
@@ -570,7 +570,7 @@
         "standardSb3": {
           "publicationState": "published",
           "filename": "kamishibai-4.0.0-rc.5.sb3",
-          "url": "https://kubohiroya.github.io/tm-kamishibai/downloads/kamishibai-4.0.0-rc.5.sb3",
+          "url": "https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/kamishibai-4.0.0-rc.5.sb3",
           "size": 6664571,
           "sha256": "2494b43f43f7b7acbd1ce9d307fcff383d239931aa46de550f76c3eb3ec40f3c"
         },
@@ -606,7 +606,7 @@
         "commands": ["pnpm release:dsl4:check", "pnpm verify:full", "pnpm release:check"],
         "unitTests": 1224,
         "chromiumTests": 63,
-        "githubActions": "https://github.com/kubohiroya/tm-kamishibai/actions/runs/31823718461/job/94842799234",
+        "githubActions": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/31823718461/job/94842799234",
         "publishedArtifactHashMatch": true,
         "physicalCameraAndPose": "rc.5-retest-pending"
       },

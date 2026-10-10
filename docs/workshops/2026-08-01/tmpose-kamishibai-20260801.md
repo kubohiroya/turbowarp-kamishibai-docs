@@ -3,7 +3,7 @@
 ## 0.1 この教材の一次配布元
 
 AI紙芝居アプリおよびこの教材は、久保裕也（千葉商科大学 総合政策学部 教授）による研究プロジェクトの成果物です。
-最新版を、[https://kubohiroya.github.io/tm-kamishibai/](https://kubohiroya.github.io/tm-kamishibai/)で配布します。
+最新版を、[https://kubohiroya.github.io/turbowarp-kamishibai-app/](https://kubohiroya.github.io/turbowarp-kamishibai-app/)で配布します。
 AI紙芝居アプリも、ここから遊べます。
 
 ## 0.2 この体験会で学ぶこと
@@ -108,7 +108,7 @@ AI紙芝居アプリも、ここから遊べます。
 
 「参加型」AI紙芝居アプリを、「浦島太郎」の物語を組み込んだ状態で開きましょう。
 
-https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/web/
+https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/web/
 
 ![](../../images/image09.png){alt="浦島太郎のサンプルを開くリンク" style="width: 209.50px;"}
 

@@ -3,7 +3,7 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 公開プレリリース`4.0.0-rc.8`の再現・公開照合・追加smoke手順<br />
-対象Issue: [tm-kamishibai-docs #47](https://github.com/kubohiroya/tm-kamishibai-docs/issues/47)、[#169](https://github.com/kubohiroya/tm-kamishibai-docs/issues/169)
+対象Issue: [turbowarp-kamishibai-docs #47](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/47)、[#169](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/169)
 
 本書はリリース担当者向けで、一般的な動作確認を説明する文書ではありません。一般的な使い方は
 [大人向け概要](../user-guides/executive-summary-adult-4.0.md)、実装の責務は
@@ -36,9 +36,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 固定commitを取得します。
 
 ```bash
-git clone https://github.com/kubohiroya/tm-kamishibai.git
-git -C tm-kamishibai checkout --detach 29c0deadcb98badf94a0244c479ca896dc71f842
-git -C tm-kamishibai status --short
+git clone https://github.com/kubohiroya/turbowarp-kamishibai-app.git
+git -C turbowarp-kamishibai-app checkout --detach 29c0deadcb98badf94a0244c479ca896dc71f842
+git -C turbowarp-kamishibai-app status --short
 ```
 
 ## Feature flag snapshot
@@ -57,7 +57,7 @@ git -C tm-kamishibai status --short
 ## 自動検証
 
 ```bash
-cd tm-kamishibai
+cd turbowarp-kamishibai-app
 pnpm install --frozen-lockfile
 pnpm release:dsl4:check
 pnpm verify:full
@@ -66,7 +66,7 @@ shasum -a 256 dist/downloads/kamishibai-4.0.0-rc.8.sb3
 ```
 
 candidate PRの`pnpm verify:full`はNode系test 1,161件、Chromium test 13件を通過しました。
-[GitHub Actionsの記録](https://github.com/kubohiroya/tm-kamishibai/actions/runs/32361658847/job/96402336784)を
+[GitHub Actionsの記録](https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/32361658847/job/96402336784)を
 一次証跡とします。
 
 ## 公開物を照合する
@@ -75,7 +75,7 @@ candidate PRの`pnpm verify:full`はNode系test 1,161件、Chromium test 13件�
 
 ```bash
 curl -fL \
-  https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3 \
+  https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3 \
   -o kamishibai-4.0.0-rc.8.sb3
 shasum -a 256 kamishibai-4.0.0-rc.8.sb3
 
@@ -126,7 +126,7 @@ socket／watcher／timer解放を確認します。
 
 ## 実カメラ・実ポーズ
 
-camera contextの責務境界は[Issue #601](https://github.com/kubohiroya/tm-kamishibai/issues/601)で
+camera contextの責務境界は[Issue #601](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/601)で
 Chrome 151と物理cameraを使って測定しました。実際と同じ1 draw／1 read経路では`willReadFrequently`に
 再現性のある高速化がなく、WebGLでは全条件で悪化したため、TurboWarp TM 1.12.0は通常contextを使用します。
 CPU推論時にChromiumのreadback警告が1回出る場合がありますが、警告抑制だけを目的に成果物を書き換えません。

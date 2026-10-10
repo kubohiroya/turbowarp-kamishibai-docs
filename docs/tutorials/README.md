@@ -3,9 +3,9 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 公開プレリリース`4.0.0-rc.8`のブラウザー完結作者flowとrc.8公開サンプルの管理\
-関連Issue: [ブラウザー作者flow #118](https://github.com/kubohiroya/tm-kamishibai-docs/issues/118) / [本体実装 #555](https://github.com/kubohiroya/tm-kamishibai/issues/555) / [正式公開 #111](https://github.com/kubohiroya/tm-kamishibai-docs/issues/111) / [準備 #31](https://github.com/kubohiroya/tm-kamishibai-docs/issues/31)
+関連Issue: [ブラウザー作者flow #118](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/118) / [本体実装 #555](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/555) / [正式公開 #111](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/111) / [準備 #31](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/31)
 
-読者向け入口: [TM紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/tm-kamishibai-docs/4.0/)
+読者向け入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
 
 このREADMEは、チュートリアルを公開する人のための管理メモです。初めて紙芝居を遊ぶ人や台本を作る人は、
 上の読者向け入口から始めてください。
@@ -53,7 +53,7 @@ include文、複雑な分岐、custom action、runtimeやextensionの開発は�
 ## サンプルとYAMLの正本
 
 「遊ぶ」と「作る」が使う最小作品、starter、画像、音声、pose bundle、Web版、SB3は、
-`tm-kamishibai-samples`を正本とします。この文書リポジトリやチュートリアル本文へ、完全なsample YAMLや
+`turbowarp-kamishibai-samples`を正本とします。この文書リポジトリやチュートリアル本文へ、完全なsample YAMLや
 配布物を複製して保守しません。
 
 チュートリアル内のYAMLは、概念を説明する短い抜粋です。sample repositoryについて、
@@ -74,7 +74,7 @@ include文、複雑な分岐、custom action、runtimeやextensionの開発は�
 ## チュートリアル用作品
 
 「遊ぶ」と「作る」は、同じ最小作品を利用します。正式なsource、asset、生成設定、Web版、SB3、
-ライセンスは`tm-kamishibai-samples`で管理し、この文書リポジトリへ複製しません。
+ライセンスは`turbowarp-kamishibai-samples`で管理し、この文書リポジトリへ複製しません。
 
 最小作品は次の条件を満たすものとします。
 
@@ -103,7 +103,7 @@ YAMLはコピー可能なcode blockを正本とします。画像はTurboWarp Ed
 
 2026-08-20時点では、全23 core action block、browser preview、Bubble 0.10.0、TurboWarp TM 1.12.0、
 ポーズoverlayを含む公開rc.8の固定実装を
-[`29c0dea`](https://github.com/kubohiroya/tm-kamishibai/commit/29c0deadcb98badf94a0244c479ca896dc71f842)
+[`29c0dea`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/29c0deadcb98badf94a0244c479ca896dc71f842)
 で確認しています。rc.8を対象とする`browser-authoring` gateを`published`、`ready: true`として追跡します。
 
 既存スクリーンショット台帳にはrc.5で撮影した固定画像を歴史的証跡として残します。画像内の旧version表示は
@@ -118,16 +118,16 @@ sizeとSHA-256を公開manifestと照合しました。`tutorial-sample` gateは
 
 DSL `4.0.0-rc.8`は公開プレリリースとして固定済みです。annotated `v4.0.0-rc.8` tag、
 [npm `next`](https://www.npmjs.com/package/@kubohiroya/tm-kamishibai/v/4.0.0-rc.8)、
-[GitHub prerelease](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.8)、
-[Pages](https://kubohiroya.github.io/tm-kamishibai/downloads/)を
-[tm-kamishibai #647](https://github.com/kubohiroya/tm-kamishibai/issues/647)で照合し、
+[GitHub prerelease](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.8)、
+[Pages](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)を
+[turbowarp-kamishibai-app #647](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/647)で照合し、
 SB3 SHA-256を`91d7f594aaf922450fba359a90c7c26e7c1dfda51cf002534cb4605dbb0d7041`へ固定しました。
 `dsl4-release` gateは`published`、`ready: true`です。安定版`4.0.0`ではなく、公開済みRCを
 チュートリアルの対象releaseとして扱います。
 
 reload overlayは上流の
-[撮影引き継ぎ契約](https://github.com/kubohiroya/tm-kamishibai/blob/087dfa526e967bb2cc38af3f5b5a795355de7739/docs/design/dsl-4-preview-reload-overlay.md#tutorial-screenshot-handoff)と
-[fixture](https://github.com/kubohiroya/tm-kamishibai/blob/087dfa526e967bb2cc38af3f5b5a795355de7739/test/fixtures/dsl4/preview-reload-overlay-screenshot.json)
+[撮影引き継ぎ契約](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/087dfa526e967bb2cc38af3f5b5a795355de7739/docs/design/dsl-4-preview-reload-overlay.md#tutorial-screenshot-handoff)と
+[fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/087dfa526e967bb2cc38af3f5b5a795355de7739/test/fixtures/dsl4/preview-reload-overlay-screenshot.json)
 を正本にします。作者用の開始、directory open、診断、build menuは、本体の
 `test/fixtures/dsl4/browser-authoring-menu.html`から実際のmenu／error indicator moduleを読み込んで撮影します。
 Google Chrome 151.0.7922.137（Chromium）を1280 × 720 CSS px、DPR 1で使用し、
@@ -155,7 +155,7 @@ docs/images/tutorials/dsl4/create/
 ## 公開導線とAppBar
 
 [navigation-contract.json](navigation-contract.json)を5項目AppBarの正本とします。契約とレンダラーは
-`@kubohiroya/tm-kamishibai-docs`のバージョン付きビルド依存として提供し、他の2リポジトリは
+`@kubohiroya/turbowarp-kamishibai-docs`のバージョン付きビルド依存として提供し、他の2リポジトリは
 同じ契約スナップショットをビルド時に検証します。
 
 ```text
@@ -167,12 +167,12 @@ docs/images/tutorials/dsl4/create/
 埋め込みます。チュートリアル公開時もこの5項目と3リポジトリの契約は変更しません。
 
 レンダラー`scripts/site-navigation.mjs`は生成物です。正本は
-`tm-kamishibai-samples`の`scripts/site-navigation.ts`で、同リポジトリの
+`turbowarp-kamishibai-samples`の`scripts/site-navigation.ts`で、同リポジトリの
 `pnpm build:site-navigation`が`.mjs`を書き出します。生成にはNode自身の型剥がしを使い、
 仕上げに本リポジトリの`.prettierrc.json`と同じ設定でPrettierを通すため、生成物は3リポジトリの
 `scripts/site-navigation.mjs`とバイト単位で一致します。**このファイルを直接編集しないでください。**
 描画を変えるときは`.ts`を編集して再生成し、生成された`.mjs`を3リポジトリへ配布します。
-手編集は`tm-kamishibai-samples`の`pnpm check:site-navigation`が検出します。Prettierの設定を
+手編集は`turbowarp-kamishibai-samples`の`pnpm check:site-navigation`が検出します。Prettierの設定を
 変更する場合は、生成器側の設定も合わせる必要があります。
 
 ## Capture gate完了記録
@@ -200,15 +200,15 @@ docs/images/tutorials/dsl4/create/
 ## 関連資料
 
 - [紙芝居DSL 4.0 台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)
-- [DSL 4.0 Schemaリファレンス準備 Issue #29](https://github.com/kubohiroya/tm-kamishibai-docs/issues/29)
-- [source channelとゼロブロック作者フロー #258](https://github.com/kubohiroya/tm-kamishibai/issues/258)
-- [capability・Bundle・release境界 #266](https://github.com/kubohiroya/tm-kamishibai/issues/266)
-- [4.0.0-rc.8の固定・公開・照合 #647](https://github.com/kubohiroya/tm-kamishibai/issues/647)
-- [4.0.0-rc.8のサンプル同期 #125](https://github.com/kubohiroya/tm-kamishibai-samples/issues/125)
-- [チュートリアル用最小作品・starter・addition kit #94](https://github.com/kubohiroya/tm-kamishibai-samples/issues/94)
-- [poseModel asset lifecycle #327](https://github.com/kubohiroya/tm-kamishibai/issues/327)
-- [Web PreviewとYAML live reload #390](https://github.com/kubohiroya/tm-kamishibai/issues/390)
-- [local assetの追加・内容更新live reload #391](https://github.com/kubohiroya/tm-kamishibai/issues/391)
-- [共通reload overlay #394](https://github.com/kubohiroya/tm-kamishibai/issues/394)
-- [pose認識進捗表示 #383](https://github.com/kubohiroya/tm-kamishibai/issues/383)
-- [camera preview操作UI #388](https://github.com/kubohiroya/tm-kamishibai/issues/388)
+- [DSL 4.0 Schemaリファレンス準備 Issue #29](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/29)
+- [source channelとゼロブロック作者フロー #258](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/258)
+- [capability・Bundle・release境界 #266](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/266)
+- [4.0.0-rc.8の固定・公開・照合 #647](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/647)
+- [4.0.0-rc.8のサンプル同期 #125](https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/125)
+- [チュートリアル用最小作品・starter・addition kit #94](https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/94)
+- [poseModel asset lifecycle #327](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/327)
+- [Web PreviewとYAML live reload #390](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/390)
+- [local assetの追加・内容更新live reload #391](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/391)
+- [共通reload overlay #394](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/394)
+- [pose認識進捗表示 #383](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/383)
+- [camera preview操作UI #388](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/388)

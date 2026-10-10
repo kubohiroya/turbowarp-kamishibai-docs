@@ -1,4 +1,4 @@
-# TM紙芝居 4.0 アプリ・教材・ツールチェインガイド
+# TurboWarp紙芝居 4.0 アプリ・教材・ツールチェインガイド
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
@@ -7,7 +7,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 対象: 教材・ワークショップ設計者、制作環境担当者、プレビュー／ビルド確認者
 
 文書状態: 固定実装基準を説明する詳細ガイド（正式リリースの操作資料ではない）\
-調査基準: TM Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
+調査基準: TurboWarp-Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
 
 > **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
 > 正式な`v4.0.0`ではありません。この文書の説明はrc.8固定実装を基準とし、将来版で同じ画面や
@@ -43,7 +43,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 <p class="application-page-label">1 / 8　アプリと制作の全体像</p>
 
-TM紙芝居4.0は、台本と画像・音声・ポーズ用データを読み込み、見る人がキー、タッチ、ポーズで
+TurboWarp紙芝居4.0は、台本と画像・音声・ポーズ用データを読み込み、見る人がキー、タッチ、ポーズで
 参加できるデジタル紙芝居です。作品を作るときは、台本と素材を作品フォルダーへまとめ、内容を検査し、
 ブラウザーで動きを確かめてから、配布用の一つのファイルへまとめます。
 
@@ -185,7 +185,7 @@ DSL 4.0の教材では、物語と演出を決める人、画像やポーズモ�
 
 <p class="application-page-label">8 / 8　DSL 4.0ツールチェイン</p>
 
-TM KamishibaiのCLIは配布環境と同じ正規化器、スキーマ、意味検証器、診断モデルを
+TurboWarp-KamishibaiのCLIは配布環境と同じ正規化器、スキーマ、意味検証器、診断モデルを
 使います。ビルドはディスク上の候補を再検証し、ソースとローカル素材を含む自己完結SB3を一括して出力します。
 
 <pre class="application-code"><code>tm-kamishibai validate-dsl4 \

@@ -10,7 +10,7 @@ import {
   staffDocumentConfig,
   workshopDocumentConfig,
 } from '../docs/config.mjs';
-import sourceSnapshot from '../sources/tm-kamishibai.json' with {type: 'json'};
+import sourceSnapshot from '../sources/turbowarp-kamishibai-app.json' with {type: 'json'};
 import upstreamForks from '../sources/upstream-forks.json' with {type: 'json'};
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
@@ -113,12 +113,12 @@ test('pins the merged 3.2.0 source contract', () => {
   assert.equal(sourceSnapshot.commit, 'd1624c9ce9464bf696b4bb97851dce9154a09ee6');
   assert.equal(sourceSnapshot.dslVersion, '3.2');
   assert.equal(sourceSnapshot.extensions.length, 16);
-  assert.equal(sourceSnapshot.productName, 'TM Kamishibai');
+  assert.equal(sourceSnapshot.productName, 'TurboWarp-Kamishibai');
   assert.equal(sourceSnapshot.recognitionExtensionName, 'TurboWarp TM');
   assert.equal(sourceSnapshot.recognitionExtensionId, 'kubohiroyatm');
   assert.equal(
     sourceSnapshot.runtimeMigrationIssue,
-    'https://github.com/kubohiroya/tm-kamishibai/issues/661',
+    'https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/661',
   );
   assert(sourceSnapshot.extensions.includes('kubohiroyatm'));
 });

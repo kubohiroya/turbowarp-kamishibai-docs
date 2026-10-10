@@ -505,7 +505,7 @@
     <main id="root"></main>
   </body>
   <script>
-    const sampleRoot = '/tm-kamishibai-samples/stories/tutorial/';
+    const sampleRoot = '/turbowarp-kamishibai-samples/stories/tutorial/';
     const classroom = `${sampleRoot}classroom.svg`;
     const earthquake = `${sampleRoot}earthquake-classroom.svg`;
     const ready = `${sampleRoot}student-ready.svg`;
@@ -523,7 +523,7 @@
       ${badges ? `<div class="badge left">ポーズ認識　82<span class="bar" style="--progress:82%"></span></div><div class="badge right">チャージ　64%<span class="bar"></span></div>` : ''}
     </div>`;
     const shell = (content, title = 'ポーズ認識') =>
-      `<div class="appbar"><strong>TM紙芝居 Web Preview</strong><span>${title}</span></div><div class="canvas">${content}</div>`;
+      `<div class="appbar"><strong>TurboWarp紙芝居 Web Preview</strong><span>${title}</span></div><div class="canvas">${content}</div>`;
     const editor = (
       content,
       code = 'Standard SB3のブロックは\\n変更しません。\\n\\n作品の台本を外部ファイルで\\n読み込みます。',
@@ -550,7 +550,7 @@
       add-pose-scene.yml.txt</div>`;
     const frames = {
       'P-01': () =>
-        `<div class="sample-page"><div class="sample-nav"><strong>📚 TM紙芝居</strong><span>トップ</span><span>ドキュメント</span><span>ワークショップ</span><span>作品</span><span>ダウンロード</span></div><div class="sample-main"><p>作品 › 公式作品</p><div class="sample-card"><span class="tag">DSL 4.0 チュートリアル</span><h1>地震だ！頭を守ろう</h1><p>教室で地震の揺れを感じたときの安全行動を、見本と達成メッセージ付きで練習する4場面の公式サンプルです。</p><div class="sample-actions"><button class="primary">Web版を開く</button><button>スターターをダウンロード</button><button>完成版SB3をダウンロード</button></div><h3>固定情報</h3><p>Version 4.0.0-rc.3　・　MPL-2.0　・　カメラを使用</p></div></div></div>`,
+        `<div class="sample-page"><div class="sample-nav"><strong>📚 TurboWarp紙芝居</strong><span>トップ</span><span>ドキュメント</span><span>ワークショップ</span><span>作品</span><span>ダウンロード</span></div><div class="sample-main"><p>作品 › 公式作品</p><div class="sample-card"><span class="tag">DSL 4.0 チュートリアル</span><h1>地震だ！頭を守ろう</h1><p>教室で地震の揺れを感じたときの安全行動を、見本と達成メッセージ付きで練習する4場面の公式サンプルです。</p><div class="sample-actions"><button class="primary">Web版を開く</button><button>スターターをダウンロード</button><button>完成版SB3をダウンロード</button></div><h3>固定情報</h3><p>Version 4.0.0-rc.3　・　MPL-2.0　・　カメラを使用</p></div></div></div>`,
       'P-02': () =>
         shell(
           `<div class="license"><h1>「参加型」AI紙芝居</h1><h2>Version 4.0.0-rc.3 (2026/08/13)</h2><div class="work">🏫 地震だ！頭を守ろう</div><p>本アプリのソースコードはMozilla Public License 2.0で提供されています。</p><p>教室での安全行動をポーズで練習します。</p></div>`,

@@ -5,7 +5,7 @@ import test from 'node:test';
 import Ajv2020 from 'ajv/dist/2020.js';
 import {parse} from 'yaml';
 
-import sourceSnapshot from '../sources/tm-kamishibai.json' with {type: 'json'};
+import sourceSnapshot from '../sources/turbowarp-kamishibai-app.json' with {type: 'json'};
 
 const extensionGuide = readFileSync(
   new URL('../docs/developer-guides/extension-guide.md', import.meta.url),
@@ -69,7 +69,7 @@ const diagnosticsDesign4 = readFileSync(
 const theme = readFileSync(new URL('../docs/general-theme.css', import.meta.url), 'utf8');
 
 test('keeps the completed DSL 4.0 guide separate from the production 3.2 manual', () => {
-  assert.match(dslManual, /対象アプリ: TM Kamishibai 3\.2\.x/u);
+  assert.match(dslManual, /対象アプリ: TurboWarp-Kamishibai 3\.2\.x/u);
   assert.match(dsl4AuthorGuide, /固定実装基準を説明する台本作成ガイド/u);
   assert.match(dsl4AuthorGuide, /v4\.0\.0-rc\.8`はprerelease/u);
   assert.match(dsl4AuthorGuide, /Schemaはruntime実装から生成するものではありません/u);
@@ -413,7 +413,7 @@ test('keeps the extension guide as an index, bundle explanation, and sixteen two
   assert.doesNotMatch(extensionGuide, /class="tw-/u);
   assert.equal((extensionGuide.match(/class="extension-kamishibai-why"/gu) ?? []).length, 16);
   assert.equal((extensionGuide.match(/機能拡張そのもの 1 \/ 2/gu) ?? []).length, 16);
-  assert.equal((extensionGuide.match(/TM紙芝居での利用例 2 \/ 2/gu) ?? []).length, 16);
+  assert.equal((extensionGuide.match(/TurboWarp紙芝居での利用例 2 \/ 2/gu) ?? []).length, 16);
   assert.match(
     extensionGuide,
     /^## TurboWarp TM — 学習済みモデルでカメラ映像のポーズを認識する /mu,
@@ -425,7 +425,7 @@ test('keeps the extension guide as an index, bundle explanation, and sixteen two
     /^## Web Linkで利用者がボタンやメニューを操作したとき、設定済みのHTTPSページを開く /mu,
   );
   assert.doesNotMatch(extensionGuide, /公式URLだけを開く|title buttonからだけ開く/u);
-  assert.match(theme, /content: ['"]TM紙芝居での利用例['"];/u);
+  assert.match(theme, /content: ['"]TurboWarp紙芝居での利用例['"];/u);
   assert.doesNotMatch(`${extensionGuide}\n${theme}`, /TMPose 紙芝居での利用/u);
   assert.match(
     extensionGuide,

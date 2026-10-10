@@ -5,7 +5,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 
 import {documentationConfig, staffDocumentConfig, workshopDocumentConfig} from '../docs/config.mjs';
 import {NAVIGATION_CONTRACT} from './site-navigation.mjs';
-import sourceSnapshot from '../sources/tm-kamishibai.json' with {type: 'json'};
+import sourceSnapshot from '../sources/turbowarp-kamishibai-app.json' with {type: 'json'};
 import {referencedLocalAssets} from './build-freshness.mjs';
 import {legacyPublicationEntries} from './legacy-version-notices.mjs';
 
@@ -216,19 +216,19 @@ async function verifySiteAppBars() {
       'The site footer is missing its individual-rights notice.',
     );
     assert(
-      footer.includes('href="https://kubohiroya.github.io/tm-kamishibai-docs/licenses/"'),
+      footer.includes('href="https://kubohiroya.github.io/turbowarp-kamishibai-docs/licenses/"'),
       'The site footer is missing its rights page.',
     );
     assert(!footer.includes('github.com'), 'The site footer must not duplicate the GitHub link.');
     assert(
-      /<a\b(?=[^>]*class="site-nav__link")(?=[^>]*href="https:\/\/kubohiroya\.github\.io\/tm-kamishibai-samples\/")[^>]*>\s*作品\s*<\/a\s*>/u.test(
+      /<a\b(?=[^>]*class="site-nav__link")(?=[^>]*href="https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-samples\/")[^>]*>\s*作品\s*<\/a\s*>/u.test(
         html,
       ),
       `${path.relative(distRoot, htmlFile)} must label the works-library link as 作品.`,
     );
     for (const destination of [
       ...NAVIGATION_CONTRACT.items.map(({href}) => href),
-      NAVIGATION_CONTRACT.siteSettings['tm-kamishibai-docs'].repository,
+      NAVIGATION_CONTRACT.siteSettings['turbowarp-kamishibai-docs'].repository,
     ]) {
       assert(
         html.includes(`href="${destination}"`),
@@ -349,13 +349,13 @@ async function verifyIndex() {
     'The retired tutorial overview does not redirect to the DSL 4.0 top.',
   );
   assert(
-    /<link\b(?=[^>]*\brel="canonical")(?=[^>]*\bhref="https:\/\/kubohiroya\.github\.io\/tm-kamishibai-docs\/4\.0\/")[^>]*>/u.test(
+    /<link\b(?=[^>]*\brel="canonical")(?=[^>]*\bhref="https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-docs\/4\.0\/")[^>]*>/u.test(
       tutorialRedirect,
     ),
     'The retired tutorial overview does not declare the DSL 4.0 canonical URL.',
   );
   assert(
-    tutorialRedirect.includes('<a href="../">TM紙芝居 4.0 ドキュメントへ移動</a>'),
+    tutorialRedirect.includes('<a href="../">TurboWarp紙芝居 4.0 ドキュメントへ移動</a>'),
     'The retired tutorial overview does not provide a fallback link.',
   );
   assert(
@@ -407,7 +407,7 @@ async function verifyIndex() {
       );
       assert(
         versionIndex.includes(
-          `tm-kamishibai-docs/${document.publicationOutputDirectory}/publication.json`,
+          `turbowarp-kamishibai-docs/${document.publicationOutputDirectory}/publication.json`,
         ),
         `${document.sourceFilename} Viewer link is missing.`,
       );
@@ -497,12 +497,12 @@ async function verifyVersionedPublications() {
     [
       '3.2/user-guides',
       'application-materials-guide',
-      'TM紙芝居 3.2 アプリ・教材・ツールチェインガイド',
+      'TurboWarp紙芝居 3.2 アプリ・教材・ツールチェインガイド',
     ],
     [
       '4.0/developer-guides',
       'application-materials-guide-4.0',
-      'TM紙芝居 4.0 アプリ・教材・ツールチェインガイド',
+      'TurboWarp紙芝居 4.0 アプリ・教材・ツールチェインガイド',
     ],
     ['4.0/developer-guides', 'internal-specification-4.0', '紙芝居アプリ 4.0 内部仕様書'],
     [
@@ -537,7 +537,7 @@ async function verifyLegacyNotices() {
       readFile(path.join(directory, 'document.html'), 'utf8'),
       readFile(path.join(directory, 'publication.json'), 'utf8'),
     ]);
-    const targetUrl = `https://kubohiroya.github.io/tm-kamishibai-docs/${entry.targetDirectory}/`;
+    const targetUrl = `https://kubohiroya.github.io/turbowarp-kamishibai-docs/${entry.targetDirectory}/`;
     for (const notice of [index, document]) {
       assert(notice.includes(targetUrl), `${entry.legacyDirectory} omits its new URL.`);
       assert(

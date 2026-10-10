@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: "TM Kamishibai Noto Sans JP";
+  font-family: "TurboWarp-Kamishibai Noto Sans JP";
   src: url("fonts/NotoSansJP-VF.ttf") format("truetype");
   font-style: normal;
   font-weight: 100 900;
@@ -17,7 +17,7 @@
   --accent-soft: #f5dfd4;
   --line: #d8c7b8;
   --code: #f5efe8;
-  font-family: "TM Kamishibai Noto Sans JP", "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP",
+  font-family: "TurboWarp-Kamishibai Noto Sans JP", "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP",
     sans-serif;
   color: var(--ink);
   line-height: 1.82;
@@ -153,7 +153,7 @@ th {
 
 code,
 pre {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", "TM Kamishibai Noto Sans JP",
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", "TurboWarp-Kamishibai Noto Sans JP",
     monospace;
 }
 

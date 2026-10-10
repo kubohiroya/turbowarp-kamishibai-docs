@@ -11,7 +11,7 @@ const execFileAsync = promisify(execFile);
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const outputDirectory = path.join(projectRoot, 'sources/dsl4');
 const schemaPath = 'schema/dsl-4.schema.json';
-const repositoryFullName = 'kubohiroya/tm-kamishibai';
+const repositoryFullName = 'kubohiroya/turbowarp-kamishibai-app';
 
 function parseArguments(argumentsAfterScript) {
   const normalizedArguments = argumentsAfterScript.filter((argument) => argument !== '--');

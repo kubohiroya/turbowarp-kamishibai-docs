@@ -1,8 +1,8 @@
 {
-  "name": "@kubohiroya/tm-kamishibai-docs",
+  "name": "@kubohiroya/turbowarp-kamishibai-docs",
   "version": "0.1.0",
   "private": true,
-  "description": "Documentation source and GitHub Pages build for TM Kamishibai",
+  "description": "Documentation source and GitHub Pages build for TurboWarp-Kamishibai",
   "type": "module",
   "exports": {
     "./site-navigation": "./scripts/site-navigation.mjs",

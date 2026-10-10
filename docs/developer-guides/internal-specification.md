@@ -2,14 +2,14 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-この文書は、TM紙芝居の汎用アプリSB3について、target、変数、event、
+この文書は、TurboWarp紙芝居の汎用アプリSB3について、target、変数、event、
 custom block、呼出し関係、状態遷移の内部仕様を現在の実装に対応させて記録します。
 成果物プロファイル、SB3・台本変換ビルダーの外部契約、開発・検証・公開手順は
 [紙芝居アプリ 3.2 ソフトウェアメンテナンスガイド](developer-guide.md)を参照してください。台本の
 外部仕様は[台本DSLマニュアル](../dsl-author-guides/dsl-manual.md)と
 [コマンドリファレンス](../dsl-author-guides/command-reference.md)を参照してください。
 各機能拡張の役割と現行アプリでの利用箇所は
-[TM紙芝居 3.2 機能拡張ガイド](extension-guide.md)を参照してください。
+[TurboWarp紙芝居 3.2 機能拡張ガイド](extension-guide.md)を参照してください。
 
 本書は「アプリが内部でどのように動くか」を扱い、「リポジトリをどう変更・公開するか」
 や「ビルダーをどう利用するか」は扱いません。
@@ -20,7 +20,7 @@ custom block、呼出し関係、状態遷移の内部仕様を現在の実装�
 [「アクターへ命令を届けるしくみ」](#actor-message-delivery){data-ref="chapter"}と
 [「主要な呼出し経路」](#events-custom-blocks-call-graph){data-ref="chapter"}が入口になります。
 
-対象アプリ: TM Kamishibai 3.2.x\
+対象アプリ: TurboWarp-Kamishibai 3.2.x\
 受理するDSL宣言: `kamishibai=3.1`、`kamishibai=3.2`
 
 過去のバージョンからの変更は[`history.md`](../dsl-author-guides/history.md)を参照してください。
@@ -661,4 +661,4 @@ transitionの反復待ちは`skipMode`の存在で終了しますが、最後の
 - [`extension-guide.md`](extension-guide.md): 依存機能拡張16個の一覧、図解、役割、利用箇所
 - [`application-materials-guide.md`](application-materials-guide.md): アプリ、浦島太郎、体験会教材、DSL 3.2、sb3-toolchainの8ページ概要
 - [`history.md`](../dsl-author-guides/history.md): DSLとアプリの変更履歴
-- [アプリrepository README](https://github.com/kubohiroya/tm-kamishibai): プロジェクト全体の入口
+- [アプリrepository README](https://github.com/kubohiroya/turbowarp-kamishibai-app): プロジェクト全体の入口

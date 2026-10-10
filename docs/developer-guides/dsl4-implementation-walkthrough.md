@@ -3,13 +3,13 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 公開プレリリース`4.0.0-rc.8`の開発者向け追試手順\
-管理Issue: [#157](https://github.com/kubohiroya/tm-kamishibai-docs/issues/157)\
+管理Issue: [#157](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/157)\
 対象: rc.8の実動作、live reload、内部仕様を確認する人\
 想定時間: 15〜25分
 
 この手順では、`tmpose-kamishibai@4.0.0-rc.8`と公開rc.8 SB3を固定し、任意のDSL 4 projectを
 development-only local previewで実行します。正常稼働、タイトルversion、invalid保存時の診断、復旧を
-同じbrowser sessionで確認します。`tm-kamishibai-samples`は取得・build・変更しません。
+同じbrowser sessionで確認します。`turbowarp-kamishibai-samples`は取得・build・変更しません。
 
 `4.0.0-rc.8`は公開済みのrelease candidateですが、安定版`4.0.0`ではありません。画面は作者向け
 local previewであり、配布作品の通常再生画面とは役割が異なります。
@@ -38,7 +38,7 @@ local previewであり、配布作品の通常再生画面とは役割が異な�
 Node.js 22.12.0以上とCorepackを使用します。既存checkoutを上書きしない作業用directoryで実行します。
 
 ```bash
-git clone https://github.com/kubohiroya/tm-kamishibai.git
+git clone https://github.com/kubohiroya/turbowarp-kamishibai-app.git
 cd tmpose-kamishibai
 git switch --detach v4.0.0-rc.8
 corepack pnpm install --frozen-lockfile
@@ -48,8 +48,8 @@ node bin/tmpose-kamishibai.mjs --version
 
 最後の二行が固定commitと`4.0.0-rc.8`を返すことを確認します。
 
-公開SB3は[GitHub prerelease](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.8)または
-[Pagesのダウンロード画面](https://kubohiroya.github.io/tm-kamishibai/downloads/)から取得し、
+公開SB3は[GitHub prerelease](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.8)または
+[Pagesのダウンロード画面](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)から取得し、
 SHA-256を照合します。
 
 ```bash

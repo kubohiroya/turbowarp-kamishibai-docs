@@ -452,8 +452,8 @@ export function renderReferenceDocument({schema, annotations, lock}) {
     ? `[Issue #${lock.candidateIssue}](${lock.candidateIssueUrl})の作業ツリーから固定したDSL 4.0規範JSON Schema候補snapshot`
     : `固定snapshotの[DSL 4.0 JSON Schema](${lock.schemaUrl})`;
   const updateCommand = candidateSnapshot
-    ? `pnpm docs:dsl4:sync -- --repository ../tm-kamishibai --commit <base-commit> --working-tree --issue ${lock.candidateIssue}`
-    : 'pnpm docs:dsl4:sync -- --repository ../tm-kamishibai --commit <commit>';
+    ? `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <base-commit> --working-tree --issue ${lock.candidateIssue}`
+    : 'pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>';
   const authorityDescription = candidateSnapshot
     ? `上流base commitと[Issue #${lock.candidateIssue}](${lock.candidateIssueUrl})の未commit Schema候補、表層仕様、適合実装・testを一組で追跡しています。`
     : '同一の上流完成commitに含まれる規範JSON Schema、表層仕様、適合実装・testを固定しています。';

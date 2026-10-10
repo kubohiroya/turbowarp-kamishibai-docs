@@ -1,10 +1,10 @@
-# TM紙芝居 3.2 機能拡張ガイド
+# TurboWarp紙芝居 3.2 機能拡張ガイド
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。引用図版には各出典の条件が適用されます。
 
 <p class="extension-overview-kicker">全34ページ。16個の機能拡張を、1拡張につき2ページの見開きで図解する</p>
 
-<div class="extension-reading-key"><section><strong>左ページ・青</strong><span>機能拡張そのもの</span><small>公式ドキュメントに基づく動作・入力・出力・制約</small></section><section><strong>右ページ・橙</strong><span>TM紙芝居での利用例</span><small>なぜ必要か、実プロジェクトのどこでどう使うか</small></section></div>
+<div class="extension-reading-key"><section><strong>左ページ・青</strong><span>機能拡張そのもの</span><small>公式ドキュメントに基づく動作・入力・出力・制約</small></section><section><strong>右ページ・橙</strong><span>TurboWarp紙芝居での利用例</span><small>なぜ必要か、実プロジェクトのどこでどう使うか</small></section></div>
 
 `kamishibai=3.1`と`kamishibai=3.2`の台本を動かす3.2.xアプリは、次の16機能拡張を利用します。
 読む順番は実行時の読込順ではなく、**Gallery由来 → TurboWarp標準 → 外部埋め込み → アプリ内蔵**です。
@@ -51,7 +51,7 @@ sb3-toolchainでbundle版SB3を生成すると、相互に動的opcode参照を�
 
 <figure class="extension-dependency-map"><figcaption><strong>実行時の直接依存関係</strong><span>矢印の先の拡張APIを呼び出す。bundleへの所属とは別の関係です。</span></figcaption><div class="extension-dependency-rows"><div class="extension-dependency-row"><span class="extension-dependency-from">Kamishibai Runtime</span><b>→</b><div><span>Asset Manager</span><span>Runtime Expression</span><span>Temporary Variables</span><span class="extension-dependency-optional">Translate<small>言語fallback</small></span><span class="extension-dependency-optional">Animated Text<small>SVG失敗時</small></span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Asset Manager</span><b>→</b><div><span>Temporary Variables</span><span>Animated Text</span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Runtime Expression</span><b>→</b><div><span>Temporary Variables</span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Async Input</span><b>→</b><div><span>Temporary Variables</span><span class="extension-dependency-optional">TurboWarp TM<small>poseInputは現在OFF</small></span></div></div></div><div class="extension-dependency-legend"><span>実線: 現行アプリの利用経路で必要</span><span>破線: fallback／既定OFFの任意経路</span></div><p>Consoles、Text、Local Storage、More Timers、Files、Text Lines、TurboWarp TM、SVG Text、Web Linkは、他拡張を直接呼ばず、Stageのblockとruntime変数を介して連携します。</p></figure>
 
-<p class="extension-source">出典: <a href="https://github.com/kubohiroya/sb3-toolchain/blob/b3f4b9aa3ed3ede363700be815fe522f6a47df0b/docs/extension-bundles.md">sb3-toolchain: Extension bundles</a>、<a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/embedded-extensions.json">Version 3.2.0 埋め込みmanifest</a>、<a href="https://github.com/kubohiroya/tm-kamishibai/tree/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions">依存APIの実装</a></p>
+<p class="extension-source">出典: <a href="https://github.com/kubohiroya/sb3-toolchain/blob/b3f4b9aa3ed3ede363700be815fe522f6a47df0b/docs/extension-bundles.md">sb3-toolchain: Extension bundles</a>、<a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/embedded-extensions.json">Version 3.2.0 埋め込みmanifest</a>、<a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions">依存APIの実装</a></p>
 
 ## Consoles — ログ・警告・エラー・計測結果をブラウザーコンソールへ出力する {#extension-consoles .extension-sheet .extension-sheet-left}
 
@@ -72,9 +72,9 @@ group、経過時間の計測、consoleの消去もblockから操作でき、実
 
 ## Consolesで台本の実行状況をログへ記録し、停止した処理を突き止める {#extension-consoles-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">Gallery 1 / 7　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">Gallery 1 / 7　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>紙芝居はasset読込、scene進行、入力待ちが非同期に重なります。画面だけでは「どの台本行まで進み、どこで止まったか」が分かりにくいため、観客向け表示を汚さずに制作者が舞台裏を追える記録経路が必要です。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>紙芝居はasset読込、scene進行、入力待ちが非同期に重なります。画面だけでは「どの台本行まで進み、どこで止まったか」が分かりにくいため、観客向け表示を汚さずに制作者が舞台裏を追える記録経路が必要です。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-consoles.png" alt="TurboWarp Editorのexec scene定義冒頭で、scene context設定に続いて2つのConsolesログを実行する画面"><figcaption>「exec scene # …」の入口。scene contextを設定し、区切りとscene番号・labelを2つのlogへ記録する順序が分かる範囲だけを示します。</figcaption></figure>
 
@@ -82,7 +82,7 @@ group、経過時間の計測、consoleの消去もblockから操作でき、実
 
 <p class="extension-note"><strong>このアプリでの役割:</strong> 緑の旗で古いconsoleを消し、<code>journal</code>で進行、<code>error</code>で異常を記録します。表示用errorと開発用logを混ぜないことが重要です。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>exec scene # %s with %s</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>exec scene # %s with %s</code>）</p>
 
 ## Temporary Variables — 実行範囲の異なる一時変数を作成・共有する {#extension-temporary-variables .extension-sheet .extension-sheet-left}
 
@@ -103,9 +103,9 @@ Scratch変数を増やさず、処理の途中だけ必要な名前付き値を�
 
 ## Temporary Variablesで処理ごとの一時値を分け、同時実行による上書きを防ぐ {#extension-temporary-variables-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">Gallery 2 / 7　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">Gallery 2 / 7　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>同じsceneの中でも複数のActorや入力処理が並行します。途中値を通常のScratch変数へ集めると別の実行が上書きし、変数一覧も膨らみます。呼出しごとの値はthreadへ、sceneや拡張をまたぐ合図だけはruntimeへ置くことで、状態の混線を防げます。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>同じsceneの中でも複数のActorや入力処理が並行します。途中値を通常のScratch変数へ集めると別の実行が上書きし、変数一覧も膨らみます。呼出しごとの値はthreadへ、sceneや拡張をまたぐ合図だけはruntimeへ置くことで、状態の混線を防げます。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-temporary-variables.png" alt="TurboWarp Editorのcreate asset定義から、asset解析に使うthread variableブロックだけを切り出した画面"><figcaption>「create asset」の解析部分。indexからasset、skin、resourceIdへ値を受け渡すthread variableの連鎖です。</figcaption></figure>
 
@@ -113,7 +113,7 @@ Scratch変数を増やさず、処理の途中だけ必要な名前付き値を�
 
 <p class="extension-note"><strong>注意:</strong> runtime variableも永続保存ではありません。再起動後に残す値はLocal Storageを使い、green flag時にruntimeへ戻します。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>create asset</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>create asset</code>）</p>
 
 ## Text — 文字列を検索・分割・置換する {#extension-text-operators .extension-sheet .extension-sheet-left}
 
@@ -134,9 +134,9 @@ Scratch変数を増やさず、処理の途中だけ必要な名前付き値を�
 
 ## Textで台本のコマンド名と引数を、区切り文字から読み取る {#extension-text-operators-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">Gallery 3 / 7　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">Gallery 3 / 7　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>紙芝居DSLは、人が直接編集できる一続きのtextです。専用parserをJavaScript側へ隠すのではなく、どの区切りを探し、どの引数を取り出したかをTurboWarpのblockとして読める形にすると、台本仕様と実装を制作者が照合しやすくなります。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>紙芝居DSLは、人が直接編集できる一続きのtextです。専用parserをJavaScript側へ隠すのではなく、どの区切りを探し、どの引数を取り出したかをTurboWarpのblockとして読める形にすると、台本仕様と実装を制作者が照合しやすくなります。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-text.png" alt="TurboWarp EditorのselectValue定義から、Text拡張で区切り文字と項目を扱うreturn部分だけを切り出した画面"><figcaption>「selectValue # …」の中核。区切り文字の出現数を調べ、指定項目をtrimして返す2つの分岐です。</figcaption></figure>
 
@@ -144,7 +144,7 @@ Scratch変数を増やさず、処理の途中だけ必要な名前付き値を�
 
 <p class="extension-note"><strong>区別:</strong> このTextは文字列演算の<code>strings</code>です。Stageへ文字を描くAnimated Text（ID: <code>text</code>）とは別物です。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>selectValue # %s separated by %s from %s</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>selectValue # %s separated by %s from %s</code>）</p>
 
 ## Local Storage — 文字列をブラウザーへ保存・取得・削除する {#extension-local-storage .extension-sheet .extension-sheet-left}
 
@@ -165,9 +165,9 @@ Scratch変数と違い、ページを閉じた後でも次回起動時に読み�
 
 ## Local Storageで選んだ台本と言語設定を保存し、次回起動時に復元する {#extension-local-storage-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">Gallery 4 / 7　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">Gallery 4 / 7　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>体験会で選んだ台本や表示言語がreloadのたびに消えると、参加者は作品をプレイするより再設定に時間を取られます。小さな設定と台本文字列だけを保存し、次回は前回の続きから始められるようにします。カメラ映像や認識途中の値は保存しません。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>体験会で選んだ台本や表示言語がreloadのたびに消えると、参加者は作品をプレイするより再設定に時間を取られます。小さな設定と台本文字列だけを保存し、次回は前回の続きから始められるようにします。カメラ映像や認識途中の値は保存しません。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-local-storage.png" alt="TurboWarp EditorのstartStory処理から、Local Storageの名前空間設定とscript保存だけを切り出した画面"><figcaption>名前空間を<code>kamishibai</code>に定め、runtimeのscriptをstorageへ書く、隣接した2ブロックです。</figcaption></figure>
 
@@ -175,7 +175,7 @@ Scratch変数と違い、ページを閉じた後でも次回起動時に読み�
 
 <p class="extension-note"><strong>注意:</strong> 同じprojectを複数tabで開くと、後から保存したwindowが値を上書きする可能性があります。小さな設定と台本文字列だけを対象にします。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: green flag）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: green flag）</p>
 
 ## More Timers — 複数の名前付きタイマーを個別に管理する {#extension-more-timers .extension-sheet .extension-sheet-left}
 
@@ -196,9 +196,9 @@ Scratch変数と違い、ページを閉じた後でも次回起動時に読み�
 
 ## More Timersで待機時間を計測しながら、利用者のスキップ操作にも応答する {#extension-more-timers-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">Gallery 5 / 7　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">Gallery 5 / 7　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>標準の「待つ」だけでは、待機中に観客がskipしても、その時間が終わるまでsceneを進められません。名前付きtimerの値とskipの両方を短いloopで確認すれば、予定時間を守りながら操作にもすぐ反応できます。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>標準の「待つ」だけでは、待機中に観客がskipしても、その時間が終わるまでsceneを進められません。名前付きtimerの値とskipの両方を短いloopで確認すれば、予定時間を守りながら操作にもすぐ反応できます。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-more-timers.png" alt="TurboWarp Editorのwait定義から、More Timersの開始、値取得、削除を含む接続部分だけを切り出した画面"><figcaption>「wait seconds」のtimer部分。開始／reset、経過値の監視、最後の削除までを一続きで示します。</figcaption></figure>
 
@@ -206,7 +206,7 @@ Scratch変数と違い、ページを閉じた後でも次回起動時に読み�
 
 <p class="extension-note"><strong>設計上の要点:</strong> Scratchの長い「待つ」ブロックに任せず、短いloopでtimerとskipを同時に監視します。これによりプレイ中の操作へすぐ反応できます。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>wait %s seconds</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>wait %s seconds</code>）</p>
 
 ## Files — ローカルファイルの読込みとダウンロードを行う {#extension-files .extension-sheet .extension-sheet-left}
 
@@ -227,9 +227,9 @@ Scratch変数と違い、ページを閉じた後でも次回起動時に読み�
 
 ## Filesで参加者が選んだTXT台本を、埋め込み台本と同じ検査・実行経路へ渡す {#extension-files-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">Gallery 6 / 7　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">Gallery 6 / 7　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>このアプリの体験会を実施する場合を想定すると、参加者が書いたTXT台本をその場ですぐ試してもらいたい一方、どのような技量・経験を持った参加者が集まるかがわからず時間的制約もある状況では、台本ごとにWebへ公開したりアプリを作り直したりはできません。端末上のfileを利用者のclickで選び、埋め込み台本と同じ検査・実行経路へ渡す入口になります。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>このアプリの体験会を実施する場合を想定すると、参加者が書いたTXT台本をその場ですぐ試してもらいたい一方、どのような技量・経験を持った参加者が集まるかがわからず時間的制約もある状況では、台本ごとにWebへ公開したりアプリを作り直したりはできません。端末上のfileを利用者のclickで選び、埋め込み台本と同じ検査・実行経路へ渡す入口になります。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-files.png" alt="TurboWarp Editorの初期化処理から、Filesのモード設定と直後のshowTitle broadcastだけを切り出した画面"><figcaption>ファイル選択を「すぐにセレクターを開く」に設定してから、title画面を表示する2ブロックです。</figcaption></figure>
 
@@ -237,7 +237,7 @@ Scratch変数と違い、ページを閉じた後でも次回起動時に読み�
 
 <p class="extension-note"><strong>安全性:</strong> pickerは利用者clickに続いて開きます。cancelで空文字になった場合は、保存済み台本を勝手に置き換えません。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（UiItem: <code>runUiItemAction</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（UiItem: <code>runUiItemAction</code>）</p>
 
 ## Animated Text — 文字列をスプライトの見た目として描画・アニメーションする {#extension-animated-text .extension-sheet .extension-sheet-left}
 
@@ -258,9 +258,9 @@ spriteへ文字専用のrenderer skinを作り、font、色、幅、配置、out
 
 ## Animated Textで台詞やメニューの文字列を画面へ描画する {#extension-animated-text-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">Gallery 7 / 7　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">Gallery 7 / 7　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>台詞、menu、prompt、診断文は台本や言語によって変わるため、すべてを事前にcostumeへ描いておくことはできません。実行時の文字列をStage上の見た目に変換すれば、同じUI部品を内容だけ差し替えて再利用できます。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>台詞、menu、prompt、診断文は台本や言語によって変わるため、すべてを事前にcostumeへ描いておくことはできません。実行時の文字列をStage上の見た目に変換すれば、同じUI部品を内容だけ差し替えて再利用できます。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-animated-text.png" alt="TurboWarp EditorのStageから、Asset Managerで文字assetを登録しstyleを設定する接続部分だけを切り出した画面"><figcaption>実プロジェクトでは、文字をAsset Managerへ登録し、font・color・width・alignを設定します。ここに見える青いblockはAsset Managerであり、Animated Textの呼出しはその内部で行われます。</figcaption></figure>
 
@@ -270,7 +270,7 @@ spriteへ文字専用のrenderer skinを作り、font、色、幅、配置、out
 
 <p class="extension-note"><strong>DSL 3.2:</strong> この経路は旧Text Assetのdeprecated互換機能として少なくとも3.2系列で維持します。3.2.0には<a href="https://github.com/kubohiroya/turbowarp-svg-text">turbowarp-svg-text</a>も組み込まれており、新旧を併用できます。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（text asset登録・style設定）、内部実装: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions/kubohiroyaassetmanager.js#L1491-L1503">Asset ManagerからAnimated Text opcodeを取得する処理</a></p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（text asset登録・style設定）、内部実装: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions/kubohiroyaassetmanager.js#L1491-L1503">Asset ManagerからAnimated Text opcodeを取得する処理</a></p>
 
 ## Translate — 文章を翻訳し、閲覧環境の言語を取得する {#extension-translate .extension-sheet .extension-sheet-left}
 
@@ -291,9 +291,9 @@ Scratch／TurboWarp標準の翻訳拡張です。文章と翻訳先の言語を�
 
 ## Translateで閲覧環境の言語を取得し、初期表示へ反映する {#extension-translate-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">TurboWarp標準 1 / 1　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">TurboWarp標準 1 / 1　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>初めて開いた利用者には日本語か英語のどちらかを提示する必要がありますが、選択前には保存値がありません。そこでviewerの言語を一度だけ「最初の推測」に使い、その後は利用者自身の選択を優先します。台本文を自動翻訳するための利用ではありません。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>初めて開いた利用者には日本語か英語のどちらかを提示する必要がありますが、選択前には保存値がありません。そこでviewerの言語を一度だけ「最初の推測」に使い、その後は利用者自身の選択を優先します。台本文を自動翻訳するための利用ではありません。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-translate.png" alt="TurboWarp Editorの初期化条件から、Translateの言語reporterと親のor条件だけを切り出した画面"><figcaption>保存済み言語がないときの条件内にあるTranslateの「言語」reporter。日本語／英語の初期判定に使います。</figcaption></figure>
 
@@ -301,7 +301,7 @@ Scratch／TurboWarp標準の翻訳拡張です。文章と翻訳先の言語を�
 
 <p class="extension-note"><strong>方針:</strong> ブラウザーのlocaleを毎回強制せず、利用者が一度選んだUI言語を優先します。Translateは初期値を決める補助です。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: green flag）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: green flag）</p>
 
 ## Asset Manager — 異なる場所・種類の素材を名前付きで管理・操作する {#extension-asset-manager .extension-sheet .extension-sheet-left}
 
@@ -322,9 +322,9 @@ Web上の画像・音声、SB3内のcostume・backdrop・sound、実行時text�
 
 ## Asset Managerで台本指定の素材を読み込み、名前で背景・登場人物・音を操作する {#extension-asset-manager-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">外部埋め込み 1 / 6　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">外部埋め込み 1 / 6　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>紙芝居の作者には、素材がURLかSB3内のcostumeかを意識せず「Hero」「海」「鐘」のような名前で台本を書いてほしいからです。登録と読込を一か所へ集めることで、local素材は通信なしで速く使い、Web素材はcacheし、Loading進捗も同じ単位で数えられます。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>紙芝居の作者には、素材がURLかSB3内のcostumeかを意識せず「Hero」「海」「鐘」のような名前で台本を書いてほしいからです。登録と読込を一か所へ集めることで、local素材は通信なしで速く使い、Web素材はcacheし、Loading進捗も同じ単位で数えられます。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-asset-manager.png" alt="TurboWarp Editorのcreate asset定義から、Asset Managerの読込確認、登録、背景設定だけを切り出した画面"><figcaption>読込完了を待ち、resourceをassetとして登録し、Loading用なら背景へ反映する接続部分です。</figcaption></figure>
 
@@ -332,7 +332,7 @@ Web上の画像・音声、SB3内のcostume・backdrop・sound、実行時text�
 
 <p class="extension-note"><strong>address例:</strong> <code>costume:Actor:hero1</code>、<code>backdrop:sea</code>、<code>sound:Stage:bell</code>。project内参照はsprite名と素材名を正確に指定します。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>create asset</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>create asset</code>）</p>
 
 ## TurboWarp TM — 学習済みモデルでカメラ映像のポーズを認識する {#extension-kubohiroyatm .extension-sheet .extension-sheet-left}
 
@@ -353,9 +353,9 @@ model、camera、preview、predictionを別々に開始・停止できます。
 
 ## TurboWarp TMで観客のポーズを認識し、物語を進める入力として扱う {#extension-kubohiroyatm-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">外部埋め込み 2 / 6　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">外部埋め込み 2 / 6　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>このアプリでは、観客がkeyやbuttonを押すだけでなく、物語に合わせて体を動かすこと自体が入力になります。学習済みmodel、camera、preview、認識loopを別々に管理できるため、必要なsceneだけでcameraを使い、poseが十分確かになった時に物語を進められます。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>このアプリでは、観客がkeyやbuttonを押すだけでなく、物語に合わせて体を動かすこと自体が入力になります。学習済みmodel、camera、preview、認識loopを別々に管理できるため、必要なsceneだけでcameraを使い、poseが十分確かになった時に物語を進められます。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-tmpose.png" alt="TurboWarp Editorから、TurboWarp TMの認識開始とcamera preview表示を呼ぶ2つの補助定義だけを切り出した画面"><figcaption><code>start pose recog</code>と<code>start camera preview</code>。各custom blockが対応するTurboWarp TM blockを1つずつ呼びます。</figcaption></figure>
 
@@ -363,7 +363,7 @@ model、camera、preview、predictionを別々に開始・停止できます。
 
 <p class="extension-note"><strong>実行条件:</strong> camera権限とHTTPSが必要です。modelとTensorFlow／Teachable Machine libraryの取得にはnetwork接続を使います。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>setTMPoseURL</code> / <code>exec pose</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>setTMPoseURL</code> / <code>exec pose</code>）</p>
 
 ## Text Lines — 複数行の文字列を行単位で取得・リスト化する {#extension-text-lines .extension-sheet .extension-sheet-left}
 
@@ -384,9 +384,9 @@ LF、CRLF、CRを同じ改行として正規化するため、台本を作った
 
 ## Text Linesで台本を行ごとに分け、エラー表示を元のTXTの行番号へ対応させる {#extension-text-lines-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">外部埋め込み 3 / 6　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">外部埋め込み 3 / 6　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>台本のerrorを直す人にとって最も役立つ手掛かりは、元のTXTと一致する行番号です。OSごとの改行差を吸収しつつ、検査と実行が同じ物理行のlistを使えば、「表示された行」と「直すべき行」がずれません。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>台本のerrorを直す人にとって最も役立つ手掛かりは、元のTXTと一致する行番号です。OSごとの改行差を吸収しつつ、検査と実行が同じ物理行のlistを使えば、「表示された行」と「直すべき行」がずれません。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-text-lines.png" alt="TurboWarp Editorのcreate sceneList定義から、Text LinesでsceneBlockをlinesへ展開する周辺だけを切り出した画面"><figcaption>scene単位に切り出した文字列を、Text Linesの1 blockで<code>lines</code> listへ展開する部分です。</figcaption></figure>
 
@@ -394,7 +394,7 @@ LF、CRLF、CRを同じ改行として正規化するため、台本を作った
 
 <p class="extension-note"><strong>listの扱い:</strong> 書込blockは追記ではなく全置換です。前回台本の行が残らないため、reloadしても行番号がずれません。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>create sceneList</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>create sceneList</code>）</p>
 
 ## Runtime Expression — 一時変数を参照する制限付き条件式を安全に評価する {#extension-runtime-expression .extension-sheet .extension-sheet-left}
 
@@ -415,9 +415,9 @@ Temporary Variablesのruntime値を、JavaScriptに似た制限付き条件式�
 
 ## Runtime Expressionで台本の条件式を安全に評価し、最初に成立した場面へ進む {#extension-runtime-expression-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">外部埋め込み 4 / 6　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">外部埋め込み 4 / 6　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>台本作者は「scoreが3以上なら次のsceneへ」のような分岐を書きたい一方、外部台本から任意のJavaScriptを動かしてはいけません。読める条件式の形を保ちつつ、許可した演算だけを現在のruntime値へ適用する安全な境界になります。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>台本作者は「scoreが3以上なら次のsceneへ」のような分岐を書きたい一方、外部台本から任意のJavaScriptを動かしてはいけません。読める条件式の形を保ちつつ、許可した演算だけを現在のruntime値へ適用する安全な境界になります。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-runtime-expression.png" alt="TurboWarp Editorのexec branch action定義で、condition文字列を取り出し、Runtime Expressionで評価して次の条件へ進む画面"><figcaption>branch条件を1件ずつ読むloop。thread variableへ式を取り出し、<code>condition</code> reporterで現在のruntime値に対して評価してから次の条件へ進みます。</figcaption></figure>
 
@@ -425,7 +425,7 @@ Temporary Variablesのruntime値を、JavaScriptに似た制限付き条件式�
 
 <p class="extension-note"><strong>二段階の安全性:</strong> Kamishibai Runtimeが実行前にsyntaxを検査し、scene移動時にRuntime Expressionが現在値で評価します。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>exec branch action</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>exec branch action</code>）</p>
 
 ## SVG Text — 名前付きスタイルで相対サイズの吹き出しとSVG文字を描画する {#extension-svg-text .extension-sheet .extension-sheet-left}
 
@@ -445,9 +445,9 @@ Temporary Variablesのruntime値を、JavaScriptに似た制限付き条件式�
 
 ## SVG Textで吹き出しとテキストアクターの見た目を共有する {#extension-svg-text-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">外部埋め込み 5 / 6　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">外部埋め込み 5 / 6　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>大きなstageや全画面表示で吹き出しだけが相対的に小さくならないことに加え、登場人物に従属するbubbleではなく、タイトルやナレーションをActor自身として配置したいからです。同じstyle名を使えば、別々の表示方法でも配色と文字設計を揃えられます。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>大きなstageや全画面表示で吹き出しだけが相対的に小さくならないことに加え、登場人物に従属するbubbleではなく、タイトルやナレーションをActor自身として配置したいからです。同じstyle名を使えば、別々の表示方法でも配色と文字設計を揃えられます。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-svg-text.png" alt="SVG Text日本語図解ガイドにある複数行のsay、think、SVGテキストアクターの使用例"><figcaption>公開済み日本語ガイドの3つの使用例。<code>\n</code>で改行し、同じ名前付きstyleを吹き出しとSVG text actorへ適用します。</figcaption></figure>
 
@@ -455,7 +455,7 @@ Temporary Variablesのruntime値を、JavaScriptに似た制限付き条件式�
 
 <p class="extension-note"><strong>DSL 3.2:</strong> <code>svgTextStyle</code>で定義したstyleを、<code>setText</code>または<code>action=ACTOR:say|think:TEXT:SECONDS:STYLE</code>から使います。後者は内部で<code>sayWithStyle</code>／<code>thinkWithStyle</code>を呼び、STYLE省略時は<code>default</code>を使います。旧Text Assetもdeprecated互換として維持します。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>svgTextStyle</code>、Actor: <code>setText</code>）、<a href="https://github.com/kubohiroya/tm-kamishibai/pull/270">スタイル付きsay／think実装PR</a>、図版: <a href="https://kubohiroya.github.io/turbowarp-svg-text/ja/">SVG Text日本語ガイド</a></p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>svgTextStyle</code>、Actor: <code>setText</code>）、<a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/270">スタイル付きsay／think実装PR</a>、図版: <a href="https://kubohiroya.github.io/turbowarp-svg-text/ja/">SVG Text日本語ガイド</a></p>
 
 ## Async Input — キー・タッチ・カスタム入力を値更新と通知へ接続する {#extension-async-input .extension-sheet .extension-sheet-left}
 
@@ -476,9 +476,9 @@ bindingは登録したtargetが所有し、値を更新してから受信script�
 
 ## Async Inputでキー・画面タッチ・ポーズ入力を、競合しない場面遷移へまとめる {#extension-async-input-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">外部埋め込み 6 / 6　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">外部埋め込み 6 / 6　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>key、画面のActor、poseごとに「入力を待つ」scriptを増やすと、同時発火やsceneをまたいだ古い待機が競合します。入力源は違ってもruntime値とbroadcastへ合流させ、最初に成立した操作の後で残りを解除できる構造が必要です。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>key、画面のActor、poseごとに「入力を待つ」scriptを増やすと、同時発火やsceneをまたいだ古い待機が競合します。入力源は違ってもruntime値とbroadcastへ合流させ、最初に成立した操作の後で残りを解除できる構造が必要です。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-async-input.png" alt="TurboWarp EditorのkeyInputToChangeScene定義から、Async Input listenerと引数準備を含む接続部分だけを切り出した画面"><figcaption>keyとscene labelを対応付け、listenerがruntime更新とbroadcastを行う1回分のloopです。</figcaption></figure>
 
@@ -486,7 +486,7 @@ bindingは登録したtargetが所有し、値を更新してから受信script�
 
 <p class="extension-note"><strong>後片付け:</strong> 登録はtargetごとに所有されます。sceneをまたいだ古いlistenerが次の場面で発火しないよう、境界で必ず停止します。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>keyInputToChangeScene</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>keyInputToChangeScene</code>）</p>
 
 ## Kamishibai Runtime — 紙芝居DSLを事前検査し、構造化診断とSVGを生成する {#extension-kamishibai-runtime .extension-sheet .extension-sheet-left}
 
@@ -503,13 +503,13 @@ bindingは登録したtargetが所有し、値を更新してから受信script�
 
 <div class="extension-columns"><section><p class="extension-subhead">検査</p><ul><li>version、command、action</li><li>scene／asset参照</li><li>addressと条件式syntax</li></ul></section><section><p class="extension-subhead">診断</p><ul><li>error code</li><li>行・列</li><li>source抜粋とSVG文字</li></ul></section></div>
 
-<p class="extension-source">出典: <a href="internal-specification.md">紙芝居アプリ 3.2 内部仕様書</a>、<a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions/kubohiroyakamishibairuntime.js">内蔵拡張ソース</a></p>
+<p class="extension-source">出典: <a href="internal-specification.md">紙芝居アプリ 3.2 内部仕様書</a>、<a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions/kubohiroyakamishibairuntime.js">内蔵拡張ソース</a></p>
 
 ## Kamishibai Runtimeで素材読込やカメラ開始の前に台本を検査し、エラーを表示する {#extension-kamishibai-runtime-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">アプリ内蔵 1 / 2　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">アプリ内蔵 1 / 2　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>外部から読み込む台本には、綴り間違いだけでなく、存在しないsceneや素材、危険なaddressが含まれ得ます。asset取得やcamera開始の後で失敗すると、利用者には半端な画面しか残りません。プレイ前に止め、直す行と理由を読める形で示します。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>外部から読み込む台本には、綴り間違いだけでなく、存在しないsceneや素材、危険なaddressが含まれ得ます。asset取得やcamera開始の後で失敗すると、利用者には半端な画面しか残りません。プレイ前に止め、直す行と理由を読める形で示します。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-kamishibai-runtime.png" alt="TurboWarp EditorのstartStory処理から、Kamishibai Runtimeのvalidateと直後の初期化だけを切り出した画面"><figcaption><code>startStory</code>直後にvalidateし、成功した場合だけskip状態の初期化やcamera開始へ進む順序を示します。</figcaption></figure>
 
@@ -517,7 +517,7 @@ bindingは登録したtargetが所有し、値を更新してから受信script�
 
 <p class="extension-note"><strong>責任境界:</strong> DSL parser／実行器全体ではありません。実行前の限定preflightと、利用者が直せる診断表示に責任を絞っています。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>startStory</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>startStory</code>）</p>
 
 ## Web Link — HTTPS URLを検証し、新しいタブで開く {#extension-web-link .extension-sheet .extension-sheet-left}
 
@@ -534,13 +534,13 @@ bindingは登録したtargetが所有し、値を更新してから受信script�
 
 <div class="extension-columns"><section><p class="extension-subhead">許可</p><ul><li>絶対URL</li><li><code>https:</code></li><li>利用者clickからの呼出し</li></ul></section><section><p class="extension-subhead">拒否</p><ul><li><code>http:</code></li><li><code>file:</code>／<code>javascript:</code></li><li>通常sceneからの任意navigation</li></ul></section></div>
 
-<p class="extension-source">出典: <a href="internal-specification.md">紙芝居アプリ 3.2 内部仕様書</a>、<a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions/kubohiroyaweblink.js">内蔵拡張ソース</a></p>
+<p class="extension-source">出典: <a href="internal-specification.md">紙芝居アプリ 3.2 内部仕様書</a>、<a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions/kubohiroyaweblink.js">内蔵拡張ソース</a></p>
 
 ## Web Linkで利用者がボタンやメニューを操作したとき、設定済みのHTTPSページを開く {#extension-web-link-example .extension-sheet .extension-sheet-right}
 
-<p class="extension-spread-label">アプリ内蔵 2 / 2　TM紙芝居での利用例 2 / 2</p>
+<p class="extension-spread-label">アプリ内蔵 2 / 2　TurboWarp紙芝居での利用例 2 / 2</p>
 
-<aside class="extension-kamishibai-why"><strong>なぜTM紙芝居に必要？</strong><p>このアプリでは、公式サイトbuttonやmenu項目からWebページへ案内します。一方、台本中の任意URLが勝手にtabを開く設計にはできません。利用者の操作をきっかけに、アプリ側で設定されたHTTPS URLだけを開くことで、案内機能と安全なプレイを両立します。</p></aside>
+<aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>このアプリでは、公式サイトbuttonやmenu項目からWebページへ案内します。一方、台本中の任意URLが勝手にtabを開く設計にはできません。利用者の操作をきっかけに、アプリ側で設定されたHTTPS URLだけを開くことで、案内機能と安全なプレイを両立します。</p></aside>
 
 <figure class="extension-editor-example"><img src="../images/extension-editor-web-link.png" alt="TurboWarp EditorのofficialWebsiteButtonから、クリックeventとWeb Link blockだけを切り出した画面"><figcaption>buttonクリック直後に、Web Linkが公式HTTPS URLを新しいtabで開く2ブロックのstackです。</figcaption></figure>
 
@@ -548,4 +548,4 @@ bindingは登録したtargetが所有し、値を更新してから受信script�
 
 <p class="extension-note"><strong>browser policy:</strong> popup blockを避けるため、利用者clickに続けて実行します。新しいtabには<code>noopener,noreferrer</code>を付けます。</p>
 
-<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/tm-kamishibai/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（<code>officialWebsiteButton</code>）</p>
+<p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（<code>officialWebsiteButton</code>）</p>

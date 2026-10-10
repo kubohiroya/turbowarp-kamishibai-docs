@@ -1,10 +1,10 @@
-# TM紙芝居ドキュメント
+# TurboWarp紙芝居ドキュメント
 
-このリポジトリは、[TM紙芝居](https://github.com/kubohiroya/tm-kamishibai)の
+このリポジトリは、[TurboWarp紙芝居](https://github.com/kubohiroya/turbowarp-kamishibai-app)の
 一般文書、紙芝居DSL作成者向け文書、開発者向け文書、体験会資料を管理し、
 独立したGitHub Pagesとして公開するためのリポジトリです。
 
-文書sourceは、現行 `tm-kamishibai` の履歴上にある旧 repository 名のPR #238 merge commit
+文書sourceは、現行 `turbowarp-kamishibai-app` の履歴上にある旧 repository 名のPR #238 merge commit
 `8166edb3a8b7ed360685bdcd6534c000054105bd`から履歴付きで移設しています。
 同commitで`docs/design/`、`docs/development/`に残っていた開発者向け3文書も、
 読者別ディレクトリへ追加移設しています。文書の表示順は`docs/config.mjs`で管理し、
@@ -12,12 +12,12 @@
 
 ## 公開サイトの役割
 
-- `tm-kamishibai`: アプリ本体と、アプリ・文書・サンプルへ移動する公開入口
-- `tm-kamishibai-docs`: 全文書のHTMLとVivliostyle Viewer、体験会資料のPDF
-- `tm-kamishibai-samples`: サンプル台本と実行可能な作品
+- `turbowarp-kamishibai-app`: アプリ本体と、アプリ・文書・サンプルへ移動する公開入口
+- `turbowarp-kamishibai-docs`: 全文書のHTMLとVivliostyle Viewer、体験会資料のPDF
+- `turbowarp-kamishibai-samples`: サンプル台本と実行可能な作品
 
-公開入口は `https://kubohiroya.github.io/tm-kamishibai/` に固定します。
-このリポジトリのPagesは `https://kubohiroya.github.io/tm-kamishibai-docs/` を予定しています。
+公開入口は `https://kubohiroya.github.io/turbowarp-kamishibai-app/` に固定します。
+このリポジトリのPagesは `https://kubohiroya.github.io/turbowarp-kamishibai-docs/` を予定しています。
 
 ドキュメントサイトの公開rootは版選択バナーだけを表示します。ワークショップ、サンプル、
 ダウンロードへの共通導線はAppBarと公式トップで提供し、版固有の文書一覧は混在させず、
@@ -54,7 +54,7 @@ rc.5 Standard SB3の作者経路と、rc.3サンプルの再生経路を文書�
 AppBarへ独立項目は追加せず、既存の「ドキュメント」を現在地にします。
 
 本文の用語、コード表記、固有概念の初出説明、図表の使い分けは
-[TM紙芝居ドキュメント表記ガイド](WRITING-STYLE.md)に従います。
+[TurboWarp紙芝居ドキュメント表記ガイド](WRITING-STYLE.md)に従います。
 DSL 4.0の固定実装、正式リリース、公開画面、文書状態の区別は
 [DSL 4.0 文書・公開状態の表記基準](DSL4-PUBLICATION-STATUS.md)で管理します。
 概念図の通常HTML、狭幅、印刷、フラグメントの確認結果は
@@ -85,7 +85,7 @@ pnpm check
 `docs/workshops/`配下の体験会資料だけで、公開用PDFを`dist/`、確認用PDFを
 `output/pdf/`へ出力します。
 移設元の固定情報と機能拡張一覧は
-[`sources/tm-kamishibai.json`](sources/tm-kamishibai.json)で管理します。
+[`sources/turbowarp-kamishibai-app.json`](sources/turbowarp-kamishibai-app.json)で管理します。
 
 ### DSLリファレンスの保守と出版
 
@@ -114,7 +114,7 @@ DSL 4.0と同じ生成方式へ擬似的に統一したりはしません。
 共有します。ViewerとPDFでは統合HTMLをreading orderへ入れず、参加者向けの表紙・目次・本文と、
 スタッフ向けの本文だけという既存の組版単位を維持します。
 
-「TM紙芝居 アプリ・教材・ツールチェインガイド」も3.2版と4.0版を別のMarkdownとして保守し、
+「TurboWarp紙芝居 アプリ・教材・ツールチェインガイド」も3.2版と4.0版を別のMarkdownとして保守し、
 それぞれに通常HTML版とVivliostyle Viewer版を用意します。3.2版は`/3.2/`、4.0版は`/4.0/`以下の
 独立した開発者向けpublicationとして提供し、以前のversion番号なしURLには移転案内を残します。
 
@@ -145,7 +145,7 @@ DSL 4.0のリファレンスは、上流JSON Schemaの固定snapshot、source lo
 ```bash
 pnpm docs:dsl4:check
 pnpm docs:dsl4:generate
-pnpm docs:dsl4:sync -- --repository ../tm-kamishibai --commit <commit>
+pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>
 ```
 
 上流を更新するときだけ`docs:dsl4:sync`を明示的に実行します。このコマンドは指定commitから
@@ -153,9 +153,9 @@ pnpm docs:dsl4:sync -- --repository ../tm-kamishibai --commit <commit>
 再生成します。生成Markdownは直接編集せず、日本語の説明、掲載順、例は
 [`sources/dsl4/annotations.ja.json`](sources/dsl4/annotations.ja.json)で変更します。
 
-準備は[Issue #1](https://github.com/kubohiroya/tm-kamishibai-docs/issues/1)、
-本文移設は[Issue #3](https://github.com/kubohiroya/tm-kamishibai-docs/issues/3)、
-残存文書と生成機構の移設は[Issue #5](https://github.com/kubohiroya/tm-kamishibai-docs/issues/5)で管理します。
+準備は[Issue #1](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/1)、
+本文移設は[Issue #3](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/3)、
+残存文書と生成機構の移設は[Issue #5](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/5)で管理します。
 
 ## ライセンス
 
