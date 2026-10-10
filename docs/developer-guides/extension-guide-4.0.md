@@ -330,7 +330,7 @@ manifest missing／read／JSON、source path／missing／size／UTF-8、
 `K4-PREVIEW-SOURCE-UNSTABLE`です。失敗したgenerationをcurrentへcommitしません。
 
 `src/builder/dsl4-web-preview-shell.js`は利用できない場合に、local uploadやremote previewへ切り替えず、
-`tm-kamishibai preview-dsl4 --watch`と`tm-kamishibai validate-dsl4`を明示します。
+`turbowarp-kamishibai preview-dsl4 --watch`と`turbowarp-kamishibai validate-dsl4`を明示します。
 `dsl4WebPreviewAdapter`は既定OFFでruntimeとapp shellを必要とし、asset live reloadはさらに
 `dsl4WebPreviewAssetLiveReload`を必要とします。rollbackはasset live reload、Web Preview adapterの順に
 OFFにし、CLI previewまたはone-shot buildへ戻します。

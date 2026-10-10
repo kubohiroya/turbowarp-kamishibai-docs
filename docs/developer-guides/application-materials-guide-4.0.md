@@ -188,11 +188,11 @@ DSL 4.0の教材では、物語と演出を決める人、画像やポーズモ�
 TurboWarp-KamishibaiのCLIは配布環境と同じ正規化器、スキーマ、意味検証器、診断モデルを
 使います。ビルドはディスク上の候補を再検証し、ソースとローカル素材を含む自己完結SB3を一括して出力します。
 
-<pre class="application-code"><code>tm-kamishibai validate-dsl4 \
+<pre class="application-code"><code>turbowarp-kamishibai validate-dsl4 \
   --input story.k4.yml \
   --format pretty
 
-tm-kamishibai build-dsl4 \
+turbowarp-kamishibai build-dsl4 \
   --base base.sb3 \
   --project-root tutorial-story \
   --source-manifest project.source.json \

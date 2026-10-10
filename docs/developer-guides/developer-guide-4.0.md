@@ -205,9 +205,10 @@ entry sourceを`path`へ記録します。
 
 `validate-dsl4`はproductionと同じcanonicalizer、Schema、semantic validator、diagnostic modelで一つのYAMLを
 検証します。`--max-source-bytes`を省略できません。pretty形式は人が読み、JSON形式はCIやeditorが処理します。
+4.0.0-rc.12以前のpackageでは、コマンド名は`tm-kamishibai`です（rc.13以降も互換aliasとして使えます）。
 
 ```bash
-pnpm exec tm-kamishibai validate-dsl4 \
+pnpm exec turbowarp-kamishibai validate-dsl4 \
   --input project/story.k4.yml \
   --max-source-bytes 65536 \
   --format pretty
@@ -227,7 +228,7 @@ pnpm exec tm-kamishibai validate-dsl4 \
 有限上限がすべて必須です。
 
 ```bash
-pnpm exec tm-kamishibai preview-dsl4 \
+pnpm exec turbowarp-kamishibai preview-dsl4 \
   --watch \
   --base base.sb3 \
   --project-root project \
@@ -259,7 +260,7 @@ full rebuildとしてcommandを再起動します。
 配布candidateは`build-dsl4`で一つの`.sb3`へ出力します。次の例はSource Graphを有効にする場合の完全なCLI契約です。
 
 ```bash
-pnpm exec tm-kamishibai build-dsl4 \
+pnpm exec turbowarp-kamishibai build-dsl4 \
   --base base.sb3 \
   --project-root project \
   --source-manifest project/project.source.json \

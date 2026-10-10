@@ -305,7 +305,7 @@ test('reviews DSL 4.0 diagnostics and safe stopping from the completed implement
 });
 
 test('documents the DSL 3.2 to 4.0 converter as a dedicated migration guide', () => {
-  assert.match(dsl4ConversionGuide, /tm-kamishibai convert-dsl4/u);
+  assert.match(dsl4ConversionGuide, /turbowarp-kamishibai convert-dsl4/u);
   assert.match(dsl4ConversionGuide, /--input source\.txt/u);
   assert.match(dsl4ConversionGuide, /--output story\.k4\.yml/u);
   assert.match(dsl4ConversionGuide, /--pose-models pose-models\.json/u);
@@ -338,9 +338,9 @@ test('publishes a DSL 4.0-only software maintenance contract from the completed 
   assert.match(developerGuide4, /src\/dsl4\/browser-preview-source-adapter\.js/u);
   assert.match(developerGuide4, /src\/builder\/dsl4-local-preview-host\.js/u);
   assert.match(developerGuide4, /src\/builder\/dsl4-build-output\.js/u);
-  assert.match(developerGuide4, /pnpm exec tm-kamishibai validate-dsl4/u);
-  assert.match(developerGuide4, /pnpm exec tm-kamishibai preview-dsl4/u);
-  assert.match(developerGuide4, /pnpm exec tm-kamishibai build-dsl4/u);
+  assert.match(developerGuide4, /pnpm exec turbowarp-kamishibai validate-dsl4/u);
+  assert.match(developerGuide4, /pnpm exec turbowarp-kamishibai preview-dsl4/u);
+  assert.match(developerGuide4, /pnpm exec turbowarp-kamishibai build-dsl4/u);
   assert.match(developerGuide4, /--enable-source-includes/u);
   assert.match(developerGuide4, /--max-total-source-bytes/u);
   assert.match(developerGuide4, /deep-frozen StoryDocument/u);

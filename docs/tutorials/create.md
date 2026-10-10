@@ -455,11 +455,12 @@ FirefoxやSafariなどdirectory pickerを利用できない環境、組織のpol
 複数作品の一括処理、CIでの再現可能な検査、高度な配布profile、directory picker非対応環境では、
 Node.jsとpnpmを用意して`preview-dsl4`、`validate-dsl4`、`build-dsl4`を利用できます。一般作者が
 このチュートリアルを完了するためには不要です。正確な引数と上限は、使用する版で次を実行して確認します。
+4.0.0-rc.12以前のpackageでは、コマンド名は`tm-kamishibai`です（rc.13以降も互換aliasとして使えます）。
 
 ```bash
-pnpm exec tm-kamishibai preview-dsl4 --help
-pnpm exec tm-kamishibai validate-dsl4 --help
-pnpm exec tm-kamishibai build-dsl4 --help
+pnpm exec turbowarp-kamishibai preview-dsl4 --help
+pnpm exec turbowarp-kamishibai validate-dsl4 --help
+pnpm exec turbowarp-kamishibai build-dsl4 --help
 ```
 
 ## このチュートリアルと台本作成ガイドの違い

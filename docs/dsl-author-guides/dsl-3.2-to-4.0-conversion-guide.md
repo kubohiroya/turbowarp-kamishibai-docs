@@ -3,7 +3,7 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: DSL 3.1／3.2の既存台本をDSL 4.0へ移行する方\
-対象コマンド: `tm-kamishibai convert-dsl4`\
+対象コマンド: `turbowarp-kamishibai convert-dsl4`\
 文書状態: 固定実装基準を説明する変換ガイド（正式リリースの操作資料ではない）\
 調査基準: TurboWarp-Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
 
@@ -13,8 +13,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 > **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
 > 正式な`v4.0.0`ではありません。
-> `convert-dsl4`を含むパッケージのリリースを使用し、利用中のパッケージで`pnpm exec tm-kamishibai --help`を
+> `convert-dsl4`を含むパッケージのリリースを使用し、利用中のパッケージで`pnpm exec turbowarp-kamishibai --help`を
 > 実行して、コマンド一覧に`convert-dsl4`があることを確認してください。
+> 4.0.0-rc.12以前のpackageでは、コマンド名は`tm-kamishibai`です（rc.13以降も互換aliasとして使えます）。
 
 `convert-dsl4`は、行ごとに命令を書く3.2の台本を、4.0のYAML台本へ一度だけ変換するコマンドです。
 3.1の台本も読み込めますが、変換結果には確認が必要な箇所を「警告」として表示します。
@@ -38,7 +39,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 必要なパッケージを導入した作品フォルダーで実行します。
 
 ```bash
-pnpm exec tm-kamishibai convert-dsl4 \
+pnpm exec turbowarp-kamishibai convert-dsl4 \
   --input source.txt \
   --output story.k4.yml
 ```
@@ -47,7 +48,7 @@ pnpm exec tm-kamishibai convert-dsl4 \
 `--pose-models`でローカルのモデルディレクトリへ置き換えます。
 
 ```bash
-pnpm exec tm-kamishibai convert-dsl4 \
+pnpm exec turbowarp-kamishibai convert-dsl4 \
   --input source.txt \
   --output story.k4.yml \
   --pose-models pose-models.json
@@ -192,7 +193,7 @@ Converted /project/story.k4.yml
 指定してください。現行実装で指定できる最大値は262144 bytesです。
 
 ```bash
-pnpm exec tm-kamishibai validate-dsl4 \
+pnpm exec turbowarp-kamishibai validate-dsl4 \
   --input story.k4.yml \
   --max-source-bytes 262144 \
   --format pretty
