@@ -8,7 +8,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 扱う台本: 4.0用のYAML台本\
 想定時間: 60〜90分
 
-入口: [TM紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/tm-kamishibai-docs/4.0/)
+入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
 
 このチュートリアルでは、「紙芝居を遊ぶ」で使用した作品のスターターを少しずつ変更します。台本は、
 YAML（項目を字下げして並べるテキスト形式）で書きます。SB3（TurboWarpやScratchで開ける一つの作品ファイル）
@@ -56,8 +56,8 @@ Node.js、pnpm、ターミナルは使いません。Scratchのブロックは�
 
 次の二つをダウンロードします。
 
-- [チュートリアル用スターター](https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip)
-- [紙芝居4.0.0-rc.8のStandard SB3](https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3)
+- [チュートリアル用スターター](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip)
+- [紙芝居4.0.0-rc.8のStandard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3)
 
 新しい作業フォルダーを作り、スターターのZIPをその中へ展開します。Standard SB3も同じ作業フォルダーへ
 保存します。インストール作業はありません。展開後の主なファイルは次の配置になります。

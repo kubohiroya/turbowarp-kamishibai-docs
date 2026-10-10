@@ -16,14 +16,14 @@
       "downstreamExactPinRequired": true,
       "downstreamUsage": [
         {
-          "repository": "https://github.com/kubohiroya/tm-kamishibai",
-          "trackingIssue": "https://github.com/kubohiroya/tm-kamishibai/issues/636",
+          "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
+          "trackingIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/636",
           "pinPolicy": "Use an exact commit if a fork-only renderer patch is adopted."
         }
       ],
       "issueRouting": {
         "generalTurboWarpBugs": "https://github.com/TurboWarp/scratch-render/issues",
-        "forkSpecificPatches": "https://github.com/kubohiroya/tm-kamishibai-docs/issues/175"
+        "forkSpecificPatches": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/175"
       },
       "syncPolicy": {
         "preferUpstreamReturn": true,

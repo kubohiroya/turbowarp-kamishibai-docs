@@ -4,9 +4,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 文書の位置付け
 
-- 対象Issue: [#201](https://github.com/kubohiroya/tm-kamishibai/issues/201)
-- 実装Issue: [#198](https://github.com/kubohiroya/tm-kamishibai/issues/198)
-- 親Issue: [#200](https://github.com/kubohiroya/tm-kamishibai/issues/200)
+- 対象Issue: [#201](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/201)
+- 実装Issue: [#198](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/198)
+- 親Issue: [#200](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/200)
 - 状態: 2026-08-03承認済み。本文の「提案」は#198の実装仕様として採用する
 - 対象バージョン: kamishibai DSL 3.1
 

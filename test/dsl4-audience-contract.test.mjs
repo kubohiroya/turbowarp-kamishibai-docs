@@ -69,7 +69,7 @@ test('marks migration and schema documents as purpose-specific references', () =
     conversionGuide.indexOf('## 基本コマンド'),
   );
   assert.match(conversionIntroduction, /すでに3\.1／3\.2の台本を持っている方/u);
-  assert.match(conversionIntroduction, /初めてTM紙芝居を使う方/u);
+  assert.match(conversionIntroduction, /初めてTurboWarp紙芝居を使う方/u);
   assert.doesNotMatch(conversionIntroduction, /one-shot|grammar|atomic/iu);
 
   const referenceIntroduction = schemaReference.slice(

@@ -3,8 +3,8 @@ import path from 'node:path';
 
 import {renderSiteHeader, replaceSiteNavigation} from './site-navigation.mjs';
 
-const siteRoot = 'https://kubohiroya.github.io/tm-kamishibai/';
-const rightsUrl = 'https://kubohiroya.github.io/tm-kamishibai-docs/licenses/';
+const siteRoot = 'https://kubohiroya.github.io/turbowarp-kamishibai-app/';
+const rightsUrl = 'https://kubohiroya.github.io/turbowarp-kamishibai-docs/licenses/';
 
 function renderSiteAppBar(assetBase, pathname, {includeContentAnchor = true} = {}) {
   const contentAnchor = includeContentAnchor
@@ -12,7 +12,7 @@ function renderSiteAppBar(assetBase, pathname, {includeContentAnchor = true} = {
     : '';
   return `${renderSiteHeader({
     assetBase,
-    site: 'tm-kamishibai-docs',
+    site: 'turbowarp-kamishibai-docs',
     pathname,
   })}${contentAnchor}`;
 }
@@ -22,7 +22,7 @@ function renderSiteFooter(assetBase) {
   <div class="site-footer__inner">
     <a class="site-footer__brand" href="${siteRoot}">
       <img class="site-footer__symbol" src="${assetBase}favicon.png" width="36" height="36" alt="">
-      <span>TM紙芝居</span>
+      <span>TurboWarp紙芝居</span>
     </a>
     <div class="site-footer__legal">
       <p>© 2026 Hiroya Kubo</p>
@@ -47,12 +47,16 @@ function addBodyClass(bodyTag) {
   );
 }
 
-export function injectSiteAppBar(source, assetBase, {pathname = '/tm-kamishibai-docs/'} = {}) {
+export function injectSiteAppBar(
+  source,
+  assetBase,
+  {pathname = '/turbowarp-kamishibai-docs/'} = {},
+) {
   const hasAppBar = /<header\b[^>]*\bclass=(["'])[^"']*\bsite-header\b[^"']*\1/iu.test(source);
   const hasFooter = /<footer\b[^>]*\bclass=(["'])[^"']*\bsite-footer\b[^"']*\1/iu.test(source);
   if (hasAppBar && hasFooter) {
     return replaceSiteNavigation(source, {
-      site: 'tm-kamishibai-docs',
+      site: 'turbowarp-kamishibai-docs',
       pathname,
     });
   }
@@ -126,8 +130,8 @@ export async function installSiteAppBars(directory, siteRootDirectory) {
     const relativePath = path.relative(siteRootDirectory, htmlFile).split(path.sep).join('/');
     const pathname =
       relativePath === 'index.html'
-        ? '/tm-kamishibai-docs/'
-        : `/tm-kamishibai-docs/${relativePath.replace(/(?:index\.html)?$/u, '')}`;
+        ? '/turbowarp-kamishibai-docs/'
+        : `/turbowarp-kamishibai-docs/${relativePath.replace(/(?:index\.html)?$/u, '')}`;
     const updated = injectSiteAppBar(source, assetBase, {pathname});
     if (updated !== source) {
       await writeFile(htmlFile, updated);

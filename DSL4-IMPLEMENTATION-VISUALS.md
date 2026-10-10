@@ -3,7 +3,7 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 記録日: 2026年8月15日\
-管理Issue: [#157](https://github.com/kubohiroya/tm-kamishibai-docs/issues/157)
+管理Issue: [#157](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/157)
 
 ## 記録の位置付け
 
@@ -11,7 +11,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 sourceからruntime・live reloadまで追跡して作成した図を固定します。安定版`v4.0.0`の公開を示す記録では
 ありません。画面はdevelopment-only previewであり、配布作品の通常再生surfaceとは区別します。
 
-この更新では`tm-kamishibai-samples`を取得、build、変更していません。実装repositoryの既存smoke projectを
+この更新では`turbowarp-kamishibai-samples`を取得、build、変更していません。実装repositoryの既存smoke projectを
 一時directoryへcopyし、文書repositoryには画像・SVG・説明だけを収録しました。
 TurboWarpの集約パレット図版は、同じ固定SB3をTurboWarp Editorで開き、7 memberのセパレータ境界で切り出しました。
 
@@ -19,7 +19,7 @@ TurboWarpの集約パレット図版は、同じ固定SB3をTurboWarp Editorで�
 
 | 項目                    | 固定値                                                             |
 | ----------------------- | ------------------------------------------------------------------ |
-| runtime repository      | `kubohiroya/tm-kamishibai`                                         |
+| runtime repository      | `kubohiroya/turbowarp-kamishibai-app`                              |
 | tag                     | `v4.0.0-rc.5`                                                      |
 | runtime commit          | `f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6`                         |
 | 公開base SB3            | `kamishibai-4.0.0-rc.5.sb3`                                        |

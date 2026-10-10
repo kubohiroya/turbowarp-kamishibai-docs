@@ -4,10 +4,10 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 標準実行環境: `4.0.0-rc.8`（公開プレリリース）\
 このチュートリアルの公開サンプル: `4.0.0-rc.8`（公開成果物）\
-対象: 初めてTM紙芝居を再生する人\
+対象: 初めてTurboWarp紙芝居を再生する人\
 想定時間: 10〜15分
 
-入口: [TM紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/tm-kamishibai-docs/4.0/)
+入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
 
 このチュートリアルでは、Webブラウザーでポーズを使うサンプル作品を開き、カメラの前でポーズを取り、
 物語を最後まで進めます。台本やプログラムの知識は必要ありません。カメラを使わない場合は、公開作品の
@@ -44,7 +44,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 1. サンプル作品を選ぶ
 
-[チュートリアル用サンプル作品](https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/)を開き、
+[チュートリアル用サンプル作品](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/)を開き、
 「Web版を開く」を押します。作品の説明で、この公開サンプルの対象バージョンが`4.0.0-rc.8`であることと、カメラを
 使うことを確認してから開きます。
 
@@ -55,7 +55,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 _公開サンプルの詳細ページから「Web版を開く」を選びます。_
 
 Web版へ直接進む場合は、
-[地震だ！頭を守ろう](https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/web-4.0/)を開きます。
+[地震だ！頭を守ろう](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/web-4.0/)を開きます。
 
 ## 2. 紙芝居を開始する
 

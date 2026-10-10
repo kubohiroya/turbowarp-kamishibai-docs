@@ -3,13 +3,13 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 公開プレリリースと安定版を区別する4.0系列の履歴<br />
-対象Issue: [tm-kamishibai-docs #42](https://github.com/kubohiroya/tm-kamishibai-docs/issues/42)、[#169](https://github.com/kubohiroya/tm-kamishibai-docs/issues/169)
+対象Issue: [turbowarp-kamishibai-docs #42](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/42)、[#169](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/169)
 
 この文書は開発・リリース担当者向けで、アプリの使い方や台本作成の
 入門書ではありません。初めて使う方は
 [大人向け概要](../user-guides/executive-summary-adult-4.0.md)、実際に試す方は
 [操作説明書](../user-guides/user-guide-4.0.md)から始めてください。機械可読な正本は
-[`sources/dsl4/release-history-4.0.json`](https://github.com/kubohiroya/tm-kamishibai-docs/blob/main/sources/dsl4/release-history-4.0.json)です。
+[`sources/dsl4/release-history-4.0.json`](https://github.com/kubohiroya/turbowarp-kamishibai-docs/blob/main/sources/dsl4/release-history-4.0.json)です。
 
 ## この文書の読み方
 
@@ -44,18 +44,18 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ### 固定revisionと公開先
 
-| 対象                  | 固定値                                                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 追跡Issue             | [`#661`](https://github.com/kubohiroya/tm-kamishibai/issues/661)                                                                                                          |
-| candidate PR          | [`#663`](https://github.com/kubohiroya/tm-kamishibai/pull/663) / `235b0bfce403fd8a6e3026bd23b6562b53c132e5`                                                               |
-| freeze PR／tag commit | [`#664`](https://github.com/kubohiroya/tm-kamishibai/pull/664) / [`65f5e70`](https://github.com/kubohiroya/tm-kamishibai/commit/65f5e705921b6c92ba6ec5373ec13eff5101f2c6) |
-| 公開記録PR            | [`#665`](https://github.com/kubohiroya/tm-kamishibai/pull/665) / `ce397b4be9a0f26ad2392e4193afa701b2834cb8`                                                               |
-| release source        | tag `v4.0.0-rc.10`。現行branchへ展開copyを保持しない                                                                                                                      |
-| source identity       | `sha256:ed05e732c9c0a0d7f43d85802450c88871bdab938a6809f7898815ae3cea714f`                                                                                                 |
-| Schema SHA-256        | `22edefa88eaa928edb8ae6fb6a8f9dce89e56ad2feb63ebaa91337757540a1df`                                                                                                        |
-| GitHub prerelease     | [`v4.0.0-rc.10`](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.10)                                                                                   |
-| npm                   | [`4.0.0-rc.10`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.10)、dist-tag `next`                                                               |
-| Pages                 | [download一覧](https://kubohiroya.github.io/tm-kamishibai/downloads/) / `ce397b4be9a0f26ad2392e4193afa701b2834cb8`                                                        |
+| 対象                  | 固定値                                                                                                                                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 追跡Issue             | [`#661`](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/661)                                                                                                                     |
+| candidate PR          | [`#663`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/663) / `235b0bfce403fd8a6e3026bd23b6562b53c132e5`                                                                          |
+| freeze PR／tag commit | [`#664`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/664) / [`65f5e70`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/65f5e705921b6c92ba6ec5373ec13eff5101f2c6) |
+| 公開記録PR            | [`#665`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/665) / `ce397b4be9a0f26ad2392e4193afa701b2834cb8`                                                                          |
+| release source        | tag `v4.0.0-rc.10`。現行branchへ展開copyを保持しない                                                                                                                                            |
+| source identity       | `sha256:ed05e732c9c0a0d7f43d85802450c88871bdab938a6809f7898815ae3cea714f`                                                                                                                       |
+| Schema SHA-256        | `22edefa88eaa928edb8ae6fb6a8f9dce89e56ad2feb63ebaa91337757540a1df`                                                                                                                              |
+| GitHub prerelease     | [`v4.0.0-rc.10`](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.10)                                                                                              |
+| npm                   | [`4.0.0-rc.10`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.10)、dist-tag `next`                                                                                     |
+| Pages                 | [download一覧](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/) / `ce397b4be9a0f26ad2392e4193afa701b2834cb8`                                                                   |
 
 作者向けSchemaリファレンスはtag commit `65f5e705921b6c92ba6ec5373ec13eff5101f2c6`と同じ
 Schema SHA-256を固定します。
@@ -63,7 +63,7 @@ Schema SHA-256を固定します。
 ### rc.8からの変更
 
 - TurboWarp TMの新しいExtension IDと`kubohiroyatm` runtime IDへ移行する
-- TM Kamishibaiの表示名、リポジトリURL、Pages URLを現行名へ揃える
+- TurboWarp-Kamishibaiの表示名、リポジトリURL、Pages URLを現行名へ揃える
 - TurboWarp-TM 2.0.0、Bubble 0.11.0、関連TurboWarp機能拡張のexact pinへ更新する
 - 公開サンプルのSB3、Web版、lockをrc.10 freeze commitから再生成する
 
@@ -80,10 +80,10 @@ Schema SHA-256を固定します。
 
 ### 公開成果物
 
-| 成果物                                                                                                                | byte      | 完全性情報                                                                 |
-| --------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------------------------- |
-| [Standard SB3](https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.10/kamishibai-4.0.0-rc.10.sb3) | 6,787,273 | SHA-256 `a8620868f5da118c142cf2a11db6679ce7fab8b8ef84f5e6cce26887d61e94ec` |
-| [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.10.tgz)           | 6,517,684 | SHA-256 `dfb42cbf86ca45465298be357f5852ae52aefc7f226c3c6742ee1c5c6e317c3c` |
+| 成果物                                                                                                                           | byte      | 完全性情報                                                                 |
+| -------------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------------------------- |
+| [Standard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.10/kamishibai-4.0.0-rc.10.sb3) | 6,787,273 | SHA-256 `a8620868f5da118c142cf2a11db6679ce7fab8b8ef84f5e6cce26887d61e94ec` |
+| [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.10.tgz)                      | 6,517,684 | SHA-256 `dfb42cbf86ca45465298be357f5852ae52aefc7f226c3c6742ee1c5c6e317c3c` |
 
 npm registry integrityは
 `sha512-U8iLEYCgdvR46Q9S7ieLMt8UZF2chVtuoKoYSmuZKh8GbVZW8vFxY7XEySwQh6KywPv/gnoxwh56Q0P9axAk+g==`です。
@@ -91,8 +91,8 @@ GitHub ReleaseとPagesのSB3は同じbyte数とSHA-256です。
 
 ### 検証、公開サンプル、rollback
 
-公開サンプルは[samples PR #131](https://github.com/kubohiroya/tm-kamishibai-samples/pull/131)で
-rc.10 freeze commitから再生成し、[Pages deployment](https://github.com/kubohiroya/tm-kamishibai-samples/actions/runs/32901209798)と
+公開サンプルは[samples PR #131](https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/131)で
+rc.10 freeze commitから再生成し、[Pages deployment](https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/32901209798)と
 公開manifestを照合しました。camera contextの物理測定はrc.8時点の証跡を履歴として維持し、rc.10ではCIとPages上の
 SB3/Web成果物の再現性を確認しています。
 
@@ -108,18 +108,18 @@ SB3/Web成果物の再現性を確認しています。
 
 ### 固定revisionと公開先
 
-| 対象                  | 固定値                                                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 追跡Issue             | [`#647`](https://github.com/kubohiroya/tm-kamishibai/issues/647)                                                                                                          |
-| candidate PR          | [`#648`](https://github.com/kubohiroya/tm-kamishibai/pull/648) / `ad244910b6bf579b8eb7c7af70d72b7ca4b1fff6`                                                               |
-| freeze PR／tag commit | [`#649`](https://github.com/kubohiroya/tm-kamishibai/pull/649) / [`29c0dea`](https://github.com/kubohiroya/tm-kamishibai/commit/29c0deadcb98badf94a0244c479ca896dc71f842) |
-| 公開記録PR            | [`#650`](https://github.com/kubohiroya/tm-kamishibai/pull/650) / `36b4d3bb4c1c809004dab9b0327857b394727a58`                                                               |
-| release source        | tag `v4.0.0-rc.8`。現行branchへ展開copyを保持しない                                                                                                                       |
-| source identity       | `sha256:8edbc02a06b3770cce0a89cf658367df129d974d53f401258b69f0713762014a`                                                                                                 |
-| Schema SHA-256        | `46ff159c29e13704d707dae8e0d2ad3a146b6aa8a68a968614e6ef56d112f135`                                                                                                        |
-| GitHub prerelease     | [`v4.0.0-rc.8`](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.8)                                                                                     |
-| npm                   | [`4.0.0-rc.8`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.8)、dist-tag `next`                                                                 |
-| Pages                 | [download一覧](https://kubohiroya.github.io/tm-kamishibai/downloads/) / `ff3867cfe32b3ff7c0c7cc9314e71459df55419d`                                                        |
+| 対象                  | 固定値                                                                                                                                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 追跡Issue             | [`#647`](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/647)                                                                                                                     |
+| candidate PR          | [`#648`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/648) / `ad244910b6bf579b8eb7c7af70d72b7ca4b1fff6`                                                                          |
+| freeze PR／tag commit | [`#649`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/649) / [`29c0dea`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/29c0deadcb98badf94a0244c479ca896dc71f842) |
+| 公開記録PR            | [`#650`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/650) / `36b4d3bb4c1c809004dab9b0327857b394727a58`                                                                          |
+| release source        | tag `v4.0.0-rc.8`。現行branchへ展開copyを保持しない                                                                                                                                             |
+| source identity       | `sha256:8edbc02a06b3770cce0a89cf658367df129d974d53f401258b69f0713762014a`                                                                                                                       |
+| Schema SHA-256        | `46ff159c29e13704d707dae8e0d2ad3a146b6aa8a68a968614e6ef56d112f135`                                                                                                                              |
+| GitHub prerelease     | [`v4.0.0-rc.8`](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.8)                                                                                                |
+| npm                   | [`4.0.0-rc.8`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.8)、dist-tag `next`                                                                                       |
+| Pages                 | [download一覧](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/) / `ff3867cfe32b3ff7c0c7cc9314e71459df55419d`                                                                   |
 
 作者向けSchemaリファレンスはtag commit `29c0deadcb98badf94a0244c479ca896dc71f842`と同じ
 Schema SHA-256を固定します。
@@ -146,10 +146,10 @@ Schema SHA-256を固定します。
 
 ### 公開成果物
 
-| 成果物                                                                                                              | byte      | 完全性情報                                                                 |
-| ------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------------------------- |
-| [Standard SB3](https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3) | 6,749,955 | SHA-256 `91d7f594aaf922450fba359a90c7c26e7c1dfda51cf002534cb4605dbb0d7041` |
-| [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.8.tgz)          | 6,492,990 | SHA-256 `a7b91378e6345c530515cc4e8f82314c3c5f2a19d3e136de5e4fe8bff8d24c5e` |
+| 成果物                                                                                                                         | byte      | 完全性情報                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------ | --------- | -------------------------------------------------------------------------- |
+| [Standard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3) | 6,749,955 | SHA-256 `91d7f594aaf922450fba359a90c7c26e7c1dfda51cf002534cb4605dbb0d7041` |
+| [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.8.tgz)                     | 6,492,990 | SHA-256 `a7b91378e6345c530515cc4e8f82314c3c5f2a19d3e136de5e4fe8bff8d24c5e` |
 
 npm registry integrityは
 `sha512-nQmvHakwLWZioi1gOUZatKwyLe2nD3GPJbEBrqDqm5mzqQhbbLEMGl3znJQpVs0JRfzyeLI1JDTcGrePiIpjUg==`です。
@@ -158,9 +158,9 @@ GitHub ReleaseとPagesのSB3は同じbyte数とSHA-256です。
 ### 検証、公開サンプル、rollback
 
 candidate PRの`pnpm verify:full`はNode系1,161件とChromium 13件を通過しました。記録は
-[GitHub Actions](https://github.com/kubohiroya/tm-kamishibai/actions/runs/32361658847/job/96402336784)で確認できます。
-公開サンプルは[samples PR #126](https://github.com/kubohiroya/tm-kamishibai-samples/pull/126)で
-rc.8 freeze commitから再生成し、[Pages deployment](https://github.com/kubohiroya/tm-kamishibai-samples/actions/runs/32368656029)と
+[GitHub Actions](https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/32361658847/job/96402336784)で確認できます。
+公開サンプルは[samples PR #126](https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/126)で
+rc.8 freeze commitから再生成し、[Pages deployment](https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/32368656029)と
 公開manifestを照合しました。camera contextの既存物理測定を維持し、rc.8のrecognitionとoverlayは公開Web版で
 起動・停止・cleanupを確認しています。
 
@@ -177,18 +177,18 @@ rc.8 freeze commitから再生成し、[Pages deployment](https://github.com/kub
 
 ### 固定revisionと公開先
 
-| 対象                  | 固定値                                                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 追跡Issue             | [`#630`](https://github.com/kubohiroya/tm-kamishibai/issues/630)                                                                                                          |
-| candidate PR          | [`#633`](https://github.com/kubohiroya/tm-kamishibai/pull/633) / `449eea670e4616b4ea155e9f42cae4742ba1cd1a`                                                               |
-| freeze PR／tag commit | [`#634`](https://github.com/kubohiroya/tm-kamishibai/pull/634) / [`3a5f31d`](https://github.com/kubohiroya/tm-kamishibai/commit/3a5f31d2519dfb2b9dab32b2c377762c774d5844) |
-| 公開記録PR            | [`#635`](https://github.com/kubohiroya/tm-kamishibai/pull/635) / `9bf0f8a7c6130d93c175b03048c4c4209e7f6eca`                                                               |
-| release source        | tag `v4.0.0-rc.7`。現行branchへ展開copyを保持しない                                                                                                                       |
-| source identity       | `sha256:838e82d33a9ecb67da81eafdc115afd4fd856db2721d1160ee601a389b6a96a7`                                                                                                 |
-| Schema SHA-256        | `bb96f6fd503ee7a747b48b4cdc30db227b5d3171854c2b83a47a96c15ed7fd79`                                                                                                        |
-| GitHub prerelease     | [`v4.0.0-rc.7`](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.7)                                                                                     |
-| npm                   | [`4.0.0-rc.7`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.7)、dist-tag `next`                                                                 |
-| Pages                 | [download一覧](https://kubohiroya.github.io/tm-kamishibai/downloads/)                                                                                                     |
+| 対象                  | 固定値                                                                                                                                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 追跡Issue             | [`#630`](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/630)                                                                                                                     |
+| candidate PR          | [`#633`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/633) / `449eea670e4616b4ea155e9f42cae4742ba1cd1a`                                                                          |
+| freeze PR／tag commit | [`#634`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/634) / [`3a5f31d`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/3a5f31d2519dfb2b9dab32b2c377762c774d5844) |
+| 公開記録PR            | [`#635`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/635) / `9bf0f8a7c6130d93c175b03048c4c4209e7f6eca`                                                                          |
+| release source        | tag `v4.0.0-rc.7`。現行branchへ展開copyを保持しない                                                                                                                                             |
+| source identity       | `sha256:838e82d33a9ecb67da81eafdc115afd4fd856db2721d1160ee601a389b6a96a7`                                                                                                                       |
+| Schema SHA-256        | `bb96f6fd503ee7a747b48b4cdc30db227b5d3171854c2b83a47a96c15ed7fd79`                                                                                                                              |
+| GitHub prerelease     | [`v4.0.0-rc.7`](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.7)                                                                                                |
+| npm                   | [`4.0.0-rc.7`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.7)、dist-tag `next`                                                                                       |
+| Pages                 | [download一覧](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)                                                                                                                |
 
 作者向けSchemaリファレンスはtag commit `3a5f31d2519dfb2b9dab32b2c377762c774d5844`と同じ
 Schema SHA-256を固定します。
@@ -216,10 +216,10 @@ Schema SHA-256を固定します。
 
 ### 公開成果物
 
-| 成果物                                                                                                              | byte      | 完全性情報                                                                 |
-| ------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------------------------- |
-| [Standard SB3](https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.7/kamishibai-4.0.0-rc.7.sb3) | 6,684,157 | SHA-256 `3ad25911b9255d51273b37f24fa0d056e6ec72418f314e97c743ad52300380f8` |
-| [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.7.tgz)          | 6,446,348 | SHA-256 `9f0055694521f60abcc7c0a072b251489b9c9ac48b6760b6cff773a22977c38a` |
+| 成果物                                                                                                                         | byte      | 完全性情報                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------ | --------- | -------------------------------------------------------------------------- |
+| [Standard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.7/kamishibai-4.0.0-rc.7.sb3) | 6,684,157 | SHA-256 `3ad25911b9255d51273b37f24fa0d056e6ec72418f314e97c743ad52300380f8` |
+| [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.7.tgz)                     | 6,446,348 | SHA-256 `9f0055694521f60abcc7c0a072b251489b9c9ac48b6760b6cff773a22977c38a` |
 
 npm registry integrityは
 `sha512-LfXNBg2ORGRex8j31NyDBEg0Zn/X7tosecX+B1Bav1V6S6gd4eqJAnYblOHlXYX+wvSiptMndwo22uWbPTCX8A==`です。
@@ -228,7 +228,7 @@ GitHub ReleaseとPagesのSB3は同じbyte数とSHA-256です。
 ### 検証、制約、rollback
 
 candidate PRの`pnpm verify:full`はNode系1,159件とChromium 13件を通過しました。記録は
-[GitHub Actions](https://github.com/kubohiroya/tm-kamishibai/actions/runs/31941807053/job/95151986429)で確認できます。
+[GitHub Actions](https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/31941807053/job/95151986429)で確認できます。
 rc.7は認識APIの用語を修正したreleaseで、camera contextとoverlayの責務境界はrc.6から変更していません。
 公開サンプルはChromium／WebKitでrecognitionとoverlayの起動・停止・cleanupを検証しています。
 
@@ -245,18 +245,18 @@ rc.7は認識APIの用語を修正したreleaseで、camera contextとoverlayの
 
 ### 固定revisionと公開先
 
-| 対象                  | 固定値                                                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 追跡Issue             | [`#624`](https://github.com/kubohiroya/tm-kamishibai/issues/624)                                                                                                          |
-| candidate PR          | [`#625`](https://github.com/kubohiroya/tm-kamishibai/pull/625) / `4efec1963af04b50c080bef7095f598da928ac84`                                                               |
-| freeze PR／tag commit | [`#626`](https://github.com/kubohiroya/tm-kamishibai/pull/626) / [`4c360cd`](https://github.com/kubohiroya/tm-kamishibai/commit/4c360cd9845f9dcdbf7ecbffaa2fe4c1462af8b6) |
-| 公開記録PR            | [`#627`](https://github.com/kubohiroya/tm-kamishibai/pull/627) / `72cf2fa8c5a989169cd3929614cf61e77eef25af`                                                               |
-| release source        | tag `v4.0.0-rc.6`。現行branchへ展開copyを保持しない                                                                                                                       |
-| source identity       | `sha256:ebdde314be4d929894bce9eb511f340c61879b2b9ff8366ae31cabbb00bfbf10`                                                                                                 |
-| Schema SHA-256        | `bb96f6fd503ee7a747b48b4cdc30db227b5d3171854c2b83a47a96c15ed7fd79`                                                                                                        |
-| GitHub prerelease     | [`v4.0.0-rc.6`](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.6)                                                                                     |
-| npm                   | [`4.0.0-rc.6`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.6)、dist-tag `next`                                                                 |
-| Pages                 | [download一覧](https://kubohiroya.github.io/tm-kamishibai/downloads/)                                                                                                     |
+| 対象                  | 固定値                                                                                                                                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 追跡Issue             | [`#624`](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624)                                                                                                                     |
+| candidate PR          | [`#625`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/625) / `4efec1963af04b50c080bef7095f598da928ac84`                                                                          |
+| freeze PR／tag commit | [`#626`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/626) / [`4c360cd`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/4c360cd9845f9dcdbf7ecbffaa2fe4c1462af8b6) |
+| 公開記録PR            | [`#627`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/627) / `72cf2fa8c5a989169cd3929614cf61e77eef25af`                                                                          |
+| release source        | tag `v4.0.0-rc.6`。現行branchへ展開copyを保持しない                                                                                                                                             |
+| source identity       | `sha256:ebdde314be4d929894bce9eb511f340c61879b2b9ff8366ae31cabbb00bfbf10`                                                                                                                       |
+| Schema SHA-256        | `bb96f6fd503ee7a747b48b4cdc30db227b5d3171854c2b83a47a96c15ed7fd79`                                                                                                                              |
+| GitHub prerelease     | [`v4.0.0-rc.6`](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.6)                                                                                                |
+| npm                   | [`4.0.0-rc.6`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.6)、dist-tag `next`                                                                                       |
+| Pages                 | [download一覧](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)                                                                                                                |
 
 作者向けSchemaリファレンスはtag commit `4c360cd9845f9dcdbf7ecbffaa2fe4c1462af8b6`と同じ
 Schema SHA-256を固定します。
@@ -283,10 +283,10 @@ Schema SHA-256を固定します。
 
 ### 公開成果物
 
-| 成果物                                                                                                              | byte      | 完全性情報                                                                 |
-| ------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------------------------- |
-| [Standard SB3](https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.6/kamishibai-4.0.0-rc.6.sb3) | 6,684,010 | SHA-256 `be0e38d6179873894db2363751955ccd68b971a829a5b09c048e54986fbd7796` |
-| [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.6.tgz)          | 6,446,010 | SHA-256 `6581c73b61f90762383bc8284699bb994dc396951ae3bfdd271249a362c99eba` |
+| 成果物                                                                                                                         | byte      | 完全性情報                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------ | --------- | -------------------------------------------------------------------------- |
+| [Standard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.6/kamishibai-4.0.0-rc.6.sb3) | 6,684,010 | SHA-256 `be0e38d6179873894db2363751955ccd68b971a829a5b09c048e54986fbd7796` |
+| [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.6.tgz)                     | 6,446,010 | SHA-256 `6581c73b61f90762383bc8284699bb994dc396951ae3bfdd271249a362c99eba` |
 
 npm registry integrityは
 `sha512-q4amPLLmVrsh60ZhNo6sjtCYLwBVH8nosmElbh/LGdX4/4gVBw4oohcgIgAZLm5G0VmgWxfj3NJ0fxHLe+C7bg==`です。
@@ -295,7 +295,7 @@ GitHub ReleaseとPagesのSB3は同じbyte数とSHA-256です。
 ### 検証、制約、rollback
 
 freeze PRの`pnpm verify:full`はNode系1,212件とChromium 13件を通過しました。記録は
-[GitHub Actions](https://github.com/kubohiroya/tm-kamishibai/actions/runs/31931898431/job/95127903375)で確認できます。
+[GitHub Actions](https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/31931898431/job/95127903375)で確認できます。
 物理cameraの測定では通常Canvas2D contextに再現性のある劣化がなく、CPU推論時のChromium readback警告は
 性能根拠のない抑制をせず許容します。camera frameは保存していません。
 
@@ -312,18 +312,18 @@ freeze PRの`pnpm verify:full`はNode系1,212件とChromium 13件を通過しま
 
 ### 固定revisionと公開先
 
-| 対象                  | 固定値                                                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 追跡Issue             | [`#583`](https://github.com/kubohiroya/tm-kamishibai/issues/583)                                                                                                          |
-| candidate PR          | [`#593`](https://github.com/kubohiroya/tm-kamishibai/pull/593) / `9b3895638edba009ee4558a6c0594f077d9fbd6b`                                                               |
-| freeze PR／tag commit | [`#594`](https://github.com/kubohiroya/tm-kamishibai/pull/594) / [`f323a54`](https://github.com/kubohiroya/tm-kamishibai/commit/f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6) |
-| 公開記録PR            | [`#596`](https://github.com/kubohiroya/tm-kamishibai/pull/596) / `f76af3b27973dad2ebab601550a585180eec1ad9`                                                               |
-| release source        | `release-sources/4.0.0-rc.5/app`                                                                                                                                          |
-| source identity       | `sha256:a6c4be01405af1b3070f6d02dc584a55bd2b45844ae48761aa3d4141ef474ca4`                                                                                                 |
-| Schema SHA-256        | `0d6bc7f58f849560f3e9125a660a2b5efc5d91f34d533963b9777d6f467ac136`                                                                                                        |
-| GitHub prerelease     | [`v4.0.0-rc.5`](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.5)                                                                                     |
-| npm                   | [`4.0.0-rc.5`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.5)、dist-tag `next`                                                                 |
-| Pages                 | [download一覧](https://kubohiroya.github.io/tm-kamishibai/downloads/)                                                                                                     |
+| 対象                  | 固定値                                                                                                                                                                                          |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 追跡Issue             | [`#583`](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/583)                                                                                                                     |
+| candidate PR          | [`#593`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/593) / `9b3895638edba009ee4558a6c0594f077d9fbd6b`                                                                          |
+| freeze PR／tag commit | [`#594`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/594) / [`f323a54`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6) |
+| 公開記録PR            | [`#596`](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/596) / `f76af3b27973dad2ebab601550a585180eec1ad9`                                                                          |
+| release source        | `release-sources/4.0.0-rc.5/app`                                                                                                                                                                |
+| source identity       | `sha256:a6c4be01405af1b3070f6d02dc584a55bd2b45844ae48761aa3d4141ef474ca4`                                                                                                                       |
+| Schema SHA-256        | `0d6bc7f58f849560f3e9125a660a2b5efc5d91f34d533963b9777d6f467ac136`                                                                                                                              |
+| GitHub prerelease     | [`v4.0.0-rc.5`](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.5)                                                                                                |
+| npm                   | [`4.0.0-rc.5`](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.5)、dist-tag `next`                                                                                       |
+| Pages                 | [download一覧](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)                                                                                                                |
 
 作者向けSchemaリファレンスもtag commit `f323a5475d4c6240a255f8a6f5b6c5d68b9ea7b6`と同じSchema SHA-256を固定します。
 
@@ -353,7 +353,7 @@ freeze PRの`pnpm verify:full`はNode系1,212件とChromium 13件を通過しま
 
 | 成果物                                                                                                     | byte      | 完全性情報                                                                 |
 | ---------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------------------------- |
-| [Standard SB3](https://kubohiroya.github.io/tm-kamishibai/downloads/kamishibai-4.0.0-rc.5.sb3)             | 6,664,571 | SHA-256 `2494b43f43f7b7acbd1ce9d307fcff383d239931aa46de550f76c3eb3ec40f3c` |
+| [Standard SB3](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/kamishibai-4.0.0-rc.5.sb3)  | 6,664,571 | SHA-256 `2494b43f43f7b7acbd1ce9d307fcff383d239931aa46de550f76c3eb3ec40f3c` |
 | [npm tarball](https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.5.tgz) | 6,425,111 | SHA-256 `f7e9075a0a4445367aa38b2a9a2b71a5a22ff471e7d3795c9a9b1430685c7b23` |
 
 npm registry integrityは
@@ -363,7 +363,7 @@ PagesとGitHub Releaseから取得したSB3は同じbyte数とSHA-256でした�
 ### 検証
 
 candidateの`pnpm verify:full`はNode test 1,224件とChromium test 63件を通過しました。記録は
-[GitHub Actions](https://github.com/kubohiroya/tm-kamishibai/actions/runs/31823718461/job/94842799234)で確認できます。
+[GitHub Actions](https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/31823718461/job/94842799234)で確認できます。
 
 rc.3で行った実カメラ・実ポーズ確認は、TMPose、PoseNet model data、モデル初期化経路が変わったrc.5の
 合格証跡には流用しません。rc.5の自動検証と公開照合は合格、物理camera／poseの再確認は未完了として
@@ -392,7 +392,7 @@ rc.3で行った実カメラ・実ポーズ確認は、TMPose、PoseNet model da
 
 ```bash
 git show --no-patch v4.0.0-rc.7
-gh release view v4.0.0-rc.7 --repo kubohiroya/tm-kamishibai
+gh release view v4.0.0-rc.7 --repo kubohiroya/turbowarp-kamishibai-app
 npm view @kubohiroya/tmpose-kamishibai@4.0.0-rc.7 version dist.integrity
 shasum -a 256 kamishibai-4.0.0-rc.7.sb3
 ```

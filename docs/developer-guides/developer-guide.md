@@ -2,12 +2,12 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-このガイドは、TM紙芝居の成果物とビルダーを利用し、アプリ、SB3ソース、
+このガイドは、TurboWarp紙芝居の成果物とビルダーを利用し、アプリ、SB3ソース、
 ビルダー、Webサイト、ドキュメントを変更・検証・公開するソフトウェア開発者向けの
 作業資料です。次を本書の責務とします。
 
-本書では、`kubohiroya/tm-kamishibai`を「本体リポジトリ」、
-`kubohiroya/tm-kamishibai-docs`を「文書リポジトリ」と呼びます。コマンドは、
+本書では、`kubohiroya/turbowarp-kamishibai-app`を「本体リポジトリ」、
+`kubohiroya/turbowarp-kamishibai-docs`を「文書リポジトリ」と呼びます。コマンドは、
 対象ファイルを管理する側のリポジトリで実行します。
 
 - 成果物プロファイルとSB3・台本変換ビルダーの外部契約
@@ -21,7 +21,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 [コマンドリファレンス](../dsl-author-guides/command-reference.md)を参照してください。本書には、
 これらの内部構造やDSL項目を重複して列挙しません。
 
-対象アプリ: TM Kamishibai 3.2.x\
+対象アプリ: TurboWarp-Kamishibai 3.2.x\
 受理するDSL宣言: `kamishibai=3.1`、`kamishibai=3.2`
 
 過去のバージョンからの変更は[`history.md`](../dsl-author-guides/history.md)を参照してください。
@@ -56,15 +56,15 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 関連プロジェクトとの境界は次のとおりです。
 
-| 対象                                  | 管理場所                                                                                  | このリポジトリとの関係                                                                |
-| ------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| SB3の展開・検証・決定的再構築         | [`kubohiroya/sb3-toolchain`](https://github.com/kubohiroya/sb3-toolchain)                 | 固定依存として利用する。[「sb3-toolchain」](#sb3-toolchain){data-ref="section"}を参照 |
-| 文書ソース、図版、HTML／PDF           | [`kubohiroya/tm-kamishibai-docs`](https://github.com/kubohiroya/tm-kamishibai-docs)       | 本体のバージョン・固定スナップショットを参照し、独立してビルド・公開する              |
-| 浦島太郎などの公開用物語              | [`kubohiroya/tm-kamishibai-samples`](https://github.com/kubohiroya/tm-kamishibai-samples) | `stories/urashima/`で台本、固有アセット、生成物を管理する                             |
-| 埋め込み機能拡張                      | 各機能拡張のGitHubリポジトリまたはnpmパッケージ                                           | `app/`には検証済み成果物と由来情報だけを同期する                                      |
-| TurboWarp Extension Galleryの機能拡張 | Galleryの公開URL                                                                          | SB3から外部URLを参照する                                                              |
+| 対象                                  | 管理場所                                                                                                | このリポジトリとの関係                                                                |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| SB3の展開・検証・決定的再構築         | [`kubohiroya/sb3-toolchain`](https://github.com/kubohiroya/sb3-toolchain)                               | 固定依存として利用する。[「sb3-toolchain」](#sb3-toolchain){data-ref="section"}を参照 |
+| 文書ソース、図版、HTML／PDF           | [`kubohiroya/turbowarp-kamishibai-docs`](https://github.com/kubohiroya/turbowarp-kamishibai-docs)       | 本体のバージョン・固定スナップショットを参照し、独立してビルド・公開する              |
+| 浦島太郎などの公開用物語              | [`kubohiroya/turbowarp-kamishibai-samples`](https://github.com/kubohiroya/turbowarp-kamishibai-samples) | `stories/urashima/`で台本、固有アセット、生成物を管理する                             |
+| 埋め込み機能拡張                      | 各機能拡張のGitHubリポジトリまたはnpmパッケージ                                                         | `app/`には検証済み成果物と由来情報だけを同期する                                      |
+| TurboWarp Extension Galleryの機能拡張 | Galleryの公開URL                                                                                        | SB3から外部URLを参照する                                                              |
 
-[公開サンプル](https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/)
+[公開サンプル](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/)
 の固有ファイルを本体へコピーしません。本体の汎用性と、サンプルの独立した更新・配布を
 維持します。
 
@@ -602,7 +602,7 @@ token、npm認証情報、秘密鍵、個人情報をrepository、SB3、台本�
 
 ## 関連プロジェクトを確認する
 
-TM紙芝居の開発から分離し、他のTurboWarp作品や開発環境でも利用できるものを
+TurboWarp紙芝居の開発から分離し、他のTurboWarp作品や開発環境でも利用できるものを
 各リポジトリで公開しています。各プロジェクトの仕様、開発手順、リリースはリンク先を
 正本とします。
 
@@ -658,4 +658,4 @@ TM紙芝居の開発から分離し、他のTurboWarp作品や開発環境でも
 - [`extension-guide.md`](extension-guide.md): 依存機能拡張16個の一覧、図解、役割、利用箇所
 - [`application-materials-guide.md`](application-materials-guide.md): アプリ、浦島太郎、体験会教材、DSL 3.2、sb3-toolchainの8ページ概要
 - [`history.md`](../dsl-author-guides/history.md): DSLとアプリの変更履歴
-- [アプリrepository README](https://github.com/kubohiroya/tm-kamishibai): プロジェクト全体の入口と主要コマンド
+- [アプリrepository README](https://github.com/kubohiroya/turbowarp-kamishibai-app): プロジェクト全体の入口と主要コマンド

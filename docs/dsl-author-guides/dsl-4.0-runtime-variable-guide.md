@@ -3,9 +3,9 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: 変数と条件分岐を使うDSL 4.0紙芝居制作者\
-現行公開仕様の基準: TM Kamishibai 4.0.0-rc.8（`29c0dea`）、2026年8月20日
+現行公開仕様の基準: TurboWarp-Kamishibai 4.0.0-rc.8（`29c0dea`）、2026年8月20日
 
-文書状態: **受け入れ済み・実装済み利用契約（既定OFF）**。[実装Issue #597](https://github.com/kubohiroya/tm-kamishibai/issues/597)で
+文書状態: **受け入れ済み・実装済み利用契約（既定OFF）**。[実装Issue #597](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/597)で
 ソース実装とテストを追加しています。追加機能は機能フラグが既定OFFのため、4.0.0-rc.8の現行の公開APIには含まれません。
 
 この文書は「台本を作る人向けドキュメント」に属し、台本変数の宣言、分岐式での参照、TurboWarpからの書込が

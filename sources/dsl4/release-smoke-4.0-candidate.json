@@ -4,7 +4,7 @@
   "status": "published-prerelease-automated-verification-passed",
   "recordedAt": "2026-08-20T21:32:15+09:00",
   "runtime": {
-    "repository": "https://github.com/kubohiroya/tm-kamishibai",
+    "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
     "candidateCommit": "ad244910b6bf579b8eb7c7af70d72b7ca4b1fff6",
     "freezeCommit": "29c0deadcb98badf94a0244c479ca896dc71f842",
     "version": "4.0.0-rc.8",
@@ -19,7 +19,7 @@
     "standardArtifact": {
       "publicationState": "published",
       "filename": "kamishibai-4.0.0-rc.8.sb3",
-      "url": "https://github.com/kubohiroya/tm-kamishibai/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3",
+      "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3",
       "buildDate": "2026-08-20",
       "size": 6749955,
       "sha256": "91d7f594aaf922450fba359a90c7c26e7c1dfda51cf002534cb4605dbb0d7041"
@@ -51,11 +51,11 @@
   "publicSamples": {
     "status": "published-rc.8-derived-artifacts-verified-independently",
     "version": "4.0.0-rc.8",
-    "repository": "https://github.com/kubohiroya/tm-kamishibai-samples",
-    "pullRequest": "https://github.com/kubohiroya/tm-kamishibai-samples/pull/126",
+    "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-samples",
+    "pullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/126",
     "publicationCommit": "236fe4ac09e17aaaaa0fb0fd1f8ebdc173073c7f",
-    "pagesDeploymentRun": "https://github.com/kubohiroya/tm-kamishibai-samples/actions/runs/32368656029",
-    "manifest": "https://kubohiroya.github.io/tm-kamishibai-samples/stories/tutorial/public-surfaces.json",
+    "pagesDeploymentRun": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/32368656029",
+    "manifest": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json",
     "relationship": "read-only-reference; sample artifacts use the published rc.8 base and freeze commit"
   },
   "environment": {
@@ -69,7 +69,7 @@
       "commands": ["pnpm release:dsl4:check", "pnpm verify:full", "pnpm release:check"],
       "unitTests": 1161,
       "chromiumTests": 13,
-      "githubActions": "https://github.com/kubohiroya/tm-kamishibai/actions/runs/32361658847/job/96402336784"
+      "githubActions": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/32361658847/job/96402336784"
     },
     "publicationVerification": {
       "status": "pass",
@@ -80,7 +80,7 @@
     "physicalCameraAndPose": {
       "status": "camera-context-measured-overlay-browser-verified",
       "reason": "Physical-camera measurements support the default Canvas2D context; the rc.8 sample Web applications verify recognition and overlay startup and cleanup in Chromium",
-      "previousEvidence": "https://github.com/kubohiroya/tm-kamishibai/issues/601",
+      "previousEvidence": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/601",
       "previousEvidenceAppliesToRc8": true
     }
   },

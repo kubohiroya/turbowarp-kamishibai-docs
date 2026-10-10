@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://kubohiroya.github.io/tm-kamishibai-docs/schemas/turbowarp-ecosystem.schema.json",
+  "$id": "https://kubohiroya.github.io/turbowarp-kamishibai-docs/schemas/turbowarp-ecosystem.schema.json",
   "type": "object",
   "required": ["schemaVersion", "generatedOn", "overview", "repositories"],
   "additionalProperties": false,

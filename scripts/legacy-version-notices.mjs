@@ -4,7 +4,7 @@ import {documentationConfig} from '../docs/config.mjs';
 import {writeFileIfChanged} from './build-freshness.mjs';
 import {injectSiteAppBar} from './site-appbar.mjs';
 
-const documentationSiteRoot = 'https://kubohiroya.github.io/tm-kamishibai-docs/';
+const documentationSiteRoot = 'https://kubohiroya.github.io/turbowarp-kamishibai-docs/';
 
 export function legacyPublicationEntries() {
   const documentEntries = documentationConfig.documents.map((document) => {
@@ -88,10 +88,10 @@ export async function writeLegacyVersionNotices(outputRoot) {
     const relativeRoot = path.relative(directory, outputRoot).split(path.sep).join('/');
     const assetBase = relativeRoot === '' ? '' : `${relativeRoot}/`;
     const index = injectSiteAppBar(notice, assetBase, {
-      pathname: `/tm-kamishibai-docs/${entry.legacyDirectory}/`,
+      pathname: `/turbowarp-kamishibai-docs/${entry.legacyDirectory}/`,
     });
     const document = injectSiteAppBar(notice, assetBase, {
-      pathname: `/tm-kamishibai-docs/${entry.legacyDirectory}/document.html`,
+      pathname: `/turbowarp-kamishibai-docs/${entry.legacyDirectory}/document.html`,
     });
     await Promise.all([
       writeFileIfChanged(path.join(directory, 'index.html'), index),

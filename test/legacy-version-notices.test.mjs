@@ -34,7 +34,7 @@ test('maps every previous unversioned document URL to its version root', () => {
 test('renders a human-readable legacy notice without automatic redirect', () => {
   const entry = legacyPublicationEntries()[0];
   const notice = renderLegacyVersionNotice(entry);
-  const targetUrl = `https://kubohiroya.github.io/tm-kamishibai-docs/${entry.targetDirectory}/`;
+  const targetUrl = `https://kubohiroya.github.io/turbowarp-kamishibai-docs/${entry.targetDirectory}/`;
 
   assert.match(notice, /旧URLから自動転送は行いません/u);
   assert.match(notice, /紙芝居DSLの版を選ぶ/u);

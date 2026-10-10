@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-対象アプリ: TM Kamishibai 3.2.x（`kamishibai=3.1`と`kamishibai=3.2`を受理、新規台本は3.2を推奨）
+対象アプリ: TurboWarp-Kamishibai 3.2.x（`kamishibai=3.1`と`kamishibai=3.2`を受理、新規台本は3.2を推奨）
 
 ## 概要
 
@@ -88,7 +88,7 @@ TurboWarp紙芝居アプリ／Web版
 
 ## `urashima.txt` の位置づけ
 
-公開中の[`urashima.txt`](https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/urashima.txt)は、浦島太郎を題材にしたサンプル台本です。[浦島太郎の公開ページ](https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/)では、Web版、再生用SB3、編集用SB3も利用できます。次の要素を含んでいるため、教材・デモ・テンプレートとして有用です。
+公開中の[`urashima.txt`](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima.txt)は、浦島太郎を題材にしたサンプル台本です。[浦島太郎の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/)では、Web版、再生用SB3、編集用SB3も利用できます。次の要素を含んでいるため、教材・デモ・テンプレートとして有用です。
 
 - 背景画像の切り替え
 - 複数キャラクターの表示

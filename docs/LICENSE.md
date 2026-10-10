@@ -8,7 +8,7 @@ Copyright © 2026 Hiroya Kubo.
 （CC BY-SA 4.0）で提供します。
 
 再利用時は、著作者名「Hiroya Kubo」、文書名、一次配布元
-<https://github.com/kubohiroya/tm-kamishibai-docs>、ライセンス名とそのURLを表示し、
+<https://github.com/kubohiroya/turbowarp-kamishibai-docs>、ライセンス名とそのURLを表示し、
 変更した場合は変更内容を示してください。改変物を配布する場合は、CC BY-SA 4.0が
 定める同一ライセンス条件を適用してください。
 
@@ -37,10 +37,10 @@ Copyright © 2026 Hiroya Kubo.
 
 `images/extension-editor-svg-text.png`を除く`images/extension-editor-*.png`の15図版は、2026年8月4日に
 [TurboWarp Editor](https://turbowarp.org/editor)で
-[TM紙芝居 Version 3.1.9のSB3](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v3.1.9)
+[TurboWarp紙芝居 Version 3.1.9のSB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v3.1.9)
 を開き、2560×1440の表示領域で撮影し、説明対象の前後だけを切り出した
 画面キャプチャです。対応するproject sourceは
-[固定commit `b8de78a`](https://github.com/kubohiroya/tm-kamishibai/blob/b8de78adcc38e7caf6010ad660e49cb89e5ac763/app/project.source.json)
+[固定commit `b8de78a`](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/b8de78adcc38e7caf6010ad660e49cb89e5ac763/app/project.source.json)
 で確認できます。
 
 `images/extension-editor-svg-text.png`は、2026年8月4日に
@@ -75,7 +75,7 @@ runtime commit、公開SB3 hash、入力hash、撮影条件、各画像とSVGの
 [`DSL4-IMPLEMENTATION-VISUALS.md`](../DSL4-IMPLEMENTATION-VISUALS.md)に記録しています。samples
 repositoryはこの撮影に使用していません。
 
-キャプチャ内のTM紙芝居ランタイム、UI、base runtimeとsmoke projectの素材は、引用元の
+キャプチャ内のTurboWarp紙芝居ランタイム、UI、base runtimeとsmoke projectの素材は、引用元の
 Mozilla Public License 2.0（MPL-2.0）の適用範囲を保持します。図版としての選択、切り出し、captionと
 実装解析SVGには本書のCC BY-SA 4.0を適用しますが、キャプチャ内のMPL-2.0対象要素を別途再許諾する
 ものではありません。

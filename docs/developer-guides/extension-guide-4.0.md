@@ -1,16 +1,16 @@
-# TM紙芝居 4.0 機能拡張・プラットフォーム統合ガイド
+# TurboWarp紙芝居 4.0 機能拡張・プラットフォーム統合ガイド
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 固定実装基準を説明する統合ガイド（正式リリース済みの意味ではない）\
-調査基準: TM Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
+調査基準: TurboWarp-Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
 
 > **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
 > 正式な`v4.0.0`ではありません。本書の統合境界はrc.8固定実装を説明します。
 
-このガイドは、TM紙芝居4.0のruntime capability、platform adapter、外部packageとの統合境界を
-保守する開発者向けの資料です。実装基準は`kubohiroya/tm-kamishibai`のcommit
-[`29c0deadcb98badf94a0244c479ca896dc71f842`](https://github.com/kubohiroya/tm-kamishibai/tree/29c0deadcb98badf94a0244c479ca896dc71f842)
+このガイドは、TurboWarp紙芝居4.0のruntime capability、platform adapter、外部packageとの統合境界を
+保守する開発者向けの資料です。実装基準は`kubohiroya/turbowarp-kamishibai-app`のcommit
+[`29c0deadcb98badf94a0244c479ca896dc71f842`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/29c0deadcb98badf94a0244c479ca896dc71f842)
 です。本書のpath、関数、package version、診断code、test名はこのcommitで確認しています。
 
 YAMLの記述方法は[紙芝居DSL 4.0 台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)、

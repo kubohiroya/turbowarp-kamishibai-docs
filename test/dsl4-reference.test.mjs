@@ -23,12 +23,12 @@ const generated = readFileSync(
 test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
   const actualHash = createHash('sha256').update(schemaSource).digest('hex');
   assert.equal(actualHash, lock.schemaSha256);
-  assert.equal(lock.repository, 'kubohiroya/tm-kamishibai');
+  assert.equal(lock.repository, 'kubohiroya/turbowarp-kamishibai-app');
   assert.equal(lock.sourceKind, 'commit');
   assert.equal(lock.commit, '29c0deadcb98badf94a0244c479ca896dc71f842');
   assert.equal(
     lock.schemaUrl,
-    `https://github.com/kubohiroya/tm-kamishibai/blob/${lock.commit}/schema/dsl-4.schema.json`,
+    `https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/${lock.commit}/schema/dsl-4.schema.json`,
   );
   assert.equal(lock.snapshotLicense, 'MPL-2.0');
   assert.equal(lock.candidateIssue, undefined);

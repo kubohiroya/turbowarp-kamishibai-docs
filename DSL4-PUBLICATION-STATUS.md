@@ -15,7 +15,7 @@ DSL 4.0の実装、プレリリース、安定版、公開サンプル、文書�
 ## 2026年8月26日の確認結果
 
 - DSL 4.0文書の現在の実装基準はannotated tag `v4.0.0-rc.10`のcommit
-  [`65f5e705921b6c92ba6ec5373ec13eff5101f2c6`](https://github.com/kubohiroya/tm-kamishibai/commit/65f5e705921b6c92ba6ec5373ec13eff5101f2c6)
+  [`65f5e705921b6c92ba6ec5373ec13eff5101f2c6`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/65f5e705921b6c92ba6ec5373ec13eff5101f2c6)
 - `v4.0.0-rc.10`はnpmの`next`、GitHub prerelease、PagesのStandard SB3として公開済み
 - rc.10のStandard SB3は`kamishibai-4.0.0-rc.10.sb3`、6,787,273 bytes、SHA-256
   `a8620868f5da118c142cf2a11db6679ce7fab8b8ef84f5e6cce26887d61e94ec`
@@ -24,9 +24,9 @@ DSL 4.0の実装、プレリリース、安定版、公開サンプル、文書�
 - rc.10の作者経路とサンプル再生経路を、本文とmachine-readable manifestで同じruntime基準へ固定する
 
 確認元:
-[v4.0.0-rc.10 GitHub prerelease](https://github.com/kubohiroya/tm-kamishibai/releases/tag/v4.0.0-rc.10)、
+[v4.0.0-rc.10 GitHub prerelease](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.10)、
 [npm 4.0.0-rc.10](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.10)、
-[Pages downloads](https://kubohiroya.github.io/tm-kamishibai/downloads/)
+[Pages downloads](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)
 
 ## rc.10で文書へ反映する差分
 

@@ -30,7 +30,7 @@ test('publishes the child overview as an independent furigana-enabled DSL 4.0 do
   assert.equal(dsl32Document?.outputDirectory, '3.2/user-guides');
   assert.match(dsl32Summary, /^# 紙芝居アプリ 3\.2 概要説明書 子供向け$/mu);
   assert.match(dsl4Summary, /^# 紙芝居アプリ 4\.0 概要説明書 子供向け$/mu);
-  assert.match(dsl4Summary, /この説明は、TM紙芝居4\.0で遊ぶ人/u);
+  assert.match(dsl4Summary, /この説明は、TurboWarp紙芝居4\.0で遊ぶ人/u);
   assert.match(dsl40Index, /href="user-guides\/executive-summary-kids-4\.0\/"/u);
   assert.match(dsl40Index, /4\.0\/user-guides\/executive-summary-kids-4\.0\/publication\.json/u);
 });

@@ -3,7 +3,7 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: 台本作者、教材作成者、授業設計者、開発者\
-対象アプリ: TM Kamishibai 3.2.x\
+対象アプリ: TurboWarp-Kamishibai 3.2.x\
 受理するDSL宣言: `kamishibai=3.1`、`kamishibai=3.2`
 
 ## この文書の読み方
@@ -22,7 +22,7 @@ DSLは「Domain Specific Language」の略で、ここでは「紙芝居を作�
 
 このDSLの大きな特徴は、紙芝居の演出だけでなく、TurboWarp TMモデルを使ったポーズ認識を物語進行に組み込めることです。見ている人が体を動かすと物語が次へ進む、という体験を台本の側から設計できます。
 
-なお、TM Kamishibai 3.2.xは台本冒頭の`kamishibai=3.1`と`kamishibai=3.2`をどちらも受理します。既存の3.1台本は冒頭を書き換えずに読み込めるので、この文書は新規台本を`kamishibai=3.2`で書く前提で進めます。互換性の詳細は「3.1台本との互換性」で説明します。
+なお、TurboWarp-Kamishibai 3.2.xは台本冒頭の`kamishibai=3.1`と`kamishibai=3.2`をどちらも受理します。既存の3.1台本は冒頭を書き換えずに読み込めるので、この文書は新規台本を`kamishibai=3.2`で書く前提で進めます。互換性の詳細は「3.1台本との互換性」で説明します。
 
 ## ファイルの基本構造
 
@@ -160,7 +160,7 @@ action=wait:1
 kamishibai=3.2
 ```
 
-台本の先頭に書きます。TM Kamishibai 3.2.xは`kamishibai=3.1`と`kamishibai=3.2`を読み込みます。既存の3.1台本は宣言を維持したまま実行でき、新規台本には3.2を使用します。2.0の台本はそのままでは読めないため、[変更履歴](history.md)とアセット識別子を確認して3.1または3.2へ移行してください。
+台本の先頭に書きます。TurboWarp-Kamishibai 3.2.xは`kamishibai=3.1`と`kamishibai=3.2`を読み込みます。既存の3.1台本は宣言を維持したまま実行でき、新規台本には3.2を使用します。2.0の台本はそのままでは読めないため、[変更履歴](history.md)とアセット識別子を確認して3.1または3.2へ移行してください。
 
 ### アセット定義
 
@@ -665,7 +665,7 @@ action=Urashima:pose:Urashima-ride-2,Urashima-ride-1,Urashima-ride-2,Urashima-ri
 
 ### DSL宣言の互換性
 
-TM Kamishibai 3.2.xは、台本冒頭の`kamishibai=3.1`と`kamishibai=3.2`をどちらも正式に受理します。既存の3.1台本は、冒頭を書き換えずに読み込めます。新規に作る台本と、3.2の機能を前提に更新する台本には`kamishibai=3.2`を使用してください。`3.0`、`3.3`など、列挙されていない宣言は受理しません。
+TurboWarp-Kamishibai 3.2.xは、台本冒頭の`kamishibai=3.1`と`kamishibai=3.2`をどちらも正式に受理します。既存の3.1台本は、冒頭を書き換えずに読み込めます。新規に作る台本と、3.2の機能を前提に更新する台本には`kamishibai=3.2`を使用してください。`3.0`、`3.3`など、列挙されていない宣言は受理しません。
 
 3.1宣言は互換入力として扱われるため、旧Text Assetを使用している場合のdeprecated警告を抑止しません。
 
@@ -807,7 +807,7 @@ abc
 
 ## 付録: `urashima.txt` の構成例
 
-ここまでの要素を実際に組み合わせた例として、公開中の[`urashima.txt`](https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/urashima.txt)を紹介します。Web版と用途別SB3は、[浦島太郎の公開ページ](https://kubohiroya.github.io/tm-kamishibai-samples/stories/urashima/)から利用できます。
+ここまでの要素を実際に組み合わせた例として、公開中の[`urashima.txt`](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima.txt)を紹介します。Web版と用途別SB3は、[浦島太郎の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/)から利用できます。
 
 | シーン | 内容 | 主な機能 |
 |---|---|---|
