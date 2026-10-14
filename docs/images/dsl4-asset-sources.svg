@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">素材の三つの入手元と、SB3作成時・実行時の扱い</title><desc id="desc">SB3内の素材は短形式またはnameで参照し、SB3のデータをそのまま使う。作品フォルダーのファイルはfileで指定し、SB3作成時に中身を埋め込む。Web上のファイルはdelivery: remoteとsource.urlで指定し、SB3にはURLだけを記録して実行時にHTTPSで取得する。準備する時期はloading: eager／lazyで入手元とは別に選ぶ。</desc>
+  <defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#315b72"/></marker><style>text{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;fill:#172b3a}.title{font-size:26px;font-weight:700}.sub{font-size:15px;fill:#486272}.col{font-size:15px;font-weight:700;fill:#486272;text-anchor:middle}.label{font-size:17px;font-weight:700}.mid{text-anchor:middle}.code{font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;fill:#315b72}.small{font-size:13px;fill:#304a59}.embed{fill:#eaf4fa;stroke:#397a9c;stroke-width:2}.file{fill:#effaf5;stroke:#3b8b70;stroke-width:2}.remote{fill:#fff1df;stroke:#b87629;stroke-width:2}.dashed{stroke-dasharray:7 5}.msg{stroke:#315b72;stroke-width:2;fill:none;marker-end:url(#a)}.note{fill:#f6f8fa;stroke:#98aab5;stroke-width:1.5}</style></defs>
+  <rect width="960" height="600" fill="#fff"/>
+  <text class="title" x="20" y="40">素材のデータをどこから持ってくるか</text><text class="sub" x="20" y="66">書き方で入手元が決まり、SB3に中身が入るか、実行時にネットワークが要るかが変わる。</text>
+  <text class="col" x="145" y="100">台本での書き方</text><text class="col" x="415" y="100">SB3を作るとき</text><text class="col" x="645" y="100">配布するSB3</text><text class="col" x="860" y="100">作品を動かすとき</text>
+  <g>
+    <rect class="embed" x="20" y="115" width="250" height="120" rx="10"/><text class="label" x="34" y="143">① SB3内の素材</text><text class="code" x="34" y="170">Beach: backdrop</text><text class="code" x="34" y="190">name: happy</text><text class="small" x="34" y="220">Editorで登録済みの素材</text>
+    <path class="msg" d="M272 175H318"/>
+    <rect class="embed" x="320" y="115" width="190" height="120" rx="10"/><text class="label mid" x="415" y="166">そのまま使う</text><text class="small mid" x="415" y="194">base SB3の素材を参照</text>
+    <path class="msg" d="M512 175H558"/>
+    <rect class="embed" x="560" y="115" width="170" height="120" rx="10"/><text class="label mid" x="645" y="166">中身あり</text><text class="small mid" x="645" y="194">Editorで入れた素材</text>
+    <path class="msg" d="M732 175H778"/>
+    <rect class="embed" x="780" y="115" width="160" height="120" rx="10"/><text class="label mid" x="860" y="166">SB3から読む</text><text class="small mid" x="860" y="194">ネットワーク不要</text>
+  </g>
+  <g>
+    <rect class="file" x="20" y="255" width="250" height="120" rx="10"/><text class="label" x="34" y="283">② 作品フォルダーのファイル</text><text class="code" x="34" y="310">file: ocean.svg</text><text class="small" x="34" y="360">台本からの相対パス</text>
+    <path class="msg" d="M272 315H318"/>
+    <rect class="file" x="320" y="255" width="190" height="120" rx="10"/><text class="label mid" x="415" y="306">読み込んで埋め込む</text><text class="small mid" x="415" y="334">build-dsl4がSB3へ追加</text>
+    <path class="msg" d="M512 315H558"/>
+    <rect class="file" x="560" y="255" width="170" height="120" rx="10"/><text class="label mid" x="645" y="306">中身あり</text><text class="small mid" x="645" y="334">ファイルを埋め込み済み</text>
+    <path class="msg" d="M732 315H778"/>
+    <rect class="file" x="780" y="255" width="160" height="120" rx="10"/><text class="label mid" x="860" y="306">SB3から読む</text><text class="small mid" x="860" y="334">ネットワーク不要</text>
+  </g>
+  <g>
+    <rect class="remote" x="20" y="395" width="250" height="120" rx="10"/><text class="label" x="34" y="423">③ Web上のファイル</text><text class="code" x="34" y="450">delivery: remote</text><text class="code" x="34" y="470">source:</text><text class="code" x="50" y="490">url: https://…</text>
+    <path class="msg" d="M272 455H318"/>
+    <rect class="remote" x="320" y="395" width="190" height="120" rx="10"/><text class="label mid" x="415" y="446">URLだけ記録</text><text class="small mid" x="415" y="474">中身は入れない</text>
+    <path class="msg" d="M512 455H558"/>
+    <rect class="remote dashed" x="560" y="395" width="170" height="120" rx="10"/><text class="label mid" x="645" y="446">URLだけ</text><text class="small mid" x="645" y="474">SB3が小さくなる</text>
+    <path class="msg" d="M732 455H778"/>
+    <rect class="remote" x="780" y="395" width="160" height="120" rx="10"/><text class="label mid" x="860" y="446">HTTPSで取得</text><text class="small mid" x="860" y="474">ネットワークが必要</text>
+  </g>
+  <rect class="note" x="20" y="535" width="920" height="48" rx="8"/><text class="small" x="36" y="564">入手元とは別に、素材を使える状態にする時期を loading: eager（開始前）／lazy（使うシーンの直前）で選ぶ。</text>
+</svg>
