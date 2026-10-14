@@ -73,7 +73,7 @@ flowchart LR
   typescript --> vite[Vite Plugin]
   vite --> bundles[standalone bundle / manifest / Composition API]
   bundles --> sb3[SB3 Toolchain]
-  camera[TurboWarp-Camera-Source] --> tm[TurboWarp TM]
+  camera[TurboWarp-Camera-Source] --> tm[TurboWarp Teachable Machine]
   camera --> jsqr[jsQR]
   tm --> async[TurboWarp-Async-Input]
   named[TurboWarp Named Data] --> asset[TurboWarp Asset Cache]
@@ -118,12 +118,12 @@ ${bulletList(inventory.overview.learningPath)}
 
 ${mermaidFlow()}
 
-図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp TMとjsQRへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
+図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp Teachable MachineとjsQRへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
 
 ## Inventory Policy
 
 - product name、package name、repository slug、Extension ID、opcodeは同じものとして扱わない。
-- current entryではTurboWarp-Kamishibai、TurboWarp紙芝居、TurboWarp TM、\`turbowarp-kamishibai-app\`を使う。
+- current entryではTurboWarp-Kamishibai、TurboWarp紙芝居、TurboWarp Teachable Machine、\`turbowarp-kamishibai-app\`を使う。
 - old product name、old repository slug、old Extension ID、old opcode prefixはHistory、Migration、source provenanceだけに限定する。
 - version numberを本文に固定する場合はinventoryまたはrelease記録と一致検査できる場所へ置く。
 - docsとして扱う本文と独自図はCC BY-SA 4.0、build scriptとsite codeはMPL-2.0、第三者素材は個別noticeに従う。

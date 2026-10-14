@@ -28,7 +28,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 調査基準: TurboWarp-Kamishibai `29c0dea`（`v4.0.0-rc.8`）、2026年8月20日
 
 > **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。ポーズoverlayはrc.8と、同版がexact pinするTurboWarp TM 1.12.0で利用できます。
+> 正式な`v4.0.0`ではありません。ポーズoverlayはrc.8と、同版がexact pinするTurboWarp Teachable Machine 1.12.0で利用できます。
 
 このガイドと[紙芝居DSL 4.0 Schemaリファレンス](dsl-4.0-schema-reference.md)は、同じ完成版の実装を
 調査基準にしています。Schemaはruntime実装から生成するものではありません。どの実装がどこまで入っているか、
@@ -406,7 +406,7 @@ _図: 書き方によって、データの入手元と、配布するSB3へ中�
 | `backdrop`  | ステージの背景                 | ○       | ○       | ○                         | ○                        |
 | `costume`   | アクターのコスチューム         | ○       | ○       | ○                         | ○                        |
 | `sound`     | 音                             | ○       | ○       | ○                         | ○                        |
-| `poseModel` | ポーズ認識モデル               | ×       | ×       | ○（モデルのディレクトリ） | ○（TurboWarp TMのURL等） |
+| `poseModel` | ポーズ認識モデル               | ×       | ×       | ○（モデルのディレクトリ） | ○（TurboWarp Teachable MachineのURL等） |
 | `image`     | カメラプレビューの操作アイコン | ×       | ×       | ○                         | ○                        |
 
 一つのアセットでは、`name`、`file`、`source`のうち一つだけを指定します。`costume`では、どの入手元でも
@@ -516,7 +516,7 @@ assets:
       size: 1024
 ```
 
-poseModelのURLは、検証情報を省略した場合は通常のTurboWarp TMのディレクトリ、検証情報を指定した場合は
+poseModelのURLは、検証情報を省略した場合は通常のTurboWarp Teachable Machineのディレクトリ、検証情報を指定した場合は
 model archiveを指します。ネットワークなしで動かす必要がある作品では、remoteではなく②の`file`を指定し、
 ビルダーでSB3へ埋め込みます。
 
@@ -560,7 +560,7 @@ _図: eagerの素材は物語の開始前にまとめて準備します。lazy�
 | ネットワークのない教室でも確実に動かす             | ①または②。③のremoteは使わない                       |
 | 物語の開始を早くしたい                             | 後半だけで使う素材を`loading: lazy`にする           |
 | SB3のファイルサイズを小さくしたい                  | 大きな素材を③`delivery: remote`にする               |
-| 公開済みのTurboWarp TMポーズモデルを使う           | `kind: poseModel`、`delivery: remote`、`source.url` |
+| 公開済みのTurboWarp Teachable Machineポーズモデルを使う           | `kind: poseModel`、`delivery: remote`、`source.url` |
 
 ## 登場人物（Actor）を登録する
 
@@ -643,7 +643,7 @@ skipした場合は待機要求を破棄し、新しいモデル初期化を開�
 cancelだけでcameraは停止しません。
 
 省略時は`policy: legacy`、`parallel: false`です。これは従来動作へ設定だけで戻せる安全な既定値です。
-`latest-needed`の実行にはTurboWarp TM 1.10.0以降が必要です。公開プレリリース4.0.0-rc.8はTurboWarp TM 1.12.0をexact pinします。
+`latest-needed`の実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。公開プレリリース4.0.0-rc.8はTurboWarp Teachable Machine 1.12.0をexact pinします。
 
 ### カメラ映像の表示と操作
 
@@ -748,7 +748,7 @@ confidenceを倍率として、0から設定値まで変化します。この表
 従来互換で非表示になります。overlayだけを隠しても認識は継続します。カメラプレビューを隠すとoverlayも隠れ、
 認識停止では描画が消え、camera停止ではSVG要素も破棄されます。表示はpreviewの配置と左右反転に追従します。
 
-実行にはTurboWarp TM 1.12.0以降が必要です。DSL runtimeは同版のcomposition APIだけを呼び、独自の描画実装を
+実行にはTurboWarp Teachable Machine 1.12.0以降が必要です。DSL runtimeは同版のcomposition APIだけを呼び、独自の描画実装を
 持ちません。専用機能フラグはなく、すべてのruntime profileで同じように利用できます。問題時は
 `overlay`設定を台本から削除すると、既存台本と同じ非表示へ戻せます。
 
@@ -1606,7 +1606,7 @@ runtime接続後は、action、scene、branch、port、戻り値などの実行�
 - action実行、分岐、シーン遷移、停止を扱うpure runtime controller
 - control profileの解決、キー入力adapter、時系列history reducer、runtime navigation control
 - カメラプレビューのstory既定、scene固有の非stickyな左右反転指定、任意の操作UI
-- TurboWarp TM 1.12.0を使う、関節とボーンのSVG overlay設定
+- TurboWarp Teachable Machine 1.12.0を使う、関節とボーンのSVG overlay設定
 - `Actor.say`／`Actor.think`の入力待ち、文字送り、音、portrait、animation、名前付き`bubbleStyles`
 - `bubbleClosePolicies`と`closePolicy`による、秒数・入力待ち・両者のraceの名前付き再利用
 - `Actor.moveTo`の`linear`、`easeIn`、`easeOut`、`easeInOut`
@@ -1645,5 +1645,5 @@ include文の複数ファイル対応は[Issue #417](https://github.com/kubohiro
 - [DSL 4.0表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/docs/design/dsl-4-surface.md): 4.0の規範的な作者向け構文
 - [DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/schema/dsl-4.schema.json): 機械可読な構造仕様
 - [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
-- [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624): Schema、TurboWarp TM 1.12.0 composition API mapping、YAML opt-in、rollback
+- [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624): Schema、TurboWarp Teachable Machine 1.12.0 composition API mapping、YAML opt-in、rollback
 - [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例

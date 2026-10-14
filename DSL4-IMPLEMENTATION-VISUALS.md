@@ -90,7 +90,7 @@ SVGとし、Web、狭幅表示、印刷版で同じ情報を保持します。
 
 | file                                                | SHA-256                                                            | 主な実装根拠                                                   |
 | --------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------- |
-| `docs/images/dsl4-architecture.svg`                 | `f52760550de64e986fd5ec560895065c5bc5ffe38189b38bab259a1a4a9b89cb` | Source Graph、frontend、StoryDocument、runtime、port、platform |
+| `docs/images/dsl4-architecture.svg`                 | `eac99a6fdb64b368d462ee985389645e6a55da09741dfeedb8327b6502750212` | Source Graph、frontend、StoryDocument、runtime、port、platform |
 | `docs/images/dsl4-source-build-sequence.svg`        | `f068ad123ac046ca81fbc70375e6d39b17ad8e5a43e4290b4751fad32189137e` | parse gate、validator、immutable IR、build再検証               |
 | `docs/images/dsl4-runtime-state-transition.svg`     | `a3b8c8e6d721148abedf1efa5921f96d633d190a89d4d9341be247154d49cbc5` | 一つのgenerationの`RuntimeStatus`と再生状態                    |
 | `docs/images/dsl4-runtime-sequence.svg`             | `ffca3dcaf77ea464fb6dfd935bd62cefd3ec436abfd2312091b26ae783490195` | startup、asset prepare、action dispatch／commit、release       |

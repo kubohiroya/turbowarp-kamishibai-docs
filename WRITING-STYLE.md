@@ -41,7 +41,7 @@ code表記または明示的な履歴説明として残します。
 | ------------------ | ------------------------------ | --------------------------------------- |
 | 英語製品名         | TurboWarp-Kamishibai           | 英語本文、公開サイト、repository説明    |
 | 日本語一般名称     | TurboWarp紙芝居                | 日本語本文、文書タイトル、公開サイト    |
-| 認識拡張の名称     | TurboWarp TM                   | ポーズ認識拡張を人間向けに説明する本文  |
+| 認識拡張の名称     | TurboWarp Teachable Machine    | ポーズ認識拡張を人間向けに説明する本文  |
 | Extension ID       | `kubohiroyatm`                 | SB3、migration guide、互換性matrix      |
 | Opcode prefix      | `kubohiroyatm_...`             | SB3内部、migration guide、tool出力      |
 | アプリrepository   | `turbowarp-kamishibai-app`     | GitHub URL、Pages URL、clone先directory |

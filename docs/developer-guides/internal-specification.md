@@ -442,7 +442,7 @@ blockが再生成されるとIDは変わります。したがって、IDは外�
 | `Stage` | `jb`                   | key `right arrow`     | 現在の`sound`停止、sequence終端化、`finishTimedActorAction`送信、`skipMode=action`     |
 | `Stage` | `jX`                   | `startStory`受信      | 既定OFFの詳細診断後、`start camera`, `create sceneList`, asset／actor生成、scene実行   |
 | `Stage` | `j/`                   | `stopStory`受信       | `stop camera`, `stop pose recog`, `show cover`; `deleteAllActors`, `showMenu`送信      |
-| `Stage` | `j?`                   | `debugTestCamera`受信 | TurboWarp TMのcamera previewを直接確認                                                 |
+| `Stage` | `j?`                   | `debugTestCamera`受信 | TurboWarp Teachable Machineのcamera previewを直接確認                                  |
 | `Stage` | `kD`                   | `showCover`受信       | `show cover`; `hidePrompt`, `deleteAllActors`送信                                      |
 | `Stage` | `l=`                   | Stage click           | `closeTitle`送信                                                                       |
 | `Stage` | `titleCloseHat`        | `closeTitle`受信      | 組み込み台本の有無に応じて`showCover`または`startStory`送信                            |

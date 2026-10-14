@@ -58,7 +58,7 @@ package成果物、第三者の画像は転載していません。
 Browser Preview、CLI接続先browser、Production SB3へ届けますが、source取得やlive reloadの能力はsurfaceごとに
 異なります。
 
-<figure class="concept-flow"><figcaption>runtime coreと外部capabilityの境界</figcaption><div class="concept-flow__track"><span>Runtime controller</span><b aria-hidden="true">→</b><span>Port contract</span><b aria-hidden="true">→</b><span>Platform composition</span><b aria-hidden="true">→</b><span>Asset Manager・Async Input・Bubble・Runtime Expression・SVG Text・TurboWarp TM</span><b aria-hidden="true">→</b><span>Browser／CLI／Production surface</span></div><p class="concept-flow__note">外部packageはportの外側に置き、runtime coreへbrowserやTurboWarp固有objectを持ち込みません。</p></figure>
+<figure class="concept-flow"><figcaption>runtime coreと外部capabilityの境界</figcaption><div class="concept-flow__track"><span>Runtime controller</span><b aria-hidden="true">→</b><span>Port contract</span><b aria-hidden="true">→</b><span>Platform composition</span><b aria-hidden="true">→</b><span>Asset Manager・Async Input・Bubble・Runtime Expression・SVG Text・TurboWarp Teachable Machine</span><b aria-hidden="true">→</b><span>Browser／CLI／Production surface</span></div><p class="concept-flow__note">外部packageはportの外側に置き、runtime coreへbrowserやTurboWarp固有objectを持ち込みません。</p></figure>
 
 ### 登録とbundleの単位
 
@@ -73,15 +73,15 @@ Browser Preview、CLI接続先browser、Production SB3へ届けますが、sourc
 6つの外部capabilityは正確なpackage versionとlockfile integrityを固定し、`./composition` exportを
 直接importします。Structured Dataは本体repository内のfirst-party sourceです。
 
-| capability         | providerと固定version                            | Standardでの主な責務                          |
-| ------------------ | ------------------------------------------------ | --------------------------------------------- |
-| Asset Manager      | `@kubohiroya/turbowarp-asset-manager@0.11.0`     | asset byte、skin、sound、検証済みremote cache |
-| Async Input        | `@kubohiroya/turbowarp-async-input@0.4.0`        | scene遷移・skip用の候補選択                   |
-| Bubble             | `@kubohiroya/turbowarp-bubble@0.10.0`            | 吹き出し、折り返し、表示、音声、animation     |
-| Runtime Expression | `@kubohiroya/turbowarp-runtime-expression@0.4.0` | branch式の検証と評価                          |
-| SVG Text           | `@kubohiroya/turbowarp-svg-text@0.5.0`           | text actor、speech bubbleの描画               |
-| TurboWarp TM       | `@kubohiroya/turbowarp-tm@1.12.0`                | pose model、認識lifecycle、preview overlay    |
-| Structured Data    | `src/dsl4/structured-data.js`、format version 1  | view、object store、iterator、JSONPath        |
+| capability                  | providerと固定version                            | Standardでの主な責務                          |
+| --------------------------- | ------------------------------------------------ | --------------------------------------------- |
+| Asset Manager               | `@kubohiroya/turbowarp-asset-manager@0.11.0`     | asset byte、skin、sound、検証済みremote cache |
+| Async Input                 | `@kubohiroya/turbowarp-async-input@0.4.0`        | scene遷移・skip用の候補選択                   |
+| Bubble                      | `@kubohiroya/turbowarp-bubble@0.10.0`            | 吹き出し、折り返し、表示、音声、animation     |
+| Runtime Expression          | `@kubohiroya/turbowarp-runtime-expression@0.4.0` | branch式の検証と評価                          |
+| SVG Text                    | `@kubohiroya/turbowarp-svg-text@0.5.0`           | text actor、speech bubbleの描画               |
+| TurboWarp Teachable Machine | `@kubohiroya/turbowarp-tm@1.12.0`                | pose model、認識lifecycle、preview overlay    |
+| Structured Data             | `src/dsl4/structured-data.js`、format version 1  | view、object store、iterator、JSONPath        |
 
 Standard 4.0のbundle種別は`source-composition`です。3.2の`extensionBundles`、unbundle用
 recovery capsule、保存opcode互換性ではなく、正確なpackage pin、lockfile、composition export、integration
@@ -95,7 +95,7 @@ testで互換性を検証します。`test/fixtures/dsl4/capability-bundle-relea
 | source読込     | read-only directory pickerと安定二重読込                        | Node processがproject root内を読込                         | SB3へ埋め込んだ固定component                     |
 | runtime所有者  | browser上のTurboWarp VM                                         | browser client。Node hostはruntimeを実行しない             | editor、web player、packager上のTurboWarp VM     |
 | transport      | directory handle内で完結                                        | loopback、exact origin、single-use token、project-root制限 | preview transportを含めない                      |
-| camera・DOM    | browserとTurboWarp TM composition                               | 接続したbrowser側                                          | 実行surfaceのbrowser側                           |
+| camera・DOM    | browserとTurboWarp Teachable Machine composition                | 接続したbrowser側                                          | 実行surfaceのbrowser側                           |
 | live reload    | source、任意でasset                                             | source watcherからbrowserへcandidateを通知                 | 含めない                                         |
 | remote         | remote previewとremote extension codeは禁止                     | remote bindは禁止                                          | remote extension codeは禁止                      |
 | 一時状態の保存 | 選択handle、permission、preview diagnosticはprojectへ保存しない | token、接続、watcher stateはSB3へ保存しない                | preview field、directory handle、tokenを含めない |
@@ -148,7 +148,7 @@ typewriter、character soundを同じcancellable operationに束ねます。
 ### 責務と入出力
 
 `src/dsl4/platform/platform-asset-session.js`の`createDsl4PlatformAssetSession()`が、一つのruntime
-sessionについてAsset Manager、TurboWarp TM、Async Input、asset adapter、cache leaseをまとめて所有します。
+sessionについてAsset Manager、TurboWarp Teachable Machine、Async Input、asset adapter、cache leaseをまとめて所有します。
 `src/dsl4/platform/asset-manager-adapter.js`の`createDsl4AssetManagerAdapter()`は検証済みasset宣言と
 byteを受け、image object URL、skin、soundとして利用できるsession-owned resourceを返します。
 
@@ -182,7 +182,7 @@ fallbackやHTTPへのdowngradeはありません。offlineを保証する作品�
 確認testは`test/dsl4-platform-asset-session.test.mjs`、`test/dsl4-asset-manager-adapter.test.mjs`、
 `test/dsl4-embedded-asset-lifecycle.test.mjs`、`test/dsl4-remote-asset-lifecycle.test.mjs`です。
 
-## 統合3: TurboWarp TM、pose入力、camera
+## 統合3: TurboWarp Teachable Machine、pose入力、camera
 
 ### 責務と入出力
 
@@ -190,11 +190,11 @@ fallbackやHTTPへのdowngradeはありません。offlineを保証する作品�
 `@kubohiroya/turbowarp-tm/composition`と`createDsl4TMModelAdapter()`を組み合わせます。
 adapterは検証済みmodel filesとlabel mappingを受け、session-owned model resourceを返します。
 StoryDocumentの`poseRecognition.modelInitialization`は、`policy`を
-`modelInitializationPolicy`、`parallel`を`parallelModelInitialization`へ変換してTurboWarp TM Compositionへ
+`modelInitializationPolicy`、`parallel`を`parallelModelInitialization`へ変換してTurboWarp Teachable Machine Compositionへ
 渡します。asset lifecycleの`AbortSignal`は`registerPoseModel(input, {signal})`へそのまま伝播します。
 
-TurboWarp TM 1.12.0の`latest-needed` policyは、重い初期化をactive 1件と最新pending 1件に制限します。
-camera canvasのcontext／readbackとSVG overlay DOMはTurboWarp TMが所有し、DSL hostは公開Composition APIだけを呼び出します。
+TurboWarp Teachable Machine 1.12.0の`latest-needed` policyは、重い初期化をactive 1件と最新pending 1件に制限します。
+camera canvasのcontext／readbackとSVG overlay DOMはTurboWarp Teachable Machineが所有し、DSL hostは公開Composition APIだけを呼び出します。
 Aの実行中にB、Cが要求された場合は、Aを安全境界でcancelし、Bを開始せずCだけを開始します。cancel済み
 resourceはregistryへ公開せず、遅れて完了したresourceもexactly onceで解放します。Web Cryptoや
 TensorFlow.jsで物理中断できない処理は完了を待って破棄し、後続phaseを開始しません。
@@ -204,12 +204,12 @@ camera起動はモデル初期化と独立して開始できます。記述子de
 cameraを停止してはいけません。`legacy`／`parallelModelInitialization: false`が既定のrollback経路です。
 
 `src/dsl4/platform/pose-action-port.js`の`createDsl4PoseActionPort()`は、`waitForPose`と
-`poseInputToChangeScene`をTurboWarp TM認識session、Async Input候補選択、`AbortSignal`へ接続します。入力は
+`poseInputToChangeScene`をTurboWarp Teachable Machine認識session、Async Input候補選択、`AbortSignal`へ接続します。入力は
 pose model ID、候補pose、confidence／hold policy、feedback設定です。出力は認識完了または選択された
 scene遷移候補であり、生のcamera frameやmodel objectをruntime coreへ返しません。
 
 `src/dsl4/platform/camera-preview-controls.js`の`createDsl4CameraPreviewControls()`はmirroring buttonと
-camera menuをDOMへ構成します。device一覧・選択はTurboWarp TM側のcamera portへ委譲し、このUI moduleは
+camera menuをDOMへ構成します。device一覧・選択はTurboWarp Teachable Machine側のcamera portへ委譲し、このUI moduleは
 `getUserMedia()`を直接呼びません。物理device ID、permission状態、選択menuはprojectへ永続化しません。
 
 ### 失敗、権限、fallback、bundle
@@ -219,13 +219,13 @@ camera menuをDOMへ構成します。device一覧・選択はTurboWarp TM側の
 - pose payload、policy、feedback不正は`K4-POSE-PORT-001`、model・label不足は`002`、未知poseは`003`、
   abortは`004`、release後は`005`、同時Actor pose sequenceは`006`、不正confidenceは`007`、Async Inputが
   未知候補を返せば`008`です。
-- camera permissionとdevice labelの公開はbrowserとTurboWarp TM compositionが所有します。拒否時に別cameraを
+- camera permissionとdevice labelの公開はbrowserとTurboWarp Teachable Machine compositionが所有します。拒否時に別cameraを
   無断選択したり、録画・frameをstorageへ保存したりしません。CLI hostにはcamera権限がなく、browser側で
   実行します。
 - production entrypointは`globalThis.tm`がない場合に限定fallbackを注入します。poseを使わないstoryの
   surfaceは起動できますが、pose modelの`loadFromFiles()`は
   `This story requires the Teachable Machine Pose runtime.`で明示失敗します。疑似認識へfallbackしません。
-- TurboWarp TM compositionとpose portはStandard bundleに含まれます。camera menu、mirroring、pose feedback UIは
+- TurboWarp Teachable Machine compositionとpose portはStandard bundleに含まれます。camera menu、mirroring、pose feedback UIは
   surface機能で、`dsl4CameraPreviewControls`、`dsl4PosePreviewMirroring`、
   `dsl4PoseFeedbackModes`がすべて既定OFFです。
 - UIだけをrollbackするときは上記flagをOFFにします。pose capability自体を戻す場合はpackage pinとlockfile、
@@ -410,18 +410,18 @@ flag値を文書だけで変更したり、既定ONへ読み替えたりしま�
 
 ## 変更時の検証matrix
 
-| 変更対象                        | 最低限の直接test                                                 | bundle・surface確認                                      |
-| ------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------- |
-| package pin・composition import | `dsl4-extension-pins`、`dsl4-capability-bundle-release-contract` | `dsl4-downloadable-release`、`dsl4-artifact-fingerprint` |
-| actor・media・speech            | `dsl4-actor-action-port`、`dsl4-media-action-port`               | `dsl4-turbowarp-runtime-host`                            |
-| asset・cache                    | `dsl4-asset-manager-adapter`、`dsl4-platform-asset-session`      | embedded／remote asset lifecycle                         |
-| TurboWarp TM・camera            | `dsl4-tm-model-adapter`、`dsl4-pose-action-port`                 | camera controls、runtime host                            |
-| SVG Text                        | `dsl4-svg-text-action-port`                                      | runtime host                                             |
-| Async Input                     | `dsl4-async-input-action-port`、`dsl4-input-arbitration`         | pose action port                                         |
-| Runtime Expression              | expression diagnostic boundaries                                 | source frontend、runtime host                            |
-| Structured Data                 | structured data、adapter、runtime integration                    | app-shell contract                                       |
-| Browser Preview                 | browser preview source adapter、web preview shell                | preview production exclusion                             |
-| CLI Preview transport           | preview transport policy、local preview host／CLI                | preview protocol、production exclusion                   |
+| 変更対象                            | 最低限の直接test                                                 | bundle・surface確認                                      |
+| ----------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------- |
+| package pin・composition import     | `dsl4-extension-pins`、`dsl4-capability-bundle-release-contract` | `dsl4-downloadable-release`、`dsl4-artifact-fingerprint` |
+| actor・media・speech                | `dsl4-actor-action-port`、`dsl4-media-action-port`               | `dsl4-turbowarp-runtime-host`                            |
+| asset・cache                        | `dsl4-asset-manager-adapter`、`dsl4-platform-asset-session`      | embedded／remote asset lifecycle                         |
+| TurboWarp Teachable Machine・camera | `dsl4-tm-model-adapter`、`dsl4-pose-action-port`                 | camera controls、runtime host                            |
+| SVG Text                            | `dsl4-svg-text-action-port`                                      | runtime host                                             |
+| Async Input                         | `dsl4-async-input-action-port`、`dsl4-input-arbitration`         | pose action port                                         |
+| Runtime Expression                  | expression diagnostic boundaries                                 | source frontend、runtime host                            |
+| Structured Data                     | structured data、adapter、runtime integration                    | app-shell contract                                       |
+| Browser Preview                     | browser preview source adapter、web preview shell                | preview production exclusion                             |
+| CLI Preview transport               | preview transport policy、local preview host／CLI                | preview protocol、production exclusion                   |
 
 最終的には本体repositoryで次を実行します。
 

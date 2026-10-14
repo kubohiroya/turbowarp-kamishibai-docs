@@ -30,7 +30,7 @@ fixtures after rebuilding the candidate.
 1. Open `https://turbowarp.org/editor` in a clean browser profile or a new browser session.
 2. Select **File → Load from your computer** and choose the candidate SB3.
 3. Approve each unsandboxed extension only after checking that it belongs to this project.
-4. Confirm that the candidate asks seven times: Asset Manager, TurboWarp TM, Text Lines, Runtime
+4. Confirm that the candidate asks seven times: Asset Manager, TurboWarp Teachable Machine, Text Lines, Runtime
    Expression, Kamishibai Runtime, Async Input, and Web Link. A 3.1.7 artifact without Kamishibai
    Runtime asks six times.
 5. Press the green flag. Confirm that the title and menu are readable and that no load-error dialog
@@ -57,12 +57,12 @@ prove the initial permission count; reload it in a new session.
 2. Press the green flag and close the title screen. No file chooser must appear.
 3. Confirm that the first scene is displayed and Space/Right/Down advance according to the script.
 
-## Camera, TurboWarp TM, and scene transition
+## Camera, TurboWarp Teachable Machine, and scene transition
 
 Use a Player story whose script contains a `pose` action and whose model URL is still available.
 
 1. Close the title screen and allow camera access for the story origin.
-2. Confirm a live preview and a TurboWarp TM skeleton or recognition result. Merely granting permission is
+2. Confirm a live preview and a TurboWarp Teachable Machine skeleton or recognition result. Merely granting permission is
    not sufficient.
 3. Perform the expected pose and confirm that the current pose action completes.
 4. Confirm that the following scene/backdrop is displayed and that camera preview and recognition
@@ -91,7 +91,7 @@ the new diagnostic.
 
 1. Package the verified Player SB3 with TurboWarp Packager using the release configuration.
 2. Open the output in a browser session that did not run the Editor checks.
-3. Repeat the embedded-script, camera/TurboWarp TM, and scene-transition checks.
+3. Repeat the embedded-script, camera/TurboWarp Teachable Machine, and scene-transition checks.
 4. Confirm that no Editor-only permission dialog or file chooser appears.
 
 A previously published web build is useful for regression comparison but does not substitute for
@@ -104,7 +104,7 @@ Stop the release if any of these occurs:
 - the candidate cannot be loaded in a fresh TurboWarp Editor session;
 - the permission count differs without a reviewed manifest change;
 - external or embedded script execution cannot reach its first scene;
-- camera preview, TurboWarp TM recognition, or the following scene cannot be confirmed;
+- camera preview, TurboWarp Teachable Machine recognition, or the following scene cannot be confirmed;
 - the detailed fixture starts the story, requests camera access, leaves background work, or fails to
   show the line-numbered SVG;
 - Packager output behaves differently from the verified Player SB3;
@@ -112,20 +112,20 @@ Stop the release if any of these occurs:
 
 ## Result record (2026-08-03)
 
-| Item                           | Environment / artifact                                                                    | Result                                                   |
-| ------------------------------ | ----------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| Candidate                      | `3865783`, SHA-256 `31d55f574ee6ac5f7244a9609c69efa74adf8eb141a13cf158e7b37453ed65b3`     | automated and browser paths passed                       |
-| Synced generic base            | `67a3295`, SHA-256 `b0d0809baadbbe406f26eefcf678035bfc3ed24cd4bdd80b7c05d87982419719`     | clone-only UI base matched the Player build input        |
-| Editor                         | TurboWarp `pentapod`, `editor.6079e10d7d50d3d832ef.js`; Chrome 150.0.7871.187; macOS 27.0 | candidate loaded; title displayed                        |
-| Permissions                    | candidate in fresh Editor tab                                                             | passed: seven prompts, then no security dialog           |
-| Published 3.1.7 comparison     | public generic and Player SB3                                                             | passed: six prompts; title/menu displayed                |
-| Packager comparison            | current-candidate Urashima Player in an isolated Playwright context                       | automated pose wait and navigation paths passed          |
-| External script                | `pr-44-smoke.txt`                                                                         | passed: timed and Right-interrupted paths                |
-| Embedded script                | published and current-candidate Urashima Player                                           | passed: Beach, Ocean, and Dragon Castle reached          |
-| Camera/TurboWarp TM/transition | Urashima model `https://sqs.prof.cuc.ac.jp/kamishibai/20260630/1and2/` and camera         | live preview/inference and interrupted transition passed |
-| Detailed diagnostic            | generated flag ON/OFF fixtures                                                            | passed: ON SVG safe stop; OFF `INVALIDSCRIPT` fallback   |
-| Diagnostic restart             | fixed ON fixture from PR #216                                                             | passed: SVG → normal title → same SVG                    |
-| Physical `help` pose           | Player SHA-256 `546a016a9842f61dc79af6ac4a507fb6793d30ab4b61f4dead1a96af35524db9`         | passed without a navigation key                          |
+| Item                                          | Environment / artifact                                                                    | Result                                                   |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Candidate                                     | `3865783`, SHA-256 `31d55f574ee6ac5f7244a9609c69efa74adf8eb141a13cf158e7b37453ed65b3`     | automated and browser paths passed                       |
+| Synced generic base                           | `67a3295`, SHA-256 `b0d0809baadbbe406f26eefcf678035bfc3ed24cd4bdd80b7c05d87982419719`     | clone-only UI base matched the Player build input        |
+| Editor                                        | TurboWarp `pentapod`, `editor.6079e10d7d50d3d832ef.js`; Chrome 150.0.7871.187; macOS 27.0 | candidate loaded; title displayed                        |
+| Permissions                                   | candidate in fresh Editor tab                                                             | passed: seven prompts, then no security dialog           |
+| Published 3.1.7 comparison                    | public generic and Player SB3                                                             | passed: six prompts; title/menu displayed                |
+| Packager comparison                           | current-candidate Urashima Player in an isolated Playwright context                       | automated pose wait and navigation paths passed          |
+| External script                               | `pr-44-smoke.txt`                                                                         | passed: timed and Right-interrupted paths                |
+| Embedded script                               | published and current-candidate Urashima Player                                           | passed: Beach, Ocean, and Dragon Castle reached          |
+| Camera/TurboWarp Teachable Machine/transition | Urashima model `https://sqs.prof.cuc.ac.jp/kamishibai/20260630/1and2/` and camera         | live preview/inference and interrupted transition passed |
+| Detailed diagnostic                           | generated flag ON/OFF fixtures                                                            | passed: ON SVG safe stop; OFF `INVALIDSCRIPT` fallback   |
+| Diagnostic restart                            | fixed ON fixture from PR #216                                                             | passed: SVG → normal title → same SVG                    |
+| Physical `help` pose                          | Player SHA-256 `546a016a9842f61dc79af6ac4a507fb6793d30ab4b61f4dead1a96af35524db9`         | passed without a navigation key                          |
 
 Playwright selected `pr-44-smoke.txt` through the real file chooser, observed Stars for the 30-second
 wait, its normal return to Title, and a separate Right-key interruption. Both runs ended without
@@ -135,7 +135,7 @@ The current candidate was combined with the Urashima source and asset manifest b
 builder, then packaged as plain HTML with autoplay and the release window title. Its builder manifest
 records the candidate SHA-256 above. In a fresh Playwright browser context which had not run the
 Editor checks, it opened without a permission dialog, file chooser, console error, or page error.
-Camera permission was granted for that context. At the first `help` pose action, TurboWarp TM reported a
+Camera permission was granted for that context. At the first `help` pose action, TurboWarp Teachable Machine reported a
 live 320×240 video track, a loaded model, active inference, a non-empty recognition result, and no
 extension error. Right and Down advanced to Ocean and Dragon Castle; after leaving the pose action,
 inference and the preview stopped.

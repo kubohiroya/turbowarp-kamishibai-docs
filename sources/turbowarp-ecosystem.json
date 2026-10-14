@@ -16,9 +16,9 @@
   },
   "repositories": [
     {
-      "id": "turbowarp-tm",
+      "id": "turbowarp-teachable-machine",
       "category": "recognition-input-network",
-      "productName": "TurboWarp TM",
+      "productName": "TurboWarp Teachable Machine",
       "responsibility": "カメラ由来の姿勢・動作状態をTurboWarp blockとComposition APIへ渡す。",
       "surface": ["Standalone extension", "Composition API"],
       "inputs": ["camera frame", "pose model output"],
@@ -26,9 +26,9 @@
       "dependencies": ["turbowarp-camera-source"],
       "optionalIntegrations": ["turbowarp-async-input", "turbowarp-kamishibai-app"],
       "useCase": "身体の動きで紙芝居やScratch作品を進める。",
-      "packageName": "@kubohiroya/turbowarp-tm",
-      "repository": "kubohiroya/turbowarp-tm",
-      "guideUrl": "https://github.com/kubohiroya/turbowarp-tm#readme",
+      "packageName": "@kubohiroya/turbowarp-teachable-machine",
+      "repository": "kubohiroya/turbowarp-teachable-machine",
+      "guideUrl": "https://github.com/kubohiroya/turbowarp-teachable-machine#readme",
       "licensePolicy": "MPL-2.0 for software.",
       "status": "current",
       "extensionId": "kubohiroyatm"
@@ -42,7 +42,7 @@
       "inputs": ["MediaDevices camera stream"],
       "outputs": ["video frame source"],
       "dependencies": [],
-      "optionalIntegrations": ["turbowarp-tm", "turbowarp-jsqr"],
+      "optionalIntegrations": ["turbowarp-teachable-machine", "turbowarp-jsqr"],
       "useCase": "認識系拡張へ共通のカメラ入力を渡す。",
       "packageName": "@kubohiroya/turbowarp-camera-source",
       "repository": "kubohiroya/turbowarp-camera-source",
@@ -94,7 +94,7 @@
       "outputs": ["queued input state"],
       "dependencies": [],
       "optionalIntegrations": [
-        "turbowarp-tm",
+        "turbowarp-teachable-machine",
         "turbowarp-webusb-pasori",
         "turbowarp-kamishibai-app"
       ],
@@ -344,7 +344,7 @@
       "inputs": ["script", "asset", "extension bundle", "runtime setting"],
       "outputs": ["web application", "SB3 artifact", "publication artifact"],
       "dependencies": [
-        "turbowarp-tm",
+        "turbowarp-teachable-machine",
         "turbowarp-asset-cache",
         "turbowarp-kvs",
         "turbowarp-async-input",

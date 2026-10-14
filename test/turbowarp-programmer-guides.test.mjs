@@ -181,7 +181,7 @@ test('lists every public bundled block and member documentation URI', () => {
     'turbowarp-bubble',
     'turbowarp-runtime-expression',
     'turbowarp-svg-text',
-    'turbowarp-tm',
+    'turbowarp-teachable-machine',
   ]) {
     assert.match(blockReference, new RegExp(`https://kubohiroya\\.github\\.io/${slug}/`, 'u'));
   }
@@ -212,7 +212,7 @@ test('places one real palette capture at the start of every member chapter', () 
     ['Bubble 0.10.0', 'dsl4-palette-bubble.jpg'],
     ['Runtime Expression 0.4.0', 'dsl4-palette-runtime-expression.jpg'],
     ['SVG Text 0.5.0', 'dsl4-palette-svg-text.jpg'],
-    ['TurboWarp TM 1.12.0', 'dsl4-palette-tmpose.png'],
+    ['TurboWarp Teachable Machine 1.12.0', 'dsl4-palette-tmpose.png'],
   ];
 
   for (const [heading, filename] of figures) {

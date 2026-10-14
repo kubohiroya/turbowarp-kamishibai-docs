@@ -97,7 +97,7 @@ rc.8 Standard SB3をfresh TurboWarp Editorで開き、次を確認します。
 3. Runtime由来の23 core action blockが表示される
 4. TurboWarp blockからの実行がYAMLと同じregistry、Schema正規化、ActionContext、lifecycleを通る
 5. Asset Manager 0.11.0、Async Input 0.4.0、Bubble 0.10.0、Runtime Expression 0.4.0、
-   SVG Text 0.5.0、TurboWarp TM 1.12.0のexact pinと一致する
+   SVG Text 0.5.0、TurboWarp Teachable Machine 1.12.0のexact pinと一致する
 6. remote codeを取得せず、PoseNet model dataをprojectから復元できる
 7. `poseRecognition.preview.overlay`設定時にSVGの関節とボーンが表示され、省略時は非表示になる
 8. Bubble 0.10.0由来の31個の可視blockと、組み込み`say`／`think` styleが表示される
@@ -128,7 +128,7 @@ socket／watcher／timer解放を確認します。
 
 camera contextの責務境界は[Issue #601](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/601)で
 Chrome 151と物理cameraを使って測定しました。実際と同じ1 draw／1 read経路では`willReadFrequently`に
-再現性のある高速化がなく、WebGLでは全条件で悪化したため、TurboWarp TM 1.12.0は通常contextを使用します。
+再現性のある高速化がなく、WebGLでは全条件で悪化したため、TurboWarp Teachable Machine 1.12.0は通常contextを使用します。
 CPU推論時にChromiumのreadback警告が1回出る場合がありますが、警告抑制だけを目的に成果物を書き換えません。
 
 現時点の判定は次のとおりです。

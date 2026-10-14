@@ -19,7 +19,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 <a href="#extension-animated-text"><strong>Animated Text</strong><code>text</code><span>Gallery｜文字を描画・演出</span></a>
 <a href="#extension-translate"><strong>Translate</strong><code>translate</code><span>TurboWarp標準｜表示言語を取得</span></a>
 <a href="#extension-asset-manager"><strong>Asset Manager</strong><code>kubohiroyaassetmanager</code><span>外部埋め込み｜assetとLoading</span></a>
-<a href="#extension-kubohiroyatm"><strong>TurboWarp TM</strong><code>kubohiroyatm</code><span>外部埋め込み｜pose認識</span></a>
+<a href="#extension-kubohiroyatm"><strong>TurboWarp Teachable Machine</strong><code>kubohiroyatm</code><span>外部埋め込み｜pose認識</span></a>
 <a href="#extension-text-lines"><strong>Text Lines</strong><code>kubohiroyatextlines</code><span>外部埋め込み｜台本を行へ分割</span></a>
 <a href="#extension-runtime-expression"><strong>Runtime Expression</strong><code>kubohiroyaruntimeexpression</code><span>外部埋め込み｜分岐条件を評価</span></a>
 <a href="#extension-svg-text"><strong>SVG Text</strong><code>kubohiroyasvgtext</code><span>npm埋め込み｜相対サイズの文字表示</span></a>
@@ -47,9 +47,9 @@ sb3-toolchainでbundle版SB3を生成すると、相互に動的opcode参照を�
 
 <div class="extension-columns"><section><p class="extension-subhead">sourceは展開したまま</p><ul><li>4拡張を個別に更新・検査</li><li>GitHub／npmの固定由来を保持</li><li><code>check</code>／<code>sync</code>も個別に実行</li></ul></section><section><p class="extension-subhead">生成物だけを集約</p><ul><li>opcodeとstorageをmember別にnamespace化</li><li>member間の動的opcode参照も変換</li><li>復元用capsuleにより展開可能</li></ul></section></div>
 
-<p class="extension-note"><strong>重要:</strong> 16個の機能が13個へ減るわけではありません。実装を統合するのではなく、配布するSB3の読込・登録単位だけをまとめる仕組みです。依存のないGallery拡張、Translate、TurboWarp TMなど12個はbundleの外に残ります。</p>
+<p class="extension-note"><strong>重要:</strong> 16個の機能が13個へ減るわけではありません。実装を統合するのではなく、配布するSB3の読込・登録単位だけをまとめる仕組みです。依存のないGallery拡張、Translate、TurboWarp Teachable Machineなど12個はbundleの外に残ります。</p>
 
-<figure class="extension-dependency-map"><figcaption><strong>実行時の直接依存関係</strong><span>矢印の先の拡張APIを呼び出す。bundleへの所属とは別の関係です。</span></figcaption><div class="extension-dependency-rows"><div class="extension-dependency-row"><span class="extension-dependency-from">Kamishibai Runtime</span><b>→</b><div><span>Asset Manager</span><span>Runtime Expression</span><span>Temporary Variables</span><span class="extension-dependency-optional">Translate<small>言語fallback</small></span><span class="extension-dependency-optional">Animated Text<small>SVG失敗時</small></span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Asset Manager</span><b>→</b><div><span>Temporary Variables</span><span>Animated Text</span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Runtime Expression</span><b>→</b><div><span>Temporary Variables</span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Async Input</span><b>→</b><div><span>Temporary Variables</span><span class="extension-dependency-optional">TurboWarp TM<small>poseInputは現在OFF</small></span></div></div></div><div class="extension-dependency-legend"><span>実線: 現行アプリの利用経路で必要</span><span>破線: fallback／既定OFFの任意経路</span></div><p>Consoles、Text、Local Storage、More Timers、Files、Text Lines、TurboWarp TM、SVG Text、Web Linkは、他拡張を直接呼ばず、Stageのblockとruntime変数を介して連携します。</p></figure>
+<figure class="extension-dependency-map"><figcaption><strong>実行時の直接依存関係</strong><span>矢印の先の拡張APIを呼び出す。bundleへの所属とは別の関係です。</span></figcaption><div class="extension-dependency-rows"><div class="extension-dependency-row"><span class="extension-dependency-from">Kamishibai Runtime</span><b>→</b><div><span>Asset Manager</span><span>Runtime Expression</span><span>Temporary Variables</span><span class="extension-dependency-optional">Translate<small>言語fallback</small></span><span class="extension-dependency-optional">Animated Text<small>SVG失敗時</small></span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Asset Manager</span><b>→</b><div><span>Temporary Variables</span><span>Animated Text</span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Runtime Expression</span><b>→</b><div><span>Temporary Variables</span></div></div><div class="extension-dependency-row"><span class="extension-dependency-from">Async Input</span><b>→</b><div><span>Temporary Variables</span><span class="extension-dependency-optional">TurboWarp Teachable Machine<small>poseInputは現在OFF</small></span></div></div></div><div class="extension-dependency-legend"><span>実線: 現行アプリの利用経路で必要</span><span>破線: fallback／既定OFFの任意経路</span></div><p>Consoles、Text、Local Storage、More Timers、Files、Text Lines、TurboWarp Teachable Machine、SVG Text、Web Linkは、他拡張を直接呼ばず、Stageのblockとruntime変数を介して連携します。</p></figure>
 
 <p class="extension-source">出典: <a href="https://github.com/kubohiroya/sb3-toolchain/blob/b3f4b9aa3ed3ede363700be815fe522f6a47df0b/docs/extension-bundles.md">sb3-toolchain: Extension bundles</a>、<a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/embedded-extensions.json">Version 3.2.0 埋め込みmanifest</a>、<a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/extensions">依存APIの実装</a></p>
 
@@ -334,7 +334,7 @@ Web上の画像・音声、SB3内のcostume・backdrop・sound、実行時text�
 
 <p class="extension-source">ブロック例: <a href="https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/d1624c9ce9464bf696b4bb97851dce9154a09ee6/app/project.source.json">Version 3.2.0 project source</a>（Stage: <code>create asset</code>）</p>
 
-## TurboWarp TM — 学習済みモデルでカメラ映像のポーズを認識する {#extension-kubohiroyatm .extension-sheet .extension-sheet-left}
+## TurboWarp Teachable Machine — 学習済みモデルでカメラ映像のポーズを認識する {#extension-kubohiroyatm .extension-sheet .extension-sheet-left}
 
 <p class="extension-spread-label">外部埋め込み 2 / 6　機能拡張そのもの 1 / 2</p>
 
@@ -349,15 +349,15 @@ model、camera、preview、predictionを別々に開始・停止できます。
 
 <div class="extension-columns"><section><p class="extension-subhead">現在の認識</p><ul><li>pose labelとconfidence</li><li>すばやい動きへ即時反応</li><li>camera previewを配置</li></ul></section><section><p class="extension-subhead">時間を含む認識</p><ul><li>confidenceを蓄積・減衰</li><li>一瞬の揺れを平滑化</li><li>開始・停止を個別管理</li></ul></section></div>
 
-<p class="extension-source">出典: <a href="https://kubohiroya.github.io/turbowarp-tm/ja/">TurboWarp TM図解ガイド</a>、<a href="https://github.com/kubohiroya/turbowarp-tm/tree/08fe0cf9da061b1eba75297b8ee187d68549eed4">固定commit 08fe0cf</a></p>
+<p class="extension-source">出典: <a href="https://kubohiroya.github.io/turbowarp-teachable-machine/ja/">TurboWarp Teachable Machine図解ガイド</a>、<a href="https://github.com/kubohiroya/turbowarp-teachable-machine/tree/08fe0cf9da061b1eba75297b8ee187d68549eed4">固定commit 08fe0cf</a></p>
 
-## TurboWarp TMで観客のポーズを認識し、物語を進める入力として扱う {#extension-kubohiroyatm-example .extension-sheet .extension-sheet-right}
+## TurboWarp Teachable Machineで観客のポーズを認識し、物語を進める入力として扱う {#extension-kubohiroyatm-example .extension-sheet .extension-sheet-right}
 
 <p class="extension-spread-label">外部埋め込み 2 / 6　TurboWarp紙芝居での利用例 2 / 2</p>
 
 <aside class="extension-kamishibai-why"><strong>なぜTurboWarp紙芝居に必要？</strong><p>このアプリでは、観客がkeyやbuttonを押すだけでなく、物語に合わせて体を動かすこと自体が入力になります。学習済みmodel、camera、preview、認識loopを別々に管理できるため、必要なsceneだけでcameraを使い、poseが十分確かになった時に物語を進められます。</p></aside>
 
-<figure class="extension-editor-example"><img src="../images/extension-editor-tmpose.png" alt="TurboWarp Editorから、TurboWarp TMの認識開始とcamera preview表示を呼ぶ2つの補助定義だけを切り出した画面"><figcaption><code>start pose recog</code>と<code>start camera preview</code>。各custom blockが対応するTurboWarp TM blockを1つずつ呼びます。</figcaption></figure>
+<figure class="extension-editor-example"><img src="../images/extension-editor-tmpose.png" alt="TurboWarp Editorから、TurboWarp Teachable Machineの認識開始とcamera preview表示を呼ぶ2つの補助定義だけを切り出した画面"><figcaption><code>start pose recog</code>と<code>start camera preview</code>。各custom blockが対応するTurboWarp Teachable Machine blockを1つずつ呼びます。</figcaption></figure>
 
 <div class="extension-usage-grid"><section><strong>scene準備</strong><span><code>TMPoseURL</code>でmodelをload。</span></section><section><strong>action</strong><span>指定poseのscoreが閾値を超えるまで反復。</span></section><section><strong>終了</strong><span>skip、scene終了、stopでpredictionとcameraを停止。</span></section></div>
 

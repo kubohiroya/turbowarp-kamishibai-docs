@@ -1,21 +1,21 @@
-# TurboWarp TM Extension ID 移行ガイド
+# TurboWarp Teachable Machine Extension ID 移行ガイド
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-対象: TurboWarp-Kamishibai 4.0 系列と、TurboWarp TM を使う SB3 / DSL 4.0 配布物\
-関連Issue: [TurboWarp TM #79](https://github.com/kubohiroya/turbowarp-tm/issues/79)、[TurboWarp-Kamishibai #661](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/661)、[sb3-toolchain #50](https://github.com/kubohiroya/sb3-toolchain/issues/50)
+対象: TurboWarp-Kamishibai 4.0 系列と、TurboWarp Teachable Machine を使う SB3 / DSL 4.0 配布物\
+関連Issue: [TurboWarp Teachable Machine #79](https://github.com/kubohiroya/turbowarp-teachable-machine/issues/79)、[TurboWarp-Kamishibai #661](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/661)、[sb3-toolchain #50](https://github.com/kubohiroya/sb3-toolchain/issues/50)
 
 ## 日本語
 
-TurboWarp TM の現行 Extension ID は `kubohiroyatm` です。TurboWarp-Kamishibai と TurboWarp紙芝居文書では、製品名を
-TurboWarp-Kamishibai / TurboWarp紙芝居、認識拡張名を TurboWarp TM、repository slug を `turbowarp-kamishibai-app` として扱います。
+TurboWarp Teachable Machine の現行 Extension ID は `kubohiroyatm` です。TurboWarp-Kamishibai と TurboWarp紙芝居文書では、製品名を
+TurboWarp-Kamishibai / TurboWarp紙芝居、認識拡張名を TurboWarp Teachable Machine、repository slug を `turbowarp-kamishibai-app` として扱います。
 DSL 4.0の固定公開基準は `v4.0.0-rc.8` で、current migrationはこの固定snapshotへ注記を重ねる形で扱います。
 
 | 区分               | 現行表記                       | 用途                                     |
 | ------------------ | ------------------------------ | ---------------------------------------- |
 | Product name       | TurboWarp-Kamishibai           | 英語本文、公開サイト、repository説明     |
 | 日本語一般名称     | TurboWarp紙芝居                | 日本語本文、ワークショップ以外の通常文書 |
-| Recognition        | TurboWarp TM                   | ポーズ認識拡張の人間向け名称             |
+| Recognition        | TurboWarp Teachable Machine    | ポーズ認識拡張の人間向け名称             |
 | Extension ID       | `kubohiroyatm`                 | SB3内のextension identifier              |
 | Opcode prefix      | `kubohiroyatm_...`             | SB3内のblock opcode                      |
 | Current repository | `turbowarp-kamishibai-app`     | GitHub repository、Pages、文書内リンク   |
@@ -30,7 +30,7 @@ DSL 4.0の固定公開基準は `v4.0.0-rc.8` で、current migrationはこの�
 
 ### version boundary
 
-`kubohiroyatm` は TurboWarp TM #79 で確定した現行IDです。TurboWarp-Kamishibai #661 はこのIDへ追随するruntime /
+`kubohiroyatm` は TurboWarp Teachable Machine #79 で確定した現行IDです。TurboWarp-Kamishibai #661 はこのIDへ追随するruntime /
 artifact migrationを扱います。固定済みの3.2 / 4.0 prerelease snapshotやrelease historyは履歴として維持し、
 current guideでは新しいIDだけを案内します。
 
@@ -45,7 +45,7 @@ current guideでは新しいIDだけを案内します。
 ### 確認方法
 
 - SB3内の extension list に `kubohiroyatm` が一度だけ現れる
-- TurboWarp Editor の拡張パレットに TurboWarp TM のblockが表示される
+- TurboWarp Editor の拡張パレットに TurboWarp Teachable Machine のblockが表示される
 - 認識結果が Async Input と runtime transitionへ届く
 - `turbowarp-kamishibai-app` Pages、`turbowarp-kamishibai-docs` Pages、`turbowarp-kamishibai-samples` Pagesのリンクが現在URLを指す
 
@@ -56,20 +56,20 @@ revertすればよく、固定済みのsource snapshot、release history、works
 
 ## English
 
-The current Extension ID for TurboWarp TM is `kubohiroyatm`. TurboWarp-Kamishibai documentation uses TurboWarp-Kamishibai as the
-English product name, TurboWarp紙芝居 as the Japanese product name, TurboWarp TM as the recognition extension name, and
+The current Extension ID for TurboWarp Teachable Machine is `kubohiroyatm`. TurboWarp-Kamishibai documentation uses TurboWarp-Kamishibai as the
+English product name, TurboWarp紙芝居 as the Japanese product name, TurboWarp Teachable Machine as the recognition extension name, and
 `turbowarp-kamishibai-app` as the current repository slug.
 
 The migration target is the SB3 extension identifier and opcode prefix. Replacing the JavaScript artifact alone is not
 enough because existing SB3 files still contain extension entries, block opcodes, monitors, and variable references.
 Use the `sb3-toolchain` migration plan to inspect each SB3 first, then rewrite the identifiers.
 
-The new boundary is defined by TurboWarp TM #79 and followed by the TurboWarp-Kamishibai runtime / artifact migration in
+The new boundary is defined by TurboWarp Teachable Machine #79 and followed by the TurboWarp-Kamishibai runtime / artifact migration in
 TurboWarp-Kamishibai #661. Versioned 3.2 and 4.0 prerelease snapshots remain historical records; current guides should point
 to `kubohiroyatm` only.
 
 Verification requires the converted SB3 to contain one `kubohiroyatm` extension entry, use the `kubohiroyatm_` opcode
-prefix, show TurboWarp TM blocks in the TurboWarp Editor, pass camera/model recognition, and deliver recognition events
+prefix, show TurboWarp Teachable Machine blocks in the TurboWarp Editor, pass camera/model recognition, and deliver recognition events
 to Async Input and scene transitions.
 
 Rollback uses the pre-migration SB3 and its matching TurboWarp-Kamishibai release. Documentation rollback should revert this

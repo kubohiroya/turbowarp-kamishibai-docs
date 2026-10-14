@@ -470,7 +470,7 @@ bitmapResolution: 2
 
 ### 名前付きポーズモデル
 
-ポーズモデルは埋め込む相対file、通常のTurboWarp TM directory URL、または検証付きremote archiveで指定します。project内の表示名だけを使う形式はありません。
+ポーズモデルは埋め込む相対file、通常のTurboWarp Teachable Machine directory URL、または検証付きremote archiveで指定します。project内の表示名だけを使う形式はありません。
 
 Schema位置: `#/$defs/namedPoseModel`
 
@@ -866,7 +866,7 @@ Schema位置: `#/$defs/poseModelInitialization`
 
 - 省略時はpolicyがlegacy、parallelがfalseです。
 - latest-neededでは重い初期化を実行中1件と最新待機1件までに制限します。
-- 実行にはTurboWarp TM 1.10.0以降が必要です。4.0.0-rc.8はTurboWarp TM 1.12.0をexact pinします。
+- 実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.8はTurboWarp Teachable Machine 1.12.0をexact pinします。
 
 Schemaで検証できる値の例:
 
@@ -995,7 +995,7 @@ controls:
 
 ### 関節とボーンのoverlay
 
-TurboWarp TM 1.12.0のSVG overlayについて、表示、関節別style、共通bone style、最低confidence、confidence連動を宣言します。
+TurboWarp Teachable Machine 1.12.0のSVG overlayについて、表示、関節別style、共通bone style、最低confidence、confidence連動を宣言します。
 
 Schema位置: `#/$defs/poseOverlay`
 
@@ -1009,7 +1009,7 @@ Schema位置: `#/$defs/poseOverlay`
 
 - overlayを記述した場合の省略値はvisibleがtrue、minimumConfidenceが0.5です。overlay自体を省略した既存台本は非表示のままです。
 - previewを隠すとoverlayも隠れます。overlayだけを隠しても認識は停止しません。認識停止では描画を消去し、camera停止ではSVG要素も破棄します。
-- 実行にはTurboWarp TM 1.12.0以降が必要です。専用feature flagはなく、問題時はoverlay設定を台本から削除すると既存台本と同じ非表示へ戻ります。
+- 実行にはTurboWarp Teachable Machine 1.12.0以降が必要です。専用feature flagはなく、問題時はoverlay設定を台本から削除すると既存台本と同じ非表示へ戻ります。
 
 Schemaで検証できる値の例:
 
@@ -1393,7 +1393,7 @@ size: 1024
 
 ### remote pose model source
 
-通常のTurboWarp TM directoryはHTTPS URLだけで参照できます。検証付きremote archiveにする場合はintegrity、content type、byte sizeを三つとも指定します。
+通常のTurboWarp Teachable Machine directoryはHTTPS URLだけで参照できます。検証付きremote archiveにする場合はintegrity、content type、byte sizeを三つとも指定します。
 
 Schema位置: `#/$defs/remotePoseModelSource`
 

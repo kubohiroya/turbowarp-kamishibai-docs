@@ -308,18 +308,18 @@ Standard SB3は`kubohiroyakamishibairuntime4`を一度だけ登録し、次を�
 端末の絶対path、ブラウザーのfile handle、preview token、reload candidate、modal状態を保存しません。local sourceと
 embedded assetだけを使う成果物は、実行時にextension codeや作品assetをremote取得しません。
 
-`delivery: remote`は明示的な例外です。通常のposeModelではHTTPS TurboWarp TM ディレクトリ URLを保存します。
+`delivery: remote`は明示的な例外です。通常のposeModelではHTTPS TurboWarp Teachable Machine ディレクトリ URLを保存します。
 検証付きremoteではURL、SHA-256 integrity、Content-Type、sizeを保存し、いずれもasset byte列は
 SB3へ含めません。「自己完結」はsource、runtime code、runtime artifact、
 embedded assetの境界を指し、remote deliveryを選んだ作品の完全offline動作を意味しません。内容を固定する
 poseModelはlocal `file`へ変換して埋め込みます。remote extension codeと
 remote previewは常に禁止します。
 
-### TurboWarp TM上流との責務境界
+### TurboWarp Teachable Machine上流との責務境界
 
 rc.8は`@kubohiroya/turbowarp-tm@1.12.0`をexact pinします。カメラのcanvas、Canvas2D context、
-TensorFlow.jsへのreadback、SVG overlay要素はTurboWarp TMが所有します。DSL runtimeは公開Composition APIへ
-正規化済みoverlay設定を渡すだけで、TurboWarp TMのDOM、canvas、TensorFlow.js内部実装を検査・patchしません。
+TensorFlow.jsへのreadback、SVG overlay要素はTurboWarp Teachable Machineが所有します。DSL runtimeは公開Composition APIへ
+正規化済みoverlay設定を渡すだけで、TurboWarp Teachable MachineのDOM、canvas、TensorFlow.js内部実装を検査・patchしません。
 CPU推論時のChromium readback警告は性能根拠のない抑制をせず許容し、回帰判定は実時間、動作、解放で行います。
 
 ## Source Graph transactionとimmutable snapshotを保つ

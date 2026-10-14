@@ -114,7 +114,7 @@ test('pins the merged 3.2.0 source contract', () => {
   assert.equal(sourceSnapshot.dslVersion, '3.2');
   assert.equal(sourceSnapshot.extensions.length, 16);
   assert.equal(sourceSnapshot.productName, 'TurboWarp-Kamishibai');
-  assert.equal(sourceSnapshot.recognitionExtensionName, 'TurboWarp TM');
+  assert.equal(sourceSnapshot.recognitionExtensionName, 'TurboWarp Teachable Machine');
   assert.equal(sourceSnapshot.recognitionExtensionId, 'kubohiroyatm');
   assert.equal(
     sourceSnapshot.runtimeMigrationIssue,
