@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="title desc">
+  <title id="title">eagerとlazyの素材を準備する時期</title><desc id="desc">eagerの素材は作品を開いた後のLoading表示中にすべて準備し、以後は待たずに使える。lazyの素材は、そのシーンへ移動することが決まった後に、そのシーンが参照する分だけ準備する。準備が間に合わなければLoading表示で待ち、失敗した場合はそのシーンの命令を始めず診断を表示する。</desc>
+  <defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#315b72"/></marker><style>text{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;fill:#172b3a}.title{font-size:26px;font-weight:700}.sub{font-size:15px;fill:#486272}.label{font-size:15px;font-weight:700;text-anchor:middle}.lane{font-size:17px;font-weight:700}.code{font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;fill:#315b72}.small{font-size:13px;fill:#304a59}.bar{font-size:14px;font-weight:700;text-anchor:middle}.stage{fill:#f6f8fa;stroke:#98aab5;stroke-width:1.5}.wait{fill:#fff;stroke:#98aab5;stroke-width:1.5;stroke-dasharray:6 5}.scene{fill:#eef0fb;stroke:#5a64a8;stroke-width:1.5}.eager{fill:#eaf4fa;stroke:#397a9c;stroke-width:2}.lazy{fill:#fff1df;stroke:#b87629;stroke-width:2}.guide{stroke:#98aab5;stroke-width:1.2;stroke-dasharray:4 5}.ready{stroke:#397a9c;stroke-width:3;stroke-dasharray:2 6;stroke-linecap:round}.msg{stroke:#315b72;stroke-width:2;fill:none;marker-end:url(#a)}.ok{fill:#effaf5;stroke:#3b8b70;stroke-width:1.7}.warn{fill:#fff4f4;stroke:#b64d4d;stroke-width:1.7}</style></defs>
+  <rect width="960" height="480" fill="#fff"/>
+  <text class="title" x="20" y="40">素材をいつ使える状態にするか</text><text class="sub" x="20" y="66">左から右へ時間が進む。色の帯は、その素材を準備している期間を示す。</text>
+  <g>
+    <rect class="stage" x="20" y="95" width="120" height="50" rx="8"/><text class="label" x="80" y="125">作品を開く</text>
+    <path class="msg" d="M141 120H158"/>
+    <rect class="stage" x="160" y="95" width="150" height="50" rx="8"/><text class="label" x="235" y="125">Loading表示</text>
+    <path class="msg" d="M311 120H328"/>
+    <rect class="scene" x="330" y="95" width="170" height="50" rx="8"/><text class="label" x="415" y="125">シーン1</text>
+    <path class="msg" d="M501 120H518"/>
+    <rect class="stage" x="520" y="95" width="150" height="50" rx="8"/><text class="label" x="595" y="125">シーン2へ移動決定</text>
+    <path class="msg" d="M671 120H688"/>
+    <rect class="wait" x="690" y="95" width="110" height="50" rx="8"/><text class="label" x="745" y="117">準備待ち</text><text class="small" x="745" y="136" text-anchor="middle">必要ならLoading</text>
+    <path class="msg" d="M801 120H818"/>
+    <rect class="scene" x="820" y="95" width="120" height="50" rx="8"/><text class="label" x="880" y="125">シーン2</text>
+  </g>
+  <path class="guide" d="M160 150V350M310 150V350M520 150V350M800 150V350"/>
+  <g>
+    <text class="lane" x="20" y="200">eager</text><text class="code" x="20" y="222">既定値</text>
+    <rect class="eager" x="160" y="180" width="150" height="56" rx="8"/><text class="bar" x="235" y="203">eager素材を</text><text class="bar" x="235" y="224">すべて準備</text>
+    <path class="ready" d="M318 208H932"/><text class="small" x="330" y="252">準備済み。どのシーンでもすぐ使える</text>
+  </g>
+  <g>
+    <text class="lane" x="20" y="300">lazy</text><text class="code" x="20" y="322">loading: lazy</text>
+    <rect class="lazy" x="520" y="280" width="280" height="56" rx="8"/><text class="bar" x="660" y="303">シーン2が参照する</text><text class="bar" x="660" y="324">lazy素材だけを準備</text>
+    <text class="small" x="330" y="314">シーン1の間は準備しない</text>
+  </g>
+  <rect class="ok" x="20" y="372" width="450" height="90" rx="10"/><text class="lane" x="36" y="399">eagerが向く素材</text><text class="small" x="36" y="425">表紙直後や多くのシーンで使う素材、小さい素材。</text><text class="small" x="36" y="447">開始までは長くなるが、場面の切り替えでは待たない。</text>
+  <rect class="warn" x="490" y="372" width="450" height="90" rx="10"/><text class="lane" x="506" y="399">lazyが向く素材</text><text class="small" x="506" y="425">後半だけで使う大きな素材、通らない分岐の素材。</text><text class="small" x="506" y="447">間に合わなければ待ち、失敗時はシーン2を始めない。</text>
+</svg>
