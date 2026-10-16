@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1532" height="486" viewBox="0 0 1532 486" role="img" aria-labelledby="title description">
+  <title id="title">Actor相対のdistance、tail length、offset、scale</title>
+  <desc id="description">実際のBubble SVG rendererで、Actor boundsからtail tipまでのdistance、本体borderまでのtail length、offsetと文字を含むscaleを比較する図。</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    .heading { fill: #25283a; font-size: 28px; font-weight: 700; }
+    .subheading { fill: #25283a; font-size: 20px; font-weight: 700; }
+    .body { fill: #25283a; font-size: 16px; }
+    .small { fill: #667085; font-size: 13px; }
+    .block-text { fill: #ffffff; font-size: 13px; font-weight: 600; }
+    .input-text { fill: #25283a; font-size: 13px; font-weight: 500; }
+  </style>
+<rect width="1532" height="486" fill="#f2f4f8"/>
+      <text x="32" y="48" class="heading">Actor相対：distance・tail・offset・scale</text>
+      <text x="32" y="78" class="body">赤い点のtail tipを基準に本体を再生成。scaleはフォント、表情、アイコン、余白にも適用します。</text>
+      <g data-actor-transform-scene="distance-tail">
+        <rect x="32" y="112" width="472" height="340" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="52" y="146" class="subheading">distance 12 / tail length 18</text>
+        <text x="52" y="170" class="small">Actor bounds → tail tip → Bubble border</text>
+        <rect x="50" y="184" width="436" height="202" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <rect x="106" y="246" width="66" height="92" rx="12" fill="#ffd5b5" stroke="#b85d63" stroke-width="2" data-actor-bounds="true"/>
+        <text x="139" y="360" text-anchor="middle" class="small">Actor bounds</text>
+        <svg x="178" y="218" width="260" height="130" viewBox="0 0 260 130" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>distance 12 / tail length 18 preview</title><path d="M 24.0000 56.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 218.0000 24.0000 L 220.8158 24.2216 L 223.5623 24.8810 L 226.1718 25.9619 L 228.5801 27.4377 L 230.7279 29.2721 L 232.5623 31.4199 L 234.0381 33.8282 L 235.1190 36.4377 L 235.7784 39.1842 L 236.0000 42.0000 L 236.0000 88.0000 L 235.7784 90.8158 L 235.1190 93.5623 L 234.0381 96.1718 L 232.5623 98.5801 L 230.7279 100.7279 L 228.5801 102.5623 L 226.1718 104.0381 L 223.5623 105.1190 L 220.8158 105.7784 L 218.0000 106.0000 L 42.0000 106.0000 L 39.1842 105.7784 L 36.4377 105.1190 L 33.8282 104.0381 L 31.4199 102.5623 L 29.2721 100.7279 L 27.4377 98.5801 L 25.9619 96.1718 L 24.8810 93.5623 L 24.2216 90.8158 L 24.0000 88.0000 L 24.0000 74.0000 L 6.0000 65.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="130" y="60.125" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="15">基準サイズ</text><text x="130" y="80.375" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="15">100%</text>
+  </svg>
+        <circle cx="184" cy="283" r="4" fill="#ef476f"/>
+        <line x1="172" y1="318" x2="184" y2="318" stroke="#ef476f" stroke-width="2"/>
+        <path d="M 177 314 L 172 318 L 177 322 M 179 314 L 184 318 L 179 322" fill="none" stroke="#ef476f"/>
+        <text x="178" y="338" text-anchor="middle" style="fill:#ef476f;font-size:12px;font-weight:700">distance 12</text>
+        <line x1="184" y1="241" x2="202" y2="241" stroke="#5b7cfa" stroke-width="2"/>
+        <text x="193" y="233" text-anchor="middle" style="fill:#4767d8;font-size:12px;font-weight:700">tail 18</text>
+      </g>
+<g data-actor-transform-scene="offset">
+        <rect x="532" y="112" width="472" height="340" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="552" y="146" class="subheading">offset [10, -10]</text>
+        <text x="552" y="170" class="small">tail tipを固定し、本体を右10・下10へ移動</text>
+        <rect x="550" y="184" width="436" height="202" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <rect x="606" y="246" width="66" height="92" rx="12" fill="#ffd5b5" stroke="#b85d63" stroke-width="2" data-actor-bounds="true"/>
+        <text x="639" y="360" text-anchor="middle" class="small">Actor bounds</text>
+        <svg x="678" y="218" width="260" height="130" viewBox="0 0 260 130" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>offset [10, -10] preview</title><path d="M 34.0000 58.0896 L 34.0000 52.0000 L 34.2216 49.1842 L 34.8810 46.4377 L 35.9619 43.8282 L 37.4377 41.4199 L 39.2721 39.2721 L 41.4199 37.4377 L 43.8282 35.9619 L 46.4377 34.8810 L 49.1842 34.2216 L 52.0000 34.0000 L 228.0000 34.0000 L 230.8158 34.2216 L 233.5623 34.8810 L 236.1718 35.9619 L 238.5801 37.4377 L 240.7279 39.2721 L 242.5623 41.4199 L 244.0381 43.8282 L 245.1190 46.4377 L 245.7784 49.1842 L 246.0000 52.0000 L 246.0000 98.0000 L 245.7784 100.8158 L 245.1190 103.5623 L 244.0381 106.1718 L 242.5623 108.5801 L 240.7279 110.7279 L 238.5801 112.5623 L 236.1718 114.0381 L 233.5623 115.1190 L 230.8158 115.7784 L 228.0000 116.0000 L 52.0000 116.0000 L 49.1842 115.7784 L 46.4377 115.1190 L 43.8282 114.0381 L 41.4199 112.5623 L 39.2721 110.7279 L 37.4377 108.5801 L 35.9619 106.1718 L 34.8810 103.5623 L 34.2216 100.8158 L 34.0000 98.0000 L 34.0000 76.0896 L 6.0000 65.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="140" y="70.125" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="15">位置補正</text><text x="140" y="90.375" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="15">10, -10</text>
+  </svg>
+        <circle cx="684" cy="283" r="4" fill="#ef476f"/>
+        <line x1="672" y1="318" x2="684" y2="318" stroke="#ef476f" stroke-width="2"/>
+        <path d="M 677 314 L 672 318 L 677 322 M 679 314 L 684 318 L 679 322" fill="none" stroke="#ef476f"/>
+        <text x="678" y="338" text-anchor="middle" style="fill:#ef476f;font-size:12px;font-weight:700">distance 12</text>
+        <line x1="684" y1="241" x2="702" y2="241" stroke="#5b7cfa" stroke-width="2"/>
+        <text x="693" y="233" text-anchor="middle" style="fill:#4767d8;font-size:12px;font-weight:700">tail 18</text>
+      </g>
+<g data-actor-transform-scene="scale">
+        <rect x="1032" y="112" width="472" height="340" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="1052" y="146" class="subheading">offset [0, 0, 120]</text>
+        <text x="1052" y="170" class="small">文字を含む全体を120%化し、Actor側の間隔を維持</text>
+        <rect x="1050" y="184" width="436" height="202" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <rect x="1106" y="246" width="66" height="92" rx="12" fill="#ffd5b5" stroke="#b85d63" stroke-width="2" data-actor-bounds="true"/>
+        <text x="1139" y="360" text-anchor="middle" class="small">Actor bounds</text>
+        <svg x="1178" y="218" width="260" height="130" viewBox="0 0 260 130" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>offset [0, 0, 120] preview</title><path d="M 24.0000 56.0000 L 24.0000 37.4000 L 24.2659 34.0210 L 25.0572 30.7252 L 26.3543 27.5938 L 28.1252 24.7038 L 30.3265 22.1265 L 32.9038 19.9252 L 35.7938 18.1543 L 38.9252 16.8572 L 42.2210 16.0659 L 45.6000 15.8000 L 256.8000 15.8000 L 260.1790 16.0659 L 263.4748 16.8572 L 266.6062 18.1543 L 269.4962 19.9252 L 272.0735 22.1265 L 274.2748 24.7038 L 276.0457 27.5938 L 277.3428 30.7252 L 278.1341 34.0210 L 278.4000 37.4000 L 278.4000 92.6000 L 278.1341 95.9790 L 277.3428 99.2748 L 276.0457 102.4062 L 274.2748 105.2962 L 272.0735 107.8735 L 269.4962 110.0748 L 266.6062 111.8457 L 263.4748 113.1428 L 260.1790 113.9341 L 256.8000 114.2000 L 45.6000 114.2000 L 42.2210 113.9341 L 38.9252 113.1428 L 35.7938 111.8457 L 32.9038 110.0748 L 30.3265 107.8735 L 28.1252 105.2962 L 26.3543 102.4062 L 25.0572 99.2748 L 24.2659 95.9790 L 24.0000 92.6000 L 24.0000 74.0000 L 6.0000 65.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="151.2" y="59.15" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="18">文字も外形も</text><text x="151.2" y="83.45" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="18">120%</text>
+  </svg>
+        <circle cx="1184" cy="283" r="4" fill="#ef476f"/>
+        <line x1="1172" y1="318" x2="1184" y2="318" stroke="#ef476f" stroke-width="2"/>
+        <path d="M 1177 314 L 1172 318 L 1177 322 M 1179 314 L 1184 318 L 1179 322" fill="none" stroke="#ef476f"/>
+        <text x="1178" y="338" text-anchor="middle" style="fill:#ef476f;font-size:12px;font-weight:700">distance 12</text>
+        <line x1="1184" y1="241" x2="1202" y2="241" stroke="#5b7cfa" stroke-width="2"/>
+        <text x="1193" y="233" text-anchor="middle" style="fill:#4767d8;font-size:12px;font-weight:700">tail 18</text>
+      </g>
+</svg>

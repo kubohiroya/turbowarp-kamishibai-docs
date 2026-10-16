@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1560" viewBox="0 0 1600 1560" role="img" aria-labelledby="title description">
+  <title id="title">Bubble placementの二つの基準</title>
+  <desc id="description">Actorと実際の吹き出し外形による16方向のミニシーン、およびStage安全領域と背景相対配置の寸法関係。</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    .heading { fill: #25283a; font-size: 28px; font-weight: 700; }
+    .subheading { fill: #25283a; font-size: 20px; font-weight: 700; }
+    .body { fill: #25283a; font-size: 16px; }
+    .small { fill: #667085; font-size: 13px; }
+    .block-text { fill: #ffffff; font-size: 13px; font-weight: 600; }
+    .input-text { fill: #25283a; font-size: 13px; font-weight: 500; }
+  </style>
+
+  <rect width="1600" height="1560" fill="#f2f4f8"/>
+  <text x="32" y="48" class="heading">Bubble placement：Actor相対と背景相対</text>
+  <text x="32" y="76" class="body">各ミニシーンは、Actor、実際のBubble外形、tail、文字を同じ縮尺で表示します。</text>
+  <text x="32" y="114" class="subheading">Actor相対：ActorからBubble中心への16方向</text>
+  <g data-placement-scene="up">
+        <rect x="32" y="146" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="46" y="173" style="fill:#25283a;font-size:15px;font-weight:700">up</text>
+        <text x="398" y="173" text-anchor="end" class="small">0°</text>
+        <rect x="44" y="188" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 222 315 L 222 219" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="139" y="172" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>up placement preview</title><path d="M 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 92.0000 70.0000 L 83.0000 88.0000 L 74.0000 70.0000 L 42.0000 70.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="222" cy="315" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="215" cy="311" r="2" fill="#3b2d3c"/>
+        <circle cx="229" cy="311" r="2" fill="#3b2d3c"/>
+        <path d="M 215 322 Q 222 327 229 322" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="up-up-right">
+        <rect x="424" y="146" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="438" y="173" style="fill:#25283a;font-size:15px;font-weight:700">up-up-right</text>
+        <text x="790" y="173" text-anchor="end" class="small">22.5°</text>
+        <rect x="436" y="188" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 592.95241121992 311.34621756054173 L 634.6649053477148 222.65378243945824" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="551.6649053477148" y="175.65378243945824" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>up-up-right placement preview</title><path d="M 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 82.4731 70.0000 L 66.5848 86.6298 L 64.4731 70.0000 L 42.0000 70.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="592.95241121992" cy="311.34621756054173" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="585.95241121992" cy="307.34621756054173" r="2" fill="#3b2d3c"/>
+        <circle cx="599.95241121992" cy="307.34621756054173" r="2" fill="#3b2d3c"/>
+        <path d="M 585.95241121992 318.34621756054173 Q 592.95241121992 323.34621756054173 599.95241121992 318.34621756054173" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="up-right">
+        <rect x="816" y="146" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="830" y="173" style="fill:#25283a;font-size:15px;font-weight:700">up-right</text>
+        <text x="1182" y="173" text-anchor="end" class="small">45°</text>
+        <rect x="828" y="188" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 967.1091270347399 300.94112549695427 L 1044.1837661840736 233.05887450304573" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="961.1837661840736" y="186.05887450304573" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>up-right placement preview</title><path d="M 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 69.0000 70.0000 L 47.2721 82.7279 L 51.0000 70.0000 L 42.0000 70.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="967.1091270347399" cy="300.94112549695427" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="960.1091270347399" cy="296.94112549695427" r="2" fill="#3b2d3c"/>
+        <circle cx="974.1091270347399" cy="296.94112549695427" r="2" fill="#3b2d3c"/>
+        <path d="M 960.1091270347399 307.94112549695427 Q 967.1091270347399 312.94112549695427 974.1091270347399 307.94112549695427" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="right-up-right">
+        <rect x="1208" y="146" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="1222" y="173" style="fill:#25283a;font-size:15px;font-weight:700">right-up-right</text>
+        <text x="1574" y="173" text-anchor="end" class="small">67.5°</text>
+        <rect x="1220" y="188" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 1347.1866257118793 285.36880475352433 L 1447.8894947556096 248.6311952464757" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="1364.8894947556096" y="201.6311952464757" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>right-up-right placement preview</title><path d="M 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 41.7615 69.9812 L 16.5455 74.5264 L 26.7626 61.4785 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="1347.1866257118793" cy="285.36880475352433" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="1340.1866257118793" cy="281.36880475352433" r="2" fill="#3b2d3c"/>
+        <circle cx="1354.1866257118793" cy="281.36880475352433" r="2" fill="#3b2d3c"/>
+        <path d="M 1340.1866257118793 292.36880475352433 Q 1347.1866257118793 297.36880475352433 1354.1866257118793 292.36880475352433" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="right">
+        <rect x="32" y="364" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="46" y="391" style="fill:#25283a;font-size:15px;font-weight:700">right</text>
+        <text x="398" y="391" text-anchor="end" class="small">90°</text>
+        <rect x="44" y="406" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 167 485 L 276 485" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="193" y="438" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>right placement preview</title><path d="M 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.4960 55.9588 L 6.0000 47.0000 L 24.4960 38.0412 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="167" cy="485" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="160" cy="481" r="2" fill="#3b2d3c"/>
+        <circle cx="174" cy="481" r="2" fill="#3b2d3c"/>
+        <path d="M 160 492 Q 167 497 174 492" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="right-down-right">
+        <rect x="424" y="364" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="438" y="391" style="fill:#25283a;font-size:15px;font-weight:700">right-down-right</text>
+        <text x="790" y="391" text-anchor="end" class="small">112.5°</text>
+        <rect x="436" y="406" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 563.1866257118793 466.63119524647567 L 663.8894947556095 503.36880475352433" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="580.8894947556095" y="456.36880475352433" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>right-down-right placement preview</title><path d="M 41.7615 24.0188 L 42.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 26.7626 32.5215 L 16.5455 19.4736 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="563.1866257118793" cy="466.63119524647567" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="556.1866257118793" cy="462.63119524647567" r="2" fill="#3b2d3c"/>
+        <circle cx="570.1866257118793" cy="462.63119524647567" r="2" fill="#3b2d3c"/>
+        <path d="M 556.1866257118793 473.63119524647567 Q 563.1866257118793 478.63119524647567 570.1866257118793 473.63119524647567" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="down-right">
+        <rect x="816" y="364" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="830" y="391" style="fill:#25283a;font-size:15px;font-weight:700">down-right</text>
+        <text x="1182" y="391" text-anchor="end" class="small">135°</text>
+        <rect x="828" y="406" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 967.1091270347399 451.05887450304573 L 1044.1837661840736 518.9411254969543" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="961.1837661840736" y="471.9411254969543" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>down-right placement preview</title><path d="M 69.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 51.0000 24.0000 L 47.2721 11.2721 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="967.1091270347399" cy="451.05887450304573" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="960.1091270347399" cy="447.05887450304573" r="2" fill="#3b2d3c"/>
+        <circle cx="974.1091270347399" cy="447.05887450304573" r="2" fill="#3b2d3c"/>
+        <path d="M 960.1091270347399 458.05887450304573 Q 967.1091270347399 463.05887450304573 974.1091270347399 458.05887450304573" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="down-down-right">
+        <rect x="1208" y="364" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="1222" y="391" style="fill:#25283a;font-size:15px;font-weight:700">down-down-right</text>
+        <text x="1574" y="391" text-anchor="end" class="small">157.5°</text>
+        <rect x="1220" y="406" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 1376.9524112199201 440.65378243945827 L 1418.664905347715 529.3462175605417" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="1335.664905347715" y="482.34621756054173" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>down-down-right placement preview</title><path d="M 82.4731 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 64.4731 24.0000 L 66.5848 7.3702 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="1376.9524112199201" cy="440.65378243945827" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="1369.9524112199201" cy="436.65378243945827" r="2" fill="#3b2d3c"/>
+        <circle cx="1383.9524112199201" cy="436.65378243945827" r="2" fill="#3b2d3c"/>
+        <path d="M 1369.9524112199201 447.65378243945827 Q 1376.9524112199201 452.65378243945827 1383.9524112199201 447.65378243945827" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="down">
+        <rect x="32" y="582" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="46" y="609" style="fill:#25283a;font-size:15px;font-weight:700">down</text>
+        <text x="398" y="609" text-anchor="end" class="small">180°</text>
+        <rect x="44" y="624" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 222 655 L 222 751" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="139" y="704" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>down placement preview</title><path d="M 92.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 74.0000 24.0000 L 83.0000 6.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="222" cy="655" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="215" cy="651" r="2" fill="#3b2d3c"/>
+        <circle cx="229" cy="651" r="2" fill="#3b2d3c"/>
+        <path d="M 215 662 Q 222 667 229 662" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="down-down-left">
+        <rect x="424" y="582" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="438" y="609" style="fill:#25283a;font-size:15px;font-weight:700">down-down-left</text>
+        <text x="790" y="609" text-anchor="end" class="small">202.5°</text>
+        <rect x="436" y="624" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 635.0475887800799 658.6537824394583 L 593.3350946522852 747.3462175605417" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="510.3350946522852" y="700.3462175605417" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>down-down-left placement preview</title><path d="M 101.5269 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 83.5269 24.0000 L 99.4152 7.3702 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="635.0475887800799" cy="658.6537824394583" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="628.0475887800799" cy="654.6537824394583" r="2" fill="#3b2d3c"/>
+        <circle cx="642.0475887800799" cy="654.6537824394583" r="2" fill="#3b2d3c"/>
+        <path d="M 628.0475887800799 665.6537824394583 Q 635.0475887800799 670.6537824394583 642.0475887800799 665.6537824394583" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="down-left">
+        <rect x="816" y="582" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="830" y="609" style="fill:#25283a;font-size:15px;font-weight:700">down-left</text>
+        <text x="1182" y="609" text-anchor="end" class="small">225°</text>
+        <rect x="828" y="624" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 1044.89087296526 669.0588745030457 L 967.8162338159265 736.9411254969543" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="884.8162338159265" y="689.9411254969543" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>down-left placement preview</title><path d="M 115.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 97.0000 24.0000 L 118.7279 11.2721 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="1044.89087296526" cy="669.0588745030457" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="1037.89087296526" cy="665.0588745030457" r="2" fill="#3b2d3c"/>
+        <circle cx="1051.89087296526" cy="665.0588745030457" r="2" fill="#3b2d3c"/>
+        <path d="M 1037.89087296526 676.0588745030457 Q 1044.89087296526 681.0588745030457 1051.89087296526 676.0588745030457" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="left-down-left">
+        <rect x="1208" y="582" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="1222" y="609" style="fill:#25283a;font-size:15px;font-weight:700">left-down-left</text>
+        <text x="1574" y="609" text-anchor="end" class="small">247.5°</text>
+        <rect x="1220" y="624" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 1448.8133742881207 684.6311952464757 L 1348.1105052443904 721.3688047535243" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="1265.1105052443904" y="674.3688047535243" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>left-down-left placement preview</title><path d="M 139.2374 32.5215 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 L 124.2385 24.0188 L 149.4545 19.4736 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="1448.8133742881207" cy="684.6311952464757" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="1441.8133742881207" cy="680.6311952464757" r="2" fill="#3b2d3c"/>
+        <circle cx="1455.8133742881207" cy="680.6311952464757" r="2" fill="#3b2d3c"/>
+        <path d="M 1441.8133742881207 691.6311952464757 Q 1448.8133742881207 696.6311952464757 1455.8133742881207 691.6311952464757" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="left">
+        <rect x="32" y="800" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="46" y="827" style="fill:#25283a;font-size:15px;font-weight:700">left</text>
+        <text x="398" y="827" text-anchor="end" class="small">270°</text>
+        <rect x="44" y="842" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 277 921 L 168 921" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="85" y="874" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>left placement preview</title><path d="M 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.5040 38.0412 L 160.0000 47.0000 L 141.5040 55.9588 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="277" cy="921" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="270" cy="917" r="2" fill="#3b2d3c"/>
+        <circle cx="284" cy="917" r="2" fill="#3b2d3c"/>
+        <path d="M 270 928 Q 277 933 284 928" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="left-up-left">
+        <rect x="424" y="800" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="438" y="827" style="fill:#25283a;font-size:15px;font-weight:700">left-up-left</text>
+        <text x="790" y="827" text-anchor="end" class="small">292.5°</text>
+        <rect x="436" y="842" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 664.8133742881207 939.3688047535243 L 564.1105052443905 902.6311952464757" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="481.11050524439054" y="855.6311952464757" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>left-up-left placement preview</title><path d="M 42.0000 70.0000 L 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 139.2374 61.4785 L 149.4545 74.5264 L 124.2385 69.9812 L 124.0000 70.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="664.8133742881207" cy="939.3688047535243" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="657.8133742881207" cy="935.3688047535243" r="2" fill="#3b2d3c"/>
+        <circle cx="671.8133742881207" cy="935.3688047535243" r="2" fill="#3b2d3c"/>
+        <path d="M 657.8133742881207 946.3688047535243 Q 664.8133742881207 951.3688047535243 671.8133742881207 946.3688047535243" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="up-left">
+        <rect x="816" y="800" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="830" y="827" style="fill:#25283a;font-size:15px;font-weight:700">up-left</text>
+        <text x="1182" y="827" text-anchor="end" class="small">315°</text>
+        <rect x="828" y="842" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 1044.89087296526 954.9411254969543 L 967.8162338159265 887.0588745030457" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="884.8162338159265" y="840.0588745030457" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>up-left placement preview</title><path d="M 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 115.0000 70.0000 L 118.7279 82.7279 L 97.0000 70.0000 L 42.0000 70.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="1044.89087296526" cy="954.9411254969543" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="1037.89087296526" cy="950.9411254969543" r="2" fill="#3b2d3c"/>
+        <circle cx="1051.89087296526" cy="950.9411254969543" r="2" fill="#3b2d3c"/>
+        <path d="M 1037.89087296526 961.9411254969543 Q 1044.89087296526 966.9411254969543 1051.89087296526 961.9411254969543" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+<g data-placement-scene="up-up-left">
+        <rect x="1208" y="800" width="380" height="208" rx="16" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="1222" y="827" style="fill:#25283a;font-size:15px;font-weight:700">up-up-left</text>
+        <text x="1574" y="827" text-anchor="end" class="small">337.5°</text>
+        <rect x="1220" y="842" width="356" height="158" rx="10" fill="#edf3fa" stroke="#aebdd0"/>
+        <path d="M 1419.0475887800799 965.3462175605417 L 1377.335094652285 876.6537824394583" stroke="#ff9bad" stroke-width="2" stroke-dasharray="4 4"/>
+        <svg x="1294.335094652285" y="829.6537824394583" width="166" height="94" viewBox="0 0 166 94" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>up-up-left placement preview</title><path d="M 39.1842 69.7784 L 36.4377 69.1190 L 33.8282 68.0381 L 31.4199 66.5623 L 29.2721 64.7279 L 27.4377 62.5801 L 25.9619 60.1718 L 24.8810 57.5623 L 24.2216 54.8158 L 24.0000 52.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 124.0000 24.0000 L 126.8158 24.2216 L 129.5623 24.8810 L 132.1718 25.9619 L 134.5801 27.4377 L 136.7279 29.2721 L 138.5623 31.4199 L 140.0381 33.8282 L 141.1190 36.4377 L 141.7784 39.1842 L 142.0000 42.0000 L 142.0000 52.0000 L 141.7784 54.8158 L 141.1190 57.5623 L 140.0381 60.1718 L 138.5623 62.5801 L 136.7279 64.7279 L 134.5801 66.5623 L 132.1718 68.0381 L 129.5623 69.1190 L 126.8158 69.7784 L 124.0000 70.0000 L 101.5269 70.0000 L 99.4152 86.6298 L 83.5269 70.0000 L 42.0000 70.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="83" y="51.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">こんにちは</text>
+  </svg>
+        <circle cx="1419.0475887800799" cy="965.3462175605417" r="21" fill="#ffd5b5" stroke="#b85d63" stroke-width="2"/>
+        <circle cx="1412.0475887800799" cy="961.3462175605417" r="2" fill="#3b2d3c"/>
+        <circle cx="1426.0475887800799" cy="961.3462175605417" r="2" fill="#3b2d3c"/>
+        <path d="M 1412.0475887800799 972.3462175605417 Q 1419.0475887800799 977.3462175605417 1426.0475887800799 972.3462175605417" fill="none" stroke="#7c2945" stroke-width="2" stroke-linecap="round"/>
+      </g>
+  <text x="32" y="1058" class="subheading">背景相対：Stage縁・安全領域・Bubble外形の配置関係</text>
+  <g data-background-placement-scene="HEADER_LIKE">
+        <rect x="32" y="1100" width="504" height="428" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="50" y="1132" style="fill:#25283a;font-size:17px;font-weight:700">HEADER_LIKE</text>
+        <text x="518" y="1131" text-anchor="end" class="small">safe margin = 16px相当</text>
+        <rect x="56" y="1158" width="472" height="300" rx="8" fill="#dce9f7" stroke="#7895b5" stroke-width="3"/>
+        <rect x="74" y="1176" width="436" height="264" fill="none" stroke="#4f78a4" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <line x1="292" y1="1158" x2="292" y2="1458" stroke="#7f93aa" stroke-dasharray="4 4"/>
+        <line x1="74" y1="1176" x2="510" y2="1176" stroke="#ef476f" stroke-width="2"/>
+        <svg x="147" y="1152" width="290" height="96" viewBox="0 0 290 96" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>HEADER_LIKE background placement preview</title><path d="M 248.0000 24.0000 L 250.8158 24.2216 L 253.5623 24.8810 L 256.1718 25.9619 L 258.5801 27.4377 L 260.7279 29.2721 L 262.5623 31.4199 L 264.0381 33.8282 L 265.1190 36.4377 L 265.7784 39.1842 L 266.0000 42.0000 L 266.0000 54.0000 L 265.7784 56.8158 L 265.1190 59.5623 L 264.0381 62.1718 L 262.5623 64.5801 L 260.7279 66.7279 L 258.5801 68.5623 L 256.1718 70.0381 L 253.5623 71.1190 L 250.8158 71.7784 L 248.0000 72.0000 L 42.0000 72.0000 L 39.1842 71.7784 L 36.4377 71.1190 L 33.8282 70.0381 L 31.4199 68.5623 L 29.2721 66.7279 L 27.4377 64.5801 L 25.9619 62.1718 L 24.8810 59.5623 L 24.2216 56.8158 L 24.0000 54.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" /><text x="145" y="44.099999999999994" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">章タイトル</text><text x="145" y="60.3" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">上端を基準に配置</text>
+  </svg>
+        <line x1="65" y1="1158" x2="65" y2="1176" stroke="#25283a"/>
+        <path d="M 61 1163 L 65 1158 L 69 1163 M 61 1171 L 65 1176 L 69 1171" fill="none" stroke="#25283a"/>
+        <text x="284" y="1486" text-anchor="middle" style="fill:#ef476f;font-size:14px;font-weight:700">外形上端 = safe top</text>
+        <text x="284" y="1510" text-anchor="middle" class="small">外形 242 × 48px相当／水平中央</text>
+      </g>
+<g data-background-placement-scene="CENTER">
+        <rect x="552" y="1100" width="504" height="428" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="570" y="1132" style="fill:#25283a;font-size:17px;font-weight:700">CENTER</text>
+        <text x="1038" y="1131" text-anchor="end" class="small">safe margin = 16px相当</text>
+        <rect x="576" y="1158" width="472" height="300" rx="8" fill="#dce9f7" stroke="#7895b5" stroke-width="3"/>
+        <rect x="594" y="1176" width="436" height="264" fill="none" stroke="#4f78a4" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <line x1="812" y1="1158" x2="812" y2="1458" stroke="#7f93aa" stroke-dasharray="4 4"/>
+        <line x1="594" y1="1308" x2="1030" y2="1308" stroke="#ef476f" stroke-width="2"/>
+        <svg x="667" y="1242" width="290" height="132" viewBox="0 0 290 132" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>CENTER background placement preview</title><path d="M 248.0000 24.0000 L 250.8158 24.2216 L 253.5623 24.8810 L 256.1718 25.9619 L 258.5801 27.4377 L 260.7279 29.2721 L 262.5623 31.4199 L 264.0381 33.8282 L 265.1190 36.4377 L 265.7784 39.1842 L 266.0000 42.0000 L 266.0000 90.0000 L 265.7784 92.8158 L 265.1190 95.5623 L 264.0381 98.1718 L 262.5623 100.5801 L 260.7279 102.7279 L 258.5801 104.5623 L 256.1718 106.0381 L 253.5623 107.1190 L 250.8158 107.7784 L 248.0000 108.0000 L 42.0000 108.0000 L 39.1842 107.7784 L 36.4377 107.1190 L 33.8282 106.0381 L 31.4199 104.5623 L 29.2721 102.7279 L 27.4377 100.5801 L 25.9619 98.1718 L 24.8810 95.5623 L 24.2216 92.8158 L 24.0000 90.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" /><text x="145" y="54" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">場面の説明を</text><text x="145" y="70.2" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">画面中央へ表示</text><text x="145" y="86.4" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">高さが変わっても中心維持</text>
+  </svg>
+        <line x1="585" y1="1158" x2="585" y2="1176" stroke="#25283a"/>
+        <path d="M 581 1163 L 585 1158 L 589 1163 M 581 1171 L 585 1176 L 589 1171" fill="none" stroke="#25283a"/>
+        <text x="804" y="1486" text-anchor="middle" style="fill:#ef476f;font-size:14px;font-weight:700">外形中心 = Stage中心</text>
+        <text x="804" y="1510" text-anchor="middle" class="small">外形 242 × 84px相当／水平中央</text>
+      </g>
+<g data-background-placement-scene="FOOTER_LIKE">
+        <rect x="1072" y="1100" width="504" height="428" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="1090" y="1132" style="fill:#25283a;font-size:17px;font-weight:700">FOOTER_LIKE</text>
+        <text x="1558" y="1131" text-anchor="end" class="small">safe margin = 16px相当</text>
+        <rect x="1096" y="1158" width="472" height="300" rx="8" fill="#dce9f7" stroke="#7895b5" stroke-width="3"/>
+        <rect x="1114" y="1176" width="436" height="264" fill="none" stroke="#4f78a4" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <line x1="1332" y1="1158" x2="1332" y2="1458" stroke="#7f93aa" stroke-dasharray="4 4"/>
+        <line x1="1114" y1="1440" x2="1550" y2="1440" stroke="#ef476f" stroke-width="2"/>
+        <svg x="1187" y="1354" width="290" height="110" viewBox="0 0 290 110" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>FOOTER_LIKE background placement preview</title><path d="M 248.0000 24.0000 L 250.8158 24.2216 L 253.5623 24.8810 L 256.1718 25.9619 L 258.5801 27.4377 L 260.7279 29.2721 L 262.5623 31.4199 L 264.0381 33.8282 L 265.1190 36.4377 L 265.7784 39.1842 L 266.0000 42.0000 L 266.0000 68.0000 L 265.7784 70.8158 L 265.1190 73.5623 L 264.0381 76.1718 L 262.5623 78.5801 L 260.7279 80.7279 L 258.5801 82.5623 L 256.1718 84.0381 L 253.5623 85.1190 L 250.8158 85.7784 L 248.0000 86.0000 L 42.0000 86.0000 L 39.1842 85.7784 L 36.4377 85.1190 L 33.8282 84.0381 L 31.4199 82.5623 L 29.2721 80.7279 L 27.4377 78.5801 L 25.9619 76.1718 L 24.8810 73.5623 L 24.2216 70.8158 L 24.0000 68.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" /><text x="145" y="51.099999999999994" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">字幕のような説明</text><text x="145" y="67.3" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="12">下端を基準に配置</text>
+  </svg>
+        <line x1="1105" y1="1158" x2="1105" y2="1176" stroke="#25283a"/>
+        <path d="M 1101 1163 L 1105 1158 L 1109 1163 M 1101 1171 L 1105 1176 L 1109 1171" fill="none" stroke="#25283a"/>
+        <text x="1324" y="1486" text-anchor="middle" style="fill:#ef476f;font-size:14px;font-weight:700">外形下端 = safe bottom</text>
+        <text x="1324" y="1510" text-anchor="middle" class="small">外形 242 × 62px相当／水平中央</text>
+      </g>
+</svg>

@@ -638,11 +638,22 @@ poseRecognition:
 要求が変わった場合、Bを開始せず、Aを安全境界でcancelしてCだけを開始します。poseを使わないsceneへ
 skipした場合は待機要求を破棄し、新しいモデル初期化を開始しません。
 
+![モデルAの初期化中にB、Cの順で必要なモデルが変わり、Bは待機中にCへ置き換えられ、Aをcancelした後にCだけを初期化する時間の流れ](../images/dsl4-pose-model-initialization.svg)
+
+_図: `latest-needed`では、途中で不要になったモデルの初期化を続けず、最後に必要になったモデルだけを準備します。_
+
 `parallel: true`では、cameraの起動とモデル準備、モデル記述子の復号・SHA検証とclassifier loadなど、
 依存関係のない処理を重ねます。最初の認識だけがcameraと登録済みモデルの両方を待ちます。モデル初期化の
 cancelだけでcameraは停止しません。
 
 省略時は`policy: legacy`、`parallel: false`です。これは従来動作へ設定だけで戻せる安全な既定値です。
+
+| 設定                        | 動作                                                             | 向いている作品                                   |
+| --------------------------- | ---------------------------------------------------------------- | ------------------------------------------------ |
+| `policy: legacy`（既定値）  | 従来どおりの初期化                                               | sceneを順番どおりに進める作品                    |
+| `policy: latest-needed`     | 実行中1件、最新待機1件まで。不要になった初期化をcancelする       | sceneのskipや分岐で遷移先が変わる作品            |
+| `parallel: false`（既定値） | 依存関係のない処理を重ねない                                     | 動作を従来と揃えたい作品                         |
+| `parallel: true`            | cameraの起動とモデル準備などを重ねる。最初の認識だけが両方を待つ | ポーズ認識が始まるまでの待ち時間を短くしたい作品 |
 `latest-needed`の実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。公開プレリリース4.0.0-rc.8はTurboWarp Teachable Machine 1.12.0をexact pinします。
 
 ### カメラ映像の表示と操作
@@ -684,6 +695,16 @@ poseRecognition:
 
 `mirroring`は`mirrored`または`unmirrored`で、省略時は従来表示と同じ`mirrored`です。これはpreview
 canvasの見た目だけを変更し、認識へ渡すframe、pose confidence、sequence／selection判定を変更しません。
+
+カメラ映像まわりの設定が何に影響するかは、次のとおりです。
+
+| 設定                                    | カメラプレビューの表示               | 認識へ渡す映像                 | confidence・ポーズ判定 |
+| --------------------------------------- | ------------------------------------ | ------------------------------ | ---------------------- |
+| `preview.mirroring`                     | story全体の左右反転を変える          | 変えない                       | 変えない               |
+| sceneの`posePreview.mirroring`          | そのsceneだけ左右反転を変える        | 変えない                       | 変えない               |
+| `preview.controls.mirroring`            | 左右反転を切り替えるbuttonを表示する | 変えない                       | 変えない               |
+| `preview.controls.cameraMenu`           | camera選択menuを表示する             | 選んだcameraの映像に切り替わる | 変えない               |
+| `preview.overlay`（関節・ボーンの表示） | 関節とボーンを重ねて描く             | 変えない                       | 変えない               |
 
 `controls`には左右反転buttonとcamera選択menuの一方または両方を記述します。配置は
 `top-center`、`bottom-center`、`left-center`、`right-center`と四隅の8 anchor、`opacity`は0〜1です。
@@ -747,6 +768,16 @@ confidenceを倍率として、0から設定値まで変化します。この表
 `overlay`を書いた場合の`visible`は省略時に`true`です。一方、`overlay`自体を省略した既存のDSL 4.0台本は
 従来互換で非表示になります。overlayだけを隠しても認識は継続します。カメラプレビューを隠すとoverlayも隠れ、
 認識停止では描画が消え、camera停止ではSVG要素も破棄されます。表示はpreviewの配置と左右反転に追従します。
+
+| 状態・操作                          | overlayの表示                                |
+| ----------------------------------- | -------------------------------------------- |
+| `overlay`を省略                     | 表示しない（従来互換）                       |
+| `overlay`を書き、`visible`を省略    | 表示する                                     |
+| `visible: false`                    | 隠す。認識は続く                             |
+| カメラプレビューを隠す              | プレビューと一緒に隠れる                     |
+| 認識を停止する                      | 描画が消える                                 |
+| cameraを停止する                    | 描画用のSVG要素も破棄する                    |
+| confidenceが`minimumConfidence`未満 | その関節、または片端がその関節のボーンを隠す |
 
 実行にはTurboWarp Teachable Machine 1.12.0以降が必要です。DSL runtimeは同版のcomposition APIだけを呼び、独自の描画実装を
 持ちません。専用機能フラグはなく、すべてのruntime profileで同じように利用できます。問題時は
@@ -816,6 +847,45 @@ effective styleに対して検査します。
 `textStyle`、`placement`、`visualStyle`、`portrait`、`continueIndicator`で吹き出しを構成できます。
 さらに`reveal`、`audio`、`showAnimation`、`hideAnimation`、`visibleAnimations`で段階表示、音、animationを
 指定できます。各fieldの列挙値と必須条件はSchemaリファレンスの「吹き出しstyle」を参照してください。
+
+### 吹き出しの形と配置の見本
+
+次の図は、吹き出しを描画するTurboWarp Bubbleの説明書から引用したものです。`bubbleStyles`に書く値と、
+実際の見た目の対応を確認できます。
+
+`visualStyle`には次の10種類を指定できます。
+
+![10種類のBubble visual styleを同じSVG rendererで比較する図](../images/turbowarp-bubble-bubble-style-gallery.svg)
+
+_図: `NORMAL`、`THINKING`、`DREAMING`、`YELLING`、`OFF_PANEL`、`WAVY`、`WHISPERING`、`ANNOUNCEMENT`、
+`NARRATION`、`NO_BUBBLE`の形。`NO_BUBBLE`は本体を描かず、文字や表情だけを表示します。_
+
+`placement`には、アクターを基準にした16方向（`up-right`等）または0〜360度と、背景を基準にした
+`HEADER_LIKE`、`CENTER`、`FOOTER_LIKE`を指定できます。
+
+![Actor相対の16方向・角度指定と、背景相対の3配置を比較する図](../images/turbowarp-bubble-placement-guide.svg)
+
+_図: アクター相対の配置ではしっぽがアクターを向き、背景相対の配置ではしっぽを付けず、アクターの位置に
+関係なく画面の上部、中央、下部へ置きます。_
+
+アクター相対の配置では、`distance`、`tailLength`、`offset`で吹き出しとアクターの距離を調整できます。
+背景相対の配置では、これらの値を使いません。
+
+![Actor相対のdistance、tail length、offset、scaleを比較する図](../images/turbowarp-bubble-actor-transform-guide.svg)
+
+_図: `distance`はアクターの外枠からしっぽの先まで、`tailLength`は吹き出し本体からしっぽの先までの長さです。
+`offset`は`[x, y]`または`[x, y, 倍率]`で位置と大きさをずらします。_
+
+`portrait`の`blink`（目パチ）と`lipSync`（口パク）、`continueIndicator`（次へ進む合図）は、セリフの状態に
+応じて動きが変わります。
+
+![portrait base、blink、lip-sync、continue indicatorを別レイヤーとして重ねる概念図](../images/turbowarp-bubble-animation-mode-guide.svg)
+
+_図: セリフの表示中（talking）は目パチと口パク、読み手の入力待ち（awaiting-continue）は目パチと次へ進む合図、
+表示したままの停止中（idle）は目パチだけが動きます。_
+
+出典: [TurboWarp Bubble README](https://github.com/kubohiroya/turbowarp-bubble/blob/ad5b008e89f95c0182977f3e2e77d58fc2041b16/README.ja.md)
+（固定commit `ad5b008`）。これら4図には[MPL-2.0](https://www.mozilla.org/MPL/2.0/)が適用されます。
 
 styleには本文、終了条件、吹き出し開始時の音声を含めません。`text`、`closePolicy`、`seconds`、
 `waitFor`、`startSound`はセリフ側の設定です。見た目の`bubbleStyles`と終了条件の

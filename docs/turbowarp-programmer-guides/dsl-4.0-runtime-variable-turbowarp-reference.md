@@ -135,6 +135,14 @@ block、型、値がない場合の戻り値を次のように固定します。
 - 最終診断は同じstory runの間だけ保持し、新しいstartで空にします。stopだけでは検証用に保持します。
 - dispose後はstatusを`stopped`、その他を「値がない場合」の値へ戻します。
 
+| 値                                              | 設定・初期化される時点                          | 保持する期間                                       | dispose後            |
+| ----------------------------------------------- | ----------------------------------------------- | -------------------------------------------------- | -------------------- |
+| 物語変数                                        | 新しいstoryの開始時に宣言値または明示した開始値 | 書込がcommitされるまで同じ値                       | 「値がない場合」の値 |
+| scene、action                                   | 実行位置が変わるたび                            | 実行位置がある間。なくなると空文字／`0`            | 「値がない場合」の値 |
+| ポーズの`completed/cancelled`、対象、名前、step | pose actionの終了時                             | 次のpose actionまたは新しいstory startまで         | 「値がない場合」の値 |
+| 最終診断                                        | runtimeの失敗時                                 | 同じstory runの間。stopでは保持し、新しいstartで空 | 「値がない場合」の値 |
+| status                                          | 状態が変わるたび                                | 常に現在の状態                                     | `stopped`            |
+
 ## 分岐式も同じ公開snapshotを参照する
 
 公開状態はTurboWarp blockだけの便宜機能ではありません。値を評価してsceneを選ぶ`branch[].if`も、同じ値を
@@ -190,6 +198,8 @@ branches:
 ### snapshotと評価順
 
 一回のbranch選択では、最初のruleを評価する前に次の値を一つの不変snapshotへ固定し、`else`を含む全ruleで共有します。
+
+<figure class="concept-flow"><figcaption>branch選択で参照する値が決まるまで</figcaption><div class="concept-flow__track"><span>直前のactionが正常終了</span><b aria-hidden="true">→</b><span>action境界で書込と公開状態を確定</span><b aria-hidden="true">→</b><span><code>branch</code>開始時に一つのsnapshotへ固定</span><b aria-hidden="true">→</b><span><code>else</code>を含む全ruleを上から評価</span><b aria-hidden="true">→</b><span>移動先のsceneを決定</span></div><p class="concept-flow__note"><strong>評価中に届いた書込:</strong> 現在の選択結果を変えず、次のaction境界で確定してから次の<code>branch</code>で参照されます。</p></figure>
 
 1. 直前のaction境界までにcommitした台本`variables:`
 2. 同じ境界で確定した公開runtime状態
