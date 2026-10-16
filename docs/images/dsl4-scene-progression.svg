@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" role="img" aria-labelledby="title desc">
+  <title id="title">次に実行するシーンの決まり方</title><desc id="desc">シーンを開始するとアクションを上から順に実行する。goto、branch、keyInputToChangeScene、touchInputToChangeScene、poseInputToChangeSceneは移動先のシーンを決め、そのシーンを開始する。branchは規則を上から評価し、最初に成立したifのgoto、どれも成立しなければelseへ移動する。入力による移動は入力を待ってから移動する。移動しないままシーンのアクションがなくなると、scenesに記述した次のシーンへ進み、次のシーンがなければ物語が終了する。transitionは画面効果だけで移動しない。</desc>
+  <defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#315b72"/></marker><style>text{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;fill:#172b3a}.title{font-size:26px;font-weight:700}.sub{font-size:15px;fill:#486272}.label{font-size:16px;font-weight:700;text-anchor:middle}.small{font-size:13px;fill:#304a59}.mid{text-anchor:middle}.code{font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;font-weight:700;fill:#315b72}.yes{font-size:13px;font-weight:700;fill:#3b8b70}.no{font-size:13px;font-weight:700;fill:#b64d4d}.step{fill:#eaf4fa;stroke:#397a9c;stroke-width:2}.ask{fill:#fff;stroke:#5a64a8;stroke-width:2}.move{fill:#fff1df;stroke:#b87629;stroke-width:2}.next{fill:#effaf5;stroke:#3b8b70;stroke-width:2}.end{fill:#f6f8fa;stroke:#98aab5;stroke-width:2}.note{fill:#fff4f4;stroke:#b64d4d;stroke-width:1.5}.msg{stroke:#315b72;stroke-width:2;fill:none;marker-end:url(#a)}.loop{stroke:#315b72;stroke-width:2;fill:none;stroke-dasharray:7 5;marker-end:url(#a)}</style></defs>
+  <rect width="960" height="700" fill="#fff"/>
+  <text class="title" x="20" y="40">次にどのシーンを実行するか</text><text class="sub" x="20" y="62">アクションを上から順に実行し、移動するアクションがあればその先へ、なければ記述順の次のシーンへ進む。</text>
+
+  <rect class="step" x="90" y="92" width="220" height="46" rx="9"/><text class="label" x="200" y="121">シーンを開始</text>
+  <path class="msg" d="M200 138V164"/>
+  <rect class="step" x="90" y="166" width="220" height="46" rx="9"/><text class="label" x="200" y="195">次のアクションを実行</text>
+  <path class="msg" d="M200 212V234"/>
+
+  <path class="ask" d="M200 236L320 286L200 336L80 286Z"/><text class="label" x="200" y="282">シーンを移動する</text><text class="label" x="200" y="302">アクション？</text>
+  <path class="msg" d="M320 286H368"/><text class="yes" x="330" y="278">はい</text>
+  <path class="msg" d="M200 336V364"/><text class="no" x="210" y="354">いいえ</text>
+
+  <path class="ask" d="M200 366L320 416L200 466L80 416Z"/><text class="label" x="200" y="412">シーンにアクションが</text><text class="label" x="200" y="432">残っている？</text>
+  <path class="loop" d="M80 416H44V189H88"/><text class="yes" x="20" y="404">はい</text>
+  <path class="msg" d="M200 466V494"/><text class="no" x="210" y="484">いいえ</text>
+
+  <path class="ask" d="M200 496L320 546L200 596L80 546Z"/><text class="label" x="200" y="542">scenesに次の</text><text class="label" x="200" y="562">シーンがある？</text>
+  <path class="msg" d="M320 546H368"/><text class="yes" x="330" y="538">はい</text>
+  <path class="msg" d="M200 596V624"/><text class="no" x="210" y="614">いいえ</text>
+  <rect class="end" x="90" y="626" width="220" height="50" rx="9"/><text class="label" x="200" y="649">物語の終了</text><text class="small mid" x="200" y="668">最後のアクションまで完了</text>
+
+  <rect class="next" x="370" y="516" width="270" height="60" rx="9"/><text class="label" x="505" y="541">記述順で次のシーンへ</text><text class="small mid" x="505" y="563">scenesに書いた順番を使う</text>
+
+  <rect class="move" x="370" y="236" width="570" height="196" rx="11"/>
+  <text class="label" x="655" y="262">移動するアクションと移動先</text>
+  <text class="code" x="390" y="296">goto</text><text class="small" x="560" y="296">指定したシーンへすぐ移動する</text>
+  <text class="code" x="390" y="330">branch</text><text class="small" x="560" y="322">規則を上から評価し、最初に成立したifのgotoへ。</text><text class="small" x="560" y="340">どれも成立しなければ末尾のelseへ移動する</text>
+  <text class="code" x="390" y="374">keyInputToChangeScene</text><text class="code" x="390" y="392">touchInputToChangeScene</text><text class="code" x="390" y="410">poseInputToChangeScene</text><text class="small" x="590" y="384">キー、タッチ、ポーズの入力を待ち、</text><text class="small" x="590" y="402">入力に対応するシーンへ移動する</text>
+
+  <path class="loop" d="M655 236V115H312"/><text class="small" x="430" y="106">移動先のシーンを開始</text>
+  <path class="loop" d="M640 546H952V82H200V90"/><text class="small" x="660" y="538">そのシーンを開始</text>
+
+  <rect class="note" x="370" y="606" width="570" height="70" rx="9"/><text class="label" x="390" y="632" style="text-anchor:start">transition はシーンを移動しない</text><text class="small" x="390" y="656">画面効果だけを実行する。移動するには、続けてgotoかbranchを書く。</text>
+</svg>
