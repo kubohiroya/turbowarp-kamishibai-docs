@@ -102,7 +102,7 @@ test('uses focused rendered diagrams for relationships that span multiple stages
   ];
 
   for (const source of documentsWithDiagrams) {
-    assert.equal((source.match(/<figure class="[^"]*\bconcept-flow\b[^"]*">/gu) ?? []).length, 1);
+    assert.ok((source.match(/<figure class="[^"]*\bconcept-flow\b[^"]*">/gu) ?? []).length >= 1);
     assert.match(source, /<figcaption>.+<\/figcaption>/u);
     assert.match(source, /concept-flow__track/u);
   }

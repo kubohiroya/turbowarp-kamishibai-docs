@@ -821,6 +821,18 @@ styleには本文、終了条件、吹き出し開始時の音声を含めませ
 `waitFor`、`startSound`はセリフ側の設定です。見た目の`bubbleStyles`と終了条件の
 `bubbleClosePolicies`は別のregistryとして扱います。
 
+吹き出しの設定は、次の三か所へ分けて書きます。
+
+| 設定                                                                                                                        | `bubbleStyles` | `bubbleClosePolicies` | `Actor.say`／`Actor.think`       |
+| --------------------------------------------------------------------------------------------------------------------------- | -------------- | --------------------- | -------------------------------- |
+| 本文`text`、開始時の音`startSound`                                                                                          | ×              | ×                     | ○                                |
+| 閉じる条件`seconds`、`waitFor`                                                                                              | ×              | ○                     | ○（`closePolicy`とどちらか一方） |
+| 閉じる条件の名前`closePolicy`                                                                                               | ×              | ×                     | ○                                |
+| 文字送り`characterIntervalSeconds`、`characterSound`、`noSoundCharacters`、`restCharacters`、`restCharacterIntervalSeconds` | ○              | ×                     | ○（styleの後に適用）             |
+| 見た目`textStyle`、`placement`、`visualStyle`、`portrait`、`continueIndicator`、`reveal`、`audio`、各animationなど          | ○              | ×                     | ×（`styles`で名前を参照する）    |
+
+`Actor.say`／`Actor.think`には、`closePolicy`、`seconds`、`waitFor`のどれかが必要です。
+
 ## 吹き出しを閉じる条件（bubble close policy）を設定する
 
 同じ終了条件を複数の`Actor.say`／`Actor.think`で使う場合は、トップレベルの`bubbleClosePolicies`へ
@@ -843,9 +855,13 @@ scenes:
         closePolicy: user-advance
 ```
 
-- `seconds`だけなら、吹き出しの表示開始から指定秒数後に閉じます。
-- `waitFor: advance`だけなら、Stageのprimary pointer／tapまたは修飾キーなしの任意キー入力で閉じます。
-- 両方なら、入力とtimeoutのうち先に成立した方で閉じます。
+| 指定                       | 閉じる時点                                                        | 向いている場面                 |
+| -------------------------- | ----------------------------------------------------------------- | ------------------------------ |
+| `seconds`だけ              | 吹き出しの表示開始から指定秒数後                                  | 自動で進むナレーション         |
+| `waitFor: advance`だけ     | Stageのprimary pointer／tapまたは修飾キーなしの任意キー入力のとき | 読み手のペースで進めるセリフ   |
+| `seconds`と`waitFor`の両方 | 入力とtimeoutのうち先に成立した方                                 | 操作がなくても止まらない展示等 |
+
+文字送りの途中で閉じる条件が成立した場合は、残りの本文を文字音と文字別の休止なしで即時表示してから閉じます。
 
 policyの継承や合成はありません。`closePolicy`と、同じaction内の`seconds`／`waitFor`は併用できません。
 未定義のpolicy名は`K4-REF-001`です。従来のinline指定は引き続き使えるので、一度しか使わない条件まで
@@ -992,6 +1008,7 @@ sceneへ指定がなければstory既定へ戻り、前sceneの値を持ち越�
 
 `scenes` mappingでは、ソースへ書いたscene keyの順番が通常実行のscene順です。最初のsceneから開始し、
 `goto`、`branch`、入力action等が別sceneを選ばない限り、scene末尾では次に書いたsceneへ進みます。
+全体の流れは[「次に実行するシーンの決まり方」](#次に実行するシーンの決まり方)の図を参照してください。
 
 YAML 1.2一般ではmappingのkey順にapplication上の意味はありません（[YAML 1.2.2 Mapping Key Order](https://yaml.org/spec/1.2.2/#3221-mapping-key-order)）。
 DSL 4.0は例外として、ソースYAMLの
@@ -1100,6 +1117,26 @@ receiver threadがすべて終了してから次actionへ進みます。終了�
 ```
 
 左側には登録済みアクター、右側には登録済みシーンを指定します。
+
+### 次に実行するシーンの決まり方
+
+シーンの中ではアクションを上から順に実行します。移動するアクションを実行するとその移動先へ、移動しないまま
+アクションがなくなると`scenes`に書いた次のシーンへ進みます。
+
+![シーンを開始してアクションを順に実行し、移動するアクションなら移動先へ、なければ記述順の次のシーンへ進み、次がなければ物語が終了する流れ](../images/dsl4-scene-progression.svg)
+
+_図: 移動先を決めるのは、移動するアクションと`scenes`の記述順の二つだけです。`transition`は画面効果だけで、
+シーンを移動しません。_
+
+| アクション                | 移動先の決め方                                                                         | 移動する前に待つもの |
+| ------------------------- | -------------------------------------------------------------------------------------- | -------------------- |
+| `goto`                    | 書いたシーンID                                                                         | なし                 |
+| `branch`                  | `branches`の規則を上から評価し、最初に成立した`if`の`goto`、どれも成立しなければ`else` | なし                 |
+| `keyInputToChangeScene`   | 押されたキーに対応するシーン                                                           | キー入力             |
+| `touchInputToChangeScene` | タッチされたアクターに対応するシーン                                                   | タッチ入力           |
+| `poseInputToChangeScene`  | 最初に認識したポーズに対応するシーン                                                   | ポーズ認識           |
+| 移動するアクションなし    | `scenes`の記述順で次のシーン。最後のシーンなら物語が終了する                           | シーンの全アクション |
+| `transition`              | 移動しない。続けて`goto`または`branch`を書く                                           | 画面効果の秒数       |
 
 ## 登場人物への命令（Actor action）
 
@@ -1218,6 +1255,8 @@ advanceとして再利用しません。
 文字送りfieldを適用します。同じstyleの重複、未定義style、単数形`style`はエラーです。styleを使わない
 inline形式も使用できます。
 
+<figure class="concept-flow"><figcaption>セリフに使うstyleを合成する順序（後の段階ほど優先）</figcaption><div class="concept-flow__track"><span><code>styles</code>の1件目<br>例: <code>Typing</code></span><b aria-hidden="true">→</b><span><code>styles</code>の2件目以降<br>記載順に上書き。例: <code>Hero style</code></span><b aria-hidden="true">→</b><span>action内の文字送りfield<br>例: <code>characterIntervalSeconds: 0.1</code></span><b aria-hidden="true">→</b><span>このセリフで使うstyle</span></div><p class="concept-flow__note"><strong>各styleの中身:</strong> 定義内の<code>styles</code>を記載順に合成し、その定義自身の値で上書きした結果を一つのstyleとして重ねます。同じ項目は後から重ねた値が使われます。</p></figure>
+
 `startSound`は吹き出し表示開始時に1回再生し、speech完了、入力、timeout、cancelで停止します。
 文字送り途中に入力またはtimeoutした場合は、残り全文を文字音と文字別休止なしで即時表示して完了します。
 `Actor.say`と`Actor.think`は同じlifecycleを使い、吹き出しの種類だけが異なります。
@@ -1310,6 +1349,8 @@ Issue #390のWeb Previewでは、対応ブラウザーで「プロジェクト�
 Web Previewは一定間隔で変更を検出し、書込み途中ではない安定した状態を解析・検証します。正常な
 候補だけが次の再開位置の選択へ進みます。
 
+<figure class="concept-flow"><figcaption>保存した変更が確認画面へ反映されるまで</figcaption><div class="concept-flow__track"><span>外部editorで台本や素材を保存</span><b aria-hidden="true">→</b><span>Web Previewが一定間隔で変更を検出</span><b aria-hidden="true">→</b><span>書込み途中ではない安定した状態を待つ</span><b aria-hidden="true">→</b><span>台本と参照する素材をまとめて解析・検証</span><b aria-hidden="true">→</b><span>再開位置を選ぶ<br>先頭／現在のscene／現在のaction</span><b aria-hidden="true">→</b><span>新しい台本と素材で再開</span></div><p class="concept-flow__note"><strong>検証に失敗した場合:</strong> 実行中の台本と素材を置き換えず、診断を表示して次の保存を待ちます。台本と素材の一部だけを反映することはありません。</p></figure>
+
 1. 先頭から
 2. 現在のsceneから
 3. 現在のactionから
@@ -1333,12 +1374,21 @@ Issue #391の候補仕様では、`backdrop`、`costume`、`sound`、`poseModel`
 しません。参照されていないファイルは無視し、プロジェクトルート全体を再帰走査せず、activeまたは候補YAMLが宣言した
 宣言どおりのパスだけを読みます。
 
-次の変更は同じlive reloadへ混ぜず、full rebuildの対象です。
+アセットIDの削除やrename、base SB3の変更などは同じlive reloadへ混ぜず、full rebuildの対象です。
+変更の種類ごとの反映方法は次のとおりです。
 
-- 既存アセットIDの削除／rename
-- 既存assetのkind／パスの変更
-- 既存pose modelのbundle構成変更
-- base SB3、app shell、extension、ビルダー設定、control profileの変更
+| 変更した内容                                                   | 反映方法                                         |
+| -------------------------------------------------------------- | ------------------------------------------------ |
+| 台本（`story.k4.yml`等）                                       | 再読み込み。再開位置を選ぶ                       |
+| 既存アセットのファイル内容だけ（アセットID、kind、パスは同じ） | 再読み込み                                       |
+| 新しいアセットIDとファイルを追加し、同じ台本から参照           | 再読み込み。台本とファイルがそろってから一括反映 |
+| 既存アセットIDの削除／rename、kind／パスの変更                 | full rebuild                                     |
+| 既存pose modelのbundle構成                                     | full rebuild                                     |
+| base SB3、app shell、extension、ビルダー設定、control profile  | full rebuild                                     |
+| 同じTurboWarp Editor内の既存costume                            | 即時表示されることがある（再読み込みの対象外）   |
+| 別Editor／別VMで保存したbase SB3                               | full rebuild                                     |
+
+再読み込みの対象になる素材は`backdrop`、`costume`、`sound`、`poseModel`です。
 
 ### TurboWarp Editor内の作品素材
 
