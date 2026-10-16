@@ -10,7 +10,7 @@ const expectedStaticSectionPointers = {
     '#/$defs/namedBackdrop',
     '#/$defs/namedSound',
     '#/$defs/namedCostume',
-    '#/$defs/namedPoseModel',
+    '#/$defs/namedRecognitionModel',
     '#/$defs/namedImage',
   ],
   settings: [
@@ -46,6 +46,8 @@ const expectedStaticSectionPointers = {
     '#/$defs/posePreviewControls',
     '#/$defs/controls',
     '#/$defs/branchRules',
+    '#/$defs/presentation',
+    '#/$defs/audio',
   ],
   'shared-types': [
     '#/$defs/id',
@@ -60,6 +62,11 @@ const expectedStaticSectionPointers = {
     '#/$defs/keyCode',
     '#/$defs/navigationCommand',
     '#/$defs/variableValue',
+    '#/$defs/visualTransition',
+    '#/$defs/audioTransition',
+    '#/$defs/bgmVolume',
+    '#/$defs/bodyText',
+    '#/$defs/rubyContentRun',
   ],
   scenes: ['#/$defs/actions', '#/$defs/longScene', '#/$defs/scene', '#/$defs/scenes'],
 };
@@ -122,6 +129,10 @@ function schemaType(schemaNode, schema, seen = new Set()) {
   if (Array.isArray(schemaNode?.enum)) return schemaNode.enum.map(code).join(' / ');
   if (Array.isArray(schemaNode?.oneOf)) {
     return schemaNode.oneOf.map((choice) => schemaType(choice, schema, seen)).join(' または ');
+  }
+  if (schemaNode?.type === 'array' && Array.isArray(schemaNode.prefixItems)) {
+    const items = schemaNode.prefixItems.map((item) => schemaType(item, schema, seen));
+    return `[${items.join(', ')}]`;
   }
   if (schemaNode?.type === 'array') {
     return `${schemaType(schemaNode.items, schema, seen)}の配列`;
@@ -474,8 +485,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 ${snapshotLabel}\\
 Schema SHA-256: \`${lock.schemaSha256}\`
 
-> **権威関係と配布状態:** 2026年8月20日時点で\`v4.0.0-rc.8\`はprereleaseとして公開されていますが、
-> 正式な\`v4.0.0\`ではありません。
+> **権威関係と配布状態:** 2026年10月16日時点で\`v4.0.0-rc.22\`はprereleaseとして公開されていますが、
+> 正式な\`v4.0.0\`ではありません。固定commitは\`v4.0.0-rc.22\`より後のmain上のcommitで、
+> 一部のfieldはrc.22の配布物にまだ含まれない場合があります。
 > ${authorityDescription} Schemaはruntime実装から生成しません。公開アプリ、配布artifact、
 > feature flagがDSL 4.0を有効にしているかは利用するreleaseごとに確認してください。
 

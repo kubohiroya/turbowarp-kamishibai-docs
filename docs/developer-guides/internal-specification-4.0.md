@@ -259,7 +259,9 @@ Source Graph経由ではさらに`sourceOrigins`が加わります。`assets`は
 その他は`story`です。
 
 `scenes`は宣言順の配列です。各sceneは`{kind: 'Scene', id, poseModel, posePreview, actions}`、
-各actionは次の形です。
+各actionは次の形です。この形はrc.8固定commitのものです。rc.11以降は台本の`poseRecognition`、
+`kind: poseModel`、sceneの`poseModel`がそれぞれ`recognition`、`kind: recognitionModel`、`recognitionModel`へ
+改名され、StoryDocumentも同じ名前を使います。
 
 YAML 1.2のmappingはrepresentation model上で順序を持ちません。DSL 4.0は固有規則として、source YAMLの
 serialization treeに現れる`scenes` pairの順序を通常実行のscene順とします。source frontendはYAML nodeの
@@ -446,7 +448,7 @@ file出力は`buildDsl4RuntimeComponentFile()`がcandidate directoryを検証し
 5. scene commitで次sceneに不要な`retention: scene` assetをreleaseする。
 6. stop、failure、disposeで全resourceを逆所有順に解放する。
 
-Poseモデルについて`poseRecognition.modelInitialization.policy`が`latest-needed`の場合、preload coordinatorの
+Poseモデルについて`recognition.modelInitialization.policy`が`latest-needed`の場合、preload coordinatorの
 最新要求をTurboWarp Teachable Machine 1.12.0 Compositionへ渡し、重い初期化をactive 1件＋最新pending 1件へ制限します。
 superseded requestはasset lifecycleの`AbortSignal`でcancelし、registryへ公開しません。Aの実行中にB、Cが
 要求された場合はBを開始せず、Aの安全な終了後にCだけを開始します。pose不要sceneへskipした場合はpendingを
@@ -457,12 +459,12 @@ decode、SHA検証、TensorFlow／PoseNet初期化と並行できます。未検
 最初の推論でcamera readyとmodel registeredを同期します。model cancelだけでcameraを停止せず、stopまたは
 session disposeがcameraを解放します。既定値`legacy`／`parallel: false`はこの最適化を無効化します。
 
-`poseRecognition.preview.overlay`がある場合、hostは正規化済みの表示、joint style、bone style、最低confidence、
+`recognition.preview.overlay`がある場合、hostは正規化済みの表示、joint style、bone style、最低confidence、
 confidence連動をTurboWarp Teachable Machine 1.12.0の公開Composition APIへ順番に適用します。overlay専用feature flagはありません。
 camera canvas、2D context、推論readback、SVG要素はTurboWarp Teachable Machineが所有し、hostはDOMやTensorFlow.js内部経路をpatchしません。
 
 remote assetは自動的に許可しません。`createDsl4RemoteAssetLifecycle()`へhost loaderを明示注入した場合だけ
-有効です。通常のposeModelはHTTPS directory URLから`model.json`、`metadata.json`、宣言されたweightsを
+有効です。通常のrecognitionModelはHTTPS directory URLから`model.json`、`metadata.json`、宣言されたweightsを
 lazy取得します。検証付きremoteはSHA-256 integrity、media type、sizeを再検証して同じlifecycleへ入ります。
 
 ## Transaction、snapshot、commit／rollback {#transactions}

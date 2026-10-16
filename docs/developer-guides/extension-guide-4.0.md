@@ -189,7 +189,7 @@ fallbackやHTTPへのdowngradeはありません。offlineを保証する作品�
 `src/dsl4/platform/tm-model-adapter.js`の`createDsl4TMPlatform()`は
 `@kubohiroya/turbowarp-tm/composition`と`createDsl4TMModelAdapter()`を組み合わせます。
 adapterは検証済みmodel filesとlabel mappingを受け、session-owned model resourceを返します。
-StoryDocumentの`poseRecognition.modelInitialization`は、`policy`を
+StoryDocumentの`recognition.modelInitialization`（rc.8では`poseRecognition.modelInitialization`）は、`policy`を
 `modelInitializationPolicy`、`parallel`を`parallelModelInitialization`へ変換してTurboWarp Teachable Machine Compositionへ
 渡します。asset lifecycleの`AbortSignal`は`registerPoseModel(input, {signal})`へそのまま伝播します。
 

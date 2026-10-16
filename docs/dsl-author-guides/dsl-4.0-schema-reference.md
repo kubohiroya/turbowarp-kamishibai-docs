@@ -11,17 +11,18 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 増やすときに[紙芝居DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)の必要な節をお読みください。
 
 文書状態: **固定実装基準を説明するSchemaリファレンス（正式リリースの操作資料ではない）**\
-Schema固定commit: [`29c0dea`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/29c0deadcb98badf94a0244c479ca896dc71f842)\
-Schema SHA-256: `46ff159c29e13704d707dae8e0d2ad3a146b6aa8a68a968614e6ef56d112f135`
+Schema固定commit: [`450a5bb`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/450a5bb950ef769241ec8258690e652b39b23bde)\
+Schema SHA-256: `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27`
 
-> **権威関係と配布状態:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。
+> **権威関係と配布状態:** 2026年10月16日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。固定commitは`v4.0.0-rc.22`より後のmain上のcommitで、
+> 一部のfieldはrc.22の配布物にまだ含まれない場合があります。
 > 同一の上流完成commitに含まれる規範JSON Schema、表層仕様、適合実装・testを固定しています。 Schemaはruntime実装から生成しません。公開アプリ、配布artifact、
 > feature flagがDSL 4.0を有効にしているかは利用するreleaseごとに確認してください。
 
 ## このリファレンスについて
 
-この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
+この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
 決定的に生成しています。型、必須性、既定値、数値範囲、列挙値、patternはSchemaから取得し、説明、掲載順、
 注意事項、例はAnnotationで管理します。Schemaで定義される項目についてSchemaと生成物が異なる場合はSchemaを
 優先します。include文はSchema検証前に処理されるためJSON Schema外であり、固定した表層仕様と実装に基づいて掲載します。
@@ -33,8 +34,8 @@ Schema SHA-256: `46ff159c29e13704d707dae8e0d2ad3a146b6aa8a68a968614e6ef56d112f13
 
 - 上流repository: [`kubohiroya/turbowarp-kamishibai-app`](https://github.com/kubohiroya/turbowarp-kamishibai-app)
 - Schema path: `schema/dsl-4.schema.json`
-- 上流commit日時: `2026-08-20T20:09:38+09:00`
-- 掲載範囲: トップレベル13 field、action 24種類、Annotation 93項目
+- 上流commit日時: `2026-10-16T16:53:31+09:00`
+- 掲載範囲: トップレベル15 field、action 30種類、Annotation 108項目
 - 更新方法: `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>`
 - 差分確認: `pnpm docs:dsl4:check`
 
@@ -90,13 +91,13 @@ Schema位置: `#/properties/kamishibai`
 
 ### `assets` — asset登録
 
-背景、音、costume、ポーズモデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。
+背景、音、costume、認識モデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。
 
 Schema位置: `#/properties/assets`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 任意のID key | 任意 | 文字列（`compactAsset`） または object または object または object（`namedBackdrop`） または object または object または object（`namedSound`） または object または object または object（`namedCostume`） または object または object（`namedPoseModel`） または object または object（`namedImage`）（`asset`） | — |
+| 任意のID key | 任意 | 文字列（`compactAsset`） または object または object または object（`namedBackdrop`） または object または object または object（`namedSound`） または object または object または object（`namedCostume`） または object または object（`namedRecognitionModel`） または object または object（`namedImage`）（`asset`） | — |
 
 `assets` fieldの値:
 
@@ -249,11 +250,11 @@ costumes:
   - Spinner2
 ```
 
-### `poseRecognition` — ポーズ認識設定
+### `recognition` — 認識設定
 
-認識中の任意の音、モデル初期化、判定方法、feedback、プレイ中にポーズ待ちをskipできるか、camera previewの表示と任意UIをまとめます。idle音とcharge音は独立して省略できます。
+ポーズ認識と画像認識に共通の音、モデル初期化、判定方法、feedback、プレイ中に認識待ちをskipできるか、camera previewの表示と任意UIをまとめます。idle音とcharge音は独立して省略できます。
 
-Schema位置: `#/properties/poseRecognition`
+Schema位置: `#/properties/recognition`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
@@ -266,7 +267,9 @@ Schema位置: `#/properties/poseRecognition`
 | `navigation` | 任意 | object（`poseNavigation`） | 未知field不可 |
 | `preview` | 任意 | object（`posePreview`） | 未知field不可 |
 
-`poseRecognition` fieldの値:
+- 旧名の`poseRecognition`は受理しません。値の構造は変わらないため、field名だけを`recognition`へ変更します。
+
+`recognition` fieldの値:
 
 ```yaml
 idleSound: PoseIdle
@@ -328,15 +331,58 @@ result:
   - else: retry
 ```
 
+### `presentation` — 表示遷移の既定値
+
+scene遷移、背景、actorのcostume切替、actorの表示・非表示に使うcrossfadeの作品既定値を指定します。actionの`transition`が既定値を上書きします。
+
+Schema位置: `#/properties/presentation`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `transitions` | 任意 | object | 未知field不可 |
+
+- 省略した項目の組み込み既定値は`cut`（0秒）です。
+- crossfadeは`dsl4CrossfadeTransitions`が有効なruntimeだけで実行できます。明示的にOFFにしたruntimeは`K4-TRANSITION-FLAG-001`で実行前に拒否します。
+
+`presentation` fieldの値:
+
+```yaml
+transitions:
+  scene: 0.5
+  backdrop: 0.3
+  actorSkin: 0.2
+  actorVisibility: 0.15
+```
+
+### `audio` — BGM遷移の既定値
+
+BGMを切り替えるときのcrossfadeの作品既定値を指定します。`bgm` actionの`transition`が既定値を上書きします。
+
+Schema位置: `#/properties/audio`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `bgm` | 任意 | object | 未知field不可 |
+
+`audio` fieldの値:
+
+```yaml
+bgm:
+  transition:
+    effect: crossfade
+    seconds: 1.5
+    curve: equalPower
+```
+
 ### `scenes` — scene定義
 
-一つ以上のsceneを記述します。短縮形のaction配列と、poseModelを持てるlong formがあります。
+一つ以上のsceneを記述します。短縮形のaction配列と、認識モデルや入場時の遷移を持てるlong formがあります。
 
 Schema位置: `#/properties/scenes`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 任意のID key | 1件以上 | object（`stageAction`） または object（`bgmAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） または object（`longScene`）（`scene`） | — |
+| 任意のID key | 1件以上 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） または object（`longScene`）（`scene`） | — |
 
 `scenes` fieldの値:
 
@@ -352,7 +398,7 @@ assetは短縮文字列または名前付きobjectで記述します。名前付
 
 ### assetで選べる形式
 
-各asset IDの値は、短縮形式、背景、音、costume、ポーズモデルのいずれかです。
+各asset IDの値は、短縮形式、背景、音、costume、認識モデル、UI画像のいずれかです。
 
 Schema位置: `#/$defs/asset`
 
@@ -362,7 +408,7 @@ Schema位置: `#/$defs/asset`
 | 形式2 | いずれか一つ | object または object または object（`namedBackdrop`） | 未知field不可 |
 | 形式3 | いずれか一つ | object または object または object（`namedSound`） | 未知field不可 |
 | 形式4 | いずれか一つ | object または object または object（`namedCostume`） | 未知field不可 |
-| 形式5 | いずれか一つ | object または object（`namedPoseModel`） | 未知field不可 |
+| 形式5 | いずれか一つ | object または object（`namedRecognitionModel`） | 未知field不可 |
 | 形式6 | いずれか一つ | object または object（`namedImage`） | 未知field不可 |
 
 - 短縮形式はproject内に同名のassetがある場合に使います。
@@ -468,25 +514,28 @@ file: hero-happy.png
 bitmapResolution: 2
 ```
 
-### 名前付きポーズモデル
+### 名前付き認識モデル
 
-ポーズモデルは埋め込む相対file、通常のTurboWarp Teachable Machine directory URL、または検証付きremote archiveで指定します。project内の表示名だけを使う形式はありません。
+ポーズ認識と画像認識のモデルを、埋め込む相対file、通常のTurboWarp Teachable Machine directory URL、または検証付きremote archiveで指定します。project内の表示名だけを使う形式はありません。
 
-Schema位置: `#/$defs/namedPoseModel`
+Schema位置: `#/$defs/namedRecognitionModel`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| `kind` | 必須 | 固定値 `poseModel` | — |
+| `kind` | 必須 | 固定値 `recognitionModel` | — |
 | `file` | 任意 | 文字列（`filePath`） | 1文字以上、pattern `^(?!/)(?![A-Za-z]:[\\/])(?![A-Za-z][A-Za-z0-9+.-]*:)[^\\\u0000]+$` |
 | `source` | 任意 | object（`remotePoseModelSource`） | 未知field不可 |
 | `delivery` | 任意 | `embedded` / `remote`（`deliveryPolicy`） | 既定値 `embedded` |
 | `loading` | 任意 | `eager` / `lazy`（`loadingPolicy`） | 既定値 `eager` |
 | `retention` | 任意 | `scene` / `story`（`retentionPolicy`） | — |
 
+- 旧名の`kind: poseModel`は受理しません。
+- ポーズ認識と画像認識のどちらに使うかは、assetではなくsceneの`recognitionMode`で指定します。
+
 Schemaで検証できる値の例:
 
 ```yaml
-kind: poseModel
+kind: recognitionModel
 delivery: remote
 loading: lazy
 source:
@@ -595,7 +644,7 @@ Schema位置: `#/$defs/bubbleStyle`
 | `placement` | 任意 | `up` / `up-up-right` / `up-right` / `right-up-right` / `right` / `right-down-right` / `down-right` / `down-down-right` / `down` / `down-down-left` / `down-left` / `left-down-left` / `left` / `left-up-left` / `up-left` / `up-up-left` / `north` / `north-northeast` / `northeast` / `east-northeast` / `east` / `east-southeast` / `southeast` / `south-southeast` / `south` / `south-southwest` / `southwest` / `west-southwest` / `west` / `west-northwest` / `northwest` / `north-northwest` / `HEADER_LIKE` / `CENTER` / `FOOTER_LIKE` または 数値 | — |
 | `distance` | 任意 | 数値 | 0以上 |
 | `tailLength` | 任意 | 数値 | 0より大きい |
-| `offset` | 任意 | 使用不可の配列 または 使用不可の配列 | — |
+| `offset` | 任意 | [数値, 数値] または [数値, 数値, 数値] | — |
 | `visualStyle` | 任意 | `NORMAL` / `THINKING` / `DREAMING` / `YELLING` / `OFF_PANEL` / `WAVY` / `WHISPERING` / `ANNOUNCEMENT` / `NARRATION` / `NO_BUBBLE` | — |
 | `portrait` | 任意 | object（`bubblePortrait`） | 未知field不可 |
 | `characterIntervalSeconds` | 任意 | 数値 | 0より大きい |
@@ -685,7 +734,7 @@ frameIntervalSeconds: 0.4
 
 ### 吹き出しportrait
 
-基本画像と、任意のまばたき・口パクframe animationを指定します。
+基本画像、任意のまばたき・口パクframe animation、吹き出しに対するportraitの配置、offset、角丸半径を指定します。
 
 Schema位置: `#/$defs/bubblePortrait`
 
@@ -694,6 +743,13 @@ Schema位置: `#/$defs/bubblePortrait`
 | `base` | 必須 | 文字列（`literalId`）（`assetId`） | — |
 | `blink` | 任意 | object（`bubbleFrameAnimation`） | 未知field不可 |
 | `lipSync` | 任意 | object（`bubbleFrameAnimation`） | 未知field不可 |
+| `placement` | 任意 | `left` / `right` / `top-left` / `top-right` / `bottom-left` / `bottom-right` | — |
+| `offset` | 任意 | [数値, 数値] または [数値, 数値, 数値] | — |
+| `cornerRadius` | 任意 | 数値 | 0以上 |
+
+- `placement`の省略時は`left`です。
+- `offset`は吹き出し本体の`offset`と同じ`[x, y]`または`[x, y, zoom]`です。zoomは0より大きい百分率で、省略時は`[0, 0, 100]`です。
+- `cornerRadius`の省略時は`0`です。runtimeはこれらの値を変換せずTurboWarp Bubbleへ渡します。
 
 Schemaで検証できる値の例:
 
@@ -705,6 +761,9 @@ blink:
 lipSync:
   frames: [MouthClosed, MouthOpen]
   frameIntervalSeconds: 0.08
+placement: top-left
+offset: [-4, 6, 120]
+cornerRadius: 12
 ```
 
 ### 本文の段階表示
@@ -816,9 +875,9 @@ costumes:
   - Spinner1
 ```
 
-### ポーズ認識全体設定
+### 認識全体設定
 
-共通音と、モデル初期化、sequence、selection、feedback、navigation、camera previewの任意設定をまとめます。
+トップレベル`recognition`の値です。共通音と、モデル初期化、sequence、selection、feedback、navigation、camera previewの任意設定をまとめます。
 
 Schema位置: `#/$defs/poseRecognition`
 
@@ -1253,6 +1312,44 @@ Schemaで検証できる値の例:
 - else: retry
 ```
 
+### 表示遷移の既定値
+
+`transitions`の下に、`scene`、`backdrop`、`actorSkin`、`actorVisibility`ごとのvisual transitionを指定します。
+
+Schema位置: `#/$defs/presentation`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `transitions` | 任意 | object | 未知field不可 |
+
+Schemaで検証できる値の例:
+
+```yaml
+transitions:
+  scene:
+    effect: crossfade
+    seconds: 0.5
+    easing: easeInOut
+  backdrop: 0.3
+```
+
+### BGM遷移の既定値
+
+`bgm.transition`へaudio transitionを指定します。visual transitionの`easing`とは別に、音量変化の`curve`を選びます。
+
+Schema位置: `#/$defs/audio`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `bgm` | 任意 | object | 未知field不可 |
+
+Schemaで検証できる値の例:
+
+```yaml
+bgm:
+  transition: 1.5
+```
+
 ## 共通型と制約
 
 複数のfieldやactionから参照される値の型です。ID、path、key codeのpatternは移行時に特に確認してください。
@@ -1460,9 +1557,110 @@ Schemaで検証できる値の例:
 42
 ```
 
+### visual transition
+
+秒数、`{effect: cut}`、または`{effect: crossfade, seconds, easing?}`で表示の切り替え方を指定します。`easing`は`linear`か`easeInOut`で、省略時は`easeInOut`です。
+
+Schema位置: `#/$defs/visualTransition`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| 形式1 | いずれか一つ | 数値 | 0以上、60以下 |
+| 形式2 | いずれか一つ | object | 未知field不可 |
+| 形式3 | いずれか一つ | object | 未知field不可 |
+
+- 秒数は0〜60です。数値の短縮形と`seconds: 0`のcrossfadeは`{effect: cut}`として扱います。
+
+Schemaで検証できる値の例:
+
+```yaml
+effect: crossfade
+seconds: 0.4
+easing: linear
+```
+
+### audio transition
+
+秒数、`{effect: cut}`、または`{effect: crossfade, seconds, curve?}`でBGMの切り替え方を指定します。`curve`は`linear`か`equalPower`で、省略時は`equalPower`です。
+
+Schema位置: `#/$defs/audioTransition`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| 形式1 | いずれか一つ | 数値 | 0以上、60以下 |
+| 形式2 | いずれか一つ | object | 未知field不可 |
+| 形式3 | いずれか一つ | object | 未知field不可 |
+
+- 再生中のBGMがない状態でcrossfadeを指定すると、新しいBGMの音量が0から上がるためfade-inになります。
+
+Schemaで検証できる値の例:
+
+```yaml
+effect: crossfade
+seconds: 1.2
+curve: equalPower
+```
+
+### BGM音量
+
+BGMの音量を0〜100で指定します。runtimeは0〜1のgainへ換算します。
+
+Schema位置: `#/$defs/bgmVolume`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| 値 | 必須 | 数値 | 0以上、100以下 |
+
+Schemaで検証できる値の例:
+
+```yaml
+80
+```
+
+### SVG Textの本文
+
+一つの文字列、またはcontent runの並びです。content runは文字列か`{ruby: {base, reading}}`です。
+
+Schema位置: `#/$defs/bodyText`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| 形式1 | いずれか一つ | 文字列 | — |
+| 形式2 | いずれか一つ | 文字列 または object（`rubyContentRun`）（`contentRun`）の配列（`contentRuns`） | 1項目以上 |
+
+- 並びは記述順のまま扱い、隣接する文字列の連結や前後の空白の除去を行いません。
+- backlog、読上げ、accessibilityへ渡す文字列には`base`だけを残し、`reading`を含めません。
+- 吹き出し（`Actor.say`／`Actor.think`）の`text`は文字列だけで、content runを受け取りません。
+
+Schemaで検証できる値の例:
+
+```yaml
+- むかしむかし、
+- ruby: {base: 竹取, reading: たけとり}
+- の翁がいました。
+```
+
+### ruby content run
+
+親文字`base`と読み`reading`を組で指定します。どちらも空文字は使えません。
+
+Schema位置: `#/$defs/rubyContentRun`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `ruby` | 必須 | object | 未知field不可 |
+
+Schemaで検証できる値の例:
+
+```yaml
+ruby:
+  base: 竹取
+  reading: たけとり
+```
+
 ## sceneとaction列
 
-sceneはaction配列の短縮形、またはposeModelとaction列を持つlong formで記述します。scene間参照は意味検証の対象です。
+sceneはaction配列の短縮形、または認識モデル、preview設定、入場時の遷移とaction列を持つlong formで記述します。scene間参照は意味検証の対象です。
 
 ### action配列
 
@@ -1472,7 +1670,7 @@ Schema位置: `#/$defs/actions`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 各項目 | 任意件数 | object（`stageAction`） または object（`bgmAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`） | — |
+| 各項目 | 任意件数 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`） | — |
 
 Schemaで検証できる値の例:
 
@@ -1483,24 +1681,31 @@ Schemaで検証できる値の例:
 
 ### long form scene
 
-scene固有のposeModelまたはpreview左右反転を指定する場合に、設定と`actions`をobjectへまとめます。
+scene固有の認識モデル、認識の種類、preview左右反転、入場時の遷移を指定する場合に、設定と`actions`をobjectへまとめます。
 
 Schema位置: `#/$defs/longScene`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| `poseModel` | 任意 | 文字列（`literalId`）（`assetId`） | — |
+| `recognitionModel` | 任意 | 文字列（`literalId`）（`assetId`） | — |
+| `recognitionMode` | 任意 | `pose` / `image` | — |
 | `posePreview` | 任意 | object（`scenePosePreview`） | 未知field不可 |
-| `actions` | 必須 | object（`stageAction`） または object（`bgmAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） | — |
+| `entryTransition` | 任意 | 数値 または object または object（`visualTransition`） | — |
+| `actions` | 必須 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） | — |
 
+- `recognitionModel`は`kind: recognitionModel`のasset IDを参照します。旧名の`poseModel`は受理しません。
+- `recognitionMode`は`pose`または`image`です。`imageInputToChangeScene`を使うsceneでは`image`を指定します。
+- `entryTransition`はそのsceneへ入るときのvisual transitionです。初回start、restart、rehearsal、履歴移動、live reloadではcrossfadeしません。
 - `posePreview`はそのsceneだけの非stickyな上書きです。次のsceneに指定がなければstory既定へ戻ります。
 
 Schemaで検証できる値の例:
 
 ```yaml
-poseModel: StoryPose
+recognitionModel: StoryPose
+recognitionMode: pose
 posePreview:
   mirroring: unmirrored
+entryTransition: 0.8
 actions:
   - wait: 1
 ```
@@ -1513,7 +1718,7 @@ Schema位置: `#/$defs/scene`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 形式1 | いずれか一つ | object（`stageAction`） または object（`bgmAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） | — |
+| 形式1 | いずれか一つ | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） | — |
 | 形式2 | いずれか一つ | object（`longScene`） | 未知field不可 |
 
 Schemaで検証できる値の例:
@@ -1530,7 +1735,7 @@ Schema位置: `#/$defs/scenes`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 任意のID key | 1件以上 | object（`stageAction`） または object（`bgmAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） または object（`longScene`）（`scene`） | — |
+| 任意のID key | 1件以上 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） または object（`longScene`）（`scene`） | — |
 
 - YAML 1.2一般ではmappingのkey順にapplication上の意味はありません（[YAML 1.2.2 Mapping Key Order](https://yaml.org/spec/1.2.2/#3221-mapping-key-order)）。DSL 4.0は固有規則として、source YAMLのserialization treeに現れるpair順をscene順として使用します。JSON Schemaはmappingのshapeを検証しますが、この順序セマンティクスは検証しません。
 - scene keyをsortするformatter、serializer、editorを使用しないでください。並べ替え後もSchema検証には成功しますが、台本の実行順が変わります。
@@ -1549,7 +1754,7 @@ actor名を付けずにstage、音、時間、scene遷移、入力待ちを制�
 
 ### `stage`
 
-背景assetへ切り替えます。短縮値またはstableId付きobjectを使用できます。
+背景assetへ切り替えます。短縮値、またはstableIdと`transition`を持つobjectを使用できます。
 
 Schema位置: `#/$defs/stageAction`
 
@@ -1567,18 +1772,20 @@ Schema位置: `#/$defs/stageAction`
 Schemaで検証できる値の例:
 
 ```yaml
-stage: Beach
+stage:
+  backdrop: Sunset
+  transition: 0.4
 ```
 
 ### `bgm`
 
-BGMとしてsound assetを開始します。
+BGMとしてsound assetを開始します。objectでは切り替えの`transition`、同じassetを最初から鳴らし直す`restart`、0〜100の`volume`を指定できます。
 
 Schema位置: `#/$defs/bgmAction`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| `bgm` | 必須 | 文字列（`literalId`）（`assetId`） または object（`soundArgs`） | — |
+| `bgm` | 必須 | 文字列（`literalId`）（`assetId`） または object（`bgmArgs`） | — |
 
 引数の詳細:
 
@@ -1587,10 +1794,71 @@ Schema位置: `#/$defs/bgmAction`
 | 形式1 | いずれか一つ | 文字列（`literalId`）（`assetId`） | — |
 | 形式2 | いずれか一つ | object | 未知field不可 |
 
+- 同じasset IDのBGMが再生中の場合、`restart: true`がなければ何もしません。
+- BGMのloop指定は4.0では受理しません。
+
 Schemaで検証できる値の例:
 
 ```yaml
-bgm: Theme
+bgm:
+  sound: EndingTheme
+  transition: 1.2
+  restart: true
+  volume: 80
+```
+
+### `stopBgm`
+
+再生中のBGMを止めます。秒数を指定すると、その時間でfade-outしてから止めます。
+
+Schema位置: `#/$defs/stopBgmAction`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `stopBgm` | 必須 | Schemaで定義された値 または 数値（`bgmFadeSeconds`） または object（`stopBgmArgs`） | — |
+
+引数の詳細:
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| 形式1 | いずれか一つ | Schemaで定義された値 | — |
+| 形式2 | いずれか一つ | 数値（`bgmFadeSeconds`） | 0以上、60以下 |
+| 形式3 | いずれか一つ | object | 未知field不可 |
+
+- 引数なしの`stopBgm:`はすぐに止めます。BGMが鳴っていないときは何もしません。
+- fade-out中は完了を待ってから次のactionへ進みます。
+
+Schemaで検証できる値の例:
+
+```yaml
+stopBgm: 2
+```
+
+### `setBgmVolume`
+
+再生中のBGMの音量を0〜100で変更します。`seconds`を指定すると、現在の音量からその時間で線形に変化させます。
+
+Schema位置: `#/$defs/setBgmVolumeAction`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `setBgmVolume` | 必須 | 数値（`bgmVolume`） または object（`setBgmVolumeArgs`） | — |
+
+引数の詳細:
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| 形式1 | いずれか一つ | 数値（`bgmVolume`） | 0以上、100以下 |
+| 形式2 | いずれか一つ | object | 未知field不可 |
+
+- BGMが鳴っていないときは何もせず、次に鳴るBGMの音量として保存もしません。
+
+Schemaで検証できる値の例:
+
+```yaml
+setBgmVolume:
+  volume: 30
+  seconds: 1
 ```
 
 ### `sound`
@@ -1756,6 +2024,76 @@ Schemaで検証できる値の例:
 branch: result
 ```
 
+### `setVariable`
+
+`variables`で宣言したstory変数へ、宣言時と同じ型のリテラル値を代入します。
+
+Schema位置: `#/$defs/setVariableAction`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `setVariable` | 必須 | object（`setVariableArgs`） | 未知field不可 |
+
+引数の詳細:
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `name` | 必須 | 文字列（`id`） | pattern `^[\p{L}_][\p{L}\p{N}_-]*$` |
+| `value` | 必須 | 文字列 または 数値 または 真偽値（`variableValue`） | — |
+
+- 未宣言の変数は`K4-VARIABLE-WRITE-UNKNOWN`、型の違う値は`K4-VARIABLE-WRITE-TYPE`でactionが失敗します。
+- 代入式は使えません。値はリテラルだけです。
+- 更新はactionが成功したときだけ確定し、cancel、skip、失敗、restoreでは破棄されます。
+
+Schemaで検証できる値の例:
+
+```yaml
+setVariable:
+  name: route
+  value: forest
+```
+
+### `changeVariable`
+
+数値のstory変数へ、`by`の有限数を加えます。減らす場合は負の数を指定します。
+
+Schema位置: `#/$defs/changeVariableAction`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `changeVariable` | 必須 | object（`changeVariableArgs`） | 未知field不可 |
+
+引数の詳細:
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `name` | 必須 | 文字列（`id`） | pattern `^[\p{L}_][\p{L}\p{N}_-]*$` |
+| `by` | 必須 | 数値 | — |
+
+Schemaで検証できる値の例:
+
+```yaml
+changeVariable:
+  name: score
+  by: 1
+```
+
+### `toggleVariable`
+
+真偽値のstory変数の値を反転します。値には変数名を書きます。
+
+Schema位置: `#/$defs/toggleVariableAction`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `toggleVariable` | 必須 | 文字列（`id`） | pattern `^[\p{L}_][\p{L}\p{N}_-]*$` |
+
+Schemaで検証できる値の例:
+
+```yaml
+toggleVariable: ready
+```
+
 ### `keyInputToChangeScene`
 
 キー入力と遷移先sceneのmappingを待ちます。navigation keymapとの衝突に注意します。
@@ -1831,13 +2169,40 @@ poseInputToChangeScene:
   jump: celebration
 ```
 
+### `imageInputToChangeScene`
+
+画像認識で選ばれたclass IDに応じてsceneを選びます。引数の形は`poseInputToChangeScene`と同じです。
+
+Schema位置: `#/$defs/imageInputAction`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `imageInputToChangeScene` | 必須 | mapping（`poseRoutes`） または object（`poseInputArgs`） | — |
+
+引数の詳細:
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| 形式1 | いずれか一つ | mapping（`poseRoutes`） | 1 field以上 |
+| 形式2 | いずれか一つ | object | 未知field不可 |
+
+- sceneのlong formで`recognitionModel`と`recognitionMode: image`を指定します。
+
+Schemaで検証できる値の例:
+
+```yaml
+imageInputToChangeScene:
+  apple: appleScene
+  banana: bananaScene
+```
+
 ## Actor action
 
 `<actor ID>.<action名>`をkeyにするactionです。core action名とcustom action名は同じpattern空間を使います。
 
 ### `Actor.show`
 
-costume、座標、scaleを指定してactorを表示します。
+costume、座標、scaleを指定してactorを表示します。任意の`transition`で表示時のcrossfadeを指定できます。
 
 Schema位置: `#/$defs/showAction`
 
@@ -1854,6 +2219,7 @@ Schema位置: `#/$defs/showAction`
 | `x` | 必須 | 数値 | — |
 | `y` | 必須 | 数値 | — |
 | `scale` | 必須 | 数値 | 0より大きい |
+| `transition` | 任意 | 数値 または object または object（`visualTransition`） | — |
 
 Schemaで検証できる値の例:
 
@@ -2006,7 +2372,7 @@ Hero.think:
 
 ### `Actor.setSkin`
 
-actorのcostumeを切り替えます。短縮値、またはscaleとstableIdを持つobjectを使用できます。
+actorのcostumeを切り替えます。短縮値、またはscale、`transition`、stableIdを持つobjectを使用できます。
 
 Schema位置: `#/$defs/setSkinAction`
 
@@ -2027,11 +2393,12 @@ Schemaで検証できる値の例:
 Hero.setSkin:
   skin: HeroHappy
   scale: 100
+  transition: 0.2
 ```
 
 ### `Actor.hide`
 
-actorのvisible stateをfalseにします。透明度とは別で、次の`Actor.show`で再表示します。
+actorのvisible stateをfalseにします。透明度とは別で、次の`Actor.show`で再表示します。任意の`transition`で消え方を指定できます。
 
 Schema位置: `#/$defs/hideAction`
 
@@ -2044,11 +2411,13 @@ Schema位置: `#/$defs/hideAction`
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
 | `stableId` | 任意 | 文字列（`id`）（`stableId`） | — |
+| `transition` | 任意 | 数値 または object または object（`visualTransition`） | — |
 
 Schemaで検証できる値の例:
 
 ```yaml
-Hero.hide: {}
+Hero.hide:
+  transition: 0.15
 ```
 
 ### `Actor.setLayer`
@@ -2105,7 +2474,7 @@ Hero.loop:
 
 ### `Actor.setText`
 
-SVG Text actorの本文と名前付きstyleを更新します。旧Text Assetの更新命令ではありません。
+SVG Text actorの本文と名前付きstyleを更新します。`text`は文字列、またはrubyを含められるcontent runの並びです。旧Text Assetの更新命令ではありません。
 
 Schema位置: `#/$defs/setTextAction`
 
@@ -2118,14 +2487,17 @@ Schema位置: `#/$defs/setTextAction`
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
 | `stableId` | 任意 | 文字列（`id`）（`stableId`） | — |
-| `text` | 必須 | 文字列 | — |
+| `text` | 必須 | 文字列 または 文字列 または object（`rubyContentRun`）（`contentRun`）の配列（`contentRuns`）（`bodyText`） | — |
 | `style` | 必須 | 文字列（`id`）（`styleId`） | — |
 
 Schemaで検証できる値の例:
 
 ```yaml
 Caption.setText:
-  text: おしまい
+  text:
+    - むかしむかし、
+    - ruby: {base: 竹取, reading: たけとり}
+    - の翁がいました。
   style: title
 ```
 

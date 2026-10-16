@@ -308,11 +308,11 @@ Standard SB3は`kubohiroyakamishibairuntime4`を一度だけ登録し、次を�
 端末の絶対path、ブラウザーのfile handle、preview token、reload candidate、modal状態を保存しません。local sourceと
 embedded assetだけを使う成果物は、実行時にextension codeや作品assetをremote取得しません。
 
-`delivery: remote`は明示的な例外です。通常のposeModelではHTTPS TurboWarp Teachable Machine ディレクトリ URLを保存します。
+`delivery: remote`は明示的な例外です。通常のrecognitionModel（rc.8では`poseModel`）ではHTTPS TurboWarp Teachable Machine ディレクトリ URLを保存します。
 検証付きremoteではURL、SHA-256 integrity、Content-Type、sizeを保存し、いずれもasset byte列は
 SB3へ含めません。「自己完結」はsource、runtime code、runtime artifact、
 embedded assetの境界を指し、remote deliveryを選んだ作品の完全offline動作を意味しません。内容を固定する
-poseModelはlocal `file`へ変換して埋め込みます。remote extension codeと
+recognitionModelはlocal `file`へ変換して埋め込みます。remote extension codeと
 remote previewは常に禁止します。
 
 ### TurboWarp Teachable Machine上流との責務境界
