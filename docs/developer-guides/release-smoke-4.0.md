@@ -45,6 +45,7 @@ git -C turbowarp-kamishibai-app status --short
 
 すべてのDSL 4.0 flagは既定OFFです。配布surfaceは起動時に次のsnapshotを明示します。
 ポーズoverlayには専用flagがなく、`poseRecognition.preview.overlay`を記述した全runtime profileで同じ契約を使います。
+rc.8固定の記録のため、rc.8の名前`poseRecognition`で記述します。rc.11以降の台本では`recognition.preview.overlay`です。
 
 | Surface               | ONにするflag                                                                                                                   |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------ |

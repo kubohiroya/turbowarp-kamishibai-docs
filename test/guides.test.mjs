@@ -71,7 +71,17 @@ const theme = readFileSync(new URL('../docs/general-theme.css', import.meta.url)
 test('keeps the completed DSL 4.0 guide separate from the production 3.2 manual', () => {
   assert.match(dslManual, /対象アプリ: TurboWarp-Kamishibai 3\.2\.x/u);
   assert.match(dsl4AuthorGuide, /固定実装基準を説明する台本作成ガイド/u);
-  assert.match(dsl4AuthorGuide, /v4\.0\.0-rc\.8`はprerelease/u);
+  assert.match(dsl4AuthorGuide, /v4\.0\.0-rc\.22`はprerelease/u);
+  assert.match(dsl4AuthorGuide, /^recognition:$/mu);
+  assert.match(dsl4AuthorGuide, /kind: recognitionModel/u);
+  assert.match(dsl4AuthorGuide, /recognitionMode: image/u);
+  assert.match(dsl4AuthorGuide, /`imageInputToChangeScene`/u);
+  assert.match(dsl4AuthorGuide, /`stopBgm`/u);
+  assert.match(dsl4AuthorGuide, /`setBgmVolume`/u);
+  assert.match(dsl4AuthorGuide, /`setVariable`/u);
+  assert.match(dsl4AuthorGuide, /ruby: \{base: 竹取, reading: たけとり\}/u);
+  assert.match(dsl4AuthorGuide, /cornerRadius: 12/u);
+  assert.doesNotMatch(dsl4AuthorGuide, /^poseRecognition:|kind: poseModel$|^ {4}poseModel:/mu);
   assert.match(dsl4AuthorGuide, /Schemaはruntime実装から生成するものではありません/u);
   assert.match(dsl4AuthorGuide, /kamishibai: '4\.0'/u);
   assert.match(dsl4AuthorGuide, /\.kamishibai\.yaml/u);
@@ -119,13 +129,13 @@ test('keeps the completed DSL 4.0 guide separate from the production 3.2 manual'
   );
   assert.match(dsl4AuthorGuide, /前sceneの値を持ち越しません/u);
   assert.match(dsl4SchemaReference, /固定実装基準を説明するSchemaリファレンス/u);
-  assert.match(dsl4SchemaReference, /v4\.0\.0-rc\.8`はprerelease/u);
+  assert.match(dsl4SchemaReference, /v4\.0\.0-rc\.22`はprerelease/u);
   assert.match(dsl4SchemaReference, /権威関係と配布状態/u);
   assert.match(dsl4SchemaReference, /Schemaはruntime実装から生成しません/u);
-  assert.match(dsl4SchemaReference, /Schema固定commit: \[`29c0dea`\]/u);
+  assert.match(dsl4SchemaReference, /Schema固定commit: \[`450a5bb`\]/u);
   assert.match(dsl4SchemaReference, /関節とボーンのoverlay/u);
   assert.match(dsl4SchemaReference, /`visible` \| 任意 \| 真偽値 \| 既定値 `true`/u);
-  assert.match(dsl4SchemaReference, /トップレベル13 field、action 24種類、Annotation 93項目/u);
+  assert.match(dsl4SchemaReference, /トップレベル15 field、action 30種類、Annotation 108項目/u);
   assert.doesNotMatch(dslManual, /kamishibai: '4\.0'/u);
   assert.doesNotMatch(dsl4AuthorGuide, /DSL 3\.[12]|kamishibai=3\.[12]/u);
   assert.doesNotMatch(dsl4SchemaReference, /DSL 3\.[12]|kamishibai=3\.[12]/u);
@@ -311,7 +321,10 @@ test('documents the DSL 3.2 to 4.0 converter as a dedicated migration guide', ()
   assert.match(dsl4ConversionGuide, /--pose-models pose-models\.json/u);
   assert.match(dsl4ConversionGuide, /--max-source-bytes 262144/u);
   assert.match(dsl4ConversionGuide, /入力と同じpathは指定できません/u);
-  assert.match(dsl4ConversionGuide, /`TMPoseURL`は既定でlazy remote poseModelへ変換/u);
+  assert.match(
+    dsl4ConversionGuide,
+    /`TMPoseURL`は既定でlazy remoteの認識モデル（`kind: recognitionModel`）へ変換/u,
+  );
   assert.match(dsl4ConversionGuide, /model directoryをproject内へ取得/u);
   assert.match(dsl4ConversionGuide, /poseInputToChangeScene`を生成しません/u);
   assert.match(dsl4ConversionGuide, /fullConfidenceHoldSeconds = 10 \/ poseCharge/u);

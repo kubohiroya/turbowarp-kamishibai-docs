@@ -72,7 +72,8 @@ TurboWarp Editorでは一つのパレットに見えますが、見出し、ア�
 - `pose` actionが完了またはキャンセルされたときと、ランタイムを停止・解放したときは、両方を`0`へ戻して
   monitorを隠します。
 
-`poseRecognition.feedback.mode`によって、TurboWarp blockからの扱いが変わります。
+`recognition.feedback.mode`によって、TurboWarp blockからの扱いが変わります。rc.8の台本では、トップレベルの
+名前が`poseRecognition`です（rc.11で`recognition`へ改名）。
 
 | mode             | TurboWarp blockからの参照  | TurboWarp blockからの書換え                                                          |
 | ---------------- | -------------------------- | ------------------------------------------------------------------------------------ |

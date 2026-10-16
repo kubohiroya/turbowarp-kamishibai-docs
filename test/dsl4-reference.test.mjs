@@ -25,7 +25,7 @@ test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
   assert.equal(actualHash, lock.schemaSha256);
   assert.equal(lock.repository, 'kubohiroya/turbowarp-kamishibai-app');
   assert.equal(lock.sourceKind, 'commit');
-  assert.equal(lock.commit, '29c0deadcb98badf94a0244c479ca896dc71f842');
+  assert.equal(lock.commit, '450a5bb950ef769241ec8258690e652b39b23bde');
   assert.equal(
     lock.schemaUrl,
     `https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/${lock.commit}/schema/dsl-4.schema.json`,
@@ -36,9 +36,9 @@ test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
 
 test('covers every top-level field and every Schema action with validated annotations', () => {
   assert.deepEqual(validateReferenceInputs({schema, annotations}), {
-    actionCount: 24,
-    annotationCount: 93,
-    topLevelFieldCount: 13,
+    actionCount: 30,
+    annotationCount: 108,
+    topLevelFieldCount: 15,
   });
 });
 
@@ -93,6 +93,11 @@ test('generates the checked-in reference byte-for-byte deterministically', () =>
   assert.match(generated, /`easeInOut`/u);
   assert.match(generated, /`Actor\.setTransparency`/u);
   assert.match(generated, /`0`は完全不透明、`100`は完全透明/u);
+  assert.match(generated, /`recognition` — 認識設定/u);
+  assert.match(generated, /名前付き認識モデル/u);
+  assert.match(generated, /`imageInputToChangeScene`/u);
+  assert.match(generated, /`presentation` — 表示遷移の既定値/u);
+  assert.match(generated, /`cornerRadius` \| 任意/u);
   assert.match(generated, /## 前処理/u);
   assert.match(generated, /### `include` — 別の台本ファイルを読み込む/u);
   assert.match(generated, /include:\n  - chapters\/opening\.k4\.yml/u);
