@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">policy: latest-neededでのPoseモデル初期化</title><desc id="desc">モデルAの初期化中に、モデルB、モデルCの順で必要なモデルが変わった場合。Bは待機に入るが、Cの要求で置き換えられて開始しない。Aは安全境界でcancelされ、その後Cだけを初期化する。実行中は1件、待機は最新の1件だけに制限される。</desc>
+  <defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#315b72"/></marker><style>text{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;fill:#172b3a}.title{font-size:26px;font-weight:700}.sub{font-size:15px;fill:#486272}.lane{font-size:16px;font-weight:700}.bar{font-size:14px;font-weight:700}.small{font-size:13px;fill:#304a59}.req{fill:#eef0fb;stroke:#5a64a8;stroke-width:2}.run{fill:#eaf4fa;stroke:#397a9c;stroke-width:2}.cancel{fill:#fff4f4;stroke:#b64d4d;stroke-width:2}.ok{fill:#effaf5;stroke:#3b8b70;stroke-width:2}.pend{fill:#fff1df;stroke:#b87629;stroke-width:2}.drop{fill:#f6f8fa;stroke:#98aab5;stroke-width:1.5;stroke-dasharray:6 5}.guide{stroke:#98aab5;stroke-width:1.2;stroke-dasharray:4 5}.x{stroke:#b64d4d;stroke-width:2.5}.axis{stroke:#98aab5;stroke-width:1.5;marker-end:url(#a)}.note{fill:#f6f8fa;stroke:#98aab5;stroke-width:1.5}</style></defs>
+  <rect width="960" height="430" fill="#fff"/>
+  <text class="title" x="20" y="40">必要なモデルが次々に変わったとき</text><text class="sub" x="20" y="66">policy: latest-needed の例。実行中は1件、待機は最新の1件だけにする。</text>
+
+  <text class="lane" x="20" y="112">必要になったモデル</text>
+  <rect class="req" x="180" y="92" width="44" height="30" rx="15"/><text class="bar" x="202" y="112" text-anchor="middle">A</text>
+  <rect class="req" x="360" y="92" width="44" height="30" rx="15"/><text class="bar" x="382" y="112" text-anchor="middle">B</text>
+  <rect class="req" x="480" y="92" width="44" height="30" rx="15"/><text class="bar" x="502" y="112" text-anchor="middle">C</text>
+  <path class="guide" d="M202 124V300M382 124V300M502 124V300"/>
+
+  <text class="lane" x="20" y="176">実行中（1件）</text>
+  <rect class="cancel" x="202" y="156" width="378" height="34" rx="7"/><text class="bar" x="216" y="178">A を初期化</text><text class="small" x="572" y="178" text-anchor="end">安全境界でcancel</text>
+  <rect class="ok" x="590" y="156" width="270" height="34" rx="7"/><text class="bar" x="604" y="178">C だけを初期化</text>
+  <text class="bar" x="870" y="178" style="fill:#3b8b70">準備完了</text>
+
+  <text class="lane" x="20" y="246">待機（最新1件）</text>
+  <rect class="drop" x="382" y="226" width="120" height="34" rx="7"/><text class="bar" x="396" y="248">B 待機</text>
+  <path class="x" d="M452 232L472 254M472 232L452 254"/>
+  <rect class="pend" x="502" y="226" width="88" height="34" rx="7"/><text class="bar" x="514" y="248">C 待機</text>
+  <text class="small" x="392" y="282">B は C に置き換えられ、開始しない</text>
+
+  <path class="axis" d="M180 316H940"/><text class="small" x="900" y="336">時間</text>
+  <rect class="note" x="20" y="352" width="920" height="60" rx="9"/><text class="small" x="36" y="377">poseを使わないsceneへskipした場合は、待機中の要求を破棄し、新しい初期化を始めない。</text><text class="small" x="36" y="399">モデル初期化のcancelだけでは、cameraは停止しない。</text>
+</svg>

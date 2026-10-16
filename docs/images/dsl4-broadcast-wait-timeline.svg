@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="title desc">
+  <title id="title">一つのmessageを複数の受信scriptで分担したときの待機</title><desc id="desc">台本のbroadcastMessageAndWaitがplayMiniGameを送ると、Stage、MiniGame sprite、SoundDirector spriteの受信scriptが同時に始まる。Stageが最初に、SoundDirectorが次に終了し、MiniGameが最後に終了した時点で、台本の次のactionが始まる。</desc>
+  <defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#315b72"/></marker><style>text{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;fill:#172b3a}.title{font-size:26px;font-weight:700}.sub{font-size:15px;fill:#486272}.lane{font-size:16px;font-weight:700}.code{font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;fill:#315b72}.bar{font-size:14px;font-weight:700}.small{font-size:13px;fill:#304a59}.story{fill:#eef0fb;stroke:#5a64a8;stroke-width:2}.recv{fill:#eaf4fa;stroke:#397a9c;stroke-width:2}.last{fill:#fff1df;stroke:#b87629;stroke-width:2}.wait{fill:#f6f8fa;stroke:#98aab5;stroke-width:1.5;stroke-dasharray:6 5}.guide{stroke:#b87629;stroke-width:2;stroke-dasharray:6 5}.start{stroke:#98aab5;stroke-width:1.5;stroke-dasharray:4 5}.msg{stroke:#315b72;stroke-width:2;fill:none;marker-end:url(#a)}.axis{stroke:#98aab5;stroke-width:1.5;marker-end:url(#a)}</style></defs>
+  <rect width="960" height="400" fill="#fff"/>
+  <text class="title" x="20" y="40">最後の受信scriptが終わってから次へ進む</text><text class="sub" x="20" y="66">左から右へ時間が進む。帯は各受信scriptが動いている期間を示す。</text>
+
+  <text class="lane" x="20" y="112">台本</text>
+  <rect class="story" x="150" y="90" width="230" height="36" rx="7"/><text class="code" x="162" y="113">broadcastMessageAndWait</text>
+  <rect class="wait" x="380" y="90" width="420" height="36" rx="7"/><text class="small" x="590" y="113" text-anchor="middle">受信scriptの終了を待つ</text>
+  <rect class="story" x="800" y="90" width="140" height="36" rx="7"/><text class="bar" x="870" y="113" text-anchor="middle">次のaction</text>
+
+  <path class="start" d="M380 128V300"/><text class="small" x="386" y="148">playMiniGameを送信</text>
+
+  <text class="lane" x="20" y="186">Stage</text>
+  <rect class="recv" x="380" y="166" width="170" height="32" rx="7"/><text class="bar" x="392" y="187">背景と照明を変更</text>
+
+  <text class="lane" x="20" y="230">MiniGame</text>
+  <rect class="last" x="380" y="210" width="420" height="32" rx="7"/><text class="bar" x="392" y="231">ゲーム本体を実行（最後に終了）</text>
+
+  <text class="lane" x="20" y="274">SoundDirector</text>
+  <rect class="recv" x="380" y="254" width="290" height="32" rx="7"/><text class="bar" x="392" y="275">開始音と終了音を再生</text>
+
+  <path class="guide" d="M800 128V300"/><text class="small" x="808" y="318">すべて終了</text>
+  <path class="axis" d="M150 330H940"/><text class="small" x="900" y="350">時間</text>
+  <text class="small" x="20" y="384">処理の順番が必要な場合は、一つの受信script内で順に実行するか、TurboWarp側でも「メッセージを送って待つ」を使う。</text>
+</svg>

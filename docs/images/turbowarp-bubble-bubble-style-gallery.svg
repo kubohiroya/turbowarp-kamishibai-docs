@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="750" viewBox="0 0 1600 750" role="img" aria-labelledby="title description">
+  <title id="title">Bubble visual style一覧</title>
+  <desc id="description">NORMAL、THINKING、DREAMING、YELLING、OFF_PANEL、WAVY、WHISPERING、ANNOUNCEMENT、NARRATION、NO_BUBBLEのSVG形状例。</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    .heading { fill: #25283a; font-size: 28px; font-weight: 700; }
+    .subheading { fill: #25283a; font-size: 20px; font-weight: 700; }
+    .body { fill: #25283a; font-size: 16px; }
+    .small { fill: #667085; font-size: 13px; }
+    .block-text { fill: #ffffff; font-size: 13px; font-weight: 600; }
+    .input-text { fill: #25283a; font-size: 13px; font-weight: 500; }
+  </style>
+
+  <rect width="1600" height="750" fill="#f2f4f8"/>
+  <text x="32" y="48" class="heading">Bubble visual style：形状の使い分け</text>
+  <text x="32" y="78" class="body">すべてBubble側の共有SVG形状rendererから生成。NEGATIVEは色指定で表現するため独立styleにしません。</text>
+  <text x="32" y="101" class="small">形状renderer基盤の仕様例です。standalone surfaceへのstyle block/API接続は後続実装です。</text>
+  <g data-style-gallery-card="NORMAL">
+        <rect x="32" y="118" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="48" y="150" style="fill:#25283a;font-size:18px;font-weight:700">NORMAL</text>
+        <svg x="40" y="162" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="NORMAL" overflow="visible">
+    <title>NORMAL visual style example</title><path d="M 39.1842 145.7784 L 36.4377 145.1190 L 33.8282 144.0381 L 31.4199 142.5623 L 29.2721 140.7279 L 27.4377 138.5801 L 25.9619 136.1718 L 24.8810 133.5623 L 24.2216 130.8158 L 24.0000 128.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 238.0000 24.0000 L 240.8158 24.2216 L 243.5623 24.8810 L 246.1718 25.9619 L 248.5801 27.4377 L 250.7279 29.2721 L 252.5623 31.4199 L 254.0381 33.8282 L 255.1190 36.4377 L 255.7784 39.1842 L 256.0000 42.0000 L 256.0000 128.0000 L 255.7784 130.8158 L 255.1190 133.5623 L 254.0381 136.1718 L 252.5623 138.5801 L 250.7279 140.7279 L 248.5801 142.5623 L 246.1718 144.0381 L 243.5623 145.1190 L 240.8158 145.7784 L 238.0000 146.0000 L 106.2873 146.0000 L 86.9630 160.7447 L 88.2873 146.0000 L 42.0000 146.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">今日はいい天気だね</text>
+  </svg>
+        <text x="180" y="350" text-anchor="middle" class="small">通常の会話</text>
+<text x="180" y="368" text-anchor="middle" class="small">丸い本体＋話者を指すtail</text>
+        <text x="180" y="388" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="THINKING">
+        <rect x="344" y="118" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="360" y="150" style="fill:#25283a;font-size:18px;font-weight:700">THINKING</text>
+        <svg x="352" y="162" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="THINKING" overflow="visible">
+    <title>THINKING visual style example</title><circle cx="92.12515224204833" cy="153.37236839860094" r="5" fill="#fff4cc" stroke="#6f5b45" stroke-width="2"/><circle cx="88.82135196866629" cy="158.0906841737055" r="3.5" fill="#fff4cc" stroke="#6f5b45" stroke-width="2"/><g transform="translate(0 0) scale(1)"><path d="M 24.0000 85.0000 C 24.0000 76.8667 24.0000 66.7000 30.9600 60.6000 C 37.9200 54.5000 56.0933 53.6867 65.7600 48.4000 C 75.4267 43.1133 76.5867 29.6933 88.9600 28.8800 C 101.3333 28.0667 124.5333 43.7233 140.0000 43.5200 C 155.4667 43.3167 168.6133 27.2533 181.7600 27.6600 C 194.9067 28.0667 207.2800 40.4700 218.8800 45.9600 C 230.4800 51.4500 245.1733 53.6867 251.3600 60.6000 C 257.5467 67.5133 257.1600 79.3067 256.0000 87.4400 C 254.8400 95.5733 251.3600 103.3000 244.4000 109.4000 C 237.4400 115.5000 224.6800 118.5500 214.2400 124.0400 C 203.8000 129.5300 194.1333 141.9333 181.7600 142.3400 C 169.3867 142.7467 153.9200 126.4800 140.0000 126.4800 C 126.0800 126.4800 110.6133 142.7467 98.2400 142.3400 C 85.8667 141.9333 76.9733 129.5300 65.7600 124.0400 C 54.5467 118.5500 37.9200 115.9067 30.9600 109.4000 C 24.0000 102.8933 24.0000 93.1333 24.0000 85.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round"/></g><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">どうしようかな…</text>
+  </svg>
+        <text x="492" y="350" text-anchor="middle" class="small">思考</text>
+<text x="492" y="368" text-anchor="middle" class="small">雲形本体＋小さな丸のtrail</text>
+        <text x="492" y="388" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="DREAMING">
+        <rect x="656" y="118" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="672" y="150" style="fill:#25283a;font-size:18px;font-weight:700">DREAMING</text>
+        <svg x="664" y="162" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="DREAMING" overflow="visible">
+    <title>DREAMING visual style example</title><circle cx="92.64137103476426" cy="152.63513155874082" r="7" fill="#fff4cc" stroke="#6f5b45" stroke-width="2"/><circle cx="89.23432700283905" cy="157.50089470181746" r="4.5" fill="#fff4cc" stroke="#6f5b45" stroke-width="2"/><circle cx="86.96296431488891" cy="160.74473679720185" r="3" fill="#fff4cc" stroke="#6f5b45" stroke-width="2"/><g transform="translate(0 0) scale(1)"><path d="M 24.0000 85.0000 C 24.0000 76.8667 24.0000 66.7000 30.9600 60.6000 C 37.9200 54.5000 56.0933 53.6867 65.7600 48.4000 C 75.4267 43.1133 76.5867 29.6933 88.9600 28.8800 C 101.3333 28.0667 124.5333 43.7233 140.0000 43.5200 C 155.4667 43.3167 168.6133 27.2533 181.7600 27.6600 C 194.9067 28.0667 207.2800 40.4700 218.8800 45.9600 C 230.4800 51.4500 245.1733 53.6867 251.3600 60.6000 C 257.5467 67.5133 257.1600 79.3067 256.0000 87.4400 C 254.8400 95.5733 251.3600 103.3000 244.4000 109.4000 C 237.4400 115.5000 224.6800 118.5500 214.2400 124.0400 C 203.8000 129.5300 194.1333 141.9333 181.7600 142.3400 C 169.3867 142.7467 153.9200 126.4800 140.0000 126.4800 C 126.0800 126.4800 110.6133 142.7467 98.2400 142.3400 C 85.8667 141.9333 76.9733 129.5300 65.7600 124.0400 C 54.5467 118.5500 37.9200 115.9067 30.9600 109.4000 C 24.0000 102.8933 24.0000 93.1333 24.0000 85.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round"/></g><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">いつか空の向こうへ</text>
+  </svg>
+        <text x="804" y="350" text-anchor="middle" class="small">夢・回想</text>
+<text x="804" y="368" text-anchor="middle" class="small">柔らかな雲形＋長い丸trail</text>
+        <text x="804" y="388" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="YELLING">
+        <rect x="968" y="118" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="984" y="150" style="fill:#25283a;font-size:18px;font-weight:700">YELLING</text>
+        <svg x="976" y="162" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="YELLING" overflow="visible">
+    <title>YELLING visual style example</title><path d="M 166.2575 23.5795 L 198.1404 13.8235 L 213.5718 35.7446 L 244.7654 35.7443 L 246.3143 57.6653 L 270.6403 67.4209 L 258.0000 85.0000 L 270.6403 102.5791 L 246.3143 112.3347 L 244.7654 134.2557 L 213.5718 134.2554 L 198.1404 156.1765 L 166.2575 146.4205 L 140.0000 164.0000 L 113.7425 146.4205 L 81.8596 156.1765 L 66.4282 134.2554 L 35.2346 134.2557 L 33.6857 112.3347 L 9.3597 102.5791 L 22.0000 85.0000 L 9.3597 67.4209 L 33.6857 57.6653 L 35.2346 35.7443 L 66.4282 35.7446 L 81.8596 13.8235 L 113.7425 23.5795 L 140.0000 6.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">危ない！</text>
+  </svg>
+        <text x="1116" y="350" text-anchor="middle" class="small">叫び</text>
+<text x="1116" y="368" text-anchor="middle" class="small">鋭いburst輪郭で強調</text>
+        <text x="1116" y="388" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="OFF_PANEL">
+        <rect x="1280" y="118" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="1296" y="150" style="fill:#25283a;font-size:18px;font-weight:700">OFF_PANEL</text>
+        <svg x="1288" y="162" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="OFF_PANEL" overflow="visible">
+    <title>OFF_PANEL visual style example</title><path d="M 24.0000 76.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 238.0000 24.0000 L 240.8158 24.2216 L 243.5623 24.8810 L 246.1718 25.9619 L 248.5801 27.4377 L 250.7279 29.2721 L 252.5623 31.4199 L 254.0381 33.8282 L 255.1190 36.4377 L 255.7784 39.1842 L 256.0000 42.0000 L 256.0000 128.0000 L 255.7784 130.8158 L 255.1190 133.5623 L 254.0381 136.1718 L 252.5623 138.5801 L 250.7279 140.7279 L 248.5801 142.5623 L 246.1718 144.0381 L 243.5623 145.1190 L 240.8158 145.7784 L 238.0000 146.0000 L 42.0000 146.0000 L 39.1842 145.7784 L 36.4377 145.1190 L 33.8282 144.0381 L 31.4199 142.5623 L 29.2721 140.7279 L 27.4377 138.5801 L 25.9619 136.1718 L 24.8810 133.5623 L 24.2216 130.8158 L 24.0000 128.0000 L 24.0000 94.0000 L 6.0000 85.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">こっちだよ！</text>
+  </svg>
+        <text x="1428" y="350" text-anchor="middle" class="small">画面外の話者</text>
+<text x="1428" y="368" text-anchor="middle" class="small">tailを画面端方向へ伸ばす</text>
+        <text x="1428" y="388" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="WAVY">
+        <rect x="32" y="418" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="48" y="450" style="fill:#25283a;font-size:18px;font-weight:700">WAVY</text>
+        <svg x="40" y="462" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="WAVY" overflow="visible">
+    <title>WAVY visual style example</title><path d="M 256.0000 24.0000 L 259.8042 36.2000 L 258.3511 48.4000 L 253.6489 60.6000 L 252.1958 72.8000 L 259.8042 97.2000 L 258.3511 109.4000 L 253.6489 121.6000 L 252.1958 133.8000 L 256.0000 146.0000 L 244.4000 142.1958 L 232.8000 143.6489 L 221.2000 148.3511 L 209.6000 149.8042 L 186.4000 142.1958 L 174.8000 143.6489 L 163.2000 148.3511 L 151.6000 149.8042 L 128.4000 142.1958 L 116.8000 143.6489 L 105.2000 148.3511 L 103.6522 148.5450 L 103.6522 148.5450 L 84.3976 164.4084 L 86.1226 147.3520 L 70.4000 142.1958 L 58.8000 143.6489 L 47.2000 148.3511 L 35.6000 149.8042 L 24.0000 146.0000 L 20.1958 133.8000 L 21.6489 121.6000 L 26.3511 109.4000 L 27.8042 97.2000 L 20.1958 72.8000 L 21.6489 60.6000 L 26.3511 48.4000 L 27.8042 36.2000 L 24.0000 24.0000 L 35.6000 27.8042 L 47.2000 26.3511 L 58.8000 21.6489 L 70.4000 20.1958 L 93.6000 27.8042 L 105.2000 26.3511 L 116.8000 21.6489 L 128.4000 20.1958 L 151.6000 27.8042 L 163.2000 26.3511 L 174.8000 21.6489 L 186.4000 20.1958 L 209.6000 27.8042 L 221.2000 26.3511 L 232.8000 21.6489 L 244.4000 20.1958 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">なんだか不安…</text>
+  </svg>
+        <text x="180" y="650" text-anchor="middle" class="small">不安・弱り</text>
+<text x="180" y="668" text-anchor="middle" class="small">揺れる輪郭</text>
+        <text x="180" y="688" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="WHISPERING">
+        <rect x="344" y="418" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="360" y="450" style="fill:#25283a;font-size:18px;font-weight:700">WHISPERING</text>
+        <svg x="352" y="462" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="WHISPERING" overflow="visible">
+    <title>WHISPERING visual style example</title><path d="M 39.1842 145.7784 L 36.4377 145.1190 L 33.8282 144.0381 L 31.4199 142.5623 L 29.2721 140.7279 L 27.4377 138.5801 L 25.9619 136.1718 L 24.8810 133.5623 L 24.2216 130.8158 L 24.0000 128.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 238.0000 24.0000 L 240.8158 24.2216 L 243.5623 24.8810 L 246.1718 25.9619 L 248.5801 27.4377 L 250.7279 29.2721 L 252.5623 31.4199 L 254.0381 33.8282 L 255.1190 36.4377 L 255.7784 39.1842 L 256.0000 42.0000 L 256.0000 128.0000 L 255.7784 130.8158 L 255.1190 133.5623 L 254.0381 136.1718 L 252.5623 138.5801 L 250.7279 140.7279 L 248.5801 142.5623 L 246.1718 144.0381 L 243.5623 145.1190 L 240.8158 145.7784 L 238.0000 146.0000 L 106.2873 146.0000 L 86.9630 160.7447 L 88.2873 146.0000 L 42.0000 146.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" stroke-dasharray="5 5"/><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">静かにしてね</text>
+  </svg>
+        <text x="492" y="650" text-anchor="middle" class="small">ささやき</text>
+<text x="492" y="668" text-anchor="middle" class="small">破線の弱い輪郭</text>
+        <text x="492" y="688" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="ANNOUNCEMENT">
+        <rect x="656" y="418" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="672" y="450" style="fill:#25283a;font-size:18px;font-weight:700">ANNOUNCEMENT</text>
+        <svg x="664" y="462" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="ANNOUNCEMENT" overflow="visible">
+    <title>ANNOUNCEMENT visual style example</title><path d="M 39.1842 145.7784 L 36.4377 145.1190 L 33.8282 144.0381 L 31.4199 142.5623 L 29.2721 140.7279 L 27.4377 138.5801 L 25.9619 136.1718 L 24.8810 133.5623 L 24.2216 130.8158 L 24.0000 128.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 238.0000 24.0000 L 240.8158 24.2216 L 243.5623 24.8810 L 246.1718 25.9619 L 248.5801 27.4377 L 250.7279 29.2721 L 252.5623 31.4199 L 254.0381 33.8282 L 255.1190 36.4377 L 255.7784 39.1842 L 256.0000 42.0000 L 256.0000 128.0000 L 255.7784 130.8158 L 255.1190 133.5623 L 254.0381 136.1718 L 252.5623 138.5801 L 250.7279 140.7279 L 248.5801 142.5623 L 246.1718 144.0381 L 243.5623 145.1190 L 240.8158 145.7784 L 238.0000 146.0000 L 106.2873 146.0000 L 86.9630 160.7447 L 88.2873 146.0000 L 42.0000 146.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><rect x="30" y="30" width="220" height="110" rx="13" fill="none" stroke="#6f5b45" stroke-width="1.5"/><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">まもなく開演します</text>
+  </svg>
+        <text x="804" y="650" text-anchor="middle" class="small">放送・告知</text>
+<text x="804" y="668" text-anchor="middle" class="small">二重の強い輪郭</text>
+        <text x="804" y="688" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="NARRATION">
+        <rect x="968" y="418" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="984" y="450" style="fill:#25283a;font-size:18px;font-weight:700">NARRATION</text>
+        <svg x="976" y="462" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="NARRATION" overflow="visible">
+    <title>NARRATION visual style example</title><path d="M 238.0000 24.0000 L 240.8158 24.2216 L 243.5623 24.8810 L 246.1718 25.9619 L 248.5801 27.4377 L 250.7279 29.2721 L 252.5623 31.4199 L 254.0381 33.8282 L 255.1190 36.4377 L 255.7784 39.1842 L 256.0000 42.0000 L 256.0000 128.0000 L 255.7784 130.8158 L 255.1190 133.5623 L 254.0381 136.1718 L 252.5623 138.5801 L 250.7279 140.7279 L 248.5801 142.5623 L 246.1718 144.0381 L 243.5623 145.1190 L 240.8158 145.7784 L 238.0000 146.0000 L 42.0000 146.0000 L 39.1842 145.7784 L 36.4377 145.1190 L 33.8282 144.0381 L 31.4199 142.5623 L 29.2721 140.7279 L 27.4377 138.5801 L 25.9619 136.1718 L 24.8810 133.5623 L 24.2216 130.8158 L 24.0000 128.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" /><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">その夜、港は静かだった。</text>
+  </svg>
+        <text x="1116" y="650" text-anchor="middle" class="small">地の文</text>
+<text x="1116" y="668" text-anchor="middle" class="small">tailなしの矩形panel</text>
+        <text x="1116" y="688" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+<g data-style-gallery-card="NO_BUBBLE">
+        <rect x="1280" y="418" width="296" height="280" rx="18" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+        <text x="1296" y="450" style="fill:#25283a;font-size:18px;font-weight:700">NO_BUBBLE</text>
+        <svg x="1288" y="462" width="280" height="170" viewBox="0 0 280 170" data-bubble-renderer="canonical" data-bubble-style="NO_BUBBLE" overflow="visible">
+    <title>NO_BUBBLE visual style example</title><text x="140" y="89.9" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="14">吹き出しなしの文字表示</text>
+  </svg>
+        <text x="1428" y="650" text-anchor="middle" class="small">本体もtailも描かず</text>
+<text x="1428" y="668" text-anchor="middle" class="small">文字だけ表示</text>
+        <text x="1428" y="688" text-anchor="middle" class="small">fill／border色は別指定</text>
+      </g>
+  <text x="32" y="724" class="small">orientation／segmentsは指定せず、幅・フォント・改行後の行数から外形寸法を自動計算します。</text>
+</svg>

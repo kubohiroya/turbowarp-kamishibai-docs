@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title description">
+  <title id="title">Bubble animation mode比較</title>
+  <desc id="description">talking、awaiting-continue、idleにおける目パチ、口パク、continue framesの動作比較。</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    .heading { fill: #25283a; font-size: 28px; font-weight: 700; }
+    .subheading { fill: #25283a; font-size: 20px; font-weight: 700; }
+    .body { fill: #25283a; font-size: 16px; }
+    .small { fill: #667085; font-size: 13px; }
+    .block-text { fill: #ffffff; font-size: 13px; font-weight: 600; }
+    .input-text { fill: #25283a; font-size: 13px; font-weight: 500; }
+  </style>
+
+  <rect width="1200" height="500" fill="#f2f4f8"/>
+  <text x="32" y="47" class="heading">animation modeで表示中の動きを切り替える</text>
+  <text x="32" y="72" class="small">緑は実行中、灰色は停止・非表示です。目パチはBubbleが表示されている間継続します。</text>
+  <g>
+    <rect x="24" y="86" width="360" height="382" rx="20" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+    <rect x="44" y="106" width="170" height="34" rx="17" fill="#e8ebf2"/>
+    <text x="129" y="129" text-anchor="middle" style="fill:#25283a;font-size:15px;font-weight:700">talking</text>
+    <text x="44" y="164" class="small">say／think直後</text>
+    <g>
+    <circle cx="100" cy="253" r="37.44" fill="#ffd5b5" stroke="#b85d63" stroke-width="2.88"/>
+    <path d="M 65.44 236.44 Q 100 196.84 134.56 236.44 Q 118 219.16 100 228.52 Q 82 219.16 65.44 236.44" fill="#50354f"/>
+    <ellipse cx="87.04" cy="244.36" rx="2.88" ry="5.04" fill="#3b2d3c"/>
+       <ellipse cx="112.96" cy="244.36" rx="2.88" ry="5.04" fill="#3b2d3c"/>
+    <ellipse cx="100" cy="267.4" rx="6.4799999999999995" ry="8.64" fill="#7c2945"/>
+  </g>
+    <g>
+    <g transform="translate(139 172)" data-bubble-renderer="canonical" data-bubble-style="NORMAL" data-bubble-tail-direction="270"><title>Animation mode Bubble preview</title><path data-animation-mode-bubble-path="union" d="M 24.0000 71.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 196.0000 24.0000 L 198.8158 24.2216 L 201.5623 24.8810 L 204.1718 25.9619 L 206.5801 27.4377 L 208.7279 29.2721 L 210.5623 31.4199 L 212.0381 33.8282 L 213.1190 36.4377 L 213.7784 39.1842 L 214.0000 42.0000 L 214.0000 118.0000 L 213.7784 120.8158 L 213.1190 123.5623 L 212.0381 126.1718 L 210.5623 128.5801 L 208.7279 130.7279 L 206.5801 132.5623 L 204.1718 134.0381 L 201.5623 135.1190 L 198.8158 135.7784 L 196.0000 136.0000 L 42.0000 136.0000 L 39.1842 135.7784 L 36.4377 135.1190 L 33.8282 134.0381 L 31.4199 132.5623 L 29.2721 130.7279 L 27.4377 128.5801 L 25.9619 126.1718 L 24.8810 123.5623 L 24.2216 120.8158 L 24.0000 118.0000 L 24.0000 89.0000 L 6.0000 80.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="119" y="85.95" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="17">海へ出発！</text></g>
+
+  </g>
+    <g transform="translate(0 0)">
+          <circle cx="56" cy="355" r="7" fill="#20a464"/>
+          <text x="74" y="361" class="body">目パチ</text>
+          <text x="352" y="361" text-anchor="end" class="body" style="font-weight:700">実行</text>
+        </g>
+<g transform="translate(0 35)">
+          <circle cx="56" cy="355" r="7" fill="#20a464"/>
+          <text x="74" y="361" class="body">口パク</text>
+          <text x="352" y="361" text-anchor="end" class="body" style="font-weight:700">実行</text>
+        </g>
+<g transform="translate(0 70)">
+          <circle cx="56" cy="355" r="7" fill="#c7ccd8"/>
+          <text x="74" y="361" class="body">次へ</text>
+          <text x="352" y="361" text-anchor="end" class="body" style="font-weight:700">非表示</text>
+        </g>
+  </g>
+  <g>
+    <rect x="420" y="86" width="360" height="382" rx="20" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+    <rect x="440" y="106" width="170" height="34" rx="17" fill="#ff6680"/>
+    <text x="525" y="129" text-anchor="middle" style="fill:#ffffff;font-size:15px;font-weight:700">awaiting-continue</text>
+    <text x="440" y="164" class="small">ユーザの「次へ」操作待ち</text>
+    <g>
+    <circle cx="496" cy="253" r="37.44" fill="#ffd5b5" stroke="#b85d63" stroke-width="2.88"/>
+    <path d="M 461.44 236.44 Q 496 196.84 530.56 236.44 Q 514 219.16 496 228.52 Q 478 219.16 461.44 236.44" fill="#50354f"/>
+    <path d="M 478 244.36 Q 483.04 248.68 488.08000000000004 244.36" fill="none" stroke="#3b2d3c" stroke-width="2.16" stroke-linecap="round"/>
+       <path d="M 503.91999999999996 244.36 Q 508.96 248.68 514 244.36" fill="none" stroke="#3b2d3c" stroke-width="2.16" stroke-linecap="round"/>
+    <path d="M 488.8 268.12 Q 496 271.72 503.2 268.12" fill="none" stroke="#7c2945" stroke-width="2.16" stroke-linecap="round"/>
+  </g>
+    <g>
+    <g transform="translate(535 172)" data-bubble-renderer="canonical" data-bubble-style="NORMAL" data-bubble-tail-direction="270"><title>Animation mode Bubble preview</title><path data-animation-mode-bubble-path="union" d="M 24.0000 71.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 196.0000 24.0000 L 198.8158 24.2216 L 201.5623 24.8810 L 204.1718 25.9619 L 206.5801 27.4377 L 208.7279 29.2721 L 210.5623 31.4199 L 212.0381 33.8282 L 213.1190 36.4377 L 213.7784 39.1842 L 214.0000 42.0000 L 214.0000 118.0000 L 213.7784 120.8158 L 213.1190 123.5623 L 212.0381 126.1718 L 210.5623 128.5801 L 208.7279 130.7279 L 206.5801 132.5623 L 204.1718 134.0381 L 201.5623 135.1190 L 198.8158 135.7784 L 196.0000 136.0000 L 42.0000 136.0000 L 39.1842 135.7784 L 36.4377 135.1190 L 33.8282 134.0381 L 31.4199 132.5623 L 29.2721 130.7279 L 27.4377 128.5801 L 25.9619 126.1718 L 24.8810 123.5623 L 24.2216 120.8158 L 24.0000 118.0000 L 24.0000 89.0000 L 6.0000 80.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="119" y="85.95" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="17">海へ出発！</text></g>
+    <g transform="translate(0 0)">
+             <path d="M 691 254 l 18 0 l -9 12 z" fill="#ff6680"/>
+             <path d="M 691 273 l 18 0 l -9 12 z" fill="#d94b68"/>
+           </g>
+  </g>
+    <g transform="translate(0 0)">
+          <circle cx="452" cy="355" r="7" fill="#20a464"/>
+          <text x="470" y="361" class="body">目パチ</text>
+          <text x="748" y="361" text-anchor="end" class="body" style="font-weight:700">実行</text>
+        </g>
+<g transform="translate(0 35)">
+          <circle cx="452" cy="355" r="7" fill="#c7ccd8"/>
+          <text x="470" y="361" class="body">口パク</text>
+          <text x="748" y="361" text-anchor="end" class="body" style="font-weight:700">停止</text>
+        </g>
+<g transform="translate(0 70)">
+          <circle cx="452" cy="355" r="7" fill="#20a464"/>
+          <text x="470" y="361" class="body">次へ</text>
+          <text x="748" y="361" text-anchor="end" class="body" style="font-weight:700">ループ</text>
+        </g>
+  </g>
+  <g>
+    <rect x="816" y="86" width="360" height="382" rx="20" fill="#ffffff" stroke="#d9deea" stroke-width="2"/>
+    <rect x="836" y="106" width="170" height="34" rx="17" fill="#e8ebf2"/>
+    <text x="921" y="129" text-anchor="middle" style="fill:#25283a;font-size:15px;font-weight:700">idle</text>
+    <text x="836" y="164" class="small">表示したまま静止</text>
+    <g>
+    <circle cx="892" cy="253" r="37.44" fill="#ffd5b5" stroke="#b85d63" stroke-width="2.88"/>
+    <path d="M 857.44 236.44 Q 892 196.84 926.56 236.44 Q 910 219.16 892 228.52 Q 874 219.16 857.44 236.44" fill="#50354f"/>
+    <ellipse cx="879.04" cy="244.36" rx="2.88" ry="5.04" fill="#3b2d3c"/>
+       <ellipse cx="904.96" cy="244.36" rx="2.88" ry="5.04" fill="#3b2d3c"/>
+    <path d="M 884.8 268.12 Q 892 271.72 899.2 268.12" fill="none" stroke="#7c2945" stroke-width="2.16" stroke-linecap="round"/>
+  </g>
+    <g>
+    <g transform="translate(931 172)" data-bubble-renderer="canonical" data-bubble-style="NORMAL" data-bubble-tail-direction="270"><title>Animation mode Bubble preview</title><path data-animation-mode-bubble-path="union" d="M 24.0000 71.0000 L 24.0000 42.0000 L 24.2216 39.1842 L 24.8810 36.4377 L 25.9619 33.8282 L 27.4377 31.4199 L 29.2721 29.2721 L 31.4199 27.4377 L 33.8282 25.9619 L 36.4377 24.8810 L 39.1842 24.2216 L 42.0000 24.0000 L 196.0000 24.0000 L 198.8158 24.2216 L 201.5623 24.8810 L 204.1718 25.9619 L 206.5801 27.4377 L 208.7279 29.2721 L 210.5623 31.4199 L 212.0381 33.8282 L 213.1190 36.4377 L 213.7784 39.1842 L 214.0000 42.0000 L 214.0000 118.0000 L 213.7784 120.8158 L 213.1190 123.5623 L 212.0381 126.1718 L 210.5623 128.5801 L 208.7279 130.7279 L 206.5801 132.5623 L 204.1718 134.0381 L 201.5623 135.1190 L 198.8158 135.7784 L 196.0000 136.0000 L 42.0000 136.0000 L 39.1842 135.7784 L 36.4377 135.1190 L 33.8282 134.0381 L 31.4199 132.5623 L 29.2721 130.7279 L 27.4377 128.5801 L 25.9619 126.1718 L 24.8810 123.5623 L 24.2216 120.8158 L 24.0000 118.0000 L 24.0000 89.0000 L 6.0000 80.0000 Z" fill="#fff4cc" stroke="#6f5b45" stroke-width="3" stroke-linejoin="round" data-boolean-operation="union" data-tail-base-on-border="true" /><text x="119" y="85.95" text-anchor="middle" fill="#25283a" font-family="Noto Sans JP, sans-serif" font-size="17">海へ出発！</text></g>
+
+  </g>
+    <g transform="translate(0 0)">
+          <circle cx="848" cy="355" r="7" fill="#20a464"/>
+          <text x="866" y="361" class="body">目パチ</text>
+          <text x="1144" y="361" text-anchor="end" class="body" style="font-weight:700">実行</text>
+        </g>
+<g transform="translate(0 35)">
+          <circle cx="848" cy="355" r="7" fill="#c7ccd8"/>
+          <text x="866" y="361" class="body">口パク</text>
+          <text x="1144" y="361" text-anchor="end" class="body" style="font-weight:700">停止</text>
+        </g>
+<g transform="translate(0 70)">
+          <circle cx="848" cy="355" r="7" fill="#c7ccd8"/>
+          <text x="866" y="361" class="body">次へ</text>
+          <text x="1144" y="361" text-anchor="end" class="body" style="font-weight:700">非表示</text>
+        </g>
+  </g>
+</svg>

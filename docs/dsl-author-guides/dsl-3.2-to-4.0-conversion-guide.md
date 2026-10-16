@@ -164,6 +164,15 @@ remoteのまま内容を固定する方法もあります。
 
 ### ポーズ関連の変換で起きること
 
+| 3.1／3.2の記述                      | 4.0の記述                                            | 変換規則                                                         | 変換を止める・警告する条件                         |
+| ----------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- |
+| `TMPoseURL`                         | `assets`の`kind: poseModel`                          | 既定はremote参照。`--pose-models`で対応付けたURLはローカル`file` | `Actor:pose`があるのに`TMPoseURL`がなければerror   |
+| `Actor:pose`                        | `Actor.pose`の`steps`                                | pose名の順にすべて成立させるstepへ変換する                       | 余分なskin／soundはwarning付きで除外。不足分は省略 |
+| `poseRecog`                         | `poseRecognition.sequence.confidenceThreshold`       | 同じ値を使う（0〜1）                                             | —                                                  |
+| `poseCharge`                        | `poseRecognition.sequence.fullConfidenceHoldSeconds` | `10 / poseCharge`                                                | —                                                  |
+| `poseIdle`                          | —                                                    | `0`だけを受け付ける                                              | `0`以外はerror                                     |
+| SB3側でAsync Inputから1件を選ぶ処理 | 生成しない                                           | `poseInputToChangeScene`を推測して作らない                       | —                                                  |
+
 sceneで`Actor:pose`を使っているのに`TMPoseURL`がない場合はerrorです。
 3.1／3.2の`Actor:pose`は候補から1件を選ぶactionではありません。converterはpose名の順にすべて成立させる
 `Actor.pose.steps`へ変換します。pose数より少ないskin／soundは省略し、余分な要素はwarning付きで除外します。

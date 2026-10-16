@@ -33,6 +33,21 @@ Copyright © 2026 Hiroya Kubo.
 [Mozilla Public License 2.0](../LICENSES/MPL-2.0.txt)（MPL-2.0）が適用されます。
 図版を含む生成PDFやHTMLでも、該当図版部分のライセンスは変わりません。
 
+## TurboWarp Bubbleの説明図
+
+次の図版は
+[kubohiroya/turbowarp-bubbleの固定commit `ad5b008`](https://github.com/kubohiroya/turbowarp-bubble/tree/ad5b008e89f95c0182977f3e2e77d58fc2041b16/docs/assets)
+から内容を変更せず、ファイル名へ`turbowarp-bubble-`を付けて収録した第三者素材です。
+
+- `images/turbowarp-bubble-bubble-style-gallery.svg`
+- `images/turbowarp-bubble-placement-guide.svg`
+- `images/turbowarp-bubble-actor-transform-guide.svg`
+- `images/turbowarp-bubble-animation-mode-guide.svg`
+
+これら4図版にはCC BY-SA 4.0ではなく、引用元の
+[Mozilla Public License 2.0](../LICENSES/MPL-2.0.txt)（MPL-2.0）が適用されます。
+図版を含む生成PDFやHTMLでも、該当図版部分のライセンスは変わりません。
+
 ## 機能拡張ガイドの実画面キャプチャ
 
 `images/extension-editor-svg-text.png`を除く`images/extension-editor-*.png`の15図版は、2026年8月4日に
