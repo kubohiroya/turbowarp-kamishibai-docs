@@ -47,6 +47,10 @@ pnpm exec turbowarp-kamishibai convert-dsl4 \
 `TMPoseURL`は既定でlazy remoteの認識モデル（`kind: recognitionModel`）へ変換されます。内容を固定した自己完結SB3を作る場合だけ、
 `--pose-models`でローカルのモデルディレクトリへ置き換えます。
 
+> **4.0.0-rc.10〜rc.22を使う場合:** これらの版の`convert-dsl4`は`TMPoseURL`を受理せず、
+> `K4-CONVERT-COMMAND-UNSUPPORTED`で止まります（[turbowarp-kamishibai-app#880](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/880)で修正予定）。
+> 変換用にコピーした台本で`TMPoseURL=`を`TMURL=`へ書き換えてから変換してください。元の3.2台本は変更しません。
+
 ```bash
 pnpm exec turbowarp-kamishibai convert-dsl4 \
   --input source.txt \

@@ -325,6 +325,7 @@ test('documents the DSL 3.2 to 4.0 converter as a dedicated migration guide', ()
     dsl4ConversionGuide,
     /`TMPoseURL`は既定でlazy remoteの認識モデル（`kind: recognitionModel`）へ変換/u,
   );
+  assert.match(dsl4ConversionGuide, /`TMPoseURL=`を`TMURL=`へ書き換えてから変換/u);
   assert.match(dsl4ConversionGuide, /model directoryをproject内へ取得/u);
   assert.match(dsl4ConversionGuide, /poseInputToChangeScene`を生成しません/u);
   assert.match(dsl4ConversionGuide, /fullConfidenceHoldSeconds = 10 \/ poseCharge/u);
