@@ -79,7 +79,7 @@ test('defines rc.8 surfaces, release stops, physical rerun, and immutable rollba
   }
 
   assert.match(guide, /camera frameは保存しません/u);
-  assert.match(guide, /TurboWarp TM 1\.12\.0/u);
+  assert.match(guide, /TurboWarp Teachable Machine 1\.12\.0/u);
   assert.match(guide, /Bubble 0\.10\.0/u);
   assert.match(guide, /bubbleClosePolicies/u);
   assert.match(guide, /23個のcore action/u);

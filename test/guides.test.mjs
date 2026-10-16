@@ -416,7 +416,7 @@ test('keeps the extension guide as an index, bundle explanation, and sixteen two
   assert.equal((extensionGuide.match(/TurboWarp紙芝居での利用例 2 \/ 2/gu) ?? []).length, 16);
   assert.match(
     extensionGuide,
-    /^## TurboWarp TM — 学習済みモデルでカメラ映像のポーズを認識する /mu,
+    /^## TurboWarp Teachable Machine — 学習済みモデルでカメラ映像のポーズを認識する /mu,
   );
   assert.doesNotMatch(extensionGuide, /cameraをpose名へ変える/u);
   assert.match(extensionGuide, /^## Web Link — HTTPS URLを検証し、新しいタブで開く /mu);

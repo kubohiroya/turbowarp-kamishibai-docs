@@ -108,7 +108,7 @@ converterもblockを生成・変更しません。
 ### 既定: 公開URLのモデルをそのまま参照する
 
 `--pose-models`を指定しない場合、converterは`TMPoseURL`を次の通常のremote poseModelへ変換します。
-DSL 4.0のposeModelは、`delivery: remote`と`source.url`だけの通常のTurboWarp TM directory参照に対応します。
+DSL 4.0のposeModelは、`delivery: remote`と`source.url`だけの通常のTurboWarp Teachable Machine directory参照に対応します。
 converterはこの変換でネットワーク取得やキャッシュ参照を行わず、integrity等も要求しません。実行時には、URLで公開されている
 その時点のモデルを読み込みます。
 

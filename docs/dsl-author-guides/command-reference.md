@@ -429,7 +429,7 @@ TMPoseURL=ポーズモデルURL
 
 | 項目 | 内容 |
 |---|---|
-| 役割 | TurboWarp TMモデルを読み込む |
+| 役割 | TurboWarp Teachable Machineモデルを読み込む |
 | 必須 | `pose` を使うシーンでは原則必須 |
 | 値 | モデルURL |
 | 実行タイミング | シーン内のアクション実行前にモデル読み込みを行う |
@@ -867,7 +867,7 @@ action=Hero:sequence:Hero1,StepSound,Hero2:0,0.5
 
 ## ポーズ認識アクション
 
-`pose`は、見ている人が指定のポーズをとるまで物語を待たせるアクターアクションです。使うシーンには、あらかじめ`TMPoseURL`でTurboWarp TMモデルを指定しておきます。ポーズ名の選び方や姿勢の設計は[ファイル作成マニュアル](dsl-manual.md)で扱います。
+`pose`は、見ている人が指定のポーズをとるまで物語を待たせるアクターアクションです。使うシーンには、あらかじめ`TMPoseURL`でTurboWarp Teachable Machineモデルを指定しておきます。ポーズ名の選び方や姿勢の設計は[ファイル作成マニュアル](dsl-manual.md)で扱います。
 
 ### 基本形
 
@@ -892,7 +892,7 @@ action=Urashima:pose:Skin1,Skin2,Skin3:pose1,pose2,pose3:Sound1,Sound2,Sound3
 | 項目 | 説明 |
 |---|---|
 | スキン名リスト | 各ポーズ待ちのときに表示するアクター画像 |
-| ポーズ名リスト | TurboWarp TMモデルに登録されたラベル名 |
+| ポーズ名リスト | TurboWarp Teachable Machineモデルに登録されたラベル名 |
 | 効果音リスト | 各ポーズ成功時に鳴らす音 |
 
 ### 実行時の流れ

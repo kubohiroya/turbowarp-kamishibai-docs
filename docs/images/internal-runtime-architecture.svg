@@ -124,7 +124,7 @@
   <text class="detail" x="845" y="355">Runtime / Thread Variables</text>
   <text class="detail" x="845" y="390">Asset Manager</text>
   <text class="detail" x="845" y="425">Async Input</text>
-  <text class="detail" x="845" y="460">TurboWarp TM</text>
+  <text class="detail" x="845" y="460" style="font-size:14px">TurboWarp Teachable Machine</text>
   <text class="detail" x="845" y="495">Text Lines / Expression</text>
   <text class="detail" x="845" y="530">Timers / Files / Text</text>
   <text class="code" x="845" y="580">Gallery + embedded</text>

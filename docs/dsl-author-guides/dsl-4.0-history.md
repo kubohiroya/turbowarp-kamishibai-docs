@@ -62,7 +62,7 @@ Schema SHA-256を固定します。
 
 ### rc.8からの変更
 
-- TurboWarp TMの新しいExtension IDと`kubohiroyatm` runtime IDへ移行する
+- TurboWarp Teachable Machineの新しいExtension IDと`kubohiroyatm` runtime IDへ移行する
 - TurboWarp-Kamishibaiの表示名、リポジトリURL、Pages URLを現行名へ揃える
 - TurboWarp-TM 2.0.0、Bubble 0.11.0、関連TurboWarp機能拡張のexact pinへ更新する
 - 公開サンプルのSB3、Web版、lockをrc.10 freeze commitから再生成する

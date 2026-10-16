@@ -27,7 +27,7 @@ TurboWarp紙芝居は、TurboWarpで作られた紙芝居にカメラ映像を�
 
 <figure class="application-flow"><figcaption>作品からプレイまで</figcaption><div><span>台本・画像・音声</span><b>→</b><span>事前検査</span><b>→</b><span>素材登録・Loading</span><b>→</b><span>シーン実行</span></div></figure>
 
-<div class="application-columns"><section><p class="application-subhead">共通ランタイム</p><ul><li>Asset Managerがローカル素材とURL素材を名前で管理</li><li>Kamishibai Runtimeが実行前に台本を検査</li><li>TurboWarp TMとAsync Inputが入力をシーン遷移へ渡す</li><li>不正な台本は行番号付きSVG診断として画面表示</li></ul></section><section><p class="application-subhead">四つの成果物</p><dl><dt><code>generic</code></dt><dd>起動後に台本を選ぶ汎用版</dd><dt><code>editor</code></dt><dd>TurboWarpで編集できる版</dd><dt><code>player</code></dt><dd>作品を埋め込んだ実行専用版</dd><dt>Web版</dt><dd>ブラウザーから直接開く公開版</dd></dl></section></div>
+<div class="application-columns"><section><p class="application-subhead">共通ランタイム</p><ul><li>Asset Managerがローカル素材とURL素材を名前で管理</li><li>Kamishibai Runtimeが実行前に台本を検査</li><li>TurboWarp Teachable MachineとAsync Inputが入力をシーン遷移へ渡す</li><li>不正な台本は行番号付きSVG診断として画面表示</li></ul></section><section><p class="application-subhead">四つの成果物</p><dl><dt><code>generic</code></dt><dd>起動後に台本を選ぶ汎用版</dd><dt><code>editor</code></dt><dd>TurboWarpで編集できる版</dd><dt><code>player</code></dt><dd>作品を埋め込んだ実行専用版</dd><dt>Web版</dt><dd>ブラウザーから直接開く公開版</dd></dl></section></div>
 
 <p class="application-callout"><strong>設計上の利点:</strong> 物語を替えてもランタイムを作り直す必要がありません。作品と実行基盤を分離するため、体験会では素材と台本の編集に集中できます。</p>
 
@@ -52,10 +52,10 @@ TurboWarp紙芝居は、TurboWarpで作られた紙芝居にカメラ映像を�
 
 <p class="application-page-label">4 / 8　浦島太郎による具体例</p>
 
-台本は、表示する素材、待つ入力、次のシーンを順に宣言します。TurboWarp TMの認識結果は
+台本は、表示する素材、待つ入力、次のシーンを順に宣言します。TurboWarp Teachable Machineの認識結果は
 単なる分類名ではなく、物語のランタイムが待っている入力イベントとして扱われます。
 
-<figure class="application-flow"><figcaption>参加者の動きが物語へ届くまで</figcaption><div><span>身体のポーズ</span><b>→</b><span>TurboWarp TMで分類</span><b>→</b><span>Async Inputで待機</span><b>→</b><span>シーンのアクションを再開</span></div></figure>
+<figure class="application-flow"><figcaption>参加者の動きが物語へ届くまで</figcaption><div><span>身体のポーズ</span><b>→</b><span>TurboWarp Teachable Machineで分類</span><b>→</b><span>Async Inputで待機</span><b>→</b><span>シーンのアクションを再開</span></div></figure>
 
 <div class="application-columns"><section><p class="application-subhead">台本側の指定</p><pre><code>kamishibai=3.2
 sceneLabel=ride-turtle
@@ -88,7 +88,7 @@ AIではないプログラムを一つの作品へ組み合わせます。何を
 教材は完成品を眺めるだけではなく、下絵、画像生成、認識モデルの学習、TurboWarpへの登録、
 台本編集、プレイ確認までを一つの制作の循環として体験させます。
 
-<div class="application-image-grid"><figure><img src="../images/tmpose-training.png" alt="TurboWarp TMのトレーニング進捗画面"><figcaption>ポーズを学習する</figcaption></figure><figure><img src="../images/image25.png" alt="棒人間の下絵をもとに乙姫のポーズ画像を生成する画面"><figcaption>画像をつくる</figcaption></figure><figure><img src="../images/image11.png" alt="片手を上げて片膝を曲げた棒人間のポーズ下絵"><figcaption>考える・描く</figcaption></figure><figure><img src="../images/turbowarp-costumes.png" alt="TurboWarpにPrincessとpose画像をcostumeとして登録した画面"><figcaption>コスチュームへ登録する</figcaption></figure></div>
+<div class="application-image-grid"><figure><img src="../images/tmpose-training.png" alt="TurboWarp Teachable Machineのトレーニング進捗画面"><figcaption>ポーズを学習する</figcaption></figure><figure><img src="../images/image25.png" alt="棒人間の下絵をもとに乙姫のポーズ画像を生成する画面"><figcaption>画像をつくる</figcaption></figure><figure><img src="../images/image11.png" alt="片手を上げて片膝を曲げた棒人間のポーズ下絵"><figcaption>考える・描く</figcaption></figure><figure><img src="../images/turbowarp-costumes.png" alt="TurboWarpにPrincessとpose画像をcostumeとして登録した画面"><figcaption>コスチュームへ登録する</figcaption></figure></div>
 
 <div class="application-cycle"><span>ポーズを設計</span><b>→</b><span>人物画像を生成</span><b>→</b><span>認識モデルを学習</span><b>→</b><span>台本と素材を編集</span><b>→</b><span>プレイして改善</span></div>
 

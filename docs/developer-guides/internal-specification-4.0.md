@@ -50,21 +50,21 @@ preview transactionの責務境界を、完成実装に対応させて記録し�
 
 ## 用語 {#terminology .unnumbered}
 
-| 用語            | 本書での意味                                                                           |
-| --------------- | -------------------------------------------------------------------------------------- |
-| project         | `project.source.json`、entry YAML、included YAML、local assetを含むdirectory境界       |
-| source          | `.k4.yml`、`.k4.yaml`、`.kamishibai.yml`、`.kamishibai.yaml`のいずれかで終わるYAML     |
-| Source Graph    | entryから`include`で到達するsource、edge、宣言、asset pathを持つimmutable graph        |
-| generation      | sourceとassetを同じ時点の検証済みsnapshotとして識別する単位                            |
-| `StoryDocument` | 検証済みYAMLをruntime用に正規化し、deep-freezeした中間表現                             |
-| source frontend | canonicalize、YAML、Schema、意味・式・資源上限検証を一つの結果へまとめるpure境界       |
-| runtime session | 一つの`StoryDocument`、実行状態、platform environmentを所有する単位                    |
-| Action Context  | actionごとの`AbortSignal`、generation、変数snapshot、Structured Data参照を渡す実行文脈 |
-| port            | runtime coreがplatform固有処理を呼ぶ関数集合                                           |
-| adapter         | TurboWarp VM、Asset Manager、TurboWarp TM、DOMなどをport契約へ変換する外側のmodule     |
-| quiesce         | live reload前に、action cleanupが完了した再開可能境界へruntimeを移す処理               |
-| commit          | 検証・prepare済みcandidateをcurrent generationとして公開する処理                       |
-| rollback        | candidateのactivate失敗時にcandidate資源を戻し、current generationを維持する処理       |
+| 用語            | 本書での意味                                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------- |
+| project         | `project.source.json`、entry YAML、included YAML、local assetを含むdirectory境界                  |
+| source          | `.k4.yml`、`.k4.yaml`、`.kamishibai.yml`、`.kamishibai.yaml`のいずれかで終わるYAML                |
+| Source Graph    | entryから`include`で到達するsource、edge、宣言、asset pathを持つimmutable graph                   |
+| generation      | sourceとassetを同じ時点の検証済みsnapshotとして識別する単位                                       |
+| `StoryDocument` | 検証済みYAMLをruntime用に正規化し、deep-freezeした中間表現                                        |
+| source frontend | canonicalize、YAML、Schema、意味・式・資源上限検証を一つの結果へまとめるpure境界                  |
+| runtime session | 一つの`StoryDocument`、実行状態、platform environmentを所有する単位                               |
+| Action Context  | actionごとの`AbortSignal`、generation、変数snapshot、Structured Data参照を渡す実行文脈            |
+| port            | runtime coreがplatform固有処理を呼ぶ関数集合                                                      |
+| adapter         | TurboWarp VM、Asset Manager、TurboWarp Teachable Machine、DOMなどをport契約へ変換する外側のmodule |
+| quiesce         | live reload前に、action cleanupが完了した再開可能境界へruntimeを移す処理                          |
+| commit          | 検証・prepare済みcandidateをcurrent generationとして公開する処理                                  |
+| rollback        | candidateのactivate失敗時にcandidate資源を戻し、current generationを維持する処理                  |
 
 ## 権威関係とアーキテクチャ {#architecture}
 
@@ -83,7 +83,7 @@ canonical diagnosticとして共通surfaceへ投影されます。_
 `Version 4.0.0-rc.8`のタイトル、invalid保存時の診断とcurrent integrity維持を観測した結果と
 突き合わせています。
 
-<figure class="concept-flow dsl4-implementation-map"><figcaption>固定実装をsourceから実画面まで追う主要呼出し経路</figcaption><div class="concept-flow__track"><span><code>createDsl4SourceGraph</code><small>source-graph.js<br>entryとincludeを有限探索</small></span><b aria-hidden="true">→</b><span><code>createDsl4SourceGraphFrontend.parse</code><small>source-graph-frontend.js<br>合成後にsingle-source frontendへ委譲</small></span><b aria-hidden="true">→</b><span><code>createDsl4SourceFrontend.parse</code><small>source-frontend.js<br>YAML・Schema・semantic・Action Registry</small></span><b aria-hidden="true">→</b><span><code>createStoryDocument</code><small>story-document.js<br>正規化してdeep-freeze</small></span><b aria-hidden="true">→</b><span><code>createDsl4RuntimeStartup</code><small>runtime-startup.js<br>componentを検証しsessionを所有</small></span><b aria-hidden="true">→</b><span><code>createDsl4RuntimeController.dispatch</code><small>runtime-controller.js<br>sceneとactionを順にportへ渡す</small></span><b aria-hidden="true">→</b><span><code>createDsl4TurboWarpRuntimeEnvironment</code><small>turbowarp-runtime-host.js<br>portとlifecycleを構成</small></span></div><div class="dsl4-implementation-map__ports"><section><strong>アセットとLoading</strong><code>platform-asset-session.js</code><span>Asset Manager、背景、音、ポーズモデルをprepare・release</span></section><section><strong>表示と発話</strong><code>media-action-port.js</code><code>actor-action-port.js</code><span>Stage、Actor、Bubble、SVG Textへ反映</span></section><section><strong>入力とポーズ</strong><code>async-input-action-port.js</code><code>pose-action-port.js</code><span>キー、タッチ、TurboWarp TM、カメラ、feedbackへ接続</span></section></div><p class="concept-flow__note">runtime coreは<code>stage</code>、<code>say</code>、<code>pose</code>等のcommand名でportを呼びます。TurboWarp VM、DOM、cameraをcoreから直接参照しないため、同じ<code>StoryDocument</code>をpreviewと配布成果物で共有できます。</p></figure>
+<figure class="concept-flow dsl4-implementation-map"><figcaption>固定実装をsourceから実画面まで追う主要呼出し経路</figcaption><div class="concept-flow__track"><span><code>createDsl4SourceGraph</code><small>source-graph.js<br>entryとincludeを有限探索</small></span><b aria-hidden="true">→</b><span><code>createDsl4SourceGraphFrontend.parse</code><small>source-graph-frontend.js<br>合成後にsingle-source frontendへ委譲</small></span><b aria-hidden="true">→</b><span><code>createDsl4SourceFrontend.parse</code><small>source-frontend.js<br>YAML・Schema・semantic・Action Registry</small></span><b aria-hidden="true">→</b><span><code>createStoryDocument</code><small>story-document.js<br>正規化してdeep-freeze</small></span><b aria-hidden="true">→</b><span><code>createDsl4RuntimeStartup</code><small>runtime-startup.js<br>componentを検証しsessionを所有</small></span><b aria-hidden="true">→</b><span><code>createDsl4RuntimeController.dispatch</code><small>runtime-controller.js<br>sceneとactionを順にportへ渡す</small></span><b aria-hidden="true">→</b><span><code>createDsl4TurboWarpRuntimeEnvironment</code><small>turbowarp-runtime-host.js<br>portとlifecycleを構成</small></span></div><div class="dsl4-implementation-map__ports"><section><strong>アセットとLoading</strong><code>platform-asset-session.js</code><span>Asset Manager、背景、音、ポーズモデルをprepare・release</span></section><section><strong>表示と発話</strong><code>media-action-port.js</code><code>actor-action-port.js</code><span>Stage、Actor、Bubble、SVG Textへ反映</span></section><section><strong>入力とポーズ</strong><code>async-input-action-port.js</code><code>pose-action-port.js</code><span>キー、タッチ、TurboWarp Teachable Machine、カメラ、feedbackへ接続</span></section></div><p class="concept-flow__note">runtime coreは<code>stage</code>、<code>say</code>、<code>pose</code>等のcommand名でportを呼びます。TurboWarp VM、DOM、cameraをcoreから直接参照しないため、同じ<code>StoryDocument</code>をpreviewと配布成果物で共有できます。</p></figure>
 
 実画面ではsource frontendの成功結果が`VALID: The current immutable source is running.`として表示され、
 reload監視は`Watching`になります。versionを`4.1`へ変えた一時candidateは`K4-VERSION-001`で`INVALID`となり、
@@ -405,7 +405,7 @@ coreはbrowser global、DOM、Scratch API、filesystem、networkを直接参照�
 | adapter／port                | 担当能力                                                              | 主なruntime command・resource                               |
 | ---------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- |
 | `asset-manager-adapter.js`   | backdrop、costume、image、soundの登録・解放                           | Asset Manager composition                                   |
-| `tm-model-adapter.js`        | pose model bundleの登録・label取得・解放                              | TurboWarp TM composition                                    |
+| `tm-model-adapter.js`        | pose model bundleの登録・label取得・解放                              | TurboWarp Teachable Machine composition                     |
 | `platform-asset-session.js`  | asset adapter、verified remote cache、binary entry、Async Inputの所有 | `assetLifecycle`、pose/input composition                    |
 | `media-action-port.js`       | stage、BGM、sound、Actor skin                                         | `stage`、`bgm`、`sound`、`setSkin`                          |
 | `actor-action-port.js`       | actor表示、発話、移動、透明度                                         | `show`、`hide`、`say`、`think`、`moveTo`、`setTransparency` |
@@ -447,7 +447,7 @@ file出力は`buildDsl4RuntimeComponentFile()`がcandidate directoryを検証し
 6. stop、failure、disposeで全resourceを逆所有順に解放する。
 
 Poseモデルについて`poseRecognition.modelInitialization.policy`が`latest-needed`の場合、preload coordinatorの
-最新要求をTurboWarp TM 1.12.0 Compositionへ渡し、重い初期化をactive 1件＋最新pending 1件へ制限します。
+最新要求をTurboWarp Teachable Machine 1.12.0 Compositionへ渡し、重い初期化をactive 1件＋最新pending 1件へ制限します。
 superseded requestはasset lifecycleの`AbortSignal`でcancelし、registryへ公開しません。Aの実行中にB、Cが
 要求された場合はBを開始せず、Aの安全な終了後にCだけを開始します。pose不要sceneへskipした場合はpendingを
 破棄します。
@@ -458,8 +458,8 @@ decode、SHA検証、TensorFlow／PoseNet初期化と並行できます。未検
 session disposeがcameraを解放します。既定値`legacy`／`parallel: false`はこの最適化を無効化します。
 
 `poseRecognition.preview.overlay`がある場合、hostは正規化済みの表示、joint style、bone style、最低confidence、
-confidence連動をTurboWarp TM 1.12.0の公開Composition APIへ順番に適用します。overlay専用feature flagはありません。
-camera canvas、2D context、推論readback、SVG要素はTurboWarp TMが所有し、hostはDOMやTensorFlow.js内部経路をpatchしません。
+confidence連動をTurboWarp Teachable Machine 1.12.0の公開Composition APIへ順番に適用します。overlay専用feature flagはありません。
+camera canvas、2D context、推論readback、SVG要素はTurboWarp Teachable Machineが所有し、hostはDOMやTensorFlow.js内部経路をpatchしません。
 
 remote assetは自動的に許可しません。`createDsl4RemoteAssetLifecycle()`へhost loaderを明示注入した場合だけ
 有効です。通常のposeModelはHTTPS directory URLから`model.json`、`metadata.json`、宣言されたweightsを

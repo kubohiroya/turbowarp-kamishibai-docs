@@ -282,7 +282,7 @@ SVG skin生成と停止処理は、validation成功・失敗が確定した後�
 4. PresenterがSVG skinを生成し、`prompt`へ直接適用する
 5. error表示だけをvisibleにする
 
-今回のpreflightはカメラ開始前に実行するため、TurboWarp TM カメラの個別停止を通常は必要としません。将来runtime中エラーを同じPresenterへ渡す場合は、カメラ停止を別途契約化します。
+今回のpreflightはカメラ開始前に実行するため、TurboWarp Teachable Machine カメラの個別停止を通常は必要としません。将来runtime中エラーを同じPresenterへ渡す場合は、カメラ停止を別途契約化します。
 
 ### 11.3 再実行とcleanup
 

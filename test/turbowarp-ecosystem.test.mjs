@@ -43,7 +43,7 @@ test('publishes every ecosystem repository from the machine-readable inventory',
   }
 
   assert.deepEqual(
-    inventory.repositories.find(({id}) => id === 'turbowarp-tm')?.extensionId,
+    inventory.repositories.find(({id}) => id === 'turbowarp-teachable-machine')?.extensionId,
     'kubohiroyatm',
   );
   assert.ok(inventory.repositories.some(({category}) => category === 'upstream-fork'));

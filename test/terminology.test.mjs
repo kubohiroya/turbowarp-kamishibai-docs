@@ -82,3 +82,22 @@ test('keeps legacy pose-era terminology out of current prose', () => {
 
   assert.deepEqual(violations, []);
 });
+
+test('uses the renamed TurboWarp Teachable Machine and TurboWarp紙芝居 product names', () => {
+  const files = [
+    ...readdirSync(repositoryRoot, {withFileTypes: true})
+      .filter((entry) => entry.isFile() && extname(entry.name) === '.md')
+      .map((entry) => join(repositoryRoot, entry.name)),
+    ...collectTextFiles(join(repositoryRoot, 'docs')),
+    ...collectTextFiles(join(repositoryRoot, 'site')),
+    ...collectTextFiles(join(repositoryRoot, 'sources')),
+  ];
+  const offenders = files
+    .filter((file) =>
+      /TurboWarp TM(?![A-Za-z])|TM紙芝居|kubohiroya\.github\.io\/turbowarp-tm\//u.test(
+        readFileSync(file, 'utf8'),
+      ),
+    )
+    .map((file) => relative(repositoryRoot, file));
+  assert.deepEqual(offenders, []);
+});

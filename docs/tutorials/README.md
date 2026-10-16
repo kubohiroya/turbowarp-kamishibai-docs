@@ -101,7 +101,7 @@ YAMLはコピー可能なcode blockを正本とします。画像はTurboWarp Ed
 
 ### 実装追跡
 
-2026-08-20時点では、全23 core action block、browser preview、Bubble 0.10.0、TurboWarp TM 1.12.0、
+2026-08-20時点では、全23 core action block、browser preview、Bubble 0.10.0、TurboWarp Teachable Machine 1.12.0、
 ポーズoverlayを含む公開rc.8の固定実装を
 [`29c0dea`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/29c0deadcb98badf94a0244c479ca896dc71f842)
 で確認しています。rc.8を対象とする`browser-authoring` gateを`published`、`ready: true`として追跡します。

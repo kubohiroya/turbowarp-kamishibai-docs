@@ -171,7 +171,7 @@ PRへ分けます。
 変換済み台本とアセット参照を分岐させません。`player`は組み込み台本を予約変数へ保存し、
 タイトル操作後にファイル選択なしで開始します。
 
-`player`へ台本とアセットを組み込んでも、TurboWarp TMモデル、カメラ、外部サービスまで
+`player`へ台本とアセットを組み込んでも、TurboWarp Teachable Machineモデル、カメラ、外部サービスまで
 自動的にオフライン化されるわけではありません。残るオンライン依存は成果物マニフェストと
 公開ページへ明記します。
 
@@ -629,7 +629,7 @@ TurboWarp紙芝居の開発から分離し、他のTurboWarp作品や開発環�
 
 ### TurboWarp 機能拡張
 
-- [`turbowarp-tm`](https://github.com/kubohiroya/turbowarp-tm):
+- [`turbowarp-teachable-machine`](https://github.com/kubohiroya/turbowarp-teachable-machine):
   Teachable Machine Poseモデルを利用したカメラ姿勢認識
 - [`turbowarp-text-lines`](https://github.com/kubohiroya/turbowarp-text-lines):
   テキストの行数取得、行単位の読み出し・分割

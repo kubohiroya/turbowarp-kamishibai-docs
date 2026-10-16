@@ -32,7 +32,7 @@ flowchart LR
   typescript --> vite[Vite Plugin]
   vite --> bundles[standalone bundle / manifest / Composition API]
   bundles --> sb3[SB3 Toolchain]
-  camera[TurboWarp-Camera-Source] --> tm[TurboWarp TM]
+  camera[TurboWarp-Camera-Source] --> tm[TurboWarp Teachable Machine]
   camera --> jsqr[jsQR]
   tm --> async[TurboWarp-Async-Input]
   named[TurboWarp Named Data] --> asset[TurboWarp Asset Cache]
@@ -50,12 +50,12 @@ flowchart LR
   app --> samples[Samples]
 ```
 
-図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp TMとjsQRへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
+図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp Teachable MachineとjsQRへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
 
 ## Inventory Policy
 
 - product name、package name、repository slug、Extension ID、opcodeは同じものとして扱わない。
-- current entryではTurboWarp-Kamishibai、TurboWarp紙芝居、TurboWarp TM、`turbowarp-kamishibai-app`を使う。
+- current entryではTurboWarp-Kamishibai、TurboWarp紙芝居、TurboWarp Teachable Machine、`turbowarp-kamishibai-app`を使う。
 - old product name、old repository slug、old Extension ID、old opcode prefixはHistory、Migration、source provenanceだけに限定する。
 - version numberを本文に固定する場合はinventoryまたはrelease記録と一致検査できる場所へ置く。
 - docsとして扱う本文と独自図はCC BY-SA 4.0、build scriptとsite codeはMPL-2.0、第三者素材は個別noticeに従う。
@@ -64,7 +64,7 @@ flowchart LR
 
 | Product                                                                                          | Surface                               | Responsibility                                                                       | Package                                       |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------- |
-| [TurboWarp TM](https://github.com/kubohiroya/turbowarp-tm)                                       | Standalone extension, Composition API | カメラ由来の姿勢・動作状態をTurboWarp blockとComposition APIへ渡す。                 | `@kubohiroya/turbowarp-tm`                    |
+| [TurboWarp Teachable Machine](https://github.com/kubohiroya/turbowarp-teachable-machine)         | Standalone extension, Composition API | カメラ由来の姿勢・動作状態をTurboWarp blockとComposition APIへ渡す。                 | `@kubohiroya/turbowarp-teachable-machine`     |
 | [TurboWarp-Camera-Source](https://github.com/kubohiroya/turbowarp-camera-source)                 | Standalone extension, Composition API | ブラウザーのカメラ入力を他の機能拡張が扱える映像sourceとして提供する。               | `@kubohiroya/turbowarp-camera-source`         |
 | [TurboWarp jsQR](https://github.com/kubohiroya/turbowarp-jsqr)                                   | Standalone extension, Composition API | カメラ画像からQR codeを読み取り、作品内の入力として扱う。                            | `@kubohiroya/turbowarp-jsqr`                  |
 | [TurboWarp-WebUSB-Pasori](https://github.com/kubohiroya/turbowarp-webusb-pasori)                 | Standalone extension, Composition API | PaSoRiなどのWebUSB機器から読み取った入力をTurboWarpへ接続する。                      | `@kubohiroya/turbowarp-webusb-pasori`         |
@@ -72,10 +72,10 @@ flowchart LR
 | [TurboWarp-Extended-Notification](https://github.com/kubohiroya/turbowarp-extended-notification) | Standalone extension, Composition API | 作品やhost applicationから利用する通知・状態表示の入口を提供する。                   | `@kubohiroya/turbowarp-extended-notification` |
 | [TurboWarp WebRTC](https://github.com/kubohiroya/turbowarp-webrtc)                               | Standalone extension, Composition API | ブラウザー間通信を作品やapplicationの入力・同期経路として扱う。                      | `@kubohiroya/turbowarp-webrtc`                |
 
-### TurboWarp TM
+### TurboWarp Teachable Machine
 
-- Repository: [kubohiroya/turbowarp-tm](https://github.com/kubohiroya/turbowarp-tm)
-- Package: `@kubohiroya/turbowarp-tm`
+- Repository: [kubohiroya/turbowarp-teachable-machine](https://github.com/kubohiroya/turbowarp-teachable-machine)
+- Package: `@kubohiroya/turbowarp-teachable-machine`
 - Surface: Standalone extension, Composition API
 - Input: camera frame, pose model output
 - Output: motion state, TM events
@@ -94,7 +94,7 @@ flowchart LR
 - Input: MediaDevices camera stream
 - Output: video frame source
 - Direct dependencies: none
-- Optional integrations: turbowarp-tm, turbowarp-jsqr
+- Optional integrations: turbowarp-teachable-machine, turbowarp-jsqr
 - Representative use case: 認識系拡張へ共通のカメラ入力を渡す。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -133,7 +133,7 @@ flowchart LR
 - Input: TM event, device event, application event
 - Output: queued input state
 - Direct dependencies: none
-- Optional integrations: turbowarp-tm, turbowarp-webusb-pasori, turbowarp-kamishibai-app
+- Optional integrations: turbowarp-teachable-machine, turbowarp-webusb-pasori, turbowarp-kamishibai-app
 - Representative use case: 複数入力を作品側の分岐条件へ安定して渡す。
 - License policy: MPL-2.0 for software.
 - Status: current
@@ -349,7 +349,7 @@ flowchart LR
 - Surface: Application, CLI
 - Input: script, asset, extension bundle, runtime setting
 - Output: web application, SB3 artifact, publication artifact
-- Direct dependencies: turbowarp-tm, turbowarp-asset-cache, turbowarp-kvs, turbowarp-async-input, turbowarp-runtime-expression, turbowarp-bubble, turbowarp-diagnostic-overlay, sb3-toolchain
+- Direct dependencies: turbowarp-teachable-machine, turbowarp-asset-cache, turbowarp-kvs, turbowarp-async-input, turbowarp-runtime-expression, turbowarp-bubble, turbowarp-diagnostic-overlay, sb3-toolchain
 - Optional integrations: turbowarp-jsqr, turbowarp-webrtc
 - Representative use case: 教材、作品、ワークショップ用の紙芝居を配布・実行する。
 - License policy: Software is MPL-2.0; documents and content follow their own notices.

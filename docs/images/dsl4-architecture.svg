@@ -38,7 +38,7 @@
   <text class="bandLabel" x="55" y="543">PLATFORM ADAPTERS</text>
   <rect class="box platform" x="75" y="565" width="205" height="70"/><text class="label" x="178" y="594" text-anchor="middle">Asset / Loading</text><text class="detail" x="178" y="617" text-anchor="middle">prepare・commit・release</text>
   <rect class="box platform" x="320" y="565" width="205" height="70"/><text class="label" x="423" y="594" text-anchor="middle">Media / Actor</text><text class="detail" x="423" y="617" text-anchor="middle">Stage・Bubble・SVG Text</text>
-  <rect class="box platform" x="565" y="565" width="205" height="70"/><text class="label" x="668" y="594" text-anchor="middle">Input / Pose</text><text class="detail" x="668" y="617" text-anchor="middle">key・pointer・TurboWarp TM</text>
+  <rect class="box platform" x="565" y="565" width="205" height="70"/><text class="label" x="668" y="589" text-anchor="middle">Input / Pose</text><text class="detail" x="668" y="609" text-anchor="middle">key・pointer</text><text class="detail" x="668" y="626" text-anchor="middle" style="font-size:13px">TurboWarp Teachable Machine</text>
   <rect class="box platform" x="810" y="565" width="285" height="70"/><text class="label" x="953" y="594" text-anchor="middle">TurboWarp runtime host</text><text class="code" x="953" y="617" text-anchor="middle">turbowarp-runtime-host.js</text>
   <path class="edge" d="M945 450V500H178V559"/><path class="edge" d="M945 450V500H423V559"/><path class="edge" d="M945 450V500H668V559"/><path class="edge" d="M945 450V559"/>
 

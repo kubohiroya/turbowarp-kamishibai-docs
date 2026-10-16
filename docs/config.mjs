@@ -329,7 +329,7 @@ export const documentCollections = [
         title: 'DSL 3.1 release smoke',
         audience: 'リリース候補をブラウザで検証する方',
         description:
-          'Scratch VMテストでは確認できないEditor、カメラ、TurboWarp TM、Packagerのrelease smoke手順をまとめます。',
+          'Scratch VMテストでは確認できないEditor、カメラ、TurboWarp Teachable Machine、Packagerのrelease smoke手順をまとめます。',
       },
       {
         sourceFilename: 'release-smoke-4.0.md',
@@ -342,10 +342,10 @@ export const documentCollections = [
       {
         sourceFilename: 'tm-extension-id-migration.md',
         version: '4.0',
-        title: 'TurboWarp TM Extension ID 移行ガイド',
+        title: 'TurboWarp Teachable Machine Extension ID 移行ガイド',
         audience: 'TurboWarp紙芝居とSB3を新しい認識拡張IDへ移行する開発者',
         description:
-          'TurboWarp TMのExtension IDをkubohiroyatmへ統一し、SB3移行、確認、rollback、旧識別子の扱いを日本語と英語で説明します。',
+          'TurboWarp Teachable MachineのExtension IDをkubohiroyatmへ統一し、SB3移行、確認、rollback、旧識別子の扱いを日本語と英語で説明します。',
       },
       {
         sourceFilename: 'turbowarp-ecosystem.md',

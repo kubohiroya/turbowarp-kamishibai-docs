@@ -50,13 +50,13 @@ SB3生成、文書生成を含む開発依存も対象とします。
 管理対象の組み込み機能拡張は、最新ツールチェインのtransactional updateで次の上流
 `main`へ更新しました。
 
-| 機能拡張           | 更新後バージョン | 解決後のコミット |
-| ------------------ | ---------------- | ---------------- |
-| Asset Manager      | 0.4.0            | `c952b0b`        |
-| TurboWarp TM       | 1.4.0            | `08fe0cf`        |
-| Text Lines         | 0.1.1            | `8655d76`        |
-| Runtime Expression | 0.2.0            | `7e2bd99`        |
-| Async Input        | 0.2.0            | `3ecd7ff`        |
+| 機能拡張                    | 更新後バージョン | 解決後のコミット |
+| --------------------------- | ---------------- | ---------------- |
+| Asset Manager               | 0.4.0            | `c952b0b`        |
+| TurboWarp Teachable Machine | 1.4.0            | `08fe0cf`        |
+| Text Lines                  | 0.1.1            | `8655d76`        |
+| Runtime Expression          | 0.2.0            | `7e2bd99`        |
+| Async Input                 | 0.2.0            | `3ecd7ff`        |
 
 外部URLで読み込むTurboWarp Gallery機能拡張はバージョンをこのrepositoryで固定しないため、
 URLを維持します。ローカル実装のKamishibai RuntimeとWeb Linkには別の上流バージョンはありません。
