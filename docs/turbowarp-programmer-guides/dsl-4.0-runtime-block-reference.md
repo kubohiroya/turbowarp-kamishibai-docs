@@ -16,10 +16,16 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 [本体Issue #883](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883)の開発版では、
 生成SB3へ同梱する編集用拡張`kubohiroyakamishibaiauthoring4`に次のブロックを追加します。
-公開rc.22のランタイムの48ブロック・bundle全体の202ブロックの数は変わりません。
+下記の48ブロック・bundle全体202ブロックの一覧は、公開済みrc.22の記録です。
+#883の開発版では旧sourceハットと文字列命令を削除し、台本の入口を編集用拡張の新ハットに統一します。
 
 - `kamishibai [VERSION] [LABEL]`（hat、opcode: `kamishibai`）: VERSIONは文字列4.0、LABELの既定は空文字。
 - `includeBlocks [LABEL]`（command、opcode: `includeBlocks`）: 同じSB3内の名前付き台本をビルド時にincludeする。
+
+`kamishibai [4.0] [ラベル]`は台本ソースの入口と版・識別名の宣言を兼ねるハットです。
+イベント受信や再生開始は行いません。旧`when kamishibai DSL source`を前段へ置く構成は使いません。
+旧ハットの定義・生成・読取互換も残しません。旧ブロック台本は元のYAMLから再生成します。
+埋込ランタイムを持つ旧ベースから生成する場合も、旧2定義を登録から除去します。
 
 空でないラベルはSB3全体で一意です。同一Stage内でもStage/Sprite間でも参照できます。
 Stageのラベル空欄の宣言を入口とし、名前付き宣言だけが複数ある場合は入口を曖昧にしません。
