@@ -55,6 +55,9 @@ GitHub Release・npm配布物は実際に取得してsize／hashを照合しま�
 | npm               | [@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.22](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.22) |
 | 公開サンプル基準  | 4.0.0-rc.22。各公開manifestのruntime commitを照合                                                                                    |
 
+Schemaリファレンスはmainの実装基準`450a5bb`を別に保持します。公開rc.22のSchemaは
+`sources/dsl4/dsl-4.0-rc.22.schema.json`へ保存し、portraitの配置3項目を公開版の対応済みとして扱いません。
+
 ### rc.8以降の変更と反映先
 
 | 版・確認基準           | 変更                                                           | 確認する契約                                                                                                                                                                                           |

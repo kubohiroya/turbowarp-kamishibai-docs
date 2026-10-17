@@ -27,8 +27,10 @@
       },
       "schema": {
         "releaseSha256": "f61955685c51ed7cfe3ed5b760ca6d290929ab9fdc4b8a912cdb901135c613ac",
-        "documentationReferenceCommit": "f8048b8c4ebd0ecd6213bb87582862034b2b88ce",
-        "documentationReferenceSha256": "f61955685c51ed7cfe3ed5b760ca6d290929ab9fdc4b8a912cdb901135c613ac"
+        "documentationReferenceCommit": "450a5bb950ef769241ec8258690e652b39b23bde",
+        "documentationReferenceSha256": "55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27",
+        "releaseReferenceCommit": "f8048b8c4ebd0ecd6213bb87582862034b2b88ce",
+        "releaseSnapshotPath": "sources/dsl4/dsl-4.0-rc.22.schema.json"
       },
       "dependencies": {
         "@kubohiroya/turbowarp-app-shell": "0.2.0",

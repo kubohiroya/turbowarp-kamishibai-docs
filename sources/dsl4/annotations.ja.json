@@ -35,7 +35,7 @@
           "pointer": "#/properties/assets",
           "order": 20,
           "title": "`assets` — asset登録",
-          "summary": "背景、音、costume、ポーズモデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。",
+          "summary": "背景、音、costume、認識モデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。",
           "example": "Beach: backdrop\nHeroIdle: costume:Hero\nCameraMenuButton:\n  kind: image\n  file: select-camera.svg\n  loading: eager",
           "exampleContext": "`assets` fieldの値:"
         },
@@ -106,10 +106,13 @@
         {
           "pointer": "#/properties/recognition",
           "order": 100,
-          "title": "`recognition` — ポーズ認識設定",
-          "summary": "認識中の任意の音、モデル初期化、判定方法、feedback、プレイ中にポーズ待ちをskipできるか、camera previewの表示と任意UIをまとめます。idle音とcharge音は独立して省略できます。",
+          "title": "`recognition` — 認識設定",
+          "summary": "ポーズ認識と画像認識に共通の音、モデル初期化、判定方法、feedback、プレイ中に認識待ちをskipできるか、camera previewの表示と任意UIをまとめます。idle音とcharge音は独立して省略できます。",
           "example": "idleSound: PoseIdle\nchargeSound: PoseCharge\nmodelInitialization:\n  policy: latest-needed\n  parallel: true\nfeedback:\n  mode: presenter\nnavigation:\n  allowSkip: true\npreview:\n  mirroring: mirrored\n  overlay:\n    visible: true\n    minimumConfidence: 0.5\n  controls:\n    cameraMenu:\n      position: bottom-center\n      opacity: 0.8\n      buttonAsset: CameraMenuButton",
-          "exampleContext": "`recognition` fieldの値:"
+          "exampleContext": "`recognition` fieldの値:",
+          "notes": [
+            "旧名の`poseRecognition`は受理しません。値の構造は変わらないため、field名だけを`recognition`へ変更します。"
+          ]
         },
         {
           "pointer": "#/properties/controls",
@@ -131,23 +134,29 @@
           "pointer": "#/properties/scenes",
           "order": 130,
           "title": "`scenes` — scene定義",
-          "summary": "一つ以上のsceneを記述します。短縮形のaction配列と、poseModelを持てるlong formがあります。",
+          "summary": "一つ以上のsceneを記述します。短縮形のaction配列と、認識モデルや入場時の遷移を持てるlong formがあります。",
           "example": "opening:\n  - stage: Beach\n  - wait: 1",
           "exampleContext": "`scenes` fieldの値:"
         },
         {
           "pointer": "#/properties/presentation",
           "order": 140,
-          "title": "`presentation` — 表示の切替",
-          "summary": "シーン、背景、登場人物の衣装と表示を切り替える効果を指定します。省略時は待ち時間を加えず即時に切り替えます。",
-          "example": "transitions:\n  scene: {effect: crossfade, seconds: 0.3}\n  backdrop: {effect: cut}"
+          "title": "`presentation` — 表示遷移の既定値",
+          "summary": "scene遷移、背景、actorのcostume切替、actorの表示・非表示に使うcrossfadeの作品既定値を指定します。actionの`transition`が既定値を上書きします。",
+          "example": "transitions:\n  scene: 0.5\n  backdrop: 0.3\n  actorSkin: 0.2\n  actorVisibility: 0.15",
+          "exampleContext": "`presentation` fieldの値:",
+          "notes": [
+            "省略した項目の組み込み既定値は`cut`（0秒）です。",
+            "crossfadeは`dsl4CrossfadeTransitions`が有効なruntimeだけで実行できます。明示的にOFFにしたruntimeは`K4-TRANSITION-FLAG-001`で実行前に拒否します。"
+          ]
         },
         {
           "pointer": "#/properties/audio",
           "order": 150,
-          "title": "`audio` — BGMの切替",
-          "summary": "BGMを切り替える際の既定の効果を指定します。",
-          "example": "bgm:\n  transition: {effect: crossfade, seconds: 0.5, curve: equalPower}"
+          "title": "`audio` — BGM遷移の既定値",
+          "summary": "BGMを切り替えるときのcrossfadeの作品既定値を指定します。`bgm` actionの`transition`が既定値を上書きします。",
+          "example": "bgm:\n  transition:\n    effect: crossfade\n    seconds: 1.5\n    curve: equalPower",
+          "exampleContext": "`audio` fieldの値:"
         }
       ]
     },
@@ -160,7 +169,7 @@
           "pointer": "#/$defs/asset",
           "order": 10,
           "title": "assetで選べる形式",
-          "summary": "各asset IDの値は、短縮形式、背景、音、costume、ポーズモデルのいずれかです。",
+          "summary": "各asset IDの値は、短縮形式、背景、音、costume、認識モデル、UI画像のいずれかです。",
           "example": "backdrop",
           "notes": [
             "短縮形式はproject内に同名のassetがある場合に使います。",
@@ -198,9 +207,13 @@
         {
           "pointer": "#/$defs/namedRecognitionModel",
           "order": 60,
-          "title": "名前付きポーズモデル",
-          "summary": "ポーズモデルは埋め込む相対file、通常のTurboWarp Teachable Machine directory URL、または検証付きremote archiveで指定します。project内の表示名だけを使う形式はありません。",
-          "example": "kind: recognitionModel\ndelivery: remote\nloading: lazy\nsource:\n  url: https://example.com/models/rescue/"
+          "title": "名前付き認識モデル",
+          "summary": "ポーズ認識と画像認識のモデルを、埋め込む相対file、通常のTurboWarp Teachable Machine directory URL、または検証付きremote archiveで指定します。project内の表示名だけを使う形式はありません。",
+          "example": "kind: recognitionModel\ndelivery: remote\nloading: lazy\nsource:\n  url: https://example.com/models/rescue/",
+          "notes": [
+            "旧名の`kind: poseModel`は受理しません。",
+            "ポーズ認識と画像認識のどちらに使うかは、assetではなくsceneの`recognitionMode`で指定します。"
+          ]
         },
         {
           "pointer": "#/$defs/namedImage",
@@ -275,8 +288,14 @@
           "pointer": "#/$defs/bubblePortrait",
           "order": 80,
           "title": "吹き出しportrait",
-          "summary": "基本画像と、任意のまばたき・口パクframe animationを指定します。",
-          "example": "base: HeroFace\nblink:\n  frames: [EyesOpen, EyesClosed]\n  frameIntervalSeconds: 0.4\nlipSync:\n  frames: [MouthClosed, MouthOpen]\n  frameIntervalSeconds: 0.08"
+          "summary": "基本画像、任意のまばたき・口パクframe animation、吹き出しに対するportraitの配置、offset、角丸半径を指定します。",
+          "example": "base: HeroFace\nblink:\n  frames: [EyesOpen, EyesClosed]\n  frameIntervalSeconds: 0.4\nlipSync:\n  frames: [MouthClosed, MouthOpen]\n  frameIntervalSeconds: 0.08\nplacement: top-left\noffset: [-4, 6, 120]\ncornerRadius: 12",
+          "notes": [
+            "`placement`の省略時は`left`です。",
+            "`offset`は吹き出し本体の`offset`と同じ`[x, y]`または`[x, y, zoom]`です。zoomは0より大きい百分率で、省略時は`[0, 0, 100]`です。",
+            "`cornerRadius`の省略時は`0`です。runtimeはこれらの値を変換せずTurboWarp Bubbleへ渡します。",
+            "`placement`、`offset`、`cornerRadius`は実装基準450a5bbで追加された項目です。公開版4.0.0-rc.22のSchemaには含まれません。"
+          ]
         },
         {
           "pointer": "#/$defs/bubbleReveal",
@@ -319,8 +338,8 @@
         {
           "pointer": "#/$defs/poseRecognition",
           "order": 140,
-          "title": "ポーズ認識全体設定",
-          "summary": "共通音と、モデル初期化、sequence、selection、feedback、navigation、camera previewの任意設定をまとめます。",
+          "title": "認識全体設定",
+          "summary": "トップレベル`recognition`の値です。共通音と、モデル初期化、sequence、selection、feedback、navigation、camera previewの任意設定をまとめます。",
           "example": "idleSound: PoseIdle\nchargeSound: PoseCharge\nmodelInitialization:\n  policy: latest-needed\n  parallel: true\nsequence:\n  confidenceThreshold: 0.6\nfeedback:\n  mode: scratchMirror\nnavigation:\n  allowSkip: false\npreview:\n  mirroring: mirrored\n  overlay:\n    visible: true"
         },
         {
@@ -488,16 +507,16 @@
         {
           "pointer": "#/$defs/presentation",
           "order": 330,
-          "title": "`presentation` — 表示の既定効果",
-          "summary": "作品共通の切替効果を指定し、シーンやアクションのtransitionで上書きできます。",
-          "example": "transitions:\n  scene: {effect: crossfade, seconds: 0.3}"
+          "title": "表示遷移の既定値",
+          "summary": "`transitions`の下に、`scene`、`backdrop`、`actorSkin`、`actorVisibility`ごとのvisual transitionを指定します。",
+          "example": "transitions:\n  scene:\n    effect: crossfade\n    seconds: 0.5\n    easing: easeInOut\n  backdrop: 0.3"
         },
         {
           "pointer": "#/$defs/audio",
           "order": 340,
-          "title": "`audio` — BGMの既定効果",
-          "summary": "BGMの切替に使う既定値です。個別のbgmアクションで上書きできます。",
-          "example": "bgm:\n  transition: {effect: cut}"
+          "title": "BGM遷移の既定値",
+          "summary": "`bgm.transition`へaudio transitionを指定します。visual transitionの`easing`とは別に、音量変化の`curve`を選びます。",
+          "example": "bgm:\n  transition: 1.5"
         }
       ]
     },
@@ -593,23 +612,34 @@
         {
           "pointer": "#/$defs/visualTransition",
           "order": 130,
-          "title": "`visualTransition` — 表示の切替効果",
-          "summary": "cut、秒数、crossfadeを指定します。秒数は0〜60、easingはlinearまたはeaseInOutです。",
-          "example": "effect: crossfade\nseconds: 0.5\neasing: easeInOut"
+          "title": "visual transition",
+          "summary": "秒数、`{effect: cut}`、または`{effect: crossfade, seconds, easing?}`で表示の切り替え方を指定します。`easing`は`linear`か`easeInOut`で、省略時は`easeInOut`です。",
+          "example": "effect: crossfade\nseconds: 0.4\neasing: linear",
+          "notes": [
+            "秒数は0〜60です。数値の短縮形と`seconds: 0`のcrossfadeは`{effect: cut}`として扱います。"
+          ]
         },
         {
           "pointer": "#/$defs/audioTransition",
           "order": 140,
-          "title": "`audioTransition` — BGMの切替効果",
-          "summary": "cut、秒数、crossfadeを指定します。curveはlinearまたはequalPowerです。",
-          "example": "effect: crossfade\nseconds: 0.5\ncurve: equalPower"
+          "title": "audio transition",
+          "summary": "秒数、`{effect: cut}`、または`{effect: crossfade, seconds, curve?}`でBGMの切り替え方を指定します。`curve`は`linear`か`equalPower`で、省略時は`equalPower`です。",
+          "example": "effect: crossfade\nseconds: 1.2\ncurve: equalPower",
+          "notes": [
+            "再生中のBGMがない状態でcrossfadeを指定すると、新しいBGMの音量が0から上がるためfade-inになります。"
+          ]
         },
         {
           "pointer": "#/$defs/bodyText",
           "order": 150,
-          "title": "`bodyText` — 本文とルビ",
-          "summary": "文字列または文字列・ルビを順に並べた配列です。Actor.setTextの本文に使い、say／thinkのtextは文字列のままです。",
-          "example": "- '昔、'\n- ruby: {base: 竹取, reading: たけとり}\n- 'の翁がいました。'"
+          "title": "SVG Textの本文",
+          "summary": "一つの文字列、またはcontent runの並びです。content runは文字列か`{ruby: {base, reading}}`です。",
+          "example": "- むかしむかし、\n- ruby: {base: 竹取, reading: たけとり}\n- の翁がいました。",
+          "notes": [
+            "並びは記述順のまま扱い、隣接する文字列の連結や前後の空白の除去を行いません。",
+            "backlog、読上げ、accessibilityへ渡す文字列には`base`だけを残し、`reading`を含めません。",
+            "吹き出し（`Actor.say`／`Actor.think`）の`text`は文字列だけで、content runを受け取りません。"
+          ]
         },
         {
           "pointer": "#/$defs/contentRuns",
@@ -628,9 +658,16 @@
         {
           "pointer": "#/$defs/rubyContentRun",
           "order": 180,
-          "title": "`rubyContentRun` — ルビ",
-          "summary": "baseに本文、readingに読みを指定します。両方とも空文字列は指定できません。",
-          "example": "ruby: {base: 亀, reading: かめ}"
+          "title": "ruby content run",
+          "summary": "親文字`base`と読み`reading`を組で指定します。どちらも空文字は使えません。",
+          "example": "ruby:\n  base: 竹取\n  reading: たけとり"
+        },
+        {
+          "pointer": "#/$defs/bgmVolume",
+          "order": 190,
+          "title": "BGM音量",
+          "summary": "BGMの音量を0〜100で指定します。runtimeは0〜1のgainへ換算します。",
+          "example": "80"
         }
       ]
     },
@@ -650,10 +687,13 @@
           "pointer": "#/$defs/longScene",
           "order": 20,
           "title": "long form scene",
-          "summary": "scene固有のposeModelまたはpreview左右反転を指定する場合に、設定と`actions`をobjectへまとめます。",
-          "example": "recognitionModel: StoryPose\nposePreview:\n  mirroring: unmirrored\nactions:\n  - wait: 1",
+          "summary": "scene固有の認識モデル、認識の種類、preview左右反転、入場時の遷移を指定する場合に、設定と`actions`をobjectへまとめます。",
+          "example": "recognitionModel: StoryPose\nrecognitionMode: pose\nposePreview:\n  mirroring: unmirrored\nentryTransition: 0.8\nactions:\n  - wait: 1",
           "notes": [
-            "`posePreview`はそのsceneだけの非stickyな上書きです。次のsceneに指定がなければstory既定へ戻ります。"
+            "`posePreview`はそのsceneだけの非stickyな上書きです。次のsceneに指定がなければstory既定へ戻ります。",
+            "`recognitionModel`は`kind: recognitionModel`のasset IDを参照します。旧名の`poseModel`は受理しません。",
+            "`recognitionMode`は`pose`または`image`です。`imageInputToChangeScene`を使うsceneでは`image`を指定します。",
+            "`entryTransition`はそのsceneへ入るときのvisual transitionです。初回start、restart、rehearsal、履歴移動、live reloadではcrossfadeしません。"
           ]
         },
         {
@@ -686,15 +726,19 @@
           "pointer": "#/$defs/stageAction",
           "order": 10,
           "title": "`stage`",
-          "summary": "背景assetへ切り替えます。短縮値またはstableId付きobjectを使用できます。",
-          "example": "stage: Beach"
+          "summary": "背景assetへ切り替えます。短縮値、またはstableIdと`transition`を持つobjectを使用できます。",
+          "example": "stage:\n  backdrop: Sunset\n  transition: 0.4"
         },
         {
           "pointer": "#/$defs/bgmAction",
           "order": 20,
           "title": "`bgm`",
-          "summary": "BGMとしてsound assetを開始します。",
-          "example": "bgm: Theme"
+          "summary": "BGMとしてsound assetを開始します。objectでは切り替えの`transition`、同じassetを最初から鳴らし直す`restart`、0〜100の`volume`を指定できます。",
+          "example": "bgm:\n  sound: EndingTheme\n  transition: 1.2\n  restart: true\n  volume: 80",
+          "notes": [
+            "同じasset IDのBGMが再生中の場合、`restart: true`がなければ何もしません。",
+            "BGMのloop指定は4.0では受理しません。"
+          ]
         },
         {
           "pointer": "#/$defs/soundAction",
@@ -773,43 +817,54 @@
           "pointer": "#/$defs/stopBgmAction",
           "order": 130,
           "title": "`stopBgm`",
-          "summary": "再生中のBGMを停止します。省略または0秒なら即時、秒数指定ならfade-outして終了します。",
-          "example": "stopBgm: 0.5"
+          "summary": "再生中のBGMを止めます。秒数を指定すると、その時間でfade-outしてから止めます。",
+          "example": "stopBgm: 2",
+          "notes": [
+            "引数なしの`stopBgm:`はすぐに止めます。BGMが鳴っていないときは何もしません。",
+            "fade-out中は完了を待ってから次のactionへ進みます。"
+          ]
         },
         {
           "pointer": "#/$defs/setBgmVolumeAction",
           "order": 140,
           "title": "`setBgmVolume`",
-          "summary": "BGMの音量を0〜100で設定します。secondsを指定するとその時間で変化します。",
-          "example": "setBgmVolume: {volume: 50, seconds: 0.3}"
+          "summary": "再生中のBGMの音量を0〜100で変更します。`seconds`を指定すると、現在の音量からその時間で線形に変化させます。",
+          "example": "setBgmVolume:\n  volume: 30\n  seconds: 1",
+          "notes": ["BGMが鳴っていないときは何もせず、次に鳴るBGMの音量として保存もしません。"]
         },
         {
           "pointer": "#/$defs/setVariableAction",
           "order": 150,
           "title": "`setVariable`",
-          "summary": "宣言済み台本変数へ同じ型のリテラル値を代入します。",
-          "example": "setVariable: {name: score, value: 10}"
+          "summary": "`variables`で宣言したstory変数へ、宣言時と同じ型のリテラル値を代入します。",
+          "example": "setVariable:\n  name: route\n  value: forest",
+          "notes": [
+            "未宣言の変数は`K4-VARIABLE-WRITE-UNKNOWN`、型の違う値は`K4-VARIABLE-WRITE-TYPE`でactionが失敗します。",
+            "代入式は使えません。値はリテラルだけです。",
+            "更新はactionが成功したときだけ確定し、cancel、skip、失敗、restoreでは破棄されます。"
+          ]
         },
         {
           "pointer": "#/$defs/changeVariableAction",
           "order": 160,
           "title": "`changeVariable`",
-          "summary": "宣言済みnumber変数へ有限数byを加算します。",
-          "example": "changeVariable: {name: score, by: 1}"
+          "summary": "数値のstory変数へ、`by`の有限数を加えます。減らす場合は負の数を指定します。",
+          "example": "changeVariable:\n  name: score\n  by: 1"
         },
         {
           "pointer": "#/$defs/toggleVariableAction",
           "order": 170,
           "title": "`toggleVariable`",
-          "summary": "宣言済みboolean変数の値を反転します。",
+          "summary": "真偽値のstory変数の値を反転します。値には変数名を書きます。",
           "example": "toggleVariable: ready"
         },
         {
           "pointer": "#/$defs/imageInputAction",
           "order": 180,
           "title": "`imageInputToChangeScene`",
-          "summary": "画像認識モデルのクラス名を次のシーンへ対応付け、最初に成立した候補へ進みます。",
-          "example": "imageInputToChangeScene:\n  wave: greeting\n  jump: celebration"
+          "summary": "画像認識で選ばれたclass IDに応じてsceneを選びます。引数の形は`poseInputToChangeScene`と同じです。",
+          "example": "imageInputToChangeScene:\n  apple: appleScene\n  banana: bananaScene",
+          "notes": ["sceneのlong formで`recognitionModel`と`recognitionMode: image`を指定します。"]
         }
       ]
     },
@@ -822,7 +877,7 @@
           "pointer": "#/$defs/showAction",
           "order": 10,
           "title": "`Actor.show`",
-          "summary": "costume、座標、scaleを指定してactorを表示します。",
+          "summary": "costume、座標、scaleを指定してactorを表示します。任意の`transition`で表示時のcrossfadeを指定できます。",
           "example": "Hero.show:\n  skin: HeroHappy\n  x: 0\n  y: -60\n  scale: 30"
         },
         {
@@ -865,15 +920,15 @@
           "pointer": "#/$defs/setSkinAction",
           "order": 60,
           "title": "`Actor.setSkin`",
-          "summary": "actorのcostumeを切り替えます。短縮値、またはscaleとstableIdを持つobjectを使用できます。",
-          "example": "Hero.setSkin:\n  skin: HeroHappy\n  scale: 100"
+          "summary": "actorのcostumeを切り替えます。短縮値、またはscale、`transition`、stableIdを持つobjectを使用できます。",
+          "example": "Hero.setSkin:\n  skin: HeroHappy\n  scale: 100\n  transition: 0.2"
         },
         {
           "pointer": "#/$defs/hideAction",
           "order": 70,
           "title": "`Actor.hide`",
-          "summary": "actorのvisible stateをfalseにします。透明度とは別で、次の`Actor.show`で再表示します。",
-          "example": "Hero.hide: {}"
+          "summary": "actorのvisible stateをfalseにします。透明度とは別で、次の`Actor.show`で再表示します。任意の`transition`で消え方を指定できます。",
+          "example": "Hero.hide:\n  transition: 0.15"
         },
         {
           "pointer": "#/$defs/setLayerAction",
@@ -893,8 +948,8 @@
           "pointer": "#/$defs/setTextAction",
           "order": 100,
           "title": "`Actor.setText`",
-          "summary": "SVG Text actorの本文と名前付きstyleを更新します。旧Text Assetの更新命令ではありません。",
-          "example": "Caption.setText:\n  text: おしまい\n  style: title"
+          "summary": "SVG Text actorの本文と名前付きstyleを更新します。`text`は文字列、またはrubyを含められるcontent runの並びです。旧Text Assetの更新命令ではありません。",
+          "example": "Caption.setText:\n  text:\n    - むかしむかし、\n    - ruby: {base: 竹取, reading: たけとり}\n    - の翁がいました。\n  style: title"
         },
         {
           "pointer": "#/$defs/poseAction",

@@ -20,6 +20,13 @@ preview transactionの責務境界を、完成実装に対応させて記録し�
 本書のpath、型、関数、event、flagは、このcommitのsourceとtestを基準にしています。
 配布成果物を調査して推測した名称ではありません。
 
+## Schemaと公開runtimeの二つの基準
+
+公開runtimeの調査基準は`4.0.0-rc.22`（`f8048b8c`）です。Schemaリファレンスはmainの
+実装基準`450a5bb`を保持し、portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応として区別します。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、
+新しい実装Schemaの出典は`sources/dsl4/source-lock.json`で確認します。両者の検証結果を混同しません。
+
 ## 読む前に {#before-reading .unnumbered}
 
 本書は、4.0の利用方法を知った後に内部の層を理解する開発者向け文書です。アプリの使い方や台本作成の

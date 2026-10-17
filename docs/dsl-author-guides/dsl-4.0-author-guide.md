@@ -30,78 +30,15 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 > **配布状態との区別:** 2026年10月17日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
 > 正式な`v4.0.0`ではありません。ポーズoverlayはrc.22と、同版がexact pinするTurboWarp Teachable Machine 3.5.1で利用できます。
 
-このガイドと[紙芝居DSL 4.0 Schemaリファレンス](dsl-4.0-schema-reference.md)は、同じ完成版の実装を
-調査基準にしています。Schemaはruntime実装から生成するものではありません。どの実装がどこまで入っているか、
+このガイドの公開runtime基準はrc.22です。[紙芝居DSL 4.0 Schemaリファレンス](dsl-4.0-schema-reference.md)は、
+それより後の実装commit `450a5bb`のSchemaを保持します。Schemaはruntime実装から生成するものではありません。どの実装がどこまで入っているか、
 根拠となる資料はどれかを確認したい方は、巻末の「付録: 実装基準と実装根拠」を参照してください。
 
-## rc.22で使う認識・切替・変数の書き方
+Schema基準: `450a5bb950ef769241ec8258690e652b39b23bde`（rc.22公開後の実装）。
+portraitの`placement`、`offset`、`cornerRadius`はこの実装基準の追加項目で、rc.22の公開配布物では使えません。
+公開版向けの台本は別に保持したrc.22のSchemaでも検査します。
 
-認識の共通設定はトップレベルの`recognition`、モデルのasset kindとシーンの参照は
-`recognitionModel`です。旧snapshotの`poseRecognition`／`poseModel`を新しい台本のキーとして使わないでください。
-シーンの`recognitionMode`は`pose`または`image`で、画像認識の分岐には`imageInputToChangeScene`を使います。
-ポーズの分岐は`poseInputToChangeScene`、連続したポーズ手順は`Actor.pose`を使います。
-
-```yaml
-assets:
-  RescueModel:
-    kind: recognitionModel
-    file: rescue
-recognition:
-  preview:
-    mirroring: mirrored
-scenes:
-  choose:
-    recognitionModel: RescueModel
-    recognitionMode: image
-    actions:
-      - imageInputToChangeScene:
-          rescue: success
-```
-
-`presentation.transitions`でscene／backdrop／actorSkin／actorVisibilityの既定効果を指定します。
-省略時は`cut`（0秒）です。シーンの`entryTransition`や対応アクションの`transition`で上書きできます。
-
-```yaml
-presentation:
-  transitions:
-    scene: {effect: crossfade, seconds: 0.3}
-    backdrop: {effect: cut}
-audio:
-  bgm:
-    transition: {effect: crossfade, seconds: 0.5, curve: equalPower}
-```
-
-表示のeasingは`linear`／`easeInOut`、BGMのcurveは`linear`／`equalPower`です。秒数は0〜60で、
-指定しない台本へ勝手に待ち時間を加えません。BGMは`bgm: {sound: Theme, volume: 50}`、
-`setBgmVolume: {volume: 30, seconds: 0.5}`、`stopBgm: 0.5`で音量と終了を制御します。
-BGMのない状態で音量変更・停止を指定しても何もしません。
-
-台本変数の書換えは、宣言済み変数へcore actionで行います。代入は宣言時と同じ型のリテラル値、
-加算はnumber、反転はbooleanだけを受け付けます。TurboWarpにも同じcore actionがあり、専用の書込flagはありません。
-
-```yaml
-variables:
-  score: 0
-  ready: false
-scenes:
-  opening:
-    - setVariable: {name: score, value: 10}
-    - changeVariable: {name: score, by: 1}
-    - toggleVariable: ready
-```
-
-本文のルビは`Actor.setText`の`text`へ文字列と`{ruby: {base, reading}}`を並べて書きます。
-`Actor.say`／`Actor.think`の`text`にはルビ配列を渡せません。吹き出しの終了は引き続き
-`bubbleClosePolicies`で名前を定義し、`closePolicy`を参照します。
-
-```yaml
-- Caption.setText:
-    text:
-      - むかし、
-      - ruby: {base: 竹取, reading: たけとり}
-      - の翁がいました。
-    style: caption
-```
+## rc.22の制作・カメラ・失敗表示
 
 YAMLとブロック台本は同じ`StoryDocument`へ正規化されます。CLIでは
 `validate-dsl4 --format canonical-json`で正規形を取得し、`author-block-dsl`でYAMLからブロック台本SB3を作り、
@@ -299,7 +236,7 @@ include文には次の規則があります。
 
 - `kamishibai`はエントリーソースだけに書き、読み込み先ソースへ重ねて宣言しない
 - 同じnamespaceの同じIDは、内容が同じでも複数ソースへ宣言しない
-- `cover`、`loading`、`recognition`、`controls`などの単一設定は読み込んだ全ファイルで一度だけ宣言する
+- `cover`、`loading`、`recognition`、`presentation`、`audio`、`controls`などの単一設定は読み込んだ全ファイルで一度だけ宣言する
 - プロジェクトルート優先、include順による後勝ち、shadowingはなく、全宣言を確定してから参照を解決する
 - include cycleは経路付き`K4-INCLUDE-CYCLE`で停止する
 - 一つのソース、ソース件数、全ファイルの合計バイト数、合成後バイト数、include depthに有限上限を設ける
@@ -319,21 +256,23 @@ CLIプレビューでinclude文を使う場合は`--enable-source-includes`を�
 合成後の台本で使用できるトップレベルキーは次のものだけです。表にないキーは警告ではなくエラーに
 なります。`include`は前節のinclude文の前処理だけが受理し、JSON Schemaのトップレベルfieldではありません。
 
-| キー                  | 必須 | 役割                                               |
-| --------------------- | ---- | -------------------------------------------------- |
-| `kamishibai`          | 必須 | 文字列`'4.0'`を指定する                            |
-| `assets`              | 任意 | 背景、音、costume、ポーズモデル、UI画像を登録する  |
-| `actors`              | 任意 | アクターと初期コスチュームを対応付ける             |
-| `cover`               | 任意 | 表紙の背景とBGMを指定する                          |
-| `textStyles`          | 任意 | SVG Textの名前付きスタイルを定義する               |
-| `bubbleStyles`        | 任意 | say／thinkの名前付き吹き出しstyleを定義する        |
-| `bubbleClosePolicies` | 任意 | say／thinkの名前付き終了条件を定義する             |
-| `variables`           | 任意 | 物語で使う変数の初期値を定義する                   |
-| `loading`             | 任意 | 読み込み中の背景とコスチューム列を指定する         |
-| `recognition`         | 任意 | ポーズ認識、プレビュー表示、任意の操作UIを設定する |
-| `controls`            | 任意 | 実行環境ごとの操作キーを定義する                   |
-| `branches`            | 任意 | 順序付きの条件分岐を登録する                       |
-| `scenes`              | 必須 | 一つ以上のシーンとアクションを記述する             |
+| キー                  | 必須 | 役割                                                     |
+| --------------------- | ---- | -------------------------------------------------------- |
+| `kamishibai`          | 必須 | 文字列`'4.0'`を指定する                                  |
+| `assets`              | 任意 | 背景、音、costume、認識モデル、UI画像を登録する          |
+| `actors`              | 任意 | アクターと初期コスチュームを対応付ける                   |
+| `cover`               | 任意 | 表紙の背景とBGMを指定する                                |
+| `textStyles`          | 任意 | SVG Textの名前付きスタイルを定義する                     |
+| `bubbleStyles`        | 任意 | say／thinkの名前付き吹き出しstyleを定義する              |
+| `bubbleClosePolicies` | 任意 | say／thinkの名前付き終了条件を定義する                   |
+| `variables`           | 任意 | 物語で使う変数の初期値を定義する                         |
+| `loading`             | 任意 | 読み込み中の背景とコスチューム列を指定する               |
+| `recognition`         | 任意 | ポーズ・画像認識、プレビュー表示、任意の操作UIを設定する |
+| `controls`            | 任意 | 実行環境ごとの操作キーを定義する                         |
+| `branches`            | 任意 | 順序付きの条件分岐を登録する                             |
+| `presentation`        | 任意 | シーン、背景、アクターの切り替え方の既定値を指定する     |
+| `audio`               | 任意 | BGMの切り替え方の既定値を指定する                        |
+| `scenes`              | 必須 | 一つ以上のシーンとアクションを記述する                   |
 
 推奨する並び順は表の順番です。YAMLのmappingの字下げには空白を使用し、タブは使いません。
 
@@ -491,7 +430,7 @@ _図: 書き方によって、データの入手元と、配布するSB3へ中�
 | `backdrop`         | ステージの背景                 | ○       | ○       | ○                         | ○                                       |
 | `costume`          | アクターのコスチューム         | ○       | ○       | ○                         | ○                                       |
 | `sound`            | 音                             | ○       | ○       | ○                         | ○                                       |
-| `recognitionModel` | ポーズ認識モデル               | ×       | ×       | ○（モデルのディレクトリ） | ○（TurboWarp Teachable MachineのURL等） |
+| `recognitionModel` | ポーズ認識・画像認識のモデル   | ×       | ×       | ○（モデルのディレクトリ） | ○（TurboWarp Teachable MachineのURL等） |
 | `image`            | カメラプレビューの操作アイコン | ×       | ×       | ○                         | ○                                       |
 
 一つのアセットでは、`name`、`file`、`source`のうち一つだけを指定します。`costume`では、どの入手元でも
@@ -539,7 +478,7 @@ assets:
     file: ocean.svg
     loading: lazy
 
-  # ② ポーズモデルのディレクトリを埋め込む
+  # ② ポーズ認識モデルのディレクトリを埋め込む
   救助Pose:
     kind: recognitionModel
     file: rescue-pose
@@ -601,7 +540,7 @@ assets:
       size: 1024
 ```
 
-poseModelのURLは、検証情報を省略した場合は通常のTurboWarp Teachable Machineのディレクトリ、検証情報を指定した場合は
+recognitionModelのURLは、検証情報を省略した場合は通常のTurboWarp Teachable Machineのディレクトリ、検証情報を指定した場合は
 model archiveを指します。ネットワークなしで動かす必要がある作品では、remoteではなく②の`file`を指定し、
 ビルダーでSB3へ埋め込みます。
 
@@ -638,14 +577,14 @@ _図: eagerの素材は物語の開始前にまとめて準備します。lazy�
 
 ### 選び方の目安
 
-| したいこと                                              | 書き方                                                     |
-| ------------------------------------------------------- | ---------------------------------------------------------- |
-| TurboWarp Editorで描いたコスチュームをそのまま使う      | 短形式`costume:Hero`、実名が違えば`name`                   |
-| 外部editorで作った画像・音声をフォルダーで管理する      | `file`（必要に応じて`loading: lazy`）                      |
-| ネットワークのない教室でも確実に動かす                  | ①または②。③のremoteは使わない                              |
-| 物語の開始を早くしたい                                  | 後半だけで使う素材を`loading: lazy`にする                  |
-| SB3のファイルサイズを小さくしたい                       | 大きな素材を③`delivery: remote`にする                      |
-| 公開済みのTurboWarp Teachable Machineポーズモデルを使う | `kind: recognitionModel`、`delivery: remote`、`source.url` |
+| したいこと                                          | 書き方                                                     |
+| --------------------------------------------------- | ---------------------------------------------------------- |
+| TurboWarp Editorで描いたコスチュームをそのまま使う  | 短形式`costume:Hero`、実名が違えば`name`                   |
+| 外部editorで作った画像・音声をフォルダーで管理する  | `file`（必要に応じて`loading: lazy`）                      |
+| ネットワークのない教室でも確実に動かす              | ①または②。③のremoteは使わない                              |
+| 物語の開始を早くしたい                              | 後半だけで使う素材を`loading: lazy`にする                  |
+| SB3のファイルサイズを小さくしたい                   | 大きな素材を③`delivery: remote`にする                      |
+| 公開済みのTurboWarp Teachable Machineのモデルを使う | `kind: recognitionModel`、`delivery: remote`、`source.url` |
 
 ## 登場人物（Actor）を登録する
 
@@ -695,7 +634,9 @@ loading:
 `loading`を記述する場合は、背景と一つ以上のコスチュームが必要です。`costumes`は同じ意味の値の集合なので
 YAML listで指定します。
 
-### ポーズ認識音
+### 認識音
+
+ポーズ認識と画像認識の設定は、トップレベルの`recognition`へまとめて書きます。
 
 ```yaml
 recognition:
@@ -733,13 +674,14 @@ cancelだけでcameraは停止しません。
 
 省略時は`policy: legacy`、`parallel: false`です。これは従来動作へ設定だけで戻せる安全な既定値です。
 
-| 設定                                                                                                                                                         | 動作                                                             | 向いている作品                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | ------------------------------------------------ |
-| `policy: legacy`（既定値）                                                                                                                                   | 従来どおりの初期化                                               | sceneを順番どおりに進める作品                    |
-| `policy: latest-needed`                                                                                                                                      | 実行中1件、最新待機1件まで。不要になった初期化をcancelする       | sceneのskipや分岐で遷移先が変わる作品            |
-| `parallel: false`（既定値）                                                                                                                                  | 依存関係のない処理を重ねない                                     | 動作を従来と揃えたい作品                         |
-| `parallel: true`                                                                                                                                             | cameraの起動とモデル準備などを重ねる。最初の認識だけが両方を待つ | ポーズ認識が始まるまでの待ち時間を短くしたい作品 |
-| `latest-needed`の実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。公開プレリリース4.0.0-rc.22はTurboWarp Teachable Machine 3.5.1をexact pinします。 |
+| 設定                        | 動作                                                             | 向いている作品                                   |
+| --------------------------- | ---------------------------------------------------------------- | ------------------------------------------------ |
+| `policy: legacy`（既定値）  | 従来どおりの初期化                                               | sceneを順番どおりに進める作品                    |
+| `policy: latest-needed`     | 実行中1件、最新待機1件まで。不要になった初期化をcancelする       | sceneのskipや分岐で遷移先が変わる作品            |
+| `parallel: false`（既定値） | 依存関係のない処理を重ねない                                     | 動作を従来と揃えたい作品                         |
+| `parallel: true`            | cameraの起動とモデル準備などを重ねる。最初の認識だけが両方を待つ | ポーズ認識が始まるまでの待ち時間を短くしたい作品 |
+
+`latest-needed`の実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。公開プレリリース4.0.0-rc.22はTurboWarp Teachable Machine 3.5.1をexact pinします。
 
 ### カメラ映像の表示と操作
 
@@ -864,7 +806,7 @@ confidenceを倍率として、0から設定値まで変化します。この表
 | cameraを停止する                    | 描画用のSVG要素も破棄する                    |
 | confidenceが`minimumConfidence`未満 | その関節、または片端がその関節のボーンを隠す |
 
-実行にはTurboWarp Teachable Machine 3.5.1以降が必要です。DSL runtimeは同版のcomposition APIだけを呼び、独自の描画実装を
+実行にはTurboWarp Teachable Machine 1.12.0以降が必要です。DSL runtimeは同版のcomposition APIだけを呼び、独自の描画実装を
 持ちません。専用機能フラグはなく、すべてのruntime profileで同じように利用できます。問題時は
 `overlay`設定を台本から削除すると、既存台本と同じ非表示へ戻せます。
 
@@ -969,6 +911,27 @@ _図: `distance`はアクターの外枠からしっぽの先まで、`tailLengt
 _図: セリフの表示中（talking）は目パチと口パク、読み手の入力待ち（awaiting-continue）は目パチと次へ進む合図、
 表示したままの停止中（idle）は目パチだけが動きます。_
 
+実装基準`450a5bb`では、`portrait`へTurboWarp Bubbleと同じ`placement`、`offset`、`cornerRadius`を指定できます。
+**この3項目はrc.22の公開Schemaに含まれません。** rc.22向けには省略し、以下の配置例は対応実装向けとして扱います。
+
+```yaml
+bubbleStyles:
+  Hero portrait:
+    portrait:
+      base: HeroFace
+      placement: top-left
+      offset: [-4, 6, 120]
+      cornerRadius: 12
+```
+
+| field          | 指定できる値                                                                      | 省略時        |
+| -------------- | --------------------------------------------------------------------------------- | ------------- |
+| `placement`    | `left`、`right`、`top-left`、`top-right`、`bottom-left`、`bottom-right`           | `left`        |
+| `offset`       | 吹き出し本体の`offset`と同じ`[x, y]`または`[x, y, 倍率]`。倍率は0より大きい百分率 | `[0, 0, 100]` |
+| `cornerRadius` | 0以上の角丸半径                                                                   | `0`           |
+
+これらの値は変換せずにTurboWarp Bubbleへ渡されます。
+
 出典: [TurboWarp Bubble README](https://github.com/kubohiroya/turbowarp-bubble/blob/ad5b008e89f95c0182977f3e2e77d58fc2041b16/README.ja.md)
 （固定commit `ad5b008`）。これら4図には[MPL-2.0](https://www.mozilla.org/MPL/2.0/)が適用されます。
 
@@ -1039,8 +1002,25 @@ variables:
 ```
 
 初期値に使用できる型はstring、number、booleanだけです。list、mapping、`null`、式を初期値には
-使用できません。実行中に値を変更する処理はruntimeまたは登録済みactionが担当し、宣言時の型と異なる値へ
-暗黙変換しません。
+使用できません。宣言時の型と異なる値へ暗黙変換しません。
+
+実行中に値を変更するには、次のGlobal actionを使います。
+
+```yaml
+- setVariable: {name: playerName, value: うみ}
+- changeVariable: {name: score, by: 1}
+- toggleVariable: takeSeaRoute
+```
+
+| action           | 対象の型                | 動作                                 |
+| ---------------- | ----------------------- | ------------------------------------ |
+| `setVariable`    | string／number／boolean | 宣言時と同じ型のリテラル値を代入する |
+| `changeVariable` | number                  | `by`の数値を加える（負の数で減らす） |
+| `toggleVariable` | boolean                 | 現在の値を反転する                   |
+
+宣言していない変数は`K4-VARIABLE-WRITE-UNKNOWN`、型の違う値は`K4-VARIABLE-WRITE-TYPE`でactionが失敗します。
+`score + 1`のような式は書けません。更新はactionが成功したときだけ確定し、cancel、skip、失敗で終わった
+actionの更新は破棄されます。
 
 `variables`は物語の意味を持つ値だけに使います。cameraの物理device ID、プレビューのボタンの選択状態、
 DOM node、listener、Object URLはapp shell所有の一時状態であり、story変数やScratch変数へ写さないでください。
@@ -1062,7 +1042,7 @@ branches:
 条件式は文字列として記述します。`if`と`goto`は同じmappingへ書き、`else`は分岐内に一つだけ、末尾へ
 置きます。すべての移動先シーンが定義済みでなければなりません。
 
-4.0.0-rc.22では、条件式は`branch` action開始時点のトップレベル`variables:`を不変snapshotとして参照します。
+4.0.0-rc.8では、条件式は`branch` action開始時点のトップレベル`variables:`を不変snapshotとして参照します。
 ASCIIのbare nameは`score == 1`のように書けます。日本語や`-`などbare nameにできない文字を含む名前は、
 `vars["救助回数"] >= 2`のように完全一致のstring literalで指定します。Stage／sprite変数、Temporary Variables、
 `ポーズ認識`、`チャージ`は条件式へ自動では入りません。
@@ -1137,7 +1117,7 @@ scenes:
 
 ### 長形式
 
-ポーズモデルなどのシーン固有設定がある場合は、`actions`を持つmappingにします。
+認識モデルなどのシーン固有設定がある場合は、`actions`を持つmappingにします。
 
 ```yaml
 scenes:
@@ -1158,6 +1138,34 @@ scenes:
 アクションは必ず`actions`のlistへ入れます。`posePreview.mirroring`はそのsceneだけの上書きです。次に入る
 sceneへ指定がなければstory既定へ戻り、前sceneの値を持ち越しません。短形式と長形式は、検証後に同じ
 内部の`SceneNode`へ正規化されます。
+
+長形式では、ほかに次の設定を書けます。
+
+| 設定              | 値                   | 意味                                                                                    |
+| ----------------- | -------------------- | --------------------------------------------------------------------------------------- |
+| `recognitionMode` | `pose`または`image`  | `recognitionModel`をポーズ認識と画像認識のどちらに使うか。画像認識では`image`を明示する |
+| `entryTransition` | 秒数または切り替え方 | このシーンへ入るときの画面の切り替え方。`presentation.transitions.scene`より優先する    |
+
+画像認識でシーンを選ぶ例です。
+
+```yaml
+assets:
+  FoodClassifier:
+    kind: recognitionModel
+    file: food-image-model
+
+scenes:
+  quiz:
+    recognitionModel: FoodClassifier
+    recognitionMode: image
+    entryTransition: 0.8
+    actions:
+      - imageInputToChangeScene:
+          apple: appleScene
+          banana: bananaScene
+```
+
+最初の開始、restart、rehearsal、履歴移動、live reloadでは、`entryTransition`を指定していてもcrossfadeしません。
 
 ### sceneの記述順を保つ
 
@@ -1182,20 +1190,26 @@ scene IDでは記述順を保証できません。これは意図したDSL仕様
 
 Global actionはアクター名を付けずに記述します。
 
-| action                    | 短形式または主な引数          | 役割                              |
-| ------------------------- | ----------------------------- | --------------------------------- |
-| `stage`                   | 背景ID                        | 背景を変更する                    |
-| `bgm`                     | 音ID                          | BGMの再生を依頼する               |
-| `sound`                   | 音ID                          | 効果音の再生を依頼する            |
-| `wait`                    | 0以上の秒数                   | 指定時間待つ                      |
-| `debugger`                | `null`                        | development debugの停止境界を置く |
-| `broadcastMessageAndWait` | message名                     | message receiverの完了を待つ      |
-| `transition`              | `effect`、`seconds`           | 見た目の遷移効果を実行する        |
-| `goto`                    | シーンID                      | 指定シーンへ移動する              |
-| `branch`                  | 分岐ID                        | 条件分岐を評価して移動する        |
-| `keyInputToChangeScene`   | キーからシーンへのmapping     | キー入力を待って移動する          |
-| `touchInputToChangeScene` | アクターからシーンへのmapping | タッチ入力を待って移動する        |
-| `poseInputToChangeScene`  | ポーズからシーンへのmapping   | 最初に認識したポーズで移動する    |
+| action                    | 短形式または主な引数           | 役割                              |
+| ------------------------- | ------------------------------ | --------------------------------- |
+| `stage`                   | 背景ID                         | 背景を変更する                    |
+| `bgm`                     | 音ID                           | BGMの再生を依頼する               |
+| `stopBgm`                 | なし、またはfade-outの秒数     | BGMを止める                       |
+| `setBgmVolume`            | 0〜100の音量                   | BGMの音量を変える                 |
+| `sound`                   | 音ID                           | 効果音の再生を依頼する            |
+| `wait`                    | 0以上の秒数                    | 指定時間待つ                      |
+| `debugger`                | `null`                         | development debugの停止境界を置く |
+| `broadcastMessageAndWait` | message名                      | message receiverの完了を待つ      |
+| `transition`              | `effect`、`seconds`            | 見た目の遷移効果を実行する        |
+| `goto`                    | シーンID                       | 指定シーンへ移動する              |
+| `branch`                  | 分岐ID                         | 条件分岐を評価して移動する        |
+| `setVariable`             | `name`、`value`                | 変数へ値を代入する                |
+| `changeVariable`          | `name`、`by`                   | 数値の変数へ値を加える            |
+| `toggleVariable`          | 変数名                         | 真偽値の変数を反転する            |
+| `keyInputToChangeScene`   | キーからシーンへのmapping      | キー入力を待って移動する          |
+| `touchInputToChangeScene` | アクターからシーンへのmapping  | タッチ入力を待って移動する        |
+| `poseInputToChangeScene`  | ポーズからシーンへのmapping    | 最初に認識したポーズで移動する    |
+| `imageInputToChangeScene` | 画像classからシーンへのmapping | 最初に認識した画像classで移動する |
 
 ### 背景、音、待機
 
@@ -1207,6 +1221,61 @@ Global actionはアクター名を付けずに記述します。
 ```
 
 `wait`は0以上です。背景と音のIDは、使用箇所に合う`kind`のアセットを参照します。
+
+### 切り替え方を指定する
+
+`dsl4CrossfadeTransitions`が有効なruntimeでは、シーン、背景、アクターのコスチュームと表示、BGMを
+crossfadeで切り替えられます。作品全体の既定値はトップレベルの`presentation`と`audio`へ書きます。
+
+```yaml
+presentation:
+  transitions:
+    scene: 0.5
+    backdrop: 0.3
+    actorSkin: 0.2
+    actorVisibility: 0.15
+audio:
+  bgm:
+    transition:
+      effect: crossfade
+      seconds: 1.5
+      curve: equalPower
+```
+
+個々のactionの`transition`は既定値より優先します。
+
+```yaml
+- stage: {backdrop: Sunset, transition: 0.4}
+- Hero.setSkin: {skin: HeroSmile, transition: 0.2}
+- Hero.hide: {transition: 0.15}
+- bgm: {sound: EndingTheme, transition: 1.2, restart: true}
+```
+
+| 書き方                                 | 意味                                                                   |
+| -------------------------------------- | ---------------------------------------------------------------------- |
+| 秒数（例: `0.4`）                      | その秒数でcrossfadeする。`0`は切り替えるだけ（`cut`）                  |
+| `{effect: cut}`                        | すぐに切り替える                                                       |
+| `{effect: crossfade, seconds, easing}` | 画面の切り替え。`easing`は`linear`か`easeInOut`（省略時は`easeInOut`） |
+| `{effect: crossfade, seconds, curve}`  | BGMの切り替え。`curve`は`linear`か`equalPower`（省略時は`equalPower`） |
+
+秒数は0〜60です。指定しなかった項目は`cut`になるため、既存の台本の見た目とtimingは変わりません。
+crossfadeを明示的にOFFにしたruntimeでは、`transition`を含む台本を`K4-TRANSITION-FLAG-001`で実行前に拒否します。
+
+### BGMを止める、音量を変える
+
+```yaml
+- bgm: {sound: Theme, volume: 80}
+- setBgmVolume: {volume: 30, seconds: 1}
+- stopBgm: 2
+```
+
+`volume`は0〜100です。`setBgmVolume`は再生中のBGMの音量を変え、`seconds`を指定するとその時間で
+線形に変化させます。`stopBgm`は再生中のBGMを止め、秒数を指定するとその時間でfade-outしてから止めます。
+引数なしの`stopBgm:`はすぐに止めます。fade中は完了を待ってから次のactionへ進みます。
+
+BGMが鳴っていないときの`stopBgm`と`setBgmVolume`は何もしません。次に鳴るBGMの音量として覚えておくことも
+ありません。fade-inは、BGMが鳴っていない状態で`bgm`へcrossfadeの`transition`を指定すると得られます。
+同じBGMが鳴っている間の`bgm`は、`restart: true`を指定しない限り何もしません。BGMのloop指定は4.0ではできません。
 
 ### debug停止とTurboWarp message
 
@@ -1307,7 +1376,7 @@ Actor actionは`ActorID.command`をキーにします。
 | `Actor.setSkin`            | コスチュームID                                    | コスチュームを変更する                     |
 | `Actor.setLayer`           | `front`／`back`／相対layer数                      | アクターの重なり順を変更する               |
 | `Actor.loop`               | `steps`                                           | コスチューム列を繰り返す                   |
-| `Actor.setText`            | `text`、`style`                                   | SVG Textを更新する                         |
+| `Actor.setText`            | `text`、`style`                                   | SVG Textを更新する。rubyも書ける           |
 | `Actor.pose`               | `steps`                                           | ポーズを順に認識してcostumeと音を適用する  |
 
 ### 表示する
@@ -1463,6 +1532,21 @@ inline形式も使用できます。
     text: おしまい
     style: title
 ```
+
+ルビを付ける場合は、`text`を文字列と`ruby`の並びにします。
+
+```yaml
+- Caption.setText:
+    text:
+      - むかしむかし、
+      - ruby: {base: 竹取, reading: たけとり}
+      - の翁がいました。
+    style: title
+```
+
+並びは書いた順のまま表示し、隣り合う文字列をつなげたり前後の空白を削ったりしません。`base`と`reading`は
+空にできません。backlogや読上げへ渡す文字列には`base`だけが残ります。`Actor.say`と`Actor.think`の`text`は
+文字列だけで、rubyはまだ使えません。
 
 ### ポーズを認識する
 
@@ -1803,7 +1887,7 @@ runtime接続後は、action、scene、branch、port、戻り値などの実行�
 
 ここから先は、公開状況や実装の追跡が必要な方のための付録です。台本を書くうえでは読み飛ばせます。
 
-2026年10月17日のrc.22固定基準では、次の実装がTurboWarp-Kamishibaiへ入っています。
+2026年10月17日の公開rc.22基準では、次の実装がTurboWarp-Kamishibaiへ入っています。
 
 - 制限付きYAMLの解析、JSON Schema検証、参照関係の意味検証
 - 行・列とStory Pathを保持するSource Map、`K4-*`診断
@@ -1829,8 +1913,8 @@ builder、TurboWarp runtime surface、ブラウザー／CLIプレビューを含
 ### 実装根拠を確認する場合
 
 仕様の正本は、`turbowarp-kamishibai-app`リポジトリの
-[紙芝居DSL 4.0 表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/docs/design/dsl-4-surface.md)と
-[JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/schema/dsl-4.schema.json)です。
+[紙芝居DSL 4.0 表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/docs/design/dsl-4-surface.md)と
+[JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/schema/dsl-4.schema.json)です。
 カメラプレビュー操作UIは[Issue #388](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/388)、
 ポーズoverlayは[Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624)、
 `bubbleStyles`は[Issue #476](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/476)以降、
@@ -1841,14 +1925,21 @@ include文の複数ファイル対応は[Issue #417](https://github.com/kubohiro
 [Issue #390](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/390)、ローカルアセットの追加・内容更新のlive reloadは
 [Issue #391](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/391)で実装されています。
 
+rc.8より後には、crossfade（[#652](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/652)）、
+`recognition`／`recognitionModel`への改名と`imageInputToChangeScene`（rc.11）、変数更新action
+（[#797](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/797)）、`stopBgm`と`setBgmVolume`
+（[#798](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/798)）、`Actor.setText`のruby
+（[#799](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/799)）、portraitの配置
+（[#879](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/879)）がSchemaへ入りました。
+
 ## 関連資料
 
 - [紙芝居DSL 4.0 Schemaリファレンス](dsl-4.0-schema-reference.md): 固定Schemaに基づくfield、型、制約、action一覧
 - [DSL 4.0ランタイム変数ガイド](dsl-4.0-runtime-variable-guide.md): 実行中に参照できる変数と、その扱い方
 - [3系作品の変換ガイド](dsl-3.2-to-4.0-conversion-guide.md): 3系の台本を4.0のYAMLへ変換する手順
 - [紙芝居DSL 4.0 リリース履歴](dsl-4.0-history.md): 版ごとの追加機能と変更点
-- [DSL 4.0表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/docs/design/dsl-4-surface.md): 4.0の規範的な作者向け構文
-- [DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/schema/dsl-4.schema.json): 機械可読な構造仕様
-- [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
-- [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624): Schema、TurboWarp Teachable Machine 3.5.1 composition API mapping、YAML opt-in、rollback
-- [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例
+- [DSL 4.0表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/docs/design/dsl-4-surface.md): 4.0の規範的な作者向け構文
+- [DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/schema/dsl-4.schema.json): 機械可読な構造仕様
+- [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
+- [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624): Schema、TurboWarp Teachable Machine 1.12.0 composition API mapping、YAML opt-in、rollback
+- [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例

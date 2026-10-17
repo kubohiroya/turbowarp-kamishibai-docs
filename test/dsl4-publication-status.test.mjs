@@ -20,6 +20,7 @@ test('records the current implementation and publication state in config', () =>
   assert.deepEqual(dsl4PublicationStatus, {
     verifiedOn: '2026-10-17',
     implementationCommit: 'f8048b8c4ebd0ecd6213bb87582862034b2b88ce',
+    schemaImplementationCommit: '450a5bb950ef769241ec8258690e652b39b23bde',
     latestPublishedRelease: 'v3.2.3',
     publishedDsl4Prerelease: 'v4.0.0-rc.22',
     officialDsl4Release: null,

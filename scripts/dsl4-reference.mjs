@@ -64,6 +64,7 @@ const expectedStaticSectionPointers = {
     '#/$defs/variableValue',
     '#/$defs/visualTransition',
     '#/$defs/audioTransition',
+    '#/$defs/bgmVolume',
     '#/$defs/bodyText',
     '#/$defs/contentRuns',
     '#/$defs/contentRun',
@@ -130,6 +131,10 @@ function schemaType(schemaNode, schema, seen = new Set()) {
   if (Array.isArray(schemaNode?.enum)) return schemaNode.enum.map(code).join(' / ');
   if (Array.isArray(schemaNode?.oneOf)) {
     return schemaNode.oneOf.map((choice) => schemaType(choice, schema, seen)).join(' または ');
+  }
+  if (schemaNode?.type === 'array' && Array.isArray(schemaNode.prefixItems)) {
+    const items = schemaNode.prefixItems.map((item) => schemaType(item, schema, seen));
+    return `[${items.join(', ')}]`;
   }
   if (schemaNode?.type === 'array') {
     return `${schemaType(schemaNode.items, schema, seen)}の配列`;
@@ -483,7 +488,8 @@ ${snapshotLabel}\\
 Schema SHA-256: \`${lock.schemaSha256}\`
 
 > **権威関係と配布状態:** 2026年10月17日時点で\`v4.0.0-rc.22\`はprereleaseとして公開されていますが、
-> 正式な\`v4.0.0\`ではありません。
+> 正式な\`v4.0.0\`ではありません。公開runtimeはrc.22、Schema固定commitはそれより後の実装基準です。
+> portraitの\`placement\`、\`offset\`、\`cornerRadius\`はrc.22未対応です。
 > ${authorityDescription} Schemaはruntime実装から生成しません。公開アプリ、配布artifact、
 > feature flagがDSL 4.0を有効にしているかは利用するreleaseごとに確認してください。
 

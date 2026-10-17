@@ -79,6 +79,14 @@ Schema snapshotです。上流repository、commit、SHA-256、source URLは
 `sources/dsl4/source-lock.json`に記録します。日本語Annotationと、両者から生成した
 `docs/dsl-author-guides/dsl-4.0-schema-reference.md`は前記のCC BY-SA 4.0区分です。
 
+`sources/dsl4/dsl-4.0-rc.8.schema.json`は、同じrepositoryの`v4.0.0-rc.8`（commit
+`29c0deadcb98badf94a0244c479ca896dc71f842`、SHA-256
+`46ff159c29e13704d707dae8e0d2ad3a146b6aa8a68a968614e6ef56d112f135`）から固定したMPL-2.0の
+Schema snapshotです。rc.8を対象とするチュートリアルの台本例を検証するためだけに使います。
+
+`sources/dsl4/dsl-4.0-rc.22.schema.json`と`sources/dsl4/release-source-lock-4.0-rc.22.json`は、公開rc.22のSchemaと出典を固定します。
+同じMPL-2.0区分として扱い、main実装基準のSchemaと区別して公開版向けの例を検証します。
+
 ## MPL-2.0の上流ブロック定義snapshot
 
 `sources/dsl4/standard-surface-rc22.json`は、上流の公開Standard SB3の`getInfo()`から抽出した

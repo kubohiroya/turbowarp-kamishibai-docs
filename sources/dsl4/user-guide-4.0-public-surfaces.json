@@ -241,5 +241,16 @@
       "formalUiCapturesIncluded": false,
       "reason": "The guide is complete with semantic steps, exact labels, URLs, and integrity tables."
     }
+  },
+  "implementationSchema": {
+    "commit": "450a5bb950ef769241ec8258690e652b39b23bde",
+    "schemaSha256": "55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27",
+    "sourceLock": "sources/dsl4/source-lock.json",
+    "publishedRuntimeCompatible": false,
+    "unreleasedFields": [
+      "bubblePortrait.placement",
+      "bubblePortrait.offset",
+      "bubblePortrait.cornerRadius"
+    ]
   }
 }

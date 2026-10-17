@@ -46,7 +46,8 @@
 | `docs/workshops/`         | 体験会の参加者、スタッフ、運営者        |
 
 具体的なファイル対応、依存境界、実施記録は[MIGRATION.md](MIGRATION.md)を参照してください。
-`docs/tutorials/`と4.0文書は公開プレリリース`4.0.0-rc.22`を実装基準にします。
+`docs/tutorials/`と4.0文書は公開プレリリース`4.0.0-rc.22`を公開runtime基準にします。
+Schemaリファレンスはmainの実装基準`450a5bb`を保持し、公開rc.22のSchemaは別snapshotとして保存します。
 `/4.0/tutorials/`系列へ配置し、4.0一覧から「紙芝居を遊ぶ」「紙芝居を作る」へ案内します。
 公開サンプル、スターター、Web版のmanifestもrc.22基準です。今回の文書更新では再生・実カメラを再検証していません。
 固定commit、取得先、照合方法、過去の検証の適用範囲は`DSL4-PUBLICATION-STATUS.md`と

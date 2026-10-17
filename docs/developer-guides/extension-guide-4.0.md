@@ -18,6 +18,13 @@ runtime coreまで含む内部構造は[紙芝居アプリ 4.0 内部仕様書](
 変更・release手順は[紙芝居アプリ 4.0 ソフトウェアメンテナンスガイド](developer-guide-4.0.md)を
 参照してください。
 
+## Schemaと公開runtimeの二つの基準
+
+公開runtimeの調査基準は`4.0.0-rc.22`（`f8048b8c`）です。Schemaリファレンスはmainの
+実装基準`450a5bb`を保持し、portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応として区別します。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、
+新しい実装Schemaの出典は`sources/dsl4/source-lock.json`で確認します。両者の検証結果を混同しません。
+
 ## 読む前に
 
 このガイドは、[内部仕様書](internal-specification-4.0.md)でruntime、port、adapterの役割を確認した後に読む

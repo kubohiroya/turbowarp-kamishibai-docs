@@ -175,7 +175,7 @@ DSL 4.0の教材では、物語と演出を決める人、画像やポーズモ�
 紙芝居DSL 4.0は、YAMLのマッピングとリストでアセット、アクター、スタイル、変数、入力設定、分岐、シーン、アクションを
 構造化します。型と局所制約はJSON Schema、参照関係と実行上の制約は意味検証器が検査します。
 
-<div class="application-columns"><section><p class="application-subhead">トップレベル</p><ul><li><code>kamishibai</code>: 固定値<code>'4.0'</code></li><li><code>assets</code>: backdrop、costume、sound、poseModel、image</li><li><code>actors</code>: アクターと初期コスチューム</li><li><code>textStyles</code>／<code>bubbleStyles</code>: 文字と吹き出しの見た目</li><li><code>controls</code>／<code>branches</code>: 入力と分岐</li><li><code>scenes</code>: 実行するシーンとアクション</li></ul></section><section><p class="application-subhead">実行手順</p><ol><li>include文で指定された複数ファイルを安定取得する</li><li>YAMLを制限付きで解析する</li><li>JSON Schemaで構造を検証する</li><li>参照と意味制約を検証する</li><li>変更不能なStoryDocumentへ正規化する</li><li>ランタイムがアクションを順に実行する</li></ol></section></div>
+<div class="application-columns"><section><p class="application-subhead">トップレベル</p><ul><li><code>kamishibai</code>: 固定値<code>'4.0'</code></li><li><code>assets</code>: backdrop、costume、sound、recognitionModel、image</li><li><code>actors</code>: アクターと初期コスチューム</li><li><code>textStyles</code>／<code>bubbleStyles</code>: 文字と吹き出しの見た目</li><li><code>controls</code>／<code>branches</code>: 入力と分岐</li><li><code>scenes</code>: 実行するシーンとアクション</li></ul></section><section><p class="application-subhead">実行手順</p><ol><li>include文で指定された複数ファイルを安定取得する</li><li>YAMLを制限付きで解析する</li><li>JSON Schemaで構造を検証する</li><li>参照と意味制約を検証する</li><li>変更不能なStoryDocumentへ正規化する</li><li>ランタイムがアクションを順に実行する</li></ol></section></div>
 
 <p class="application-callout"><strong>安全な失敗:</strong> 未知のキー、型違反、重複ID、存在しない参照、危険なパスは実行前に診断し、カメラや音声を開始しません。</p>
 

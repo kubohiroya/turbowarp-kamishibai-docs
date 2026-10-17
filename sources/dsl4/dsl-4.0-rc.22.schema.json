@@ -1,0 +1,2298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kubohiroya/turbowarp-kamishibai-app/schema/dsl-4.schema.json",
+  "title": "TurboWarp-Kamishibai DSL 4.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kamishibai", "scenes"],
+  "properties": {
+    "kamishibai": {"const": "4.0"},
+    "assets": {"$ref": "#/$defs/assets"},
+    "actors": {"$ref": "#/$defs/actors"},
+    "cover": {"$ref": "#/$defs/cover"},
+    "textStyles": {"$ref": "#/$defs/textStyles"},
+    "bubbleStyles": {"$ref": "#/$defs/bubbleStyles"},
+    "bubbleClosePolicies": {"$ref": "#/$defs/bubbleClosePolicies"},
+    "variables": {"$ref": "#/$defs/variables"},
+    "loading": {"$ref": "#/$defs/loadingScreen"},
+    "recognition": {"$ref": "#/$defs/poseRecognition"},
+    "controls": {"$ref": "#/$defs/controls"},
+    "branches": {"$ref": "#/$defs/branches"},
+    "presentation": {"$ref": "#/$defs/presentation"},
+    "audio": {"$ref": "#/$defs/audio"},
+    "scenes": {"$ref": "#/$defs/scenes"}
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[\\p{L}_][\\p{L}\\p{N}_-]*$"
+    },
+    "filePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?![A-Za-z][A-Za-z0-9+.-]*:)[^\\\\\\u0000]+$"
+    },
+    "loadingPolicy": {
+      "type": "string",
+      "enum": ["eager", "lazy"],
+      "default": "eager"
+    },
+    "retentionPolicy": {
+      "type": "string",
+      "enum": ["scene", "story"]
+    },
+    "deliveryPolicy": {
+      "type": "string",
+      "enum": ["embedded", "remote"],
+      "default": "embedded"
+    },
+    "remoteAssetSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^https://[^\\s]+$"
+        },
+        "integrity": {
+          "type": "string",
+          "pattern": "^sha256-[0-9a-f]{64}$"
+        },
+        "contentType": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9!#$&^_.+-]*/[a-z0-9][a-z0-9!#$&^_.+-]*$"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "dependentRequired": {
+        "integrity": ["contentType", "size"],
+        "contentType": ["integrity", "size"],
+        "size": ["integrity", "contentType"]
+      }
+    },
+    "remotePoseModelSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^https://[^\\s]+$"
+        },
+        "integrity": {
+          "type": "string",
+          "pattern": "^sha256-[0-9a-f]{64}$"
+        },
+        "contentType": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9!#$&^_.+-]*/[a-z0-9][a-z0-9!#$&^_.+-]*$"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "dependentRequired": {
+        "integrity": ["contentType", "size"],
+        "contentType": ["integrity", "size"],
+        "size": ["integrity", "contentType"]
+      }
+    },
+    "literalId": {"type": "string", "minLength": 1},
+    "assetId": {"$ref": "#/$defs/literalId"},
+    "sceneId": {"$ref": "#/$defs/literalId"},
+    "actorId": {"$ref": "#/$defs/id"},
+    "styleId": {"$ref": "#/$defs/id"},
+    "bubbleStyleName": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!\\s)(?!.*\\s$)[^\\p{Cc}\\p{Cs}\\p{Zl}\\p{Zp}]+$"
+    },
+    "bubbleClosePolicyName": {"$ref": "#/$defs/bubbleStyleName"},
+    "stableId": {"$ref": "#/$defs/id"},
+    "visualTransition": {
+      "oneOf": [
+        {"type": "number", "minimum": 0, "maximum": 60},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["effect"],
+          "properties": {"effect": {"const": "cut"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["effect", "seconds"],
+          "properties": {
+            "effect": {"const": "crossfade"},
+            "seconds": {"type": "number", "minimum": 0, "maximum": 60},
+            "easing": {"enum": ["linear", "easeInOut"]}
+          }
+        }
+      ]
+    },
+    "audioTransition": {
+      "oneOf": [
+        {"type": "number", "minimum": 0, "maximum": 60},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["effect"],
+          "properties": {"effect": {"const": "cut"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["effect", "seconds"],
+          "properties": {
+            "effect": {"const": "crossfade"},
+            "seconds": {"type": "number", "minimum": 0, "maximum": 60},
+            "curve": {"enum": ["linear", "equalPower"]}
+          }
+        }
+      ]
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transitions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "scene": {"$ref": "#/$defs/visualTransition"},
+            "backdrop": {"$ref": "#/$defs/visualTransition"},
+            "actorSkin": {"$ref": "#/$defs/visualTransition"},
+            "actorVisibility": {"$ref": "#/$defs/visualTransition"}
+          }
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bgm": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {"transition": {"$ref": "#/$defs/audioTransition"}}
+        }
+      }
+    },
+    "compactAsset": {
+      "type": "string",
+      "pattern": "^(?:backdrop|sound|costume:[\\p{L}_][\\p{L}\\p{N}_-]*)$"
+    },
+    "namedBackdrop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "const": "backdrop"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file": {
+          "$ref": "#/$defs/filePath"
+        },
+        "source": {
+          "$ref": "#/$defs/remoteAssetSource"
+        },
+        "bitmapResolution": {
+          "type": "integer",
+          "enum": [1, 2],
+          "default": 1
+        },
+        "delivery": {
+          "$ref": "#/$defs/deliveryPolicy"
+        },
+        "loading": {
+          "$ref": "#/$defs/loadingPolicy"
+        },
+        "retention": {
+          "$ref": "#/$defs/retentionPolicy"
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["name"],
+          "properties": {
+            "name": true,
+            "delivery": {
+              "const": "embedded"
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "file": true
+                },
+                "required": ["file"]
+              },
+              {
+                "properties": {
+                  "source": true
+                },
+                "required": ["source"]
+              }
+            ]
+          }
+        },
+        {
+          "required": ["file"],
+          "properties": {
+            "file": true,
+            "delivery": {
+              "const": "embedded"
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "name": true
+                },
+                "required": ["name"]
+              },
+              {
+                "properties": {
+                  "source": true
+                },
+                "required": ["source"]
+              }
+            ]
+          }
+        },
+        {
+          "required": ["delivery", "source"],
+          "properties": {
+            "delivery": {
+              "const": "remote"
+            },
+            "source": true
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "name": true
+                },
+                "required": ["name"]
+              },
+              {
+                "properties": {
+                  "file": true
+                },
+                "required": ["file"]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "namedSound": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "const": "sound"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file": {
+          "$ref": "#/$defs/filePath"
+        },
+        "source": {
+          "$ref": "#/$defs/remoteAssetSource"
+        },
+        "delivery": {
+          "$ref": "#/$defs/deliveryPolicy"
+        },
+        "loading": {
+          "$ref": "#/$defs/loadingPolicy"
+        },
+        "retention": {
+          "$ref": "#/$defs/retentionPolicy"
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["name"],
+          "properties": {
+            "name": true,
+            "delivery": {
+              "const": "embedded"
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "file": true
+                },
+                "required": ["file"]
+              },
+              {
+                "properties": {
+                  "source": true
+                },
+                "required": ["source"]
+              }
+            ]
+          }
+        },
+        {
+          "required": ["file"],
+          "properties": {
+            "file": true,
+            "delivery": {
+              "const": "embedded"
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "name": true
+                },
+                "required": ["name"]
+              },
+              {
+                "properties": {
+                  "source": true
+                },
+                "required": ["source"]
+              }
+            ]
+          }
+        },
+        {
+          "required": ["delivery", "source"],
+          "properties": {
+            "delivery": {
+              "const": "remote"
+            },
+            "source": true
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "name": true
+                },
+                "required": ["name"]
+              },
+              {
+                "properties": {
+                  "file": true
+                },
+                "required": ["file"]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "namedCostume": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "target"],
+      "properties": {
+        "kind": {
+          "const": "costume"
+        },
+        "target": {
+          "$ref": "#/$defs/actorId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "file": {
+          "$ref": "#/$defs/filePath"
+        },
+        "source": {
+          "$ref": "#/$defs/remoteAssetSource"
+        },
+        "bitmapResolution": {
+          "type": "integer",
+          "enum": [1, 2],
+          "default": 1
+        },
+        "delivery": {
+          "$ref": "#/$defs/deliveryPolicy"
+        },
+        "loading": {
+          "$ref": "#/$defs/loadingPolicy"
+        },
+        "retention": {
+          "$ref": "#/$defs/retentionPolicy"
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["name"],
+          "properties": {
+            "name": true,
+            "delivery": {
+              "const": "embedded"
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "file": true
+                },
+                "required": ["file"]
+              },
+              {
+                "properties": {
+                  "source": true
+                },
+                "required": ["source"]
+              }
+            ]
+          }
+        },
+        {
+          "required": ["file"],
+          "properties": {
+            "file": true,
+            "delivery": {
+              "const": "embedded"
+            }
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "name": true
+                },
+                "required": ["name"]
+              },
+              {
+                "properties": {
+                  "source": true
+                },
+                "required": ["source"]
+              }
+            ]
+          }
+        },
+        {
+          "required": ["delivery", "source"],
+          "properties": {
+            "delivery": {
+              "const": "remote"
+            },
+            "source": true
+          },
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "name": true
+                },
+                "required": ["name"]
+              },
+              {
+                "properties": {
+                  "file": true
+                },
+                "required": ["file"]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "namedRecognitionModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "const": "recognitionModel"
+        },
+        "file": {
+          "$ref": "#/$defs/filePath"
+        },
+        "source": {
+          "$ref": "#/$defs/remotePoseModelSource"
+        },
+        "delivery": {
+          "$ref": "#/$defs/deliveryPolicy"
+        },
+        "loading": {
+          "$ref": "#/$defs/loadingPolicy"
+        },
+        "retention": {
+          "$ref": "#/$defs/retentionPolicy"
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["file"],
+          "properties": {
+            "file": true,
+            "delivery": {
+              "const": "embedded"
+            }
+          },
+          "not": {
+            "properties": {
+              "source": true
+            },
+            "required": ["source"]
+          }
+        },
+        {
+          "required": ["delivery", "source"],
+          "properties": {
+            "delivery": {
+              "const": "remote"
+            },
+            "source": true
+          },
+          "not": {
+            "properties": {
+              "file": true
+            },
+            "required": ["file"]
+          }
+        }
+      ]
+    },
+    "namedImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "const": "image"
+        },
+        "file": {
+          "$ref": "#/$defs/filePath"
+        },
+        "source": {
+          "$ref": "#/$defs/remoteAssetSource"
+        },
+        "delivery": {
+          "$ref": "#/$defs/deliveryPolicy"
+        },
+        "loading": {
+          "$ref": "#/$defs/loadingPolicy"
+        },
+        "retention": {
+          "$ref": "#/$defs/retentionPolicy"
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["file"],
+          "properties": {
+            "file": true,
+            "delivery": {
+              "const": "embedded"
+            }
+          },
+          "not": {
+            "properties": {
+              "source": true
+            },
+            "required": ["source"]
+          }
+        },
+        {
+          "required": ["delivery", "source"],
+          "properties": {
+            "delivery": {
+              "const": "remote"
+            },
+            "source": true
+          },
+          "not": {
+            "properties": {
+              "file": true
+            },
+            "required": ["file"]
+          }
+        }
+      ]
+    },
+    "asset": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/compactAsset"
+        },
+        {
+          "$ref": "#/$defs/namedBackdrop"
+        },
+        {
+          "$ref": "#/$defs/namedSound"
+        },
+        {
+          "$ref": "#/$defs/namedCostume"
+        },
+        {
+          "$ref": "#/$defs/namedRecognitionModel"
+        },
+        {
+          "$ref": "#/$defs/namedImage"
+        }
+      ]
+    },
+    "assets": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/assetId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/asset"
+      }
+    },
+    "actors": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/actorId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/assetId"
+      }
+    },
+    "cover": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backdrop"],
+      "properties": {
+        "backdrop": {
+          "$ref": "#/$defs/assetId"
+        },
+        "bgm": {
+          "$ref": "#/$defs/assetId"
+        }
+      }
+    },
+    "textStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "background": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "font": {
+          "type": "string",
+          "minLength": 1
+        },
+        "size": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "align": {
+          "type": "string",
+          "enum": ["left", "center", "right"]
+        }
+      }
+    },
+    "textStyles": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/id"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/textStyle"
+      }
+    },
+    "bubbleStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "styles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/bubbleStyleName"
+          }
+        },
+        "textStyle": {
+          "$ref": "#/$defs/styleId"
+        },
+        "maxWidth": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "textLocale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "placement": {
+          "oneOf": [
+            {
+              "enum": [
+                "up",
+                "up-up-right",
+                "up-right",
+                "right-up-right",
+                "right",
+                "right-down-right",
+                "down-right",
+                "down-down-right",
+                "down",
+                "down-down-left",
+                "down-left",
+                "left-down-left",
+                "left",
+                "left-up-left",
+                "up-left",
+                "up-up-left",
+                "north",
+                "north-northeast",
+                "northeast",
+                "east-northeast",
+                "east",
+                "east-southeast",
+                "southeast",
+                "south-southeast",
+                "south",
+                "south-southwest",
+                "southwest",
+                "west-southwest",
+                "west",
+                "west-northwest",
+                "northwest",
+                "north-northwest",
+                "HEADER_LIKE",
+                "CENTER",
+                "FOOTER_LIKE"
+              ]
+            },
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 360
+            }
+          ]
+        },
+        "distance": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tailLength": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "offset": {
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "items": false
+            },
+            {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              ],
+              "items": false
+            }
+          ]
+        },
+        "visualStyle": {
+          "enum": [
+            "NORMAL",
+            "THINKING",
+            "DREAMING",
+            "YELLING",
+            "OFF_PANEL",
+            "WAVY",
+            "WHISPERING",
+            "ANNOUNCEMENT",
+            "NARRATION",
+            "NO_BUBBLE"
+          ]
+        },
+        "portrait": {
+          "$ref": "#/$defs/bubblePortrait"
+        },
+        "characterIntervalSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "characterSound": {
+          "$ref": "#/$defs/assetId"
+        },
+        "noSoundCharacters": {
+          "type": "string",
+          "minLength": 1
+        },
+        "restCharacters": {
+          "type": "string",
+          "minLength": 1
+        },
+        "restCharacterIntervalSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "continueIndicator": {
+          "$ref": "#/$defs/bubbleContinueIndicator"
+        },
+        "reveal": {
+          "$ref": "#/$defs/bubbleReveal"
+        },
+        "audio": {
+          "$ref": "#/$defs/bubbleAudio"
+        },
+        "showAnimation": {
+          "$ref": "#/$defs/bubbleMotion"
+        },
+        "hideAnimation": {
+          "$ref": "#/$defs/bubbleMotion"
+        },
+        "visibleAnimations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/bubbleMotion"
+          }
+        }
+      }
+    },
+    "bubbleContinueIndicator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frames", "frameIntervalSeconds"],
+      "properties": {
+        "frames": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/assetId"
+          }
+        },
+        "frameIntervalSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "bubbleFrameAnimation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frames", "frameIntervalSeconds"],
+      "properties": {
+        "frames": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/assetId"
+          }
+        },
+        "frameIntervalSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "bubblePortrait": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base"],
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/assetId"
+        },
+        "blink": {
+          "$ref": "#/$defs/bubbleFrameAnimation"
+        },
+        "lipSync": {
+          "$ref": "#/$defs/bubbleFrameAnimation"
+        }
+      }
+    },
+    "bubbleReveal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit"],
+      "properties": {
+        "unit": {
+          "enum": ["CHARACTER", "WORD", "LINE", "BLOCK"]
+        },
+        "delimiters": {
+          "type": "string",
+          "minLength": 1
+        },
+        "showDelimiters": {
+          "type": "boolean"
+        },
+        "layout": {
+          "enum": ["DYNAMIC", "RESERVED"]
+        },
+        "intervalSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "sound": {
+          "$ref": "#/$defs/assetId"
+        }
+      }
+    },
+    "bubbleAudio": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "voice": {
+          "$ref": "#/$defs/assetId"
+        },
+        "reveal": {
+          "$ref": "#/$defs/assetId"
+        },
+        "finish": {
+          "$ref": "#/$defs/assetId"
+        }
+      }
+    },
+    "bubbleMotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "enum": [
+            "fadeIn",
+            "fadeOut",
+            "floatIn",
+            "floatOut",
+            "zoomIn",
+            "zoomOut",
+            "riseUp",
+            "sink",
+            "shake",
+            "explode",
+            "animateBubbleShape"
+          ]
+        },
+        "durationSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "ease": {
+          "enum": ["linear", "easeIn", "easeOut", "easeInOut"]
+        },
+        "direction": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "relativeScale": {
+          "type": "number",
+          "minimum": 0
+        },
+        "speed": {
+          "type": "number",
+          "minimum": 0
+        },
+        "visualStyle": {
+          "enum": [
+            "NORMAL",
+            "THINKING",
+            "DREAMING",
+            "YELLING",
+            "OFF_PANEL",
+            "WAVY",
+            "WHISPERING",
+            "ANNOUNCEMENT",
+            "NARRATION",
+            "NO_BUBBLE"
+          ]
+        }
+      }
+    },
+    "bubbleStyles": {
+      "type": "object",
+      "propertyNames": {"$ref": "#/$defs/bubbleStyleName"},
+      "additionalProperties": {"$ref": "#/$defs/bubbleStyle"}
+    },
+    "bubbleClosePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "anyOf": [
+        {"required": ["seconds"], "properties": {"seconds": true}},
+        {"required": ["waitFor"], "properties": {"waitFor": true}}
+      ],
+      "properties": {
+        "seconds": {"type": "number", "minimum": 0},
+        "waitFor": {"const": "advance"}
+      }
+    },
+    "bubbleClosePolicies": {
+      "type": "object",
+      "propertyNames": {"$ref": "#/$defs/bubbleClosePolicyName"},
+      "additionalProperties": {"$ref": "#/$defs/bubbleClosePolicy"}
+    },
+    "variableValue": {
+      "oneOf": [{"type": "string"}, {"type": "number"}, {"type": "boolean"}]
+    },
+    "variables": {
+      "type": "object",
+      "propertyNames": {"$ref": "#/$defs/id"},
+      "additionalProperties": {"$ref": "#/$defs/variableValue"}
+    },
+    "loadingScreen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backdrop", "costumes"],
+      "properties": {
+        "backdrop": {"$ref": "#/$defs/assetId"},
+        "costumes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/assetId"}
+        }
+      }
+    },
+    "poseRecognition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idleSound": {"$ref": "#/$defs/assetId"},
+        "chargeSound": {"$ref": "#/$defs/assetId"},
+        "modelInitialization": {"$ref": "#/$defs/poseModelInitialization"},
+        "sequence": {"$ref": "#/$defs/poseSequenceRecognition"},
+        "selection": {"$ref": "#/$defs/poseSelectionRecognition"},
+        "feedback": {"$ref": "#/$defs/poseFeedback"},
+        "navigation": {"$ref": "#/$defs/poseNavigation"},
+        "preview": {"$ref": "#/$defs/posePreview"}
+      }
+    },
+    "poseModelInitialization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy": {
+          "type": "string",
+          "enum": ["legacy", "latest-needed"],
+          "default": "legacy"
+        },
+        "parallel": {"type": "boolean", "default": false}
+      }
+    },
+    "posePreview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mirroring"],
+      "properties": {
+        "mirroring": {"type": "string", "enum": ["mirrored", "unmirrored"]},
+        "overlay": {"$ref": "#/$defs/poseOverlay"},
+        "controls": {"$ref": "#/$defs/posePreviewControls"}
+      }
+    },
+    "poseKeypointName": {
+      "type": "string",
+      "enum": [
+        "nose",
+        "leftEye",
+        "rightEye",
+        "leftEar",
+        "rightEar",
+        "leftShoulder",
+        "rightShoulder",
+        "leftElbow",
+        "rightElbow",
+        "leftWrist",
+        "rightWrist",
+        "leftHip",
+        "rightHip",
+        "leftKnee",
+        "rightKnee",
+        "leftAnkle",
+        "rightAnkle"
+      ]
+    },
+    "poseJointStyle": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "color": {"type": "string", "pattern": "\\S", "default": "#00e5ff"},
+        "opacity": {"type": "number", "minimum": 0, "maximum": 1, "default": 1},
+        "radius": {"type": "number", "minimum": 0, "default": 4}
+      }
+    },
+    "poseBoneStyle": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "color": {"type": "string", "pattern": "\\S", "default": "#00e5ff"},
+        "opacity": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.9},
+        "width": {"type": "number", "minimum": 0, "default": 3}
+      }
+    },
+    "poseOverlayConfidenceScaling": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "jointOpacity": {"type": "boolean", "default": false},
+        "jointRadius": {"type": "boolean", "default": false},
+        "boneOpacity": {"type": "boolean", "default": false},
+        "boneWidth": {"type": "boolean", "default": false}
+      }
+    },
+    "poseOverlay": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "visible": {"type": "boolean", "default": true},
+        "jointStyles": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {"$ref": "#/$defs/poseKeypointName"},
+          "additionalProperties": {"$ref": "#/$defs/poseJointStyle"}
+        },
+        "boneStyle": {"$ref": "#/$defs/poseBoneStyle"},
+        "minimumConfidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.5
+        },
+        "confidenceScaling": {"$ref": "#/$defs/poseOverlayConfidenceScaling"}
+      }
+    },
+    "scenePosePreview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mirroring"],
+      "properties": {
+        "mirroring": {
+          "type": "string",
+          "enum": ["mirrored", "unmirrored"]
+        }
+      }
+    },
+    "posePreviewControlPosition": {
+      "type": "string",
+      "enum": [
+        "top-center",
+        "bottom-center",
+        "left-center",
+        "right-center",
+        "top-right",
+        "bottom-right",
+        "top-left",
+        "bottom-left"
+      ]
+    },
+    "posePreviewMirroringControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["position", "assets"],
+      "properties": {
+        "position": {
+          "$ref": "#/$defs/posePreviewControlPosition"
+        },
+        "opacity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 1
+        },
+        "assets": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["showMirrored", "showUnmirrored"],
+          "properties": {
+            "showMirrored": {
+              "$ref": "#/$defs/assetId"
+            },
+            "showUnmirrored": {
+              "$ref": "#/$defs/assetId"
+            }
+          }
+        }
+      }
+    },
+    "posePreviewCameraMenuControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["position", "buttonAsset"],
+      "properties": {
+        "position": {
+          "$ref": "#/$defs/posePreviewControlPosition"
+        },
+        "opacity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 1
+        },
+        "buttonAsset": {
+          "$ref": "#/$defs/assetId"
+        }
+      }
+    },
+    "posePreviewControls": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "mirroring": {
+          "$ref": "#/$defs/posePreviewMirroringControl"
+        },
+        "cameraMenu": {
+          "$ref": "#/$defs/posePreviewCameraMenuControl"
+        }
+      }
+    },
+    "poseFeedback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["scratchMirror", "scratchBinding", "presenter"]
+        }
+      }
+    },
+    "poseNavigation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowSkip"],
+      "properties": {
+        "allowSkip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "poseSequenceRecognition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "confidenceThreshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.5
+        },
+        "fullConfidenceHoldSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "default": 1
+        },
+        "idleChargePerSecond": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0
+        }
+      }
+    },
+    "poseSelectionRecognition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accumulationPerSecond": {
+          "type": "number",
+          "minimum": 0,
+          "default": 1
+        },
+        "decayPerSecond": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.9
+        },
+        "scoreThreshold": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0
+        }
+      }
+    },
+    "keyCode": {
+      "type": "string",
+      "pattern": "^(?:Space|Enter|Escape|Tab|Backspace|Delete|Home|End|PageUp|PageDown|Arrow(?:Up|Down|Left|Right)|Digit[0-9]|Key[A-Z]|Numpad[0-9]|F(?:[1-9]|1[0-2]))$"
+    },
+    "navigationCommand": {
+      "type": "string",
+      "enum": [
+        "navigation.nextAction",
+        "navigation.nextScene",
+        "rehearsal.skipPose",
+        "rehearsal.skipAction",
+        "rehearsal.skipScene",
+        "history.previousAction",
+        "history.previousScene",
+        "history.nextScene"
+      ]
+    },
+    "keymap": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/keyCode"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/navigationCommand"
+      }
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keymaps"],
+      "properties": {
+        "keymaps": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/keymap"
+          }
+        }
+      }
+    },
+    "conditionRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["if", "goto"],
+      "properties": {
+        "if": {"type": "string", "minLength": 1},
+        "goto": {"$ref": "#/$defs/sceneId"}
+      }
+    },
+    "elseRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["else"],
+      "properties": {"else": {"$ref": "#/$defs/sceneId"}}
+    },
+    "branchRules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [{"$ref": "#/$defs/conditionRule"}, {"$ref": "#/$defs/elseRule"}]
+      },
+      "contains": {"$ref": "#/$defs/elseRule"},
+      "minContains": 1,
+      "maxContains": 1
+    },
+    "branches": {
+      "type": "object",
+      "propertyNames": {"$ref": "#/$defs/id"},
+      "additionalProperties": {"$ref": "#/$defs/branchRules"}
+    },
+    "stageArgs": {
+      "oneOf": [
+        {"$ref": "#/$defs/assetId"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["backdrop"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "backdrop": {"$ref": "#/$defs/assetId"},
+            "transition": {"$ref": "#/$defs/visualTransition"}
+          }
+        }
+      ]
+    },
+    "bgmVolume": {"type": "number", "minimum": 0, "maximum": 100},
+    "bgmFadeSeconds": {"type": "number", "minimum": 0, "maximum": 60},
+    "stopBgmArgs": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/bgmFadeSeconds"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "seconds": {"$ref": "#/$defs/bgmFadeSeconds"}
+          }
+        }
+      ]
+    },
+    "setBgmVolumeArgs": {
+      "oneOf": [
+        {"$ref": "#/$defs/bgmVolume"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["volume"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "volume": {"$ref": "#/$defs/bgmVolume"},
+            "seconds": {"$ref": "#/$defs/bgmFadeSeconds"}
+          }
+        }
+      ]
+    },
+    "bgmArgs": {
+      "oneOf": [
+        {"$ref": "#/$defs/assetId"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sound"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "sound": {"$ref": "#/$defs/assetId"},
+            "transition": {"$ref": "#/$defs/audioTransition"},
+            "restart": {"type": "boolean"},
+            "volume": {"$ref": "#/$defs/bgmVolume"}
+          }
+        }
+      ]
+    },
+    "soundArgs": {
+      "oneOf": [
+        {"$ref": "#/$defs/assetId"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sound"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "sound": {"$ref": "#/$defs/assetId"}
+          }
+        }
+      ]
+    },
+    "waitArgs": {
+      "oneOf": [
+        {"type": "number", "minimum": 0},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["seconds"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "seconds": {"type": "number", "minimum": 0}
+          }
+        }
+      ]
+    },
+    "broadcastMessageAndWaitArgs": {
+      "oneOf": [
+        {"type": "string", "minLength": 1},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["message"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "message": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "transitionArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effect", "seconds"],
+      "properties": {
+        "stableId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "effect": {
+          "$ref": "#/$defs/id"
+        },
+        "seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "sceneReferenceArgs": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sceneId"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["scene"],
+          "properties": {
+            "stableId": {
+              "$ref": "#/$defs/stableId"
+            },
+            "scene": {
+              "$ref": "#/$defs/sceneId"
+            }
+          }
+        }
+      ]
+    },
+    "branchReferenceArgs": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/id"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["branch"],
+          "properties": {
+            "stableId": {
+              "$ref": "#/$defs/stableId"
+            },
+            "branch": {
+              "$ref": "#/$defs/id"
+            }
+          }
+        }
+      ]
+    },
+    "keyRoutes": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/keyCode"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/sceneId"
+      }
+    },
+    "keyInputArgs": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/keyRoutes"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["routes"],
+          "properties": {
+            "stableId": {
+              "$ref": "#/$defs/stableId"
+            },
+            "routes": {
+              "$ref": "#/$defs/keyRoutes"
+            }
+          }
+        }
+      ]
+    },
+    "touchRoutes": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/actorId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/sceneId"
+      }
+    },
+    "touchInputArgs": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/touchRoutes"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["routes"],
+          "properties": {
+            "stableId": {
+              "$ref": "#/$defs/stableId"
+            },
+            "routes": {
+              "$ref": "#/$defs/touchRoutes"
+            }
+          }
+        }
+      ]
+    },
+    "poseRoutes": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/id"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/sceneId"
+      }
+    },
+    "poseInputArgs": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/poseRoutes"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["routes"],
+          "properties": {
+            "stableId": {
+              "$ref": "#/$defs/stableId"
+            },
+            "routes": {
+              "$ref": "#/$defs/poseRoutes"
+            }
+          }
+        }
+      ]
+    },
+    "showArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skin", "x", "y", "scale"],
+      "properties": {
+        "stableId": {"$ref": "#/$defs/stableId"},
+        "skin": {"$ref": "#/$defs/assetId"},
+        "x": {"type": "number"},
+        "y": {"type": "number"},
+        "scale": {"type": "number", "exclusiveMinimum": 0},
+        "transition": {"$ref": "#/$defs/visualTransition"}
+      }
+    },
+    "setTransparencyArgs": {
+      "oneOf": [
+        {"type": "number", "minimum": 0, "maximum": 100},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["transparency"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "transparency": {"type": "number", "minimum": 0, "maximum": 100}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["from", "to", "seconds"],
+          "properties": {
+            "stableId": {
+              "$ref": "#/$defs/stableId"
+            },
+            "from": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "to": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "background": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "moveToArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "seconds"],
+      "properties": {
+        "stableId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "easing": {
+          "enum": ["linear", "easeIn", "easeOut", "easeInOut"]
+        }
+      }
+    },
+    "speechArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text"],
+      "anyOf": [
+        {"required": ["closePolicy"], "properties": {"closePolicy": true}},
+        {"required": ["seconds"], "properties": {"seconds": true}},
+        {"required": ["waitFor"], "properties": {"waitFor": true}}
+      ],
+      "allOf": [
+        {"not": {"required": ["closePolicy", "seconds"]}},
+        {"not": {"required": ["closePolicy", "waitFor"]}}
+      ],
+      "properties": {
+        "stableId": {"$ref": "#/$defs/stableId"},
+        "text": {"type": "string"},
+        "closePolicy": {"$ref": "#/$defs/bubbleClosePolicyName"},
+        "seconds": {"type": "number", "minimum": 0},
+        "waitFor": {"const": "advance"},
+        "styles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/bubbleStyleName"}
+        },
+        "characterIntervalSeconds": {"type": "number", "exclusiveMinimum": 0},
+        "startSound": {"$ref": "#/$defs/assetId"},
+        "characterSound": {"$ref": "#/$defs/assetId"},
+        "noSoundCharacters": {"type": "string", "minLength": 1},
+        "restCharacters": {"type": "string", "minLength": 1},
+        "restCharacterIntervalSeconds": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "setSkinArgs": {
+      "oneOf": [
+        {"$ref": "#/$defs/assetId"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["skin"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "skin": {"$ref": "#/$defs/assetId"},
+            "scale": {"type": "number", "exclusiveMinimum": 0},
+            "transition": {"$ref": "#/$defs/visualTransition"}
+          }
+        }
+      ]
+    },
+    "hideArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stableId": {"$ref": "#/$defs/stableId"},
+        "transition": {"$ref": "#/$defs/visualTransition"}
+      }
+    },
+    "setLayerArgs": {
+      "oneOf": [
+        {"enum": ["front", "back"]},
+        {"type": "number"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["layer"],
+          "properties": {
+            "stableId": {"$ref": "#/$defs/stableId"},
+            "layer": {"oneOf": [{"enum": ["front", "back"]}, {"type": "number"}]}
+          }
+        }
+      ]
+    },
+    "loopStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skin", "seconds"],
+      "properties": {
+        "skin": {
+          "$ref": "#/$defs/assetId"
+        },
+        "seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "loopArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["steps"],
+      "properties": {
+        "stableId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/loopStep"
+          },
+          "contains": {
+            "type": "object",
+            "required": ["seconds"],
+            "properties": {
+              "seconds": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "rubyContentRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ruby"],
+      "properties": {
+        "ruby": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["base", "reading"],
+          "properties": {
+            "base": {"type": "string", "minLength": 1},
+            "reading": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "contentRun": {
+      "oneOf": [{"type": "string"}, {"$ref": "#/$defs/rubyContentRun"}]
+    },
+    "contentRuns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/contentRun"}
+    },
+    "bodyText": {
+      "oneOf": [{"type": "string"}, {"$ref": "#/$defs/contentRuns"}]
+    },
+    "setTextArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "style"],
+      "properties": {
+        "stableId": {
+          "$ref": "#/$defs/stableId"
+        },
+        "text": {
+          "$ref": "#/$defs/bodyText"
+        },
+        "style": {
+          "$ref": "#/$defs/styleId"
+        }
+      }
+    },
+    "poseStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pose"],
+      "properties": {
+        "pose": {
+          "$ref": "#/$defs/id"
+        },
+        "skin": {
+          "$ref": "#/$defs/assetId"
+        },
+        "sound": {
+          "$ref": "#/$defs/assetId"
+        }
+      }
+    },
+    "poseArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["steps"],
+      "properties": {
+        "stableId": {"$ref": "#/$defs/stableId"},
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/poseStep"}
+        }
+      }
+    },
+    "customArguments": {
+      "type": "object",
+      "propertyNames": {"$ref": "#/$defs/id"},
+      "additionalProperties": {"$ref": "#/$defs/variableValue"}
+    },
+    "customActorActionArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stableId": {"$ref": "#/$defs/stableId"},
+        "arguments": {"$ref": "#/$defs/customArguments"}
+      }
+    },
+    "stageAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage"],
+      "properties": {"stage": {"$ref": "#/$defs/stageArgs"}}
+    },
+    "bgmAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bgm"],
+      "properties": {"bgm": {"$ref": "#/$defs/bgmArgs"}}
+    },
+    "stopBgmAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stopBgm"],
+      "properties": {"stopBgm": {"$ref": "#/$defs/stopBgmArgs"}}
+    },
+    "setBgmVolumeAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["setBgmVolume"],
+      "properties": {"setBgmVolume": {"$ref": "#/$defs/setBgmVolumeArgs"}}
+    },
+    "soundAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sound"],
+      "properties": {"sound": {"$ref": "#/$defs/soundArgs"}}
+    },
+    "waitAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wait"],
+      "properties": {"wait": {"$ref": "#/$defs/waitArgs"}}
+    },
+    "debuggerAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["debugger"],
+      "properties": {"debugger": {"type": "null"}}
+    },
+    "broadcastMessageAndWaitAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["broadcastMessageAndWait"],
+      "properties": {
+        "broadcastMessageAndWait": {"$ref": "#/$defs/broadcastMessageAndWaitArgs"}
+      }
+    },
+    "transitionAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transition"],
+      "properties": {"transition": {"$ref": "#/$defs/transitionArgs"}}
+    },
+    "setVariableArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value"],
+      "properties": {
+        "name": {"$ref": "#/$defs/id"},
+        "value": {"$ref": "#/$defs/variableValue"}
+      }
+    },
+    "changeVariableArgs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "by"],
+      "properties": {
+        "name": {"$ref": "#/$defs/id"},
+        "by": {"type": "number"}
+      }
+    },
+    "setVariableAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["setVariable"],
+      "properties": {"setVariable": {"$ref": "#/$defs/setVariableArgs"}}
+    },
+    "changeVariableAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["changeVariable"],
+      "properties": {"changeVariable": {"$ref": "#/$defs/changeVariableArgs"}}
+    },
+    "toggleVariableAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["toggleVariable"],
+      "properties": {"toggleVariable": {"$ref": "#/$defs/id"}}
+    },
+    "gotoAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["goto"],
+      "properties": {"goto": {"$ref": "#/$defs/sceneReferenceArgs"}}
+    },
+    "branchAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["branch"],
+      "properties": {"branch": {"$ref": "#/$defs/branchReferenceArgs"}}
+    },
+    "keyInputAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keyInputToChangeScene"],
+      "properties": {
+        "keyInputToChangeScene": {"$ref": "#/$defs/keyInputArgs"}
+      }
+    },
+    "touchInputAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["touchInputToChangeScene"],
+      "properties": {
+        "touchInputToChangeScene": {
+          "$ref": "#/$defs/touchInputArgs"
+        }
+      }
+    },
+    "poseInputAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["poseInputToChangeScene"],
+      "properties": {
+        "poseInputToChangeScene": {
+          "$ref": "#/$defs/poseInputArgs"
+        }
+      }
+    },
+    "imageInputAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["imageInputToChangeScene"],
+      "properties": {
+        "imageInputToChangeScene": {
+          "$ref": "#/$defs/poseInputArgs"
+        }
+      }
+    },
+    "showAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.show$": {
+          "$ref": "#/$defs/showArgs"
+        }
+      }
+    },
+    "setTransparencyAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.setTransparency$": {
+          "$ref": "#/$defs/setTransparencyArgs"
+        }
+      }
+    },
+    "moveToAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.moveTo$": {
+          "$ref": "#/$defs/moveToArgs"
+        }
+      }
+    },
+    "sayAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.say$": {
+          "$ref": "#/$defs/speechArgs"
+        }
+      }
+    },
+    "thinkAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.think$": {
+          "$ref": "#/$defs/speechArgs"
+        }
+      }
+    },
+    "setSkinAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.setSkin$": {
+          "$ref": "#/$defs/setSkinArgs"
+        }
+      }
+    },
+    "hideAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.hide$": {
+          "$ref": "#/$defs/hideArgs"
+        }
+      }
+    },
+    "setLayerAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.setLayer$": {
+          "$ref": "#/$defs/setLayerArgs"
+        }
+      }
+    },
+    "loopAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.loop$": {
+          "$ref": "#/$defs/loopArgs"
+        }
+      }
+    },
+    "setTextAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.setText$": {
+          "$ref": "#/$defs/setTextArgs"
+        }
+      }
+    },
+    "poseAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.pose$": {
+          "$ref": "#/$defs/poseArgs"
+        }
+      }
+    },
+    "customActorAction": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[\\p{L}_][\\p{L}\\p{N}_-]*\\.(?!(?:show|hide|setTransparency|moveTo|say|think|setSkin|setLayer|loop|setText|pose)$)[\\p{L}_][\\p{L}\\p{N}_-]*$": {
+          "$ref": "#/$defs/customActorActionArgs"
+        }
+      }
+    },
+    "action": {
+      "oneOf": [
+        {"$ref": "#/$defs/stageAction"},
+        {"$ref": "#/$defs/bgmAction"},
+        {"$ref": "#/$defs/stopBgmAction"},
+        {"$ref": "#/$defs/setBgmVolumeAction"},
+        {"$ref": "#/$defs/soundAction"},
+        {"$ref": "#/$defs/waitAction"},
+        {"$ref": "#/$defs/debuggerAction"},
+        {"$ref": "#/$defs/broadcastMessageAndWaitAction"},
+        {"$ref": "#/$defs/transitionAction"},
+        {"$ref": "#/$defs/gotoAction"},
+        {"$ref": "#/$defs/branchAction"},
+        {"$ref": "#/$defs/setVariableAction"},
+        {"$ref": "#/$defs/changeVariableAction"},
+        {"$ref": "#/$defs/toggleVariableAction"},
+        {"$ref": "#/$defs/keyInputAction"},
+        {"$ref": "#/$defs/touchInputAction"},
+        {"$ref": "#/$defs/poseInputAction"},
+        {"$ref": "#/$defs/imageInputAction"},
+        {"$ref": "#/$defs/showAction"},
+        {"$ref": "#/$defs/setTransparencyAction"},
+        {"$ref": "#/$defs/moveToAction"},
+        {"$ref": "#/$defs/sayAction"},
+        {"$ref": "#/$defs/thinkAction"},
+        {"$ref": "#/$defs/setSkinAction"},
+        {"$ref": "#/$defs/hideAction"},
+        {"$ref": "#/$defs/setLayerAction"},
+        {"$ref": "#/$defs/loopAction"},
+        {"$ref": "#/$defs/setTextAction"},
+        {"$ref": "#/$defs/poseAction"},
+        {"$ref": "#/$defs/customActorAction"}
+      ]
+    },
+    "actions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/action"}
+    },
+    "longScene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actions"],
+      "properties": {
+        "recognitionModel": {"$ref": "#/$defs/assetId"},
+        "recognitionMode": {
+          "type": "string",
+          "enum": ["pose", "image"]
+        },
+        "posePreview": {"$ref": "#/$defs/scenePosePreview"},
+        "entryTransition": {"$ref": "#/$defs/visualTransition"},
+        "actions": {"$ref": "#/$defs/actions"}
+      }
+    },
+    "scene": {
+      "oneOf": [{"$ref": "#/$defs/actions"}, {"$ref": "#/$defs/longScene"}]
+    },
+    "scenes": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"$ref": "#/$defs/sceneId"},
+      "additionalProperties": {"$ref": "#/$defs/scene"}
+    }
+  }
+}

@@ -366,6 +366,10 @@ scenes:
 カメラ映像へ重ね、confidenceが低い部分を薄くします。プレビューを先頭から更新し、カメラを許可します。
 見本のポーズ、カメラ映像、関節とボーン、進み具合が表示され、ポーズを保つと次へ進むことを確認します。
 
+> **rc.11以降のリリースを使う場合:** この手順はrc.8の名前で書いています。rc.11以降では
+> `kind: poseModel`を`kind: recognitionModel`へ、`poseRecognition`を`recognition`へ、sceneの`poseModel`を
+> `recognitionModel`へ変更します。値の書き方は変わりません。
+
 <!-- screenshot:C-10 -->
 
 ![合成人物のポーズ認識中にカメラ操作と更新状態が重ならず表示されたローカルプレビュー](../images/tutorials/dsl4/create/tutorial-create-10-pose-preview-controls.png)

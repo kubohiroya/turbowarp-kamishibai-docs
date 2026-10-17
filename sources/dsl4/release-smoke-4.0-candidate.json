@@ -6,7 +6,9 @@
     "version": "4.0.0-rc.22",
     "freezeCommit": "f8048b8c4ebd0ecd6213bb87582862034b2b88ce",
     "schema": {
-      "sha256": "f61955685c51ed7cfe3ed5b760ca6d290929ab9fdc4b8a912cdb901135c613ac"
+      "sha256": "f61955685c51ed7cfe3ed5b760ca6d290929ab9fdc4b8a912cdb901135c613ac",
+      "snapshotPath": "sources/dsl4/dsl-4.0-rc.22.schema.json",
+      "sourceLock": "sources/dsl4/release-source-lock-4.0-rc.22.json"
     },
     "releaseSource": {
       "sourceIdentity": "sha256:44e85ea98dd7d4aef7bbd08c21610675bef8cd9a6244196a9fac54caa712ee6f"
@@ -191,5 +193,10 @@
         "pagesRollbackCommit": "a7f377d4675a9bf9acc8691a11d269ff3d78118b"
       }
     }
-  ]
+  ],
+  "implementationSchema": {
+    "commit": "450a5bb950ef769241ec8258690e652b39b23bde",
+    "sourceLock": "sources/dsl4/source-lock.json",
+    "relationship": "post-rc.22; not the schema for the published runtime"
+  }
 }

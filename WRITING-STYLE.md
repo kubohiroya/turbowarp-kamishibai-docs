@@ -10,7 +10,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 - 最初に現れる固有概念は、日本語による短い説明を添える
 - 一般的な説明では、日本語の語を使う。例: プロジェクト、ソース、素材、プレビュー、ビルド
 - コード上の名前は翻訳しない。例: `project.source.json`、`validate-dsl4`、`StoryDocument`
-- YAMLのキーや値はコード表記にする。例: `assets`、`scenes`、`poseModel`
+- YAMLのキーや値はコード表記にする。例: `assets`、`scenes`、`recognitionModel`
 - 英語の略語は、必要なら最初に意味を補う。例: CLI（コマンドラインインターフェース）
 - 同じ段落で日本語表記と英語表記を無目的に切り替えない
 
@@ -21,7 +21,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 | 作品を構成する一式 | プロジェクト             | `project.source.json`、`--project-root` |
 | 台本などの入力     | ソース                   | `sourceFilename`                        |
 | 複数台本の読み込み | include文                | `include`                               |
-| 画像・音・モデル   | 素材、アセット           | `assets`、`poseModel`                   |
+| 画像・音・モデル   | 素材、アセット           | `assets`、`recognitionModel`            |
 | 制作中の表示確認   | プレビュー               | Web Preview、`preview-dsl4`             |
 | 配布物の生成       | ビルド                   | `build-dsl4`                            |
 | 実行部分           | ランタイム               | `RuntimeController`                     |

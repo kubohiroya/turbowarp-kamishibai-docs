@@ -44,8 +44,12 @@ pnpm exec turbowarp-kamishibai convert-dsl4 \
   --output story.k4.yml
 ```
 
-`TMPoseURL`は既定でlazy remote poseModelへ変換されます。内容を固定した自己完結SB3を作る場合だけ、
+`TMPoseURL`は既定でlazy remoteの認識モデル（`kind: recognitionModel`）へ変換されます。内容を固定した自己完結SB3を作る場合だけ、
 `--pose-models`でローカルのモデルディレクトリへ置き換えます。
+
+> **4.0.0-rc.10〜rc.22を使う場合:** これらの版の`convert-dsl4`は`TMPoseURL`を受理せず、
+> `K4-CONVERT-COMMAND-UNSUPPORTED`で止まります（[turbowarp-kamishibai-app#880](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/880)で修正予定）。
+> 変換用にコピーした台本で`TMPoseURL=`を`TMURL=`へ書き換えてから変換してください。元の3.2台本は変更しません。
 
 ```bash
 pnpm exec turbowarp-kamishibai convert-dsl4 \
@@ -115,8 +119,8 @@ converterもblockを生成・変更しません。
 
 ### 既定: 公開URLのモデルをそのまま参照する
 
-`--pose-models`を指定しない場合、converterは`TMPoseURL`を次の通常のremote poseModelへ変換します。
-DSL 4.0のposeModelは、`delivery: remote`と`source.url`だけの通常のTurboWarp Teachable Machine directory参照に対応します。
+`--pose-models`を指定しない場合、converterは`TMPoseURL`を次の通常のremote recognitionModelへ変換します。
+DSL 4.0のrecognitionModelは、`delivery: remote`と`source.url`だけの通常のTurboWarp Teachable Machine directory参照に対応します。
 converterはこの変換でネットワーク取得やキャッシュ参照を行わず、integrity等も要求しません。実行時には、URLで公開されている
 その時点のモデルを読み込みます。
 
@@ -164,14 +168,14 @@ remoteのまま内容を固定する方法もあります。
 
 ### ポーズ関連の変換で起きること
 
-| 3.1／3.2の記述                      | 4.0の記述                                        | 変換規則                                                         | 変換を止める・警告する条件                         |
-| ----------------------------------- | ------------------------------------------------ | ---------------------------------------------------------------- | -------------------------------------------------- |
-| `TMPoseURL`                         | `assets`の`kind: recognitionModel`               | 既定はremote参照。`--pose-models`で対応付けたURLはローカル`file` | `Actor:pose`があるのに`TMPoseURL`がなければerror   |
-| `Actor:pose`                        | `Actor.pose`の`steps`                            | pose名の順にすべて成立させるstepへ変換する                       | 余分なskin／soundはwarning付きで除外。不足分は省略 |
-| `poseRecog`                         | `recognition.sequence.confidenceThreshold`       | 同じ値を使う（0〜1）                                             | —                                                  |
-| `poseCharge`                        | `recognition.sequence.fullConfidenceHoldSeconds` | `10 / poseCharge`                                                | —                                                  |
-| `poseIdle`                          | —                                                | `0`だけを受け付ける                                              | `0`以外はerror                                     |
-| SB3側でAsync Inputから1件を選ぶ処理 | 生成しない                                       | `poseInputToChangeScene`を推測して作らない                       | —                                                  |
+| 3.1／3.2の記述                      | 4.0の記述                                                     | 変換規則                                                         | 変換を止める・警告する条件                         |
+| ----------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- |
+| `TMPoseURL`                         | `assets`の`kind: recognitionModel`、sceneの`recognitionModel` | 既定はremote参照。`--pose-models`で対応付けたURLはローカル`file` | `Actor:pose`があるのに`TMPoseURL`がなければerror   |
+| `Actor:pose`                        | `Actor.pose`の`steps`                                         | pose名の順にすべて成立させるstepへ変換する                       | 余分なskin／soundはwarning付きで除外。不足分は省略 |
+| `poseRecog`                         | `recognition.sequence.confidenceThreshold`                    | 同じ値を使う（0〜1）                                             | —                                                  |
+| `poseCharge`                        | `recognition.sequence.fullConfidenceHoldSeconds`              | `10 / poseCharge`                                                | —                                                  |
+| `poseIdle`                          | —                                                             | `0`だけを受け付ける                                              | `0`以外はerror                                     |
+| SB3側でAsync Inputから1件を選ぶ処理 | 生成しない                                                    | `poseInputToChangeScene`を推測して作らない                       | —                                                  |
 
 sceneで`Actor:pose`を使っているのに`TMPoseURL`がない場合はerrorです。
 3.1／3.2の`Actor:pose`は候補から1件を選ぶactionではありません。converterはpose名の順にすべて成立させる

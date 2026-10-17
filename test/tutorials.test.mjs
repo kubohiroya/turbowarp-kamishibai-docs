@@ -22,8 +22,10 @@ const publicationPlan = JSON.parse(
   readFileSync(path.join(tutorialRoot, 'publication-plan.json'), 'utf8'),
 );
 const packageManifest = JSON.parse(readFileSync(path.join(projectRoot, 'package.json'), 'utf8'));
+// The tutorial targets the published rc.8 SB3, so it validates against the rc.8 Schema snapshot
+// rather than the newer Schema pinned for the reference.
 const dsl4Schema = JSON.parse(
-  readFileSync(path.join(projectRoot, 'sources/dsl4/dsl-4.schema.json'), 'utf8'),
+  readFileSync(path.join(projectRoot, 'sources/dsl4/dsl-4.0-rc.22.schema.json'), 'utf8'),
 );
 const tutorialSources = Object.fromEntries(
   ['README.md', 'play.md', 'create.md'].map((filename) => [
@@ -564,7 +566,7 @@ test('routes general users and script authors before implementation details', ()
   assert(previewStep >= 0 && previewStep < editStep && editStep < changedDialogue);
 });
 
-test('keeps the starter and every tutorial addition valid against the pinned DSL 4.0 Schema', () => {
+test('keeps the starter and every tutorial addition valid against the rc.8 DSL 4.0 Schema', () => {
   const createSource = tutorialSources['create.md'];
   const [starterBlock] = yamlBlocksBetween(
     createSource,

@@ -24,6 +24,13 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 [紙芝居DSL 4.0 Schemaリファレンス](../dsl-author-guides/dsl-4.0-schema-reference.md)、作品の配置と記述方法を
 調べる場合は[紙芝居DSL 4.0 台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)を参照してください。
 
+## Schemaと公開runtimeの二つの基準
+
+公開runtimeの調査基準は`4.0.0-rc.22`（`f8048b8c`）です。Schemaリファレンスはmainの
+実装基準`450a5bb`を保持し、portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応として区別します。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、
+新しい実装Schemaの出典は`sources/dsl4/source-lock.json`で確認します。両者の検証結果を混同しません。
+
 ## このガイドの読み進め方
 
 4.0の実装全体を初めて調べる場合は、先に
@@ -53,7 +60,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 | `include`、compose、source origin | `src/dsl4/source-graph-frontend.ts`                | `test/dsl4-source-graph-frontend.test.ts`            |
 | scene実行と再開                   | `src/dsl4/runtime-controller.ts`                   | `test/dsl4-runtime-controller.test.ts`               |
 | live reload                       | `src/dsl4/live-reload-session.ts`                  | `test/dsl4-live-reload-session.test.ts`              |
-| Browser Previewのsource／asset    | `src/dsl4/browser-preview-*-adapter.js`            | `test/dsl4-browser-preview-*-adapter.test.mjs`       |
+| Browser Previewのsource／asset    | `src/dsl4/browser-preview-*-adapter.ts`            | `test/dsl4-browser-preview-*-adapter.test.ts`        |
 | CLI Preview                       | `src/builder/dsl4-local-preview-*.js`              | `test/dsl4-local-preview-cli.test.ts`                |
 | 自己完結SB3                       | `src/builder/dsl4-build*.js`                       | `test/dsl4-build-cli.test.ts`                        |
 | Standard Runtime release          | `scripts/sb3/dsl4-downloadable-release.ts`         | `test/dsl4-downloadable-release.test.ts`             |
@@ -83,8 +90,8 @@ CLIは`validate-dsl4 --format canonical-json`・`author-block-dsl`・`export-blo
 ## 規範Schemaとsource lockを守る
 
 DSL 4.0の構造仕様は、本体リポジトリの`schema/dsl-4.schema.json`が規範です。runtime codeからSchemaを
-生成しません。表層仕様、Schema、適合実装、testは同じ上流revisionで扱い、文書だけを別のrevisionへ
-先行させません。
+生成しません。それぞれの基準内では表層仕様、Schema、適合実装、testを同じ上流revisionで扱います。
+公開rc.22の検証へ450a5bbだけの項目を混ぜません。
 
 文書リポジトリは上流revisionを次の二つで固定します。
 
@@ -95,12 +102,13 @@ DSL 4.0の構造仕様は、本体リポジトリの`schema/dsl-4.schema.json`�
 `sources/dsl4/annotations.ja.json`から決定的に生成します。生成Markdownやスナップショットを直接書き換えて
 上流との差を隠してはいけません。
 
-上流を更新するときだけ、文書リポジトリで次を実行します。
+上流を更新するときだけ、文書リポジトリで次を実行します。以下は実装Schema基準を再現する例です。
+公開rc.22の検査には別に固定した`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、現行Schemaを巻き戻しません。
 
 ```bash
 pnpm docs:dsl4:sync -- \
   --repository ../turbowarp-kamishibai-app \
-  --commit f8048b8c4ebd0ecd6213bb87582862034b2b88ce
+  --commit 450a5bb950ef769241ec8258690e652b39b23bde
 pnpm docs:dsl4:check
 git diff -- \
   sources/dsl4/source-lock.json \
@@ -333,7 +341,8 @@ remote previewは常に禁止します。
 
 ### TurboWarp Teachable Machine上流との責務境界
 
-rc.22は`@kubohiroya/turbowarp-teachable-machine@3.5.1`をexact pinします。カメラのcanvas、Canvas2D context、
+rc.22は`@kubohiroya/turbowarp-teachable-machine@3.5.1`をexact pinします。カメラ映像はCamera Sourceが所有し、
+TurboWarp Teachable Machineはleaseした映像を認識に使います。推論用canvas、Canvas2D context、
 TensorFlow.jsへのreadback、SVG overlay要素はTurboWarp Teachable Machineが所有します。DSL runtimeは公開Composition APIへ
 正規化済みoverlay設定を渡すだけで、TurboWarp Teachable MachineのDOM、canvas、TensorFlow.js内部実装を検査・patchしません。
 CPU推論時のChromium readback警告は性能根拠のない抑制をせず許容し、回帰判定は実時間、動作、解放で行います。
@@ -380,7 +389,7 @@ I/Oの所有者は分けます。
 | production外  | ディレクトリhandle、overlay、reload preferenceをartifactへ保存しない | host、token、watcher、browser bundleをproductionへ含めない  |
 
 platform coreはfilesystem、DOM、カメラ、TurboWarp VMへ直接依存しません。`src/dsl4/platform/`のportへactor、media、
-SVG Text、pose、asset lifecycleを注入し、`browser-turbowarp-platform.js`でブラウザー実装をcomposeします。platform APIを
+SVG Text、pose、asset lifecycleを注入し、`browser-turbowarp-platform.ts`でブラウザー実装をcomposeします。platform APIを
 変更した場合はcore unit testだけでなく、browser fixtureとadapter contractを実行します。
 
 ## 変更対象別の検証matrix

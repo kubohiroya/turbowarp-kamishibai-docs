@@ -14,8 +14,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 2026年10月17日の確認結果
 
-- 実装基準は公開プレリリース`v4.0.0-rc.22`のcommit
-  [`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)。Schemaの固定値は`sources/dsl4/source-lock.json`に記録する。
+- 公開runtimeの実装基準は公開プレリリース`v4.0.0-rc.22`のcommit
+  [`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)。公開版のSchemaは`sources/dsl4/dsl-4.0-rc.22.schema.json`、出典は`sources/dsl4/release-source-lock-4.0-rc.22.json`に固定する。
 - GitHub Releaseとnpm `@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.22`を照合した。npmの`next`と`latest`はいずれもrc.22を指す。
 - 正式版`v4.0.0`は未公開。rc.22のリリースノートが示す推奨安定版は`v3.2.3`。
 - Standard SB3の取得先は[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.22)。6,911,464 bytes、SHA-256は`3731ed3a58c000d40f65057fbe5e27b340bae915df11e863fd55c98ba061b5c9`。
@@ -25,6 +25,17 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 公開URL、manifest由来のsize／checksum、照合方法、未確認範囲は
 [`sources/dsl4/user-guide-4.0-public-surfaces.json`](sources/dsl4/user-guide-4.0-public-surfaces.json)へ記録する。
 rc.10の旧manifestと実機確認は`previousVerification`に保存し、rc.22の実機成功として利用しない。
+
+## 公開runtimeとSchema実装基準の区別
+
+mainのSchemaリファレンスは実装commit `450a5bb950ef769241ec8258690e652b39b23bde`を維持します。
+`sources/dsl4/source-lock.json`と`dsl-4.schema.json`はこの実装基準です。portraitの`placement`、
+`offset`、`cornerRadius`はrc.22より後の追加項目であり、**rc.22の公開配布物では利用できません**。
+作者ガイドと生成リファレンスで適用範囲を明記し、公開版の例は別に保存したrc.22のSchemaでも検査します。
+実装Schemaに項目があることを、公開runtimeの対応済み判定には使いません。
+
+変換CLIについてはmainの回避策を保持します。rc.10〜rc.22の`convert-dsl4`で`TMPoseURL`が
+`K4-CONVERT-COMMAND-UNSUPPORTED`になる場合、変換用コピーだけを`TMURL`へ直し、元の3.2台本は変更しません。
 
 ## 現行文書へ反映する契約
 
