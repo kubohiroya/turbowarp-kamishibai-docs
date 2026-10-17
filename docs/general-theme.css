@@ -1479,3 +1479,30 @@ h2.application-sheet {
     font-size: 6.8pt;
   }
 }
+
+/* Keep block labels readable on narrow screens and fit diagrams to printed pages. */
+.block-script-diagram {
+  margin: 1.25rem 0;
+  overflow-x: auto;
+}
+
+.block-script-diagram img {
+  display: block;
+  width: 760px;
+  min-width: 640px;
+  max-width: none;
+  height: auto;
+}
+
+@media print {
+  .block-script-diagram {
+    overflow: visible;
+    break-inside: avoid;
+  }
+
+  .block-script-diagram img {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}

@@ -77,6 +77,11 @@ test('registers the tutorial publications without changing the active AppBar con
         publicationOutputDirectory: '4.0/tutorials/create',
         listedOnVersionTop: true,
       },
+      {
+        sourceFilename: 'create-blocks.md',
+        publicationOutputDirectory: '4.0/tutorials/create-blocks',
+        listedOnVersionTop: true,
+      },
     ],
   );
 
@@ -130,7 +135,7 @@ test('fixes the versioned tutorial publication plan without adding an AppBar ite
   assert.equal(publicationPlan.targetDslVersion, '4.0');
   assert.deepEqual(publicationPlan.listing, {
     source: 'site/4.0/index.html',
-    entryCount: 2,
+    entryCount: 3,
     entries: [
       {
         sectionId: 'user-documents',
@@ -139,8 +144,14 @@ test('fixes the versioned tutorial publication plan without adding an AppBar ite
         entrySource: 'play.md',
       },
       {
+        sectionId: 'block-documents',
+        categoryTitle: '台本ブロックで台本を作る人向けドキュメント',
+        title: '紙芝居を作る',
+        entrySource: 'create-blocks.md',
+      },
+      {
         sectionId: 'dsl-documents',
-        categoryTitle: '台本を作る人向けドキュメント',
+        categoryTitle: '台本DSLで台本を作る人向けドキュメント',
         title: '紙芝居を作る',
         entrySource: 'create.md',
       },
@@ -171,9 +182,10 @@ test('fixes the versioned tutorial publication plan without adding an AppBar ite
     [
       ['play.md', '/4.0/tutorials/play/', 'play'],
       ['create.md', '/4.0/tutorials/create/', 'create'],
+      ['create-blocks.md', '/4.0/tutorials/create-blocks/', 'create-blocks'],
     ],
   );
-  assert.equal(new Set(publicationPlan.pages.map(({publicPath}) => publicPath)).size, 2);
+  assert.equal(new Set(publicationPlan.pages.map(({publicPath}) => publicPath)).size, 3);
   for (const page of publicationPlan.pages) {
     assert(page.publicPath.startsWith('/4.0/tutorials/'));
     assert.equal(readFileSync(path.join(tutorialRoot, page.source), 'utf8').length > 0, true);
@@ -505,7 +517,10 @@ test('keeps the published prerelease reviewable with its fixed captures', () => 
     tutorialSources['README.md'],
     /「紙芝居を遊ぶ」を[\s\S]*「紙芝居を見る人向けドキュメント」/u,
   );
-  assert.match(tutorialSources['README.md'], /「紙芝居を作る」を「台本を作る人向けドキュメント」/u);
+  assert.match(
+    tutorialSources['README.md'],
+    /「紙芝居を作る」を「台本DSLで台本を作る人向けドキュメント」/u,
+  );
   assert.match(tutorialSources['README.md'], /独立カテゴリーや統合一覧カードは設けません/u);
   assert.match(tutorialSources['README.md'], /AppBarへ独立した「チュートリアル」項目は追加せず/u);
   assert.match(tutorialSources['play.md'], /## 完了チェック/u);

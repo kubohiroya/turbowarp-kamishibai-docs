@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="197" viewBox="0 0 760 197" role="img" aria-labelledby="title desc">
+<title id="title">SVG Textを設定する</title>
+<desc id="desc">Issue #881の開発版の台本ブロック。上から順につなぎ、シーンの命令はC字の内側に配置します。入力欄の長い値は図中だけで折り返しています。</desc>
+<rect width="760" height="197" rx="12" fill="#f3f6fa"/>
+<g font-family="ui-monospace, Menlo, monospace" font-weight="500"><text x="24" y="30" font-size="18" fill="#172b40">SVG Textを設定する</text><g data-opcode="property"><path d="M 28 64 h 16 l 5 5 h 20 l 5 -5 H 732 q 8 0 8 8 V 158 q 0 8 -8 8 H 66 l -5 5 h -20 l -5 -5 H 28 q -8 0 -8 -8 V 74 Z" fill="#683f8f" stroke="#fff" stroke-width="1"/><text x="34" y="93" fill="#fff" font-size="16">story property </text><rect x="185.4" y="74" width="217.30000000000007" height="27" rx="6" fill="#fff"/><text x="193.4" y="93" fill="#172b40" font-size="15">[&quot;textStyles&quot;,&quot;title&quot;]</text><text x="407.70000000000005" y="93" fill="#fff" font-size="16"> = JSON </text><rect x="34" y="106" width="683.9499999999991" height="48" rx="6" fill="#fff"/><text x="42" y="125" fill="#172b40" font-size="15">{&quot;background&quot;:&quot;#112233&quot;,&quot;color&quot;:&quot;#ffffff&quot;,&quot;font&quot;:&quot;Noto Sans JP&quot;,&quot;size&quot;:15</text><text x="42" y="146" fill="#172b40" font-size="15">0,&quot;align&quot;:&quot;center&quot;}</text></g></g>
+</svg>

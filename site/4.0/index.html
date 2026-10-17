@@ -138,12 +138,14 @@
                 >を確認する
               </li>
               <li>
-                <a href="tutorials/create/">「紙芝居を作る」チュートリアル</a
-                >で、最初の作品を完成させる
+                <a href="tutorials/create-blocks/">台本ブロック版</a>／<a href="tutorials/create/"
+                  >台本DSL版</a
+                >の「紙芝居を作る」で、最初の作品を完成させる
               </li>
               <li>
-                作品を発展させるときに<a href="dsl-author-guides/dsl-4.0-author-guide/"
-                  >台本作成ガイド</a
+                作品を発展させるときに<a href="block-author-guides/dsl-4.0-block-author-guide/"
+                  >ブロック版</a
+                >／<a href="dsl-author-guides/dsl-4.0-author-guide/">台本作成ガイド</a
                 >へ進み、必要な項目だけ<a href="dsl-author-guides/dsl-4.0-schema-reference/"
                   >項目・命令の仕様一覧</a
                 >で確認する
@@ -265,8 +267,60 @@
           </article>
         </div>
       </section>
+      <section aria-labelledby="block-documents">
+        <h2 id="block-documents">台本ブロックで台本を作る人向けドキュメント</h2>
+        <p>
+          TurboWarpでブロックをつなぎ、台本を編集する方の入口です。命令単位の編集はIssue
+          #881の開発版が対象です。
+        </p>
+        <div class="cards">
+          <article>
+            <h3><span aria-hidden="true">🧩</span> 紙芝居を作る</h3>
+            <p class="audience">初めて台本ブロックで紙芝居を作る方</p>
+            <p class="document-updated">
+              更新日: <time datetime="2026-10-17">2026年10月17日</time>
+            </p>
+            <p>
+              台本ブロックのセリフや場面を編集し、検査、ビルド、再生まで進めます。準備にはIssue
+              #881の開発版CLIを使います。
+            </p>
+            <div class="actions">
+              <a class="button" href="tutorials/create-blocks/">HTML</a>
+              <a
+                class="button secondary"
+                href="https://vivliostyle.org/viewer/#src=https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/tutorials/create-blocks/publication.json&amp;bookMode=true"
+                target="_blank"
+                rel="noopener"
+                >Vivliostyle Viewer</a
+              >
+            </div>
+          </article>
+          <article>
+            <h3><span aria-hidden="true">🧭</span> 紙芝居DSL 4.0 台本作成ガイド</h3>
+            <p class="audience">台本ブロックでDSL 4.0の作品を作る方</p>
+            <p class="document-updated">
+              更新日: <time datetime="2026-10-17">2026年10月17日</time>
+            </p>
+            <p>
+              台本宣言、シーン、設定、命令、入力、分岐をブロック図版で調べるガイドです。命令単位の編集はIssue
+              #881の開発版が対象です。
+            </p>
+            <div class="actions">
+              <a class="button" href="block-author-guides/dsl-4.0-block-author-guide/">HTML</a>
+              <a
+                class="button secondary"
+                href="https://vivliostyle.org/viewer/#src=https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/block-author-guides/dsl-4.0-block-author-guide/publication.json&amp;bookMode=true"
+                target="_blank"
+                rel="noopener"
+                >Vivliostyle Viewer</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
       <section aria-labelledby="dsl-documents">
-        <h2 id="dsl-documents">台本を作る人向けドキュメント</h2>
+        <h2 id="dsl-documents">台本DSLで台本を作る人向けドキュメント</h2>
+        <p>YAML形式の台本をテキストで編集する方の入口です。</p>
         <div class="cards">
           <article>
             <h3><span aria-hidden="true">📝</span> 紙芝居を作る</h3>
@@ -306,6 +360,12 @@
               >
             </div>
           </article>
+        </div>
+      </section>
+      <section aria-labelledby="author-details-documents">
+        <h2 id="author-details-documents">台本作りについて詳しく知りたい人向けドキュメント</h2>
+        <p>ブロック版・DSL版のどちらからも、必要に応じて参照する詳しい資料です。</p>
+        <div class="cards">
           <article>
             <h3>
               <span aria-hidden="true">🔁</span> DSL 4.0 YAMLとブロック台本SB3の相互変換ガイド
