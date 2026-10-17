@@ -8,6 +8,10 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 公開SB3のbundleが返す`getInfo()`を照合した一覧です。表示されるopcode付きブロックは202個、memberは8個です。
 見出し・ドキュメントボタン・非表示ブロックは202個に含めません。表示の抽出は再生・実カメラの検証ではありません。
 
+台本の変換コマンドと編集手順は、[YAMLとブロック台本SB3の相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
+同ガイドでは、公開rc.22の文字列方式と、未公開の開発版による実命令ブロック方式を区別します。
+開発版が生成SB3へ同梱する編集用の補助ブロックは、本書の公開rc.22の一覧には含めません。
+
 ## パレットとドキュメントボタン
 
 memberごとに見出し、`Open Documentation`、ブロックが並びます。

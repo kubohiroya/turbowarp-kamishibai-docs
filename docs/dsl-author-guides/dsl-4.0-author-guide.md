@@ -42,8 +42,14 @@ portraitの`placement`、`offset`、`cornerRadius`はこの実装基準の追加
 
 YAMLとブロック台本は同じ`StoryDocument`へ正規化されます。CLIでは
 `validate-dsl4 --format canonical-json`で正規形を取得し、`author-block-dsl`でYAMLからブロック台本SB3を作り、
-`export-block-dsl`でYAMLへ戻せます。include文のある台本はrootと参照先を一緒に扱います。
+`export-block-dsl`でYAMLへ戻せます。include文のあるSB3からの書き出しは、主台本と参照先を一緒に扱います。
+YAMLからinclude文付きのブロック台本を新規生成することには未対応です。
 サンプルの4形式はYAML台本、台本埋め込みSB3、ブロック台本SB3、Web版です。
+
+両コマンドの実行例と、TurboWarpで編集・保存してYAMLへ書き戻す手順は、
+[「YAMLとブロック台本SB3の相互変換ガイド」](dsl-4.0-block-script-conversion-guide.md)を参照してください。
+公開rc.22はYAML全文を宣言ブロックの文字列として保持します。各命令を実ブロックで配置して編集する新形式は、
+本体Issue #881の未公開の開発版を対象にします。
 
 カメラはCamera Sourceが所有し、認識側が映像を借ります。プレビューは映像をそのまま表示し、推論には中央の
 正方形を切り出して左右反転した入力を使います。プレビューの左右反転と推論入力の処理を同一視しないでください。

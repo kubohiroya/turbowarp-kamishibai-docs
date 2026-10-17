@@ -18,6 +18,7 @@ export const documentUpdatedAt = Object.freeze({
   'command-reference.md': '2026-08-08',
   'history.md': '2026-08-04',
   'dsl-4.0-author-guide.md': '2026-10-17',
+  'dsl-4.0-block-script-conversion-guide.md': '2026-10-17',
   'dsl-4.0-schema-reference.md': '2026-10-17',
   'dsl-4.0-history.md': '2026-10-17',
   'dsl-3.2-to-4.0-conversion-guide.md': '2026-10-17',
@@ -146,6 +147,15 @@ export const documentCollections = [
         audience: 'DSL 4.0の作品を作る方',
         description:
           '入門チュートリアルの次に、作品フォルダー、場面、命令、入力、分岐、エラーへの対処を必要な範囲で調べるガイドです。',
+      },
+      {
+        sourceFilename: 'dsl-4.0-block-script-conversion-guide.md',
+        sourceDirectory: 'dsl-author-guides',
+        outputDirectory: 'dsl-author-guides',
+        title: 'DSL 4.0 YAMLとブロック台本SB3の相互変換ガイド',
+        audience: 'YAML台本とTurboWarpのブロック台本を相互に編集する方',
+        description:
+          'author-block-dslとexport-block-dslの使い方、ブロックを編集・保存してYAMLへ書き戻す手順、公開版と開発版の違いを説明します。',
       },
       {
         sourceFilename: 'dsl-4.0-runtime-variable-guide.md',
