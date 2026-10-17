@@ -25,15 +25,16 @@ const expectedCollections = {
     'user-guide-4.0.md',
   ],
   'dsl-3.2-guides': ['dsl-manual.md', 'command-reference.md', 'history.md'],
-  'dsl-4.0-guides': [
-    'dsl-4.0-author-guide.md',
+  'block-author-guides': ['dsl-4.0-block-author-guide.md'],
+  'dsl-4.0-guides': ['dsl-4.0-author-guide.md'],
+  'dsl-4.0-detail-guides': [
     'dsl-4.0-block-script-conversion-guide.md',
     'dsl-4.0-runtime-variable-guide.md',
     'dsl-4.0-schema-reference.md',
     'dsl-4.0-history.md',
     'dsl-3.2-to-4.0-conversion-guide.md',
   ],
-  tutorials: ['play.md', 'create.md'],
+  tutorials: ['play.md', 'create.md', 'create-blocks.md'],
   'turbowarp-programmer-guides': [
     'dsl-4.0-turbowarp-broadcast-guide.md',
     'dsl-4.0-runtime-block-reference.md',
@@ -284,7 +285,7 @@ test('names public document categories for the reader role', () => {
   );
   assert.equal(
     documentCollections.find(({id}) => id === 'dsl-4.0-guides')?.title,
-    '台本を作る人向けドキュメント',
+    '台本DSLで台本を作る人向けドキュメント',
   );
   const turboWarpGuides = documentCollections.find(({id}) => id === 'turbowarp-programmer-guides');
   assert.equal(turboWarpGuides?.title, 'TurboWarpでプログラムを書く人向けドキュメント');
@@ -316,7 +317,7 @@ test('places every version-specific document below an explicit version root', ()
   assert.equal(staffDocumentConfig.articleHtmlFilename, 'document.html');
 });
 
-test('publishes both tutorial task pages directly without a duplicate overview', () => {
+test('publishes all tutorial task pages directly without a duplicate overview', () => {
   const tutorials = documentationConfig.documents.filter(
     ({collectionId}) => collectionId === 'tutorials',
   );
@@ -335,6 +336,11 @@ test('publishes both tutorial task pages directly without a duplicate overview',
       {
         sourceFilename: 'create.md',
         publicationOutputDirectory: '4.0/tutorials/create',
+        listedOnVersionTop: true,
+      },
+      {
+        sourceFilename: 'create-blocks.md',
+        publicationOutputDirectory: '4.0/tutorials/create-blocks',
         listedOnVersionTop: true,
       },
     ],

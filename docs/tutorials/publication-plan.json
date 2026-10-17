@@ -4,7 +4,7 @@
   "targetDslVersion": "4.0",
   "listing": {
     "source": "site/4.0/index.html",
-    "entryCount": 2,
+    "entryCount": 3,
     "entries": [
       {
         "sectionId": "user-documents",
@@ -13,8 +13,14 @@
         "entrySource": "play.md"
       },
       {
+        "sectionId": "block-documents",
+        "categoryTitle": "台本ブロックで台本を作る人向けドキュメント",
+        "title": "紙芝居を作る",
+        "entrySource": "create-blocks.md"
+      },
+      {
         "sectionId": "dsl-documents",
-        "categoryTitle": "台本を作る人向けドキュメント",
+        "categoryTitle": "台本DSLで台本を作る人向けドキュメント",
         "title": "紙芝居を作る",
         "entrySource": "create.md"
       }
@@ -30,6 +36,11 @@
       "source": "create.md",
       "publicPath": "/4.0/tutorials/create/",
       "role": "create"
+    },
+    {
+      "source": "create-blocks.md",
+      "publicPath": "/4.0/tutorials/create-blocks/",
+      "role": "create-blocks"
     }
   ],
   "redirects": [

@@ -1,0 +1,2456 @@
+{
+  "verifiedOn": "2026-10-17",
+  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/881",
+  "status": "unpublished-development",
+  "provenance": "Generated from createDsl4StructuredBlockSourceDeclaration in the local Issue #881 development implementation. Labels come from its core action and authoring extension definitions. Layout and colors are schematic.",
+  "diagrams": [
+    {
+      "id": "guide-01",
+      "title": "最小台本（1/3）",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"kamishibai\"]",
+            "VALUE": "\"4.0\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Beach\"]",
+            "VALUE": "\"backdrop\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroIdle\"]",
+            "VALUE": "\"costume:Hero\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-02",
+      "title": "最小台本（2/3）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"actors\",\"Hero\"]",
+            "VALUE": "\"HeroIdle\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-03",
+      "title": "最小台本（3/3）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "opening",
+            "PROPERTIES": "{}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Beach"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "say",
+              "text": "actor [TARGET] say spec [SPEC]",
+              "inputs": {
+                "TARGET": "Hero",
+                "SPEC": "{\"text\":\"こんにちは！\",\"seconds\":2}"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "wait",
+              "text": "wait [SECONDS] seconds",
+              "inputs": {
+                "SECONDS": 1
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-04",
+      "title": "短形式",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Beach\"]",
+            "VALUE": "\"backdrop\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroIdle\"]",
+            "VALUE": "\"costume:Hero\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"OpeningSound\"]",
+            "VALUE": "\"sound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-05",
+      "title": "名前付き形式（1/2）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroHappy\"]",
+            "VALUE": "{\"kind\":\"costume\",\"target\":\"Hero\",\"name\":\"happy\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"OpeningSound\"]",
+            "VALUE": "{\"kind\":\"sound\",\"name\":\"Opening Theme\",\"loading\":\"eager\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Ocean\"]",
+            "VALUE": "{\"kind\":\"backdrop\",\"file\":\"ocean.svg\",\"loading\":\"lazy\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"救助Pose\"]",
+            "VALUE": "{\"kind\":\"recognitionModel\",\"file\":\"rescue-pose\",\"loading\":\"lazy\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-06",
+      "title": "名前付き形式（2/2）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"CameraMenuButton\"]",
+            "VALUE": "{\"kind\":\"image\",\"file\":\"select-camera.svg\",\"loading\":\"eager\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"EndingTheme\"]",
+            "VALUE": "{\"kind\":\"sound\",\"delivery\":\"remote\",\"source\":{\"url\":\"https://example.com/kamishibai/ending.ogg\"},\"loading\":\"lazy\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-07",
+      "title": "Web上のファイル（remote）の内容を固定する",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"EndingTheme\"]",
+            "VALUE": "{\"kind\":\"sound\",\"delivery\":\"remote\",\"loading\":\"lazy\",\"source\":{\"url\":\"https://example.com/kamishibai/ending.ogg\",\"integrity\":\"sha256-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\",\"contentType\":\"audio/ogg\",\"size\":1024}}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-08",
+      "title": "登場人物（Actor）を登録する（1/2）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroIdle\"]",
+            "VALUE": "\"costume:Hero\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroHappy\"]",
+            "VALUE": "\"costume:Hero\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"TurtleIdle\"]",
+            "VALUE": "\"costume:Turtle\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"actors\",\"Hero\"]",
+            "VALUE": "\"HeroIdle\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-09",
+      "title": "登場人物（Actor）を登録する（2/2）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"actors\",\"Turtle\"]",
+            "VALUE": "\"TurtleIdle\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-10",
+      "title": "表紙",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"cover\",\"backdrop\"]",
+            "VALUE": "\"Beach\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"cover\",\"bgm\"]",
+            "VALUE": "\"OpeningSound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-11",
+      "title": "読み込み中の表示（1/2）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"LoadingBackground\"]",
+            "VALUE": "\"backdrop\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Loading1\"]",
+            "VALUE": "\"costume:Loading\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Loading2\"]",
+            "VALUE": "\"costume:Loading\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"loading\",\"backdrop\"]",
+            "VALUE": "\"LoadingBackground\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-12",
+      "title": "読み込み中の表示（2/2）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"loading\",\"costumes\"]",
+            "VALUE": "[\"Loading1\",\"Loading2\"]"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-13",
+      "title": "認識音",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"idleSound\"]",
+            "VALUE": "\"ClockTicking\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"chargeSound\"]",
+            "VALUE": "\"Success\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-14",
+      "title": "Poseモデルの初期化方法",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"modelInitialization\"]",
+            "VALUE": "{\"policy\":\"latest-needed\",\"parallel\":true}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-15",
+      "title": "カメラ映像の表示と操作（1/2）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"ShowMirroredButton\"]",
+            "VALUE": "{\"kind\":\"image\",\"file\":\"ui/show-mirrored.svg\",\"loading\":\"eager\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"ShowUnmirroredButton\"]",
+            "VALUE": "{\"kind\":\"image\",\"file\":\"ui/show-unmirrored.svg\",\"loading\":\"eager\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"CameraMenuButton\"]",
+            "VALUE": "{\"kind\":\"image\",\"file\":\"ui/select-camera.svg\",\"loading\":\"eager\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"idleSound\"]",
+            "VALUE": "\"ClockTicking\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-16",
+      "title": "カメラ映像の表示と操作（2/2）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"chargeSound\"]",
+            "VALUE": "\"Success\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"preview\"]",
+            "VALUE": "{\"mirroring\":\"mirrored\",\"controls\":{\"mirroring\":{\"position\":\"top-center\",\"opacity\":0.8,\"assets\":{\"showMirrored\":\"ShowMirroredButton\",\"showUnmirrored\":\"ShowUnmirroredButton\"}},\"cameraMenu\":{\"position\":\"bottom-center\",\"opacity\":0.8,\"buttonAsset\":\"CameraMenuButton\"}}}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-17",
+      "title": "ポーズの関節とボーンを重ねる",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"preview\"]",
+            "VALUE": "{\"mirroring\":\"mirrored\",\"overlay\":{\"visible\":true,\"jointStyles\":{\"leftWrist\":{\"color\":\"#ff00aa\",\"opacity\":0.8,\"radius\":6},\"rightWrist\":{\"color\":\"#ff00aa\",\"radius\":6}},\"boneStyle\":{\"color\":\"#00e5ff\",\"opacity\":0.9,\"width\":3},\"minimumConfidence\":0.5,\"confidenceScaling\":{\"jointOpacity\":true,\"jointRadius\":false,\"boneOpacity\":true,\"boneWidth\":false}}}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-18",
+      "title": "SVG Textを設定する",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"textStyles\",\"title\"]",
+            "VALUE": "{\"background\":\"#112233\",\"color\":\"#ffffff\",\"font\":\"Noto Sans JP\",\"size\":150,\"align\":\"center\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-19",
+      "title": "SVG Textを設定する",
+      "nodes": [
+        {
+          "opcode": "setText",
+          "text": "set text actor [TARGET] to [TEXT] style [STYLE]",
+          "inputs": {
+            "TARGET": "Caption",
+            "TEXT": "おしまい",
+            "STYLE": "title"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-20",
+      "title": "セリフの見た目（bubble style）を設定する",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleStyles\",\"Typing\"]",
+            "VALUE": "{\"characterIntervalSeconds\":0.05,\"characterSound\":\"Typewriter\",\"noSoundCharacters\":\"「」\",\"restCharacters\":\"、。…\",\"restCharacterIntervalSeconds\":0.5}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleStyles\",\"Hero style\"]",
+            "VALUE": "{\"styles\":[\"Typing\"],\"textStyle\":\"title\",\"placement\":\"FOOTER_LIKE\",\"visualStyle\":\"NARRATION\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-21",
+      "title": "吹き出しの形と配置の見本",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleStyles\",\"Hero portrait\"]",
+            "VALUE": "{\"portrait\":{\"base\":\"HeroFace\",\"placement\":\"top-left\",\"offset\":[-4,6,120],\"cornerRadius\":12}}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-22",
+      "title": "吹き出しを閉じる条件（bubble close policy）を設定する（1/2）",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleClosePolicies\",\"after-3-seconds\"]",
+            "VALUE": "{\"seconds\":3}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleClosePolicies\",\"user-advance\"]",
+            "VALUE": "{\"waitFor\":\"advance\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleClosePolicies\",\"advance-or-timeout\"]",
+            "VALUE": "{\"seconds\":10,\"waitFor\":\"advance\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-23",
+      "title": "吹き出しを閉じる条件（bubble close policy）を設定する（2/2）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "opening",
+            "PROPERTIES": "{}"
+          },
+          "children": [
+            {
+              "opcode": "say",
+              "text": "actor [TARGET] say spec [SPEC]",
+              "inputs": {
+                "TARGET": "Hero",
+                "SPEC": "{\"text\":\"次へ進みます\",\"closePolicy\":\"user-advance\"}"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-24",
+      "title": "変数",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"variables\",\"score\"]",
+            "VALUE": "1"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"variables\",\"takeSeaRoute\"]",
+            "VALUE": "false"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"variables\",\"playerName\"]",
+            "VALUE": "\"ななし\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-25",
+      "title": "変数",
+      "nodes": [
+        {
+          "opcode": "setVariable",
+          "text": "set story variable [NAME] to [VALUE] as [TYPE]",
+          "inputs": {
+            "NAME": "playerName",
+            "VALUE": "うみ",
+            "TYPE": "string"
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "changeVariable",
+          "text": "change story variable [NAME] by [BY]",
+          "inputs": {
+            "NAME": "score",
+            "BY": 1
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "toggleVariable",
+          "text": "toggle story variable [NAME]",
+          "inputs": {
+            "NAME": "takeSeaRoute"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-26",
+      "title": "分岐",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"branches\",\"rescueResult\"]",
+            "VALUE": "[{\"if\":\"score == 1\",\"goto\":\"seaRoute\"},{\"if\":\"takeSeaRoute\",\"goto\":\"seaRoute\"},{\"else\":\"ending\"}]"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-27",
+      "title": "分岐",
+      "nodes": [
+        {
+          "opcode": "branch",
+          "text": "choose branch [BRANCH]",
+          "inputs": {
+            "BRANCH": "rescueResult"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-28",
+      "title": "操作キーを設定する",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"controls\",\"keymaps\"]",
+            "VALUE": "{\"development\":{\"Space\":\"navigation.nextAction\",\"Enter\":\"navigation.nextScene\",\"ArrowLeft\":\"history.previousAction\",\"ArrowUp\":\"history.previousScene\",\"ArrowDown\":\"history.nextScene\"},\"production\":{\"Space\":\"rehearsal.skipPose\"}}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-29",
+      "title": "短形式（1/2）",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-30",
+      "title": "短形式（2/2）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "opening",
+            "PROPERTIES": "{}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Beach"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "wait",
+              "text": "wait [SECONDS] seconds",
+              "inputs": {
+                "SECONDS": 1
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-31",
+      "title": "長形式（1/2）",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-32",
+      "title": "長形式（2/2）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "rescue",
+            "PROPERTIES": "{\"recognitionModel\":\"救助Pose\",\"posePreview\":{\"mirroring\":\"unmirrored\"}}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Ocean"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "pose",
+              "text": "recognize actor [TARGET] pose steps [STEPS]",
+              "inputs": {
+                "TARGET": "Hero",
+                "STEPS": "[{\"pose\":\"help\",\"skin\":\"HeroHelp\",\"sound\":\"Success\"}]"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-33",
+      "title": "長形式（1/2）",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"FoodClassifier\"]",
+            "VALUE": "{\"kind\":\"recognitionModel\",\"file\":\"food-image-model\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-34",
+      "title": "長形式（2/2）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "quiz",
+            "PROPERTIES": "{\"recognitionModel\":\"FoodClassifier\",\"recognitionMode\":\"image\",\"entryTransition\":0.8}"
+          },
+          "children": [
+            {
+              "opcode": "imageInputToChangeScene",
+              "text": "wait for image label routes [ROUTES]",
+              "inputs": {
+                "ROUTES": "{\"apple\":\"appleScene\",\"banana\":\"bananaScene\"}"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-35",
+      "title": "背景、音、待機",
+      "nodes": [
+        {
+          "opcode": "stage",
+          "text": "set stage backdrop [BACKDROP]",
+          "inputs": {
+            "BACKDROP": "Beach"
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "bgm",
+          "text": "play BGM [SOUND]",
+          "inputs": {
+            "SOUND": "OpeningSound"
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "sound",
+          "text": "play sound [SOUND] until done",
+          "inputs": {
+            "SOUND": "Success"
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "wait",
+          "text": "wait [SECONDS] seconds",
+          "inputs": {
+            "SECONDS": 1.5
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-36",
+      "title": "切り替え方を指定する",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"presentation\",\"transitions\"]",
+            "VALUE": "{\"scene\":0.5,\"backdrop\":0.3,\"actorSkin\":0.2,\"actorVisibility\":0.15}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"audio\",\"bgm\"]",
+            "VALUE": "{\"transition\":{\"effect\":\"crossfade\",\"seconds\":1.5,\"curve\":\"equalPower\"}}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-37",
+      "title": "切り替え方を指定する（1/4）",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"transition\":0.4},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Sunset"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-38",
+      "title": "切り替え方を指定する（2/4）",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"transition\":0.2},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "setSkin",
+              "text": "set actor [TARGET] skin [SKIN] optional scale [SCALE]",
+              "inputs": {
+                "TARGET": "Hero",
+                "SKIN": "HeroSmile",
+                "SCALE": ""
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-39",
+      "title": "切り替え方を指定する（3/4）",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"transition\":0.15},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "hide",
+              "text": "hide actor [TARGET]",
+              "inputs": {
+                "TARGET": "Hero"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-40",
+      "title": "切り替え方を指定する（4/4）",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"transition\":1.2,\"restart\":true},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "bgm",
+              "text": "play BGM [SOUND]",
+              "inputs": {
+                "SOUND": "EndingTheme"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-41",
+      "title": "BGMを止める、音量を変える（1/2）",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"volume\":80},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "bgm",
+              "text": "play BGM [SOUND]",
+              "inputs": {
+                "SOUND": "Theme"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-42",
+      "title": "BGMを止める、音量を変える（2/2）",
+      "nodes": [
+        {
+          "opcode": "setBgmVolume",
+          "text": "set BGM volume to [VOLUME] % over [SECONDS] seconds",
+          "inputs": {
+            "VOLUME": 30,
+            "SECONDS": 1
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "stopBgm",
+          "text": "stop BGM over [SECONDS] seconds",
+          "inputs": {
+            "SECONDS": 2
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-43",
+      "title": "debug停止とTurboWarp message（1/2）",
+      "nodes": [
+        {
+          "opcode": "debugger",
+          "text": "debugger",
+          "inputs": {},
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "broadcastMessageAndWait",
+          "text": "broadcast [MESSAGE] and wait",
+          "inputs": {
+            "MESSAGE": "playMiniGame"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-44",
+      "title": "debug停止とTurboWarp message（2/2）",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"stableId\":\"endingEffects\"},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "broadcastMessageAndWait",
+              "text": "broadcast [MESSAGE] and wait",
+              "inputs": {
+                "MESSAGE": "showEndingEffects"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-45",
+      "title": "画面効果",
+      "nodes": [
+        {
+          "opcode": "transition",
+          "text": "transition [EFFECT] for [SECONDS] seconds",
+          "inputs": {
+            "EFFECT": "fadeOut",
+            "SECONDS": 0.5
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-46",
+      "title": "シーン移動",
+      "nodes": [
+        {
+          "opcode": "goto",
+          "text": "go to scene [SCENE]",
+          "inputs": {
+            "SCENE": "ending"
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "branch",
+          "text": "choose branch [BRANCH]",
+          "inputs": {
+            "BRANCH": "rescueResult"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-47",
+      "title": "キー入力による移動",
+      "nodes": [
+        {
+          "opcode": "keyInputToChangeScene",
+          "text": "wait for key routes [ROUTES]",
+          "inputs": {
+            "ROUTES": "{\"Digit1\":\"rescue\",\"Digit2\":\"ending\"}"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-48",
+      "title": "キー入力による移動",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"stableId\":\"routeSelection\"},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "keyInputToChangeScene",
+              "text": "wait for key routes [ROUTES]",
+              "inputs": {
+                "ROUTES": "{\"Digit1\":\"rescue\",\"Digit2\":\"ending\"}"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-49",
+      "title": "タッチ入力による移動",
+      "nodes": [
+        {
+          "opcode": "touchInputToChangeScene",
+          "text": "wait for actor touch routes [ROUTES]",
+          "inputs": {
+            "ROUTES": "{\"Hero\":\"rescue\",\"Caption\":\"ending\"}"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-50",
+      "title": "表示する",
+      "nodes": [
+        {
+          "opcode": "show",
+          "text": "show actor [TARGET] skin [SKIN] x [X] y [Y] scale [SCALE] %",
+          "inputs": {
+            "TARGET": "Hero",
+            "SKIN": "HeroHappy",
+            "X": 0,
+            "Y": -60,
+            "SCALE": 30
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-51",
+      "title": "非表示にする",
+      "nodes": [
+        {
+          "opcode": "hide",
+          "text": "hide actor [TARGET]",
+          "inputs": {
+            "TARGET": "Hero"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-52",
+      "title": "透明度を変える",
+      "nodes": [
+        {
+          "opcode": "setTransparency",
+          "text": "set actor [TARGET] transparency spec [SPEC]",
+          "inputs": {
+            "TARGET": "Hero",
+            "SPEC": "50"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-53",
+      "title": "透明度を変える",
+      "nodes": [
+        {
+          "opcode": "setTransparency",
+          "text": "set actor [TARGET] transparency spec [SPEC]",
+          "inputs": {
+            "TARGET": "Hero",
+            "SPEC": "{\"stableId\":\"heroHalfTransparent\",\"transparency\":50}"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-54",
+      "title": "透明度を変える",
+      "nodes": [
+        {
+          "opcode": "setTransparency",
+          "text": "set actor [TARGET] transparency spec [SPEC]",
+          "inputs": {
+            "TARGET": "Hero",
+            "SPEC": "{\"from\":0,\"to\":50,\"seconds\":1,\"background\":true}"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-55",
+      "title": "移動する",
+      "nodes": [
+        {
+          "opcode": "moveTo",
+          "text": "move actor [TARGET] to x [X] y [Y] in [SECONDS] seconds [EASING]",
+          "inputs": {
+            "TARGET": "Hero",
+            "X": 40,
+            "Y": -57,
+            "SECONDS": 1.5,
+            "EASING": "easeInOut"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-56",
+      "title": "セリフと思考を表示する",
+      "nodes": [
+        {
+          "opcode": "say",
+          "text": "actor [TARGET] say spec [SPEC]",
+          "inputs": {
+            "TARGET": "Hero",
+            "SPEC": "{\"text\":\"助けに行こう\",\"closePolicy\":\"advance-or-timeout\",\"styles\":[\"Typing\",\"Hero style\"],\"startSound\":\"HeroGreetingVoice\"}"
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "think",
+          "text": "actor [TARGET] think spec [SPEC]",
+          "inputs": {
+            "TARGET": "Hero",
+            "SPEC": "{\"text\":\"どうしよう……\",\"closePolicy\":\"user-advance\",\"characterIntervalSeconds\":0.1,\"characterSound\":\"Typewriter\"}"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-57",
+      "title": "セリフと思考を表示する",
+      "nodes": [
+        {
+          "opcode": "say",
+          "text": "actor [TARGET] say spec [SPEC]",
+          "inputs": {
+            "TARGET": "Hero",
+            "SPEC": "{\"text\":\"3秒だけ表示します\",\"seconds\":3}"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-58",
+      "title": "コスチュームを変える",
+      "nodes": [
+        {
+          "opcode": "setSkin",
+          "text": "set actor [TARGET] skin [SKIN] optional scale [SCALE]",
+          "inputs": {
+            "TARGET": "Hero",
+            "SKIN": "HeroHelp",
+            "SCALE": ""
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-59",
+      "title": "コスチュームを変える",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"stableId\":\"heroRescueSkin\"},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "setSkin",
+              "text": "set actor [TARGET] skin [SKIN] optional scale [SCALE]",
+              "inputs": {
+                "TARGET": "Hero",
+                "SKIN": "HeroHelp",
+                "SCALE": 100
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-60",
+      "title": "重なり順を変える",
+      "nodes": [
+        {
+          "opcode": "setLayer",
+          "text": "set actor [TARGET] layer [LAYER]",
+          "inputs": {
+            "TARGET": "Hero",
+            "LAYER": "front"
+          },
+          "kind": "stack",
+          "color": "action"
+        },
+        {
+          "opcode": "setLayer",
+          "text": "set actor [TARGET] layer [LAYER]",
+          "inputs": {
+            "TARGET": "Guide",
+            "LAYER": -1
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-61",
+      "title": "コスチュームを繰り返す",
+      "nodes": [
+        {
+          "opcode": "loop",
+          "text": "loop actor [TARGET] costume steps [STEPS]",
+          "inputs": {
+            "TARGET": "Hero",
+            "STEPS": "[{\"skin\":\"HeroWalk1\",\"seconds\":0.2},{\"skin\":\"HeroWalk2\",\"seconds\":0.2}]"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-62",
+      "title": "SVG Textを更新する",
+      "nodes": [
+        {
+          "opcode": "setText",
+          "text": "set text actor [TARGET] to [TEXT] style [STYLE]",
+          "inputs": {
+            "TARGET": "Caption",
+            "TEXT": "おしまい",
+            "STYLE": "title"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-63",
+      "title": "SVG Textを更新する",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{},\"textFormat\":\"json\"}"
+          },
+          "children": [
+            {
+              "opcode": "setText",
+              "text": "set text actor [TARGET] to [TEXT] style [STYLE]",
+              "inputs": {
+                "TARGET": "Caption",
+                "TEXT": "[\"むかしむかし、\",{\"ruby\":{\"base\":\"竹取\",\"reading\":\"たけとり\"}},\"の翁がいました。\"]",
+                "STYLE": "title"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-64",
+      "title": "ポーズを認識する",
+      "nodes": [
+        {
+          "opcode": "pose",
+          "text": "recognize actor [TARGET] pose steps [STEPS]",
+          "inputs": {
+            "TARGET": "Hero",
+            "STEPS": "[{\"pose\":\"help\",\"skin\":\"HeroHelp\",\"sound\":\"Success\"},{\"pose\":\"jump\",\"skin\":\"HeroHappy\",\"sound\":\"Success\"}]"
+          },
+          "kind": "stack",
+          "color": "action"
+        }
+      ]
+    },
+    {
+      "id": "guide-65",
+      "title": "再読み込みに備えてstableIdを付ける",
+      "nodes": [
+        {
+          "opcode": "actionOptions",
+          "text": "action options JSON [PROPERTIES]",
+          "inputs": {
+            "PROPERTIES": "{\"arguments\":{\"stableId\":\"waitBeforeEnding\"},\"textFormat\":\"plain\"}"
+          },
+          "children": [
+            {
+              "opcode": "wait",
+              "text": "wait [SECONDS] seconds",
+              "inputs": {
+                "SECONDS": 1
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-66",
+      "title": "総合サンプル（1/13）",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"kamishibai\"]",
+            "VALUE": "\"4.0\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Beach\"]",
+            "VALUE": "\"backdrop\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Ocean\"]",
+            "VALUE": "{\"kind\":\"backdrop\",\"file\":\"ocean.svg\",\"loading\":\"lazy\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-67",
+      "title": "総合サンプル（2/13）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroIdle\"]",
+            "VALUE": "\"costume:Hero\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroHappy\"]",
+            "VALUE": "\"costume:Hero\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroHelp\"]",
+            "VALUE": "\"costume:Hero\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"CaptionIdle\"]",
+            "VALUE": "\"costume:Caption\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-68",
+      "title": "総合サンプル（3/13）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"OpeningSound\"]",
+            "VALUE": "\"sound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"ClockTicking\"]",
+            "VALUE": "\"sound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Success\"]",
+            "VALUE": "\"sound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"Typewriter\"]",
+            "VALUE": "\"sound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-69",
+      "title": "総合サンプル（4/13）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroGreetingVoice\"]",
+            "VALUE": "\"sound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"HeroThinkingVoice\"]",
+            "VALUE": "\"sound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"ShowMirroredButton\"]",
+            "VALUE": "{\"kind\":\"image\",\"file\":\"show-mirrored.svg\",\"loading\":\"eager\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"ShowUnmirroredButton\"]",
+            "VALUE": "{\"kind\":\"image\",\"file\":\"show-unmirrored.svg\",\"loading\":\"eager\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-70",
+      "title": "総合サンプル（5/13）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"CameraMenuButton\"]",
+            "VALUE": "{\"kind\":\"image\",\"file\":\"select-camera.svg\",\"loading\":\"eager\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"救助Pose\"]",
+            "VALUE": "{\"kind\":\"recognitionModel\",\"file\":\"rescue-pose\",\"loading\":\"lazy\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"actors\",\"Hero\"]",
+            "VALUE": "\"HeroIdle\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"actors\",\"Caption\"]",
+            "VALUE": "\"CaptionIdle\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-71",
+      "title": "総合サンプル（6/13）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"cover\",\"backdrop\"]",
+            "VALUE": "\"Beach\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"cover\",\"bgm\"]",
+            "VALUE": "\"OpeningSound\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"textStyles\",\"title\"]",
+            "VALUE": "{\"background\":\"#112233\",\"color\":\"#ffffff\",\"font\":\"Noto Sans JP\",\"size\":150,\"align\":\"center\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleStyles\",\"Typing\"]",
+            "VALUE": "{\"characterIntervalSeconds\":0.05,\"characterSound\":\"Typewriter\",\"noSoundCharacters\":\"「」\",\"restCharacters\":\"、。…\",\"restCharacterIntervalSeconds\":0.5}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-72",
+      "title": "総合サンプル（7/13）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleStyles\",\"Hero style\"]",
+            "VALUE": "{\"styles\":[\"Typing\"],\"textStyle\":\"title\",\"placement\":\"FOOTER_LIKE\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleClosePolicies\",\"user-advance\"]",
+            "VALUE": "{\"waitFor\":\"advance\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"bubbleClosePolicies\",\"advance-or-timeout\"]",
+            "VALUE": "{\"seconds\":8,\"waitFor\":\"advance\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"variables\",\"score\"]",
+            "VALUE": "1"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-73",
+      "title": "総合サンプル（8/13）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"variables\",\"takeSeaRoute\"]",
+            "VALUE": "false"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"idleSound\"]",
+            "VALUE": "\"ClockTicking\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"chargeSound\"]",
+            "VALUE": "\"Success\""
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"recognition\",\"preview\"]",
+            "VALUE": "{\"mirroring\":\"mirrored\",\"overlay\":{\"visible\":true,\"boneStyle\":{\"color\":\"#00e5ff\",\"opacity\":0.9,\"width\":3},\"minimumConfidence\":0.5},\"controls\":{\"mirroring\":{\"position\":\"top-center\",\"opacity\":0.8,\"assets\":{\"showMirrored\":\"ShowMirroredButton\",\"showUnmirrored\":\"ShowUnmirroredButton\"}},\"cameraMenu\":{\"position\":\"bottom-center\",\"opacity\":0.8,\"buttonAsset\":\"CameraMenuButton\"}}}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-74",
+      "title": "総合サンプル（9/13）",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"controls\",\"keymaps\"]",
+            "VALUE": "{\"development\":{\"Space\":\"navigation.nextAction\",\"ArrowLeft\":\"history.previousAction\",\"ArrowUp\":\"history.previousScene\",\"ArrowDown\":\"history.nextScene\"},\"production\":{\"Space\":\"rehearsal.skipPose\"}}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"branches\",\"rescueResult\"]",
+            "VALUE": "[{\"if\":\"score == 1\",\"goto\":\"seaRoute\"},{\"if\":\"takeSeaRoute\",\"goto\":\"seaRoute\"},{\"else\":\"ending\"}]"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-75",
+      "title": "総合サンプル（10/13）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "opening",
+            "PROPERTIES": "{}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Beach"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "bgm",
+              "text": "play BGM [SOUND]",
+              "inputs": {
+                "SOUND": "OpeningSound"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "actionOptions",
+              "text": "action options JSON [PROPERTIES]",
+              "inputs": {
+                "PROPERTIES": "{\"arguments\":{\"stableId\":\"openingTitle\"},\"textFormat\":\"plain\"}"
+              },
+              "children": [
+                {
+                  "opcode": "setText",
+                  "text": "set text actor [TARGET] to [TEXT] style [STYLE]",
+                  "inputs": {
+                    "TARGET": "Caption",
+                    "TEXT": "海へ出発！\n1か2を押してください",
+                    "STYLE": "title"
+                  },
+                  "kind": "stack",
+                  "color": "action"
+                }
+              ],
+              "kind": "c",
+              "color": "authoring"
+            },
+            {
+              "opcode": "show",
+              "text": "show actor [TARGET] skin [SKIN] x [X] y [Y] scale [SCALE] %",
+              "inputs": {
+                "TARGET": "Hero",
+                "SKIN": "HeroHappy",
+                "X": 0,
+                "Y": -60,
+                "SCALE": 30
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "setTransparency",
+              "text": "set actor [TARGET] transparency spec [SPEC]",
+              "inputs": {
+                "TARGET": "Hero",
+                "SPEC": "{\"from\":100,\"to\":0,\"seconds\":0.5}"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "say",
+              "text": "actor [TARGET] say spec [SPEC]",
+              "inputs": {
+                "TARGET": "Hero",
+                "SPEC": "{\"text\":\"助けに行こう\",\"closePolicy\":\"advance-or-timeout\",\"styles\":[\"Hero style\"],\"startSound\":\"HeroGreetingVoice\"}"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "keyInputToChangeScene",
+              "text": "wait for key routes [ROUTES]",
+              "inputs": {
+                "ROUTES": "{\"Digit1\":\"rescue\",\"Digit2\":\"ending\"}"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-76",
+      "title": "総合サンプル（11/13）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "rescue",
+            "PROPERTIES": "{\"recognitionModel\":\"救助Pose\",\"posePreview\":{\"mirroring\":\"unmirrored\"}}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Ocean"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "setSkin",
+              "text": "set actor [TARGET] skin [SKIN] optional scale [SCALE]",
+              "inputs": {
+                "TARGET": "Hero",
+                "SKIN": "HeroHelp",
+                "SCALE": ""
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "pose",
+              "text": "recognize actor [TARGET] pose steps [STEPS]",
+              "inputs": {
+                "TARGET": "Hero",
+                "STEPS": "[{\"pose\":\"help\",\"skin\":\"HeroHelp\",\"sound\":\"Success\"},{\"pose\":\"jump\",\"skin\":\"HeroHappy\",\"sound\":\"Success\"}]"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "branch",
+              "text": "choose branch [BRANCH]",
+              "inputs": {
+                "BRANCH": "rescueResult"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-77",
+      "title": "総合サンプル（12/13）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "seaRoute",
+            "PROPERTIES": "{}"
+          },
+          "children": [
+            {
+              "opcode": "moveTo",
+              "text": "move actor [TARGET] to x [X] y [Y] in [SECONDS] seconds [EASING]",
+              "inputs": {
+                "TARGET": "Hero",
+                "X": 40,
+                "Y": -57,
+                "SECONDS": 1.5,
+                "EASING": "easeInOut"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "think",
+              "text": "actor [TARGET] think spec [SPEC]",
+              "inputs": {
+                "TARGET": "Hero",
+                "SPEC": "{\"text\":\"海路で帰ろう……\",\"closePolicy\":\"user-advance\",\"startSound\":\"HeroThinkingVoice\"}"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "transition",
+              "text": "transition [EFFECT] for [SECONDS] seconds",
+              "inputs": {
+                "EFFECT": "fadeOut",
+                "SECONDS": 0.5
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "goto",
+              "text": "go to scene [SCENE]",
+              "inputs": {
+                "SCENE": "ending"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "guide-78",
+      "title": "総合サンプル（13/13）",
+      "nodes": [
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "ending",
+            "PROPERTIES": "{}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Beach"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "setText",
+              "text": "set text actor [TARGET] to [TEXT] style [STYLE]",
+              "inputs": {
+                "TARGET": "Caption",
+                "TEXT": "おしまい",
+                "STYLE": "title"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "tutorial-dialogue",
+      "title": "セリフを変える",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        },
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "earthquake",
+            "PROPERTIES": "{}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Classroom"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "show",
+              "text": "show actor [TARGET] skin [SKIN] x [X] y [Y] scale [SCALE] %",
+              "inputs": {
+                "TARGET": "Student",
+                "SKIN": "StudentReady",
+                "X": -90,
+                "Y": -55,
+                "SCALE": 58
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "say",
+              "text": "actor [TARGET] say spec [SPEC]",
+              "inputs": {
+                "TARGET": "Student",
+                "SPEC": "{\"text\":\"地震だ！\",\"seconds\":2}"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "tutorial-scene",
+      "title": "次の場面を加える",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        },
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "instruction",
+            "PROPERTIES": "{}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Classroom"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "say",
+              "text": "actor [TARGET] say spec [SPEC]",
+              "inputs": {
+                "TARGET": "Student",
+                "SPEC": "{\"text\":\"両手で頭を守ろう！\",\"seconds\":3}"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "wait",
+              "text": "wait [SECONDS] seconds",
+              "inputs": {
+                "SECONDS": 1
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "tutorial-assets",
+      "title": "追加素材を登録する",
+      "nodes": [
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"EarthquakeClassroom\"]",
+            "VALUE": "{\"kind\":\"backdrop\",\"file\":\"earthquake-classroom.svg\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "property",
+          "text": "story property [PATH] = JSON [VALUE]",
+          "inputs": {
+            "PATH": "[\"assets\",\"ProtectHead\"]",
+            "VALUE": "{\"kind\":\"costume\",\"target\":\"Student\",\"file\":\"protect-head.svg\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        }
+      ]
+    },
+    {
+      "id": "tutorial-pose",
+      "title": "ポーズ認識のあるシーン",
+      "nodes": [
+        {
+          "opcode": "whenDsl4Source",
+          "text": "when kamishibai DSL source",
+          "inputs": {},
+          "kind": "hat",
+          "color": "action"
+        },
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "protect",
+            "PROPERTIES": "{\"recognitionModel\":\"SafetyPose\"}"
+          },
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "EarthquakeClassroom"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "show",
+              "text": "show actor [TARGET] skin [SKIN] x [X] y [Y] scale [SCALE] %",
+              "inputs": {
+                "TARGET": "Student",
+                "SKIN": "ProtectHead",
+                "X": 0,
+                "Y": -60,
+                "SCALE": 65
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "pose",
+              "text": "recognize actor [TARGET] pose steps [STEPS]",
+              "inputs": {
+                "TARGET": "Student",
+                "STEPS": "[{\"pose\":\"頭を守る\",\"skin\":\"ProtectHead\",\"sound\":\"SuccessSound\"}]"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ],
+          "kind": "c",
+          "color": "authoring"
+        }
+      ]
+    }
+  ]
+}

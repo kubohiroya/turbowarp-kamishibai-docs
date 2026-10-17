@@ -28,6 +28,8 @@ export const documentUpdatedAt = Object.freeze({
   'dsl-4.0-runtime-variable-turbowarp-reference.md': '2026-10-17',
   'play.md': '2026-10-17',
   'create.md': '2026-10-17',
+  'create-blocks.md': '2026-10-17',
+  'dsl-4.0-block-author-guide.md': '2026-10-17',
   'application-materials-guide.md': '2026-08-09',
   'application-materials-guide-4.0.md': '2026-10-17',
   'developer-guide.md': '2026-08-12',
@@ -135,9 +137,23 @@ export const documentCollections = [
     ],
   },
   {
+    id: 'block-author-guides',
+    version: '4.0',
+    title: '台本ブロックで台本を作る人向けドキュメント',
+    documents: [
+      {
+        sourceFilename: 'dsl-4.0-block-author-guide.md',
+        title: '紙芝居DSL 4.0 台本作成ガイド',
+        audience: '台本ブロックでDSL 4.0の作品を作る方',
+        description:
+          '台本宣言、シーン、設定、命令、入力、分岐をブロック図版で調べるガイドです。命令単位の編集はIssue #881の開発版が対象です。',
+      },
+    ],
+  },
+  {
     id: 'dsl-4.0-guides',
     version: '4.0',
-    title: '台本を作る人向けドキュメント',
+    title: '台本DSLで台本を作る人向けドキュメント',
     documents: [
       {
         sourceFilename: 'dsl-4.0-author-guide.md',
@@ -148,6 +164,13 @@ export const documentCollections = [
         description:
           '入門チュートリアルの次に、作品フォルダー、場面、命令、入力、分岐、エラーへの対処を必要な範囲で調べるガイドです。',
       },
+    ],
+  },
+  {
+    id: 'dsl-4.0-detail-guides',
+    version: '4.0',
+    title: '台本作りについて詳しく知りたい人向けドキュメント',
+    documents: [
       {
         sourceFilename: 'dsl-4.0-block-script-conversion-guide.md',
         sourceDirectory: 'dsl-author-guides',
@@ -215,6 +238,15 @@ export const documentCollections = [
         title: '紙芝居を作る',
         audience: '初めて紙芝居DSL 4.0を書く方',
         description: '公開スターターを変更し、プレビュー、検査、ビルドを経て作品を完成させます。',
+      },
+      {
+        sourceFilename: 'create-blocks.md',
+        publicationBasename: 'create-blocks',
+        listedOnVersionTop: true,
+        title: '紙芝居を作る',
+        audience: '初めて台本ブロックで紙芝居を作る方',
+        description:
+          '台本ブロックのセリフや場面を編集し、検査、ビルド、再生まで進めます。準備にはIssue #881の開発版CLIを使います。',
       },
     ],
   },

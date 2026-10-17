@@ -165,3 +165,8 @@ pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit
 
 このリポジトリ全体に適用される単一のライセンスはありません。ファイルごとの正確な
 適用範囲は[LICENSES.md](LICENSES.md)を参照してください。
+
+4.0の作者向け入口は、台本ブロック、台本DSL、台本作りの詳細資料に分けています。
+各作成経路に「紙芝居を作る」と「紙芝居DSL 4.0 台本作成ガイド」を置き、既存のDSL版URLは維持します。
+ブロック図版は`sources/dsl4-authoring-blocks.json`から`node scripts/render-authoring-blocks.mjs`で再生成できます。
+命令単位の編集の実装基準は本体Issue #881の未公開の開発版です。

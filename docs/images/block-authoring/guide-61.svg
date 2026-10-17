@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="176" viewBox="0 0 760 176" role="img" aria-labelledby="title desc">
+<title id="title">コスチュームを繰り返す</title>
+<desc id="desc">Issue #881の開発版の台本ブロック。上から順につなぎ、シーンの命令はC字の内側に配置します。入力欄の長い値は図中だけで折り返しています。</desc>
+<rect width="760" height="176" rx="12" fill="#f3f6fa"/>
+<g font-family="ui-monospace, Menlo, monospace" font-weight="500"><text x="24" y="30" font-size="18" fill="#172b40">コスチュームを繰り返す</text><g data-opcode="loop"><path d="M 28 64 h 16 l 5 5 h 20 l 5 -5 H 732 q 8 0 8 8 V 137 q 0 8 -8 8 H 66 l -5 5 h -20 l -5 -5 H 28 q -8 0 -8 -8 V 74 Z" fill="#086f78" stroke="#fff" stroke-width="1"/><text x="34" y="93" fill="#fff" font-size="16">loop actor </text><rect x="146.36" y="74" width="52.6" height="27" rx="6" fill="#fff"/><text x="154.36" y="93" fill="#172b40" font-size="15">Hero</text><text x="203.96" y="93" fill="#fff" font-size="16"> costume steps </text><rect x="34" y="106" width="665.6499999999992" height="27" rx="6" fill="#fff"/><text x="42" y="125" fill="#172b40" font-size="15">[{&quot;skin&quot;:&quot;HeroWalk1&quot;,&quot;seconds&quot;:0.2},{&quot;skin&quot;:&quot;HeroWalk2&quot;,&quot;seconds&quot;:0.2}]</text></g></g>
+</svg>

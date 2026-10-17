@@ -164,7 +164,10 @@ test('keeps the two version tops independent', () => {
 test('organizes both version tops by reader role and routes tutorials directly', () => {
   for (const index of [dsl32Index, dsl40Index]) {
     assert.match(index, />紙芝居を見る人向けドキュメント<\/h2>/u);
-    assert.match(index, />台本を作る人向けドキュメント<\/h2>/u);
+    assert.match(
+      index,
+      />(?:台本を作る人向けドキュメント|台本DSLで台本を作る人向けドキュメント)<\/h2>/u,
+    );
     assert.match(index, />アプリを開発する人向けドキュメント<\/h2>/u);
     assert.doesNotMatch(index, />一般向けドキュメント<\/h2>/u);
     assert.doesNotMatch(index, />開発者向けドキュメント<\/h2>/u);
