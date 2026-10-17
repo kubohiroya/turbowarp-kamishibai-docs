@@ -85,7 +85,10 @@ Standard productionは`dsl4TurboWarpStateSurface`・`dsl4ExpressionRuntimeState`
 
 CLIは`validate-dsl4 --format canonical-json`・`author-block-dsl`・`export-block-dsl`でYAML／ブロック台本を往復できます。
 公開rc.22の生成はYAML文字列を保持する方式です。実命令ブロックの生成・編集後の書き戻しは、
-未公開の本体Issue #881の開発版で追加しています。コマンド例、編集・保存の手順、include文の制約は
+mainへマージ済みの本体Issue #881の修正で追加しています（npm未公開）。
+本体Issue #883の追加開発版は`kamishibai [4.0] [ラベル]`ハットと`includeBlocks`、include付きYAMLの生成・読取・分割exportに対応します。
+旧`when kamishibai DSL source`と旧YAML文字列方式の生成・読取互換は廃止します。
+コマンド例、編集・保存の手順、include文の制約は
 [YAMLとブロック台本SB3の相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
 ローカルプレビューはリモートassetを取得せず、rc.22では失敗ダイアログを表示します。
 リモート取得のOFFLINE／CORS／CONNECTとCLIのTLS診断、sandbox内で許可した場合の案内を確認します。

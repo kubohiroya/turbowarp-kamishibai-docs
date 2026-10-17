@@ -12,6 +12,30 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 同ガイドでは、公開rc.22の文字列方式と、未公開の開発版による実命令ブロック方式を区別します。
 開発版が生成SB3へ同梱する編集用の補助ブロックは、本書の公開rc.22の一覧には含めません。
 
+## 編集用ブロック台本のラベルとincludeBlocks（開発版）
+
+[本体Issue #883](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883)の開発版では、
+生成SB3へ同梱する編集用拡張`kubohiroyakamishibaiauthoring4`に次のブロックを追加します。
+下記の48ブロック・bundle全体202ブロックの一覧は、公開済みrc.22の記録です。
+#883の開発版では旧sourceハットと文字列命令を削除し、台本の入口を編集用拡張の新ハットに統一します。
+
+- `kamishibai [VERSION] [LABEL]`（hat、opcode: `kamishibai`）: VERSIONは文字列4.0、LABELの既定は空文字。
+- `includeBlocks [LABEL]`（command、opcode: `includeBlocks`）: 同じSB3内の名前付き台本をビルド時にincludeする。
+
+`kamishibai [4.0] [ラベル]`は台本ソースの入口と版・識別名の宣言を兼ねるハットです。
+イベント受信や再生開始は行いません。旧`when kamishibai DSL source`を前段へ置く構成は使いません。
+旧ハットの定義・生成・読取互換も残しません。旧ブロック台本は元のYAMLから再生成します。
+埋込ランタイムを持つ旧ベースから生成する場合も、旧2定義を登録から除去します。
+
+空でないラベルはSB3全体で一意です。同一Stage内でもStage/Sprite間でも参照できます。
+Stageのラベル空欄の宣言を入口とし、名前付き宣言だけが複数ある場合は入口を曖昧にしません。
+`includeBlocks`は台本ハット直下の宣言列に置き、シーン内の命令にはできません。
+参照切れ、重複、空参照、自己参照・循環、動的入力は診断します。
+ラベルの改名時は参照元も編集してください。
+
+ブロック台本は編集用ソースです。生成・編集・保存と、分割YAMLへの書き戻し・再生用ビルドは
+[相互変換ガイドのincludeBlocks手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
+
 ## パレットとドキュメントボタン
 
 memberごとに見出し、`Open Documentation`、ブロックが並びます。
