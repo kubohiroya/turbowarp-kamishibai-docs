@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="144" viewBox="0 0 760 144" role="img" aria-labelledby="title desc">
 <title id="title">画面効果</title>
-<desc id="desc">Issue #881の開発版の台本ブロック。上から順につなぎ、シーンの命令はC字の内側に配置します。入力欄の長い値は図中だけで折り返しています。</desc>
+<desc id="desc">Issue #883の新ハット形式の台本ブロック。複数のハットは独立した台本として配置します。上から順につなぎ、シーンの命令はC字の内側に配置します。入力欄の長い値は図中だけで折り返しています。</desc>
 <rect width="760" height="144" rx="12" fill="#f3f6fa"/>
 <g font-family="ui-monospace, Menlo, monospace" font-weight="500"><text x="24" y="30" font-size="18" fill="#172b40">画面効果</text><g data-opcode="transition"><path d="M 28 64 h 16 l 5 5 h 20 l 5 -5 H 732 q 8 0 8 8 V 105 q 0 8 -8 8 H 66 l -5 5 h -20 l -5 -5 H 28 q -8 0 -8 -8 V 74 Z" fill="#086f78" stroke="#fff" stroke-width="1"/><text x="34" y="93" fill="#fff" font-size="16">transition </text><rect x="146.36" y="74" width="80.05" height="27" rx="6" fill="#fff"/><text x="154.36" y="93" fill="#172b40" font-size="15">fadeOut</text><text x="231.41000000000003" y="93" fill="#fff" font-size="16"> for </text><rect x="285.21000000000004" y="74" width="43.45" height="27" rx="6" fill="#fff"/><text x="293.21000000000004" y="93" fill="#172b40" font-size="15">0.5</text><text x="333.66" y="93" fill="#fff" font-size="16"> seconds</text></g></g>
 </svg>

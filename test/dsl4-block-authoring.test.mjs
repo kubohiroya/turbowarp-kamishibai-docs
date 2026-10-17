@@ -47,9 +47,11 @@ test('gives block and DSL authors exactly one tutorial and one guide, followed b
 test('keeps the block walkthrough explicit about development prerequisites and saved-block input', () => {
   for (const source of [guide, tutorial]) {
     assert.doesNotMatch(source, /```ya?ml/iu);
-    assert.match(source, /Issue #881/u);
+    assert.match(source, /Issue #883/u);
     assert.match(source, /未公開の開発版/u);
     assert.match(source, /公開rc\.22/u);
+    assert.doesNotMatch(source, /when kamishibai DSL source|whenDsl4Source/u);
+    assert.match(source, /kamishibai \[4\.0\]/u);
   }
   assert.match(tutorial, /export-block-dsl[\s\S]*--input[^\n]+story-edited\.sb3/u);
   assert.match(tutorial, /build-dsl4[\s\S]*--base[^\n]+story-edited\.sb3/u);
@@ -66,10 +68,19 @@ test('ships every referenced block diagram with accessible SVG and complete JSON
   assert.equal(used.size, snapshot.diagrams.length);
   function checkNodes(nodes) {
     for (const node of nodes) {
+      assert.notEqual(node.opcode, 'whenDsl4Source');
+      if (node.kind === 'hat') {
+        assert.equal(node.opcode, 'kamishibai');
+        assert.equal(node.text, 'kamishibai [VERSION] [LABEL]');
+        assert.equal(node.inputs.VERSION, '4.0');
+        assert.equal(typeof node.inputs.LABEL, 'string');
+        assert.equal(node.color, 'authoring');
+      }
       for (const match of node.text.matchAll(/\[([A-Z]+)\]/gu))
         assert.ok(Object.hasOwn(node.inputs, match[1]));
       if (node.opcode === 'property') {
         assert.ok(Array.isArray(JSON.parse(node.inputs.PATH)));
+        assert.notDeepEqual(JSON.parse(node.inputs.PATH), ['kamishibai']);
         JSON.parse(node.inputs.VALUE);
       }
       checkNodes(node.children ?? []);
@@ -81,7 +92,25 @@ test('ships every referenced block diagram with accessible SVG and complete JSON
     assert.match(svg, /role="img" aria-labelledby="title desc"/u);
     assert.match(svg, /<title id="title">/u);
     assert.match(svg, /<desc id="desc">/u);
-    assert.doesNotMatch(svg, /undefined|NaN/u);
+    assert.doesNotMatch(svg, /undefined|NaN|when kamishibai DSL source|whenDsl4Source/u);
+    assert.match(svg, /Issue #883/u);
     checkNodes(diagram.nodes);
   }
+});
+
+test('documents label-based includes with independent source hats and YAML writeback', () => {
+  const snapshot = JSON.parse(read('sources/dsl4-authoring-blocks.json'));
+  const example = snapshot.diagrams.find(({id}) => id === 'guide-includes');
+  assert.ok(example);
+  const hats = example.nodes.filter(({kind}) => kind === 'hat');
+  assert.equal(hats.length, 2);
+  assert.equal(hats[0].inputs.LABEL, '');
+  assert.notEqual(hats[1].inputs.LABEL, '');
+  const include = example.nodes.find(({opcode}) => opcode === 'includeBlocks');
+  assert.equal(include.inputs.LABEL, hats[1].inputs.LABEL);
+  assert.ok(example.nodes.indexOf(include) < example.nodes.indexOf(hats[1]));
+  assert.match(guide, /同じStageに名前付きの台本/u);
+  assert.match(guide, /ラベルはSprite名とは独立/u);
+  assert.match(guide, /blocks-0001\.k4\.yml/u);
+  assert.doesNotMatch(guide, /公開版・開発版とも未対応|複数の宣言ハットを置くとエラー/u);
 });

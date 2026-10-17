@@ -4,7 +4,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 対象: 初めて台本ブロックで紙芝居を作る方\
 扱う台本: TurboWarp上のブロック台本SB3\
-実装基準: 本体Issue #881の修正を含む未公開の開発版、2026年10月17日\
+実装基準: 本体Issue #883の修正を含む未公開の開発版、2026年10月17日\
 スターターとベースSB3: 公開プレリリース`4.0.0-rc.22`
 
 入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
@@ -15,7 +15,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 利用する版を先に確認する
 
-**命令単位のブロック編集には、Issue #881の修正を含む開発版CLIが必要です。**
+**命令単位のブロック編集には、Issue #883の修正を含む開発版CLIが必要です。**
 公開rc.22のCLIはYAML全文を一つの文字列としてブロックに保存します。公開rc.22をインストールするだけでは、
 本書のようにセリフや待機を個別のブロックで編集できません。
 
@@ -29,7 +29,7 @@ CLIの版番号だけでは修正の有無を判定できません。生成時�
 ## 用意するものと完成までの流れ
 
 - [TurboWarp Editor](https://turbowarp.org/editor)を開くブラウザー
-- Issue #881の修正を含む開発版CLIを動かす環境（Node.js 22.18.0以上）
+- Issue #883の修正を含む開発版CLIを動かす環境（Node.js 22.18.0以上）
 - スターター、ランタイム入りのベースSB3、作業用フォルダー
 - ポーズ場面も試す場合はカメラと、周囲にぶつからない空間
 
@@ -87,7 +87,8 @@ node bin/turbowarp-kamishibai.mjs author-block-dsl \
 
 1. TurboWarp Editorのファイルメニューから`story-blocks.sb3`を開く
 2. 拡張の読み込みを許可する。案内が出た場合は「サンドボックスなしで実行する」を有効にして開き直す
-3. ステージのコードで`when kamishibai DSL source`を探す
+3. ステージのコードで`kamishibai [4.0] []`を探す
+   版の入力は文字列`4.0`、ラベルは空欄です。版を別の`story property`へ入力しません。
 4. そこからつながる`scene`のうち、名前が`earthquake`のものを探す
 5. 内側の`actor [Student] say spec [...]`の`SPEC`入力を開き、セリフだけを変える
 

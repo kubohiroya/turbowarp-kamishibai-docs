@@ -1,28 +1,21 @@
 {
   "verifiedOn": "2026-10-17",
-  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/881",
+  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883",
   "status": "unpublished-development",
-  "provenance": "Generated from createDsl4StructuredBlockSourceDeclaration in the local Issue #881 development implementation. Labels come from its core action and authoring extension definitions. Layout and colors are schematic.",
+  "provenance": "Original examples generated from createDsl4StructuredBlockSourceDeclaration; migrated to the unified authoring hat and includeBlocks definitions at implementationCommit (Issue #883). Redundant version properties removed. Layout and colors are schematic.",
   "diagrams": [
     {
       "id": "guide-01",
       "title": "最小台本（1/3）",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
-          "kind": "hat",
-          "color": "action"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
           "inputs": {
-            "PATH": "[\"kamishibai\"]",
-            "VALUE": "\"4.0\""
+            "VERSION": "4.0",
+            "LABEL": ""
           },
-          "kind": "stack",
+          "kind": "hat",
           "color": "authoring"
         },
         {
@@ -593,11 +586,14 @@
       "title": "吹き出しを閉じる条件（bubble close policy）を設定する（1/2）",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
           "kind": "hat",
-          "color": "action"
+          "color": "authoring"
         },
         {
           "opcode": "property",
@@ -783,11 +779,14 @@
       "title": "短形式（1/2）",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
           "kind": "hat",
-          "color": "action"
+          "color": "authoring"
         }
       ]
     },
@@ -832,11 +831,14 @@
       "title": "長形式（1/2）",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
           "kind": "hat",
-          "color": "action"
+          "color": "authoring"
         }
       ]
     },
@@ -882,11 +884,14 @@
       "title": "長形式（1/2）",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
           "kind": "hat",
-          "color": "action"
+          "color": "authoring"
         },
         {
           "opcode": "property",
@@ -1618,20 +1623,13 @@
       "title": "総合サンプル（1/13）",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
-          "kind": "hat",
-          "color": "action"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
           "inputs": {
-            "PATH": "[\"kamishibai\"]",
-            "VALUE": "\"4.0\""
+            "VERSION": "4.0",
+            "LABEL": ""
           },
-          "kind": "stack",
+          "kind": "hat",
           "color": "authoring"
         },
         {
@@ -2264,11 +2262,14 @@
       "title": "セリフを変える",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
           "kind": "hat",
-          "color": "action"
+          "color": "authoring"
         },
         {
           "opcode": "scene",
@@ -2321,11 +2322,14 @@
       "title": "次の場面を加える",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
           "kind": "hat",
-          "color": "action"
+          "color": "authoring"
         },
         {
           "opcode": "scene",
@@ -2400,11 +2404,14 @@
       "title": "ポーズ認識のあるシーン",
       "nodes": [
         {
-          "opcode": "whenDsl4Source",
-          "text": "when kamishibai DSL source",
-          "inputs": {},
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
           "kind": "hat",
-          "color": "action"
+          "color": "authoring"
         },
         {
           "opcode": "scene",
@@ -2451,6 +2458,84 @@
           "color": "authoring"
         }
       ]
+    },
+    {
+      "id": "guide-includes",
+      "title": "ラベルで別の台本を読み込む（独立した二つのハット）",
+      "nodes": [
+        {
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
+          "kind": "hat",
+          "color": "authoring"
+        },
+        {
+          "opcode": "includeBlocks",
+          "text": "includeBlocks [LABEL]",
+          "inputs": {
+            "LABEL": "共通シーン"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "本編",
+            "PROPERTIES": "{}"
+          },
+          "kind": "c",
+          "color": "authoring",
+          "children": [
+            {
+              "opcode": "goto",
+              "text": "go to scene [SCENE]",
+              "inputs": {
+                "SCENE": "結末"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ]
+        },
+        {
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": "共通シーン"
+          },
+          "kind": "hat",
+          "color": "authoring"
+        },
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "結末",
+            "PROPERTIES": "{}"
+          },
+          "kind": "c",
+          "color": "authoring",
+          "children": [
+            {
+              "opcode": "wait",
+              "text": "wait [SECONDS] seconds",
+              "inputs": {
+                "SECONDS": "2"
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "implementationCommit": "1a4bb356cc9eb75667414df28dea054193f83a8b"
 }
