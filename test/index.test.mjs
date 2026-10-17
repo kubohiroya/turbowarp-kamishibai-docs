@@ -99,7 +99,7 @@ test('publishes each document only from its version-specific top page', () => {
       assert.match(
         card,
         new RegExp(
-          `<p class="document-updated">更新日: <time datetime="${document.updatedAt}">${year}年${month}月${day}日<\\/time><\\/p>`,
+          `<p class="document-updated">\\s*更新日: <time datetime="${document.updatedAt}">${year}年${month}月${day}日<\\/time>\\s*<\\/p>`,
           'u',
         ),
       );
