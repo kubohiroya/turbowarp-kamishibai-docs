@@ -65,7 +65,7 @@
         },
         {
           "pointer": "#/properties/bubbleStyles",
-          "order": 55,
+          "order": 60,
           "title": "`bubbleStyles` — 吹き出しstyle",
           "summary": "`Actor.say`と`Actor.think`から参照する文字送り、配置、見た目、portrait、音、animationを名前付きで再利用・合成します。",
           "example": "Typing:\n  characterIntervalSeconds: 0.05\nHero style:\n  styles:\n    - Typing\n  placement: FOOTER_LIKE\n  visualStyle: NORMAL",
@@ -73,7 +73,7 @@
         },
         {
           "pointer": "#/properties/bubbleClosePolicies",
-          "order": 57,
+          "order": 70,
           "title": "`bubbleClosePolicies` — 吹き出し終了条件",
           "summary": "`Actor.say`と`Actor.think`から参照する終了条件を名前付きで登録します。秒数、advance入力、または両者の先着を再利用できます。",
           "example": "after-3-seconds:\n  seconds: 3\nuser-advance:\n  waitFor: advance\nadvance-or-timeout:\n  seconds: 10\n  waitFor: advance",
@@ -86,7 +86,7 @@
         },
         {
           "pointer": "#/properties/variables",
-          "order": 60,
+          "order": 80,
           "title": "`variables` — runtime変数",
           "summary": "条件式やcustom actionへ渡すstory変数の初期値を定義します。値は文字列、数値、真偽値に限定されます。",
           "example": "score: 0\nready: false",
@@ -97,23 +97,23 @@
         },
         {
           "pointer": "#/properties/loading",
-          "order": 70,
+          "order": 90,
           "title": "`loading` — 読み込み画面",
           "summary": "asset準備中に表示する背景と、一つ以上のcostume列を指定します。",
           "example": "backdrop: Loading\ncostumes:\n  - Spinner1\n  - Spinner2",
           "exampleContext": "`loading` fieldの値:"
         },
         {
-          "pointer": "#/properties/poseRecognition",
-          "order": 80,
-          "title": "`poseRecognition` — ポーズ認識設定",
+          "pointer": "#/properties/recognition",
+          "order": 100,
+          "title": "`recognition` — ポーズ認識設定",
           "summary": "認識中の任意の音、モデル初期化、判定方法、feedback、プレイ中にポーズ待ちをskipできるか、camera previewの表示と任意UIをまとめます。idle音とcharge音は独立して省略できます。",
           "example": "idleSound: PoseIdle\nchargeSound: PoseCharge\nmodelInitialization:\n  policy: latest-needed\n  parallel: true\nfeedback:\n  mode: presenter\nnavigation:\n  allowSkip: true\npreview:\n  mirroring: mirrored\n  overlay:\n    visible: true\n    minimumConfidence: 0.5\n  controls:\n    cameraMenu:\n      position: bottom-center\n      opacity: 0.8\n      buttonAsset: CameraMenuButton",
-          "exampleContext": "`poseRecognition` fieldの値:"
+          "exampleContext": "`recognition` fieldの値:"
         },
         {
           "pointer": "#/properties/controls",
-          "order": 90,
+          "order": 110,
           "title": "`controls` — 操作profile",
           "summary": "実行環境ごとのkeymapを定義し、キーをnavigationまたはhistory操作へ割り当てます。",
           "example": "keymaps:\n  presenter:\n    Space: navigation.nextAction\n    ArrowLeft: history.previousAction",
@@ -121,7 +121,7 @@
         },
         {
           "pointer": "#/properties/branches",
-          "order": 100,
+          "order": 120,
           "title": "`branches` — 条件分岐",
           "summary": "上から評価する条件と遷移先を名前付きで登録します。各分岐にはelse規則を一つ含めます。",
           "example": "result:\n  - if: score > 0\n    goto: success\n  - else: retry",
@@ -129,11 +129,25 @@
         },
         {
           "pointer": "#/properties/scenes",
-          "order": 110,
+          "order": 130,
           "title": "`scenes` — scene定義",
           "summary": "一つ以上のsceneを記述します。短縮形のaction配列と、poseModelを持てるlong formがあります。",
           "example": "opening:\n  - stage: Beach\n  - wait: 1",
           "exampleContext": "`scenes` fieldの値:"
+        },
+        {
+          "pointer": "#/properties/presentation",
+          "order": 140,
+          "title": "`presentation` — 表示の切替",
+          "summary": "シーン、背景、登場人物の衣装と表示を切り替える効果を指定します。省略時は待ち時間を加えず即時に切り替えます。",
+          "example": "transitions:\n  scene: {effect: crossfade, seconds: 0.3}\n  backdrop: {effect: cut}"
+        },
+        {
+          "pointer": "#/properties/audio",
+          "order": 150,
+          "title": "`audio` — BGMの切替",
+          "summary": "BGMを切り替える際の既定の効果を指定します。",
+          "example": "bgm:\n  transition: {effect: crossfade, seconds: 0.5, curve: equalPower}"
         }
       ]
     },
@@ -182,11 +196,11 @@
           "example": "kind: costume\ntarget: Hero\nfile: hero-happy.png\nbitmapResolution: 2"
         },
         {
-          "pointer": "#/$defs/namedPoseModel",
+          "pointer": "#/$defs/namedRecognitionModel",
           "order": 60,
           "title": "名前付きポーズモデル",
           "summary": "ポーズモデルは埋め込む相対file、通常のTurboWarp Teachable Machine directory URL、または検証付きremote archiveで指定します。project内の表示名だけを使う形式はありません。",
-          "example": "kind: poseModel\ndelivery: remote\nloading: lazy\nsource:\n  url: https://example.com/models/rescue/"
+          "example": "kind: recognitionModel\ndelivery: remote\nloading: lazy\nsource:\n  url: https://example.com/models/rescue/"
         },
         {
           "pointer": "#/$defs/namedImage",
@@ -228,7 +242,7 @@
         },
         {
           "pointer": "#/$defs/bubbleStyle",
-          "order": 31,
+          "order": 40,
           "title": "吹き出しstyle",
           "summary": "文字送り、配置、見た目、portrait、音、animationを再利用できる部分styleとして定義します。`styles`で既存styleを順に合成できます。",
           "example": "styles:\n  - Typing\ntextStyle: caption\nplacement: FOOTER_LIKE\nvisualStyle: NARRATION\ncharacterIntervalSeconds: 0.05\ncontinueIndicator:\n  frames: [Next1, Next2]\n  frameIntervalSeconds: 0.12",
@@ -238,56 +252,56 @@
         },
         {
           "pointer": "#/$defs/bubbleStyles",
-          "order": 32,
+          "order": 50,
           "title": "吹き出しstyle mapping",
           "summary": "人が読めるstyle名を吹き出しstyleへ対応付けます。`Actor.say`と`Actor.think`の`styles`配列から参照します。",
           "example": "Typing:\n  characterIntervalSeconds: 0.05\nHero style:\n  styles:\n    - Typing\n  placement: FOOTER_LIKE"
         },
         {
           "pointer": "#/$defs/bubbleContinueIndicator",
-          "order": 33,
+          "order": 60,
           "title": "入力待ちindicator",
           "summary": "全文表示後にadvance入力を待っている間、2枚以上のimage assetを順番に表示します。",
           "example": "frames: [Next1, Next2]\nframeIntervalSeconds: 0.12"
         },
         {
           "pointer": "#/$defs/bubbleFrameAnimation",
-          "order": 34,
+          "order": 70,
           "title": "portrait frame animation",
           "summary": "portraitのまばたきや口パクに使う1枚以上のimage assetと表示間隔です。",
           "example": "frames: [EyesOpen, EyesClosed]\nframeIntervalSeconds: 0.4"
         },
         {
           "pointer": "#/$defs/bubblePortrait",
-          "order": 35,
+          "order": 80,
           "title": "吹き出しportrait",
           "summary": "基本画像と、任意のまばたき・口パクframe animationを指定します。",
           "example": "base: HeroFace\nblink:\n  frames: [EyesOpen, EyesClosed]\n  frameIntervalSeconds: 0.4\nlipSync:\n  frames: [MouthClosed, MouthOpen]\n  frameIntervalSeconds: 0.08"
         },
         {
           "pointer": "#/$defs/bubbleReveal",
-          "order": 36,
+          "order": 90,
           "title": "本文の段階表示",
           "summary": "文字、単語、行、blockの単位と、layout、間隔、任意の効果音を指定します。",
           "example": "unit: CHARACTER\nlayout: RESERVED\nintervalSeconds: 0.05\nsound: Typewriter"
         },
         {
           "pointer": "#/$defs/bubbleAudio",
-          "order": 37,
+          "order": 100,
           "title": "吹き出し音声",
           "summary": "音声、本文の段階表示、完了時に使うsound assetを個別に指定します。",
           "example": "voice: HeroVoice\nreveal: Typewriter\nfinish: ContinueSound"
         },
         {
           "pointer": "#/$defs/bubbleMotion",
-          "order": 38,
+          "order": 110,
           "title": "吹き出しanimation",
           "summary": "表示・非表示・表示中に適用するanimation名と時間、easing、方向などを指定します。",
           "example": "name: floatOut\ndurationSeconds: 0.15\nease: easeOut\ndirection: down"
         },
         {
           "pointer": "#/$defs/variables",
-          "order": 40,
+          "order": 120,
           "title": "runtime変数mapping",
           "summary": "変数IDごとに文字列、数値、真偽値の初期値を保持します。objectや配列はcore変数値ではありません。",
           "example": "message: start\nscore: 0\nready: true",
@@ -297,61 +311,61 @@
         },
         {
           "pointer": "#/$defs/loadingScreen",
-          "order": 50,
+          "order": 130,
           "title": "読み込み画面設定",
           "summary": "読み込み用背景と、一つ以上のcostumeを指定します。",
           "example": "backdrop: Loading\ncostumes:\n  - Spinner1"
         },
         {
           "pointer": "#/$defs/poseRecognition",
-          "order": 60,
+          "order": 140,
           "title": "ポーズ認識全体設定",
           "summary": "共通音と、モデル初期化、sequence、selection、feedback、navigation、camera previewの任意設定をまとめます。",
           "example": "idleSound: PoseIdle\nchargeSound: PoseCharge\nmodelInitialization:\n  policy: latest-needed\n  parallel: true\nsequence:\n  confidenceThreshold: 0.6\nfeedback:\n  mode: scratchMirror\nnavigation:\n  allowSkip: false\npreview:\n  mirroring: mirrored\n  overlay:\n    visible: true"
         },
         {
           "pointer": "#/$defs/poseModelInitialization",
-          "order": 65,
+          "order": 150,
           "title": "Poseモデル初期化",
           "summary": "従来互換のlegacyと、不要になった初期化をcancelして最新要求だけを準備するlatest-neededを選びます。camera準備とモデル準備の並行化も明示します。",
           "example": "policy: latest-needed\nparallel: true",
           "notes": [
             "省略時はpolicyがlegacy、parallelがfalseです。",
             "latest-neededでは重い初期化を実行中1件と最新待機1件までに制限します。",
-            "実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.8はTurboWarp Teachable Machine 1.12.0をexact pinします。"
+            "実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.22はTurboWarp Teachable Machine 3.5.1をexact pinします。"
           ]
         },
         {
           "pointer": "#/$defs/poseSequenceRecognition",
-          "order": 70,
+          "order": 160,
           "title": "sequence認識設定",
           "summary": "連続ポーズのconfidence閾値、満点保持時間、idle時のcharge量を調整します。",
           "example": "confidenceThreshold: 0.6\nfullConfidenceHoldSeconds: 1.2\nidleChargePerSecond: 0"
         },
         {
           "pointer": "#/$defs/poseSelectionRecognition",
-          "order": 80,
+          "order": 170,
           "title": "selection認識設定",
           "summary": "複数候補の蓄積速度、減衰、決定scoreを調整します。",
           "example": "accumulationPerSecond: 1\ndecayPerSecond: 0.9\nscoreThreshold: 2"
         },
         {
           "pointer": "#/$defs/poseFeedback",
-          "order": 90,
+          "order": 180,
           "title": "ポーズfeedback mode",
           "summary": "Scratch mirror、Scratch binding、presenter UIのどこへ認識状態を反映するかを選びます。",
           "example": "mode: presenter"
         },
         {
           "pointer": "#/$defs/poseNavigation",
-          "order": 100,
+          "order": 190,
           "title": "ポーズ中のnavigation",
           "summary": "プレイ中にポーズ待ちをskipできるかを明示します。",
           "example": "allowSkip: true"
         },
         {
           "pointer": "#/$defs/posePreview",
-          "order": 110,
+          "order": 200,
           "title": "camera previewのstory設定",
           "summary": "preview canvasの左右反転と任意の関節・ボーンoverlayをstory既定として指定し、必要な場合だけapp shell所有の操作UIを構成します。",
           "example": "mirroring: mirrored\noverlay:\n  visible: true\n  jointStyles:\n    leftWrist:\n      color: '#ff00aa'\n      opacity: 0.8\n      radius: 6\n  boneStyle:\n    color: '#00e5ff'\n    opacity: 0.9\n    width: 3\n  minimumConfidence: 0.5\n  confidenceScaling:\n    jointOpacity: true\n    jointRadius: false\n    boneOpacity: true\n    boneWidth: false\ncontrols:\n  mirroring:\n    position: top-center\n    opacity: 0.8\n    assets:\n      showMirrored: ShowMirroredButton\n      showUnmirrored: ShowUnmirroredButton",
@@ -363,19 +377,19 @@
         },
         {
           "pointer": "#/$defs/poseOverlay",
-          "order": 112,
+          "order": 210,
           "title": "関節とボーンのoverlay",
-          "summary": "TurboWarp Teachable Machine 1.12.0のSVG overlayについて、表示、関節別style、共通bone style、最低confidence、confidence連動を宣言します。",
+          "summary": "TurboWarp Teachable Machine 3.5.1のSVG overlayについて、表示、関節別style、共通bone style、最低confidence、confidence連動を宣言します。",
           "example": "visible: true\njointStyles:\n  leftWrist:\n    color: '#ff00aa'\n    opacity: 0.8\n    radius: 6\nboneStyle:\n  color: '#00e5ff'\n  opacity: 0.9\n  width: 3\nminimumConfidence: 0.5\nconfidenceScaling:\n  jointOpacity: true\n  jointRadius: false\n  boneOpacity: true\n  boneWidth: false",
           "notes": [
             "overlayを記述した場合の省略値はvisibleがtrue、minimumConfidenceが0.5です。overlay自体を省略した既存台本は非表示のままです。",
             "previewを隠すとoverlayも隠れます。overlayだけを隠しても認識は停止しません。認識停止では描画を消去し、camera停止ではSVG要素も破棄します。",
-            "実行にはTurboWarp Teachable Machine 1.12.0以降が必要です。専用feature flagはなく、問題時はoverlay設定を台本から削除すると既存台本と同じ非表示へ戻ります。"
+            "実行にはTurboWarp Teachable Machine 3.5.1以降が必要です。専用feature flagはなく、問題時はoverlay設定を台本から削除すると既存台本と同じ非表示へ戻ります。"
           ]
         },
         {
           "pointer": "#/$defs/poseJointStyle",
-          "order": 114,
+          "order": 220,
           "title": "関節別style",
           "summary": "一つのPoseNet関節を描く円のCSS color、opacity、radiusから一つ以上を上書きします。",
           "example": "color: '#ff00aa'\nopacity: 0.8\nradius: 6",
@@ -385,7 +399,7 @@
         },
         {
           "pointer": "#/$defs/poseBoneStyle",
-          "order": 116,
+          "order": 230,
           "title": "ボーン共通style",
           "summary": "12本の標準PoseNet bone connectionで共有するCSS color、opacity、線幅から一つ以上を上書きします。",
           "example": "color: '#00e5ff'\nopacity: 0.9\nwidth: 3",
@@ -395,7 +409,7 @@
         },
         {
           "pointer": "#/$defs/poseOverlayConfidenceScaling",
-          "order": 118,
+          "order": 240,
           "title": "confidenceによる見た目の拡縮",
           "summary": "関節のopacityとradius、boneのopacityとwidthをconfidenceに応じて個別に0から設定値まで変化させます。",
           "example": "jointOpacity: true\njointRadius: false\nboneOpacity: true\nboneWidth: false",
@@ -405,7 +419,7 @@
         },
         {
           "pointer": "#/$defs/poseKeypointName",
-          "order": 119,
+          "order": 250,
           "title": "PoseNet関節名",
           "summary": "jointStylesのkeyに指定できる17個のPoseNet関節名です。",
           "example": "leftWrist",
@@ -415,21 +429,21 @@
         },
         {
           "pointer": "#/$defs/scenePosePreview",
-          "order": 120,
+          "order": 260,
           "title": "scene固有のpreview表示",
           "summary": "長形式sceneで左右反転だけを上書きします。上書きはそのsceneだけに適用され、次のsceneへ持ち越しません。",
           "example": "mirroring: unmirrored"
         },
         {
           "pointer": "#/$defs/posePreviewControlPosition",
-          "order": 130,
+          "order": 270,
           "title": "preview controlの配置",
           "summary": "preview表示矩形を基準に、上下左右と四隅を含む8個のanchorから選びます。",
           "example": "bottom-center"
         },
         {
           "pointer": "#/$defs/posePreviewMirroringControl",
-          "order": 140,
+          "order": 280,
           "title": "左右反転button",
           "summary": "押した後のtarget stateを示す2画像、配置、任意のopacityで反転buttonを構成します。",
           "example": "position: top-center\nopacity: 0.8\nassets:\n  showMirrored: ShowMirroredButton\n  showUnmirrored: ShowUnmirroredButton",
@@ -439,7 +453,7 @@
         },
         {
           "pointer": "#/$defs/posePreviewCameraMenuControl",
-          "order": 150,
+          "order": 290,
           "title": "camera選択menu button",
           "summary": "camera選択menuを開くbutton画像、配置、任意のopacityを指定します。",
           "example": "position: bottom-center\nopacity: 0.8\nbuttonAsset: CameraMenuButton",
@@ -449,7 +463,7 @@
         },
         {
           "pointer": "#/$defs/posePreviewControls",
-          "order": 160,
+          "order": 300,
           "title": "camera preview操作UI",
           "summary": "左右反転buttonとcamera選択menuのうち、一つ以上を任意に有効化します。",
           "example": "cameraMenu:\n  position: bottom-right\n  buttonAsset: CameraMenuButton",
@@ -459,17 +473,31 @@
         },
         {
           "pointer": "#/$defs/controls",
-          "order": 170,
+          "order": 310,
           "title": "操作profile",
           "summary": "一つ以上のkeymapを名前付きprofileとして登録します。キー衝突は意味検証でも確認します。",
           "example": "keymaps:\n  presenter:\n    Space: navigation.nextAction"
         },
         {
           "pointer": "#/$defs/branchRules",
-          "order": 180,
+          "order": 320,
           "title": "分岐規則列",
           "summary": "条件規則を上から評価し、一つだけ含めたelse規則をfallbackにします。",
           "example": "- if: score >= 10\n  goto: success\n- else: retry"
+        },
+        {
+          "pointer": "#/$defs/presentation",
+          "order": 330,
+          "title": "`presentation` — 表示の既定効果",
+          "summary": "作品共通の切替効果を指定し、シーンやアクションのtransitionで上書きできます。",
+          "example": "transitions:\n  scene: {effect: crossfade, seconds: 0.3}"
+        },
+        {
+          "pointer": "#/$defs/audio",
+          "order": 340,
+          "title": "`audio` — BGMの既定効果",
+          "summary": "BGMの切替に使う既定値です。個別のbgmアクションで上書きできます。",
+          "example": "bgm:\n  transition: {effect: cut}"
         }
       ]
     },
@@ -487,80 +515,122 @@
         },
         {
           "pointer": "#/$defs/literalId",
-          "order": 12,
+          "order": 20,
           "title": "asset・sceneのliteral ID",
           "summary": "Scratch上の名前をそのまま保持できる空でない文字列です。空白や記号を含められ、trimやUnicode正規化を行いません。",
           "example": "救助 Scene 1"
         },
         {
           "pointer": "#/$defs/bubbleStyleName",
-          "order": 14,
+          "order": 30,
           "title": "吹き出しstyle名",
           "summary": "内部の空白や日本語を含められる人向けの名前です。先頭・末尾の空白、改行、tab、制御文字は使用できません。",
           "example": "日本語 ナレーション"
         },
         {
           "pointer": "#/$defs/filePath",
-          "order": 20,
+          "order": 40,
           "title": "安全な相対file path",
           "summary": "絶対path、Windows drive path、URL scheme、backslash、NULを許可しないproject内相対pathです。",
           "example": "hero.svg"
         },
         {
           "pointer": "#/$defs/loadingPolicy",
-          "order": 30,
+          "order": 50,
           "title": "読み込みpolicy",
           "summary": "story開始前に読むeagerと、利用時に読むlazyから選びます。",
           "example": "lazy"
         },
         {
           "pointer": "#/$defs/retentionPolicy",
-          "order": 40,
+          "order": 60,
           "title": "保持policy",
           "summary": "assetをsceneの範囲で保持するか、story全体で保持するかを指定します。",
           "example": "story"
         },
         {
           "pointer": "#/$defs/deliveryPolicy",
-          "order": 50,
+          "order": 70,
           "title": "配布policy",
           "summary": "成果物へ埋め込むembeddedと、明示的にURLから取得するremoteから選びます。",
           "example": "remote"
         },
         {
           "pointer": "#/$defs/remoteAssetSource",
-          "order": 60,
+          "order": 80,
           "title": "remote asset source",
           "summary": "HTTPS URLを指定します。内容を固定する場合はSHA-256、content type、byte sizeを三つとも指定します。三項目の一部だけは指定できません。",
           "example": "url: https://example.com/audio.ogg\nintegrity: sha256-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\ncontentType: audio/ogg\nsize: 1024"
         },
         {
           "pointer": "#/$defs/remotePoseModelSource",
-          "order": 65,
+          "order": 90,
           "title": "remote pose model source",
           "summary": "通常のTurboWarp Teachable Machine directoryはHTTPS URLだけで参照できます。検証付きremote archiveにする場合はintegrity、content type、byte sizeを三つとも指定します。",
           "example": "url: https://example.com/models/rescue/"
         },
         {
           "pointer": "#/$defs/keyCode",
-          "order": 70,
+          "order": 100,
           "title": "key code",
           "summary": "文字そのものではなく、Schemaが列挙するKeyboardEvent code形式を使用します。",
           "example": "Space"
         },
         {
           "pointer": "#/$defs/navigationCommand",
-          "order": 80,
+          "order": 110,
           "title": "navigation command",
           "summary": "通常の次action／次scene、実行履歴上の前後、リハーサル用のpose／action／scene skipへ操作を割り当てます。",
           "example": "rehearsal.skipScene"
         },
         {
           "pointer": "#/$defs/variableValue",
-          "order": 90,
+          "order": 120,
           "title": "変数・custom引数の値",
           "summary": "core schemaで保持できるscalarは文字列、数値、真偽値です。",
           "example": "42"
+        },
+        {
+          "pointer": "#/$defs/visualTransition",
+          "order": 130,
+          "title": "`visualTransition` — 表示の切替効果",
+          "summary": "cut、秒数、crossfadeを指定します。秒数は0〜60、easingはlinearまたはeaseInOutです。",
+          "example": "effect: crossfade\nseconds: 0.5\neasing: easeInOut"
+        },
+        {
+          "pointer": "#/$defs/audioTransition",
+          "order": 140,
+          "title": "`audioTransition` — BGMの切替効果",
+          "summary": "cut、秒数、crossfadeを指定します。curveはlinearまたはequalPowerです。",
+          "example": "effect: crossfade\nseconds: 0.5\ncurve: equalPower"
+        },
+        {
+          "pointer": "#/$defs/bodyText",
+          "order": 150,
+          "title": "`bodyText` — 本文とルビ",
+          "summary": "文字列または文字列・ルビを順に並べた配列です。Actor.setTextの本文に使い、say／thinkのtextは文字列のままです。",
+          "example": "- '昔、'\n- ruby: {base: 竹取, reading: たけとり}\n- 'の翁がいました。'"
+        },
+        {
+          "pointer": "#/$defs/contentRuns",
+          "order": 160,
+          "title": "`contentRuns` — 本文の並び",
+          "summary": "文字列とルビを記述順に並べます。",
+          "example": "- '海で'\n- ruby: {base: 亀, reading: かめ}"
+        },
+        {
+          "pointer": "#/$defs/contentRun",
+          "order": 170,
+          "title": "`contentRun` — 本文の一要素",
+          "summary": "一つの文字列、またはruby objectを指定します。",
+          "example": "ruby: {base: 亀, reading: かめ}"
+        },
+        {
+          "pointer": "#/$defs/rubyContentRun",
+          "order": 180,
+          "title": "`rubyContentRun` — ルビ",
+          "summary": "baseに本文、readingに読みを指定します。両方とも空文字列は指定できません。",
+          "example": "ruby: {base: 亀, reading: かめ}"
         }
       ]
     },
@@ -581,7 +651,7 @@
           "order": 20,
           "title": "long form scene",
           "summary": "scene固有のposeModelまたはpreview左右反転を指定する場合に、設定と`actions`をobjectへまとめます。",
-          "example": "poseModel: StoryPose\nposePreview:\n  mirroring: unmirrored\nactions:\n  - wait: 1",
+          "example": "recognitionModel: StoryPose\nposePreview:\n  mirroring: unmirrored\nactions:\n  - wait: 1",
           "notes": [
             "`posePreview`はそのsceneだけの非stickyな上書きです。次のsceneに指定がなければstory既定へ戻ります。"
           ]
@@ -642,14 +712,14 @@
         },
         {
           "pointer": "#/$defs/debuggerAction",
-          "order": 42,
+          "order": 50,
           "title": "`debugger`",
           "summary": "development debug実行でaction開始前に停止する境界です。productionや埋め込み作品では副作用のないno-opです。",
           "example": "debugger:"
         },
         {
           "pointer": "#/$defs/broadcastMessageAndWaitAction",
-          "order": 45,
+          "order": 60,
           "title": "`broadcastMessageAndWait`",
           "summary": "Scratch／TurboWarpのmessageを送り、そのmessageで開始されたreceiver threadがすべて終了するまで待ちます。",
           "example": "broadcastMessageAndWait:\n  stableId: play-mini-game\n  message: playMiniGame",
@@ -659,45 +729,87 @@
         },
         {
           "pointer": "#/$defs/transitionAction",
-          "order": 50,
+          "order": 70,
           "title": "`transition`",
           "summary": "名前付きeffectを指定秒数で実行します。利用できるeffectはruntime capabilityとも照合します。",
           "example": "transition:\n  effect: fadeOut\n  seconds: 0.5"
         },
         {
           "pointer": "#/$defs/gotoAction",
-          "order": 60,
+          "order": 80,
           "title": "`goto`",
           "summary": "指定sceneへ無条件に遷移します。",
           "example": "goto: ending"
         },
         {
           "pointer": "#/$defs/branchAction",
-          "order": 70,
+          "order": 90,
           "title": "`branch`",
           "summary": "名前付き分岐規則を評価し、選ばれたsceneへ遷移します。",
           "example": "branch: result"
         },
         {
           "pointer": "#/$defs/keyInputAction",
-          "order": 80,
+          "order": 100,
           "title": "`keyInputToChangeScene`",
           "summary": "キー入力と遷移先sceneのmappingを待ちます。navigation keymapとの衝突に注意します。",
           "example": "keyInputToChangeScene:\n  Space: nextScene\n  Escape: cancelScene"
         },
         {
           "pointer": "#/$defs/touchInputAction",
-          "order": 90,
+          "order": 110,
           "title": "`touchInputToChangeScene`",
           "summary": "touchされたactor IDに応じてsceneを選びます。",
           "example": "touchInputToChangeScene:\n  Hero: heroRoute\n  Guide: guideRoute"
         },
         {
           "pointer": "#/$defs/poseInputAction",
-          "order": 100,
+          "order": 120,
           "title": "`poseInputToChangeScene`",
           "summary": "認識されたpose IDに応じてsceneを選びます。",
           "example": "poseInputToChangeScene:\n  wave: greeting\n  jump: celebration"
+        },
+        {
+          "pointer": "#/$defs/stopBgmAction",
+          "order": 130,
+          "title": "`stopBgm`",
+          "summary": "再生中のBGMを停止します。省略または0秒なら即時、秒数指定ならfade-outして終了します。",
+          "example": "stopBgm: 0.5"
+        },
+        {
+          "pointer": "#/$defs/setBgmVolumeAction",
+          "order": 140,
+          "title": "`setBgmVolume`",
+          "summary": "BGMの音量を0〜100で設定します。secondsを指定するとその時間で変化します。",
+          "example": "setBgmVolume: {volume: 50, seconds: 0.3}"
+        },
+        {
+          "pointer": "#/$defs/setVariableAction",
+          "order": 150,
+          "title": "`setVariable`",
+          "summary": "宣言済み台本変数へ同じ型のリテラル値を代入します。",
+          "example": "setVariable: {name: score, value: 10}"
+        },
+        {
+          "pointer": "#/$defs/changeVariableAction",
+          "order": 160,
+          "title": "`changeVariable`",
+          "summary": "宣言済みnumber変数へ有限数byを加算します。",
+          "example": "changeVariable: {name: score, by: 1}"
+        },
+        {
+          "pointer": "#/$defs/toggleVariableAction",
+          "order": 170,
+          "title": "`toggleVariable`",
+          "summary": "宣言済みboolean変数の値を反転します。",
+          "example": "toggleVariable: ready"
+        },
+        {
+          "pointer": "#/$defs/imageInputAction",
+          "order": 180,
+          "title": "`imageInputToChangeScene`",
+          "summary": "画像認識モデルのクラス名を次のシーンへ対応付け、最初に成立した候補へ進みます。",
+          "example": "imageInputToChangeScene:\n  wave: greeting\n  jump: celebration"
         }
       ]
     },
@@ -715,7 +827,7 @@
         },
         {
           "pointer": "#/$defs/setTransparencyAction",
-          "order": 15,
+          "order": 20,
           "title": "`Actor.setTransparency`",
           "summary": "Scratch／TurboWarpの幽霊効果と同じ0〜100の値でactorの透明度を即時設定するか、指定秒数で線形に変化させます。",
           "example": "Hero.setTransparency:\n  from: 0\n  to: 50\n  seconds: 1\n  background: true",
@@ -726,14 +838,14 @@
         },
         {
           "pointer": "#/$defs/moveToAction",
-          "order": 20,
+          "order": 30,
           "title": "`Actor.moveTo`",
           "summary": "指定秒数でactorを座標へ移動します。任意のeasingでlinear、ease-in、ease-out、ease-in-outを選べます。",
           "example": "Hero.moveTo:\n  x: 40\n  y: -57\n  seconds: 1.5\n  easing: easeInOut"
         },
         {
           "pointer": "#/$defs/sayAction",
-          "order": 30,
+          "order": 40,
           "title": "`Actor.say`",
           "summary": "actorのsay吹き出しへテキストを表示し、名前付き`closePolicy`またはinlineの秒数／advance入力で完了します。複数の吹き出しstyleを順に合成できます。",
           "example": "Hero.say:\n  text: こんにちは！\n  closePolicy: advance-or-timeout\n  styles:\n    - Typing\n    - Hero style\n  startSound: GreetingVoice",
@@ -744,56 +856,56 @@
         },
         {
           "pointer": "#/$defs/thinkAction",
-          "order": 35,
+          "order": 50,
           "title": "`Actor.think`",
           "summary": "`Actor.say`と同じspeech lifecycleを使い、think吹き出しへテキストを表示します。",
           "example": "Hero.think:\n  text: どうしよう……\n  waitFor: advance\n  characterIntervalSeconds: 0.1"
         },
         {
           "pointer": "#/$defs/setSkinAction",
-          "order": 40,
+          "order": 60,
           "title": "`Actor.setSkin`",
           "summary": "actorのcostumeを切り替えます。短縮値、またはscaleとstableIdを持つobjectを使用できます。",
           "example": "Hero.setSkin:\n  skin: HeroHappy\n  scale: 100"
         },
         {
           "pointer": "#/$defs/hideAction",
-          "order": 42,
+          "order": 70,
           "title": "`Actor.hide`",
           "summary": "actorのvisible stateをfalseにします。透明度とは別で、次の`Actor.show`で再表示します。",
           "example": "Hero.hide: {}"
         },
         {
           "pointer": "#/$defs/setLayerAction",
-          "order": 44,
+          "order": 80,
           "title": "`Actor.setLayer`",
           "summary": "front／backで絶対位置へ、正負の数値で現在位置から前後のlayerへ移動します。",
           "example": "Hero.setLayer: front"
         },
         {
           "pointer": "#/$defs/loopAction",
-          "order": 46,
+          "order": 90,
           "title": "`Actor.loop`",
           "summary": "costumeと表示秒数のstep列をbackgroundで繰り返します。少なくとも一つのstepは正の秒数にします。",
           "example": "Hero.loop:\n  steps:\n    - skin: HeroWalk1\n      seconds: 0.2\n    - skin: HeroWalk2\n      seconds: 0.2"
         },
         {
           "pointer": "#/$defs/setTextAction",
-          "order": 50,
+          "order": 100,
           "title": "`Actor.setText`",
           "summary": "SVG Text actorの本文と名前付きstyleを更新します。旧Text Assetの更新命令ではありません。",
           "example": "Caption.setText:\n  text: おしまい\n  style: title"
         },
         {
           "pointer": "#/$defs/poseAction",
-          "order": 60,
+          "order": 110,
           "title": "`Actor.pose`",
           "summary": "一つ以上のpose stepを順に認識し、任意のcostumeとsoundでfeedbackします。",
           "example": "Hero.pose:\n  steps:\n    - pose: wave\n      skin: HeroWave\n      sound: Success"
         },
         {
           "pointer": "#/$defs/customActorAction",
-          "order": 70,
+          "order": 120,
           "title": "`Actor.<customAction>`",
           "summary": "core action名以外の名前をcapability registryへ委譲します。引数値は文字列、数値、真偽値です。",
           "example": "Hero.wave:\n  stableId: hero-wave\n  arguments:\n    speed: 1\n    reverse: false",

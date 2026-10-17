@@ -79,6 +79,12 @@ Schema snapshotです。上流repository、commit、SHA-256、source URLは
 `sources/dsl4/source-lock.json`に記録します。日本語Annotationと、両者から生成した
 `docs/dsl-author-guides/dsl-4.0-schema-reference.md`は前記のCC BY-SA 4.0区分です。
 
+## MPL-2.0の上流ブロック定義snapshot
+
+`sources/dsl4/standard-surface-rc22.json`は、上流の公開Standard SB3の`getInfo()`から抽出した
+ブロック定義です。元のSB3のSHA-256、version、commit、抽出方法を同ファイルへ記録し、
+MPL-2.0として扱います。日本語による説明文と表を掲載するブロックリファレンスの区分はCC BY-SA 4.0です。
+
 ## 生成物、中間ファイル、第三者の素材
 
 `dist/**`、`output/**`、`tmp/**`などの生成先へ移動または変換しても、生成元の

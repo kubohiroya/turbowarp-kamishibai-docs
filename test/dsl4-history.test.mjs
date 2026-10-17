@@ -8,8 +8,8 @@ import historyManifest from '../sources/dsl4/release-history-4.0.json' with {typ
 const read = (relativePath) => readFileSync(new URL(`../${relativePath}`, import.meta.url), 'utf8');
 const history = read('docs/dsl-author-guides/dsl-4.0-history.md');
 const dsl4Index = read('site/4.0/index.html');
-const entry = historyManifest.entries[0];
-const previousEntry = historyManifest.entries[1];
+const entry = historyManifest.entries.find(({version}) => version === '4.0.0-rc.10');
+const previousEntry = historyManifest.entries.find(({version}) => version === '4.0.0-rc.8');
 
 test('publishes a separate DSL 4.0 release history', () => {
   const publication = documentationConfig.documents.find(

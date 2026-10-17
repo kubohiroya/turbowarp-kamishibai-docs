@@ -493,6 +493,9 @@ test('maps every planned screenshot to a draft marker and a release gate', () =>
 });
 
 test('keeps the published prerelease reviewable with its fixed captures', () => {
+  assert.match(tutorialSources['README.md'], /### rc\.22の現行基準/u);
+  assert.match(tutorialSources['README.md'], /### 過去の実装追跡（rc\.8）/u);
+  assert.match(tutorialSources['README.md'], /rc\.22の検証へ読み替えません/u);
   assert.match(tutorialSources['README.md'], /公開プレリリース/u);
   assert.match(tutorialSources['README.md'], /\/4\.0\/tutorials\/play\//u);
   assert.match(tutorialSources['README.md'], /\/4\.0\/tutorials\/create\//u);
@@ -509,14 +512,14 @@ test('keeps the published prerelease reviewable with its fixed captures', () => 
   assert.match(tutorialSources['create.md'], /preview-dsl4 --help/u);
   assert.match(tutorialSources['create.md'], /validate-dsl4/u);
   assert.match(tutorialSources['create.md'], /build-dsl4/u);
-  assert.match(tutorialSources['create.md'], /4\.0\.0-rc\.8/u);
+  assert.match(tutorialSources['create.md'], /4\.0\.0-rc\.22/u);
   assert.match(tutorialSources['create.md'], /addition-kit\/earthquake-classroom\.svg/u);
   assert.match(tutorialSources['create.md'], /addition-kit\/add-pose-scene\.yml\.txt/u);
   assert.match(tutorialSources['create.md'], /file: classroom\.svg/u);
   assert.match(tutorialSources['create.md'], /file: student-ready\.svg/u);
   assert.match(tutorialSources['create.md'], /file: earthquake-classroom\.svg/u);
   assert.match(tutorialSources['create.md'], /更新状態ボタン[\s\S]*再開位置[\s\S]*再開方針/u);
-  assert.match(tutorialSources['create.md'], /poseModel: SafetyPose/u);
+  assert.match(tutorialSources['create.md'], /recognitionModel: SafetyPose/u);
   assert.match(tutorialSources['create.md'], /overlay:[\s\S]*boneStyle:[\s\S]*width: 3/u);
   assert.match(tutorialSources['create.md'], /Student\.show:[\s\S]*skin: ProtectHead/u);
   assert.match(tutorialSources['create.md'], /success:[\s\S]*できた！ 頭を守れたね/u);

@@ -5,13 +5,13 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 対象: DSL 3.1／3.2の既存台本をDSL 4.0へ移行する方\
 対象コマンド: `turbowarp-kamishibai convert-dsl4`\
 文書状態: 固定実装基準を説明する変換ガイド（正式リリースの操作資料ではない）\
-調査基準: TurboWarp-Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
+調査基準: TurboWarp-Kamishibai `f8048b8`（4.0.0-rc.22）、2026年10月17日
 
 このガイドは、すでに3.1／3.2の台本を持っている方のための移行手順です。初めてTurboWarp紙芝居を使う方や、
 4.0で最初の作品を作る方は、先に[大人向け概要](../user-guides/executive-summary-adult-4.0.md)と
 [「紙芝居を作る」チュートリアル](../tutorials/create.md)をお読みください。
 
-> **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
+> **配布状態との区別:** 2026年10月17日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
 > 正式な`v4.0.0`ではありません。
 > `convert-dsl4`を含むパッケージのリリースを使用し、利用中のパッケージで`pnpm exec turbowarp-kamishibai --help`を
 > 実行して、コマンド一覧に`convert-dsl4`があることを確認してください。
@@ -54,10 +54,10 @@ pnpm exec turbowarp-kamishibai convert-dsl4 \
   --pose-models pose-models.json
 ```
 
-| option               | 必須 | 内容                                                                     |
-| -------------------- | ---- | ------------------------------------------------------------------------ |
-| `--input FILE`       | 必須 | UTF-8のDSL 3.1／3.2台本。BOM、CRLF、CRは読み込み時に正規化します。       |
-| `--output FILE`      | 必須 | 生成するDSL 4.0 YAML。入力と同じpathは指定できません。                   |
+| option               | 必須 | 内容                                                                            |
+| -------------------- | ---- | ------------------------------------------------------------------------------- |
+| `--input FILE`       | 必須 | UTF-8のDSL 3.1／3.2台本。BOM、CRLF、CRは読み込み時に正規化します。              |
+| `--output FILE`      | 必須 | 生成するDSL 4.0 YAML。入力と同じpathは指定できません。                          |
 | `--pose-models FILE` | 任意 | 内容固定時に`TMPoseURL`をローカルのポーズモデル素材へ置換するJSONファイルです。 |
 
 相対パスは、コマンドを実行したディレクトリを基準に解決されます。新しいDSL 4.0のソースには短い`.k4.yml` suffixを
@@ -123,7 +123,7 @@ converterはこの変換でネットワーク取得やキャッシュ参照を�
 ```yaml
 assets:
   PoseModel1:
-    kind: poseModel
+    kind: recognitionModel
     delivery: remote
     source:
       url: https://example.com/models/rescue/
@@ -164,14 +164,14 @@ remoteのまま内容を固定する方法もあります。
 
 ### ポーズ関連の変換で起きること
 
-| 3.1／3.2の記述                      | 4.0の記述                                            | 変換規則                                                         | 変換を止める・警告する条件                         |
-| ----------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- |
-| `TMPoseURL`                         | `assets`の`kind: poseModel`                          | 既定はremote参照。`--pose-models`で対応付けたURLはローカル`file` | `Actor:pose`があるのに`TMPoseURL`がなければerror   |
-| `Actor:pose`                        | `Actor.pose`の`steps`                                | pose名の順にすべて成立させるstepへ変換する                       | 余分なskin／soundはwarning付きで除外。不足分は省略 |
-| `poseRecog`                         | `poseRecognition.sequence.confidenceThreshold`       | 同じ値を使う（0〜1）                                             | —                                                  |
-| `poseCharge`                        | `poseRecognition.sequence.fullConfidenceHoldSeconds` | `10 / poseCharge`                                                | —                                                  |
-| `poseIdle`                          | —                                                    | `0`だけを受け付ける                                              | `0`以外はerror                                     |
-| SB3側でAsync Inputから1件を選ぶ処理 | 生成しない                                           | `poseInputToChangeScene`を推測して作らない                       | —                                                  |
+| 3.1／3.2の記述                      | 4.0の記述                                        | 変換規則                                                         | 変換を止める・警告する条件                         |
+| ----------------------------------- | ------------------------------------------------ | ---------------------------------------------------------------- | -------------------------------------------------- |
+| `TMPoseURL`                         | `assets`の`kind: recognitionModel`               | 既定はremote参照。`--pose-models`で対応付けたURLはローカル`file` | `Actor:pose`があるのに`TMPoseURL`がなければerror   |
+| `Actor:pose`                        | `Actor.pose`の`steps`                            | pose名の順にすべて成立させるstepへ変換する                       | 余分なskin／soundはwarning付きで除外。不足分は省略 |
+| `poseRecog`                         | `recognition.sequence.confidenceThreshold`       | 同じ値を使う（0〜1）                                             | —                                                  |
+| `poseCharge`                        | `recognition.sequence.fullConfidenceHoldSeconds` | `10 / poseCharge`                                                | —                                                  |
+| `poseIdle`                          | —                                                | `0`だけを受け付ける                                              | `0`以外はerror                                     |
+| SB3側でAsync Inputから1件を選ぶ処理 | 生成しない                                       | `poseInputToChangeScene`を推測して作らない                       | —                                                  |
 
 sceneで`Actor:pose`を使っているのに`TMPoseURL`がない場合はerrorです。
 3.1／3.2の`Actor:pose`は候補から1件を選ぶactionではありません。converterはpose名の順にすべて成立させる
@@ -198,10 +198,10 @@ Converted /project/story.k4.yml
 /project/source.txt:2:1: warning [K4-CONVERT-VARIABLE-TYPE] ...
 ```
 
-| status | 意味                                                    |
-| ------ | ------------------------------------------------------- |
-| `0`    | 変換成功。警告がある場合も生成YAMLを出力します。     |
-| `1`    | 変換エラー。新規出力を作らず、既存出力を変更しません。   |
+| status | 意味                                                                       |
+| ------ | -------------------------------------------------------------------------- |
+| `0`    | 変換成功。警告がある場合も生成YAMLを出力します。                           |
+| `1`    | 変換エラー。新規出力を作らず、既存出力を変更しません。                     |
 | `2`    | オプション不足や未知のオプションなど、コマンドの使い方が正しくありません。 |
 
 ## 変換後に確認する

@@ -30,12 +30,97 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 | 状態             | 意味                                                             |
 | ---------------- | ---------------------------------------------------------------- |
 | 公開プレリリース | npm `next`、GitHub prerelease、Pages成果物として公開された候補版 |
-| 安定版           | npm `latest`と通常のダウンロード導線で推奨する版                 |
+| 安定版           | リリースが安定運用向けに推奨する版（npm latestとは別に確認）     |
 | 公開サンプル基準 | サンプル作品、starter、Web版を生成したruntimeの版                |
 
-2026年8月26日現在、`v4.0.0-rc.10`は公開プレリリースです。推奨安定版は`v3.2.3`で、
-正式版`v4.0.0`は未公開です。チュートリアルとサンプル成果物は、公開rc.10のSB3とfreeze commitを
-入力として再生成し、作品ごとのlockに完全性情報を記録します。
+2026年10月17日現在、公開プレリリースは`v4.0.0-rc.22`です。正式版`v4.0.0`は未公開です。
+リリースノート上の推奨安定版は`v3.2.3`ですが、現行packageのnpm `latest`／`next`はともにrc.22です。
+以下のrc.10以前の公開・検証記録は当時の事実として保存し、rc.22へ読み替えません。
+
+## 4.0.0-rc.22
+
+状態: **公開プレリリース**。実装基準はcommit `f8048b8c4ebd0ecd6213bb87582862034b2b88ce`です。
+GitHub Release・npm配布物は実際に取得してsize／hashを照合しました。公開サンプルは3作品のmanifestを照合しました。
+今回、上流suite、ブラウザー再生、実カメラ・実ポーズの再検証は行っていません。
+
+### 固定revisionと公開先
+
+| 対象              | 固定値                                                                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| tag               | `v4.0.0-rc.22`                                                                                                                       |
+| commit            | `f8048b8c4ebd0ecd6213bb87582862034b2b88ce`                                                                                           |
+| source identity   | `sha256:44e85ea98dd7d4aef7bbd08c21610675bef8cd9a6244196a9fac54caa712ee6f`                                                            |
+| Schema SHA-256    | `f61955685c51ed7cfe3ed5b760ca6d290929ab9fdc4b8a912cdb901135c613ac`                                                                   |
+| GitHub prerelease | [v4.0.0-rc.22](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.22)                                     |
+| npm               | [@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.22](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.22) |
+| 公開サンプル基準  | 4.0.0-rc.22。各公開manifestのruntime commitを照合                                                                                    |
+
+### rc.8以降の変更と反映先
+
+| 版・確認基準           | 変更                                                           | 確認する契約                                                                                                                                                                                           |
+| ---------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| rc.9                   | 表示とBGMのcrossfade                                           | presentation.transitions、audio.bgm.transition、action／sceneのtransition                                                                                                                              |
+| rc.10                  | Extension ID移行と名称・公開先の整理                           | kubohiroyatm、互換性・移行ガイド                                                                                                                                                                       |
+| rc.11（未公開）／rc.12 | package／CLI移行、TypeScript・Vitest・Viteへの移行             | dist公開subpath、src／testの.ts参照、メンテナンスガイド                                                                                                                                                |
+| rc.13                  | TurboWarp-Kamishibaiのpackage／CLI名称                         | @kubohiroya/turbowarp-kamishibai-app、turbowarp-kamishibai                                                                                                                                             |
+| rc.14                  | YAMLとブロック台本を往復するCLI                                | validate-dsl4 --format canonical-json、author-block-dsl、export-block-dsl                                                                                                                              |
+| rc.15                  | 認識拡張のpackage名変更                                        | @kubohiroya/turbowarp-teachable-machine                                                                                                                                                                |
+| rc.16／rc.17           | Camera Source同梱とlease不具合修正                             | rc.16はポーズ作品へ使用しない、Camera Sourceがカメラを所有                                                                                                                                             |
+| rc.18                  | カメラプレビュー操作UIの接続                                   | recognition.preview.controls、K4-HOST-PREVIEW-CONTROLS-001                                                                                                                                             |
+| rc.19                  | 対応ブラウザーのタイトルでカメラ許可                           | dsl4UserMediaPermissionGate、非対応環境は従来の取得経路                                                                                                                                                |
+| rc.20／rc.21           | プレビューと推論入力の分離・画像モードの向き・preview終了      | Teachable Machine 3.5.1、中央正方形と左右反転、停止時の接続終了                                                                                                                                        |
+| rc.22                  | リモート取得失敗の原因表示・preview失敗ダイアログ・sandbox案内 | K4-ASSET-REMOTE-OFFLINE-001、K4-ASSET-REMOTE-CORS-001、K4-ASSET-REMOTE-CONNECT-001、K4-ASSET-REMOTE-TLS-001                                                                                            |
+| rc.22固定ソースの照合  | 旧snapshotとの差分（個別の導入版は未特定）                     | recognition／recognitionModel、imageInputToChangeScene、setVariable／changeVariable／toggleVariable、BGM音量・停止、Actor.setTextのruby、読取専用runtime surface、Asset ManagerからAsset Cacheへの置換 |
+
+個別の導入版を特定していない項目は、rc.22固定ソースで確認した現行契約として記録しています。
+rc.11は未公開で、変更内容はrc.12に含まれます。rc.16にはポーズ認識のlease経路の不具合があり、rc.17で修正されています。
+台本のdocument versionは引き続き`kamishibai: '4.0'`です。
+
+### exact dependency pin
+
+- `@kubohiroya/turbowarp-app-shell@0.2.0`
+- `@kubohiroya/turbowarp-asset-cache@0.1.0`
+- `@kubohiroya/turbowarp-async-input@0.7.0`
+- `@kubohiroya/turbowarp-bubble@0.13.0`
+- `@kubohiroya/turbowarp-camera-source@0.15.0`
+- `@kubohiroya/turbowarp-extension-manifest@0.2.0`
+- `@kubohiroya/turbowarp-kvs@0.1.0`
+- `@kubohiroya/turbowarp-live-reload-controller@0.2.0`
+- `@kubohiroya/turbowarp-local-preview@0.1.0`
+- `@kubohiroya/turbowarp-runtime-adapter@0.2.0`
+- `@kubohiroya/turbowarp-runtime-expression@0.6.0`
+- `@kubohiroya/turbowarp-svg-text@0.10.0`
+- `@kubohiroya/turbowarp-teachable-machine@3.5.1`
+- `@teachablemachine/pose@0.8.6`
+- `@tensorflow/tfjs@1.3.1`
+- `@turbowarp/scratch-storage@2.0.0`
+- `@turbowarp/scratch-svg-renderer@1.1.0`
+- `base64-js@1.5.1`
+- `brfs@2.0.2`
+- `buffer@6.0.3`
+- `fflate@0.8.3`
+- `scratch-audio@github:TurboWarp/scratch-audio#aba00cd02e36d95407effafa03f3678e4c669b30`
+- `scratch-render@github:TurboWarp/scratch-render#a67f7c9c07d459582c227d4fd3fae8f59d8fc9ce`
+- `scratch-vm@github:TurboWarp/scratch-vm#c4823421cb7c17d8d8a89878851ce1668c26a21f`
+- `vite@^8.3.3`
+- `yaml@2.9.0`
+
+### 公開成果物
+
+| 成果物       | bytes   | SHA-256                                                            |
+| ------------ | ------- | ------------------------------------------------------------------ |
+| Standard SB3 | 6911464 | `3731ed3a58c000d40f65057fbe5e27b340bae915df11e863fd55c98ba061b5c9` |
+| npm tarball  | 6667560 | `b4b2b4ae68f39d3eabc358c9b8172d7b4f26952eb95730eb11b66d81527badbd` |
+
+npm integrity: `sha512-CHT3k06i/Jrw6jeIr6liwAt7k869CSWsW77vWT1MwM4sRVRjsT7Q0/w12t286i5yzYXmJk1tVkvLw8TFE2qMWQ==`。
+Pagesのversion付きSB3 URLは確認時に404だったため、[GitHub ReleaseのSB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.22/kamishibai-4.0.0-rc.22.sb3)を使います。
+
+### 検証、制約、rollback
+
+今回の照合は配布物とmanifestの確認です。実行テストや実カメラの成功を意味しません。
+過去のカメラ測定は当時の版にだけ帰属し、rc.22へ適用しません。
+問題時は公開済みrc.21または推奨安定版3.2.3へ戻し、rc.22を同じversionで差し替えません。
+文書だけに問題がある場合は文書変更をrevertし、確認済みの基準へ戻します。
 
 ## 4.0.0-rc.10
 

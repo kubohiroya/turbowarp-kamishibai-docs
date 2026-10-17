@@ -3,7 +3,9 @@ import {readFileSync} from 'node:fs';
 import test from 'node:test';
 
 import {documentationConfig} from '../docs/config.mjs';
-import candidate from '../sources/dsl4/release-smoke-4.0-candidate.json' with {type: 'json'};
+import currentCandidate from '../sources/dsl4/release-smoke-4.0-candidate.json' with {type: 'json'};
+
+const candidate = currentCandidate.historicalCandidates[0];
 
 const read = (relativePath) => readFileSync(new URL(`../${relativePath}`, import.meta.url), 'utf8');
 
@@ -83,7 +85,7 @@ test('defines rc.8 surfaces, release stops, physical rerun, and immutable rollba
   assert.match(guide, /Bubble 0\.10\.0/u);
   assert.match(guide, /bubbleClosePolicies/u);
   assert.match(guide, /23個のcore action/u);
-  assert.match(guide, /4\.0\.0-rc\.8/u);
+  assert.match(guide, /4\.0\.0-rc\.22/u);
   assert(candidate.releaseStops.length >= 8);
   assert.equal(candidate.rollback.recommendedStableVersion, '3.2.3');
 });

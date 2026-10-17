@@ -1,88 +1,75 @@
 {
   "formatVersion": 1,
-  "candidateId": "dsl4-4.0.0-rc.8",
-  "status": "published-prerelease-automated-verification-passed",
-  "recordedAt": "2026-08-20T21:32:15+09:00",
+  "candidateId": "dsl4-4.0.0-rc.22",
+  "status": "published-prerelease-artifacts-verified; runtime-smoke-not-run",
   "runtime": {
-    "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
-    "candidateCommit": "ad244910b6bf579b8eb7c7af70d72b7ca4b1fff6",
-    "freezeCommit": "29c0deadcb98badf94a0244c479ca896dc71f842",
-    "version": "4.0.0-rc.8",
+    "version": "4.0.0-rc.22",
+    "freezeCommit": "f8048b8c4ebd0ecd6213bb87582862034b2b88ce",
     "schema": {
-      "path": "schema/dsl-4.schema.json",
-      "sha256": "46ff159c29e13704d707dae8e0d2ad3a146b6aa8a68a968614e6ef56d112f135"
+      "sha256": "f61955685c51ed7cfe3ed5b760ca6d290929ab9fdc4b8a912cdb901135c613ac"
     },
     "releaseSource": {
-      "path": null,
-      "sourceIdentity": "sha256:8edbc02a06b3770cce0a89cf658367df129d974d53f401258b69f0713762014a"
+      "sourceIdentity": "sha256:44e85ea98dd7d4aef7bbd08c21610675bef8cd9a6244196a9fac54caa712ee6f"
     },
     "standardArtifact": {
-      "publicationState": "published",
-      "filename": "kamishibai-4.0.0-rc.8.sb3",
-      "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3",
-      "buildDate": "2026-08-20",
-      "size": 6749955,
-      "sha256": "91d7f594aaf922450fba359a90c7c26e7c1dfda51cf002534cb4605dbb0d7041"
+      "filename": "kamishibai-4.0.0-rc.22.sb3",
+      "sha256": "3731ed3a58c000d40f65057fbe5e27b340bae915df11e863fd55c98ba061b5c9",
+      "size": 6911464,
+      "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.22/kamishibai-4.0.0-rc.22.sb3",
+      "publicationState": "published"
     },
     "packageTarball": {
-      "publicationState": "published",
-      "url": "https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.8.tgz",
-      "size": 6492990,
-      "sha256": "a7b91378e6345c530515cc4e8f82314c3c5f2a19d3e136de5e4fe8bff8d24c5e",
-      "integrity": "sha512-nQmvHakwLWZioi1gOUZatKwyLe2nD3GPJbEBrqDqm5mzqQhbbLEMGl3znJQpVs0JRfzyeLI1JDTcGrePiIpjUg=="
+      "url": "https://registry.npmjs.org/@kubohiroya/turbowarp-kamishibai-app/-/turbowarp-kamishibai-app-4.0.0-rc.22.tgz",
+      "size": 6667560,
+      "sha256": "b4b2b4ae68f39d3eabc358c9b8172d7b4f26952eb95730eb11b66d81527badbd",
+      "integrity": "sha512-CHT3k06i/Jrw6jeIr6liwAt7k869CSWsW77vWT1MwM4sRVRjsT7Q0/w12t286i5yzYXmJk1tVkvLw8TFE2qMWQ==",
+      "publicationState": "published"
     },
     "featureFlags": {
       "defaultState": "all-off",
       "standardProductionEnabled": [
         "dsl4Runtime",
+        "dsl4CrossfadeTransitions",
         "dsl4AppShell",
         "dsl4PoseFeedbackModes",
         "dsl4SpeechAdvanceTypewriter",
-        "dsl4TurboWarpActionSurface"
-      ],
-      "nonEmbeddedDevelopmentAdditionalEnabled": [
-        "dsl4WebPreviewAdapter",
-        "dsl4BrowserDistributionBuild",
-        "dsl4PreviewReloadOverlay",
-        "dsl4Debugger"
+        "dsl4TurboWarpActionSurface",
+        "dsl4TurboWarpStateSurface",
+        "dsl4ExpressionRuntimeState",
+        "dsl4PosePreviewMirroring",
+        "dsl4CameraPreviewControls",
+        "dsl4UserMediaPermissionGate",
+        "dsl4BroadcastMessageAndWait",
+        "dsl4TurboWarpBubbleAdvancedPresentation",
+        "dsl4IndexedDBAssetSessionStore"
       ]
     }
   },
   "publicSamples": {
-    "status": "published-rc.8-derived-artifacts-verified-independently",
-    "version": "4.0.0-rc.8",
-    "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-samples",
-    "pullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/126",
-    "publicationCommit": "236fe4ac09e17aaaaa0fb0fd1f8ebdc173073c7f",
-    "pagesDeploymentRun": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/32368656029",
-    "manifest": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json",
-    "relationship": "read-only-reference; sample artifacts use the published rc.8 base and freeze commit"
-  },
-  "environment": {
-    "requiredBrowser": "current Chrome or Chromium",
-    "cameraFrameStorage": false,
-    "allowedOrigins": ["localhost", "https"]
+    "version": "4.0.0-rc.22",
+    "evidenceUrls": [
+      "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/manifest.json",
+      "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/dsl4-manifest.json",
+      "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json"
+    ],
+    "status": "public-manifests-verified; browser-rerun-not-performed"
   },
   "evidence": {
-    "upstreamVerification": {
-      "status": "pass",
-      "commands": ["pnpm release:dsl4:check", "pnpm verify:full", "pnpm release:check"],
-      "unitTests": 1161,
-      "chromiumTests": 13,
-      "githubActions": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/32361658847/job/96402336784"
-    },
     "publicationVerification": {
-      "status": "pass",
-      "npmDistTag": "next",
-      "githubPrerelease": true,
-      "pagesArtifactHashMatch": true
+      "githubReleaseArtifactHashMatch": true,
+      "npmTarballIntegrityMatch": true,
+      "pagesArtifactHashMatch": null
+    },
+    "upstreamVerification": {
+      "status": "not-run-in-this-documentation-update"
     },
     "physicalCameraAndPose": {
-      "status": "camera-context-measured-overlay-browser-verified",
-      "reason": "Physical-camera measurements support the default Canvas2D context; the rc.8 sample Web applications verify recognition and overlay startup and cleanup in Chromium",
-      "previousEvidence": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/601",
-      "previousEvidenceAppliesToRc8": true
+      "status": "not-run-for-rc.22",
+      "previousEvidenceAppliesToRc22": false
     }
+  },
+  "environment": {
+    "cameraFrameStorage": false
   },
   "releaseStops": [
     "candidate-metadata-mismatch",
@@ -96,9 +83,113 @@
   ],
   "rollback": {
     "recommendedStableVersion": "3.2.3",
-    "npm": "move-next-to-4.0.0-rc.7",
-    "githubAndPages": "add-warning-without-replacing-rc.8-bytes",
-    "fixVersion": "4.0.0-rc.9",
-    "pagesRollbackCommit": "a7f377d4675a9bf9acc8691a11d269ff3d78118b"
-  }
+    "previousPrerelease": "4.0.0-rc.21",
+    "replacePublishedBytes": false
+  },
+  "historicalCandidates": [
+    {
+      "formatVersion": 1,
+      "candidateId": "dsl4-4.0.0-rc.8",
+      "status": "published-prerelease-automated-verification-passed",
+      "recordedAt": "2026-08-20T21:32:15+09:00",
+      "runtime": {
+        "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-app",
+        "candidateCommit": "ad244910b6bf579b8eb7c7af70d72b7ca4b1fff6",
+        "freezeCommit": "29c0deadcb98badf94a0244c479ca896dc71f842",
+        "version": "4.0.0-rc.8",
+        "schema": {
+          "path": "schema/dsl-4.schema.json",
+          "sha256": "46ff159c29e13704d707dae8e0d2ad3a146b6aa8a68a968614e6ef56d112f135"
+        },
+        "releaseSource": {
+          "path": null,
+          "sourceIdentity": "sha256:8edbc02a06b3770cce0a89cf658367df129d974d53f401258b69f0713762014a"
+        },
+        "standardArtifact": {
+          "publicationState": "published",
+          "filename": "kamishibai-4.0.0-rc.8.sb3",
+          "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3",
+          "buildDate": "2026-08-20",
+          "size": 6749955,
+          "sha256": "91d7f594aaf922450fba359a90c7c26e7c1dfda51cf002534cb4605dbb0d7041"
+        },
+        "packageTarball": {
+          "publicationState": "published",
+          "url": "https://registry.npmjs.org/@kubohiroya/tmpose-kamishibai/-/tmpose-kamishibai-4.0.0-rc.8.tgz",
+          "size": 6492990,
+          "sha256": "a7b91378e6345c530515cc4e8f82314c3c5f2a19d3e136de5e4fe8bff8d24c5e",
+          "integrity": "sha512-nQmvHakwLWZioi1gOUZatKwyLe2nD3GPJbEBrqDqm5mzqQhbbLEMGl3znJQpVs0JRfzyeLI1JDTcGrePiIpjUg=="
+        },
+        "featureFlags": {
+          "defaultState": "all-off",
+          "standardProductionEnabled": [
+            "dsl4Runtime",
+            "dsl4AppShell",
+            "dsl4PoseFeedbackModes",
+            "dsl4SpeechAdvanceTypewriter",
+            "dsl4TurboWarpActionSurface"
+          ],
+          "nonEmbeddedDevelopmentAdditionalEnabled": [
+            "dsl4WebPreviewAdapter",
+            "dsl4BrowserDistributionBuild",
+            "dsl4PreviewReloadOverlay",
+            "dsl4Debugger"
+          ]
+        }
+      },
+      "publicSamples": {
+        "status": "published-rc.8-derived-artifacts-verified-independently",
+        "version": "4.0.0-rc.8",
+        "repository": "https://github.com/kubohiroya/turbowarp-kamishibai-samples",
+        "pullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/126",
+        "publicationCommit": "236fe4ac09e17aaaaa0fb0fd1f8ebdc173073c7f",
+        "pagesDeploymentRun": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/32368656029",
+        "manifest": "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json",
+        "relationship": "read-only-reference; sample artifacts use the published rc.8 base and freeze commit"
+      },
+      "environment": {
+        "requiredBrowser": "current Chrome or Chromium",
+        "cameraFrameStorage": false,
+        "allowedOrigins": ["localhost", "https"]
+      },
+      "evidence": {
+        "upstreamVerification": {
+          "status": "pass",
+          "commands": ["pnpm release:dsl4:check", "pnpm verify:full", "pnpm release:check"],
+          "unitTests": 1161,
+          "chromiumTests": 13,
+          "githubActions": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/32361658847/job/96402336784"
+        },
+        "publicationVerification": {
+          "status": "pass",
+          "npmDistTag": "next",
+          "githubPrerelease": true,
+          "pagesArtifactHashMatch": true
+        },
+        "physicalCameraAndPose": {
+          "status": "camera-context-measured-overlay-browser-verified",
+          "reason": "Physical-camera measurements support the default Canvas2D context; the rc.8 sample Web applications verify recognition and overlay startup and cleanup in Chromium",
+          "previousEvidence": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/601",
+          "previousEvidenceAppliesToRc8": true
+        }
+      },
+      "releaseStops": [
+        "candidate-metadata-mismatch",
+        "artifact-integrity-mismatch",
+        "schema-or-feature-flag-change",
+        "browser-console-or-page-error",
+        "camera-or-pose-transition-failure",
+        "asset-or-diagnostic-failure",
+        "resource-leak",
+        "nondeterministic-build"
+      ],
+      "rollback": {
+        "recommendedStableVersion": "3.2.3",
+        "npm": "move-next-to-4.0.0-rc.7",
+        "githubAndPages": "add-warning-without-replacing-rc.8-bytes",
+        "fixVersion": "4.0.0-rc.9",
+        "pagesRollbackCommit": "a7f377d4675a9bf9acc8691a11d269ff3d78118b"
+      }
+    }
+  ]
 }

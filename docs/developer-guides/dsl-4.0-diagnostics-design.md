@@ -3,20 +3,31 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 固定実装基準を説明する設計レビュー（正式リリース済みの意味ではない）\
-調査基準: TurboWarp-Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
+調査基準: TurboWarp-Kamishibai `f8048b8`（4.0.0-rc.22）、2026年10月17日
 
-> **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。本書はrc.8固定コミットの失敗経路を説明します。
+> **配布状態との区別:** 2026年10月17日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。本書はrc.22固定コミットの失敗経路を説明します。
 
 この文書は、DSL 4.0のYAML読込からproduction実行まで、失敗をどこで分類し、どの状態をcommitせず、
 どのresourceを停止・解放するかを実装からレビューできるようにまとめたものです。対象となる完成実装は
 `kubohiroya/turbowarp-kamishibai-app`のcommit
-[`29c0deadcb98badf94a0244c479ca896dc71f842`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/29c0deadcb98badf94a0244c479ca896dc71f842)
+[`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)
 です。本文のpath、関数、code、event、testはこのcommitで確認しています。
 
 対象アプリ: TurboWarp-Kamishibai 4.0.x
 
 受理するDSL宣言: `kamishibai: '4.0'`
+
+## rc.22のリモート取得とプレビュー失敗
+
+ブラウザーは取得失敗を`K4-ASSET-REMOTE-OFFLINE-001`、`K4-ASSET-REMOTE-CORS-001`、
+`K4-ASSET-REMOTE-CONNECT-001`に分類します。CONNECTは証明書障害の確定診断ではなく、TLS・DNS・サーバ停止等を含みます。
+CLIはNodeのTLSエラーコードを使い、`K4-ASSET-REMOTE-TLS-001`で原因を示します。
+
+ローカルプレビューは`runtime.fail`を失敗ダイアログへ接続します。リモートassetを許可する変更ではなく、
+`K4-ASSET-REMOTE-DISABLED`ならローカル配信またはbuild済み作品で確認するよう案内します。
+サンドボックス内で許可されたbundleは、無言で待ち続けずパレットとコンソールへ開き直す手順を出します。
+この文書更新ではこれらの上流実行テストを再実行していません。
 
 ## 読む前に
 
@@ -47,7 +58,7 @@ JavaScriptの限定preflightを追加し、最初のfatal error一件を表示�
 - `featureDetailedScriptErrors`と`runtime.stopAll()`中心の停止順序
 - `prompt` spriteへ直接適用する3.1専用SVG presenter
 
-4.0の正本は`src/dsl4/source-frontend.js`、`diagnostic-sequence-policy.js`、`StoryDocument`、
+4.0の正本は`src/dsl4/source-frontend.ts`、`diagnostic-sequence-policy.js`、`StoryDocument`、
 runtime controller、platform adapter、preview transactionです。
 
 ## レビュー結論
@@ -349,7 +360,7 @@ CLIの通常出力やbrowser DOMへ直接文字列化しません。
 ## Feature flagとrollback
 
 この文書追加でflagの既定値は変更しません。固定commitのDSL 4.0 flagは
-`src/dsl4/feature-flags.js`で全て既定OFFです。
+`src/dsl4/feature-flags.ts`で全て既定OFFです。
 
 | flag                            | 診断・停止との関係                           | OFF時の安全動作                            |
 | ------------------------------- | -------------------------------------------- | ------------------------------------------ |
@@ -366,17 +377,17 @@ rollbackは該当flagをOFFにし、processまたはsessionを再起動して起
 
 ## 実装レビューの確認表
 
-| 変更箇所                   | 必ず確認するtest                                                                                                                    |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| diagnostic envelope・順序  | `test/dsl4-diagnostic-sequence-policy.test.mjs`、`test/dsl4-expression-diagnostic-boundaries.test.mjs`                              |
-| YAML・Schema・semantic     | `test/dsl4-schema.test.mjs`、`test/dsl4-source-limits.test.mjs`、`test/dsl4-validate-cli.test.mjs`                                  |
-| include・origin・path      | `test/dsl4-source-graph.test.mjs`、`test/dsl4-source-graph-frontend.test.mjs`、`test/dsl4-source-include-build.test.mjs`            |
-| invalid source・reload     | `test/dsl4-live-reload-session.test.mjs`、`test/dsl4-live-reload-quiesce.test.mjs`                                                  |
-| asset transaction          | `test/dsl4-asset-reload-transaction.test.mjs`、`test/dsl4-browser-asset-reload-pipeline.test.mjs`                                   |
-| runtime fail・abort        | `test/dsl4-runtime-controller.test.mjs`、`test/dsl4-runtime-startup.test.mjs`、`test/dsl4-runtime-asset-lifecycle.test.mjs`         |
-| platform partial cleanup   | `test/dsl4-turbowarp-runtime-host.test.mjs`、`test/dsl4-platform-asset-session.test.mjs`                                            |
-| Browser／CLI diagnostic    | `test/dsl4-web-preview-shell.test.mjs`、`test/dsl4-local-preview-cli.test.mjs`、`test/dsl4-preview-source-generation-wire.test.mjs` |
-| production candidate／出力 | `test/dsl4-build-cli.test.mjs`、`test/dsl4-one-shot-build.test.mjs`、`test/dsl4-packaged-runtime-component.test.mjs`                |
+| 変更箇所                   | 必ず確認するtest                                                                                                                 |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| diagnostic envelope・順序  | `test/dsl4-diagnostic-sequence-policy.test.ts`、`test/dsl4-expression-diagnostic-boundaries.test.ts`                             |
+| YAML・Schema・semantic     | `test/dsl4-schema.test.ts`、`test/dsl4-source-limits.test.ts`、`test/dsl4-validate-cli.test.ts`                                  |
+| include・origin・path      | `test/dsl4-source-graph.test.ts`、`test/dsl4-source-graph-frontend.test.ts`、`test/dsl4-source-include-build.test.ts`            |
+| invalid source・reload     | `test/dsl4-live-reload-session.test.ts`、`test/dsl4-live-reload-quiesce.test.ts`                                                 |
+| asset transaction          | `test/dsl4-asset-reload-transaction.test.ts`、`test/dsl4-browser-asset-reload-pipeline.test.ts`                                  |
+| runtime fail・abort        | `test/dsl4-runtime-controller.test.ts`、`test/dsl4-runtime-startup.test.ts`、`test/dsl4-runtime-asset-lifecycle.test.ts`         |
+| platform partial cleanup   | `test/dsl4-turbowarp-runtime-host.test.ts`、`test/dsl4-platform-asset-session.test.ts`                                           |
+| Browser／CLI diagnostic    | `test/dsl4-web-preview-shell.test.ts`、`test/dsl4-local-preview-cli.test.ts`、`test/dsl4-preview-source-generation-wire.test.ts` |
+| production candidate／出力 | `test/dsl4-build-cli.test.ts`、`test/dsl4-one-shot-build.test.ts`、`test/dsl4-packaged-runtime-component.test.ts`                |
 
 新しいcodeは既存codeの意味を再利用せず、検出段階と安全動作をtest名へ対応させます。新しいdiagnostic fieldが必要な場合は、
 producerだけへ追加せず`diagnostic-sequence-policy.js`、projection、wire、CLI JSON、telemetry、version migrationを
@@ -384,11 +395,11 @@ producerだけへ追加せず`diagnostic-sequence-policy.js`、projection、wire
 
 ## 固定実装への参照
 
-- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-frontend.js)と[diagnostic sequence policy](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/diagnostic-sequence-policy.js)
-- [diagnostic projection](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/diagnostic-projection.js)と[expression diagnostics](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/expression-diagnostics.js)
-- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-graph.js)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-graph-frontend.js)
-- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/live-reload-session.js)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/asset-reload-transaction.js)
-- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/runtime-controller.js)と[runtime startup](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/runtime-startup.js)
-- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/platform/turbowarp-runtime-host.js)と[preview session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/platform/turbowarp-preview-session.js)
-- [preview generation wire](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/preview-source-generation-wire.js)
-- [production build](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/builder/dsl4-build.js)と[atomic output](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/builder/atomic-output.js)
+- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-frontend.ts)と[diagnostic sequence policy](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/diagnostic-sequence-policy.ts)
+- [diagnostic projection](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/diagnostic-projection.ts)と[expression diagnostics](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/expression-diagnostics.ts)
+- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-graph.ts)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-graph-frontend.ts)
+- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/live-reload-session.ts)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/asset-reload-transaction.ts)
+- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/runtime-controller.ts)と[runtime startup](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/runtime-startup.ts)
+- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/platform/turbowarp-runtime-host.ts)と[preview session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/platform/turbowarp-preview-session.ts)
+- [preview generation wire](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/preview-source-generation-wire.ts)
+- [production build](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/builder/dsl4-build.ts)と[atomic output](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/builder/atomic-output.ts)

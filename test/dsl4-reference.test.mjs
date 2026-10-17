@@ -25,7 +25,7 @@ test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
   assert.equal(actualHash, lock.schemaSha256);
   assert.equal(lock.repository, 'kubohiroya/turbowarp-kamishibai-app');
   assert.equal(lock.sourceKind, 'commit');
-  assert.equal(lock.commit, '29c0deadcb98badf94a0244c479ca896dc71f842');
+  assert.equal(lock.commit, 'f8048b8c4ebd0ecd6213bb87582862034b2b88ce');
   assert.equal(
     lock.schemaUrl,
     `https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/${lock.commit}/schema/dsl-4.schema.json`,
@@ -36,9 +36,9 @@ test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
 
 test('covers every top-level field and every Schema action with validated annotations', () => {
   assert.deepEqual(validateReferenceInputs({schema, annotations}), {
-    actionCount: 24,
-    annotationCount: 93,
-    topLevelFieldCount: 13,
+    actionCount: 30,
+    annotationCount: 109,
+    topLevelFieldCount: 15,
   });
 });
 
@@ -74,7 +74,7 @@ test('generates the checked-in reference byte-for-byte deterministically', () =>
   assert.match(generated, new RegExp(lock.schemaSha256, 'u'));
   assert.match(generated, /camera preview操作UI/u);
   assert.match(generated, /関節とボーンのoverlay/u);
-  assert.match(generated, /TurboWarp Teachable Machine 1\.12\.0/u);
+  assert.match(generated, /TurboWarp Teachable Machine 3\.5\.1/u);
   assert.match(generated, /物理device IDは台本やruntime変数へ保存しません/u);
   assert.match(generated, /`mirrored` \/ `unmirrored`/u);
   assert.match(generated, /`bubbleStyles` — 吹き出しstyle/u);
@@ -114,7 +114,7 @@ test('rejects missing, extra, and ambiguously ordered annotations', () => {
     .find(({id}) => id === 'shared-types')
     .entries.push({
       pointer: '#/$defs/styleId',
-      order: 100,
+      order: 10000,
       title: 'extra',
       summary: 'extra',
       example: 'caption',

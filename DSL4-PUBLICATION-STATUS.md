@@ -2,71 +2,55 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-DSL 4.0の実装、プレリリース、安定版、公開サンプル、文書の状態を混同しないため、次の語を使います。
+実装、配布先のchannel、推奨安定版、サンプルの生成基準、確認済みの証跡を分けて説明します。
 
-| 状態             | 意味                                                             |
-| ---------------- | ---------------------------------------------------------------- |
-| 実装基準         | 固定commitとSchemaで実装内容を調査・検証した基準                 |
-| 公開プレリリース | npm `next`、GitHub prerelease、Pages成果物として公開された候補版 |
-| 安定版           | npm `latest`と通常のダウンロード導線で推奨する版                 |
-| 公開サンプル基準 | サンプル作品、スターター、Web版を生成したruntimeの版             |
-| 文書状態         | どの実装、配布物、公開画面を説明する資料かの区別                 |
+| 状態             | 意味                                                                    |
+| ---------------- | ----------------------------------------------------------------------- |
+| 実装基準         | 固定commitとSchemaで照合した仕様                                        |
+| 公開プレリリース | prereleaseとして公開された候補版。npmのdist-tagだけで安定版と判定しない |
+| 安定版           | リリースで安定運用向けに推奨される版。npmのlatestとは別に確認する       |
+| 公開サンプル基準 | サンプル作品、スターター、Web版を生成したruntimeの版                    |
+| 文書状態         | どの実装・成果物・画面を説明するかと、未確認の範囲                      |
 
-## 2026年8月26日の確認結果
+## 2026年10月17日の確認結果
 
-- DSL 4.0文書の現在の実装基準はannotated tag `v4.0.0-rc.10`のcommit
-  [`65f5e705921b6c92ba6ec5373ec13eff5101f2c6`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/65f5e705921b6c92ba6ec5373ec13eff5101f2c6)
-- `v4.0.0-rc.10`はnpmの`next`、GitHub prerelease、PagesのStandard SB3として公開済み
-- rc.10のStandard SB3は`kamishibai-4.0.0-rc.10.sb3`、6,787,273 bytes、SHA-256
-  `a8620868f5da118c142cf2a11db6679ce7fab8b8ef84f5e6cce26887d61e94ec`
-- 安定版の推奨は`v3.2.3`で、正式版`v4.0.0`は未公開
-- 公開中の4.0サンプル作品、スターター、Web版はrc.10から再生成した成果物
-- rc.10の作者経路とサンプル再生経路を、本文とmachine-readable manifestで同じruntime基準へ固定する
+- 実装基準は公開プレリリース`v4.0.0-rc.22`のcommit
+  [`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)。Schemaの固定値は`sources/dsl4/source-lock.json`に記録する。
+- GitHub Releaseとnpm `@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.22`を照合した。npmの`next`と`latest`はいずれもrc.22を指す。
+- 正式版`v4.0.0`は未公開。rc.22のリリースノートが示す推奨安定版は`v3.2.3`。
+- Standard SB3の取得先は[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.22)。6,911,464 bytes、SHA-256は`3731ed3a58c000d40f65057fbe5e27b340bae915df11e863fd55c98ba061b5c9`。
+- Pagesの`downloads/kamishibai-4.0.0-rc.22.sb3`は確認時に404だった。未確認のPages配布を成功と記録せず、本文では取得確認済みのGitHub Releaseへ案内する。
+- 浦島太郎、私の浦島太郎、チュートリアルの公開manifestはいずれもrc.22の同じruntime commitを参照する。サンプル作品、スターター、Web版はrc.22基準の公開manifestと照合したが、今回それぞれのバイト列の再hashや再生・実カメラ検証は行っていない。
 
-確認元:
-[v4.0.0-rc.10 GitHub prerelease](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.10)、
-[npm 4.0.0-rc.10](https://www.npmjs.com/package/@kubohiroya/tmpose-kamishibai/v/4.0.0-rc.10)、
-[Pages downloads](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)
+公開URL、manifest由来のsize／checksum、照合方法、未確認範囲は
+[`sources/dsl4/user-guide-4.0-public-surfaces.json`](sources/dsl4/user-guide-4.0-public-surfaces.json)へ記録する。
+rc.10の旧manifestと実機確認は`previousVerification`に保存し、rc.22の実機成功として利用しない。
 
-## rc.10で文書へ反映する差分
+## 現行文書へ反映する契約
 
-- トップレベルの`bubbleClosePolicies`で、吹き出しを閉じる条件を名前付きで再利用可能にした
-- `Actor.say`／`Actor.think`の`closePolicy`から、秒数、入力待ち、または両者のraceを一つ選んで参照する
-- action内の`seconds`／`waitFor`は後方互換として維持し、`closePolicy`との同時指定をエラーにする
-- Bubbleを0.10.0へexact pinし、Scratch互換の組み込み`say`／`think` styleとclose-policy blockを利用する
-- 公開サンプルのSB3、Web版、lockをrc.10 freeze commitから再生成した
+台本は`kamishibai: '4.0'`のまま、認識設定は`recognition`、モデルassetのkindとシーンのモデル参照は
+`recognitionModel`を使う。`recognitionMode: image`と`imageInputToChangeScene`も固定Schemaに含まれる。
+表示・BGMのcrossfade、BGMの音量と停止、台本変数を書き換えるcore action、`Actor.setText`のルビを説明する。
+`Actor.say`／`Actor.think`のtextは文字列のまま。吹き出し終了条件は`bubbleClosePolicies`と`closePolicy`を使う。
 
-## 公開画面に基づく文書
+Standard bundleはAsset Cache、Camera Source、Teachable Machine 3.5.1等を同梱する。
+カメラはCamera Sourceが所有し、認識側はleaseを使う。プレビューと推論入力の経路を区別し、
+タイトルでのカメラ許可は対応ブラウザー・機能フラグ・ポーズ作品の条件が揃った場合だけ表示する。
 
-- [紙芝居アプリ 4.0 操作説明書](docs/user-guides/user-guide-4.0.md)は公開画面を説明する
-- [紙芝居を遊ぶ](docs/tutorials/play.md)は公開サンプル成果物rc.10を対象にする
-- [紙芝居DSL 4.0 台本作成ガイド](docs/dsl-author-guides/dsl-4.0-author-guide.md)はrc.10 Standard SB3の
-  `bubbleClosePolicies`、`closePolicy`、既存のinline指定との使い分けを説明する
-- 公開URL、版、checksumなどの追跡情報は
-  [`sources/dsl4/user-guide-4.0-public-surfaces.json`](sources/dsl4/user-guide-4.0-public-surfaces.json)へ固定する
+ローカルプレビューはリモートassetを取得しない。rc.22の失敗ダイアログ、ブラウザーでの
+OFFLINE／CORS／CONNECT、CLIでのTLS診断を説明し、ブラウザーのCONNECTを証明書障害の確定診断としない。
 
-## リリース記録
+## 履歴・画像・検証の保存
 
-- [紙芝居DSL 4.0 リリース履歴](docs/dsl-author-guides/dsl-4.0-history.md)はrc.10のtag、公開URL、成果物、
-  dependencyとrollbackを記録する
-- [DSL 4.0 release smoke](docs/developer-guides/release-smoke-4.0.md)はrc.10の自動検証と公開照合を記録する
-- rc.10のclose-policy契約とBubble 0.10.0 pinに加え、camera contextとoverlay cleanupの継続確認を記録する
-
-## 安定版4.0.0の公開時に更新する情報
-
-- annotated `v4.0.0` tagとrelease commit
-- GitHub Release URL、公開日、release asset URL／size／SHA-256／provenance
-- npm 4.0.0のregistry URLとintegrity
-- production Pagesのversionとartifact checksum
-- 4.0.0で再生成したサンプル、スターター、Web版のruntime基準
-
-未公開のtag、release asset、npm情報を公開済みとして本文へ固定しません。rc.8以前の公開記録と、将来の
-安定版4.0.0の状態は別の履歴項目として管理します。
+旧RCのtag、checksum、測定結果、撮影版は変更しない。旧画面には版を明示し、現在の画面と同一と説明しない。
+生成Schemaリファレンスは固定snapshotと日本語annotationから再生成する。
+各読者向けの本文へ現行仕様を書き、過去の履歴だけを現行説明の代わりにしない。
 
 ## 更新手順
 
-1. GitHub Release、npm registry、Pages成果物を一次情報で確認する
-2. 実装基準、公開プレリリース、安定版、公開サンプル基準を別々に記録する
-3. 各文書、machine-readable manifest、テストを同じ変更で更新する
-4. 4.0トップと文書メタデータを更新し、build後の公開表示を確認する
-5. 問題があれば未確認の公開情報を削除し、確認済みのversion、commit、checksumへ戻す
+1. 固定tagをcommitへ解決し、コード・テスト・リリースノート・Schemaを照合する。
+2. GitHub Release、npm registry、公開サンプルmanifestをそれぞれ確認する。
+3. 実装基準、公開プレリリース、推奨安定版、npm channel、公開サンプル基準を分けて記録する。
+4. 本文・snapshot・annotation・生成物・関連テストを同じ変更で揃える。
+5. 影響する検証と通常HTML／Viewer等の表示を確認し、実行SHA・件数・旧結果の適用範囲・未確認項目をIssueへ記録する。
+6. 問題時は文書変更をrevertし、直前の確認済み基準へ戻す。公開済みRCのバイト列は差し替えない。
