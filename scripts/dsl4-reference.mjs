@@ -66,6 +66,8 @@ const expectedStaticSectionPointers = {
     '#/$defs/audioTransition',
     '#/$defs/bgmVolume',
     '#/$defs/bodyText',
+    '#/$defs/contentRuns',
+    '#/$defs/contentRun',
     '#/$defs/rubyContentRun',
   ],
   scenes: ['#/$defs/actions', '#/$defs/longScene', '#/$defs/scene', '#/$defs/scenes'],
@@ -475,7 +477,7 @@ export function renderReferenceDocument({schema, annotations, lock}) {
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: DSL 4.0台本の作成、構造・制約の確認を行う方\\
-対象仕様: \`kamishibai: '4.0'\`\\
+対象仕様: \`kamishibai: '4.0'\`
 
 この文書は、台本の項目や命令について正確な値を検索するための仕様一覧です。先頭から読むチュートリアルではありません。
 初めて作品を作る場合は、先に[「紙芝居を作る」チュートリアル](../tutorials/create.md)を行い、機能を
@@ -485,9 +487,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 ${snapshotLabel}\\
 Schema SHA-256: \`${lock.schemaSha256}\`
 
-> **権威関係と配布状態:** 2026年10月16日時点で\`v4.0.0-rc.22\`はprereleaseとして公開されていますが、
-> 正式な\`v4.0.0\`ではありません。固定commitは\`v4.0.0-rc.22\`より後のmain上のcommitで、
-> 一部のfieldはrc.22の配布物にまだ含まれない場合があります。
+> **権威関係と配布状態:** 2026年10月17日時点で\`v4.0.0-rc.22\`はprereleaseとして公開されていますが、
+> 正式な\`v4.0.0\`ではありません。公開runtimeはrc.22、Schema固定commitはそれより後の実装基準です。
+> portraitの\`placement\`、\`offset\`、\`cornerRadius\`はrc.22未対応です。
 > ${authorityDescription} Schemaはruntime実装から生成しません。公開アプリ、配布artifact、
 > feature flagがDSL 4.0を有効にしているかは利用するreleaseごとに確認してください。
 

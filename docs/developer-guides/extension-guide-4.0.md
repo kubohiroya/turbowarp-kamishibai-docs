@@ -3,20 +3,27 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 固定実装基準を説明する統合ガイド（正式リリース済みの意味ではない）\
-調査基準: TurboWarp-Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
+調査基準: TurboWarp-Kamishibai `f8048b8`（4.0.0-rc.22）、2026年10月17日
 
-> **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。本書の統合境界はrc.8固定実装を説明します。
+> **配布状態との区別:** 2026年10月17日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。本書の統合境界はrc.22固定実装を説明します。
 
 このガイドは、TurboWarp紙芝居4.0のruntime capability、platform adapter、外部packageとの統合境界を
 保守する開発者向けの資料です。実装基準は`kubohiroya/turbowarp-kamishibai-app`のcommit
-[`29c0deadcb98badf94a0244c479ca896dc71f842`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/29c0deadcb98badf94a0244c479ca896dc71f842)
+[`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)
 です。本書のpath、関数、package version、診断code、test名はこのcommitで確認しています。
 
 YAMLの記述方法は[紙芝居DSL 4.0 台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)、
 runtime coreまで含む内部構造は[紙芝居アプリ 4.0 内部仕様書](internal-specification-4.0.md)、
 変更・release手順は[紙芝居アプリ 4.0 ソフトウェアメンテナンスガイド](developer-guide-4.0.md)を
 参照してください。
+
+## Schemaと公開runtimeの二つの基準
+
+公開runtimeの調査基準は`4.0.0-rc.22`（`f8048b8c`）です。Schemaリファレンスはmainの
+実装基準`450a5bb`を保持し、portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応として区別します。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、
+新しい実装Schemaの出典は`sources/dsl4/source-lock.json`で確認します。両者の検証結果を混同しません。
 
 ## 読む前に
 
@@ -43,7 +50,7 @@ capabilityとplatform境界」を記録します。各providerが単体で公開
 
 ## 図版、source、licenseの境界
 
-本書では画像、editor capture、外部図版を新規使用しません。rc.8のStandard paletteには23個のcore action
+本書では画像、editor capture、外部図版を新規使用しません。rc.22のStandard paletteには29個のcore action
 blockがありますが、画面captureだけでは統合責務や失敗条件を検証できないためです。代わりに、固定commitの
 実装path、export関数、契約fixture、testを表で対応させます。
 
@@ -58,14 +65,14 @@ package成果物、第三者の画像は転載していません。
 Browser Preview、CLI接続先browser、Production SB3へ届けますが、source取得やlive reloadの能力はsurfaceごとに
 異なります。
 
-<figure class="concept-flow"><figcaption>runtime coreと外部capabilityの境界</figcaption><div class="concept-flow__track"><span>Runtime controller</span><b aria-hidden="true">→</b><span>Port contract</span><b aria-hidden="true">→</b><span>Platform composition</span><b aria-hidden="true">→</b><span>Asset Manager・Async Input・Bubble・Runtime Expression・SVG Text・TurboWarp Teachable Machine</span><b aria-hidden="true">→</b><span>Browser／CLI／Production surface</span></div><p class="concept-flow__note">外部packageはportの外側に置き、runtime coreへbrowserやTurboWarp固有objectを持ち込みません。</p></figure>
+<figure class="concept-flow"><figcaption>runtime coreと外部capabilityの境界</figcaption><div class="concept-flow__track"><span>Runtime controller</span><b aria-hidden="true">→</b><span>Port contract</span><b aria-hidden="true">→</b><span>Platform composition</span><b aria-hidden="true">→</b><span>Asset Cache・Async Input・Bubble・Runtime Expression・SVG Text・TurboWarp Teachable Machine</span><b aria-hidden="true">→</b><span>Browser／CLI／Production surface</span></div><p class="concept-flow__note">外部packageはportの外側に置き、runtime coreへbrowserやTurboWarp固有objectを持ち込みません。</p></figure>
 
 ### 登録とbundleの単位
 
-`scripts/sb3/dsl4-runtime-extension-entry.js`は、Standard 4.0で集約extension
+`scripts/sb3/dsl4-runtime-extension-entry.ts`は、Standard 4.0で集約extension
 `kubohiroyakamishibai4`を一度だけ`Scratch.extensions.register()`します。core Runtimeのmember IDは
 `kubohiroyakamishibairuntime4`です。実行には
-`Scratch.extensions.unsandboxed`が必要です。Runtime memberのmanifestはDSLと同じ23個のcore actionを
+`Scratch.extensions.unsandboxed`が必要です。Runtime memberのmanifestはDSLと29個のcore actionを
 可視blockとして公開し、version、status、last error、内部text値を扱う4 control opcodeだけを
 `hideFromPalette`にします。各blockはYAML実行と同じregistry、Schema正規化、`ActionContext`、lifecycleへ入り、
 独立した実行系を作りません。
@@ -75,18 +82,18 @@ Browser Preview、CLI接続先browser、Production SB3へ届けますが、sourc
 
 | capability                  | providerと固定version                            | Standardでの主な責務                          |
 | --------------------------- | ------------------------------------------------ | --------------------------------------------- |
-| Asset Manager               | `@kubohiroya/turbowarp-asset-manager@0.11.0`     | asset byte、skin、sound、検証済みremote cache |
-| Async Input                 | `@kubohiroya/turbowarp-async-input@0.4.0`        | scene遷移・skip用の候補選択                   |
-| Bubble                      | `@kubohiroya/turbowarp-bubble@0.10.0`            | 吹き出し、折り返し、表示、音声、animation     |
-| Runtime Expression          | `@kubohiroya/turbowarp-runtime-expression@0.4.0` | branch式の検証と評価                          |
-| SVG Text                    | `@kubohiroya/turbowarp-svg-text@0.5.0`           | text actor、speech bubbleの描画               |
-| TurboWarp Teachable Machine | `@kubohiroya/turbowarp-tm@1.12.0`                | pose model、認識lifecycle、preview overlay    |
-| Structured Data             | `src/dsl4/structured-data.js`、format version 1  | view、object store、iterator、JSONPath        |
+| Asset Cache                 | `@kubohiroya/turbowarp-asset-cache@0.1.0`        | asset byte、skin、sound、検証済みremote cache |
+| Async Input                 | `@kubohiroya/turbowarp-async-input@0.7.0`        | scene遷移・skip用の候補選択                   |
+| Bubble                      | `@kubohiroya/turbowarp-bubble@0.13.0`            | 吹き出し、折り返し、表示、音声、animation     |
+| Runtime Expression          | `@kubohiroya/turbowarp-runtime-expression@0.6.0` | branch式の検証と評価                          |
+| SVG Text                    | `@kubohiroya/turbowarp-svg-text@0.10.0`          | text actor、speech bubbleの描画               |
+| TurboWarp Teachable Machine | `@kubohiroya/turbowarp-teachable-machine@3.5.1`  | pose model、認識lifecycle、preview overlay    |
+| Structured Data             | `src/dsl4/structured-data.ts`、format version 1  | view、object store、iterator、JSONPath        |
 
 Standard 4.0のbundle種別は`source-composition`です。3.2の`extensionBundles`、unbundle用
 recovery capsule、保存opcode互換性ではなく、正確なpackage pin、lockfile、composition export、integration
 testで互換性を検証します。`test/fixtures/dsl4/capability-bundle-release-contract.json`と
-`test/dsl4-capability-bundle-release-contract.test.mjs`がこの関係を機械的に検査します。
+`test/dsl4-capability-bundle-release-contract.test.ts`がこの関係を機械的に検査します。
 
 ### surfaceごとの能力差
 
@@ -100,16 +107,16 @@ testで互換性を検証します。`test/fixtures/dsl4/capability-bundle-relea
 | remote         | remote previewとremote extension codeは禁止                     | remote bindは禁止                                          | remote extension codeは禁止                      |
 | 一時状態の保存 | 選択handle、permission、preview diagnosticはprojectへ保存しない | token、接続、watcher stateはSB3へ保存しない                | preview field、directory handle、tokenを含めない |
 
-`src/dsl4/platform/standard-app-shell.js`の`createDsl4StandardAppShell()`は`webPlayer`、
+`src/dsl4/platform/standard-app-shell.ts`の`createDsl4StandardAppShell()`は`webPlayer`、
 `regularEditor`、`packager`、`developmentPreview`を同じcomposition rootへ接続します。一方、
-`src/dsl4/browser-preview-source-adapter.js`や`src/builder/dsl4-local-preview-host.js`は開発時だけの
+`src/dsl4/browser-preview-source-adapter.ts`や`src/builder/dsl4-local-preview-host.ts`は開発時だけの
 adapterです。production artifactへ混ぜません。
 
 ## 統合1: Runtime host、actor、media、speech
 
 ### 責務と入出力
 
-`src/dsl4/platform/turbowarp-runtime-host.js`の`createDsl4TurboWarpRuntimeEnvironment()`が
+`src/dsl4/platform/turbowarp-runtime-host.ts`の`createDsl4TurboWarpRuntimeEnvironment()`が
 runtime coreへ渡すportを構成し、`createDsl4TurboWarpRuntimeHost()`がstartup、start、stop、disposeを
 所有します。runtime coreはTurboWarp VM、renderer、audio engineを直接参照しません。
 
@@ -120,7 +127,7 @@ runtime coreへ渡すportを構成し、`createDsl4TurboWarpRuntimeHost()`がsta
 | `createDsl4TurboWarpActorPlatform()` | VM runtime、renderer、actor lookup                         | actorごとのplatform handleとrelease               |
 | runtime hostのwait port              | 有限な待機秒、`AbortSignal`                                | cancellableな完了                                 |
 
-actorとmedia portはasset IDをprivate Asset Manager compositionで解決し、画像・音声のMIME kindも検査します。
+actorとmedia portはasset IDをprivate Asset Cache compositionで解決し、画像・音声のMIME kindも検査します。
 `show`、`setTransparency`、`moveTo`、`say`は常に構成され、`think`は
 `dsl4SpeechAdvanceTypewriter`がONのときだけportへ追加されます。advanced speechは`waitFor: advance`、
 typewriter、character soundを同じcancellable operationに束ねます。
@@ -140,16 +147,16 @@ typewriter、character soundを同じcancellable operationに束ねます。
   `dsl4SpeechAdvanceTypewriter`をOFFにし、基本`Actor.say`までの経路を保ちます。host自体を戻すときは
   app shell、runtimeの順でOFFにします。
 
-確認testは`test/dsl4-turbowarp-runtime-host.test.mjs`、`test/dsl4-actor-action-port.test.mjs`、
-`test/dsl4-media-action-port.test.mjs`です。
+確認testは`test/dsl4-turbowarp-runtime-host.test.ts`、`test/dsl4-actor-action-port.test.ts`、
+`test/dsl4-media-action-port.test.ts`です。
 
-## 統合2: Asset Manager、storage、remote asset
+## 統合2: Asset Cache、storage、remote asset
 
 ### 責務と入出力
 
-`src/dsl4/platform/platform-asset-session.js`の`createDsl4PlatformAssetSession()`が、一つのruntime
-sessionについてAsset Manager、TurboWarp Teachable Machine、Async Input、asset adapter、cache leaseをまとめて所有します。
-`src/dsl4/platform/asset-manager-adapter.js`の`createDsl4AssetManagerAdapter()`は検証済みasset宣言と
+`src/dsl4/platform/platform-asset-session.ts`の`createDsl4PlatformAssetSession()`が、一つのruntime
+sessionについてAsset Cache、TurboWarp Teachable Machine、Async Input、asset adapter、cache leaseをまとめて所有します。
+`src/dsl4/platform/asset-manager-adapter.ts`の`createDsl4AssetManagerAdapter()`は検証済みasset宣言と
 byteを受け、image object URL、skin、soundとして利用できるsession-owned resourceを返します。
 
 | delivery・storage  | 入力契約                                                           | 出力と所有権                                 |
@@ -160,7 +167,7 @@ byteを受け、image object URL、skin、soundとして利用できるsession-o
 | browser object URL | image byteとMIME                                                   | adapter所有URL。release時にrevoke            |
 | verified cache     | integrityを含むcache identity、lease                               | stats、list、prune、clear、delete、heartbeat |
 
-remote assetは`loadRemoteAsset`関数を明示注入したsessionだけで有効です。loaderが返した結果もAsset Managerの
+remote assetは`loadRemoteAsset`関数を明示注入したsessionだけで有効です。loaderが返した結果もAsset Cacheの
 `resolveVerifiedRemoteBinary`でURL、integrity、size、content typeを再検証します。未検証byteを採用する
 fallbackやHTTPへのdowngradeはありません。offlineを保証する作品はembeddedを使います。
 
@@ -173,27 +180,27 @@ fallbackやHTTPへのdowngradeはありません。offlineを保証する作品�
   `StoryDocument.variables`、production SB3へcache leaseや端末storage keyを保存しません。
 - remote fetchにはbrowserのnetwork policyが適用されますが、Standard Runtimeが一般的なnetwork permission
   dialogを提供するわけではありません。CLI previewのNode hostはremote assetの信頼判定を代行しません。
-- Asset Manager compositionとembedded asset lifecycleはStandardに含まれます。remote loaderとpreviewの
+- Asset Cache compositionとembedded asset lifecycleはStandardに含まれます。remote loaderとpreviewの
   cache stateは注入境界で、productionへの必須依存ではありません。
 - remote asset用の独立feature flagはありません。「loaderを注入しない」が既定の無効状態です。
   rollbackはloader注入を外し、作品をembedded assetへ戻します。asset live reloadだけを戻す場合は
   `dsl4WebPreviewAssetLiveReload`をOFFにし、source reloadまたはone-shot buildを使います。
 
-確認testは`test/dsl4-platform-asset-session.test.mjs`、`test/dsl4-asset-manager-adapter.test.mjs`、
-`test/dsl4-embedded-asset-lifecycle.test.mjs`、`test/dsl4-remote-asset-lifecycle.test.mjs`です。
+確認testは`test/dsl4-platform-asset-session.test.ts`、`test/dsl4-asset-manager-adapter.test.ts`、
+`test/dsl4-embedded-asset-lifecycle.test.ts`、`test/dsl4-remote-asset-lifecycle.test.ts`です。
 
 ## 統合3: TurboWarp Teachable Machine、pose入力、camera
 
 ### 責務と入出力
 
-`src/dsl4/platform/tm-model-adapter.js`の`createDsl4TMPlatform()`は
-`@kubohiroya/turbowarp-tm/composition`と`createDsl4TMModelAdapter()`を組み合わせます。
+`src/dsl4/platform/tm-model-adapter.ts`の`createDsl4TMPlatform()`は
+`@kubohiroya/turbowarp-teachable-machine/composition`と`createDsl4TMModelAdapter()`を組み合わせます。
 adapterは検証済みmodel filesとlabel mappingを受け、session-owned model resourceを返します。
-StoryDocumentの`recognition.modelInitialization`（rc.8では`poseRecognition.modelInitialization`）は、`policy`を
+StoryDocumentの`recognition.modelInitialization`は、`policy`を
 `modelInitializationPolicy`、`parallel`を`parallelModelInitialization`へ変換してTurboWarp Teachable Machine Compositionへ
 渡します。asset lifecycleの`AbortSignal`は`registerPoseModel(input, {signal})`へそのまま伝播します。
 
-TurboWarp Teachable Machine 1.12.0の`latest-needed` policyは、重い初期化をactive 1件と最新pending 1件に制限します。
+TurboWarp Teachable Machine 3.5.1の`latest-needed` policyは、重い初期化をactive 1件と最新pending 1件に制限します。
 camera canvasのcontext／readbackとSVG overlay DOMはTurboWarp Teachable Machineが所有し、DSL hostは公開Composition APIだけを呼び出します。
 Aの実行中にB、Cが要求された場合は、Aを安全境界でcancelし、Bを開始せずCだけを開始します。cancel済み
 resourceはregistryへ公開せず、遅れて完了したresourceもexactly onceで解放します。Web Cryptoや
@@ -203,12 +210,12 @@ camera起動はモデル初期化と独立して開始できます。記述子de
 依存範囲内で並行し、最初の推論だけがcamera準備とモデル登録の両方を待ちます。モデル初期化のcancelで
 cameraを停止してはいけません。`legacy`／`parallelModelInitialization: false`が既定のrollback経路です。
 
-`src/dsl4/platform/pose-action-port.js`の`createDsl4PoseActionPort()`は、`waitForPose`と
+`src/dsl4/platform/pose-action-port.ts`の`createDsl4PoseActionPort()`は、`waitForPose`と
 `poseInputToChangeScene`をTurboWarp Teachable Machine認識session、Async Input候補選択、`AbortSignal`へ接続します。入力は
 pose model ID、候補pose、confidence／hold policy、feedback設定です。出力は認識完了または選択された
 scene遷移候補であり、生のcamera frameやmodel objectをruntime coreへ返しません。
 
-`src/dsl4/platform/camera-preview-controls.js`の`createDsl4CameraPreviewControls()`はmirroring buttonと
+`src/dsl4/platform/camera-preview-controls.ts`の`createDsl4CameraPreviewControls()`はmirroring buttonと
 camera menuをDOMへ構成します。device一覧・選択はTurboWarp Teachable Machine側のcamera portへ委譲し、このUI moduleは
 `getUserMedia()`を直接呼びません。物理device ID、permission状態、選択menuはprojectへ永続化しません。
 
@@ -231,12 +238,12 @@ camera menuをDOMへ構成します。device一覧・選択はTurboWarp Teachabl
 - UIだけをrollbackするときは上記flagをOFFにします。pose capability自体を戻す場合はpackage pinとlockfile、
   release sourceを直前の検証済み組合せへ戻し、pose storyは機能縮退させず停止させます。
 
-確認testは`test/dsl4-tm-model-adapter.test.mjs`、`test/dsl4-pose-action-port.test.mjs`、
-`test/dsl4-camera-preview-controls.test.mjs`、`test/dsl4-turbowarp-runtime-host.test.mjs`です。
+確認testは`test/dsl4-tm-model-adapter.test.ts`、`test/dsl4-pose-action-port.test.ts`、
+`test/dsl4-camera-preview-controls.test.ts`、`test/dsl4-turbowarp-runtime-host.test.ts`です。
 
 ## 統合4: SVG Text
 
-`src/dsl4/platform/svg-text-action-port.js`の`createDsl4SvgTextPlatform()`は
+`src/dsl4/platform/svg-text-action-port.ts`の`createDsl4SvgTextPlatform()`は
 `@kubohiroya/turbowarp-svg-text/composition`をblock登録なしで利用します。入力はtext actor ID、文字列、
 定義済みstyle、`AbortSignal`です。出力はactor skinとして表示できるSVG text resourceで、
 `defineStyle()`、`setText()`、`releaseTarget()`、`releaseAll()`のownershipをplatform内に閉じます。
@@ -250,15 +257,15 @@ camera menuをDOMへ構成します。device一覧・選択はTurboWarp Teachabl
   直前の検証済み状態へ戻します。storyが`setText`やspeech styleを要求するときは代替描画へfallbackせず、
   port不在または描画失敗として診断します。
 
-確認testは`test/dsl4-svg-text-action-port.test.mjs`です。
+確認testは`test/dsl4-svg-text-action-port.test.ts`です。
 
 ## 統合5: Async Inputと入力調停
 
-`src/dsl4/platform/platform-asset-session.js`は
+`src/dsl4/platform/platform-asset-session.ts`は
 `@kubohiroya/turbowarp-async-input/composition`をsessionごとに作成します。
-`src/dsl4/platform/async-input-action-port.js`の`createDsl4AsyncInputActionPort()`は、key sourceと
+`src/dsl4/platform/async-input-action-port.ts`の`createDsl4AsyncInputActionPort()`は、key sourceと
 actor touch sourceが提供された場合だけ、それぞれの入力を候補選択へ接続します。pose候補はpose portから
-同じcompositionへ入り、`src/dsl4/input-arbitration.js`が競合するforeground入力の所有権を調停します。
+同じcompositionへ入り、`src/dsl4/input-arbitration.ts`が競合するforeground入力の所有権を調停します。
 
 入力は一意な候補、入力source、Action Contextの`AbortSignal`です。出力は選択された候補またはcancelで、
 生のDOM eventやScratch eventをruntime coreへ漏らしません。不正なpayload、signal、source、composition
@@ -270,11 +277,11 @@ Async Input compositionはStandard bundleに含まれますが、利用可能な
 専用feature flagはなく、rollbackはsource注入を外すかpackage pinを戻します。作品側は利用可能な別入力を
 明示してから切り替え、実行中候補の意味を変更しません。
 
-確認testは`test/dsl4-async-input-action-port.test.mjs`と`test/dsl4-input-arbitration.test.mjs`です。
+確認testは`test/dsl4-async-input-action-port.test.ts`と`test/dsl4-input-arbitration.test.ts`です。
 
 ## 統合6: Runtime Expression
 
-`src/dsl4/platform/turbowarp-runtime-host.js`は
+`src/dsl4/platform/turbowarp-runtime-host.ts`は
 `@kubohiroya/turbowarp-runtime-expression/composition`の`evaluateCondition()`と`releaseAll()`を
 runtimeへ渡します。production source frontendも同じcompositionを使い、branch式をparse・検証します。
 
@@ -288,14 +295,14 @@ package pinを使います。compositionはStandard bundleに含まれ、remote 
 専用feature flagはありません。rollbackはpackageとlockfileを直前の検証済みpinへ戻し、source frontend、
 runtime host、expression diagnostic testを同時に確認します。
 
-確認testは`test/dsl4-expression-diagnostic-boundaries.test.mjs`、
-`test/dsl4-turbowarp-runtime-host.test.mjs`、`test/dsl4-extension-pins.test.mjs`です。
+確認testは`test/dsl4-expression-diagnostic-boundaries.test.ts`、
+`test/dsl4-turbowarp-runtime-host.test.ts`、`test/dsl4-extension-pins.test.ts`です。
 
 ## 統合7: Structured Dataとcustom action境界
 
-Structured Dataは外部extensionではありません。`src/dsl4/structured-data.js`の
+Structured Dataは外部extensionではありません。`src/dsl4/structured-data.ts`の
 `createDsl4StructuredDataComposition()`が`StoryDocument` view、object store、collection、iterator、
-JSONPathを有限limit付きで構成し、`src/dsl4/structured-data-adapter.js`の
+JSONPathを有限limit付きで構成し、`src/dsl4/structured-data-adapter.ts`の
 `createDsl4StructuredDataAdapter()`がrealm固有のopaque handleへ投影します。
 
 入力はdeep-frozen story data、JSONPath、scope、有限操作limitです。出力はprimitiveまたは同じrealmでのみ
@@ -307,16 +314,16 @@ JSONPathを有限limit付きで構成し、`src/dsl4/structured-data-adapter.js`
 memoryだけを所有します。first-party sourceとしてStandard compositionに含まれますが、runtime統合は
 `structuredDataIntegrationEnabled`が既定OFFです。
 
-custom action自体は`src/dsl4/action-context-turbowarp.js`の`dsl4CustomActionsEnabled`が既定OFFで、
+custom action自体は`src/dsl4/action-context-turbowarp.ts`の`dsl4CustomActionsEnabled`が既定OFFで、
 Standardの必須extension登録ではありません。rollbackはまずcustom action flag、次にStructured Data統合flagを
 OFFにし、core story executionを維持します。
 
-確認testは`test/dsl4-structured-data.test.mjs`、`test/dsl4-structured-data-adapter.test.mjs`、
-`test/dsl4-runtime-structured-data-integration.test.mjs`です。
+確認testは`test/dsl4-structured-data.test.ts`、`test/dsl4-structured-data-adapter.test.ts`、
+`test/dsl4-runtime-structured-data-integration.test.ts`です。
 
 ## 統合8: Browser Web Preview
 
-`src/dsl4/browser-preview-source-adapter.js`の`inspectDsl4BrowserPreviewSupport()`はsecureなtop-level
+`src/dsl4/browser-preview-source-adapter.ts`の`inspectDsl4BrowserPreviewSupport()`はsecureなtop-level
 contextと`showDirectoryPicker`を検出し、`createDsl4BrowserPreviewSourceAdapter()`が選択directoryを
 read-onlyで監視します。入力は`FileSystemDirectoryHandle`、`project.source.json`、entry／include YAML、
 有限byte・poll limitです。出力は安定したsource generation、`StoryDocument`、または診断です。
@@ -329,20 +336,20 @@ adapterは`showDirectoryPicker({mode: 'read'})`と`queryPermission({mode: 'read'
 manifest missing／read／JSON、source path／missing／size／UTF-8、
 `K4-PREVIEW-SOURCE-UNSTABLE`です。失敗したgenerationをcurrentへcommitしません。
 
-`src/builder/dsl4-web-preview-shell.js`は利用できない場合に、local uploadやremote previewへ切り替えず、
+`src/builder/dsl4-web-preview-shell.ts`は利用できない場合に、local uploadやremote previewへ切り替えず、
 `turbowarp-kamishibai preview-dsl4 --watch`と`turbowarp-kamishibai validate-dsl4`を明示します。
 `dsl4WebPreviewAdapter`は既定OFFでruntimeとapp shellを必要とし、asset live reloadはさらに
 `dsl4WebPreviewAssetLiveReload`を必要とします。rollbackはasset live reload、Web Preview adapterの順に
 OFFにし、CLI previewまたはone-shot buildへ戻します。
 
 Browser adapterとdirectory handleはdevelopment surfaceだけで、Production SB3に保存しません。
-確認testは`test/dsl4-browser-preview-source-adapter.test.mjs`と
-`test/dsl4-web-preview-shell.test.mjs`です。
+確認testは`test/dsl4-browser-preview-source-adapter.test.ts`と
+`test/dsl4-web-preview-shell.test.ts`です。
 
 ## 統合9: CLI Preview transport
 
-`src/builder/dsl4-local-preview-command.js`と`src/builder/dsl4-local-preview-host.js`はNode側でproject
-sourceを監視します。`src/builder/dsl4-preview-transport-policy.js`の
+`src/builder/dsl4-local-preview-command.ts`と`src/builder/dsl4-local-preview-host.ts`はNode側でproject
+sourceを監視します。`src/builder/dsl4-preview-transport-policy.ts`の
 `createDsl4PreviewTransportPolicy()`は次を強制します。
 
 - bind addressはliteral `127.0.0.1`または`::1`
@@ -362,12 +369,12 @@ transport、token、watch stateはdevelopment専用でProduction SB3へ保存さ
 runtime／app-shell flagから明示起動します。rollbackはhostを停止してtokenと接続を破棄し、
 `validate-dsl4`と`build-dsl4`のone-shot経路へ戻します。
 
-確認testは`test/dsl4-preview-transport-policy.test.mjs`、`test/dsl4-local-preview-host.test.mjs`、
-`test/dsl4-local-preview-cli.test.mjs`です。
+確認testは`test/dsl4-preview-transport-policy.test.ts`、`test/dsl4-local-preview-host.test.ts`、
+`test/dsl4-local-preview-cli.test.ts`です。
 
 ## 診断、reload、fallbackの共通規則
 
-`src/dsl4/runtime-controller.js`は`runtime.start`、`scene.transition`、`action.start`、`action.commit`、
+`src/dsl4/runtime-controller.ts`は`runtime.start`、`scene.transition`、`action.start`、`action.commit`、
 `runtime.fail`を順序付きeventとして公開します。adapterはerrorを握りつぶさず、runtimeがsource originと
 組み合わせられるstable codeまたはcauseを返します。live reloadはcandidateを検証・prepareしてから
 quiesce／commitし、失敗時はcurrent generationを維持します。
@@ -386,7 +393,7 @@ quiesce／commitし、失敗時はcurrent generationを維持します。
 
 ## feature flag一覧
 
-`src/dsl4/feature-flags.js`の`dsl4DefaultFeatureFlags`では次のflagがすべて`false`です。
+`src/dsl4/feature-flags.ts`の`dsl4DefaultFeatureFlags`では次のflagがすべて`false`です。
 `resolveDsl4FeatureFlags()`は起動時に未知key、boolean型、依存関係を検査し、deep-frozen snapshotを返します。
 実行中に一部だけ変更しません。
 

@@ -2,10 +2,10 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書状態: 公開プレリリース`4.0.0-rc.8`の固定実装基準を説明する保守資料\
-調査基準: TurboWarp-Kamishibai `29c0dea`、2026年8月20日
+文書状態: 公開プレリリース`4.0.0-rc.22`の固定実装基準を説明する保守資料\
+調査基準: TurboWarp-Kamishibai `f8048b8`、2026年10月17日
 
-> **配布状態との区別:** `v4.0.0-rc.8`はnpm `next`、GitHub prerelease、Pagesのダウンロード導線として
+> **配布状態との区別:** `v4.0.0-rc.22`はnpm `next`、GitHub prerelease、Pagesのダウンロード導線として
 > 公開済みです。安定版の推奨は`3.2.3`で、正式版`v4.0.0`は未公開です。
 
 本書はソフトウェアを変更・公開する開発者向けであり、アプリの使い方や台本作成の入門書ではありません。
@@ -16,13 +16,20 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 このガイドは、TurboWarp紙芝居のDSL 4.0 source frontend、runtime、platform adapter、preview、ビルド、
 リリースを変更・検証・公開するソフトウェア開発者向けの作業資料です。対象となる実装基準は
 `kubohiroya/turbowarp-kamishibai-app`のコミット
-[`29c0deadcb98badf94a0244c479ca896dc71f842`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/29c0deadcb98badf94a0244c479ca896dc71f842)
+[`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)
 です。本書中のpath、command、artifact名は、このコミットで確認しています。
 
 本書では、`kubohiroya/turbowarp-kamishibai-app`を「本体リポジトリ」、
 `kubohiroya/turbowarp-kamishibai-docs`を「文書リポジトリ」と呼びます。DSLのfieldとactionを調べる場合は
 [紙芝居DSL 4.0 Schemaリファレンス](../dsl-author-guides/dsl-4.0-schema-reference.md)、作品の配置と記述方法を
 調べる場合は[紙芝居DSL 4.0 台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)を参照してください。
+
+## Schemaと公開runtimeの二つの基準
+
+公開runtimeの調査基準は`4.0.0-rc.22`（`f8048b8c`）です。Schemaリファレンスはmainの
+実装基準`450a5bb`を保持し、portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応として区別します。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、
+新しい実装Schemaの出典は`sources/dsl4/source-lock.json`で確認します。両者の検証結果を混同しません。
 
 ## このガイドの読み進め方
 
@@ -46,29 +53,45 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 変更対象ごとの正本と、最初に確認する場所は次のとおりです。
 
-| 変更対象                          | 正本／入口                                         | 最初に確認するtest                                    |
-| --------------------------------- | -------------------------------------------------- | ----------------------------------------------------- |
-| DSLのfield、型、必須性            | `schema/dsl-4.schema.json`                         | `test/dsl4-schema.test.mjs`                           |
-| YAML parse、canonicalize、診断    | `src/dsl4/source-frontend.js`                      | `test/dsl4-validate-cli.test.mjs`                     |
-| `include`、compose、source origin | `src/dsl4/source-graph-frontend.js`                | `test/dsl4-source-graph-frontend.test.mjs`            |
-| scene実行と再開                   | `src/dsl4/runtime-controller.js`                   | `test/dsl4-runtime-controller.test.mjs`               |
-| live reload                       | `src/dsl4/live-reload-session.js`                  | `test/dsl4-live-reload-session.test.mjs`              |
-| Browser Previewのsource／asset    | `src/dsl4/browser-preview-*-adapter.js`            | `test/dsl4-browser-preview-*-adapter.test.mjs`        |
-| CLI Preview                       | `src/builder/dsl4-local-preview-*.js`              | `test/dsl4-local-preview-cli.test.mjs`                |
-| 自己完結SB3                       | `src/builder/dsl4-build*.js`                       | `test/dsl4-build-cli.test.mjs`                        |
-| Standard Runtime release          | `scripts/sb3/dsl4-downloadable-release.mjs`        | `test/dsl4-downloadable-release.test.mjs`             |
-| 配布一覧とchecksum                | `scripts/download-catalog.mjs`                     | `scripts/sb3/downloadable-releases.mjs`のビルド時検査 |
-| 公開リファレンス                  | 文書リポジトリの`sources/dsl4/`と`docs/config.mjs` | `pnpm docs:dsl4:check`、`pnpm check`                  |
+| 変更対象                          | 正本／入口                                         | 最初に確認するtest                                   |
+| --------------------------------- | -------------------------------------------------- | ---------------------------------------------------- |
+| DSLのfield、型、必須性            | `schema/dsl-4.schema.json`                         | `test/dsl4-schema.test.ts`                           |
+| YAML parse、canonicalize、診断    | `src/dsl4/source-frontend.ts`                      | `test/dsl4-validate-cli.test.ts`                     |
+| `include`、compose、source origin | `src/dsl4/source-graph-frontend.ts`                | `test/dsl4-source-graph-frontend.test.ts`            |
+| scene実行と再開                   | `src/dsl4/runtime-controller.ts`                   | `test/dsl4-runtime-controller.test.ts`               |
+| live reload                       | `src/dsl4/live-reload-session.ts`                  | `test/dsl4-live-reload-session.test.ts`              |
+| Browser Previewのsource／asset    | `src/dsl4/browser-preview-*-adapter.ts`            | `test/dsl4-browser-preview-*-adapter.test.ts`        |
+| CLI Preview                       | `src/builder/dsl4-local-preview-*.js`              | `test/dsl4-local-preview-cli.test.ts`                |
+| 自己完結SB3                       | `src/builder/dsl4-build*.js`                       | `test/dsl4-build-cli.test.ts`                        |
+| Standard Runtime release          | `scripts/sb3/dsl4-downloadable-release.ts`         | `test/dsl4-downloadable-release.test.ts`             |
+| 配布一覧とchecksum                | `scripts/download-catalog.ts`                      | `scripts/sb3/downloadable-releases.ts`のビルド時検査 |
+| 公開リファレンス                  | 文書リポジトリの`sources/dsl4/`と`docs/config.mjs` | `pnpm docs:dsl4:check`、`pnpm check`                 |
 
 Schema、source frontend、StoryDocument、runtimeを同時に変更する必要がある場合も、互換性の判断を一つの
 大きな差分へ隠しません。Schemaとfixture、frontend、semantic validator、runtime、adapterの順に小さく分け、
 各PRに受け入れ基準とrollbackを記録します。
 
+## rc.22の保守境界
+
+本体はTypeScript strict・Vitest・Viteを使用し、公開subpathはcompile済みの`dist/`を指します。
+`src/`内部への直接importを公開APIとしません。ソースの相対importに`.js`が残っていても、調査対象のファイルは`.ts`です。
+
+Standard productionは`dsl4TurboWarpStateSurface`・`dsl4ExpressionRuntimeState`・crossfade・カメラ操作UI等を明示的にONにします。
+汎用defaultがOFFであることと、配布profileで使えることを混同しないでください。台本変数はcore actionで更新し、
+旧提案の書込queueや専用書込flagを追加しません。
+
+素材はAsset Cache、カメラはCamera Sourceが所有します。Teachable Machine 3.5.1はleaseした映像から認識し、
+プレビューと推論入力を分離します。DOM controlsの接続ができないhostは`K4-HOST-PREVIEW-CONTROLS-001`で拒否します。
+
+CLIは`validate-dsl4 --format canonical-json`・`author-block-dsl`・`export-block-dsl`でYAML／ブロック台本を往復できます。
+ローカルプレビューはリモートassetを取得せず、rc.22では失敗ダイアログを表示します。
+リモート取得のOFFLINE／CORS／CONNECTとCLIのTLS診断、sandbox内で許可した場合の案内を確認します。
+
 ## 規範Schemaとsource lockを守る
 
 DSL 4.0の構造仕様は、本体リポジトリの`schema/dsl-4.schema.json`が規範です。runtime codeからSchemaを
-生成しません。表層仕様、Schema、適合実装、testは同じ上流revisionで扱い、文書だけを別のrevisionへ
-先行させません。
+生成しません。それぞれの基準内では表層仕様、Schema、適合実装、testを同じ上流revisionで扱います。
+公開rc.22の検証へ450a5bbだけの項目を混ぜません。
 
 文書リポジトリは上流revisionを次の二つで固定します。
 
@@ -79,12 +102,13 @@ DSL 4.0の構造仕様は、本体リポジトリの`schema/dsl-4.schema.json`�
 `sources/dsl4/annotations.ja.json`から決定的に生成します。生成Markdownやスナップショットを直接書き換えて
 上流との差を隠してはいけません。
 
-上流を更新するときだけ、文書リポジトリで次を実行します。
+上流を更新するときだけ、文書リポジトリで次を実行します。以下は実装Schema基準を再現する例です。
+公開rc.22の検査には別に固定した`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、現行Schemaを巻き戻しません。
 
 ```bash
 pnpm docs:dsl4:sync -- \
   --repository ../turbowarp-kamishibai-app \
-  --commit 29c0deadcb98badf94a0244c479ca896dc71f842
+  --commit 450a5bb950ef769241ec8258690e652b39b23bde
 pnpm docs:dsl4:check
 git diff -- \
   sources/dsl4/source-lock.json \
@@ -97,7 +121,7 @@ git diff -- \
 
 ## 開発環境を準備する
 
-固定コミットの本体リポジトリはNode.js 22.12.0以上とpnpm 11、文書リポジトリはNode.js 24.0.0以上と
+固定コミットの本体リポジトリはNode.js 22.18.0以上とpnpm 11、文書リポジトリはNode.js 24.0.0以上と
 pnpm 11を要求します。それぞれのrepository rootでロックファイルを使用して依存を復元します。
 
 ```bash
@@ -123,30 +147,30 @@ pnpm test
 
 本体リポジトリのDSL 4.0保守領域は次のとおりです。
 
-| path                                         | 責務                                                              |
-| -------------------------------------------- | ----------------------------------------------------------------- |
-| `schema/dsl-4.schema.json`                   | DSL 4.0の機械可読な規範Schema                                     |
-| `src/dsl4/source-frontend.js`                | YAML parse、Schema検証、意味検証、StoryDocument生成               |
-| `src/dsl4/source-graph.js`                   | 到達可能source、cycle、path、有限上限を検証したSource Graph       |
-| `src/dsl4/source-graph-frontend.js`          | 複数sourceのcompose、重複診断、source origin保持                  |
-| `src/dsl4/story-document.js`                 | 正規化したStoryDocumentとsource range、deep freeze                |
-| `src/dsl4/runtime-controller.js`             | scene、action、navigation、asset lifecycleの実行制御              |
-| `src/dsl4/live-reload-session.js`            | quiesce、candidate、再開位置、コミット、旧sessionのdispose        |
-| `src/dsl4/platform/`                         | actor、media、pose、SVG Text、asset managerへのport／adapter      |
-| `src/dsl4/browser-turbowarp-platform.js`     | ブラウザー上のTurboWarp platform composition                      |
-| `src/dsl4/browser-preview-source-adapter.js` | Browser Previewのread-only source選択と安定読込                   |
-| `src/dsl4/browser-preview-asset-adapter.js`  | Browser Previewのlocal asset snapshot                             |
-| `src/dsl4/browser-preview-runtime-bridge.js` | preview protocolとbrowser-owned runtimeの接続                     |
-| `src/builder/dsl4-validate.js`               | `validate-dsl4`の診断出力                                         |
-| `src/builder/dsl4-build.js`                  | source、asset、runtime componentのmemory内ビルド                  |
-| `src/builder/dsl4-build-output.js`           | disk candidateの再検証とatomic 導入                               |
-| `src/builder/dsl4-local-preview-command.js`  | `preview-dsl4 --watch`のlifecycle                                 |
-| `src/builder/dsl4-local-preview-host.js`     | loopback transport、session token、watcher                        |
-| `bin/turbowarp-kamishibai.mjs`               | 公開CLI entrypoint                                                |
-| `release-metadata/4.0.0-rc.8.json`           | rc.8の状態、source identity、artifact、公開先                     |
-| `scripts/sb3/dsl4-downloadable-release.mjs`  | Standard Runtime release sourceの決定的生成と検査                 |
-| `scripts/download-catalog.mjs`               | `kamishibai-4.0.0-rc.8.sb3`のバージョン、source identity、SHA-256 |
-| `test/fixtures/dsl4/`                        | Schema、adapter、リリース契約のfixture                            |
+| path                                         | 責務                                                               |
+| -------------------------------------------- | ------------------------------------------------------------------ |
+| `schema/dsl-4.schema.json`                   | DSL 4.0の機械可読な規範Schema                                      |
+| `src/dsl4/source-frontend.ts`                | YAML parse、Schema検証、意味検証、StoryDocument生成                |
+| `src/dsl4/source-graph.ts`                   | 到達可能source、cycle、path、有限上限を検証したSource Graph        |
+| `src/dsl4/source-graph-frontend.ts`          | 複数sourceのcompose、重複診断、source origin保持                   |
+| `src/dsl4/story-document.ts`                 | 正規化したStoryDocumentとsource range、deep freeze                 |
+| `src/dsl4/runtime-controller.ts`             | scene、action、navigation、asset lifecycleの実行制御               |
+| `src/dsl4/live-reload-session.ts`            | quiesce、candidate、再開位置、コミット、旧sessionのdispose         |
+| `src/dsl4/platform/`                         | actor、media、pose、SVG Text、asset managerへのport／adapter       |
+| `src/dsl4/browser-turbowarp-platform.ts`     | ブラウザー上のTurboWarp platform composition                       |
+| `src/dsl4/browser-preview-source-adapter.ts` | Browser Previewのread-only source選択と安定読込                    |
+| `src/dsl4/browser-preview-asset-adapter.ts`  | Browser Previewのlocal asset snapshot                              |
+| `src/dsl4/browser-preview-runtime-bridge.ts` | preview protocolとbrowser-owned runtimeの接続                      |
+| `src/builder/dsl4-validate.ts`               | `validate-dsl4`の診断出力                                          |
+| `src/builder/dsl4-build.ts`                  | source、asset、runtime componentのmemory内ビルド                   |
+| `src/builder/dsl4-build-output.ts`           | disk candidateの再検証とatomic 導入                                |
+| `src/builder/dsl4-local-preview-command.ts`  | `preview-dsl4 --watch`のlifecycle                                  |
+| `src/builder/dsl4-local-preview-host.ts`     | loopback transport、session token、watcher                         |
+| `bin/turbowarp-kamishibai.mjs`               | 公開CLI entrypoint                                                 |
+| `release-metadata/4.0.0-rc.22.json`          | rc.22の状態、source identity、artifact、公開先                     |
+| `scripts/sb3/dsl4-downloadable-release.ts`   | Standard Runtime release sourceの決定的生成と検査                  |
+| `scripts/download-catalog.ts`                | `kamishibai-4.0.0-rc.22.sb3`のバージョン、source identity、SHA-256 |
+| `test/fixtures/dsl4/`                        | Schema、adapter、リリース契約のfixture                             |
 
 文書リポジトリでは、次の境界を保ちます。
 
@@ -165,7 +189,7 @@ pnpm test
 
 ## feature flagを起動時スナップショットとして扱う
 
-DSL 4.0のflagは`src/dsl4/feature-flags.js`で列挙し、`dsl4DefaultFeatureFlags`ではすべて`false`です。
+DSL 4.0のflagは`src/dsl4/feature-flags.ts`で列挙し、`dsl4DefaultFeatureFlags`ではすべて`false`です。
 `resolveDsl4FeatureFlags()`は起動時に未知keyと依存関係を検査し、deep freezeしたスナップショットを返します。
 実行中にflag objectを変更して一部だけを切り替えません。
 
@@ -308,7 +332,7 @@ Standard SB3は`kubohiroyakamishibairuntime4`を一度だけ登録し、次を�
 端末の絶対path、ブラウザーのfile handle、preview token、reload candidate、modal状態を保存しません。local sourceと
 embedded assetだけを使う成果物は、実行時にextension codeや作品assetをremote取得しません。
 
-`delivery: remote`は明示的な例外です。通常のrecognitionModel（rc.8では`poseModel`）ではHTTPS TurboWarp Teachable Machine ディレクトリ URLを保存します。
+`delivery: remote`は明示的な例外です。通常のrecognitionModelではHTTPS TurboWarp Teachable Machine ディレクトリ URLを保存します。
 検証付きremoteではURL、SHA-256 integrity、Content-Type、sizeを保存し、いずれもasset byte列は
 SB3へ含めません。「自己完結」はsource、runtime code、runtime artifact、
 embedded assetの境界を指し、remote deliveryを選んだ作品の完全offline動作を意味しません。内容を固定する
@@ -317,7 +341,8 @@ remote previewは常に禁止します。
 
 ### TurboWarp Teachable Machine上流との責務境界
 
-rc.8は`@kubohiroya/turbowarp-tm@1.12.0`をexact pinします。カメラのcanvas、Canvas2D context、
+rc.22は`@kubohiroya/turbowarp-teachable-machine@3.5.1`をexact pinします。カメラ映像はCamera Sourceが所有し、
+TurboWarp Teachable Machineはleaseした映像を認識に使います。推論用canvas、Canvas2D context、
 TensorFlow.jsへのreadback、SVG overlay要素はTurboWarp Teachable Machineが所有します。DSL runtimeは公開Composition APIへ
 正規化済みoverlay設定を渡すだけで、TurboWarp Teachable MachineのDOM、canvas、TensorFlow.js内部実装を検査・patchしません。
 CPU推論時のChromium readback警告は性能根拠のない抑制をせず許容し、回帰判定は実時間、動作、解放で行います。
@@ -364,28 +389,28 @@ I/Oの所有者は分けます。
 | production外  | ディレクトリhandle、overlay、reload preferenceをartifactへ保存しない | host、token、watcher、browser bundleをproductionへ含めない  |
 
 platform coreはfilesystem、DOM、カメラ、TurboWarp VMへ直接依存しません。`src/dsl4/platform/`のportへactor、media、
-SVG Text、pose、asset lifecycleを注入し、`browser-turbowarp-platform.js`でブラウザー実装をcomposeします。platform APIを
+SVG Text、pose、asset lifecycleを注入し、`browser-turbowarp-platform.ts`でブラウザー実装をcomposeします。platform APIを
 変更した場合はcore unit testだけでなく、browser fixtureとadapter contractを実行します。
 
 ## 変更対象別の検証matrix
 
 変更したpathに対応する行をすべて実行し、最後に標準checkへ合流します。
 
-| 変更対象                                    | 必須の自動検証                                                                                                                                                                                                            | 追加smoke                                              |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| Schema、normalization、semantic diagnostics | `node --test test/dsl4-schema.test.mjs test/dsl4-validate-cli.test.mjs test/dsl4-expression-diagnostic-boundaries.test.mjs`                                                                                               | valid／invalid fixtureのpretty・JSON診断               |
-| Source Graph、origin、limits                | `node --test test/dsl4-source-graph.test.mjs test/dsl4-source-graph-frontend.test.mjs test/dsl4-source-include-build.test.mjs test/dsl4-source-limits.test.mjs`                                                           | included sourceを保存し、active generation維持を確認   |
-| runtime controller、action、navigation      | `node --test test/dsl4-runtime-controller.test.mjs test/dsl4-action-scope-integration.test.mjs test/dsl4-navigation-session.test.mjs`                                                                                     | entry、分岐、戻る、停止を一作品で確認                  |
-| live reload、immutable generation           | `node --test test/dsl4-live-reload-session.test.mjs test/dsl4-live-reload-quiesce.test.mjs test/dsl4-preview-source-graph-generation.test.mjs`                                                                            | 構文error保存後も直前generationが動くことを確認        |
-| asset lifecycle、transaction                | `node --test test/dsl4-asset-reload-transaction.test.mjs test/dsl4-platform-asset-session.test.mjs test/dsl4-runtime-asset-lifecycle.test.mjs`                                                                            | 失敗candidateで旧assetが維持されることを確認           |
-| Browser Preview source／asset adapter       | `node --test test/dsl4-browser-preview-source-adapter.test.mjs test/dsl4-browser-preview-asset-adapter.test.mjs test/dsl4-browser-asset-reload-pipeline.test.mjs`                                                         | ディレクトリ再選択、permission取消、途中保存           |
-| CLI Preview host／transport                 | `node --test test/dsl4-local-preview-cli.test.mjs test/dsl4-local-preview-host.test.mjs test/dsl4-preview-transport-policy.test.mjs`                                                                                      | runtime-ready、SIGINT、ブラウザー切断、full rebuild    |
-| カメラ、pose、feedback、overlay             | `node --test test/dsl4-camera-preview-controls.test.mjs test/dsl4-pose-action-port.test.mjs test/dsl4-pose-feedback-presenter.test.mjs test/dsl4-tmpose-model-adapter.test.mjs test/dsl4-platform-asset-session.test.mjs` | カメラ許可、mirroring、overlay、model解放              |
-| ビルド、component storage、自己完結SB3      | `node --test test/dsl4-build-cli.test.mjs test/dsl4-one-shot-build.test.mjs test/dsl4-packaged-runtime-component.test.mjs test/dsl4-source-sb3-storage.test.mjs`                                                          | networkなしでembedded作品を起動                        |
-| Standard Runtime、capability pin、リリース  | `node --test test/dsl4-capability-bundle-release-contract.test.mjs test/dsl4-extension-pins.test.mjs test/dsl4-downloadable-release.test.mjs`                                                                             | `kamishibai-4.0.0-rc.8.sb3`のchecksumとTurboWarp起動   |
-| Web Preview E2E                             | `pnpm e2e`                                                                                                                                                                                                                | Chromiumでsource変更、asset変更、overlay、cleanup      |
-| npmパッケージのsurface                      | `pnpm pack:check`、`pnpm release:check`                                                                                                                                                                                   | tarballに`src/builder/`、`src/dsl4/*.js`、Schemaを確認 |
-| 文書、publication、公開導線                 | 文書リポジトリで`pnpm check`                                                                                                                                                                                              | `/4.0/`のHTMLとVivliostyle Viewerを開く                |
+| 変更対象                                    | 必須の自動検証                                                                                                                                                                                                                 | 追加smoke                                              |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| Schema、normalization、semantic diagnostics | `pnpm exec vitest run test/dsl4-schema.test.ts test/dsl4-validate-cli.test.ts test/dsl4-expression-diagnostic-boundaries.test.ts`                                                                                              | valid／invalid fixtureのpretty・JSON診断               |
+| Source Graph、origin、limits                | `pnpm exec vitest run test/dsl4-source-graph.test.ts test/dsl4-source-graph-frontend.test.ts test/dsl4-source-include-build.test.ts test/dsl4-source-limits.test.ts`                                                           | included sourceを保存し、active generation維持を確認   |
+| runtime controller、action、navigation      | `pnpm exec vitest run test/dsl4-runtime-controller.test.ts test/dsl4-action-scope-integration.test.ts test/dsl4-navigation-session.test.ts`                                                                                    | entry、分岐、戻る、停止を一作品で確認                  |
+| live reload、immutable generation           | `pnpm exec vitest run test/dsl4-live-reload-session.test.ts test/dsl4-live-reload-quiesce.test.ts test/dsl4-preview-source-graph-generation.test.ts`                                                                           | 構文error保存後も直前generationが動くことを確認        |
+| asset lifecycle、transaction                | `pnpm exec vitest run test/dsl4-asset-reload-transaction.test.ts test/dsl4-platform-asset-session.test.ts test/dsl4-runtime-asset-lifecycle.test.ts`                                                                           | 失敗candidateで旧assetが維持されることを確認           |
+| Browser Preview source／asset adapter       | `pnpm exec vitest run test/dsl4-browser-preview-source-adapter.test.ts test/dsl4-browser-preview-asset-adapter.test.ts test/dsl4-browser-asset-reload-pipeline.test.ts`                                                        | ディレクトリ再選択、permission取消、途中保存           |
+| CLI Preview host／transport                 | `pnpm exec vitest run test/dsl4-local-preview-cli.test.ts test/dsl4-local-preview-host.test.ts test/dsl4-preview-transport-policy.test.ts`                                                                                     | runtime-ready、SIGINT、ブラウザー切断、full rebuild    |
+| カメラ、pose、feedback、overlay             | `pnpm exec vitest run test/dsl4-camera-preview-controls.test.ts test/dsl4-pose-action-port.test.ts test/dsl4-pose-feedback-presenter.test.ts test/dsl4-tmpose-model-adapter.test.mjs test/dsl4-platform-asset-session.test.ts` | カメラ許可、mirroring、overlay、model解放              |
+| ビルド、component storage、自己完結SB3      | `pnpm exec vitest run test/dsl4-build-cli.test.ts test/dsl4-one-shot-build.test.ts test/dsl4-packaged-runtime-component.test.ts test/dsl4-source-sb3-storage.test.ts`                                                          | networkなしでembedded作品を起動                        |
+| Standard Runtime、capability pin、リリース  | `pnpm exec vitest run test/dsl4-capability-bundle-release-contract.test.ts test/dsl4-extension-pins.test.ts test/dsl4-downloadable-release.test.ts`                                                                            | `kamishibai-4.0.0-rc.22.sb3`のchecksumとTurboWarp起動  |
+| Web Preview E2E                             | `pnpm e2e`                                                                                                                                                                                                                     | Chromiumでsource変更、asset変更、overlay、cleanup      |
+| npmパッケージのsurface                      | `pnpm pack:check`、`pnpm release:check`                                                                                                                                                                                        | tarballに`src/builder/`、`src/dsl4/*.js`、Schemaを確認 |
+| 文書、publication、公開導線                 | 文書リポジトリで`pnpm check`                                                                                                                                                                                                   | `/4.0/`のHTMLとVivliostyle Viewerを開く                |
 
 本体リポジトリの最終回帰は次です。
 
@@ -404,32 +429,32 @@ pnpm verify:full
 同書は作成したcandidateを公開してよいか判定する手順を担当します。
 
 DSL 4.0 Standard Runtimeは、source-composedされた`kubohiroyakamishibairuntime4`と、完全固定したcapability
-パッケージから作ります。rc.8ではタグ、`release-metadata/4.0.0-rc.8.json`、GitHub Releaseの
-`kamishibai-4.0.0-rc.8.sb3`を不変の公開記録として管理します。現行branchへ展開済みrelease sourceを重複保持しません。
-composite IDは`kubohiroyakamishibai4`で、23個のcore actionは
-可視blockとして、4個の内部制御blockは非表示で登録されます。
+パッケージから作ります。rc.22ではタグ、`release-metadata/4.0.0-rc.22.json`、GitHub Releaseの
+`kamishibai-4.0.0-rc.22.sb3`を不変の公開記録として管理します。現行branchへ展開済みrelease sourceを重複保持しません。
+composite IDは`kubohiroyakamishibai4`で、29個のcore actionは
+可視blockとして、source宣言2個と読取状態17個を加えます。内部の10 blockは非表示で登録されます。
 
 リリースは次の順で行います。
 
 1. capabilityパッケージを各repositoryで検証してリリースする
 2. 本体の`package.json`と`pnpm-lock.yaml`をexactなバージョンとintegrityへ更新する
 3. `LICENSES.md`のattributionとパッケージのprovenanceを同期する
-4. Standard Runtime ID、23個の可視core action、4個の非表示制御、remote code禁止をcontract testで確認する
+4. Standard Runtime ID、29個の可視core action、2個のsource宣言、17個の読取状態blockと10個の非表示block、remote code禁止をcontract testで確認する
 5. `pnpm verify:full`を完走する
 6. `release-metadata/<version>.json`をcandidateとして作り、source identityと成果物を生成する
 7. source identityと成果物が正本と一致することを`pnpm release:dsl4:check`で確認する
-8. `scripts/download-catalog.mjs`のバージョン、`sourceCommit`、`buildDate`、SHA-256を更新する
+8. `scripts/download-catalog.ts`のバージョン、`sourceCommit`、`buildDate`、SHA-256を更新する
 9. `pnpm release:dsl4:freeze`でタグ対象のコミットとartifactを固定する
 10. `pnpm release:check`でnpm 公開内容をdry runする
 11. GitHub Actions、download、パッケージ、Pagesの公開結果を確認してからIssueを完了する
 
-rc.8のrelease metadataと成果物を検査するcommandは次です。公開済みartifactを再生成して差し替えません。
+rc.22のrelease metadataと成果物を検査するcommandは次です。公開済みartifactを再生成して差し替えません。
 
 ```bash
 pnpm release:dsl4:check
 pnpm verify:full
 pnpm release:check
-git diff --exit-code -- release-metadata/4.0.0-rc.8.json
+git diff --exit-code -- release-metadata/4.0.0-rc.22.json
 ```
 
 安定版へ進める場合は、generator内のリリース ディレクトリ、パッケージ バージョン、download catalogを同じバージョンへ更新して
@@ -439,7 +464,7 @@ PRには少なくとも次を記録します。
 
 - 上流コミットと変更したSchema／source／adapter path
 - 実行したtargeted testと`pnpm verify:full`の結果
-- `kamishibai-4.0.0-rc.8.sb3`のSHA-256とsource identity
+- `kamishibai-4.0.0-rc.22.sb3`のSHA-256とsource identity
 - Browser／CLI Preview、カメラ、pose、offline smokeの対象
 - feature flagの既定値とrollback方法
 - パッケージ、artifact、Pagesの公開順
@@ -454,7 +479,7 @@ PRには少なくとも次を記録します。
 1. 問題のあるsurfaceのflagを起動時スナップショットでOFFにする
 2. npmの`next`を直前版へ戻し、PagesとGitHub prereleaseへ注意事項を追加する
 3. パッケージとロックファイルを直前のexact pinへ戻す
-4. 公開済みrc.8は上書きせず、修正版を新しいバージョンとしてビルドする
+4. 公開済みrc.22は上書きせず、修正版を新しいバージョンとしてビルドする
 5. `pnpm verify:full`と代表smokeを再実行する
 6. Pagesを再公開し、Issueとrelease noteへ影響範囲を記録する
 

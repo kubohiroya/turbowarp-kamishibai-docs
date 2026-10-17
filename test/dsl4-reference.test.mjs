@@ -37,7 +37,7 @@ test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
 test('covers every top-level field and every Schema action with validated annotations', () => {
   assert.deepEqual(validateReferenceInputs({schema, annotations}), {
     actionCount: 30,
-    annotationCount: 108,
+    annotationCount: 110,
     topLevelFieldCount: 15,
   });
 });
@@ -73,8 +73,11 @@ test('generates the checked-in reference byte-for-byte deterministically', () =>
   assert.match(generated, new RegExp(lock.commit.slice(0, 7), 'u'));
   assert.match(generated, new RegExp(lock.schemaSha256, 'u'));
   assert.match(generated, /camera preview操作UI/u);
+  assert.match(generated, /`cornerRadius` \| 任意/u);
+  assert.match(generated, /rc\.22未対応/u);
+  assert.match(generated, /\[数値, 数値\] または \[数値, 数値, 数値\]/u);
   assert.match(generated, /関節とボーンのoverlay/u);
-  assert.match(generated, /TurboWarp Teachable Machine 1\.12\.0/u);
+  assert.match(generated, /TurboWarp Teachable Machine 3\.5\.1/u);
   assert.match(generated, /物理device IDは台本やruntime変数へ保存しません/u);
   assert.match(generated, /`mirrored` \/ `unmirrored`/u);
   assert.match(generated, /`bubbleStyles` — 吹き出しstyle/u);
@@ -93,11 +96,6 @@ test('generates the checked-in reference byte-for-byte deterministically', () =>
   assert.match(generated, /`easeInOut`/u);
   assert.match(generated, /`Actor\.setTransparency`/u);
   assert.match(generated, /`0`は完全不透明、`100`は完全透明/u);
-  assert.match(generated, /`recognition` — 認識設定/u);
-  assert.match(generated, /名前付き認識モデル/u);
-  assert.match(generated, /`imageInputToChangeScene`/u);
-  assert.match(generated, /`presentation` — 表示遷移の既定値/u);
-  assert.match(generated, /`cornerRadius` \| 任意/u);
   assert.match(generated, /## 前処理/u);
   assert.match(generated, /### `include` — 別の台本ファイルを読み込む/u);
   assert.match(generated, /include:\n  - chapters\/opening\.k4\.yml/u);
@@ -119,7 +117,7 @@ test('rejects missing, extra, and ambiguously ordered annotations', () => {
     .find(({id}) => id === 'shared-types')
     .entries.push({
       pointer: '#/$defs/styleId',
-      order: 100,
+      order: 10000,
       title: 'extra',
       summary: 'extra',
       example: 'caption',

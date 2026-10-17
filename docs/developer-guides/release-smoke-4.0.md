@@ -2,167 +2,95 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書状態: 公開プレリリース`4.0.0-rc.8`の再現・公開照合・追加smoke手順<br />
-対象Issue: [turbowarp-kamishibai-docs #47](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/47)、[#169](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/169)
+文書基準: 公開プレリリース`4.0.0-rc.22`、commit `f8048b8c4ebd0ecd6213bb87582862034b2b88ce`、2026年10月17日。
+正式版4.0.0は未公開です。これは再現と照合の手順であり、未実行項目をpassとする記録ではありません。
 
-本書はリリース担当者向けで、一般的な動作確認を説明する文書ではありません。一般的な使い方は
-[大人向け概要](../user-guides/executive-summary-adult-4.0.md)、実装の責務は
-[ソフトウェアメンテナンスガイド](developer-guide-4.0.md)を参照してください。
+本書はリリース担当者向けで、一般的な動作確認を説明する文書ではありません。
 
-`v4.0.0-rc.8`はnpm `next`、GitHub prerelease、Pagesのダウンロード導線として公開済みです。ただし、
-推奨安定版は`v3.2.3`で、正式版`v4.0.0`は未公開です。Standard SB3の配布正本はGitHub Releaseです。
-公開サンプルは、この公開SB3とfreeze commitから再生成したlockを別途照合します。
+| 用語     | 意味                                         |
+| -------- | -------------------------------------------- |
+| manifest | 版・成果物・照合範囲を固定する機械可読な記録 |
+| checksum | 取得した成果物のバイト列を照合する値         |
 
-| 用語     | この文書での意味                                          |
-| -------- | --------------------------------------------------------- |
-| manifest | version、commit、成果物、検証結果を固定する機械可読な記録 |
-| checksum | 取得・再生成した成果物が固定byte列と一致するか確認する値  |
+## Schemaと公開runtimeの二つの基準
+
+公開runtimeの調査基準は`4.0.0-rc.22`（`f8048b8c`）です。Schemaリファレンスはmainの
+実装基準`450a5bb`を保持し、portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応として区別します。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、
+新しい実装Schemaの出典は`sources/dsl4/source-lock.json`で確認します。両者の検証結果を混同しません。
 
 ## 固定値
 
 正本は`sources/dsl4/release-smoke-4.0-candidate.json`です。
 
-| 対象               | 固定値                                                                               |
-| ------------------ | ------------------------------------------------------------------------------------ |
-| candidate merge    | `ad244910b6bf579b8eb7c7af70d72b7ca4b1fff6`                                           |
-| freeze／tag commit | `29c0deadcb98badf94a0244c479ca896dc71f842`                                           |
-| version            | `4.0.0-rc.8`                                                                         |
-| release source     | tag `v4.0.0-rc.8`（現行branchへ展開copyを保持しない）                                |
-| source identity    | `sha256:8edbc02a06b3770cce0a89cf658367df129d974d53f401258b69f0713762014a`            |
-| Schema SHA-256     | `46ff159c29e13704d707dae8e0d2ad3a146b6aa8a68a968614e6ef56d112f135`                   |
-| Standard SB3       | 6,749,955 bytes / `91d7f594aaf922450fba359a90c7c26e7c1dfda51cf002534cb4605dbb0d7041` |
-| npm tarball        | 6,492,990 bytes / `a7b91378e6345c530515cc4e8f82314c3c5f2a19d3e136de5e4fe8bff8d24c5e` |
-
-固定commitを取得します。
-
-```bash
-git clone https://github.com/kubohiroya/turbowarp-kamishibai-app.git
-git -C turbowarp-kamishibai-app checkout --detach 29c0deadcb98badf94a0244c479ca896dc71f842
-git -C turbowarp-kamishibai-app status --short
-```
+| 対象               | 固定値                                                                             |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| freeze／tag commit | `f8048b8c4ebd0ecd6213bb87582862034b2b88ce`                                         |
+| source identity    | `sha256:44e85ea98dd7d4aef7bbd08c21610675bef8cd9a6244196a9fac54caa712ee6f`          |
+| Schema SHA-256     | `f61955685c51ed7cfe3ed5b760ca6d290929ab9fdc4b8a912cdb901135c613ac`                 |
+| Standard SB3       | 6911464 bytes / `3731ed3a58c000d40f65057fbe5e27b340bae915df11e863fd55c98ba061b5c9` |
+| npm tarball        | 6667560 bytes / `b4b2b4ae68f39d3eabc358c9b8172d7b4f26952eb95730eb11b66d81527badbd` |
 
 ## Feature flag snapshot
 
-すべてのDSL 4.0 flagは既定OFFです。配布surfaceは起動時に次のsnapshotを明示します。
-ポーズoverlayには専用flagがなく、`poseRecognition.preview.overlay`を記述した全runtime profileで同じ契約を使います。
-rc.8固定の記録のため、rc.8の名前`poseRecognition`で記述します。rc.11以降の台本では`recognition.preview.overlay`です。
-
-| Surface               | ONにするflag                                                                                                                   |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Standard production   | `dsl4Runtime`、`dsl4AppShell`、`dsl4PoseFeedbackModes`、`dsl4SpeechAdvanceTypewriter`、`dsl4TurboWarpActionSurface`            |
-| 非埋め込みdevelopment | Standard productionに加え、`dsl4WebPreviewAdapter`、`dsl4BrowserDistributionBuild`、`dsl4PreviewReloadOverlay`、`dsl4Debugger` |
-
-`dsl4TurboWarpActionSurface`により、23個のcore actionを可視blockとして公開します。4個の内部制御blockは
-非表示のままです。smoke中に既定値を変更しません。
+汎用defaultはすべてOFFです。Standard productionは起動時にsnapshotを明示して有効化します。
+現在のON一覧はcandidateの`runtime.featureFlags.standardProductionEnabled`と固定ソースの
+`src/dsl4/feature-flags.ts`で照合します。crossfade、読取状態、式namespace、プレビューの反転と操作UI、
+broadcast、Bubbleの高度な表示、カメラ許可段などを含みます。
+ポーズoverlayには専用flagがなく、`recognition.preview.overlay`の宣言を使います。
 
 ## 自動検証
 
-```bash
-cd turbowarp-kamishibai-app
-pnpm install --frozen-lockfile
-pnpm release:dsl4:check
-pnpm verify:full
-pnpm release:check
-shasum -a 256 dist/downloads/kamishibai-4.0.0-rc.8.sb3
-```
-
-candidate PRの`pnpm verify:full`はNode系test 1,161件、Chromium test 13件を通過しました。
-[GitHub Actionsの記録](https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/32361658847/job/96402336784)を
-一次証跡とします。
+固定tagをcheckoutし、依存をlockどおりに用意してから、変更の影響に合う上流のVitest対象を選びます。
+TypeScriptへ移行したrc.22のsuiteを、rc.8当時の`node --test`や件数で説明しません。
+この文書更新では上流suiteを実行していません。文書側の検証結果はIssue #195に記録します。
 
 ## 公開物を照合する
 
-公開元を別々に取得し、固定値と照合します。
+[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.22)からStandard SB3を取得し、上記size／hashと照合します。
 
 ```bash
-curl -fL \
-  https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.8/kamishibai-4.0.0-rc.8.sb3 \
-  -o kamishibai-4.0.0-rc.8.sb3
-shasum -a 256 kamishibai-4.0.0-rc.8.sb3
-
-npm view @kubohiroya/tm-kamishibai@4.0.0-rc.8 \
-  version dist.tarball dist.integrity dist.shasum
-npm view @kubohiroya/tm-kamishibai dist-tags
+curl -fL https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.22/kamishibai-4.0.0-rc.22.sb3 -o kamishibai-4.0.0-rc.22.sb3
+shasum -a 256 kamishibai-4.0.0-rc.22.sb3
+npm view @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.22 version dist.tarball dist.integrity dist.shasum
+npm view @kubohiroya/turbowarp-kamishibai-app dist-tags
 ```
 
-確認済みのnpm integrityは
-`sha512-nQmvHakwLWZioi1gOUZatKwyLe2nD3GPJbEBrqDqm5mzqQhbbLEMGl3znJQpVs0JRfzyeLI1JDTcGrePiIpjUg==`です。
-`next`は`4.0.0-rc.8`、`latest`は`3.2.3`であることを確認します。
+npm integrityは`sha512-CHT3k06i/Jrw6jeIr6liwAt7k869CSWsW77vWT1MwM4sRVRjsT7Q0/w12t286i5yzYXmJk1tVkvLw8TFE2qMWQ==`です。今回SB3とnpm tarballの実バイトを照合しました。
+確認時のnpm `latest`と`next`はrc.22で、推奨安定版3.2.3とは別です。Pagesのversion付きSB3は404で、照合成功として扱いません。
+公開サンプルは3作品のmanifestのruntime commitを照合しました。各サンプルの再hash・再生は未実施です。
 
 ## TurboWarp surfaceを確認する
 
-rc.8 Standard SB3をfresh TurboWarp Editorで開き、次を確認します。
-
-1. composite IDが`kubohiroyakamishibai4`である
-2. Runtimeと6つの外部機能拡張、合計7 memberの見出しと文書ボタンが表示される
-3. Runtime由来の23 core action blockが表示される
-4. TurboWarp blockからの実行がYAMLと同じregistry、Schema正規化、ActionContext、lifecycleを通る
-5. Asset Manager 0.11.0、Async Input 0.4.0、Bubble 0.10.0、Runtime Expression 0.4.0、
-   SVG Text 0.5.0、TurboWarp Teachable Machine 1.12.0のexact pinと一致する
-6. remote codeを取得せず、PoseNet model dataをprojectから復元できる
-7. `poseRecognition.preview.overlay`設定時にSVGの関節とボーンが表示され、省略時は非表示になる
-8. Bubble 0.10.0由来の31個の可視blockと、組み込み`say`／`think` styleが表示される
-9. `bubbleClosePolicies`の秒数、入力待ち、両者のraceが、inline指定と同じspeech lifecycleで完了する
-10. 未定義`closePolicy`と、`closePolicy`＋inline `seconds`／`waitFor`の競合をbuild前に拒否する
+Standard SB3のbundleは8 member、表示されるopcode付きblockは202個です。
+runtimeには29個のcore action、2個のsource宣言block、17個の読取状態blockがあります。
+Teachable Machineは3.5.1、Bubbleは0.13.0、Camera Sourceは0.15.0、素材保持はAsset Cache 0.1.0です。
+`bubbleClosePolicies`と`closePolicy`、`recognition`と`recognitionModel`、変数更新actionを確認します。
+ブロック定義の抽出と、実際の作品の実行確認は別の検証です。
 
 ## Browser／CLI Previewを確認する
 
-Browser-owned Previewではuser gestureでproject directoryを選び、正常YAML、不正YAMLからの復帰、asset変更、
-reload overlay、camera control、pose feedback、停止後のresource解放を確認します。source本文、local absolute path、
-session token、file handle、camera device IDをログやSB3へ保存しません。
-
-CLI Previewは候補packageとversion付きStandard SB3を使います。
-
-```bash
-pnpm exec tm-kamishibai preview-dsl4 --watch \
-  --base /absolute/path/to/kamishibai-4.0.0-rc.8.sb3 \
-  --project-root /absolute/path/to/project \
-  --source-manifest /absolute/path/to/project/project.source.json \
-  --control-profile production \
-  --channel bundled
-```
-
-token付きloopback URLだけを開き、runtime-ready、source／asset変更、診断、safe stop、Ctrl+C後の
-socket／watcher／timer解放を確認します。
+正常な台本の開始・変更・停止、失敗ダイアログとメニューへ戻る操作を確認します。
+ローカルプレビューはリモートassetを取得しません。`K4-ASSET-REMOTE-DISABLED`の場合はローカル配信またはbuild済み作品を使います。
+ブラウザーのOFFLINE／CORS／CONNECTと、CLIの`K4-ASSET-REMOTE-TLS-001`を区別します。
+CONNECTでは証明書障害の可能性とDNS・サーバ停止等の可能性を分けて説明します。
+サンドボックス内で許可した場合は、パレットの再読込案内を確認します。
 
 ## 実カメラ・実ポーズ
 
-camera contextの責務境界は[Issue #601](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/601)で
-Chrome 151と物理cameraを使って測定しました。実際と同じ1 draw／1 read経路では`willReadFrequently`に
-再現性のある高速化がなく、WebGLでは全条件で悪化したため、TurboWarp Teachable Machine 1.12.0は通常contextを使用します。
-CPU推論時にChromiumのreadback警告が1回出る場合がありますが、警告抑制だけを目的に成果物を書き換えません。
-
-現時点の判定は次のとおりです。
-
-| 項目                       | rc.8の状態 |
-| -------------------------- | ---------- |
-| 自動test／Chromium         | 合格       |
-| npm／GitHub／Pages公開照合 | 合格       |
-| camera context物理測定     | 合格       |
-| overlay browser確認        | 合格       |
-
-追加の物理確認ではcamera許可／拒否、preview、`legacy`と必要時の`latest-needed`、model準備の中断、認識feedback、
-overlayの位置合わせ、scene遷移、終了時のtrack／model／timer解放を確認します。camera frameは保存しません。
+今回の文書更新では未実施です。camera frameは保存しません。
+Camera Sourceの起動・lease、previewの反転・カメラ選択、認識・overlay・停止時の解放を、実機で確認した場合だけ記録します。
+rc.8の旧証跡はcandidateの`historicalCandidates`に保存しています。TurboWarp Teachable Machine 1.12.0、
+Bubble 0.10.0、23個のcore action、上流unit 1,161件とChromium 13件等は当時の記録であり、rc.22のpassではありません。
 
 ## Release-stop条件
 
-- commit、version、Schema、source identity、flag snapshot、artifact hashの不一致
-- 23 core action、7 member見出し／文書ボタン、dependency pinの不一致
-- 名前付きclose policyとinline終了条件で、入力購読、timeout、cancel、Bubble cleanupが一致しない
-- 同じ入力から生成したSB3またはWeb版の非決定性
-- Browser Preview、CLI Preview、Standard SB3での診断または挙動差
-- camera拒否、model中断、asset失敗、無効source、runtime例外での部分commitまたはresource残留
-- production成果物へのpreview token、debug session、local path、file handleの混入
+checksum不一致、Schemaと公開blockの食い違い、必要な実行確認の未完了を成功として記録しないでください。
+上流リリースの受け入れ条件は固定したrelease metadataと対応するIssueで確認します。
+文書の公開可否と、アプリの安定版リリース完了を同じ判定にしません。
 
 ## Rollback
 
-公開済みrc.8のtag、SB3、npm tarballを同じversionで差し替えません。
-
-1. npmの`next`を`4.0.0-rc.7`へ戻す
-2. GitHub prereleaseとPagesへ影響範囲と回避策を追記する
-3. 必要ならPagesを`a7f377d4675a9bf9acc8691a11d269ff3d78118b`へ戻す
-4. 修正版を`4.0.0-rc.9`としてbuild、検証、公開する
-5. 推奨安定版`3.2.3`と過去のversion付き成果物を変更しない
-
-文書だけをrollbackする場合は、このMarkdown、candidate manifest、リリース履歴、`docs/config.mjs`、
-`site/4.0/index.html`、対応testを同じcommitで戻します。
+公開済みrc.22を同じversionで差し替えません。必要ならrc.21または推奨安定版3.2.3へ戻します。
+文書の誤りは本Issueの差分をrevertして直前の確認済み記述へ戻します。
+旧versionのSB3、履歴、実機測定値は削除・上書きしません。

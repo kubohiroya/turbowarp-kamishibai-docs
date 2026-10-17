@@ -2,6 +2,8 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
+4.0の現行実装基準は`4.0.0-rc.22`（`f8048b8c`）です。版別の配布状況は[4.0リリース履歴](../dsl-author-guides/dsl-4.0-history.md)を参照してください。以下の履歴・他系列の記録は、それぞれに明記した版を対象にします。
+
 この文書は、TurboWarp-Kamishibai ecosystemが保持する上流forkの目的、差分、利用条件、戻し方を記録します。独自extension、toolchain、applicationとは別枠で扱い、上流projectの恒久的な再実装や別製品として紹介しません。
 
 2026年8月25日時点では、この方針は公開プレリリース`v4.0.0-rc.8`のruntime behaviorと独立しています。renderer runtimeを変更せず、上流forkの分類、pin、license、issue routingだけを文書化します。

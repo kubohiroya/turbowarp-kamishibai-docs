@@ -3,10 +3,10 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 固定実装基準を説明する内部仕様（正式リリース済みの意味ではない）\
-調査基準: TurboWarp-Kamishibai `29c0dea`（4.0.0-rc.8）、2026年8月20日
+調査基準: TurboWarp-Kamishibai `f8048b8`（4.0.0-rc.22）、2026年10月17日
 
-> **配布状態との区別:** 2026年8月20日時点で`v4.0.0-rc.8`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。本書はrc.8固定コミットの内部構造を説明します。
+> **配布状態との区別:** 2026年10月17日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。本書はrc.22固定コミットの内部構造を説明します。
 
 この文書は、TurboWarp紙芝居4.0のsource frontend、実行中間表現、runtime、platform adapter、
 preview transactionの責務境界を、完成実装に対応させて記録します。作者向けのYAML構文は
@@ -15,10 +15,17 @@ preview transactionの責務境界を、完成実装に対応させて記録し�
 
 対象アプリ: TurboWarp-Kamishibai 4.0.x\
 受理するDSL宣言: `kamishibai: '4.0'`\
-実装固定commit: [`29c0dea`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/29c0deadcb98badf94a0244c479ca896dc71f842)（2026年8月20日、`v4.0.0-rc.8`）
+実装固定commit: [`f8048b8`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)（2026年10月17日、`v4.0.0-rc.22`）
 
 本書のpath、型、関数、event、flagは、このcommitのsourceとtestを基準にしています。
 配布成果物を調査して推測した名称ではありません。
+
+## Schemaと公開runtimeの二つの基準
+
+公開runtimeの調査基準は`4.0.0-rc.22`（`f8048b8c`）です。Schemaリファレンスはmainの
+実装基準`450a5bb`を保持し、portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応として区別します。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、
+新しい実装Schemaの出典は`sources/dsl4/source-lock.json`で確認します。両者の検証結果を混同しません。
 
 ## 読む前に {#before-reading .unnumbered}
 
@@ -50,21 +57,21 @@ preview transactionの責務境界を、完成実装に対応させて記録し�
 
 ## 用語 {#terminology .unnumbered}
 
-| 用語            | 本書での意味                                                                                      |
-| --------------- | ------------------------------------------------------------------------------------------------- |
-| project         | `project.source.json`、entry YAML、included YAML、local assetを含むdirectory境界                  |
-| source          | `.k4.yml`、`.k4.yaml`、`.kamishibai.yml`、`.kamishibai.yaml`のいずれかで終わるYAML                |
-| Source Graph    | entryから`include`で到達するsource、edge、宣言、asset pathを持つimmutable graph                   |
-| generation      | sourceとassetを同じ時点の検証済みsnapshotとして識別する単位                                       |
-| `StoryDocument` | 検証済みYAMLをruntime用に正規化し、deep-freezeした中間表現                                        |
-| source frontend | canonicalize、YAML、Schema、意味・式・資源上限検証を一つの結果へまとめるpure境界                  |
-| runtime session | 一つの`StoryDocument`、実行状態、platform environmentを所有する単位                               |
-| Action Context  | actionごとの`AbortSignal`、generation、変数snapshot、Structured Data参照を渡す実行文脈            |
-| port            | runtime coreがplatform固有処理を呼ぶ関数集合                                                      |
-| adapter         | TurboWarp VM、Asset Manager、TurboWarp Teachable Machine、DOMなどをport契約へ変換する外側のmodule |
-| quiesce         | live reload前に、action cleanupが完了した再開可能境界へruntimeを移す処理                          |
-| commit          | 検証・prepare済みcandidateをcurrent generationとして公開する処理                                  |
-| rollback        | candidateのactivate失敗時にcandidate資源を戻し、current generationを維持する処理                  |
+| 用語            | 本書での意味                                                                                    |
+| --------------- | ----------------------------------------------------------------------------------------------- |
+| project         | `project.source.json`、entry YAML、included YAML、local assetを含むdirectory境界                |
+| source          | `.k4.yml`、`.k4.yaml`、`.kamishibai.yml`、`.kamishibai.yaml`のいずれかで終わるYAML              |
+| Source Graph    | entryから`include`で到達するsource、edge、宣言、asset pathを持つimmutable graph                 |
+| generation      | sourceとassetを同じ時点の検証済みsnapshotとして識別する単位                                     |
+| `StoryDocument` | 検証済みYAMLをruntime用に正規化し、deep-freezeした中間表現                                      |
+| source frontend | canonicalize、YAML、Schema、意味・式・資源上限検証を一つの結果へまとめるpure境界                |
+| runtime session | 一つの`StoryDocument`、実行状態、platform environmentを所有する単位                             |
+| Action Context  | actionごとの`AbortSignal`、generation、変数snapshot、Structured Data参照を渡す実行文脈          |
+| port            | runtime coreがplatform固有処理を呼ぶ関数集合                                                    |
+| adapter         | TurboWarp VM、Asset Cache、TurboWarp Teachable Machine、DOMなどをport契約へ変換する外側のmodule |
+| quiesce         | live reload前に、action cleanupが完了した再開可能境界へruntimeを移す処理                        |
+| commit          | 検証・prepare済みcandidateをcurrent generationとして公開する処理                                |
+| rollback        | candidateのactivate失敗時にcandidate資源を戻し、current generationを維持する処理                |
 
 ## 権威関係とアーキテクチャ {#architecture}
 
@@ -78,12 +85,12 @@ canonical diagnosticとして共通surfaceへ投影されます。_
 
 ### 固定実装の呼出し経路 {#implementation-call-path}
 
-前図を実装のexportとcomposition rootまで具体化すると、固定commit`29c0dea`では次の経路になります。
-この追跡は、同commitの公開rc.8 SB3をbaseにしたlocal previewを実行し、immutable sourceの稼働、
-`Version 4.0.0-rc.8`のタイトル、invalid保存時の診断とcurrent integrity維持を観測した結果と
+前図を実装のexportとcomposition rootまで具体化すると、固定commit`f8048b8`では次の経路になります。
+以下の画面観測だけはrc.8当時の履歴証跡です。この追跡は、旧commit `29c0dea`の公開rc.8 SB3をbaseにしたlocal previewを実行し、immutable sourceの稼働、
+`Version 4.0.0-rc.8`のタイトル（旧版の観測証跡）、invalid保存時の診断とcurrent integrity維持を観測した結果と
 突き合わせています。
 
-<figure class="concept-flow dsl4-implementation-map"><figcaption>固定実装をsourceから実画面まで追う主要呼出し経路</figcaption><div class="concept-flow__track"><span><code>createDsl4SourceGraph</code><small>source-graph.js<br>entryとincludeを有限探索</small></span><b aria-hidden="true">→</b><span><code>createDsl4SourceGraphFrontend.parse</code><small>source-graph-frontend.js<br>合成後にsingle-source frontendへ委譲</small></span><b aria-hidden="true">→</b><span><code>createDsl4SourceFrontend.parse</code><small>source-frontend.js<br>YAML・Schema・semantic・Action Registry</small></span><b aria-hidden="true">→</b><span><code>createStoryDocument</code><small>story-document.js<br>正規化してdeep-freeze</small></span><b aria-hidden="true">→</b><span><code>createDsl4RuntimeStartup</code><small>runtime-startup.js<br>componentを検証しsessionを所有</small></span><b aria-hidden="true">→</b><span><code>createDsl4RuntimeController.dispatch</code><small>runtime-controller.js<br>sceneとactionを順にportへ渡す</small></span><b aria-hidden="true">→</b><span><code>createDsl4TurboWarpRuntimeEnvironment</code><small>turbowarp-runtime-host.js<br>portとlifecycleを構成</small></span></div><div class="dsl4-implementation-map__ports"><section><strong>アセットとLoading</strong><code>platform-asset-session.js</code><span>Asset Manager、背景、音、ポーズモデルをprepare・release</span></section><section><strong>表示と発話</strong><code>media-action-port.js</code><code>actor-action-port.js</code><span>Stage、Actor、Bubble、SVG Textへ反映</span></section><section><strong>入力とポーズ</strong><code>async-input-action-port.js</code><code>pose-action-port.js</code><span>キー、タッチ、TurboWarp Teachable Machine、カメラ、feedbackへ接続</span></section></div><p class="concept-flow__note">runtime coreは<code>stage</code>、<code>say</code>、<code>pose</code>等のcommand名でportを呼びます。TurboWarp VM、DOM、cameraをcoreから直接参照しないため、同じ<code>StoryDocument</code>をpreviewと配布成果物で共有できます。</p></figure>
+<figure class="concept-flow dsl4-implementation-map"><figcaption>固定実装をsourceから実画面まで追う主要呼出し経路</figcaption><div class="concept-flow__track"><span><code>createDsl4SourceGraph</code><small>source-graph.js<br>entryとincludeを有限探索</small></span><b aria-hidden="true">→</b><span><code>createDsl4SourceGraphFrontend.parse</code><small>source-graph-frontend.js<br>合成後にsingle-source frontendへ委譲</small></span><b aria-hidden="true">→</b><span><code>createDsl4SourceFrontend.parse</code><small>source-frontend.js<br>YAML・Schema・semantic・Action Registry</small></span><b aria-hidden="true">→</b><span><code>createStoryDocument</code><small>story-document.js<br>正規化してdeep-freeze</small></span><b aria-hidden="true">→</b><span><code>createDsl4RuntimeStartup</code><small>runtime-startup.js<br>componentを検証しsessionを所有</small></span><b aria-hidden="true">→</b><span><code>createDsl4RuntimeController.dispatch</code><small>runtime-controller.js<br>sceneとactionを順にportへ渡す</small></span><b aria-hidden="true">→</b><span><code>createDsl4TurboWarpRuntimeEnvironment</code><small>turbowarp-runtime-host.js<br>portとlifecycleを構成</small></span></div><div class="dsl4-implementation-map__ports"><section><strong>アセットとLoading</strong><code>platform-asset-session.js</code><span>Asset Cache、背景、音、ポーズモデルをprepare・release</span></section><section><strong>表示と発話</strong><code>media-action-port.js</code><code>actor-action-port.js</code><span>Stage、Actor、Bubble、SVG Textへ反映</span></section><section><strong>入力とポーズ</strong><code>async-input-action-port.js</code><code>pose-action-port.js</code><span>キー、タッチ、TurboWarp Teachable Machine、カメラ、feedbackへ接続</span></section></div><p class="concept-flow__note">runtime coreは<code>stage</code>、<code>say</code>、<code>pose</code>等のcommand名でportを呼びます。TurboWarp VM、DOM、cameraをcoreから直接参照しないため、同じ<code>StoryDocument</code>をpreviewと配布成果物で共有できます。</p></figure>
 
 実画面ではsource frontendの成功結果が`VALID: The current immutable source is running.`として表示され、
 reload監視は`Watching`になります。versionを`4.1`へ変えた一時candidateは`K4-VERSION-001`で`INVALID`となり、
@@ -93,9 +100,9 @@ current integrityを更新しませんでした。画面との対応、撮影条
 ### 正本の順序
 
 1. 作者向け構造の正本は`schema/dsl-4.schema.json`です。
-2. parse後の追加制約は`src/dsl4/semantic-validator.js`と、注入されたRuntime Expression validatorが正本です。
-3. runtime入力の正本は`src/dsl4/story-document.js`が生成する`StoryDocument`です。
-4. 実行状態とeventの正本は`src/dsl4/runtime-controller.js`です。
+2. parse後の追加制約は`src/dsl4/semantic-validator.ts`と、注入されたRuntime Expression validatorが正本です。
+3. runtime入力の正本は`src/dsl4/story-document.ts`が生成する`StoryDocument`です。
+4. 実行状態とeventの正本は`src/dsl4/runtime-controller.ts`です。
 5. platform能力は`src/dsl4/platform/`のcomposition rootと各adapterが正本です。
 6. preview candidateの切替は`live-reload-session.js`、asset byteの切替は`asset-reload-transaction.js`が正本です。
 
@@ -107,22 +114,22 @@ Schema、semantic validator、StoryDocument、runtimeの各境界を独立test�
 次表は上から下への主要呼出し方向です。「主要関数」は固定commitに存在するexport、
 「確認test」はその境界を直接検証するfileです。
 
-| 層                     | 入力 → 出力                                                | 主要path・関数                                                                         | 確認test                                                        |
-| ---------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| project read           | project path → bounded source bytes                        | `src/builder/dsl4-external-source.js`、`loadDsl4ExternalSource`                        | `test/dsl4-external-source-loader.test.mjs`                     |
-| graph discovery        | entry path → Source Graph                                  | `src/dsl4/source-graph.js`、`createDsl4SourceGraph`                                    | `test/dsl4-source-graph.test.mjs`                               |
-| graph composition      | Source Graph → composed parse result                       | `src/dsl4/source-graph-frontend.js`、`createDsl4SourceGraphFrontend`                   | `test/dsl4-source-graph-frontend.test.mjs`                      |
-| source frontend        | canonical YAML → diagnosticまたは`StoryDocument`           | `src/dsl4/source-frontend.js`、`createDsl4SourceFrontend`                              | `test/dsl4-schema.test.mjs`、`test/dsl4-source-limits.test.mjs` |
-| production composition | Schema + Runtime Expression → frontend                     | `src/builder/dsl4-source-frontend.js`、`createDsl4ProductionSourceFrontend`            | `test/dsl4-expression-diagnostic-boundaries.test.mjs`           |
-| artifact build         | source + asset + base SB3 → verified runtime component     | `src/builder/dsl4-build.js`、`buildDsl4RuntimeComponent`                               | `test/dsl4-one-shot-build.test.mjs`                             |
-| startup                | packaged component → navigation session                    | `src/dsl4/runtime-startup.js`、`createDsl4RuntimeStartup`                              | `test/dsl4-runtime-startup.test.mjs`                            |
-| execution core         | `StoryDocument` + port → runtime state・event              | `src/dsl4/runtime-controller.js`、`createDsl4RuntimeController`                        | `test/dsl4-runtime-controller.test.mjs`                         |
-| navigation             | runtime + input + history → controlled movement            | `src/dsl4/navigation-session.js`、`createDsl4NavigationSession`                        | `test/dsl4-navigation-session.test.mjs`                         |
-| platform composition   | runtime component + TurboWarp host → port・asset lifecycle | `src/dsl4/platform/turbowarp-runtime-host.js`、`createDsl4TurboWarpRuntimeEnvironment` | `test/dsl4-turbowarp-runtime-host.test.mjs`                     |
-| source reload          | immutable candidate → next runtime session                 | `src/dsl4/live-reload-session.js`、`createDsl4LiveReloadSession`                       | `test/dsl4-live-reload-session.test.mjs`                        |
-| asset reload           | byte candidate → active asset generation                   | `src/dsl4/asset-reload-transaction.js`、`createDsl4AssetReloadTransaction`             | `test/dsl4-asset-reload-transaction.test.mjs`                   |
+| 層                     | 入力 → 出力                                                | 主要path・関数                                                                         | 確認test                                                      |
+| ---------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| project read           | project path → bounded source bytes                        | `src/builder/dsl4-external-source.ts`、`loadDsl4ExternalSource`                        | `test/dsl4-external-source-loader.test.ts`                    |
+| graph discovery        | entry path → Source Graph                                  | `src/dsl4/source-graph.ts`、`createDsl4SourceGraph`                                    | `test/dsl4-source-graph.test.ts`                              |
+| graph composition      | Source Graph → composed parse result                       | `src/dsl4/source-graph-frontend.ts`、`createDsl4SourceGraphFrontend`                   | `test/dsl4-source-graph-frontend.test.ts`                     |
+| source frontend        | canonical YAML → diagnosticまたは`StoryDocument`           | `src/dsl4/source-frontend.ts`、`createDsl4SourceFrontend`                              | `test/dsl4-schema.test.ts`、`test/dsl4-source-limits.test.ts` |
+| production composition | Schema + Runtime Expression → frontend                     | `src/builder/dsl4-source-frontend.ts`、`createDsl4ProductionSourceFrontend`            | `test/dsl4-expression-diagnostic-boundaries.test.ts`          |
+| artifact build         | source + asset + base SB3 → verified runtime component     | `src/builder/dsl4-build.ts`、`buildDsl4RuntimeComponent`                               | `test/dsl4-one-shot-build.test.ts`                            |
+| startup                | packaged component → navigation session                    | `src/dsl4/runtime-startup.ts`、`createDsl4RuntimeStartup`                              | `test/dsl4-runtime-startup.test.ts`                           |
+| execution core         | `StoryDocument` + port → runtime state・event              | `src/dsl4/runtime-controller.ts`、`createDsl4RuntimeController`                        | `test/dsl4-runtime-controller.test.ts`                        |
+| navigation             | runtime + input + history → controlled movement            | `src/dsl4/navigation-session.ts`、`createDsl4NavigationSession`                        | `test/dsl4-navigation-session.test.ts`                        |
+| platform composition   | runtime component + TurboWarp host → port・asset lifecycle | `src/dsl4/platform/turbowarp-runtime-host.ts`、`createDsl4TurboWarpRuntimeEnvironment` | `test/dsl4-turbowarp-runtime-host.test.ts`                    |
+| source reload          | immutable candidate → next runtime session                 | `src/dsl4/live-reload-session.ts`、`createDsl4LiveReloadSession`                       | `test/dsl4-live-reload-session.test.ts`                       |
+| asset reload           | byte candidate → active asset generation                   | `src/dsl4/asset-reload-transaction.ts`、`createDsl4AssetReloadTransaction`             | `test/dsl4-asset-reload-transaction.test.ts`                  |
 
-`test/dsl4-architecture.test.mjs`は、core import graphに`node:`、DOM、Scratch VM、
+`test/dsl4-architecture.test.ts`は、core import graphに`node:`、DOM、Scratch VM、
 platform moduleが侵入しないことを検査します。I/Oとplatform依存を注入するため、同じ
 `StoryDocument`とruntime coreを複数surfaceで共有できます。
 
@@ -224,7 +231,7 @@ production compositionは`createDsl4ProductionSourceFrontend`が
 `Function`へのfallbackはありません。preview、validate、buildはこのfrontend契約を共有します。
 
 runtimeでは`resolveBranch()`がaction contextの`variables` snapshotを`evaluateCondition()`へ渡し、一つのbranchを
-上から評価します。4.0.0-rc.8のsnapshotに含まれるのはトップレベル`variables:`だけで、Stage／sprite変数、
+上から評価します。4.0.0-rc.22のbranch式はトップレベル`variables:`と読取専用`runtime["KEY"]`をsnapshotとして参照し、Stage／sprite変数、
 Temporary Variables、controller status、pose eventをliveには読みません。
 
 ## StoryDocument {#story-document}
@@ -242,10 +249,11 @@ Temporary Variables、controller status、pose eventをliveには読みません
   "actors": {},
   "cover": null,
   "textStyles": {},
-  "speechStyles": {},
+  "bubbleStyles": {},
+  "bubbleClosePolicies": {},
   "variables": {},
   "loading": null,
-  "poseRecognition": null,
+  "recognition": null,
   "controls": null,
   "branches": {},
   "scenes": [],
@@ -253,15 +261,13 @@ Temporary Variables、controller status、pose eventをliveには読みません
 }
 ```
 
-Source Graph経由ではさらに`sourceOrigins`が加わります。`assets`はIDをkeyとし、compact記法も
+`presentation`と`audio`は入力に指定した場合だけ加わります。Source Graph経由ではさらに`sourceOrigins`が加わります。`assets`はIDをkeyとし、compact記法も
 `id`、`kind`、`name`、`delivery`、`loading`、`retention`を持つobjectへ正規化します。
 既定の`delivery`は`embedded`、`loading`は`eager`、`retention`はpose modelだけ`scene`、
 その他は`story`です。
 
-`scenes`は宣言順の配列です。各sceneは`{kind: 'Scene', id, poseModel, posePreview, actions}`、
-各actionは次の形です。この形はrc.8固定commitのものです。rc.11以降は台本の`poseRecognition`、
-`kind: poseModel`、sceneの`poseModel`がそれぞれ`recognition`、`kind: recognitionModel`、`recognitionModel`へ
-改名され、StoryDocumentも同じ名前を使います。
+`scenes`は宣言順の配列です。各sceneは`{kind: 'Scene', id, recognitionModel, recognitionMode, posePreview, actions}`、
+各actionは次の形です。
 
 YAML 1.2のmappingはrepresentation model上で順序を持ちません。DSL 4.0は固有規則として、source YAMLの
 serialization treeに現れる`scenes` pairの順序を通常実行のscene順とします。source frontendはYAML nodeの
@@ -406,7 +412,7 @@ coreはbrowser global、DOM、Scratch API、filesystem、networkを直接参照�
 
 | adapter／port                | 担当能力                                                              | 主なruntime command・resource                               |
 | ---------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- |
-| `asset-manager-adapter.js`   | backdrop、costume、image、soundの登録・解放                           | Asset Manager composition                                   |
+| `asset-manager-adapter.js`   | backdrop、costume、image、soundの登録・解放                           | Asset Cache composition                                     |
 | `tm-model-adapter.js`        | pose model bundleの登録・label取得・解放                              | TurboWarp Teachable Machine composition                     |
 | `platform-asset-session.js`  | asset adapter、verified remote cache、binary entry、Async Inputの所有 | `assetLifecycle`、pose/input composition                    |
 | `media-action-port.js`       | stage、BGM、sound、Actor skin                                         | `stage`、`bgm`、`sound`、`setSkin`                          |
@@ -449,7 +455,7 @@ file出力は`buildDsl4RuntimeComponentFile()`がcandidate directoryを検証し
 6. stop、failure、disposeで全resourceを逆所有順に解放する。
 
 Poseモデルについて`recognition.modelInitialization.policy`が`latest-needed`の場合、preload coordinatorの
-最新要求をTurboWarp Teachable Machine 1.12.0 Compositionへ渡し、重い初期化をactive 1件＋最新pending 1件へ制限します。
+最新要求をTurboWarp Teachable Machine 3.5.1 Compositionへ渡し、重い初期化をactive 1件＋最新pending 1件へ制限します。
 superseded requestはasset lifecycleの`AbortSignal`でcancelし、registryへ公開しません。Aの実行中にB、Cが
 要求された場合はBを開始せず、Aの安全な終了後にCだけを開始します。pose不要sceneへskipした場合はpendingを
 破棄します。
@@ -460,7 +466,7 @@ decode、SHA検証、TensorFlow／PoseNet初期化と並行できます。未検
 session disposeがcameraを解放します。既定値`legacy`／`parallel: false`はこの最適化を無効化します。
 
 `recognition.preview.overlay`がある場合、hostは正規化済みの表示、joint style、bone style、最低confidence、
-confidence連動をTurboWarp Teachable Machine 1.12.0の公開Composition APIへ順番に適用します。overlay専用feature flagはありません。
+confidence連動をTurboWarp Teachable Machine 3.5.1の公開Composition APIへ順番に適用します。overlay専用feature flagはありません。
 camera canvas、2D context、推論readback、SVG要素はTurboWarp Teachable Machineが所有し、hostはDOMやTensorFlow.js内部経路をpatchしません。
 
 remote assetは自動的に許可しません。`createDsl4RemoteAssetLifecycle()`へhost loaderを明示注入した場合だけ
@@ -622,11 +628,11 @@ raw／canonical YAML、絶対path、tokenはwireに含めません。browserはY
 production SB3はsource、runtime artifact、asset bundleを自己完結させ、埋込み後に再検証します。
 `previewBridge`、`previewToken`、`reloadCandidate`、directory handle、reload overlayなどのdevelopment stateを
 保存しません。`test/fixtures/dsl4/preview-production-exclusion.json`と
-`test/dsl4-packaged-runtime-component.test.mjs`がこの境界を固定します。
+`test/dsl4-packaged-runtime-component.test.ts`がこの境界を固定します。
 
 ## Feature flagとrollback {#feature-flags}
 
-runtime全体のflagは`src/dsl4/feature-flags.js`で読み、すべて既定OFFです。snapshotは起動時に固定し、
+runtime全体のflagは`src/dsl4/feature-flags.ts`で読み、すべて既定OFFです。snapshotは起動時に固定し、
 session途中で切り替えません。
 
 | flag                               | 前提                              | OFF時の境界                               |
@@ -667,11 +673,11 @@ runtime側の仕様変更では、表に示した固定commitの対応testも更
 
 ## 固定実装への参照 {#implementation-links .unnumbered}
 
-- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-frontend.js)
-- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-graph.js)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/source-graph-frontend.js)
-- [StoryDocument](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/story-document.js)と[semantic validator](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/semantic-validator.js)
-- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/runtime-controller.js)と[navigation session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/navigation-session.js)
-- [Action Context](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/action-context-turbowarp.js)と[custom action invocation](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/action-invocation-adapter.js)
-- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/platform/turbowarp-runtime-host.js)
-- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/live-reload-session.js)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/asset-reload-transaction.js)
-- [feature flags](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/29c0deadcb98badf94a0244c479ca896dc71f842/src/dsl4/feature-flags.js)
+- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-frontend.ts)
+- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-graph.ts)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-graph-frontend.ts)
+- [StoryDocument](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/story-document.ts)と[semantic validator](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/semantic-validator.ts)
+- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/runtime-controller.ts)と[navigation session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/navigation-session.ts)
+- [Action Context](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/action-context-turbowarp.ts)と[custom action invocation](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/action-invocation-adapter.ts)
+- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/platform/turbowarp-runtime-host.ts)
+- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/live-reload-session.ts)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/asset-reload-transaction.ts)
+- [feature flags](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/feature-flags.ts)
