@@ -97,7 +97,7 @@ _スターターを開き、編集する台本と後で使う追加素材を確�
 
 ## 3. TurboWarpで作品フォルダーを開く
 
-1. [TurboWarp Editor](https://turbowarp.org/editor)を開く
+1. [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開く
 2. 「ファイル」から`kamishibai-4.0.0-rc.22.sb3`を読み込む
 3. 緑の旗を押す
 4. タイトル画面を閉じ、メニューの「台本を開く」（以後「開く」）を押す

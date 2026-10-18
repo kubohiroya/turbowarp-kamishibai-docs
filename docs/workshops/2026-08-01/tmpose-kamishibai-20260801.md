@@ -439,7 +439,7 @@ M365 Copilotの画面中央に、「Copilotにメッセージを送信する」�
 
 WebブラウザEdgeで、TurboWarpの編集画面として、次のリンクを開いてください。
 
-[https://turbowarp.org/editor](https://turbowarp.org/editor)
+[https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)
 
 ![](../../images/image42.png){alt="TurboWarpのエディター画面" style="width: 601.70px;"}
 
@@ -908,7 +908,7 @@ action=Princess:pose:p1,p2,p3,p4,p1,p2,p3,p4:p1,p2,p3,p4,p1,p2,p3,p4:Drum...
 
 ## 7.1 緑色の旗を押して開始する
 
-1. WebブラウザEdgeで、[TurboWarpのエディター](https://turbowarp.org/editor)を開いているタブを表示してください。もし閉じてしまっている場合には、もういちど開いてください。
+1. WebブラウザEdgeで、[TurboWarpのエディター](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開いているタブを表示してください。もし閉じてしまっている場合には、もういちど開いてください。
 2. このTurboWarpにおいて、my-urashima.sb3ファイルが開かれた状態であることを確認してください。
 3. 画面右上の、緑色の旗を押して、この「参加型」AI紙芝居アプリを実行してください。
 4. 画面右上の「フルスクリーン」ボタン![](../../images/fullscreen-button.png){alt="フルスクリーンボタン"}を押すと、全画面表示でアプリを実行できます。

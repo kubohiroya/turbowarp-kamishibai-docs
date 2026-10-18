@@ -107,7 +107,7 @@ node bin/turbowarp-kamishibai.mjs author-block-dsl \
 
 ### 3. TurboWarpでブロックを編集して保存する
 
-1. [TurboWarp Editor](https://turbowarp.org/editor)を開き、ファイルメニューから
+1. [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開き、ファイルメニューから
    `output/block-script/story-blocks.sb3`を読み込みます。既存の作品を編集している場合は先に保存してください。
 2. 拡張の読み込みを許可し、ランタイムの案内が出た場合は「サンドボックスなしで実行する」を有効にして開き直します。
 3. ステージのコードを選び、台本ハットからつながるシーンのまとまりを探します。
