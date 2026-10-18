@@ -28,7 +28,7 @@ CLIの版番号だけでは修正の有無を判定できません。生成時�
 
 ## 用意するものと完成までの流れ
 
-- [TurboWarp Editor](https://turbowarp.org/editor)を開くブラウザー
+- [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開くブラウザー
 - Issue #883の修正を含む開発版CLIを動かす環境（Node.js 22.18.0以上）
 - スターター、ランタイム入りのベースSB3、作業用フォルダー
 - ポーズ場面も試す場合はカメラと、周囲にぶつからない空間
