@@ -4,7 +4,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 対象: TurboWarpで台本ブロックを編集する作者、教材作成者、授業設計者\
 扱う台本: `kamishibai [4.0] [ラベル]`からつながるブロック台本SB3\
-確認日: 2026年10月17日
+確認日: 2026年10月19日
 
 このガイドは、[台本DSL版の台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)と同じ
 場面・素材・命令を、台本ブロックの図版で説明します。最初に一作品を完成させる方は
@@ -12,12 +12,15 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 利用する版と図版の読み方
 
-**命令単位の台本ブロック編集には、本体Issue #883の修正を含む未公開の開発版が必要です。**
+**専用ブロックのフォーム編集には、本体Issue #891の修正を含む未公開の開発版が必要です。**
+開発版CLIの実行にはNode.js 24.0.0以上を使用します。
+Issue #883の統一ハットとincludeBlocksに加え、8種類の定義ブロックが使えます。
 公開rc.22の`author-block-dsl`はYAML全文を文字列入力へ保存する方式で、本書の図のようには展開しません。
 公開rc.22をインストールするだけでは、この手順を実行できません。準備する人は
 [相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)で開発版の利用条件を確認してください。
 
-図版は実装のブロック名、入力値、接続を読み取って描き直した説明図です。画面キャプチャではありません。
+SVGのブロック図は実装のブロック名、入力値、接続を基に描いた説明図です。
+PNGのフォーム画面はIssue #891対応の編集用拡張を実Editorで開いて撮影したものです。
 補助ブロックは紫、命令ブロックは青緑で区別し、入力欄の文字は実際の英語表記を使います。
 長い入力値は図の中だけで折り返しています。入力欄へは改行や省略を加えず、値全体を入力します。
 狭い画面では図を左右にスクロールできます。図が複数に分かれている場合も、番号順に同じハットの下へ接続します。
@@ -45,15 +48,15 @@ rc.22公開後の項目は、その実装を含むruntimeが必要です。台�
 別のSpriteへ置いたりできます。ラベル空欄のハットは各Stage/Spriteに1個までです。
 Stageにハットが1個だけなら、名前付きでも主台本にできます。名前付きだけを複数置くと入口が曖昧なためエラーです。
 
-| ブロック         | 役割                                 | 主な入力                                       |
-| ---------------- | ------------------------------------ | ---------------------------------------------- |
-| `kamishibai` | 台本の入口と版・識別名を宣言する | `VERSION`は文字列`4.0`、`LABEL`は既定で空欄 |
-| `includeBlocks` | 同じSB3の別台本をビルド時に読み込む | 参照先の`LABEL` |
-| `story property` | 台本全体の設定や素材を登録する       | `PATH`はJSON配列、`VALUE`はJSON値              |
-| `scene`          | 一つのシーンを囲む                   | シーン名と`PROPERTIES`（シーン固有のJSON設定） |
-| 命令ブロック     | 背景変更、移動、セリフなどを指定する | 素材名、秒数、対象アクターなど                 |
-| `action options` | 実命令一つへ追加属性を付ける         | 安定ID、ブロックに入力欄がない引数など         |
-| `custom action`  | 登録済みの独自命令を記述する         | 対象、命令名、JSON引数、安定ID                 |
+| ブロック             | 役割                                           | 主な入力                                         |
+| -------------------- | ---------------------------------------------- | ------------------------------------------------ |
+| `kamishibai`         | 台本の入口と版・識別名を宣言する               | `VERSION`は文字列`4.0`、`LABEL`は既定で空欄      |
+| `includeBlocks`      | 同じSB3の別台本をビルド時に読み込む            | 参照先の`LABEL`                                  |
+| 種類別の定義ブロック | 素材・登場人物・変数・台本全体の設定を登録する | 名前付き定義は`NAME`と`VALUE`、単一設定は`VALUE` |
+| `scene`              | 一つのシーンを囲む                             | シーン名と`PROPERTIES`（シーン固有のJSON設定）   |
+| 命令ブロック         | 背景変更、移動、セリフなどを指定する           | 素材名、秒数、対象アクターなど                   |
+| `action options`     | 実命令一つへ追加属性を付ける                   | 安定ID、ブロックに入力欄がない引数など           |
+| `custom action`      | 登録済みの独自命令を記述する                   | 対象、命令名、JSON引数、安定ID                   |
 
 設定とシーンをハットの下へ接続し、命令を`scene`のC字の内側へ接続します。
 ハットやシーンから切り離したブロックは台本に含まれません。宣言ハットと補助ブロックは
@@ -74,24 +77,90 @@ Stageにハットが1個だけなら、名前付きでも主台本にできま�
 `Hero`が2秒話し、1秒待ちます。最初につないだシーンから始まり、移動先を指定しなければ
 次につないだシーンへ進みます。最後のシーンが終わると物語が終了します。
 
+## 種類別の定義ブロック
+
+台本ハットの下へ、用途に合った定義ブロックを接続します。名前欄へYAMLの内部パスを入力する必要はありません。
+
+| ブロック                          | NAME         | VALUEの例                                                 | YAMLの定義先             |
+| --------------------------------- | ------------ | --------------------------------------------------------- | ------------------------ |
+| `asset [NAME] = JSON [VALUE]`     | `HeroIdle`   | `"costume:Hero"`                                          | `assets[NAME]`           |
+| `control [NAME] = JSON [VALUE]`   | `production` | `{"Space":"navigation.nextAction"}`                       | `controls.keymaps[NAME]` |
+| `actor [NAME] = JSON [VALUE]`     | `Hero`       | `"HeroIdle"`                                              | `actors[NAME]`           |
+| `textStyle [NAME] = JSON [VALUE]` | `title`      | `{"size":24,"color":"#ffffff"}`                           | `textStyles[NAME]`       |
+| `variable [NAME] = JSON [VALUE]`  | `score`      | `0`、`false`、`"浦島"`                                    | `variables[NAME]`        |
+| `cover = JSON [VALUE]`            | なし         | `{"backdrop":"Beach","bgm":"OpeningSound"}`               | `cover`                  |
+| `loading = JSON [VALUE]`          | なし         | `{"backdrop":"Beach","costumes":["Loading1","Loading2"]}` | `loading`                |
+| `recognition = JSON [VALUE]`      | なし         | `{"preview":{"mirroring":"mirrored"}}`                    | `recognition`            |
+
+名前付きの5種類は1件につき1ブロックです。`control`の名前はキーマップ名で、値に`keymaps`を重ねません。
+`actor`の値は初期コスチュームのアセットIDを表すJSON文字列です。オブジェクトにはしません。
+`cover`、`loading`、`recognition`は名前欄のない設定で、台本ごとに各1個にまとめます。
+複数の図の設定を組み合わせるときも、同じ単一設定のブロックを追加せず、既存の`VALUE`へ項目をまとめます。
+
+## フォームでJSONを編集する
+
+1. [編集ダイアログ付き日本語Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開き、Issue #891対応CLIで生成した編集用SB3を読み込む
+2. 編集用拡張をサンドボックスなしで読み込む
+3. 配置した専用ブロックの左端にある白い書類のアイコンを押す。キーボードではアイコンへフォーカスしてEnterを押す
+4. フォームの項目を編集し、「保存」を押す。「キャンセル」では入力欄へ反映しない
+5. EditorのファイルメニューからSB3を保存し、同じCLIで書き戻し・検査・ビルドする
+
+名前付き定義の`NAME`はブロック上で編集し、フォームでは`VALUE`だけを編集します。
+文字列はフォームの欄へそのまま入力し、JSON用の二重引用符は加えません。
+`variable`は文字列・数値・真偽値を選びます。`asset`は素材の種類と入手元を選ぶと、必要な欄が表示されます。
+`recognition`の任意設定は「設定しない」と「〜を設定」を切り替えます。
+
+図は`Classroom`という素材に、作品フォルダー内の`classroom.svg`を指定する実フォームです。
+
+<figure class="block-script-form"><img src="../images/block-authoring/form-asset.png" alt="assetの実フォーム。背景と作品フォルダーのファイルを選びclassroom.svgを指定する"></figure>
+
+Schemaの型・必須項目・範囲などに違反すると保存できません。素材やアクターの参照先が存在するかなど、
+台本全体の検査は保存したSB3の書き戻し・ビルド時にも行います。フォーム内の保存はSB3ファイル自体の保存とは別です。
+変更なしで保存した場合は元のJSON文字列を保ち、変更は通常のUndo/Redoで戻せます。
+
+GUIのフラグは既定OFFです。`blockEditorDialogs=1`をURLから外して再読込すると通常入力へ戻ります。
+フォーム登録に対応しないEditorやサンドボックス内では、従来の文字列入力欄を使います。
+古い編集用SB3の埋込拡張は自動更新されないため、専用ブロックがあるSB3も、フォーム対応版CLIで
+YAMLへ書き戻してから再生成してください。
+
 ## 入力欄とJSONの規則
 
-`PATH`の例は`["assets","Beach"]`、その`VALUE`は`"backdrop"`です。
+以後のJSON表記は、ブロックの文字列入力欄へ直接入力する場合の規則です。フォームでは引用符や括弧を手入力しません。
+
+`asset`の`NAME`の例は`Beach`、その`VALUE`は`"backdrop"`です。
 JSONは名前と値を括弧でまとめる記法です。文字列は二重引用符で囲みます。
 通常の文字列入力欄（シーン名、アクター名など）にはJSON用の引用符を加えません。
 
-| 入力             | 例                                    | 注意                                  |
-| ---------------- | ------------------------------------- | ------------------------------------- |
-| JSON文字列       | `"4.0"`                               | `4.0`という数値とは違う               |
-| JSON数値・真偽値 | `1`、`true`、`false`                  | 引用符で囲まない                      |
-| JSONオブジェクト | `{"text":"こんにちは！","seconds":2}` | キーと文字列に二重引用符を使う        |
-| JSON配列         | `["variables","score"]`               | `PATH`は設定箇所を示す1〜2要素の配列  |
-| 省略可能な入力欄 | 空欄                                  | `moveTo`の任意easingなど。`0`とは違う |
+| 入力             | 例                                    | 注意                                              |
+| ---------------- | ------------------------------------- | ------------------------------------------------- |
+| JSON文字列       | `"HeroIdle"`                          | `actor`の初期コスチュームなど。二重引用符を付ける |
+| JSON数値・真偽値 | `1`、`true`、`false`                  | 引用符で囲まない                                  |
+| JSONオブジェクト | `{"text":"こんにちは！","seconds":2}` | キーと文字列に二重引用符を使う                    |
+| JSON配列         | `["Loading1","Loading2"]`             | `loading`の`costumes`などに使う                   |
+| 省略可能な入力欄 | 空欄                                  | `moveTo`の任意easingなど。`0`とは違う             |
 
 一つの命令は一つのブロックです。`SPEC`、`ROUTES`、`STEPS`などはJSON入力のままです。
 すべての設定が専用の選択メニューになっているわけではありません。素材の`kind`や入力値の範囲は
 [Schemaリファレンス](../dsl-author-guides/dsl-4.0-schema-reference.md)で調べます。
 動的なScratchの変数や演算ブロックの評価は行いません。対応する静的な入力値を使用します。
+
+## 旧story propertyと専用ブロックのない設定
+
+`story property [PATH] = JSON [VALUE]`は旧形式の読取と、専用ブロックがない設定の保持に使います。
+新しい編集用拡張のパレットでは非表示です。素材やアクターの新規登録には、上の専用ブロックを使います。
+`branches`、`bubbleStyles`、`bubbleClosePolicies`、`presentation`、`audio`は引き続き生成済みの
+`story property`を編集します。`PATH`は1〜2要素のJSON配列、`VALUE`はJSON値です。
+名前付き項目がない明示的な空マッピングも、この形式で保持します。
+
+旧`story property`を含む編集用SB3は、Issue #886対応CLIの`export-block-dsl`でYAMLへ戻し、
+`author-block-dsl`で再生成すると専用ブロックへ移行できます。古いSB3に埋め込まれた編集用拡張は
+パレットが自動更新されないため、CLIを更新するだけでは専用ブロックを追加できません。
+旧ハットやYAML全文の文字列方式は読取対象外なので、元のYAMLから再生成します。
+
+同じ名前の定義、`cover`などの単一設定の重複、旧`story property`と専用ブロックによる
+同じ範囲への書込はエラーです。改名時には、命令などの参照先も作者が変更します。
+元のYAMLと編集前SB3を保持してください。切り戻す場合は、専用ブロックの編集結果を対応CLIでYAMLへ
+退避してから、変更前CLIでそのYAMLから再生成します。専用ブロックを含むSB3は旧CLIでの読取を保証しません。
 
 ## 名前の規則
 
@@ -273,7 +342,11 @@ _図: eagerの素材は物語の開始前にまとめて準備します。lazy�
 
 ## 登場人物（Actor）を登録する
 
-`actors`では、アクターIDと初期コスチュームを対応付けます。
+`actor [NAME] = JSON [VALUE]`で、アクターIDと初期コスチュームを対応付けます。
+例は`NAME`が`Hero`、`VALUE`が`"HeroIdle"`です。文字列入力欄では二重引用符も入力します。
+フォームでは、図のように`HeroIdle`だけを入力します。
+
+<figure class="block-script-form"><img src="../images/block-authoring/form-actor.png" alt="actorの実フォーム。初期コスチュームのアセットIDをHeroIdleにする"></figure>
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-08.svg" alt="登場人物（Actor）を登録する（1/2）の台本ブロック"></figure>
 
@@ -290,6 +363,8 @@ _図: eagerの素材は物語の開始前にまとめて準備します。lazy�
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-10.svg" alt="表紙の台本ブロック"></figure>
 
+<figure class="block-script-form"><img src="../images/block-authoring/form-cover.png" alt="coverの実フォーム。背景アセットIDと任意のBGMアセットID"></figure>
+
 `backdrop`は必須で、背景アセットを指定します。`bgm`は任意で、音アセットを指定します。
 
 ### 読み込み中の表示
@@ -297,6 +372,8 @@ _図: eagerの素材は物語の開始前にまとめて準備します。lazy�
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-11.svg" alt="読み込み中の表示（1/2）の台本ブロック"></figure>
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-12.svg" alt="読み込み中の表示（2/2）の台本ブロック"></figure>
+
+<figure class="block-script-form"><img src="../images/block-authoring/form-loading.png" alt="loadingの実フォーム。背景アセットIDとコスチュームの配列"></figure>
 
 `loading`を記述する場合は、背景と一つ以上のコスチュームが必要です。`costumes`は同じ意味の値の集合なので
 JSON配列で指定します。
@@ -306,6 +383,8 @@ JSON配列で指定します。
 ポーズ認識と画像認識の設定は、トップレベルの`recognition`へまとめて書きます。
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-13.svg" alt="認識音の台本ブロック"></figure>
+
+<figure class="block-script-form"><img src="../images/block-authoring/form-recognition.png" alt="recognitionの実フォーム。認識音と任意の認識設定"></figure>
 
 `idleSound`と`chargeSound`はそれぞれ任意です。両方を省略した無音、片方だけ、両方を指定した設定を
 受理します。指定する場合、参照先は音アセットでなければなりません。音を省略してもsequence、selection、
@@ -348,6 +427,8 @@ story全体の左右反転既定と、必要な操作UIを`recognition.preview`�
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-15.svg" alt="カメラ映像の表示と操作（1/2）の台本ブロック"></figure>
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-16.svg" alt="カメラ映像の表示と操作（2/2）の台本ブロック"></figure>
+
+<figure class="block-script-form"><img src="../images/block-authoring/form-recognition-detail.png" alt="recognitionの実フォーム詳細。カメラプレビューの左右反転をunmirroredへ変更する"></figure>
 
 `mirroring`は`mirrored`または`unmirrored`で、省略時は従来表示と同じ`mirrored`です。これはpreview
 canvasの見た目だけを変更し、認識へ渡すframe、pose confidence、sequence／selection判定を変更しません。
@@ -420,6 +501,8 @@ confidenceを倍率として、0から設定値まで変化します。この表
 DSL 4.0の標準テキスト表現はSVG Textです。最初に`textStyles`で名前付きスタイルを定義します。
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-18.svg" alt="SVG Textを設定するの台本ブロック"></figure>
+
+<figure class="block-script-form"><img src="../images/block-authoring/form-text-style.png" alt="textStyleの実フォーム。文字の色と大きさを編集する"></figure>
 
 | 項目         | 値                        |
 | ------------ | ------------------------- |
@@ -554,6 +637,8 @@ runtimeはaction開始前にpolicyを既存の`seconds`／`waitFor`へ展開し�
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-24.svg" alt="変数の台本ブロック"></figure>
 
+<figure class="block-script-form"><img src="../images/block-authoring/form-variable.png" alt="variableの実フォーム。型に数値を選び初期値0を指定する"></figure>
+
 初期値に使用できる型はstring、number、booleanだけです。配列、オブジェクト、`null`、式を初期値には
 使用できません。宣言時の型と異なる値へ暗黙変換しません。
 
@@ -599,6 +684,8 @@ ASCIIのbare nameは`score == 1`のように書けます。日本語や`-`など
 `controls`では、development用とproduction用など、実行環境ごとに完全なkeymapを定義できます。
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-28.svg" alt="操作キーを設定するの台本ブロック"></figure>
+
+<figure class="block-script-form"><img src="../images/block-authoring/form-control.png" alt="controlの実フォーム。Spaceキーへnavigation.nextActionを割り当てる"></figure>
 
 ビルダーは`controlProfile`を明示的に一つ選び、選択されたprofileのkeymapだけを有効にする設計です。
 profile間の継承、merge、fallbackはありません。
@@ -997,31 +1084,32 @@ inline形式も使用できます。
 ブロックの接続・JSON・台本の構造・参照関係を検査してから、素材の準備と実行へ進みます。
 不正な台本を元のYAMLへ黙って戻すことはありません。ブロックを修正してSB3を保存し直し、再実行します。
 
-| 表示                           | 確認すること                                            |
-| ------------------------------ | ------------------------------------------------------- |
-| `K4-BLOCK-SOURCE-MISSING-001`  | 主台本の宣言ハットがあるか。実行専用SB3を選んでいないか |
-| `K4-BLOCK-SOURCE-GRAPH-001`    | シーンの接続、重複、対応する命令ブロック、入力欄        |
-| `K4-BLOCK-SOURCE-FRAGMENT-001` | JSONの引用符・カンマ・括弧                              |
-| `K4-BLOCK-SOURCE-VERSION-001` | ハットの版入力が文字列`4.0`か |
-| `K4-BLOCK-SOURCE-LABEL-001` | 参照ラベルが空欄・未定義でないか |
-| `K4-BLOCK-SOURCE-DUPLICATE-001` | ラベル・入口・出力名が重複していないか |
-| `K4-BLOCK-SOURCE-CYCLE-001` | includeBlocksが自己参照・循環していないか |
-| `K4-VERSION-001`               | 版の設定値が数値でなく文字列の`"4.0"`か                 |
-| `K4-SCHEMA-*`                  | 項目、値の型、必須入力、範囲                            |
-| `K4-REF-*`                     | 素材、シーン、アクターなどの参照先                      |
-| `K4-STABLE-ID-001`             | 安定IDが重複していないか                                |
-| `K4-BRANCH-001`                | 分岐の最後に一つだけ`else`があるか                      |
+| 表示                            | 確認すること                                            |
+| ------------------------------- | ------------------------------------------------------- |
+| `K4-BLOCK-SOURCE-MISSING-001`   | 主台本の宣言ハットがあるか。実行専用SB3を選んでいないか |
+| `K4-BLOCK-SOURCE-GRAPH-001`     | シーンの接続、重複、対応する命令ブロック、入力欄        |
+| `K4-BLOCK-SOURCE-FRAGMENT-001`  | JSONの引用符・カンマ・括弧                              |
+| `K4-BLOCK-SOURCE-VERSION-001`   | ハットの版入力が文字列`4.0`か                           |
+| `K4-BLOCK-SOURCE-LABEL-001`     | 参照ラベルが空欄・未定義でないか                        |
+| `K4-BLOCK-SOURCE-DUPLICATE-001` | ラベル・入口・出力名が重複していないか                  |
+| `K4-BLOCK-SOURCE-CYCLE-001`     | includeBlocksが自己参照・循環していないか               |
+| `K4-VERSION-001`                | 版の設定値が数値でなく文字列の`"4.0"`か                 |
+| `K4-SCHEMA-*`                   | 項目、値の型、必須入力、範囲                            |
+| `K4-REF-*`                      | 素材、シーン、アクターなどの参照先                      |
+| `K4-STABLE-ID-001`              | 安定IDが重複していないか                                |
+| `K4-BRANCH-001`                 | 分岐の最後に一つだけ`else`があるか                      |
 
 診断のブロックIDやStory Pathを使って該当箇所を特定します。書き戻したYAMLの行番号は、
 ブロック画面の座標ではありません。実行中のエラーには`K4-RUNTIME-*`も使用します。
 
 ## 作成時のチェックリスト
 
-- [ ] Issue #883の修正を含む同じ開発版で生成・書き戻し・ビルドした
+- [ ] Issue #891の修正を含む同じ開発版で生成・書き戻し・ビルドした
 - [ ] ステージの主台本が一意に決まり、設定・参照・シーンがつながっている
 - [ ] ハットの版入力が文字列`4.0`で、ラベルと参照先が一致している
 - [ ] 各命令がシーンの内側につながり、順番が正しい
-- [ ] `PATH`、`VALUE`、`SPEC`、`ROUTES`、`STEPS`のJSONが正しい
+- [ ] `NAME`は名前だけを入力し、`VALUE`、`SPEC`、`ROUTES`、`STEPS`のJSONが正しい
+- [ ] `cover`、`loading`、`recognition`は各1個で、定義の重複がない
 - [ ] 背景・衣装・音・モデルの種別と、衣装の対象アクターが正しい
 - [ ] 使うシーン・素材・スタイル・変数・分岐をすべて定義した
 - [ ] キー入力が操作用キーと衝突しない
@@ -1031,11 +1119,14 @@ inline形式も使用できます。
 
 ## 付録: 図版と実装の対応
 
-図版は台本DSL版のYAML例から生成した接続と入力値を基に、Issue #883の統一ハット形式へ更新しています。
-ブロック定義の確認基準は本体commit `1a4bb356cc9eb75667414df28dea054193f83a8b`です。
+図版は台本DSL版のYAML例から生成した接続と入力値を基に、Issue #883の統一ハットと
+Issue #886の種類別定義ブロックへ更新しています。
+ブロック定義の確認基準は本体commit `33594634ff19aebcde596c8be05730c0817b5ac6`です。
 図版の再生成元は`sources/dsl4-authoring-blocks.json`、描画スクリプトは
 `scripts/render-authoring-blocks.mjs`です。図の配置や配色は説明用で、生成SB3の画面位置とは異なります。
 ブロック名、入力欄、C字の内側の命令は実装と対応します。
+フォームの実装基準は本体commit `0c1bf09f3285e1ea265037926a3465e550ab46c8`です。
+撮影条件・入力値・検証結果は`sources/dsl4-definition-forms.json`に記録しています。
 
 公開状況やruntime側の実装根拠は[台本DSL版の付録](../dsl-author-guides/dsl-4.0-author-guide.md#付録-実装基準と実装根拠)を参照してください。
 

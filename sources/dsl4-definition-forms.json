@@ -1,0 +1,140 @@
+{
+  "capturedOn": "2026-10-19",
+  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/891",
+  "implementationCommit": "0c1bf09f3285e1ea265037926a3465e550ab46c8",
+  "editor": "Local build of kubohiroya/scratch-gui with @kubohiroya/turbowarp-extension-data-editor@0.1.0",
+  "editorQuery": "blockEditorDialogs=1&lang=ja",
+  "locale": "ja",
+  "theme": "dark",
+  "capture": "Actual Chrome Editor dialog, cropped at its dialog boundary; no reconstructed UI.",
+  "verification": {
+    "invalidSaveBlocked": true,
+    "cancelPreserved": true,
+    "optionalObjectRemoved": true,
+    "sb3ReloadPreserved": true,
+    "results": [
+      {
+        "opcode": "asset",
+        "saved": {
+          "kind": "backdrop",
+          "file": "classroom-edited.svg"
+        },
+        "undoRedo": true
+      },
+      {
+        "opcode": "control",
+        "saved": {
+          "Space": "navigation.nextScene"
+        },
+        "undoRedo": true
+      },
+      {
+        "opcode": "actor",
+        "saved": "HeroHappy",
+        "undoRedo": true
+      },
+      {
+        "opcode": "textStyle",
+        "saved": {
+          "color": "#ffffff",
+          "size": 32
+        },
+        "undoRedo": true
+      },
+      {
+        "opcode": "variable",
+        "saved": 7,
+        "undoRedo": true
+      },
+      {
+        "opcode": "cover",
+        "saved": {
+          "backdrop": "Ocean"
+        },
+        "undoRedo": true
+      },
+      {
+        "opcode": "loading",
+        "saved": {
+          "backdrop": "Classroom",
+          "costumes": ["LoadingNew", "Loading2"]
+        },
+        "undoRedo": true
+      },
+      {
+        "opcode": "recognition",
+        "saved": {
+          "preview": {
+            "mirroring": "unmirrored"
+          }
+        },
+        "undoRedo": true
+      }
+    ]
+  },
+  "screenshots": [
+    {
+      "opcode": "asset",
+      "path": "docs/images/block-authoring/form-asset.png",
+      "sha256": "39f5a0c27419b8634cae4a3e884cccda25f92e8dd9c6ddb9330cc23b6a644414",
+      "width": 608,
+      "height": 888
+    },
+    {
+      "opcode": "control",
+      "path": "docs/images/block-authoring/form-control.png",
+      "sha256": "992e230ead03f72ad6cc14251558cc499185643e06cda0b7c3b142236c68a241",
+      "width": 608,
+      "height": 444
+    },
+    {
+      "opcode": "actor",
+      "path": "docs/images/block-authoring/form-actor.png",
+      "sha256": "7c0866b9eaba1449127a2e9a7a6512c26efbbeebf7fec0d7563445a5d21c8495",
+      "width": 608,
+      "height": 260
+    },
+    {
+      "opcode": "textStyle",
+      "path": "docs/images/block-authoring/form-text-style.png",
+      "sha256": "f18161156271c1610918ab57075378ae0f02257d74fd92a8a22b842da868dc64",
+      "width": 608,
+      "height": 668
+    },
+    {
+      "opcode": "variable",
+      "path": "docs/images/block-authoring/form-variable.png",
+      "sha256": "31709deaf8696e60b3dc10e633ba68e5c434948bd3cbc77a6647ef1e1e3cf3dc",
+      "width": 608,
+      "height": 358
+    },
+    {
+      "opcode": "cover",
+      "path": "docs/images/block-authoring/form-cover.png",
+      "sha256": "751edc4393a5b5cfb4656687be84fffae4c9e9976359b3ad5aa9ad8465a1ca98",
+      "width": 608,
+      "height": 396
+    },
+    {
+      "opcode": "loading",
+      "path": "docs/images/block-authoring/form-loading.png",
+      "sha256": "3f223a252af6f769953711e80c0a8cef5aae4e9ee0f0de402314c60895de9445",
+      "width": 608,
+      "height": 568
+    },
+    {
+      "opcode": "recognition",
+      "path": "docs/images/block-authoring/form-recognition.png",
+      "sha256": "660b4cccfd2a161600f3ae51338e794c6f462a2e7fc63991d7d20f55aad7daea",
+      "width": 608,
+      "height": 978
+    },
+    {
+      "opcode": "recognition",
+      "path": "docs/images/block-authoring/form-recognition-detail.png",
+      "sha256": "56b0c60c0a6e185e699476ccff39888520be25e6b2a2cac426f43d05ef4039b6",
+      "width": 608,
+      "height": 1318
+    }
+  ]
+}
