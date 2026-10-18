@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
 
@@ -47,7 +48,7 @@ test('gives block and DSL authors exactly one tutorial and one guide, followed b
 test('keeps the block walkthrough explicit about development prerequisites and saved-block input', () => {
   for (const source of [guide, tutorial]) {
     assert.doesNotMatch(source, /```ya?ml/iu);
-    assert.match(source, /Issue #883/u);
+    assert.match(source, /Issue #891/u);
     assert.match(source, /未公開の開発版/u);
     assert.match(source, /公開rc\.22/u);
     assert.doesNotMatch(source, /when kamishibai DSL source|whenDsl4Source/u);
@@ -80,7 +81,11 @@ test('ships every referenced block diagram with accessible SVG and complete JSON
         assert.ok(Object.hasOwn(node.inputs, match[1]));
       if (node.opcode === 'property') {
         assert.ok(Array.isArray(JSON.parse(node.inputs.PATH)));
-        assert.notDeepEqual(JSON.parse(node.inputs.PATH), ['kamishibai']);
+        assert.ok(
+          ['branches', 'bubbleStyles', 'bubbleClosePolicies', 'presentation', 'audio'].includes(
+            JSON.parse(node.inputs.PATH)[0],
+          ),
+        );
         JSON.parse(node.inputs.VALUE);
       }
       checkNodes(node.children ?? []);
@@ -93,7 +98,7 @@ test('ships every referenced block diagram with accessible SVG and complete JSON
     assert.match(svg, /<title id="title">/u);
     assert.match(svg, /<desc id="desc">/u);
     assert.doesNotMatch(svg, /undefined|NaN|when kamishibai DSL source|whenDsl4Source/u);
-    assert.match(svg, /Issue #883/u);
+    assert.match(svg, /Issue #886/u);
     checkNodes(diagram.nodes);
   }
 });
@@ -113,4 +118,69 @@ test('documents label-based includes with independent source hats and YAML write
   assert.match(guide, /ラベルはSprite名とは独立/u);
   assert.match(guide, /blocks-0001\.k4\.yml/u);
   assert.doesNotMatch(guide, /公開版・開発版とも未対応|複数の宣言ハットを置くとエラー/u);
+});
+
+test('uses all eight definition blocks and keeps singleton settings unique across split figures', () => {
+  const snapshot = JSON.parse(read('sources/dsl4-authoring-blocks.json'));
+  const named = new Set(['asset', 'control', 'actor', 'textStyle', 'variable']);
+  const singletons = new Set(['cover', 'loading', 'recognition']);
+  const seen = new Set();
+  const definitions = snapshot.diagrams.flatMap(({nodes}) => nodes);
+  for (const node of definitions) {
+    if (!named.has(node.opcode) && !singletons.has(node.opcode)) continue;
+    seen.add(node.opcode);
+    assert.ok(!Object.hasOwn(node.inputs, 'PATH'));
+    const value = JSON.parse(node.inputs.VALUE);
+    if (named.has(node.opcode)) assert.ok(node.inputs.NAME.length > 0);
+    else {
+      assert.ok(!Object.hasOwn(node.inputs, 'NAME'));
+      assert.equal(typeof value, 'object');
+      assert.ok(value !== null && !Array.isArray(value));
+    }
+    if (node.opcode === 'actor') assert.equal(typeof value, 'string');
+    if (node.opcode === 'variable')
+      assert.ok(['string', 'number', 'boolean'].includes(typeof value));
+    if (node.opcode === 'control') assert.ok(!Object.hasOwn(value, 'keymaps'));
+  }
+  assert.equal(seen.size, 8);
+  for (const ids of [
+    ['guide-11', 'guide-12'],
+    ['guide-15', 'guide-16'],
+  ]) {
+    const nodes = snapshot.diagrams.filter(({id}) => ids.includes(id)).flatMap(({nodes}) => nodes);
+    for (const opcode of singletons)
+      assert.ok(nodes.filter((node) => node.opcode === opcode).length <= 1);
+  }
+  const assets = snapshot.diagrams.find(({id}) => id === 'tutorial-assets').nodes;
+  assert.deepEqual(
+    assets.map(({opcode, inputs}) => [opcode, inputs.NAME]),
+    [
+      ['asset', 'EarthquakeClassroom'],
+      ['asset', 'ProtectHead'],
+    ],
+  );
+  const conversion = read('docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md');
+  for (const source of [guide, conversion]) {
+    assert.match(source, /パレット.*非表示/u);
+    assert.match(source, /再生成/u);
+    assert.match(source, /旧CLI/u);
+  }
+});
+
+test('publishes real form screenshots for all eight definitions with traceable capture records', () => {
+  const capture = JSON.parse(read('sources/dsl4-definition-forms.json'));
+  assert.equal(new Set(capture.screenshots.map(({opcode}) => opcode)).size, 8);
+  assert.match(capture.implementationIssue, /issues\/891$/u);
+  assert.equal(capture.verification.sb3ReloadPreserved, true);
+  for (const screenshot of capture.screenshots) {
+    const bytes = readFileSync(new URL(`../${screenshot.path}`, import.meta.url));
+    assert.equal(bytes.subarray(1, 4).toString(), 'PNG');
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), screenshot.sha256);
+    assert.equal(bytes.readUInt32BE(16), screenshot.width);
+    assert.equal(bytes.readUInt32BE(20), screenshot.height);
+    assert.ok(guide.includes(screenshot.path.replace('docs/', '../')));
+  }
+  assert.match(guide, /フォームでJSONを編集する/u);
+  assert.match(guide, /SB3ファイル自体の保存とは別/u);
+  assert.match(tutorial, /書類アイコン/u);
 });

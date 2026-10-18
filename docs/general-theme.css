@@ -1494,6 +1494,19 @@ h2.application-sheet {
   height: auto;
 }
 
+/* Fit actual form screenshots without enlarging their pixels or forcing horizontal scrolling. */
+.block-script-form {
+  margin: 1.25rem 0;
+  break-inside: avoid;
+}
+
+.block-script-form img {
+  display: block;
+  width: 100%;
+  max-width: 608px;
+  height: auto;
+}
+
 @media print {
   .block-script-diagram {
     overflow: visible;

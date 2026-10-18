@@ -3,9 +3,13 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: YAML台本をTurboWarpのブロックで編集し、編集結果をYAMLへ戻したい方。\
-確認日: 2026年10月17日。コマンドの公開版基準は`4.0.0-rc.22`、命令単位のブロック生成・読取は
+確認日: 2026年10月19日。コマンドの公開版基準は`4.0.0-rc.22`、命令単位のブロック生成・読取は
 [本体Issue #881](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/881)（PR #882でmainへマージ済み）の未公開開発版、
-ラベルとincludeBlocksは[本体Issue #883](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883)の追加開発版を対象にします。
+ラベルとincludeBlocksは[本体Issue #883](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883)、
+種類別の定義ブロックは[本体Issue #886](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/886)
+（PR #887）の追加開発版を対象にします。専用ブロックのフォーム編集は
+[本体Issue #891](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/891)
+（commit `0c1bf09f3285e1ea265037926a3465e550ab46c8`）の修正を含む開発版が必要です。開発版CLIはNode.js 24.0.0以上で実行します。
 
 ## 最初に利用する版を確認する
 
@@ -287,19 +291,48 @@ node bin/turbowarp-kamishibai.mjs build-dsl4 \
 生成SB3に同梱する編集用拡張「Kamishibai Block Script」の補助ブロックで保持します。
 これらをrc.22のランタイムパレットの公開ブロック数へ加えないでください。
 
-| 補助ブロック            | 編集する内容                                                       |
-| ----------------------- | ------------------------------------------------------------------ |
-| `kamishibai`（#883）    | バージョン4.0とラベル（既定は空文字）。台本の先頭。                |
-| `includeBlocks`（#883） | 同じSB3の名前付き台本への参照。宣言直下に接続する。                |
-| `scene`                 | シーン名とシーン属性。内側へ命令を接続する。                       |
-| `property`              | 素材や変数などの台本設定。PATHはJSON配列、VALUEはJSON値。          |
-| `actionOptions`         | 安定IDや追加属性。内側の実命令と一緒に移動する。                   |
-| `customAction`          | 登録済みの独自命令の対象・名前・JSON引数。対応する登録情報が必要。 |
+| 補助ブロック                                                 | 編集する内容                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `kamishibai`（#883）                                         | バージョン4.0とラベル（既定は空文字）。台本の先頭。                |
+| `includeBlocks`（#883）                                      | 同じSB3の名前付き台本への参照。宣言直下に接続する。                |
+| `scene`                                                      | シーン名とシーン属性。内側へ命令を接続する。                       |
+| `asset`、`control`、`actor`、`textStyle`、`variable`（#886） | 名前付き定義。`NAME`とJSONの`VALUE`を入力する。                    |
+| `cover`、`loading`、`recognition`（#886）                    | 台本に一つの設定。名前欄なしでJSONの`VALUE`を入力する。            |
+| `property`                                                   | 旧形式と専用ブロックのない設定の保持用。新パレットでは非表示。     |
+| `actionOptions`                                              | 安定IDや追加属性。内側の実命令と一緒に移動する。                   |
+| `customAction`                                               | 登録済みの独自命令の対象・名前・JSON引数。対応する登録情報が必要。 |
 
 JSONは、`{"seconds": 2}`のように名前と値を記述する形式です。
 既存ブロックの`SPEC`・`ROUTES`・`STEPS`は公開契約どおりJSONを使います。
 `actionOptions`で、実命令の入力値を重ねて指定することはできません。
 入力欄とJSONの意味は[ランタイム ブロックリファレンス](../turbowarp-programmer-guides/dsl-4.0-runtime-block-reference.md)を参照してください。
+
+## 種類別定義ブロックと旧SB3の移行（Issue #886の開発版）
+
+Issue #886対応CLIは素材を`asset`、登場人物を`actor`などの専用ブロックで生成します。
+例えば`asset`は`NAME`に`HeroIdle`、`VALUE`に`"costume:Hero"`を、`actor`は
+`NAME`に`Hero`、`VALUE`に`"HeroIdle"`を入力します。`NAME`にJSONパスや引用符は不要です。
+`control`はキーマップごとに1個、`variable`の値は数値・真偽値・文字列です。
+フォームは対応Editorの`blockEditorDialogs=1`で有効になります。編集用拡張をサンドボックスなしで読み込み、
+配置した専用ブロックの左端の書類アイコンを押します。古い編集用SB3は、専用ブロックを持つものも含め、
+Issue #891対応CLIでYAMLへ書き戻して再生成してください。
+8種類の実フォーム画面・用途・入力例は[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#種類別の定義ブロック)を参照してください。
+
+`story property [PATH] = JSON [VALUE]`は旧形式の読取と、専用ブロックがない設定の保持に使います。
+新しい編集用拡張のパレットでは非表示です。素材やアクターの新規登録には、上の専用ブロックを使います。
+`branches`、`bubbleStyles`、`bubbleClosePolicies`、`presentation`、`audio`は引き続き生成済みの
+`story property`を編集します。`PATH`は1〜2要素のJSON配列、`VALUE`はJSON値です。
+名前付き項目がない明示的な空マッピングも、この形式で保持します。
+
+旧`story property`を含む編集用SB3は、Issue #886対応CLIの`export-block-dsl`でYAMLへ戻し、
+`author-block-dsl`で再生成すると専用ブロックへ移行できます。古いSB3に埋め込まれた編集用拡張は
+パレットが自動更新されないため、CLIを更新するだけでは専用ブロックを追加できません。
+旧ハットやYAML全文の文字列方式は読取対象外なので、元のYAMLから再生成します。
+
+同じ名前の定義、`cover`などの単一設定の重複、旧`story property`と専用ブロックによる
+同じ範囲への書込はエラーです。改名時には、命令などの参照先も作者が変更します。
+元のYAMLと編集前SB3を保持してください。切り戻す場合は、専用ブロックの編集結果を対応CLIでYAMLへ
+退避してから、変更前CLIでそのYAMLから再生成します。専用ブロックを含むSB3は旧CLIでの読取を保証しません。
 
 ## include文・対象形式・書き戻しの制約
 
@@ -342,3 +375,5 @@ JSONは、`{"seconds": 2}`のように名前と値を記述する形式です。
 - [本体Issue #881: 実命令ブロックの生成と編集結果の書き戻し](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/881)
 
 - [本体Issue #883: ラベル付き台本とincludeBlocks](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883)
+- [本体Issue #886: 種類別の定義ブロック](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/886)
+- [本体Issue #891: 専用定義ブロックのフォーム編集](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/891)

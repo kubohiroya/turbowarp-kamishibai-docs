@@ -1,8 +1,8 @@
 {
-  "verifiedOn": "2026-10-17",
-  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883",
+  "verifiedOn": "2026-10-19",
+  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/886",
   "status": "unpublished-development",
-  "provenance": "Original examples generated from createDsl4StructuredBlockSourceDeclaration; migrated to the unified authoring hat and includeBlocks definitions at implementationCommit (Issue #883). Redundant version properties removed. Layout and colors are schematic.",
+  "provenance": "Original YAML examples migrated to Issue #883 unified hats and Issue #886 definition blocks. Named definitions use NAME; singleton settings are combined into one JSON object. Legacy properties remain only for settings without dedicated blocks. Layout and colors are schematic.",
   "diagrams": [
     {
       "id": "guide-01",
@@ -19,20 +19,20 @@
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Beach\"]",
+            "NAME": "Beach",
             "VALUE": "\"backdrop\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroIdle\"]",
+            "NAME": "HeroIdle",
             "VALUE": "\"costume:Hero\""
           },
           "kind": "stack",
@@ -45,10 +45,10 @@
       "title": "最小台本（2/3）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "actor",
+          "text": "actor [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"actors\",\"Hero\"]",
+            "NAME": "Hero",
             "VALUE": "\"HeroIdle\""
           },
           "kind": "stack",
@@ -107,30 +107,30 @@
       "title": "短形式",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Beach\"]",
+            "NAME": "Beach",
             "VALUE": "\"backdrop\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroIdle\"]",
+            "NAME": "HeroIdle",
             "VALUE": "\"costume:Hero\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"OpeningSound\"]",
+            "NAME": "OpeningSound",
             "VALUE": "\"sound\""
           },
           "kind": "stack",
@@ -143,40 +143,40 @@
       "title": "名前付き形式（1/2）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroHappy\"]",
+            "NAME": "HeroHappy",
             "VALUE": "{\"kind\":\"costume\",\"target\":\"Hero\",\"name\":\"happy\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"OpeningSound\"]",
+            "NAME": "OpeningSound",
             "VALUE": "{\"kind\":\"sound\",\"name\":\"Opening Theme\",\"loading\":\"eager\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Ocean\"]",
+            "NAME": "Ocean",
             "VALUE": "{\"kind\":\"backdrop\",\"file\":\"ocean.svg\",\"loading\":\"lazy\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"救助Pose\"]",
+            "NAME": "救助Pose",
             "VALUE": "{\"kind\":\"recognitionModel\",\"file\":\"rescue-pose\",\"loading\":\"lazy\"}"
           },
           "kind": "stack",
@@ -189,20 +189,20 @@
       "title": "名前付き形式（2/2）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"CameraMenuButton\"]",
+            "NAME": "CameraMenuButton",
             "VALUE": "{\"kind\":\"image\",\"file\":\"select-camera.svg\",\"loading\":\"eager\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"EndingTheme\"]",
+            "NAME": "EndingTheme",
             "VALUE": "{\"kind\":\"sound\",\"delivery\":\"remote\",\"source\":{\"url\":\"https://example.com/kamishibai/ending.ogg\"},\"loading\":\"lazy\"}"
           },
           "kind": "stack",
@@ -215,10 +215,10 @@
       "title": "Web上のファイル（remote）の内容を固定する",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"EndingTheme\"]",
+            "NAME": "EndingTheme",
             "VALUE": "{\"kind\":\"sound\",\"delivery\":\"remote\",\"loading\":\"lazy\",\"source\":{\"url\":\"https://example.com/kamishibai/ending.ogg\",\"integrity\":\"sha256-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\",\"contentType\":\"audio/ogg\",\"size\":1024}}"
           },
           "kind": "stack",
@@ -231,40 +231,40 @@
       "title": "登場人物（Actor）を登録する（1/2）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroIdle\"]",
+            "NAME": "HeroIdle",
             "VALUE": "\"costume:Hero\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroHappy\"]",
+            "NAME": "HeroHappy",
             "VALUE": "\"costume:Hero\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"TurtleIdle\"]",
+            "NAME": "TurtleIdle",
             "VALUE": "\"costume:Turtle\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "actor",
+          "text": "actor [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"actors\",\"Hero\"]",
+            "NAME": "Hero",
             "VALUE": "\"HeroIdle\""
           },
           "kind": "stack",
@@ -277,10 +277,10 @@
       "title": "登場人物（Actor）を登録する（2/2）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "actor",
+          "text": "actor [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"actors\",\"Turtle\"]",
+            "NAME": "Turtle",
             "VALUE": "\"TurtleIdle\""
           },
           "kind": "stack",
@@ -293,21 +293,10 @@
       "title": "表紙",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "cover",
+          "text": "cover = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"cover\",\"backdrop\"]",
-            "VALUE": "\"Beach\""
-          },
-          "kind": "stack",
-          "color": "authoring"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
-          "inputs": {
-            "PATH": "[\"cover\",\"bgm\"]",
-            "VALUE": "\"OpeningSound\""
+            "VALUE": "{\"backdrop\":\"Beach\",\"bgm\":\"OpeningSound\"}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -319,41 +308,31 @@
       "title": "読み込み中の表示（1/2）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"LoadingBackground\"]",
+            "NAME": "LoadingBackground",
             "VALUE": "\"backdrop\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Loading1\"]",
+            "NAME": "Loading1",
             "VALUE": "\"costume:Loading\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Loading2\"]",
+            "NAME": "Loading2",
             "VALUE": "\"costume:Loading\""
-          },
-          "kind": "stack",
-          "color": "authoring"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
-          "inputs": {
-            "PATH": "[\"loading\",\"backdrop\"]",
-            "VALUE": "\"LoadingBackground\""
           },
           "kind": "stack",
           "color": "authoring"
@@ -365,11 +344,10 @@
       "title": "読み込み中の表示（2/2）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "loading",
+          "text": "loading = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"loading\",\"costumes\"]",
-            "VALUE": "[\"Loading1\",\"Loading2\"]"
+            "VALUE": "{\"backdrop\":\"LoadingBackground\",\"costumes\":[\"Loading1\",\"Loading2\"]}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -381,21 +359,10 @@
       "title": "認識音",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "recognition",
+          "text": "recognition = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"recognition\",\"idleSound\"]",
-            "VALUE": "\"ClockTicking\""
-          },
-          "kind": "stack",
-          "color": "authoring"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
-          "inputs": {
-            "PATH": "[\"recognition\",\"chargeSound\"]",
-            "VALUE": "\"Success\""
+            "VALUE": "{\"idleSound\":\"ClockTicking\",\"chargeSound\":\"Success\"}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -407,11 +374,10 @@
       "title": "Poseモデルの初期化方法",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "recognition",
+          "text": "recognition = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"recognition\",\"modelInitialization\"]",
-            "VALUE": "{\"policy\":\"latest-needed\",\"parallel\":true}"
+            "VALUE": "{\"modelInitialization\":{\"policy\":\"latest-needed\",\"parallel\":true}}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -423,41 +389,31 @@
       "title": "カメラ映像の表示と操作（1/2）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"ShowMirroredButton\"]",
+            "NAME": "ShowMirroredButton",
             "VALUE": "{\"kind\":\"image\",\"file\":\"ui/show-mirrored.svg\",\"loading\":\"eager\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"ShowUnmirroredButton\"]",
+            "NAME": "ShowUnmirroredButton",
             "VALUE": "{\"kind\":\"image\",\"file\":\"ui/show-unmirrored.svg\",\"loading\":\"eager\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"CameraMenuButton\"]",
+            "NAME": "CameraMenuButton",
             "VALUE": "{\"kind\":\"image\",\"file\":\"ui/select-camera.svg\",\"loading\":\"eager\"}"
-          },
-          "kind": "stack",
-          "color": "authoring"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
-          "inputs": {
-            "PATH": "[\"recognition\",\"idleSound\"]",
-            "VALUE": "\"ClockTicking\""
           },
           "kind": "stack",
           "color": "authoring"
@@ -469,21 +425,10 @@
       "title": "カメラ映像の表示と操作（2/2）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "recognition",
+          "text": "recognition = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"recognition\",\"chargeSound\"]",
-            "VALUE": "\"Success\""
-          },
-          "kind": "stack",
-          "color": "authoring"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
-          "inputs": {
-            "PATH": "[\"recognition\",\"preview\"]",
-            "VALUE": "{\"mirroring\":\"mirrored\",\"controls\":{\"mirroring\":{\"position\":\"top-center\",\"opacity\":0.8,\"assets\":{\"showMirrored\":\"ShowMirroredButton\",\"showUnmirrored\":\"ShowUnmirroredButton\"}},\"cameraMenu\":{\"position\":\"bottom-center\",\"opacity\":0.8,\"buttonAsset\":\"CameraMenuButton\"}}}"
+            "VALUE": "{\"idleSound\":\"ClockTicking\",\"chargeSound\":\"Success\",\"preview\":{\"mirroring\":\"mirrored\",\"controls\":{\"mirroring\":{\"position\":\"top-center\",\"opacity\":0.8,\"assets\":{\"showMirrored\":\"ShowMirroredButton\",\"showUnmirrored\":\"ShowUnmirroredButton\"}},\"cameraMenu\":{\"position\":\"bottom-center\",\"opacity\":0.8,\"buttonAsset\":\"CameraMenuButton\"}}}}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -495,11 +440,10 @@
       "title": "ポーズの関節とボーンを重ねる",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "recognition",
+          "text": "recognition = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"recognition\",\"preview\"]",
-            "VALUE": "{\"mirroring\":\"mirrored\",\"overlay\":{\"visible\":true,\"jointStyles\":{\"leftWrist\":{\"color\":\"#ff00aa\",\"opacity\":0.8,\"radius\":6},\"rightWrist\":{\"color\":\"#ff00aa\",\"radius\":6}},\"boneStyle\":{\"color\":\"#00e5ff\",\"opacity\":0.9,\"width\":3},\"minimumConfidence\":0.5,\"confidenceScaling\":{\"jointOpacity\":true,\"jointRadius\":false,\"boneOpacity\":true,\"boneWidth\":false}}}"
+            "VALUE": "{\"preview\":{\"mirroring\":\"mirrored\",\"overlay\":{\"visible\":true,\"jointStyles\":{\"leftWrist\":{\"color\":\"#ff00aa\",\"opacity\":0.8,\"radius\":6},\"rightWrist\":{\"color\":\"#ff00aa\",\"radius\":6}},\"boneStyle\":{\"color\":\"#00e5ff\",\"opacity\":0.9,\"width\":3},\"minimumConfidence\":0.5,\"confidenceScaling\":{\"jointOpacity\":true,\"jointRadius\":false,\"boneOpacity\":true,\"boneWidth\":false}}}}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -511,10 +455,10 @@
       "title": "SVG Textを設定する",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "textStyle",
+          "text": "textStyle [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"textStyles\",\"title\"]",
+            "NAME": "title",
             "VALUE": "{\"background\":\"#112233\",\"color\":\"#ffffff\",\"font\":\"Noto Sans JP\",\"size\":150,\"align\":\"center\"}"
           },
           "kind": "stack",
@@ -660,30 +604,30 @@
       "title": "変数",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "variable",
+          "text": "variable [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"variables\",\"score\"]",
+            "NAME": "score",
             "VALUE": "1"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "variable",
+          "text": "variable [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"variables\",\"takeSeaRoute\"]",
+            "NAME": "takeSeaRoute",
             "VALUE": "false"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "variable",
+          "text": "variable [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"variables\",\"playerName\"]",
+            "NAME": "playerName",
             "VALUE": "\"ななし\""
           },
           "kind": "stack",
@@ -763,11 +707,21 @@
       "title": "操作キーを設定する",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "control",
+          "text": "control [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"controls\",\"keymaps\"]",
-            "VALUE": "{\"development\":{\"Space\":\"navigation.nextAction\",\"Enter\":\"navigation.nextScene\",\"ArrowLeft\":\"history.previousAction\",\"ArrowUp\":\"history.previousScene\",\"ArrowDown\":\"history.nextScene\"},\"production\":{\"Space\":\"rehearsal.skipPose\"}}"
+            "NAME": "development",
+            "VALUE": "{\"Space\":\"navigation.nextAction\",\"Enter\":\"navigation.nextScene\",\"ArrowLeft\":\"history.previousAction\",\"ArrowUp\":\"history.previousScene\",\"ArrowDown\":\"history.nextScene\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "control",
+          "text": "control [NAME] = JSON [VALUE]",
+          "inputs": {
+            "NAME": "production",
+            "VALUE": "{\"Space\":\"rehearsal.skipPose\"}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -894,10 +848,10 @@
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"FoodClassifier\"]",
+            "NAME": "FoodClassifier",
             "VALUE": "{\"kind\":\"recognitionModel\",\"file\":\"food-image-model\"}"
           },
           "kind": "stack",
@@ -1633,20 +1587,20 @@
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Beach\"]",
+            "NAME": "Beach",
             "VALUE": "\"backdrop\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Ocean\"]",
+            "NAME": "Ocean",
             "VALUE": "{\"kind\":\"backdrop\",\"file\":\"ocean.svg\",\"loading\":\"lazy\"}"
           },
           "kind": "stack",
@@ -1659,40 +1613,40 @@
       "title": "総合サンプル（2/13）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroIdle\"]",
+            "NAME": "HeroIdle",
             "VALUE": "\"costume:Hero\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroHappy\"]",
+            "NAME": "HeroHappy",
             "VALUE": "\"costume:Hero\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroHelp\"]",
+            "NAME": "HeroHelp",
             "VALUE": "\"costume:Hero\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"CaptionIdle\"]",
+            "NAME": "CaptionIdle",
             "VALUE": "\"costume:Caption\""
           },
           "kind": "stack",
@@ -1705,40 +1659,40 @@
       "title": "総合サンプル（3/13）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"OpeningSound\"]",
+            "NAME": "OpeningSound",
             "VALUE": "\"sound\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"ClockTicking\"]",
+            "NAME": "ClockTicking",
             "VALUE": "\"sound\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Success\"]",
+            "NAME": "Success",
             "VALUE": "\"sound\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"Typewriter\"]",
+            "NAME": "Typewriter",
             "VALUE": "\"sound\""
           },
           "kind": "stack",
@@ -1751,40 +1705,40 @@
       "title": "総合サンプル（4/13）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroGreetingVoice\"]",
+            "NAME": "HeroGreetingVoice",
             "VALUE": "\"sound\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"HeroThinkingVoice\"]",
+            "NAME": "HeroThinkingVoice",
             "VALUE": "\"sound\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"ShowMirroredButton\"]",
+            "NAME": "ShowMirroredButton",
             "VALUE": "{\"kind\":\"image\",\"file\":\"show-mirrored.svg\",\"loading\":\"eager\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"ShowUnmirroredButton\"]",
+            "NAME": "ShowUnmirroredButton",
             "VALUE": "{\"kind\":\"image\",\"file\":\"show-unmirrored.svg\",\"loading\":\"eager\"}"
           },
           "kind": "stack",
@@ -1797,40 +1751,40 @@
       "title": "総合サンプル（5/13）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"CameraMenuButton\"]",
+            "NAME": "CameraMenuButton",
             "VALUE": "{\"kind\":\"image\",\"file\":\"select-camera.svg\",\"loading\":\"eager\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"救助Pose\"]",
+            "NAME": "救助Pose",
             "VALUE": "{\"kind\":\"recognitionModel\",\"file\":\"rescue-pose\",\"loading\":\"lazy\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "actor",
+          "text": "actor [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"actors\",\"Hero\"]",
+            "NAME": "Hero",
             "VALUE": "\"HeroIdle\""
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "actor",
+          "text": "actor [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"actors\",\"Caption\"]",
+            "NAME": "Caption",
             "VALUE": "\"CaptionIdle\""
           },
           "kind": "stack",
@@ -1843,30 +1797,19 @@
       "title": "総合サンプル（6/13）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "cover",
+          "text": "cover = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"cover\",\"backdrop\"]",
-            "VALUE": "\"Beach\""
+            "VALUE": "{\"backdrop\":\"Beach\",\"bgm\":\"OpeningSound\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "textStyle",
+          "text": "textStyle [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"cover\",\"bgm\"]",
-            "VALUE": "\"OpeningSound\""
-          },
-          "kind": "stack",
-          "color": "authoring"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
-          "inputs": {
-            "PATH": "[\"textStyles\",\"title\"]",
+            "NAME": "title",
             "VALUE": "{\"background\":\"#112233\",\"color\":\"#ffffff\",\"font\":\"Noto Sans JP\",\"size\":150,\"align\":\"center\"}"
           },
           "kind": "stack",
@@ -1919,10 +1862,10 @@
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "variable",
+          "text": "variable [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"variables\",\"score\"]",
+            "NAME": "score",
             "VALUE": "1"
           },
           "kind": "stack",
@@ -1935,41 +1878,20 @@
       "title": "総合サンプル（8/13）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "variable",
+          "text": "variable [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"variables\",\"takeSeaRoute\"]",
+            "NAME": "takeSeaRoute",
             "VALUE": "false"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "recognition",
+          "text": "recognition = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"recognition\",\"idleSound\"]",
-            "VALUE": "\"ClockTicking\""
-          },
-          "kind": "stack",
-          "color": "authoring"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
-          "inputs": {
-            "PATH": "[\"recognition\",\"chargeSound\"]",
-            "VALUE": "\"Success\""
-          },
-          "kind": "stack",
-          "color": "authoring"
-        },
-        {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
-          "inputs": {
-            "PATH": "[\"recognition\",\"preview\"]",
-            "VALUE": "{\"mirroring\":\"mirrored\",\"overlay\":{\"visible\":true,\"boneStyle\":{\"color\":\"#00e5ff\",\"opacity\":0.9,\"width\":3},\"minimumConfidence\":0.5},\"controls\":{\"mirroring\":{\"position\":\"top-center\",\"opacity\":0.8,\"assets\":{\"showMirrored\":\"ShowMirroredButton\",\"showUnmirrored\":\"ShowUnmirroredButton\"}},\"cameraMenu\":{\"position\":\"bottom-center\",\"opacity\":0.8,\"buttonAsset\":\"CameraMenuButton\"}}}"
+            "VALUE": "{\"idleSound\":\"ClockTicking\",\"chargeSound\":\"Success\",\"preview\":{\"mirroring\":\"mirrored\",\"overlay\":{\"visible\":true,\"boneStyle\":{\"color\":\"#00e5ff\",\"opacity\":0.9,\"width\":3},\"minimumConfidence\":0.5},\"controls\":{\"mirroring\":{\"position\":\"top-center\",\"opacity\":0.8,\"assets\":{\"showMirrored\":\"ShowMirroredButton\",\"showUnmirrored\":\"ShowUnmirroredButton\"}},\"cameraMenu\":{\"position\":\"bottom-center\",\"opacity\":0.8,\"buttonAsset\":\"CameraMenuButton\"}}}}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -1981,11 +1903,21 @@
       "title": "総合サンプル（9/13）",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "control",
+          "text": "control [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"controls\",\"keymaps\"]",
-            "VALUE": "{\"development\":{\"Space\":\"navigation.nextAction\",\"ArrowLeft\":\"history.previousAction\",\"ArrowUp\":\"history.previousScene\",\"ArrowDown\":\"history.nextScene\"},\"production\":{\"Space\":\"rehearsal.skipPose\"}}"
+            "NAME": "development",
+            "VALUE": "{\"Space\":\"navigation.nextAction\",\"ArrowLeft\":\"history.previousAction\",\"ArrowUp\":\"history.previousScene\",\"ArrowDown\":\"history.nextScene\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "control",
+          "text": "control [NAME] = JSON [VALUE]",
+          "inputs": {
+            "NAME": "production",
+            "VALUE": "{\"Space\":\"rehearsal.skipPose\"}"
           },
           "kind": "stack",
           "color": "authoring"
@@ -2378,20 +2310,20 @@
       "title": "追加素材を登録する",
       "nodes": [
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"EarthquakeClassroom\"]",
+            "NAME": "EarthquakeClassroom",
             "VALUE": "{\"kind\":\"backdrop\",\"file\":\"earthquake-classroom.svg\"}"
           },
           "kind": "stack",
           "color": "authoring"
         },
         {
-          "opcode": "property",
-          "text": "story property [PATH] = JSON [VALUE]",
+          "opcode": "asset",
+          "text": "asset [NAME] = JSON [VALUE]",
           "inputs": {
-            "PATH": "[\"assets\",\"ProtectHead\"]",
+            "NAME": "ProtectHead",
             "VALUE": "{\"kind\":\"costume\",\"target\":\"Student\",\"file\":\"protect-head.svg\"}"
           },
           "kind": "stack",
@@ -2537,5 +2469,5 @@
       ]
     }
   ],
-  "implementationCommit": "1a4bb356cc9eb75667414df28dea054193f83a8b"
+  "implementationCommit": "33594634ff19aebcde596c8be05730c0817b5ac6"
 }

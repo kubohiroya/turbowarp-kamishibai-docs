@@ -4,32 +4,34 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 対象: 初めて台本ブロックで紙芝居を作る方\
 扱う台本: TurboWarp上のブロック台本SB3\
-実装基準: 本体Issue #883の修正を含む未公開の開発版、2026年10月17日\
+実装基準: 本体Issue #891の修正を含む未公開の開発版、2026年10月19日\
 スターターとベースSB3: 公開プレリリース`4.0.0-rc.22`
 
 入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
 
 このチュートリアルは、[台本DSL版「紙芝居を作る」](create.md)と同じスターターを、台本ブロックで編集する実習です。
 最初にセリフを変え、次の場面を加え、検査して配布用SB3を作ります。最初のセリフ変更ができてから、背景やポーズへ進みます。
-図版は実装の入力欄と接続を基に描いた説明図で、画面キャプチャではありません。狭い画面では図を左右にスクロールできます。
+SVGのブロック図は入力欄と接続を基に描いた説明図、PNGのフォーム図は実Editorの画面キャプチャです。狭い画面では図を左右にスクロールできます。
 
 ## 利用する版を先に確認する
 
-**命令単位のブロック編集には、Issue #883の修正を含む開発版CLIが必要です。**
+**命令単位のブロック編集には、Issue #891の修正を含む開発版CLIが必要です。**
 公開rc.22のCLIはYAML全文を一つの文字列としてブロックに保存します。公開rc.22をインストールするだけでは、
 本書のようにセリフや待機を個別のブロックで編集できません。
 
 準備担当者は[相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)に従い、
 修正を含む本体の作業ツリーで依存を復元し、`pnpm run build:lib`を実行してください。
 以後のコマンドはすべて、その本体リポジトリ直下で実行します。
-CLIの版番号だけでは修正の有無を判定できません。生成時に`scene`の内側へ命令ブロックが配置されることを確認します。
+CLIの版番号だけでは修正の有無を判定できません。生成時に`scene`の内側へ命令ブロックが配置され、素材が`asset`ブロックになることを確認します。
+専用ブロックの実装は[本体PR #887](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/887)でmainへマージ済みです。
+古い編集用SB3は、同じ開発版CLIでYAMLへ書き出してから`author-block-dsl`で再生成します。
 
 準備済みの編集用SB3が配られた場合は、Step 3から始められます。検査と配布用SB3の生成は準備担当者と行います。
 
 ## 用意するものと完成までの流れ
 
 - [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開くブラウザー
-- Issue #883の修正を含む開発版CLIを動かす環境（Node.js 22.18.0以上）
+- Issue #891の修正を含む開発版CLIを動かす環境（Node.js 24.0.0以上）
 - スターター、ランタイム入りのベースSB3、作業用フォルダー
 - ポーズ場面も試す場合はカメラと、周囲にぶつからない空間
 
@@ -90,7 +92,7 @@ node bin/turbowarp-kamishibai.mjs author-block-dsl \
 3. ステージのコードで`kamishibai [4.0] []`を探す
    版の入力は文字列`4.0`、ラベルは空欄です。版を別の`story property`へ入力しません。
 4. そこからつながる`scene`のうち、名前が`earthquake`のものを探す
-5. 内側の`actor [Student] say spec [...]`の`SPEC`入力を開き、セリフだけを変える
+5. 内側の`actor [Student] say spec [...]`の`SPEC`の文字列入力欄を選び、セリフだけを変える
 
 変更後のブロックは次の図の形です。
 
@@ -123,21 +125,32 @@ node bin/turbowarp-kamishibai.mjs author-block-dsl \
 背景と衣装を増やす場合は、`addition-kit/earthquake-classroom.svg`と`addition-kit/protect-head.svg`を
 `tutorial-story`直下へコピーします。
 
-ハットの下へ`story property`を二つ追加します。入力する値は次の図のとおりです。
+編集用拡張「Kamishibai Block Script」から、ハットの下へ`asset`を二つ追加します。入力する値は次の図のとおりです。
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/tutorial-assets.svg" alt="EarthquakeClassroomとProtectHeadを登録する設定ブロック"></figure>
 
-`PATH`はそれぞれ`["assets","EarthquakeClassroom"]`と`["assets","ProtectHead"]`です。
+`VALUE`は、配置した`asset`の左端にある白い書類アイコンを押すとフォームで編集できます。
+「背景 — 作品フォルダーのファイル」を選び、ファイルのパスを入力して「保存」を押します。
+図は`Classroom`の例です。この実習では`earthquake-classroom.svg`、衣装の方は
+「コスチューム — 作品フォルダーのファイル」で対象を`Student`、パスを`protect-head.svg`にします。
+
+<figure class="block-script-form"><img src="../images/block-authoring/form-asset.png" alt="assetの実フォーム。背景のファイルパスを編集して保存する"></figure>
+
+フォームの「保存」の後、EditorのファイルメニューからSB3も保存します。
+フォームが開かない場合は、Issue #891対応CLIで編集用SB3を再生成し、編集用拡張をサンドボックスなしで読み込んだことを確認します。
+フォームの操作と8種類の画面は[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#フォームでjsonを編集する)を参照してください。
+
+`NAME`はそれぞれ`EarthquakeClassroom`と`ProtectHead`です。名前欄に引用符やJSONパスは入力しません。
 `VALUE`は`{"kind":"backdrop","file":"earthquake-classroom.svg"}`と
 `{"kind":"costume","target":"Student","file":"protect-head.svg"}`です。
 `instruction`の背景入力を`EarthquakeClassroom`へ変えて保存します。
 
-ポーズも加える場合は、`story property`で次の設定を追加します。
+ポーズも加える場合は、`asset`で次の素材を追加します。
 
-| PATH                        | VALUE                                              |
-| --------------------------- | -------------------------------------------------- |
-| `["assets","SafetyPose"]`   | `{"kind":"recognitionModel","file":"safety-pose"}` |
-| `["assets","SuccessSound"]` | `{"kind":"sound","file":"success.mp3"}`            |
+| NAME           | VALUE                                              |
+| -------------- | -------------------------------------------------- |
+| `SafetyPose`   | `{"kind":"recognitionModel","file":"safety-pose"}` |
+| `SuccessSound` | `{"kind":"sound","file":"success.mp3"}`            |
 
 `protect`シーンを`instruction`の下へ追加し、次の図のようにします。
 
@@ -196,7 +209,7 @@ node bin/turbowarp-kamishibai.mjs build-dsl4 \
 
 ## 完了チェック
 
-- [ ] 命令単位のブロックを扱える開発版を使った
+- [ ] `asset`などの専用ブロックを扱えるIssue #891対応の開発版を使った
 - [ ] セリフを変更し、次のシーンを接続した
 - [ ] 編集したSB3をコンピューターへ保存した
 - [ ] 保存したSB3から書き出して検査した

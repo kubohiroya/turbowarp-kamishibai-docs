@@ -95,7 +95,7 @@ for (const diagram of snapshot.diagrams) {
   const height = top + body.height + 38;
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title desc">
 <title id="title">${escape(diagram.title)}</title>
-<desc id="desc">${escape('Issue #883の新ハット形式の台本ブロック。複数のハットは独立した台本として配置します。上から順につなぎ、シーンの命令はC字の内側に配置します。入力欄の長い値は図中だけで折り返しています。')}</desc>
+<desc id="desc">${escape('Issue #883の統一ハットとIssue #886の種類別定義ブロック。複数のハットは独立した台本として配置します。上から順につなぎ、シーンの命令はC字の内側に配置します。入力欄の長い値は図中だけで折り返しています。')}</desc>
 <rect width="${width}" height="${height}" rx="12" fill="#f3f6fa"/>
 <g font-family="ui-monospace, Menlo, monospace" font-weight="500">${heading.map((line, i) => `<text x="24" y="${30 + i * 26}" font-size="18" fill="#172b40">${escape(line)}</text>`).join('')}${body.svg}</g>
 </svg>
