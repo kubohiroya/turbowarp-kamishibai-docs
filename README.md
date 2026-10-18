@@ -134,6 +134,11 @@ release smokeも3.x版と4.0版を別のMarkdown、URL、publicationとして保
 [`sources/dsl4/release-history-4.0.json`](sources/dsl4/release-history-4.0.json)を正本にし、実装・検証済みcandidateと
 tag、GitHub Release、npm、production Pagesの正式公開状態を分けて追跡します。
 
+4.0の素材の置き方を変更する手順は、
+[DSL 4.0 アセット変換ガイド](docs/dsl-author-guides/dsl-4.0-asset-conversion-guide.md)で保守します。
+組み込み素材とローカル素材の相互変換、リモート素材の取り込み、変換後のビルドと切り戻しを扱い、
+`/4.0/dsl-author-guides/dsl-4.0-asset-conversion-guide/`へHTML・Viewer用本文を生成します。
+
 ### DSL 4.0 Schemaリファレンスの生成
 
 DSL 4.0のリファレンスは、上流JSON Schemaの固定snapshot、source lock、日本語Annotationから

@@ -19,6 +19,7 @@ export const documentUpdatedAt = Object.freeze({
   'history.md': '2026-08-04',
   'dsl-4.0-author-guide.md': '2026-10-17',
   'dsl-4.0-block-script-conversion-guide.md': '2026-10-17',
+  'dsl-4.0-asset-conversion-guide.md': '2026-10-18',
   'dsl-4.0-schema-reference.md': '2026-10-17',
   'dsl-4.0-history.md': '2026-10-17',
   'dsl-3.2-to-4.0-conversion-guide.md': '2026-10-17',
@@ -179,6 +180,15 @@ export const documentCollections = [
         audience: 'YAML台本とTurboWarpのブロック台本を相互に編集する方',
         description:
           'author-block-dslとexport-block-dslの使い方、ブロックを編集・保存してYAMLへ書き戻す手順、公開版と開発版の違いを説明します。',
+      },
+      {
+        sourceFilename: 'dsl-4.0-asset-conversion-guide.md',
+        sourceDirectory: 'dsl-author-guides',
+        outputDirectory: 'dsl-author-guides',
+        title: 'DSL 4.0 アセット変換ガイド',
+        audience: '組み込み・ローカル・リモートの素材を移し替える台本作者',
+        description:
+          '組み込み素材とローカル素材の相互変換、リモート素材の取り込み、出力の再利用、配布プロファイルとの使い分けを説明します。',
       },
       {
         sourceFilename: 'dsl-4.0-runtime-variable-guide.md',

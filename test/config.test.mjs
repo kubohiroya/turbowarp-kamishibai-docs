@@ -29,6 +29,7 @@ const expectedCollections = {
   'dsl-4.0-guides': ['dsl-4.0-author-guide.md'],
   'dsl-4.0-detail-guides': [
     'dsl-4.0-block-script-conversion-guide.md',
+    'dsl-4.0-asset-conversion-guide.md',
     'dsl-4.0-runtime-variable-guide.md',
     'dsl-4.0-schema-reference.md',
     'dsl-4.0-history.md',
