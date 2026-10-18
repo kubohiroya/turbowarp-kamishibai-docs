@@ -48,7 +48,7 @@ test('shows rc.22 on the 4.0 top and current public samples', () => {
   assert.match(dsl4Index, /安定版<code>4\.0\.0<\/code>はまだ未公開/u);
   assert.match(dsl4Index, /最新安定版は\s*<code>v3\.2\.3<\/code>/u);
 
-  assert.equal(dsl4Documents.length, 25);
+  assert.equal(dsl4Documents.length, 26);
   for (const {sourceFilename, source} of dsl4Documents) {
     if (sourceFilename === 'turbowarp-ecosystem.md') continue;
     assert.match(source, /4\.0\.0-rc\.22|v4\.0\.0-rc\.22/u, sourceFilename);

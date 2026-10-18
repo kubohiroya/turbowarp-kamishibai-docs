@@ -413,6 +413,9 @@ scenes:
 | どこからデータを持ってくるか | ①SB3内の素材、②作品フォルダーのファイル、③Web上のファイル | 短形式／`name`、`file`、`delivery: remote`＋`source` |
 | いつ使える状態にするか       | 開始前（eager）、使うシーンの直前（lazy）                 | `loading: eager`／`loading: lazy`                    |
 
+素材の置き方を変更する場合は、[アセット変換ガイド](dsl-4.0-asset-conversion-guide.md)を参照してください。
+`convert-dsl4-assets`で、SB3内とローカルファイルの相互変換、リモート素材の取り込みができます。
+
 ### 入手元を選ぶ
 
 ![SB3内の素材、作品フォルダーのファイル、Web上のファイルの三つの入手元と、SB3作成時・実行時の扱い](../images/dsl4-asset-sources.svg)
@@ -1939,6 +1942,8 @@ rc.8より後には、crossfade（[#652](https://github.com/kubohiroya/turbowarp
 （[#879](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/879)）がSchemaへ入りました。
 
 ## 関連資料
+
+- [DSL 4.0 アセット変換ガイド](dsl-4.0-asset-conversion-guide.md): 組み込み・ローカル・リモートの変換と、変換後のビルド
 
 - [紙芝居DSL 4.0 Schemaリファレンス](dsl-4.0-schema-reference.md): 固定Schemaに基づくfield、型、制約、action一覧
 - [DSL 4.0ランタイム変数ガイド](dsl-4.0-runtime-variable-guide.md): 実行中に参照できる変数と、その扱い方
