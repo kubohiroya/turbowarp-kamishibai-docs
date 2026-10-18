@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-labelledby="title desc">
+  <title id="title">アセットの三つの状態と四方向の変換</title>
+  <desc id="desc">リモート素材remoteから、HTTPSで取得して組み込み素材projectまたはローカル素材localへ変換する。組み込み素材projectとローカル素材localは相互変換できる。projectへの変換は--to project、localへの変換は--to localを指定する。変換ごとに新しい作品フォルダーを作り、入力の台本・SB3・素材は保持する。これは制作用素材の置き方の図であり、実行中の読み込み状態ではない。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L10 5L0 10Z" fill="#315b72"/></marker>
+    <style>
+      text{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;fill:#172b3a;text-anchor:middle}
+      .heading{font-size:27px;font-weight:700}
+      .code{font-family:"SFMono-Regular",Consolas,monospace;font-size:22px;fill:#315b72}
+      .small{font-size:20px;fill:#304a59}
+      .project{fill:#eaf4fa;stroke:#397a9c;stroke-width:2}
+      .local{fill:#effaf5;stroke:#3b8b70;stroke-width:2}
+      .remote{fill:#fff1df;stroke:#b87629;stroke-width:2}
+      .edge{stroke:#315b72;stroke-width:3;fill:none;marker-end:url(#arrow)}
+      .label{fill:#fff;stroke:#d8e1e7;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="960" height="640" fill="#fff"/>
+  <g>
+    <rect class="remote" x="305" y="30" width="350" height="130" rx="12"/>
+    <text class="heading" x="480" y="68">(c) リモート素材</text>
+    <text class="code" x="480" y="104">remote</text>
+    <text class="small" x="480" y="139">source.url / HTTPS</text>
+  </g>
+  <path class="edge" d="M340 160L190 400"/>
+  <path class="edge" d="M620 160L770 400"/>
+  <g>
+    <rect class="label" x="35" y="235" width="320" height="83" rx="10"/>
+    <text class="code" x="195" y="267">--to project</text>
+    <text class="small" x="195" y="298">HTTPS取得 → SB3へ登録</text>
+    <rect class="label" x="605" y="235" width="320" height="83" rx="10"/>
+    <text class="code" x="765" y="267">--to local</text>
+    <text class="small" x="765" y="298">HTTPS取得 → ファイル保存</text>
+  </g>
+  <g>
+    <rect class="project" x="30" y="410" width="310" height="140" rx="12"/>
+    <text class="heading" x="185" y="450">(a) 組み込み素材</text>
+    <text class="code" x="185" y="486">project</text>
+    <text class="small" x="185" y="523">短形式 / name</text>
+    <rect class="local" x="620" y="410" width="310" height="140" rx="12"/>
+    <text class="heading" x="775" y="450">(b) ローカル素材</text>
+    <text class="code" x="775" y="486">local</text>
+    <text class="small" x="775" y="523">file</text>
+  </g>
+  <path class="edge" d="M350 465H610"/>
+  <text class="code" x="480" y="447">--to local</text>
+  <path class="edge" d="M610 505H350"/>
+  <text class="code" x="480" y="537">--to project</text>
+  <rect x="30" y="580" width="900" height="42" rx="8" fill="#f6f8fa" stroke="#98aab5"/>
+  <text class="small" x="480" y="607">出力は新しい作品フォルダーへ。元の台本・SB3・素材は保持。</text>
+</svg>
