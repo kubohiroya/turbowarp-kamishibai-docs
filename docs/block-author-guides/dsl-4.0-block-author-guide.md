@@ -23,13 +23,15 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 利用する版と図版の読み方
 
-公開プレリリース`4.0.0-rc.23`のCLIとStandard SB3を使います。正式版4.0.0は未公開です。
+基本手順は公開プレリリース`4.0.0-rc.23`のCLIとStandard SB3を使います。正式版4.0.0は未公開です。
+「この部分を使う［オン／オフ］」の節だけは、本体PR #903対応のCLIとランタイムを使う追加機能です。
 Node.js 24.0.0以上で公開CLIをexact installすれば、実命令ブロック、統一ハット、includeBlocks、
 8種類の定義ブロックとフォーム編集が使えます。本体のcheckoutやCLIのビルドは不要です。
 準備方法は[相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
 
 SVGのブロック図は実装のブロック名、入力値、接続を基に描いた説明図です。
 PNGのフォーム画面はIssue #891対応の編集用拡張を実Editorで開いて撮影したものです。
+オン／オフのPNGは、本体PR #903対応のブロック台本を実Extension Data Editorで開いて撮影しています。
 補助ブロックは紫、命令ブロックは青緑で区別し、入力欄の文字は実際の英語表記を使います。
 長い入力値は図の中だけで折り返しています。入力欄へは改行や省略を加えず、値全体を入力します。
 狭い画面では図を左右にスクロールできます。図が複数に分かれている場合も、番号順に同じハットの下へ接続します。
@@ -1050,6 +1052,62 @@ inline形式も使用できます。
 
 `action options`の`PROPERTIES`に`{"arguments":{"stableId":"waitBeforeEnding"},"textFormat":"plain"}`を入れ、内側へ待機ブロックを一つ接続します。
 
+<a id="use-section"></a>
+
+## この部分を使う［オン／オフ］
+
+台本の一部を残したまま試さずにおきたいときは、C字型の「この部分を使う［オン／オフ］」で囲みます。
+YAMLの行頭に`#`を付けて一時的に外す操作に対応します。複数の行に相当するブロックも一度に切り替えられます。
+
+**この節は本体[PR #903](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/903)対応の追加機能です。**
+公開rc.23のCLI・Standard SB3・上の公開サンプルには含まれません。Editorを開き直すだけでは増えません。
+[対応するCLI・ランタイムの準備と往復手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#section-roundtrip)で
+`author-block-dsl --block-sections true`を指定して生成したSB3を使います。パレット表示は既定OFFです。
+直接再生には、ブロックの読み取りにも対応したランタイムが必要です。
+
+### 命令を囲んで切り替える
+
+1. 対応SB3をExtension Data Editorで開き、ステージの「コード」を選びます。編集用拡張の読み込みも許可します。
+2. 紫色の「Kamishibai Block Script」から「この部分を使う」を取り出し、`scene`の内側へ接続します。
+3. 一時的に外したい命令をC字の内側へ移します。続けて実行する命令は囲みの下につなぎます。
+   複数命令を移すときは、その後も実行する末尾の命令を先に切り離してください。
+4. メニューを「オフ」にすると内側を読み飛ばし、「オン」に戻すと内側をその位置で実行します。
+5. SB3をコンピューターへ保存し、物語を開始し直して確認します。実行中の切り替えを自動反映する機能ではありません。
+
+<figure class="block-script-form"><img style="max-width:273px" src="../images/block-authoring/section-menu.png" alt="実Editorのこの部分を使うブロックでオンとオフを選ぶメニュー"><figcaption>プルダウンから「オン」「オフ」を選びます。値や条件式を入力する必要はありません。</figcaption></figure>
+
+次の例は、1秒・2秒・3秒の待機のうち、2秒だけを囲んでいます。図は切り替え部分を示しています。
+再生する台本には、`production`のキーマップなど必要な設定も用意してください。
+
+<figure class="block-script-form"><img style="max-width:270px" src="../images/block-authoring/section-on.png" alt="openingの1秒、囲みの中の2秒、囲みの下の3秒の待機。選択値はオン"><figcaption>オン: 1秒 → 2秒 → 3秒の順に実行します。</figcaption></figure>
+
+<figure class="block-script-form"><img style="max-width:270px" src="../images/block-authoring/section-off.png" alt="同じ待機ブロックを残し、この部分を使うの選択値だけをオフにした実画面"><figcaption>オフ: 1秒 → 3秒の順に実行します。2秒の命令は囲みの中に残ります。</figcaption></figure>
+
+オフでもブロックの色は変わりません。メニューの選択値を確認してください。
+オフ部分を削除したり、通常のScratchの「もし」ブロックで囲んだりする必要はありません。
+
+### 定義にも使う
+
+`asset`や`actor`などの定義を外すときは、台本ハット直下の定義列に囲みを置き、定義ブロックを中へ移します。
+定義をオフにする場合は、それを参照する命令・定義も外すか、別の有効な定義へ参照を変更します。
+有効部分から無効な素材などを参照すると診断になります。同じ名前の候補を並べる場合は片方だけをオンにします。
+
+囲めるのは定義列、または`scene`内の命令列です。`scene`全体と`includeBlocks`は囲めません。
+入れ子は最大32段で、外側がオフなら内側がオンでも実行されません。
+オフ部分でも、接続・循環・JSON構文・基本型を検査します。内部のSchema制約と素材参照などの意味検査は、
+オンにしたときに行います。オフは壊れた接続や不正JSONを隠す指定ではありません。
+
+### 保存とYAMLへの書き戻し
+
+SB3には、囲んだブロックとオン／オフの選択値が残ります。対応CLIでYAMLへ書き戻すと、実行する部分を
+通常の台本、オフ部分と囲み構造を`# kamishibai-block-sections-v1:`で始まる復元用コメントへ保存します。
+対応CLIで再生成すれば元の囲みを復元できます。元のYAMLの各行へ`#`を付け直す方式ではありません。
+
+YAMLの本文だけを独立に変更すると、再生成時に編集状態との不一致を診断します。
+YAMLの直接編集へ移る場合は、編集用SB3を退避してから復元用コメントを削除します。
+そのYAMLからは、オフ部分と囲み構造を復元できなくなる点に注意してください。
+詳細は[相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#section-roundtrip)を参照してください。
+
 ## 編集したブロックを保存・検査・再生する
 
 1. 素材bundleを含むブロック台本SB3をTurboWarpで開き、台本ハットからつながるブロックを変更する
@@ -1115,6 +1173,7 @@ Editorで開き、緑の旗で起動してタイトルを閉じると、組み�
 | `K4-BLOCK-SOURCE-LABEL-001`     | 参照ラベルが空欄・未定義でないか                        |
 | `K4-BLOCK-SOURCE-DUPLICATE-001` | ラベル・入口・出力名が重複していないか                  |
 | `K4-BLOCK-SOURCE-CYCLE-001`     | includeBlocksが自己参照・循環していないか               |
+| `K4-BLOCK-SOURCE-SECTION-STATE-001` | オン／オフの復元用コメントとYAML本文が一致するか。対応CLIを使っているか |
 | `K4-VERSION-001`                | 版の設定値が数値でなく文字列の`"4.0"`か                 |
 | `K4-SCHEMA-*`                   | 項目、値の型、必須入力、範囲                            |
 | `K4-REF-*`                      | 素材、シーン、アクターなどの参照先                      |
@@ -1149,6 +1208,9 @@ Issue #886の種類別定義ブロックへ更新しています。
 ブロック名、入力欄、C字の内側の命令は実装と対応します。
 フォームの実装基準は本体commit `0c1bf09f3285e1ea265037926a3465e550ab46c8`です。
 撮影条件・入力値・検証結果は`sources/dsl4-definition-forms.json`に記録しています。
+
+オン／オフブロックの実装基準は本体commit `0f1654573ccb517805fe6512ca45e64bd471d163`です。
+実画面の撮影条件・命令列・検証結果は`sources/dsl4-source-sections.json`に記録しています。
 
 公開状況やruntime側の実装根拠は[台本DSL版の付録](../dsl-author-guides/dsl-4.0-author-guide.md#付録-実装基準と実装根拠)を参照してください。
 

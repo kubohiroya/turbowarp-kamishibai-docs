@@ -364,6 +364,72 @@ JSONは、`{"seconds": 2}`のように名前と値を記述する形式です。
 元のYAMLと編集前SB3を保持してください。切り戻す場合は、専用ブロックの編集結果を対応CLIでYAMLへ
 退避してから、変更前CLIでそのYAMLから再生成します。専用ブロックを含むSB3は旧CLIでの読取を保証しません。
 
+<a id="section-roundtrip"></a>
+
+## オン／オフを保持して往復する（本体PR #903対応）
+
+「この部分を使う［オン／オフ］」は、本体[PR #903](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/903)で
+追加された機能です。この節だけは公開rc.23のCLIとベースSB3をそのまま使う手順ではありません。
+公開rc.23には`--block-sections`と対応する読み取り処理がありません。
+操作と実画面は[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#use-section)を参照してください。
+
+### 対応するCLIとベースSB3を準備する
+
+次は、確認済みの本体commitへ固定してCLIをビルドする例です。Node.js 24.0.0以上と、
+`corepack`でこのリポジトリのpnpmを実行できる環境を用意します。
+公開CLIを使う前節までの作業とは分け、元の台本・SB3を保持してください。
+
+```sh
+git clone https://github.com/kubohiroya/turbowarp-kamishibai-app.git kamishibai-section-tools
+git -C kamishibai-section-tools checkout --detach 0f1654573ccb517805fe6512ca45e64bd471d163
+corepack pnpm --dir kamishibai-section-tools install --frozen-lockfile
+corepack pnpm --dir kamishibai-section-tools run build:lib
+```
+
+以後は、このCLIのパスを指定します。以下は素材を使わない単一台本`story.k4.yml`と、ランタイム入りの
+`base.sb3`を作業フォルダーへ置いた例です。台本は前の最小例のように`production`のキーマップを定義します。
+まず対応ランタイムを持つベースを生成してから、編集用拡張のパレット表示を有効にします。
+
+```sh
+node kamishibai-section-tools/bin/turbowarp-kamishibai.mjs build-dsl4 \
+  --base base.sb3 --project-root . --source story.k4.yml \
+  --output section-base.sb3 --control-profile production --channel bundled --replace-existing
+
+node kamishibai-section-tools/bin/turbowarp-kamishibai.mjs author-block-dsl \
+  --input story.k4.yml --base section-base.sb3 --output section-blocks.sb3 --block-sections true
+```
+
+`sourceSections`は生成時に固定するパレット表示フラグで、既定falseです。
+`--block-sections true`は新規ブロックをパレットに表示します。古いベースへこの指定だけを加えても、
+そのベースの再生ランタイムは更新されません。上のベース生成も行ってください。
+file素材やScratchスプライトがある作品は、前節の素材準備の条件も適用します。
+
+### 編集・保存・書き戻し・再生成
+
+1. `section-blocks.sb3`をEditorで開き、命令列または定義列を囲み、オン／オフを選びます。
+2. ファイルメニューから`section-edited.sb3`として保存します。
+3. 同じ対応CLIでYAMLへ書き戻し、必要ならそのYAMLから再生成します。
+
+```sh
+node kamishibai-section-tools/bin/turbowarp-kamishibai.mjs export-block-dsl \
+  --input section-edited.sb3 --output-dir section-exported --name story
+
+node kamishibai-section-tools/bin/turbowarp-kamishibai.mjs author-block-dsl \
+  --input section-exported/story.k4.yml --base section-base.sb3 \
+  --output section-restored.sb3 --block-sections true
+```
+
+実行する命令・定義は通常のYAML、無効部分と囲み構造はサイズ制限付きの
+`# kamishibai-block-sections-v1:`復元用コメントに入ります。オンなら1・2・3秒、オフなら1・3秒と
+なる待機の例でも、2秒の命令を復元できます。元のYAMLのコメント・引用符・空行を保存する機能ではありません。
+
+本文を独立に編集して復元状態と食い違った場合は、`K4-BLOCK-SOURCE-SECTION-STATE-001`で止めます。
+SB3を保持してブロック側で編集するか、YAML直接編集へ移る場合はSB3を退避してから復元用コメントを削除します。
+削除後のYAMLではオフ部分と囲み構造が失われます。旧CLIによる往復では、編集状態の保持を保証しません。
+
+切り戻しは`--block-sections false`で新規パレット表示を隠します。保存済みブロックの読取互換性は残ります。
+旧rc.23へ戻る場合は、有効部分のYAMLと対応版で保存した編集用SB3を別々に退避し、旧版用のSB3を再生成してください。
+
 ## include文・対象形式・書き戻しの制約
 
 - **YAMLからの生成:** 公開rc.23では、前節のラベル付き宣言とincludeBlocksでinclude付き台本を生成できます。

@@ -1,0 +1,50 @@
+{
+  "capturedOn": "2026-10-19",
+  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/902",
+  "implementationCommit": "0f1654573ccb517805fe6512ca45e64bd471d163",
+  "editor": "https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html",
+  "editorQuery": "blockEditorDialogs=1&lang=ja",
+  "locale": "ja",
+  "capture": "Actual Editor workspace with a locally generated candidate SB3. Screenshots clipped to the source block stack; no reconstructed UI. Menu captured open, on/off captured after closing the menu.",
+  "blockOpcode": "kubohiroyakamishibaiauthoring4_useSection",
+  "menuValues": {
+    "オン": "on",
+    "オフ": "off"
+  },
+  "source": {
+    "scene": "opening",
+    "waitSeconds": [1, 2, 3],
+    "wrappedWaitSeconds": [2]
+  },
+  "verification": {
+    "nativeMenuSelected": true,
+    "onAndOffSb3Saved": true,
+    "onExportWaitSeconds": [1, 2, 3],
+    "offExportWaitSeconds": [1, 3],
+    "exportRetainedSectionState": true,
+    "documentedBaseAndAuthorCommandsPassed": true
+  },
+  "screenshots": [
+    {
+      "state": "menu",
+      "path": "docs/images/block-authoring/section-menu.png",
+      "sha256": "76598016a929e9db32bc2aa448b640e114e22543178a40f88b49aa26b2066142",
+      "width": 273,
+      "height": 162
+    },
+    {
+      "state": "on",
+      "path": "docs/images/block-authoring/section-on.png",
+      "sha256": "2d9e81b63cc547491c15e53eb461d11f956fb2ac391561aa9f3650d33d19701d",
+      "width": 270,
+      "height": 355
+    },
+    {
+      "state": "off",
+      "path": "docs/images/block-authoring/section-off.png",
+      "sha256": "4168c3e0a7b981f1c870a79f2232bed44cfbc5800ee6e9dbd952452dd081195c",
+      "width": 270,
+      "height": 355
+    }
+  ]
+}

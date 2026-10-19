@@ -242,6 +242,17 @@ npx --no-install turbowarp-kamishibai build-dsl4 \
 元の完成版SB3、更新前SB3、編集後SB3、元の素材は別々に保持します。
 新しい素材をbundleへ加えた後は、その生成済みSB3を次の編集に使います。
 
+## 台本の一部を残してオン／オフにする（追加機能）
+
+対応するCLIとランタイムでは、「この部分を使う［オン／オフ］」で命令や定義を囲み、
+中身を削除せずに一時的に外せます。YAMLの行頭`#`によるコメントアウトに対応する操作です。
+[ブロック版ガイドの実画面付き手順](../block-author-guides/dsl-4.0-block-author-guide.md#use-section)を参照してください。
+この実習で使う公開rc.23には未収録のため、準備と対応版の条件を確認してから使います。
+
+今回のmy-urashimaワークショップは、この追加機能の準備をせずに進められます。
+[公開ページの2・3・4ポーズ選択](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/#block-workshop)から
+設定済みSB3を開き、同ページの「ワークショップ資料の読み替え」に沿って編集してください。
+
 ## 完了チェック
 
 - [ ] 公開rc.23のCLIとStudent入り完成版SB3を使い、スターターの台本とfile素材をbundleへまとめた
