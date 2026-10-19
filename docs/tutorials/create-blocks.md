@@ -4,8 +4,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 対象: 初めて台本ブロックで紙芝居を作る方\
 扱う台本: TurboWarp上のブロック台本SB3\
-実装基準: 公開プレリリース`4.0.0-rc.25`、2026年10月19日\
-スターターとベースSB3: 公開プレリリース`4.0.0-rc.25`
+実装基準: 公開プレリリース`4.0.0-rc.26`、2026年10月19日\
+スターターとベースSB3: 公開プレリリース`4.0.0-rc.25`対応の公開サンプル（CLIはrc.26）
 
 入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
 
@@ -28,29 +28,29 @@ SVGのブロック図は入力欄と接続を基に描いた説明図、PNGの�
 
 ## 利用する版を先に確認する
 
-公開rc.25には、命令単位のブロック編集、8種類の専用定義ブロック、フォーム編集、
+公開rc.26には、命令単位のブロック編集、8種類の専用定義ブロック、フォーム編集、
 組み込み台本からの直接再生が含まれます。正式版4.0.0は未公開です。
 Node.js 24.0.0以上で作業用フォルダーに公開CLIを版固定してインストールします。
 本体リポジトリのcheckoutや`build:lib`は不要です。
 
 ```sh
-npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.25
+npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.26
 npx --no-install turbowarp-kamishibai --version
 ```
 
-`ajv/dist/2020.js`が見つからないエラーでCLIが起動しない場合は、
-[rc.23向けのAjv追加導入手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-ajv-workaround)を参照してください。
-rc.25でも同じエラーが出る場合は、CLIの固定版を変えずにAjvを追加します。
+rc.26は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不要です。
+旧rc.23・rc.25を固定して使い、`ajv/dist/2020.js`が見つからずCLIが起動しない場合は、
+[rc.23・rc.25向けのAjv追加導入手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-ajv-workaround)を参照してください。
 
-表示が`4.0.0-rc.25`であることを確認します。以後のコマンドはすべて、この作業用フォルダーで実行します。
-古い編集用SB3の埋込拡張は自動更新されません。統一ハットの台本は公開rc.25でYAMLへ書き戻して再生成し、
+表示が`4.0.0-rc.26`であることを確認します。以後のコマンドはすべて、この作業用フォルダーで実行します。
+古い編集用SB3の埋込拡張は自動更新されません。統一ハットの台本は公開rc.26でYAMLへ書き戻して再生成し、
 旧ハットやYAML全文の文字列方式のSB3は元YAMLから再生成してください。
 準備済みの素材入りブロック台本SB3が配られた場合は、Step 3から始められます。
 
 ## 用意するものと完成までの流れ
 
 - [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開くブラウザー
-- 公開rc.25のCLIを動かす環境（Node.js 24.0.0以上）
+- 公開rc.26のCLIを動かす環境（Node.js 24.0.0以上）
 - スターター、Studentスプライト入りのチュートリアル完成版SB3、作業用フォルダー
 - ポーズ場面も試す場合はカメラと、周囲にぶつからない空間
 
@@ -170,7 +170,7 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 <figure class="block-script-form"><img src="../images/block-authoring/form-asset.png" alt="assetの実フォーム。背景のファイルパスを編集して保存する"></figure>
 
 フォームの「保存」の後、EditorのファイルメニューからSB3も保存します。
-フォームが開かない場合は、公開rc.25のCLIで編集用SB3を再生成し、編集用拡張をサンドボックスなしで読み込んだことを確認します。
+フォームが開かない場合は、公開rc.26のCLIで編集用SB3を再生成し、編集用拡張をサンドボックスなしで読み込んだことを確認します。
 フォームの操作と8種類の画面は[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#フォームでjsonを編集する)を参照してください。
 
 `NAME`はそれぞれ`EarthquakeClassroom`と`ProtectHead`です。名前欄に引用符やJSONパスは入力しません。
@@ -191,7 +191,7 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 
 シーンの`PROPERTIES`は`{"recognitionModel":"SafetyPose"}`です。
 `STEPS`には`[{"pose":"頭を守る","skin":"ProtectHead","sound":"SuccessSound"}]`を入力します。
-rc.25で生成したSB3では、`recognize actor [TARGET] pose steps [STEPS]`の白い書類アイコンからも編集できます。
+rc.26で生成したSB3では、`recognize actor [TARGET] pose steps [STEPS]`の白い書類アイコンからも編集できます。
 「ポーズ認識の手順」で`pose`に「頭を守る」、`skin`に`ProtectHead`、`sound`に`SuccessSound`を入れて保存します。
 `pose`は必須です。「キャンセル」は変更を破棄し、「保存」の後はEditorのファイルメニューからSB3も保存します。
 以前のSB3には自動で追加されないため、この手順の固定CLIで編集用SB3を再生成してください。
@@ -230,7 +230,7 @@ SB3を保存し直し、書き出しと検査が成功することを確かめ�
 セリフ、待機、シーン接続だけを変更した場合は、`story-edited.sb3`を開いて緑の旗で起動し、タイトルを閉じます。
 別の再生用SB3を作る必要はありません。物語を開始し直すたびに現在のブロックを読み直します。
 再生後に編集する場合は、赤い停止ボタンで止めてからブロックの値を保存し、緑の旗を押してタイトルを閉じます。
-rc.25では、前の再生でカメラ許可への応答が保留されたままでも、古い開始処理を待たずに再起動できます。
+rc.26では、前の再生でカメラ許可への応答が保留されたままでも、古い開始処理を待たずに再起動できます。
 セリフが「地震だ！」になり、続いて「両手で頭を守ろう！」の場面へ進むことを確認します。
 不正な台本は診断を表示します。ファイル選択へ自動で切り替わったり、古い台本を代わりに再生したりしません。
 
@@ -257,7 +257,7 @@ npx --no-install turbowarp-kamishibai build-dsl4 \
 
 `--source`は`--project-root`内のファイル名です。書き出したYAMLを素材と同じフォルダーに置くことで、
 `file`の相対パスを維持します。書き出しや検査に失敗した場合は、古いYAMLを使ってビルドせず、先にブロックを修正します。
-公開rc.25のCLIは、`--source`を省略しても編集後SB3の台本ブロックを自動選択しません。
+公開rc.26のCLIは、`--source`を省略しても編集後SB3の台本ブロックを自動選択しません。
 元の`project.source.json`がある場合は、そこから古いYAMLを読み、ビルドが成功しても変更した素材が反映されないことがあります。
 毎回、編集後SB3から書き出した最新のYAMLを明示してください。
 
@@ -274,7 +274,8 @@ npx --no-install turbowarp-kamishibai build-dsl4 \
 対応するCLIとランタイムでは、「この部分を使う［オン／オフ］」で命令や定義を囲み、
 中身を削除せずに一時的に外せます。YAMLの行頭`#`によるコメントアウトに対応する操作です。
 [ブロック版ガイドの実画面付き手順](../block-author-guides/dsl-4.0-block-author-guide.md#use-section)を参照してください。
-この実習で使う公開rc.25には未収録のため、準備と対応版の条件を確認してから使います。
+公開rc.26はこの機能と表示改善に対応しています。パレット表示は既定OFFのため、
+ガイドに従い`author-block-dsl --block-sections true`で編集用SB3を生成して使います。
 
 今回のmy-urashimaワークショップは、この追加機能の準備をせずに進められます。
 [公開ページの2・3・4ポーズ選択](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/#block-workshop)から
@@ -282,7 +283,7 @@ npx --no-install turbowarp-kamishibai build-dsl4 \
 
 ## 完了チェック
 
-- [ ] 公開rc.25のCLIとStudent入り完成版SB3を使い、スターターの台本とfile素材をbundleへまとめた
+- [ ] 公開rc.26のCLIとStudent入り完成版SB3を使い、スターターの台本とfile素材をbundleへまとめた
 - [ ] セリフを変更し、次のシーンを接続した
 - [ ] 編集したSB3をコンピューターへ保存した
 - [ ] 保存したSB3から書き出して検査した
