@@ -5,6 +5,17 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 対象: YAML台本をTurboWarpのブロックで編集し、編集結果をYAMLへ戻したい方。\
 確認日: 2026年10月19日。公開プレリリース`4.0.0-rc.23`を対象にします。正式版4.0.0は未公開です。
 
+## 公開サンプルをフォーム編集で開く
+
+次のリンクから、公開済みのブロック台本SB3を日本語のExtension Data Editorへ直接読み込めます。
+
+- [地震安全チュートリアルのブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3)
+- [浦島太郎のブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3)
+
+拡張の読み込み確認では、それぞれ「サンドボックスなしで実行する」を有効にして許可します。
+ステージのコードにある専用定義ブロックの白い書類アイコンを押すと、JSONをフォームで編集できます。
+編集後は、EditorのファイルメニューからSB3をコンピューターへ保存します。
+
 ## 最初に利用する版を確認する
 
 公開rc.23には、実命令ブロックの生成・読取、ラベルとincludeBlocks、8種類の定義ブロック、
