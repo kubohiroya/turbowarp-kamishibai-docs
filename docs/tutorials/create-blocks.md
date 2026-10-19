@@ -38,6 +38,10 @@ npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-r
 npx --no-install turbowarp-kamishibai --version
 ```
 
+`ajv/dist/2020.js`が見つからないエラーでCLIが起動しない場合は、
+[rc.23向けのAjv追加導入手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-ajv-workaround)を参照してください。
+rc.25でも同じエラーが出る場合は、CLIの固定版を変えずにAjvを追加します。
+
 表示が`4.0.0-rc.25`であることを確認します。以後のコマンドはすべて、この作業用フォルダーで実行します。
 古い編集用SB3の埋込拡張は自動更新されません。統一ハットの台本は公開rc.25でYAMLへ書き戻して再生成し、
 旧ハットやYAML全文の文字列方式のSB3は元YAMLから再生成してください。

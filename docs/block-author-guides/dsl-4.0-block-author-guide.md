@@ -27,6 +27,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 Node.js 24.0.0以上で公開CLIをexact installすれば、実命令ブロック、統一ハット、includeBlocks、
 8種類の定義ブロックとフォーム編集が使えます。本体のcheckoutやCLIのビルドは不要です。
 準備方法は[相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
+rc.23などで`ajv/dist/2020.js`が見つからずCLIが起動しない場合は、
+[Ajvの追加導入手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-ajv-workaround)を参照してください。
 
 SVGのブロック図は実装のブロック名、入力値、接続を基に描いた説明図です。
 PNGのフォーム画面はIssue #891対応の編集用拡張を実Editorで開いて撮影したものです。
