@@ -22,29 +22,31 @@ test('publishes the DSL 4.0 smoke guide as an independent publication', () => {
   assert.match(dsl4Index, /developer-guides\/release-smoke-4\.0\//u);
 });
 
-test('records current rc.23 public hashes and automated playback without claiming physical validation', () => {
-  assert.equal(currentCandidate.runtime.version, '4.0.0-rc.23');
-  assert.equal(currentCandidate.runtime.freezeCommit, '2f2889fe9df88548a92b0925ca3008c5c62682e5');
-  assert.equal(currentCandidate.runtime.standardArtifact.size, 6922003);
+test('records current rc.25 public hashes and automated playback without claiming physical validation', () => {
+  assert.equal(currentCandidate.runtime.version, '4.0.0-rc.25');
+  assert.equal(currentCandidate.runtime.freezeCommit, 'a68f8dc4d38b4609c8387192d3be0376963735e3');
+  assert.equal(currentCandidate.runtime.standardArtifact.size, 6923215);
   assert.equal(
     currentCandidate.runtime.standardArtifact.sha256,
-    'ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998',
+    'd6b8d73e27685ac8359a17ade7c5c9cb4596ab22413eae9bf33d060351d0ab29',
   );
-  assert.equal(currentCandidate.runtime.packageTarball.size, 6657881);
+  assert.equal(currentCandidate.runtime.packageTarball.size, 6664616);
   assert.equal(
     currentCandidate.runtime.packageTarball.sha256,
-    'e917e13fccb42354167967f07d7d310d427f0885f115a0da744fae0cc728f728',
+    '79fb6803bd6b1abc41c3776ee3c27b205b90c90bc8a333fdd2fc5760fc3ec3a3',
   );
-  assert.equal(currentCandidate.evidence.publicationVerification.publicSampleArtifactCount, 12);
+  assert.equal(currentCandidate.evidence.publicationVerification.publicSampleArtifactCount, 16);
   assert.equal(currentCandidate.evidence.sampleBrowserVerification.realEditorBlockStory, true);
   assert.equal(currentCandidate.evidence.sampleBrowserVerification.physicalCamera, false);
-  assert.equal(currentCandidate.evidence.physicalCameraAndPose.status, 'not-run-for-rc.23');
+  assert.equal(currentCandidate.evidence.physicalCameraAndPose.status, 'not-run-for-rc.25');
   assert.equal(
-    currentCandidate.evidence.physicalCameraAndPose.previousEvidenceAppliesToRc23,
+    currentCandidate.evidence.physicalCameraAndPose.previousEvidenceAppliesToRc25,
     false,
   );
-  assert.match(currentCandidate.evidence.upstreamVerification.evidenceUrl, /39183520334$/u);
-  assert.match(guide, /4\.0\.0-rc\.23/u);
+  assert.match(currentCandidate.evidence.upstreamVerification.evidenceUrl, /39205538001$/u);
+  assert.match(guide, /4\.0\.0-rc\.25/u);
+  assert.equal(currentCandidate.rollback.previousPrerelease, '4.0.0-rc.23');
+  assert.match(guide, /直前の確認済みrc\.23/u);
   assert.equal(candidate.runtime.version, '4.0.0-rc.8');
   const previous = currentCandidate.historicalCandidates.find(
     ({runtime}) => runtime.version === '4.0.0-rc.22',
@@ -116,7 +118,7 @@ test('defines rc.8 surfaces, release stops, physical rerun, and immutable rollba
   assert.match(guide, /Bubble 0\.10\.0/u);
   assert.match(guide, /bubbleClosePolicies/u);
   assert.match(guide, /23個のcore action/u);
-  assert.match(guide, /4\.0\.0-rc\.23/u);
+  assert.match(guide, /4\.0\.0-rc\.25/u);
   assert(candidate.releaseStops.length >= 8);
   assert.equal(candidate.rollback.recommendedStableVersion, '3.2.3');
 });

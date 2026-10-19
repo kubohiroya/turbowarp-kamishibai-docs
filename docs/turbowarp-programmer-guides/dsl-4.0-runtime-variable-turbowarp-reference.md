@@ -2,9 +2,9 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書基準: 公開プレリリース`4.0.0-rc.23`、commit `2f2889fe`、2026年10月19日。正式版4.0.0は未公開です。
+文書基準: 公開プレリリース`4.0.0-rc.25`、commit `a68f8dc4`、2026年10月19日。正式版4.0.0は未公開です。
 
-本書はrc.23の読取状態blockと台本変数の更新actionを説明します。
+本書はrc.25の読取状態blockと台本変数の更新actionを説明します。
 [変数の利用ガイド](../dsl-author-guides/dsl-4.0-runtime-variable-guide.md)と
 [ブロック一覧](dsl-4.0-runtime-block-reference.md)を併用してください。
 
@@ -58,7 +58,7 @@ action番号とpose step番号は1始まり、非実行時は0です。未知の
 ## Feature flags
 
 `dsl4TurboWarpStateSurface`は状態block、`dsl4ExpressionRuntimeState`は式namespaceを制御します。
-汎用defaultはOFF、Standard productionはONです。`dsl4TurboWarpStoryVariableWrite`はrc.23のflag一覧にありません。
+汎用defaultはOFF、Standard productionはONです。`dsl4TurboWarpStoryVariableWrite`はrc.25のflag一覧にありません。
 書換えはcore actionであるため専用flagを設けません。
 
 ## 公開しない状態

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
 
-import surface from '../sources/dsl4/standard-surface-rc23.json' with {type: 'json'};
+import surface from '../sources/dsl4/standard-surface-rc25.json' with {type: 'json'};
 
 const read = (filename) =>
   readFileSync(new URL(`../docs/turbowarp-programmer-guides/${filename}`, import.meta.url), 'utf8');
@@ -29,7 +29,7 @@ test('explains exact broadcast-and-wait behavior from YAML through TurboWarp rec
   }
 });
 
-test('lists every public rc.23 bundled block with its member and arguments', () => {
+test('lists every public rc.25 bundled block with its member and arguments', () => {
   assert.equal(surface.extensionId, 'kubohiroyakamishibai4');
   assert.equal(surface.blocks.length, 200);
   const members = new Set(surface.blocks.map(({opcode}) => opcode.split('__')[0]));
@@ -72,7 +72,7 @@ test('lists every public rc.23 bundled block with its member and arguments', () 
   }
 });
 
-test('preserves the rc.22 surface and removes only its retired source blocks in rc.23', () => {
+test('preserves the rc.22 surface and removes only its retired source blocks in rc.25', () => {
   const previous = JSON.parse(
     readFileSync(new URL('../sources/dsl4/standard-surface-rc22.json', import.meta.url), 'utf8'),
   );
@@ -92,7 +92,7 @@ test('preserves the rc.22 surface and removes only its retired source blocks in 
   assert.doesNotMatch(blockReference, /^\|\s+`(?:whenDsl4Source|dsl4SourceFromYamlJson)`/mu);
 });
 
-test('retains palette images as historical captures rather than presenting them as rc.23', () => {
+test('retains palette images as historical captures rather than presenting them as rc.25', () => {
   const appendix = blockReference.slice(blockReference.indexOf('## 旧版のパレット画像'));
   assert.match(appendix, /rc\.5／rc\.7/u);
   const images = [...appendix.matchAll(/!\[[^\]]+\]\(\.\.\/images\/([^\)]+)\)/gu)];
@@ -159,5 +159,5 @@ test('cross-links the author and programmer variable guides', () => {
     runtimeVariableReference.includes('../dsl-author-guides/dsl-4.0-runtime-variable-guide.md'),
   );
   for (const source of [runtimeVariableGuide, runtimeVariableReference])
-    assert.match(source, /4\.0\.0-rc\.23/u);
+    assert.match(source, /4\.0\.0-rc\.25/u);
 });

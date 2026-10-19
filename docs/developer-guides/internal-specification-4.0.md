@@ -3,10 +3,10 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 固定実装基準を説明する内部仕様（正式リリース済みの意味ではない）\
-調査基準: TurboWarp-Kamishibai `2f2889f`（4.0.0-rc.23）、2026年10月19日
+調査基準: TurboWarp-Kamishibai `a68f8dc`（4.0.0-rc.25）、2026年10月19日
 
-> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.23`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。本書はrc.23固定コミットの内部構造を説明します。
+> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.25`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。本書はrc.25固定コミットの内部構造を説明します。
 
 この文書は、TurboWarp紙芝居4.0のsource frontend、実行中間表現、runtime、platform adapter、
 preview transactionの責務境界を、完成実装に対応させて記録します。作者向けのYAML構文は
@@ -15,15 +15,15 @@ preview transactionの責務境界を、完成実装に対応させて記録し�
 
 対象アプリ: TurboWarp-Kamishibai 4.0.x\
 受理するDSL宣言: `kamishibai: '4.0'`\
-実装固定commit: [`2f2889f`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/2f2889fe9df88548a92b0925ca3008c5c62682e5)（2026年10月19日、`v4.0.0-rc.23`）
+実装固定commit: [`a68f8dc`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/a68f8dc4d38b4609c8387192d3be0376963735e3)（2026年10月19日、`v4.0.0-rc.25`）
 
 本書のpath、型、関数、event、flagは、このcommitのsourceとtestを基準にしています。
 配布成果物を調査して推測した名称ではありません。
 
 ## Schemaと公開runtimeの二つの基準
 
-公開runtimeの調査基準は`4.0.0-rc.23`（`2f2889fe`）です。Schemaリファレンスも同じ公開commitへ固定し、portraitの`placement`、`offset`、`cornerRadius`はrc.23で利用できます。
-公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.23.schema.json`を使い、
+公開runtimeの調査基準は`4.0.0-rc.25`（`a68f8dc4`）です。Schemaリファレンスも同じ公開commitへ固定し、portraitの`placement`、`offset`、`cornerRadius`はrc.25で利用できます。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.25.schema.json`を使い、
 現行Schemaの出典は`sources/dsl4/source-lock.json`で確認します。旧版の検証結果を現行版へ読み替えません。
 
 ## 読む前に {#before-reading .unnumbered}
@@ -84,7 +84,7 @@ canonical diagnosticとして共通surfaceへ投影されます。_
 
 ### 固定実装の呼出し経路 {#implementation-call-path}
 
-前図を実装のexportとcomposition rootまで具体化すると、固定commit`2f2889f`では次の経路になります。
+前図を実装のexportとcomposition rootまで具体化すると、固定commit`a68f8dc`では次の経路になります。
 以下の画面観測だけはrc.8当時の履歴証跡です。この追跡は、旧commit `29c0dea`の公開rc.8 SB3をbaseにしたlocal previewを実行し、immutable sourceの稼働、
 `Version 4.0.0-rc.8`のタイトル（旧版の観測証跡）、invalid保存時の診断とcurrent integrity維持を観測した結果と
 突き合わせています。
@@ -230,7 +230,7 @@ production compositionは`createDsl4ProductionSourceFrontend`が
 `Function`へのfallbackはありません。preview、validate、buildはこのfrontend契約を共有します。
 
 runtimeでは`resolveBranch()`がaction contextの`variables` snapshotを`evaluateCondition()`へ渡し、一つのbranchを
-上から評価します。4.0.0-rc.23のbranch式はトップレベル`variables:`と読取専用`runtime["KEY"]`をsnapshotとして参照し、Stage／sprite変数、
+上から評価します。4.0.0-rc.25のbranch式はトップレベル`variables:`と読取専用`runtime["KEY"]`をsnapshotとして参照し、Stage／sprite変数、
 Temporary Variables、controller status、pose eventをliveには読みません。
 
 ## StoryDocument {#story-document}
@@ -319,6 +319,11 @@ runtime environmentは次を提供します。
 
 sessionはenvironmentを単独所有します。session dispose時はnavigationを停止した後、environmentを解放し、
 双方のcleanup失敗を`AggregateError`へまとめます。
+
+rc.25ではcamera起動の許可待ちと、物語の停止・破棄の完了を分離します。
+`src/dsl4/platform/story-camera-lifecycle.ts`の停止・破棄は古い起動要求を無効化し、未解決の取得を待って再起動を止めません。
+遅延取得の完了時には現在の必要状態を確認し、不要なcameraを停止します。
+このためフォーム編集後の緑の旗でも、新しいタイトル表示と空名ルートの読み直しへ進めます。
 
 ### RuntimeStatusとsnapshot
 
@@ -672,11 +677,11 @@ runtime側の仕様変更では、表に示した固定commitの対応testも更
 
 ## 固定実装への参照 {#implementation-links .unnumbered}
 
-- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/source-frontend.ts)
-- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/source-graph.ts)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/source-graph-frontend.ts)
-- [StoryDocument](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/story-document.ts)と[semantic validator](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/semantic-validator.ts)
-- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/runtime-controller.ts)と[navigation session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/navigation-session.ts)
-- [Action Context](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/action-context-turbowarp.ts)と[custom action invocation](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/action-invocation-adapter.ts)
-- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/platform/turbowarp-runtime-host.ts)
-- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/live-reload-session.ts)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/asset-reload-transaction.ts)
-- [feature flags](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/feature-flags.ts)
+- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/source-frontend.ts)
+- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/source-graph.ts)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/source-graph-frontend.ts)
+- [StoryDocument](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/story-document.ts)と[semantic validator](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/semantic-validator.ts)
+- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/runtime-controller.ts)と[navigation session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/navigation-session.ts)
+- [Action Context](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/action-context-turbowarp.ts)と[custom action invocation](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/action-invocation-adapter.ts)
+- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/platform/turbowarp-runtime-host.ts)
+- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/live-reload-session.ts)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/asset-reload-transaction.ts)
+- [feature flags](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/dsl4/feature-flags.ts)

@@ -25,7 +25,7 @@ test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
   assert.equal(actualHash, lock.schemaSha256);
   assert.equal(lock.repository, 'kubohiroya/turbowarp-kamishibai-app');
   assert.equal(lock.sourceKind, 'commit');
-  assert.equal(lock.commit, '2f2889fe9df88548a92b0925ca3008c5c62682e5');
+  assert.equal(lock.commit, 'a68f8dc4d38b4609c8387192d3be0376963735e3');
   assert.equal(
     lock.schemaUrl,
     `https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/${lock.commit}/schema/dsl-4.schema.json`,

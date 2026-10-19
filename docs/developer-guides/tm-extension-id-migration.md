@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-4.0の現行実装基準は`4.0.0-rc.23`（`2f2889fe`）です。版別の配布状況は[4.0リリース履歴](../dsl-author-guides/dsl-4.0-history.md)を参照してください。以下の履歴・他系列の記録は、それぞれに明記した版を対象にします。
+4.0の現行実装基準は`4.0.0-rc.25`（`a68f8dc4`）です。版別の配布状況は[4.0リリース履歴](../dsl-author-guides/dsl-4.0-history.md)を参照してください。以下の履歴・他系列の記録は、それぞれに明記した版を対象にします。
 
 対象: TurboWarp-Kamishibai 4.0 系列と、TurboWarp Teachable Machine を使う SB3 / DSL 4.0 配布物\
 関連Issue: [TurboWarp Teachable Machine #79](https://github.com/kubohiroya/turbowarp-teachable-machine/issues/79)、[TurboWarp-Kamishibai #661](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/661)、[sb3-toolchain #50](https://github.com/kubohiroya/sb3-toolchain/issues/50)

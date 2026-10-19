@@ -21,17 +21,17 @@ test('publishes a separate DSL 4.0 release history', () => {
   assert.match(dsl4Index, /dsl-author-guides\/dsl-4\.0-history\//u);
 });
 
-test('records rc.23 source and public artifacts while preserving earlier verification scope', () => {
+test('records rc.25 source and public artifacts while preserving earlier verification scope', () => {
   const current = historyManifest.entries[0];
-  assert.equal(current.version, '4.0.0-rc.23');
-  assert.equal(current.publication.tagCommit, '2f2889fe9df88548a92b0925ca3008c5c62682e5');
+  assert.equal(current.version, '4.0.0-rc.25');
+  assert.equal(current.publication.tagCommit, 'a68f8dc4d38b4609c8387192d3be0376963735e3');
   assert.equal(current.schema.documentationReferenceCommit, current.publication.tagCommit);
   assert.equal(current.schema.releaseReferenceCommit, current.publication.tagCommit);
-  assert.equal(current.artifacts.standardSb3.size, 6922003);
-  assert.equal(current.artifacts.npmTarball.size, 6657881);
-  assert.equal(current.verification.sampleTests, 57);
-  assert.equal(current.verification.physicalCameraAndPose, 'not-run-for-rc.23');
-  assert.match(current.verification.publicSamples, /^12-public-artifacts/u);
+  assert.equal(current.artifacts.standardSb3.size, 6923215);
+  assert.equal(current.artifacts.npmTarball.size, 6664616);
+  assert.equal(current.verification.sampleTests, 63);
+  assert.equal(current.verification.physicalCameraAndPose, 'not-run-for-rc.25');
+  assert.match(current.verification.publicSamples, /^16-public-artifacts/u);
   assert.match(current.verification.sampleBrowser, /fake-camera-web-and-real-editor/u);
   for (const value of [
     current.publication.tagCommit,

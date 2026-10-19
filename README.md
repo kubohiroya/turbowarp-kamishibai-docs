@@ -46,10 +46,10 @@
 | `docs/workshops/`         | 体験会の参加者、スタッフ、運営者        |
 
 具体的なファイル対応、依存境界、実施記録は[MIGRATION.md](MIGRATION.md)を参照してください。
-`docs/tutorials/`と4.0文書は公開プレリリース`4.0.0-rc.23`を公開runtime基準にします。
-Schemaリファレンスと公開runtimeは同じrc.23のcommit `2f2889f`へ固定し、旧rc.22のSchemaは履歴snapshotとして保存します。
+`docs/tutorials/`と4.0文書は公開プレリリース`4.0.0-rc.25`を公開runtime基準にします。
+Schemaリファレンスと公開runtimeは同じrc.25のcommit `a68f8dc`へ固定し、旧rc.23以前のSchemaは履歴snapshotとして保存します。
 `/4.0/tutorials/`系列へ配置し、4.0一覧から「紙芝居を遊ぶ」「紙芝居を作る」へ案内します。
-公開サンプル、スターター、Web版のmanifestもrc.23基準です。samplesのWeb・実Editorでの直接再生と公開12ファイルのhashを確認済みです。実カメラ・実ポーズは再検証していません。
+公開サンプル、スターター、Web版のmanifestもrc.25基準です。samplesのWeb・実Editorでの直接再生と公開16ファイルのhashを確認済みです。実カメラ・実ポーズは再検証していません。
 固定commit、取得先、照合方法、過去の検証の適用範囲は`DSL4-PUBLICATION-STATUS.md`と
 `sources/dsl4/user-guide-4.0-public-surfaces.json`に記録します。
 
@@ -174,4 +174,4 @@ pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit
 4.0の作者向け入口は、台本ブロック、台本DSL、台本作りの詳細資料に分けています。
 各作成経路に「紙芝居を作る」と「紙芝居DSL 4.0 台本作成ガイド」を置き、既存のDSL版URLは維持します。
 ブロック図版は`sources/dsl4-authoring-blocks.json`から`node scripts/render-authoring-blocks.mjs`で再生成できます。
-命令単位の編集と空名ルートからの直接再生は、公開プレリリース4.0.0-rc.23を基準にします。素材入りのブロック台本SB3を開き、緑の旗で起動してタイトルを閉じると再生できます。
+命令単位の編集と空名ルートからの直接再生は、公開プレリリース4.0.0-rc.25を基準にします。素材入りのブロック台本SB3を開き、緑の旗で起動してタイトルを閉じると再生できます。

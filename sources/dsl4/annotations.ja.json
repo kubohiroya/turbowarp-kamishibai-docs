@@ -351,7 +351,7 @@
           "notes": [
             "省略時はpolicyがlegacy、parallelがfalseです。",
             "latest-neededでは重い初期化を実行中1件と最新待機1件までに制限します。",
-            "実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.23はTurboWarp Teachable Machine 3.5.1をexact pinします。"
+            "実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.25はTurboWarp Teachable Machine 3.5.1をexact pinします。"
           ]
         },
         {

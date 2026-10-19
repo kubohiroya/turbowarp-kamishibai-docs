@@ -14,26 +14,26 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 2026年10月19日の確認結果
 
-- 公開runtimeの実装基準は公開プレリリース`v4.0.0-rc.23`のcommit
-  [`2f2889fe9df88548a92b0925ca3008c5c62682e5`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/2f2889fe9df88548a92b0925ca3008c5c62682e5)。公開Schemaとその出典は`sources/dsl4/dsl-4.0-rc.23.schema.json`と`sources/dsl4/release-source-lock-4.0-rc.23.json`に固定する。
-- GitHub Releaseとnpm `@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.23`は公開済み。npmの`next`と`latest`はいずれもrc.23を指す。
+- 公開runtimeの実装基準は公開プレリリース`v4.0.0-rc.25`のcommit
+  [`a68f8dc4d38b4609c8387192d3be0376963735e3`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/a68f8dc4d38b4609c8387192d3be0376963735e3)。公開Schemaとその出典は`sources/dsl4/dsl-4.0-rc.25.schema.json`と`sources/dsl4/release-source-lock-4.0-rc.25.json`に固定する。
+- GitHub Releaseとnpm `@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.25`は公開済み。npmの`next`と`latest`はいずれもrc.25を指す。
 - 正式版`v4.0.0`は未公開。推奨安定版は`v3.2.3`。
-- Standard SB3は[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.23)と[Pages](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/kamishibai-4.0.0-rc.23.sb3)から取得できる。6,922,003 bytes、SHA-256は`ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998`。
-- 浦島太郎、私の浦島太郎、チュートリアルのサンプル作品、スターター、Web版はrc.23基準。samples PR #173、commit `d8deecfbd46b69a6787ec9e5deea936b8b54f0f0`、Pages run `39188793571`で公開し、配布12ファイルのsizeとSHA-256を照合した。starterとaddition kitは再生成して同じバイト列であることを確認した。
-- 上流samplesの全57テスト、Web作品、実TurboWarp Editorでの表示・編集・保存・ブロック台本の直接再生を確認した。カメラの自動検証は模擬入力であり、rc.23の実カメラ・実ポーズ測定は未実施。
+- Standard SB3は[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.25)と[Pages](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/kamishibai-4.0.0-rc.25.sb3)から取得できる。6,923,215 bytes、SHA-256は`d6b8d73e27685ac8359a17ade7c5c9cb4596ab22413eae9bf33d060351d0ab29`。
+- 浦島太郎、私の浦島太郎、チュートリアルのサンプル作品、スターター、Web版はrc.25基準。samples PR #179、commit `c01ad9eb664b198ba7d421fa0e784cd99fdf56bf`、Pages run `39207776239`で公開し、配布16ファイルのsizeとSHA-256を照合した。starterとaddition kitも同じrc.25入力から再生成した。
+- 上流samplesの全63テスト、Web作品、実TurboWarp Editorでの表示・編集・保存・ブロック台本の直接再生を確認した。カメラの自動検証は模擬入力であり、rc.25の実カメラ・実ポーズ測定は未実施。
 
 公開URL、size／checksum、照合方法、未確認範囲は
 [`sources/dsl4/user-guide-4.0-public-surfaces.json`](sources/dsl4/user-guide-4.0-public-surfaces.json)へ記録する。
-rc.10の旧manifestと実機確認は`previousVerification`、rc.22の公開確認は履歴として保存し、rc.23の実機成功へ読み替えない。
+rc.10の旧manifestと実機確認は`previousVerification`、rc.22の公開確認は履歴として保存し、rc.25の実機成功へ読み替えない。
 
 ## 公開runtimeとSchemaの固定
 
-現行Schemaとruntimeは同じ公開commit `2f2889fe9df88548a92b0925ca3008c5c62682e5`を基準にする。
-以前の実装基準`450a5bb`とSchemaのバイト列は同一だが、rc.23ではportraitの`placement`、`offset`、
-`cornerRadius`も公開配布物で利用できる。旧rc.22のSchemaとsource lockは当時の記録として保持する。
+現行Schemaとruntimeは同じ公開commit `a68f8dc4d38b4609c8387192d3be0376963735e3`を基準にする。
+以前の実装基準`450a5bb`とSchemaのバイト列は同一だが、rc.25ではportraitの`placement`、`offset`、
+`cornerRadius`も公開配布物で利用できる。旧rc.23以前のSchemaとsource lockは当時の記録として保持する。
 構造に項目があることだけで実行対応を判定せず、固定runtimeとそのテストも照合する。
 
-公開rc.23の変換CLIは`TMPoseURL`と互換表記`TMURL`を受理する。
+公開rc.25の変換CLIは`TMPoseURL`と互換表記`TMURL`を受理する。
 旧rc.10〜rc.22で`TMPoseURL`が`K4-CONVERT-COMMAND-UNSUPPORTED`になる場合だけ、
 変換用コピーを`TMURL`へ直す。元の3.2台本は変更しない。
 
@@ -44,7 +44,7 @@ rc.10の旧manifestと実機確認は`previousVerification`、rc.22の公開確�
 表示・BGMのcrossfade、BGMの音量と停止、台本変数を書き換えるcore action、`Actor.setText`のルビを説明する。
 `Actor.say`／`Actor.think`のtextは文字列のまま。吹き出し終了条件は`bubbleClosePolicies`と`closePolicy`を使う。
 
-rc.23のブロック台本は公開CLIで生成・書き戻しできる。Stage上の名前が空の`kamishibai [4.0] []`を
+rc.25のブロック台本は公開CLIで生成・書き戻しできる。Stage上の名前が空の`kamishibai [4.0] []`を
 ルートとし、名前付き台本は`includeBlocks`から参照する。ハット自体はScratchのイベントとして発火せず、
 ランタイムが起動時と開始し直すときに接続されたブロックを読み取る。緑の旗で起動し、タイトルを閉じると
 その台本の物語を開始する。編集しただけで実行中の物語へ自動反映するわけではない。
@@ -54,7 +54,7 @@ Standard bundleはAsset Cache、Camera Source、Teachable Machine 3.5.1等を同
 カメラはCamera Sourceが所有し、認識側はleaseを使う。プレビューと推論入力の経路を区別し、
 タイトルでのカメラ許可は対応ブラウザー・機能フラグ・ポーズ作品の条件が揃った場合だけ表示する。
 
-ローカルプレビューはリモートassetを取得しない。rc.23の失敗ダイアログ、ブラウザーでの
+ローカルプレビューはリモートassetを取得しない。rc.25の失敗ダイアログ、ブラウザーでの
 OFFLINE／CORS／CONNECT、CLIでのTLS診断を説明し、ブラウザーのCONNECTを証明書障害の確定診断としない。
 
 ## 履歴・画像・検証の保存

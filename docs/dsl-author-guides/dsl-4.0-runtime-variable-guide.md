@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書基準: 公開プレリリース`4.0.0-rc.23`、commit `2f2889fe`、2026年10月19日。正式版4.0.0は未公開です。
+文書基準: 公開プレリリース`4.0.0-rc.25`、commit `a68f8dc4`、2026年10月19日。正式版4.0.0は未公開です。
 
 台本変数は作品が宣言して書き換える値、公開ランタイム状態はランタイムが所有する読取専用の値です。
 両者を同じ変数として扱わないでください。TurboWarpの正確なopcodeは
@@ -60,6 +60,6 @@ branches:
 
 ## 有効化と現行版との関係
 
-汎用defaultはすべてOFFですが、rc.23のStandard productionでは`dsl4TurboWarpStateSurface`と
+汎用defaultはすべてOFFですが、rc.25のStandard productionでは`dsl4TurboWarpStateSurface`と
 `dsl4ExpressionRuntimeState`がONです。書換えはcore actionであり、`dsl4TurboWarpStoryVariableWrite`は使いません。
 カスタムhostは起動時snapshotを固定し、必要なsurfaceを明示します。
