@@ -421,6 +421,31 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 そのベースの再生ランタイムは更新されません。rc.25のベースを使ってください。
 file素材やScratchスプライトがある作品は、前節の素材準備の条件も適用します。
 
+<a id="section-appearance-cli"></a>
+
+### グレー表示・絵文字メニューを使う
+
+「✅ オン／🚫 オフ」、専用グレー、オフ範囲の灰色・斜線背景は、
+[本体PR #909](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/909)で追加した表示です。
+公開npm版rc.25には未収録なので、図と同じ表示で生成する場合は、この変更を含むCLIを別フォルダーへ用意します。
+Node.js 24.0.0以上とpnpmを使い、次のcommitへ固定します。
+
+```sh
+git clone https://github.com/kubohiroya/turbowarp-kamishibai-app.git kamishibai-section-cli
+git -C kamishibai-section-cli checkout --detach 1c11ceffdaf880a8bbd31bd355d9c94363223354
+pnpm --dir kamishibai-section-cli install --frozen-lockfile
+pnpm --dir kamishibai-section-cli run build:lib
+
+node kamishibai-section-cli/bin/turbowarp-kamishibai.mjs author-block-dsl \
+  --input story.k4.yml --base section-base.sb3 --output section-blocks.sb3 --block-sections true
+```
+
+公開rc.25のランタイムで直接再生でき、保存値や復元用コメントの形式も同じです。
+書き戻したYAMLから再生成するときも、`author-block-dsl`はこの表示改善版CLIで実行してください。
+以前のCLIで生成すると、オン／オフの意味を保ったまま以前の表示になります。
+エディターの`Scratch.gui.getBlockly()` APIがない場合は、専用色と絵文字セレクタを表示し、
+オフ範囲の灰色・斜線装飾は追加しません。
+
 ### 編集・保存・書き戻し・再生成
 
 1. `section-blocks.sb3`をEditorで開き、命令列または定義列を囲み、オン／オフを選びます。
