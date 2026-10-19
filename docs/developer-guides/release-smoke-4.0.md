@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書基準: 公開プレリリース`4.0.0-rc.23`、commit `2f2889fe9df88548a92b0925ca3008c5c62682e5`、2026年10月19日。
+文書基準: 公開プレリリース`4.0.0-rc.25`、commit `a68f8dc4d38b4609c8387192d3be0376963735e3`、2026年10月19日。
 正式版4.0.0は未公開です。これは再現と照合の手順であり、未実行項目をpassとする記録ではありません。
 
 本書はリリース担当者向けで、一般的な動作確認を説明する文書ではありません。
@@ -14,8 +14,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## Schemaと公開runtimeの二つの基準
 
-公開runtimeの調査基準は`4.0.0-rc.23`（`2f2889fe`）です。Schemaリファレンスも同じ公開commitへ固定し、portraitの`placement`、`offset`、`cornerRadius`はrc.23で利用できます。
-公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.23.schema.json`を使い、
+公開runtimeの調査基準は`4.0.0-rc.25`（`a68f8dc4`）です。Schemaリファレンスも同じ公開commitへ固定し、portraitの`placement`、`offset`、`cornerRadius`はrc.25で利用できます。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.25.schema.json`を使い、
 現行Schemaの出典は`sources/dsl4/source-lock.json`で確認します。旧版の検証結果を現行版へ読み替えません。
 
 ## 固定値
@@ -24,11 +24,11 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 | 対象               | 固定値                                                                             |
 | ------------------ | ---------------------------------------------------------------------------------- |
-| freeze／tag commit | `2f2889fe9df88548a92b0925ca3008c5c62682e5`                                         |
-| source identity    | `sha256:1600bea27fccd29a22212fa12cf8f9ff30e947a8164f552429f8930b1720d93f`          |
+| freeze／tag commit | `a68f8dc4d38b4609c8387192d3be0376963735e3`                                         |
+| source identity    | `sha256:0e0ed3c9a8b99e2fd6aee84818a3400e619a1adfd844dc0d0b3b0b00d84158ca`          |
 | Schema SHA-256     | `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27`                 |
-| Standard SB3       | 6922003 bytes / `ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998` |
-| npm tarball        | 6657881 bytes / `e917e13fccb42354167967f07d7d310d427f0885f115a0da744fae0cc728f728` |
+| Standard SB3       | 6923215 bytes / `d6b8d73e27685ac8359a17ade7c5c9cb4596ab22413eae9bf33d060351d0ab29` |
+| npm tarball        | 6664616 bytes / `79fb6803bd6b1abc41c3776ee3c27b205b90c90bc8a333fdd2fc5760fc3ec3a3` |
 
 ## Feature flag snapshot
 
@@ -41,23 +41,23 @@ broadcast、Bubbleの高度な表示、カメラ許可段などを含みます�
 ## 自動検証
 
 固定tagをcheckoutし、依存をlockどおりに用意してから、変更の影響に合う上流のVitest対象を選びます。
-TypeScriptへ移行したrc.23のsuiteを、rc.8当時の`node --test`や件数で説明しません。
-rc.23公開時の本体・samples CIの結果はcandidateの出典URLで追跡します。この文書更新では上流suiteを再実行せず、旧版の件数もrc.23へ読み替えません。文書側の検証結果はIssue #205に記録します。
+rc.25のTypeScript／Vitest suiteを、rc.8当時の`node --test`や件数で説明しません。
+rc.25公開時の本体・samples CIの結果はcandidateの出典URLで追跡します。この文書更新では上流suiteを再実行せず、旧版の件数もrc.25へ読み替えません。文書側の検証結果はIssue #217に記録します。
 
 ## 公開物を照合する
 
-[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.23)からStandard SB3を取得し、上記size／hashと照合します。
+[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.25)からStandard SB3を取得し、上記size／hashと照合します。
 
 ```bash
-curl -fL https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.23/kamishibai-4.0.0-rc.23.sb3 -o kamishibai-4.0.0-rc.23.sb3
-shasum -a 256 kamishibai-4.0.0-rc.23.sb3
-npm view @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.23 version dist.tarball dist.integrity dist.shasum
+curl -fL https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.25/kamishibai-4.0.0-rc.25.sb3 -o kamishibai-4.0.0-rc.25.sb3
+shasum -a 256 kamishibai-4.0.0-rc.25.sb3
+npm view @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.25 version dist.tarball dist.integrity dist.shasum
 npm view @kubohiroya/turbowarp-kamishibai-app dist-tags
 ```
 
-npm integrityは`sha512-m9TCa1ElwSC2BNk8i2iGBl5UzYKAMWyzNP4ATNF+EV60xconL9t3G3tgkap20m5wJWbuRVG+LDw+i59BIaNQOQ==`です。今回SB3とnpm tarballの実バイトを照合しました。
-確認時のnpm `latest`と`next`はrc.23で、推奨安定版3.2.3とは別です。Pagesのversion付きSB3も取得し、GitHub Releaseと同じsize/hashであることを確認済みです。
-公開サンプルは3作品のmanifestのruntime commitを照合しました。公開12ファイルのsize/hash、Web作品、実Editorでのブロック台本の直接再生を確認済みです。実カメラ・実ポーズは未検証です。
+npm integrityは`sha512-gruNLzXoJVMwybzsZ6zwgHMItz63wpvK3Uu96EYklX1aBGpo6jwPI60kze6MjggglmcaRebhe42U6CP3n5c5/Q==`です。今回SB3とnpm tarballの実バイトを照合しました。
+確認時のnpm `latest`と`next`はrc.25で、推奨安定版3.2.3とは別です。Pagesのversion付きSB3も取得し、GitHub Releaseと同じsize/hashであることを確認済みです。
+公開サンプル3作品のruntime commitと公開16ファイルのsize/hashを照合しました。同じバイト列のWeb作品と実Editorでのブロック台本再生を確認しています。実カメラ・実ポーズは未検証です。
 
 ## TurboWarp surfaceを確認する
 
@@ -80,7 +80,7 @@ CONNECTでは証明書障害の可能性とDNS・サーバ停止等の可能性�
 今回の文書更新では未実施です。camera frameは保存しません。
 Camera Sourceの起動・lease、previewの反転・カメラ選択、認識・overlay・停止時の解放を、実機で確認した場合だけ記録します。
 rc.8の旧証跡はcandidateの`historicalCandidates`に保存しています。TurboWarp Teachable Machine 1.12.0、
-Bubble 0.10.0、23個のcore action、上流unit 1,161件とChromium 13件等は当時の記録であり、rc.23のpassではありません。
+Bubble 0.10.0、23個のcore action、上流unit 1,161件とChromium 13件等は当時の記録であり、rc.25のpassではありません。
 
 ## Release-stop条件
 
@@ -90,6 +90,6 @@ checksum不一致、Schemaと公開blockの食い違い、必要な実行確認�
 
 ## Rollback
 
-公開済みrc.23を同じversionで差し替えません。必要なら直前のrc.22または推奨安定版3.2.3へ戻します。
+公開済みrc.25を同じversionで差し替えません。必要なら直前の確認済みrc.23または推奨安定版3.2.3へ戻します。
 文書の誤りは本Issueの差分をrevertして直前の確認済み記述へ戻します。
 旧versionのSB3、履歴、実機測定値は削除・上書きしません。

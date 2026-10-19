@@ -1,9 +1,9 @@
 export const dsl4PublicationStatus = Object.freeze({
   verifiedOn: '2026-10-19',
-  implementationCommit: '2f2889fe9df88548a92b0925ca3008c5c62682e5',
-  schemaImplementationCommit: '2f2889fe9df88548a92b0925ca3008c5c62682e5',
+  implementationCommit: 'a68f8dc4d38b4609c8387192d3be0376963735e3',
+  schemaImplementationCommit: 'a68f8dc4d38b4609c8387192d3be0376963735e3',
   latestPublishedRelease: 'v3.2.3',
-  publishedDsl4Prerelease: 'v4.0.0-rc.23',
+  publishedDsl4Prerelease: 'v4.0.0-rc.25',
   officialDsl4Release: null,
 });
 
@@ -147,7 +147,7 @@ export const documentCollections = [
         title: '紙芝居DSL 4.0 台本作成ガイド',
         audience: '台本ブロックでDSL 4.0の作品を作る方',
         description:
-          '台本宣言、シーン、設定、命令、入力、分岐をブロック図版で調べるガイドです。命令単位の編集と空名ルートからの直接再生は公開rc.23で利用できます。',
+          '台本宣言、シーン、設定、命令、入力、分岐をブロック図版で調べるガイドです。命令単位の編集と空名ルートからの直接再生は公開rc.25で利用できます。',
       },
     ],
   },
@@ -179,7 +179,7 @@ export const documentCollections = [
         title: 'DSL 4.0 YAMLとブロック台本SB3の相互変換ガイド',
         audience: 'YAML台本とTurboWarpのブロック台本を相互に編集する方',
         description:
-          'author-block-dslとexport-block-dslの使い方、ブロックを編集・保存してYAMLへ書き戻す手順、公開rc.23での直接再生と素材の条件を説明します。',
+          'author-block-dslとexport-block-dslの使い方、ブロックを編集・保存してYAMLへ書き戻す手順、公開rc.25での直接再生と素材の条件を説明します。',
       },
       {
         sourceFilename: 'dsl-4.0-asset-conversion-guide.md',
@@ -256,7 +256,7 @@ export const documentCollections = [
         title: '紙芝居を作る',
         audience: '初めて台本ブロックで紙芝居を作る方',
         description:
-          '公開rc.23で台本ブロックを編集・保存し、空名ルートから直接再生します。素材の追加時はビルドで同梱します。',
+          '公開rc.25で台本ブロックを編集・保存し、空名ルートから直接再生します。素材の追加時はビルドで同梱します。',
       },
     ],
   },

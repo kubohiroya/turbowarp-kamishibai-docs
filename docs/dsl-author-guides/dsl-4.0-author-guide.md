@@ -35,21 +35,21 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 公開プレリリースと文書基準
 
-文書状態: 公開プレリリースrc.23の固定実装基準を説明する台本作成ガイド\
-調査基準: TurboWarp-Kamishibai `2f2889f`（`v4.0.0-rc.23`）、2026年10月19日
+文書状態: 公開プレリリースrc.25の固定実装基準を説明する台本作成ガイド\
+調査基準: TurboWarp-Kamishibai `a68f8dc`（`v4.0.0-rc.25`）、2026年10月19日
 
-> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.23`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。ポーズoverlayはrc.23と、同版がexact pinするTurboWarp Teachable Machine 3.5.1で利用できます。
+> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.25`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。ポーズoverlayはrc.25と、同版がexact pinするTurboWarp Teachable Machine 3.5.1で利用できます。
 
-このガイドの公開runtime基準はrc.23です。[紙芝居DSL 4.0 Schemaリファレンス](dsl-4.0-schema-reference.md)は、
-同じ公開commit `2f2889f`のSchemaを保持します。Schemaはruntime実装から生成するものではありません。どの実装がどこまで入っているか、
+このガイドの公開runtime基準はrc.25です。[紙芝居DSL 4.0 Schemaリファレンス](dsl-4.0-schema-reference.md)は、
+同じ公開commit `a68f8dc`のSchemaを保持します。Schemaはruntime実装から生成するものではありません。どの実装がどこまで入っているか、
 根拠となる資料はどれかを確認したい方は、巻末の「付録: 実装基準と実装根拠」を参照してください。
 
-Schema基準: `2f2889fe9df88548a92b0925ca3008c5c62682e5`（rc.23公開tag）。
-portraitの`placement`、`offset`、`cornerRadius`はrc.23の公開Schemaとランタイムで利用できます。
-公開版向けの台本は同じrc.23のSchemaで検査します。旧rc.22のsnapshotは履歴として保持します。
+Schema基準: `a68f8dc4d38b4609c8387192d3be0376963735e3`（rc.25公開tag）。
+portraitの`placement`、`offset`、`cornerRadius`はrc.25の公開Schemaとランタイムで利用できます。
+公開版向けの台本は同じrc.25のSchemaで検査します。旧rc.22のsnapshotは履歴として保持します。
 
-## rc.23の制作・カメラ・失敗表示
+## rc.25の制作・カメラ・失敗表示
 
 YAMLとブロック台本は同じ`StoryDocument`へ正規化されます。CLIでは
 `validate-dsl4 --format canonical-json`で正規形を取得し、`author-block-dsl`でYAMLからブロック台本SB3を作り、
@@ -59,14 +59,14 @@ include文付きのYAMLから、ラベル付き台本と`includeBlocks`を持つ
 
 両コマンドの実行例と、TurboWarpで編集・保存してYAMLへ書き戻す手順は、
 [「YAMLとブロック台本SB3の相互変換ガイド」](dsl-4.0-block-script-conversion-guide.md)を参照してください。
-公開rc.23はシーンと命令を実ブロックで配置し、編集・保存・YAMLへの書き戻しに対応します。Stage上の名前が空の`kamishibai [4.0] []`がルートです。対応するfile素材を同梱したSB3なら、緑の旗で起動してタイトルを閉じると、そのブロック台本を再生します。編集後に開始し直すと現在のブロックを読み直します。素材の追加・変更には素材バンドルの再ビルドが必要です。
+公開rc.25はシーンと命令を実ブロックで配置し、編集・保存・YAMLへの書き戻しに対応します。Stage上の名前が空の`kamishibai [4.0] []`がルートです。対応するfile素材を同梱したSB3なら、緑の旗で起動してタイトルを閉じると、そのブロック台本を再生します。編集後に開始し直すと現在のブロックを読み直します。素材の追加・変更には素材バンドルの再ビルドが必要です。
 
 カメラはCamera Sourceが所有し、認識側が映像を借ります。プレビューは映像をそのまま表示し、推論には中央の
 正方形を切り出して左右反転した入力を使います。プレビューの左右反転と推論入力の処理を同一視しないでください。
 タイトルのカメラ許可は、対応ブラウザー・ポーズ作品・有効な機能フラグの条件が揃った場合に表示されます。
-rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わずrc.23を選びます。
+rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わずrc.25を選びます。
 
-ローカルプレビューはリモート素材を読み込みません。rc.23では失敗時にダイアログが表示されます。
+ローカルプレビューはリモート素材を読み込みません。rc.25では失敗時にダイアログが表示されます。
 `K4-ASSET-REMOTE-DISABLED`ならローカル配信へ変更するか、ビルドした作品で確認してください。
 ブラウザーの取得失敗はOFFLINE／CORS／CONNECTに分かれ、CONNECTでは証明書・DNS・サーバ停止などの可能性を確認します。
 CLIはTLSエラーを`K4-ASSET-REMOTE-TLS-001`で報告します。拡張機能をサンドボックス内で許可した場合は、
@@ -700,7 +700,7 @@ cancelだけでcameraは停止しません。
 | `parallel: false`（既定値） | 依存関係のない処理を重ねない                                     | 動作を従来と揃えたい作品                         |
 | `parallel: true`            | cameraの起動とモデル準備などを重ねる。最初の認識だけが両方を待つ | ポーズ認識が始まるまでの待ち時間を短くしたい作品 |
 
-`latest-needed`の実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。公開プレリリース4.0.0-rc.23はTurboWarp Teachable Machine 3.5.1をexact pinします。
+`latest-needed`の実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。公開プレリリース4.0.0-rc.25はTurboWarp Teachable Machine 3.5.1をexact pinします。
 
 ### カメラ映像の表示と操作
 
@@ -930,8 +930,8 @@ _図: `distance`はアクターの外枠からしっぽの先まで、`tailLengt
 _図: セリフの表示中（talking）は目パチと口パク、読み手の入力待ち（awaiting-continue）は目パチと次へ進む合図、
 表示したままの停止中（idle）は目パチだけが動きます。_
 
-実装基準`2f2889f`では、`portrait`へTurboWarp Bubbleと同じ`placement`、`offset`、`cornerRadius`を指定できます。
-この3項目はrc.23の公開Schemaに含まれ、以下の配置例を公開rc.23で利用できます。
+実装基準`a68f8dc`では、`portrait`へTurboWarp Bubbleと同じ`placement`、`offset`、`cornerRadius`を指定できます。
+この3項目はrc.25の公開Schemaに含まれ、以下の配置例を公開rc.25で利用できます。
 
 ```yaml
 bubbleStyles:
@@ -1906,7 +1906,7 @@ runtime接続後は、action、scene、branch、port、戻り値などの実行�
 
 ここから先は、公開状況や実装の追跡が必要な方のための付録です。台本を書くうえでは読み飛ばせます。
 
-2026年10月19日の公開rc.23基準では、次の実装がTurboWarp-Kamishibaiへ入っています。
+2026年10月19日の公開rc.25基準では、次の実装がTurboWarp-Kamishibaiへ入っています。
 
 - 制限付きYAMLの解析、JSON Schema検証、参照関係の意味検証
 - 行・列とStory Pathを保持するSource Map、`K4-*`診断
@@ -1932,8 +1932,8 @@ builder、TurboWarp runtime surface、ブラウザー／CLIプレビューを含
 ### 実装根拠を確認する場合
 
 仕様の正本は、`turbowarp-kamishibai-app`リポジトリの
-[紙芝居DSL 4.0 表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/docs/design/dsl-4-surface.md)と
-[JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/schema/dsl-4.schema.json)です。
+[紙芝居DSL 4.0 表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/docs/design/dsl-4-surface.md)と
+[JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/schema/dsl-4.schema.json)です。
 カメラプレビュー操作UIは[Issue #388](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/388)、
 ポーズoverlayは[Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624)、
 `bubbleStyles`は[Issue #476](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/476)以降、
@@ -1959,8 +1959,8 @@ rc.8より後には、crossfade（[#652](https://github.com/kubohiroya/turbowarp
 - [DSL 4.0ランタイム変数ガイド](dsl-4.0-runtime-variable-guide.md): 実行中に参照できる変数と、その扱い方
 - [3系作品の変換ガイド](dsl-3.2-to-4.0-conversion-guide.md): 3系の台本を4.0のYAMLへ変換する手順
 - [紙芝居DSL 4.0 リリース履歴](dsl-4.0-history.md): 版ごとの追加機能と変更点
-- [DSL 4.0表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/docs/design/dsl-4-surface.md): 4.0の規範的な作者向け構文
-- [DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/schema/dsl-4.schema.json): 機械可読な構造仕様
-- [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
+- [DSL 4.0表層仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/docs/design/dsl-4-surface.md): 4.0の規範的な作者向け構文
+- [DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/schema/dsl-4.schema.json): 機械可読な構造仕様
+- [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
 - [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624): Schema、TurboWarp Teachable Machine 1.12.0 composition API mapping、YAML opt-in、rollback
-- [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例
+- [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例

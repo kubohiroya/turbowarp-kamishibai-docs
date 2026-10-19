@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書状態: 公開プレリリース`4.0.0-rc.23`のブラウザー完結作者flowとrc.23公開サンプルの管理\
+文書状態: 公開プレリリース`4.0.0-rc.25`のブラウザー完結作者flowとrc.25公開サンプルの管理\
 関連Issue: [ブラウザー作者flow #118](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/118) / [本体実装 #555](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/555) / [正式公開 #111](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/111) / [準備 #31](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/31)
 
 読者向け入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
@@ -10,8 +10,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 このREADMEは、チュートリアルを公開する人のための管理メモです。初めて紙芝居を遊ぶ人や台本を作る人は、
 上の読者向け入口から始めてください。
 
-このディレクトリは、公開プレリリース`4.0.0-rc.23`を作者用実行環境とするチュートリアル本文、
-スクリーンショット台帳、4.0ドキュメント一覧への公開計画を保持します。公開中のsample成果物もrc.23から
+このディレクトリは、公開プレリリース`4.0.0-rc.25`を作者用実行環境とするチュートリアル本文、
+スクリーンショット台帳、4.0ドキュメント一覧への公開計画を保持します。公開中のsample成果物もrc.25から
 再生成し、作者用runtimeの版とsample成果物の完全性情報を別々に固定します。
 
 3ページを`docs/config.mjs`へ登録し、4.0トップには「紙芝居を遊ぶ」を見る人向け、
@@ -40,7 +40,7 @@ activation gate、ロールバック方針の正本とします。4.0トップ�
 同じカテゴリーに[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md)を置きます。
 相互変換、変数、Schema、履歴、3系からの移行は「台本作りについて詳しく知りたい人向けドキュメント」へまとめます。
 
-ブロック版は公開rc.23で利用できます。既存のブラウザー作者flowの撮影当時のgateを
+ブロック版は公開rc.25で利用できます。既存のブラウザー作者flowの撮影当時のgateを
 ブロック編集の公開済み判定へ流用しません。図版は実装の接続と入力値を描き直した説明図です。
 
 ## 台本作成ガイドとの役割分担
@@ -106,17 +106,17 @@ include文、複雑な分岐、custom action、runtimeやextensionの開発は�
 YAMLはコピー可能なcode blockを正本とします。画像はTurboWarp Editorでの画面操作、正常状態、
 失敗状態を示す補助として使用します。CLI commandは高度な利用者向けの任意手順だけに置きます。
 
-### rc.23の現行基準
+### rc.25の現行基準
 
-現在の本文・公開サンプルは`4.0.0-rc.23`を対象にします。実装commitは`2f2889fe9df88548a92b0925ca3008c5c62682e5`、
-公開SB3のSHA-256は`ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998`です。
+現在の本文・公開サンプルは`4.0.0-rc.25`を対象にします。実装commitは`a68f8dc4d38b4609c8387192d3be0376963735e3`、
+公開SB3のSHA-256は`d6b8d73e27685ac8359a17ade7c5c9cb4596ab22413eae9bf33d060351d0ab29`です。
 npm packageは`@kubohiroya/turbowarp-kamishibai-app`です。GitHub ReleaseのSB3とnpm配布物は取得して照合しました。
-サンプル3作品の公開manifestと、samples commit `d8deecfbd46b69a6787ec9e5deea936b8b54f0f0`の
-Pages deploy run `39188793571`を確認しています。Web作品と実Editorでのブロック台本の直接再生、公開12ファイルのsize/hashを照合済みです。実カメラ・実ポーズ測定は未実施です。
+サンプル3作品の公開manifestと、samples commit `c01ad9eb664b198ba7d421fa0e784cd99fdf56bf`の
+Pages deploy run `39207776239`を確認しています。Web作品と実Editorでのブロック台本の直接再生、公開16ファイルのsize/hashを照合済みです。実カメラ・実ポーズ測定は未実施です。
 
 現行の正本は[公開状態の表記基準](../../DSL4-PUBLICATION-STATUS.md)と
 [公開状態データ](../../sources/dsl4/user-guide-4.0-public-surfaces.json)です。
-以下のスクリーンショット・旧gateの成功結果は撮影当時の版に帰属し、rc.23の検証へ読み替えません。
+以下のスクリーンショット・旧gateの成功結果は撮影当時の版に帰属し、rc.25の検証へ読み替えません。
 
 ### 過去の実装追跡（rc.8）
 
@@ -231,3 +231,6 @@ docs/images/tutorials/dsl4/create/
 - [共通reload overlay #394](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/394)
 - [pose認識進捗表示 #383](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/383)
 - [camera preview操作UI #388](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/388)
+
+- [4.0.0-rc.25の公開](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/900)
+- [4.0.0-rc.25のサンプル同期](https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/175)

@@ -1,30 +1,30 @@
 {
   "formatVersion": 1,
-  "candidateId": "dsl4-4.0.0-rc.23",
+  "candidateId": "dsl4-4.0.0-rc.25",
   "status": "published-prerelease-artifacts-and-samples-verified; automated-web-and-editor-passed; physical-runtime-smoke-not-run",
   "runtime": {
-    "version": "4.0.0-rc.23",
-    "freezeCommit": "2f2889fe9df88548a92b0925ca3008c5c62682e5",
+    "version": "4.0.0-rc.25",
+    "freezeCommit": "a68f8dc4d38b4609c8387192d3be0376963735e3",
     "schema": {
       "sha256": "55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27",
-      "snapshotPath": "sources/dsl4/dsl-4.0-rc.23.schema.json",
-      "sourceLock": "sources/dsl4/release-source-lock-4.0-rc.23.json"
+      "snapshotPath": "sources/dsl4/dsl-4.0-rc.25.schema.json",
+      "sourceLock": "sources/dsl4/release-source-lock-4.0-rc.25.json"
     },
     "releaseSource": {
-      "sourceIdentity": "sha256:1600bea27fccd29a22212fa12cf8f9ff30e947a8164f552429f8930b1720d93f"
+      "sourceIdentity": "sha256:0e0ed3c9a8b99e2fd6aee84818a3400e619a1adfd844dc0d0b3b0b00d84158ca"
     },
     "standardArtifact": {
-      "filename": "kamishibai-4.0.0-rc.23.sb3",
-      "sha256": "ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998",
-      "size": 6922003,
-      "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.23/kamishibai-4.0.0-rc.23.sb3",
+      "filename": "kamishibai-4.0.0-rc.25.sb3",
+      "sha256": "d6b8d73e27685ac8359a17ade7c5c9cb4596ab22413eae9bf33d060351d0ab29",
+      "size": 6923215,
+      "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.25/kamishibai-4.0.0-rc.25.sb3",
       "publicationState": "published"
     },
     "packageTarball": {
-      "url": "https://registry.npmjs.org/@kubohiroya/turbowarp-kamishibai-app/-/turbowarp-kamishibai-app-4.0.0-rc.23.tgz",
-      "size": 6657881,
-      "sha256": "e917e13fccb42354167967f07d7d310d427f0885f115a0da744fae0cc728f728",
-      "integrity": "sha512-m9TCa1ElwSC2BNk8i2iGBl5UzYKAMWyzNP4ATNF+EV60xconL9t3G3tgkap20m5wJWbuRVG+LDw+i59BIaNQOQ==",
+      "url": "https://registry.npmjs.org/@kubohiroya/turbowarp-kamishibai-app/-/turbowarp-kamishibai-app-4.0.0-rc.25.tgz",
+      "size": 6664616,
+      "sha256": "79fb6803bd6b1abc41c3776ee3c27b205b90c90bc8a333fdd2fc5760fc3ec3a3",
+      "integrity": "sha512-gruNLzXoJVMwybzsZ6zwgHMItz63wpvK3Uu96EYklX1aBGpo6jwPI60kze6MjggglmcaRebhe42U6CP3n5c5/Q==",
       "publicationState": "published",
       "verificationMethod": "published-registry-tarball-downloaded; sha1-sha256-sha512-verified"
     },
@@ -49,16 +49,16 @@
     }
   },
   "publicSamples": {
-    "version": "4.0.0-rc.23",
+    "version": "4.0.0-rc.25",
     "evidenceUrls": [
       "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/manifest.json",
       "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/dsl4-manifest.json",
       "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json"
     ],
-    "status": "12-public-artifacts-sha256-verified; fake-camera-web-and-real-editor-block-playback-passed",
-    "publicationCommit": "d8deecfbd46b69a6787ec9e5deea936b8b54f0f0",
-    "pullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/173",
-    "pagesDeploymentRun": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39188793571"
+    "status": "16-public-artifacts-sha256-verified; fake-camera-web-and-real-editor-block-playback-passed",
+    "publicationCommit": "c01ad9eb664b198ba7d421fa0e784cd99fdf56bf",
+    "pullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/179",
+    "pagesDeploymentRun": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39207776239"
   },
   "evidence": {
     "publicationVerification": {
@@ -66,23 +66,45 @@
       "npmTarballIntegrityMatch": true,
       "pagesArtifactHashMatch": true,
       "publicSampleArtifactHashMatch": true,
-      "publicSampleArtifactCount": 12
+      "publicSampleArtifactCount": 16
     },
     "upstreamVerification": {
       "status": "upstream-node24-ci-passed; not-rerun-in-this-documentation-update",
-      "evidenceUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/39183520334",
+      "evidenceUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/39205538001",
       "command": "pnpm verify:full"
     },
     "physicalCameraAndPose": {
-      "status": "not-run-for-rc.23",
-      "previousEvidenceAppliesToRc23": false
+      "status": "not-run-for-rc.25",
+      "previousEvidenceAppliesToRc25": false
     },
     "sampleBrowserVerification": {
-      "status": "passed-with-fake-camera-and-real-editor",
-      "evidenceUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39188793571",
+      "status": "passed-with-fake-camera-and-real-editor; public-project-url-and-three-web-works-passed",
+      "evidenceUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39207776239",
       "physicalCamera": false,
       "realEditorBlockStory": true,
-      "editorSavedYamlMatches": true
+      "editorSavedYamlMatches": true,
+      "publishedPlayback": {
+        "status": "passed-in-published-pages",
+        "runtimeVersion": "4.0.0-rc.25",
+        "webWorks": ["urashima", "my-urashima", "tutorial"],
+        "editorPublicProjectUrl": true,
+        "myUrashimaNativeYamlPicker": true,
+        "pageErrors": 0,
+        "physicalCamera": false,
+        "evidenceUrls": [
+          "https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=en&blockEditorDialogs=1&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3",
+          "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/web-4.0/index.html",
+          "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/web-4.0/index.html",
+          "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/web-4.0/index.html"
+        ]
+      }
+    },
+    "restartAfterFormEdit": {
+      "status": "passed-at-fix-899; included-in-rc25-and-unit-regressions-passed",
+      "oldCameraRequestPendingDuringRestart": true,
+      "lateTracksStopped": true,
+      "physicalCamera": false,
+      "evidenceUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/899"
     }
   },
   "environment": {
@@ -100,7 +122,7 @@
   ],
   "rollback": {
     "recommendedStableVersion": "3.2.3",
-    "previousPrerelease": "4.0.0-rc.22",
+    "previousPrerelease": "4.0.0-rc.23",
     "replacePublishedBytes": false
   },
   "historicalCandidates": [
@@ -298,11 +320,117 @@
         "previousPrerelease": "4.0.0-rc.21",
         "replacePublishedBytes": false
       }
+    },
+    {
+      "formatVersion": 1,
+      "candidateId": "dsl4-4.0.0-rc.23",
+      "status": "published-prerelease-artifacts-and-samples-verified; automated-web-and-editor-passed; physical-runtime-smoke-not-run",
+      "runtime": {
+        "version": "4.0.0-rc.23",
+        "freezeCommit": "2f2889fe9df88548a92b0925ca3008c5c62682e5",
+        "schema": {
+          "sha256": "55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27",
+          "snapshotPath": "sources/dsl4/dsl-4.0-rc.23.schema.json",
+          "sourceLock": "sources/dsl4/release-source-lock-4.0-rc.23.json"
+        },
+        "releaseSource": {
+          "sourceIdentity": "sha256:1600bea27fccd29a22212fa12cf8f9ff30e947a8164f552429f8930b1720d93f"
+        },
+        "standardArtifact": {
+          "filename": "kamishibai-4.0.0-rc.23.sb3",
+          "sha256": "ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998",
+          "size": 6922003,
+          "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.23/kamishibai-4.0.0-rc.23.sb3",
+          "publicationState": "published"
+        },
+        "packageTarball": {
+          "url": "https://registry.npmjs.org/@kubohiroya/turbowarp-kamishibai-app/-/turbowarp-kamishibai-app-4.0.0-rc.23.tgz",
+          "size": 6657881,
+          "sha256": "e917e13fccb42354167967f07d7d310d427f0885f115a0da744fae0cc728f728",
+          "integrity": "sha512-m9TCa1ElwSC2BNk8i2iGBl5UzYKAMWyzNP4ATNF+EV60xconL9t3G3tgkap20m5wJWbuRVG+LDw+i59BIaNQOQ==",
+          "publicationState": "published",
+          "verificationMethod": "published-registry-tarball-downloaded; sha1-sha256-sha512-verified"
+        },
+        "featureFlags": {
+          "defaultState": "all-off",
+          "standardProductionEnabled": [
+            "dsl4Runtime",
+            "dsl4CrossfadeTransitions",
+            "dsl4AppShell",
+            "dsl4PoseFeedbackModes",
+            "dsl4SpeechAdvanceTypewriter",
+            "dsl4TurboWarpActionSurface",
+            "dsl4TurboWarpStateSurface",
+            "dsl4ExpressionRuntimeState",
+            "dsl4PosePreviewMirroring",
+            "dsl4CameraPreviewControls",
+            "dsl4UserMediaPermissionGate",
+            "dsl4BroadcastMessageAndWait",
+            "dsl4TurboWarpBubbleAdvancedPresentation",
+            "dsl4IndexedDBAssetSessionStore"
+          ]
+        }
+      },
+      "publicSamples": {
+        "version": "4.0.0-rc.23",
+        "evidenceUrls": [
+          "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/manifest.json",
+          "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/dsl4-manifest.json",
+          "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/public-surfaces.json"
+        ],
+        "status": "12-public-artifacts-sha256-verified; fake-camera-web-and-real-editor-block-playback-passed",
+        "publicationCommit": "d8deecfbd46b69a6787ec9e5deea936b8b54f0f0",
+        "pullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/173",
+        "pagesDeploymentRun": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39188793571"
+      },
+      "evidence": {
+        "publicationVerification": {
+          "githubReleaseArtifactHashMatch": true,
+          "npmTarballIntegrityMatch": true,
+          "pagesArtifactHashMatch": true,
+          "publicSampleArtifactHashMatch": true,
+          "publicSampleArtifactCount": 12
+        },
+        "upstreamVerification": {
+          "status": "upstream-node24-ci-passed; not-rerun-in-this-documentation-update",
+          "evidenceUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/39183520334",
+          "command": "pnpm verify:full"
+        },
+        "physicalCameraAndPose": {
+          "status": "not-run-for-rc.23",
+          "previousEvidenceAppliesToRc23": false
+        },
+        "sampleBrowserVerification": {
+          "status": "passed-with-fake-camera-and-real-editor",
+          "evidenceUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39188793571",
+          "physicalCamera": false,
+          "realEditorBlockStory": true,
+          "editorSavedYamlMatches": true
+        }
+      },
+      "environment": {
+        "cameraFrameStorage": false
+      },
+      "releaseStops": [
+        "candidate-metadata-mismatch",
+        "artifact-integrity-mismatch",
+        "schema-or-feature-flag-change",
+        "browser-console-or-page-error",
+        "camera-or-pose-transition-failure",
+        "asset-or-diagnostic-failure",
+        "resource-leak",
+        "nondeterministic-build"
+      ],
+      "rollback": {
+        "recommendedStableVersion": "3.2.3",
+        "previousPrerelease": "4.0.0-rc.22",
+        "replacePublishedBytes": false
+      }
     }
   ],
   "implementationSchema": {
-    "commit": "2f2889fe9df88548a92b0925ca3008c5c62682e5",
+    "commit": "a68f8dc4d38b4609c8387192d3be0376963735e3",
     "sourceLock": "sources/dsl4/source-lock.json",
-    "relationship": "published-rc.23-schema"
+    "relationship": "published-rc.25-schema"
   }
 }

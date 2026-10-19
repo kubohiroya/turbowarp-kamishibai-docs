@@ -30,7 +30,7 @@ test('publishes the adult overview as an independent DSL 4.0 document', () => {
   assert.equal(dsl32Document?.outputDirectory, '3.2/user-guides');
   assert.match(dsl32Summary, /^# 紙芝居アプリ 3\.2 概要説明書 大人向け$/mu);
   assert.match(dsl4Summary, /^# 紙芝居アプリ 4\.0 概要説明書 大人向け$/mu);
-  assert.match(dsl4Summary, /文書状態: 公開プレリリース`4\.0\.0-rc\.23`を前提とする概要/u);
+  assert.match(dsl4Summary, /文書状態: 公開プレリリース`4\.0\.0-rc\.25`を前提とする概要/u);
   assert.match(dsl40Index, /href="user-guides\/executive-summary-adult-4\.0\/"/u);
   assert.match(dsl40Index, /4\.0\/user-guides\/executive-summary-adult-4\.0\/publication\.json/u);
 });

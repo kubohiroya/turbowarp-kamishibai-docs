@@ -2,24 +2,27 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書基準: 公開プレリリース`4.0.0-rc.23`、commit `2f2889fe`、2026年10月19日。正式版4.0.0は未公開です。
+文書基準: 公開プレリリース`4.0.0-rc.25`、commit `a68f8dc4`、2026年10月19日。正式版4.0.0は未公開です。
 
 対象: DSL 4.0ランタイムをTurboWarp Editorで開き、集約されたブロックからプログラムを書く方。
 公開SB3のbundleが返す`getInfo()`を照合した一覧です。表示されるopcode付きブロックは200個、memberは8個です。
 見出し・ドキュメントボタン・非表示ブロックは200個に含めません。表示の抽出は再生・実カメラの検証ではありません。
 
 台本の変換コマンドと編集手順は、[YAMLとブロック台本SB3の相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
-公開rc.23は、シーンごとに実命令ブロックを配置し、種類別の定義ブロックで台本を編集する形式に対応します。
+公開rc.25は、シーンごとに実命令ブロックを配置し、種類別の定義ブロックで台本を編集する形式に対応します。
 生成SB3へ同梱する編集用拡張の補助ブロックは、Standard SB3を照合した下記の200個には含めません。
 
 ## ブロック台本の入口とincludeBlocks
 
-公開rc.23では、生成SB3へ同梱する編集用拡張`kubohiroyakamishibaiauthoring4`に次のブロックがあります。
+公開rc.25では、生成SB3へ同梱する編集用拡張`kubohiroyakamishibaiauthoring4`に次のブロックがあります。
 Standard SB3のRuntime memberは46ブロック、bundle全体は200ブロックです。
 旧sourceハットと文字列命令は削除され、台本の入口は編集用拡張のハットへ統一されています。
 
 - `kamishibai [VERSION] [LABEL]`（hat、opcode: `kamishibai`）: VERSIONは文字列4.0、LABELの既定は空文字。
 - `includeBlocks [LABEL]`（command、opcode: `includeBlocks`）: 同じSB3内の名前付き台本を読み込む。
+- `この部分を使う [ENABLED]`（command、opcode: `useSection`）: 定義列やscene内命令を囲み、オン／オフを選ぶC字ブロック。
+  rc.25のCLIで`--block-sections true`を付けた場合だけパレットに表示します。既定は非表示です。
+  scene全体とincludeBlocksは囲めません。外側のオフが優先し、開始し直すと反映します。
 
 `kamishibai [4.0] [ラベル]`は台本ソースの入口と版・識別名の宣言を兼ねるハットです。
 このハット自身はイベントを受信しません。ランタイムが起動時に宣言を検出し、接続された台本から物語を開始します。
@@ -35,6 +38,8 @@ Stageにある名前（LABEL）が空欄の台本1個がルートです。名前
 
 素材を含む公開サンプルのブロック台本SB3は、緑の旗を押し、タイトルを閉じるとその台本を直接再生します。
 物語終了後の「再読み込み」では、編集したブロックを読み直します。不正な台本は診断を表示します。
+フォームで編集して再開する場合は、赤い停止ボタンで止めて値を保存し、緑の旗を押してタイトルを閉じます。
+rc.25では、前のカメラ開始が許可待ちでも停止・破棄が完了し、次のタイトル表示と再開始を妨げません。
 `file`素材には同梱済みのファイルbundleが必要です。Standard SB3へ台本ブロックを追加するだけでは、
 外部ファイルの内容は取り込まれません。別の台本ファイルを選択済みの場合は、選択した台本を優先します。
 生成・編集・保存と、分割YAMLへの書き戻し・再生用ビルドは
@@ -42,13 +47,19 @@ Stageにある名前（LABEL）が空欄の台本1個がルートです。名前
 
 ## パレットとドキュメントボタン
 
+rc.25のCLIで生成した編集用SB3では、8種類の定義フォームとは別に、
+`recognize actor [TARGET] pose steps [STEPS]`の書類アイコンから`STEPS`をフォームで編集できます。
+「ポーズ認識の手順」の各行は`pose`が必須、`skin`・`sound`が任意で、1行以上が必要です。
+フォームの登録と解除はSB3内の編集用拡張が担当し、表示ブロック200個の構成は変わりません。
+以前の編集用SB3は、rc.25のCLIで再生成してください。
+
 memberごとに見出し、`Open Documentation`、ブロックが並びます。
 集約bundleのExtension IDは`kubohiroyakamishibai4`です。保存時のopcodeは`member ID__opcode`であり、
 下の表では共通prefixを除いたmember内のopcodeを示します。member名、Extension ID、製品名を混同しないでください。
 
 | member                      | version     | member ID                      | ブロック数 |
 | --------------------------- | ----------- | ------------------------------ | ---------- |
-| Kamishibai DSL 4.0 Runtime  | 4.0.0-rc.23 | `kubohiroyakamishibairuntime4` | 46         |
+| Kamishibai DSL 4.0 Runtime  | 4.0.0-rc.25 | `kubohiroyakamishibairuntime4` | 46         |
 | Asset Cache                 | 0.1.0       | `kubohiroyaassetcache`         | 23         |
 | Async Input                 | 0.7.0       | `kubohiroyaasyncinput`         | 9          |
 | Bubble                      | 0.13.0      | `kubohiroyabubble`             | 31         |
@@ -57,7 +68,7 @@ memberごとに見出し、`Open Documentation`、ブロックが並びます。
 | SVG Text                    | 0.10.0      | `kubohiroyasvgtext`            | 2          |
 | TurboWarp Teachable Machine | 3.5.1       | `kubohiroyatm`                 | 48         |
 
-rc.23の素材保持はAsset Cacheが担当し、
+rc.25の素材保持はAsset Cacheが担当し、
 カメラはCamera Sourceが所有し、Teachable Machineはleaseを通じて映像を読みます。
 
 ## 現状TurboWarpブロックから参照できる公開変数（2変数）
@@ -65,14 +76,14 @@ rc.23の素材保持はAsset Cacheが担当し、
 互換Stage変数`ポーズ認識`と`チャージ`は0〜100の数値です。台本変数`variables:`とは別です。
 ランタイムが所有するため、作品の得点やフラグの保存先には使いません。
 初期化・完了・中断時には0へ戻し、`recognition.feedback.mode`に従って表示します。
-通常の変数blockで読めるこの2変数に加え、rc.23では専用の読取reporterで台本変数・ランタイム状態を参照できます。
+通常の変数blockで読めるこの2変数に加え、rc.25では専用の読取reporterで台本変数・ランタイム状態を参照できます。
 
 台本変数の書換えはcore actionの`setVariable`／`changeVariable`／`toggleVariable`を使います。
 `setStoryVariableString`等の旧提案の書込blockや`dsl4TurboWarpStoryVariableWrite`は現行APIではありません。
 宣言済みの変数だけを同じ型で更新し、値の意味はYAMLとブロック台本で共通です。
 詳細は[ランタイム変数リファレンス](dsl-4.0-runtime-variable-turbowarp-reference.md)を参照してください。
 
-## Kamishibai DSL 4.0 Runtime 4.0.0-rc.23（46ブロック）
+## Kamishibai DSL 4.0 Runtime 4.0.0-rc.25（46ブロック）
 
 29個のcore actionと17個の読取状態blockを含みます。
 
@@ -341,7 +352,7 @@ rc.23の素材保持はAsset Cacheが担当し、
 
 ## 旧版のパレット画像
 
-次の画像はrc.5／rc.7を撮影した履歴資料です。現在のmember数・opcode・ブロック数の正本は上のrc.23表です。
+次の画像はrc.5／rc.7を撮影した履歴資料です。現在のmember数・opcode・ブロック数の正本は上のrc.25表です。
 画像へ新しいブロックを合成せず、撮影版を保持します。
 
 ![TurboWarpの集約パレットに表示されたKamishibai DSL 4.0 Runtimeの23ブロック](../images/dsl4-palette-kamishibai-runtime.jpg)

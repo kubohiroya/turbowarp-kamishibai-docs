@@ -50,7 +50,7 @@ test('gives block and DSL authors exactly one tutorial and one guide, followed b
 test('uses the published CLI and keeps saved blocks as input when refreshing file bundles', () => {
   for (const source of [guide, tutorial]) {
     assert.doesNotMatch(source, /```ya?ml/iu);
-    assert.match(source, /公開(?:プレリリース`4\.0\.0-rc\.23`|rc\.23)/u);
+    assert.match(source, /公開(?:プレリリース`4\.0\.0-rc\.25`|rc\.25)/u);
     assert.match(source, /Node\.js 24\.0\.0以上/u);
     assert.doesNotMatch(source, /未公開の開発版|開発版CLI|node bin\/turbowarp-kamishibai/u);
     assert.doesNotMatch(source, /when kamishibai DSL source|whenDsl4Source/u);
@@ -58,7 +58,7 @@ test('uses the published CLI and keeps saved blocks as input when refreshing fil
   }
   assert.match(
     tutorial,
-    /npm install --save-dev --save-exact @kubohiroya\/turbowarp-kamishibai-app@4\.0\.0-rc\.23/u,
+    /npm install --save-dev --save-exact @kubohiroya\/turbowarp-kamishibai-app@4\.0\.0-rc\.25/u,
   );
   assert.match(
     tutorial,
@@ -81,7 +81,7 @@ test('prepares native actor targets and replaces existing runtime components in 
     preparation,
     /https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-samples\/stories\/tutorial\/tutorial-4\.0\.sb3/u,
   );
-  assert.doesNotMatch(preparation, /releases\/download\/[^\n]+kamishibai-4\.0\.0-rc\.23\.sb3/u);
+  assert.doesNotMatch(preparation, /releases\/download\/[^\n]+kamishibai-4\.0\.0-rc\.25\.sb3/u);
   assert.match(preparation, /Student[\s\S]*Scratchスプライト/u);
   assert.match(preparation, /build-dsl4[\s\S]*新規生成しません/u);
   for (const match of conversion.matchAll(/```sh\n([\s\S]*?)```/gu)) {
@@ -90,7 +90,7 @@ test('prepares native actor targets and replaces existing runtime components in 
   assert.match(guide, /control \[production\] = JSON \[\{"Space":"navigation.nextAction"\}\]/u);
 });
 
-test('validates complete standalone conversion examples against the published rc.23 schema', () => {
+test('validates complete standalone conversion examples against the published rc.25 schema', () => {
   const conversion = read('docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md');
   const examples = [...conversion.matchAll(/```yaml\n([\s\S]*?)```/gu)]
     .map((match) => parse(match[1]))
@@ -98,7 +98,7 @@ test('validates complete standalone conversion examples against the published rc
   assert.equal(examples.length, 2);
   const AjvConstructor = /** @type {any} */ (Ajv2020);
   const ajv = new AjvConstructor({strict: true, allErrors: true});
-  const validate = ajv.compile(JSON.parse(read('sources/dsl4/dsl-4.0-rc.23.schema.json')));
+  const validate = ajv.compile(JSON.parse(read('sources/dsl4/dsl-4.0-rc.25.schema.json')));
   for (const [index, source] of examples.entries()) {
     assert.equal(
       validate(source),

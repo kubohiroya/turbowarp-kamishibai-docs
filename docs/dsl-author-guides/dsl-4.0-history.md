@@ -33,9 +33,71 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 | 安定版           | リリースが安定運用向けに推奨する版（npm latestとは別に確認）     |
 | 公開サンプル基準 | サンプル作品、starter、Web版を生成したruntimeの版                |
 
-2026年10月19日現在、公開プレリリースは`v4.0.0-rc.23`です。正式版`v4.0.0`は未公開です。
-リリースノート上の推奨安定版は`v3.2.3`ですが、現行packageのnpm `latest`／`next`はともにrc.23です。
-以下のrc.22以前の公開・検証記録は当時の事実として保存し、rc.23へ読み替えません。
+2026年10月19日現在、公開プレリリースは`v4.0.0-rc.25`です。正式版`v4.0.0`は未公開です。
+リリースノート上の推奨安定版は`v3.2.3`ですが、現行packageのnpm `latest`／`next`はともにrc.25です。
+以下のrc.23以前の公開・検証記録は当時の事実として保存し、rc.25へ読み替えません。
+
+## 4.0.0-rc.25
+
+状態: **公開プレリリース**。実装基準はcommit `a68f8dc4d38b4609c8387192d3be0376963735e3`です。
+カメラ開始の応答が保留されたまま停止すると再起動が待機する問題を修正し、配布SB3とサンプル3作品を同じ版へ更新しました。
+
+### 固定revisionと公開先
+
+| 対象              | 固定値                                                                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| tag               | `v4.0.0-rc.25`                                                                                                                       |
+| commit            | `a68f8dc4d38b4609c8387192d3be0376963735e3`                                                                                           |
+| source identity   | `sha256:0e0ed3c9a8b99e2fd6aee84818a3400e619a1adfd844dc0d0b3b0b00d84158ca`                                                            |
+| Schema SHA-256    | `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27`                                                                   |
+| GitHub prerelease | [v4.0.0-rc.25](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.25)                                     |
+| npm               | [@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.25](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.25) |
+| 公開サンプル基準  | rc.25、samples commit `c01ad9eb664b198ba7d421fa0e784cd99fdf56bf`                                                                     |
+
+公開版のSchemaと出典を`sources/dsl4/dsl-4.0-rc.25.schema.json`、`release-source-lock-4.0-rc.25.json`へ保存します。
+Schemaと表示ブロックの構造はrc.23と同じです。rc.23以前の固定snapshotと公開記録は保持します。
+
+### rc.23からの変更
+
+- 定義・命令を「この部分を使う」でオン／オフできます。`--block-sections true`で生成時のパレットに表示し、既定は非表示です。
+  YAMLの実行対象と復元用コメントを分け、無効部分を失わずに往復できます。Schemaの実行用fieldは増やしません。
+- カメラ許可への応答が保留されたままでも、停止・破棄が古いカメラ開始処理を待たずに完了します。
+  次の緑の旗でタイトルを表示し、空名ルートの台本を読み直せます。
+- 遅れて取得した不要なカメラは停止します。同じcompositionがcameraを必要とする場合は進行中の取得を共有します。
+- フォーム編集後は、赤い停止ボタンで止め、値を保存してから緑の旗を押し、タイトルを閉じて変更を確認します。
+  名前付き台本1個だけをルートとは解釈しません。file素材には対応バンドルが必要です。
+- `recognize actor [TARGET] pose steps [STEPS]`へ「ポーズ認識の手順」フォームを追加しました。
+  `pose`は必須、`skin`・`sound`は任意、手順は1個以上です。既存8種類の定義フォームと表示200ブロックの構成は変わりません。
+  以前の編集用SB3には自動追加されないため、rc.25のCLIで再生成します。
+- Standard SB3、浦島太郎・私の浦島太郎・チュートリアルの配布SB3／Web作品、スターターをrc.25へ再生成しました。
+
+### exact dependency pin
+
+Teachable Machine `3.5.1`、Camera Source `0.15.0`、Bubble `0.13.0`を含む依存版はrc.23と同じです。
+全件は機械可読な履歴のrc.25項目に記録します。
+
+### 公開成果物
+
+| 成果物       |  バイト数 | SHA-256                                                            |
+| ------------ | --------: | ------------------------------------------------------------------ |
+| Standard SB3 | 6,923,215 | `d6b8d73e27685ac8359a17ade7c5c9cb4596ab22413eae9bf33d060351d0ab29` |
+| npm tarball  | 6,664,616 | `79fb6803bd6b1abc41c3776ee3c27b205b90c90bc8a333fdd2fc5760fc3ec3a3` |
+
+npm tarballのSHA-512 integrityは`sha512-gruNLzXoJVMwybzsZ6zwgHMItz63wpvK3Uu96EYklX1aBGpo6jwPI60kze6MjggglmcaRebhe42U6CP3n5c5/Q==`です。
+GitHub Release、npm registry、Pagesの実バイトを取得し、公開値と照合しました。
+
+### 検証、制約、rollback
+
+上流の[凍結版CI](https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/39205538001)でNode.js 24の`pnpm verify:full`に成功しています。
+文書更新で同じ上流suiteを再実行せず、版ごとの検証結果を保持します。
+サンプルは[更新PR](https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/179)、[Pages実行](https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39207776239)、commit `c01ad9eb664b198ba7d421fa0e784cd99fdf56bf`に対応します。
+対象テスト63件、偽カメラを使ったWebと実Editorのブロック台本再生を確認し、公開16成果物のsize・SHA-256を照合しました。
+実Editorでposeフォームのキャンセル・不正値の保存防止・保存・元に戻す／やり直す・SB3保存再読込とYAML書き戻しの整合を確認しました。
+保留中のカメラ要求があっても、停止後の再起動・フォーム編集反映と遅延取得trackの解放を自動ブラウザーで確認しました。
+実カメラ・実ポーズの確認は今回行っていません。過去の実機結果をrc.25の成功へ読み替えません。
+
+問題時は依存版、lockfile、ベースSB3を公開済みrc.23へ戻し、再配信します。公開済みrc.25のバイト列は差し替えません。
+文書の誤りはIssue #217の差分をrevertします。
 
 ## 4.0.0-rc.23
 

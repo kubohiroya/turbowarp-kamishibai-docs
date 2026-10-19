@@ -4,6 +4,152 @@
   "updatedAt": "2026-10-19",
   "entries": [
     {
+      "version": "4.0.0-rc.25",
+      "publicationState": "published-prerelease",
+      "publication": {
+        "checkedAt": "2026-10-19",
+        "gitTag": "v4.0.0-rc.25",
+        "tagCommit": "a68f8dc4d38b4609c8387192d3be0376963735e3",
+        "githubRelease": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.25",
+        "npmVersion": "4.0.0-rc.25",
+        "npmUrl": "https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.25",
+        "npmDistTag": "next",
+        "observedNpmDistTags": {
+          "migration": "4.0.0-rc.12",
+          "latest": "4.0.0-rc.25",
+          "next": "4.0.0-rc.25"
+        },
+        "recommendedStableRelease": "v3.2.3",
+        "officialDsl4Release": null
+      },
+      "source": {
+        "freezeMergeCommit": "a68f8dc4d38b4609c8387192d3be0376963735e3",
+        "sourceIdentity": "sha256:0e0ed3c9a8b99e2fd6aee84818a3400e619a1adfd844dc0d0b3b0b00d84158ca"
+      },
+      "schema": {
+        "releaseSha256": "55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27",
+        "documentationReferenceCommit": "a68f8dc4d38b4609c8387192d3be0376963735e3",
+        "documentationReferenceSha256": "55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27",
+        "releaseReferenceCommit": "a68f8dc4d38b4609c8387192d3be0376963735e3",
+        "releaseSnapshotPath": "sources/dsl4/dsl-4.0-rc.25.schema.json"
+      },
+      "dependencies": {
+        "@kubohiroya/turbowarp-app-shell": "0.2.0",
+        "@kubohiroya/turbowarp-asset-cache": "0.1.0",
+        "@kubohiroya/turbowarp-async-input": "0.7.0",
+        "@kubohiroya/turbowarp-bubble": "0.13.0",
+        "@kubohiroya/turbowarp-camera-source": "0.15.0",
+        "@kubohiroya/turbowarp-extension-manifest": "0.2.0",
+        "@kubohiroya/turbowarp-kvs": "0.1.0",
+        "@kubohiroya/turbowarp-live-reload-controller": "0.2.0",
+        "@kubohiroya/turbowarp-local-preview": "0.1.0",
+        "@kubohiroya/turbowarp-runtime-adapter": "0.2.0",
+        "@kubohiroya/turbowarp-runtime-expression": "0.6.0",
+        "@kubohiroya/turbowarp-svg-text": "0.10.0",
+        "@kubohiroya/turbowarp-teachable-machine": "3.5.1",
+        "@teachablemachine/pose": "0.8.6",
+        "@tensorflow/tfjs": "1.3.1",
+        "@turbowarp/scratch-storage": "2.0.0",
+        "@turbowarp/scratch-svg-renderer": "1.1.0",
+        "base64-js": "1.5.1",
+        "brfs": "2.0.2",
+        "buffer": "6.0.3",
+        "fflate": "0.8.3",
+        "scratch-audio": "github:TurboWarp/scratch-audio#aba00cd02e36d95407effafa03f3678e4c669b30",
+        "scratch-render": "github:TurboWarp/scratch-render#a67f7c9c07d459582c227d4fd3fae8f59d8fc9ce",
+        "scratch-vm": "github:TurboWarp/scratch-vm#c4823421cb7c17d8d8a89878851ce1668c26a21f",
+        "vite": "^8.3.3",
+        "yaml": "2.9.0"
+      },
+      "artifacts": {
+        "standardSb3": {
+          "filename": "kamishibai-4.0.0-rc.25.sb3",
+          "sha256": "d6b8d73e27685ac8359a17ade7c5c9cb4596ab22413eae9bf33d060351d0ab29",
+          "size": 6923215,
+          "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.25/kamishibai-4.0.0-rc.25.sb3"
+        },
+        "npmTarball": {
+          "url": "https://registry.npmjs.org/@kubohiroya/turbowarp-kamishibai-app/-/turbowarp-kamishibai-app-4.0.0-rc.25.tgz",
+          "size": 6664616,
+          "sha256": "79fb6803bd6b1abc41c3776ee3c27b205b90c90bc8a333fdd2fc5760fc3ec3a3",
+          "integrity": "sha512-gruNLzXoJVMwybzsZ6zwgHMItz63wpvK3Uu96EYklX1aBGpo6jwPI60kze6MjggglmcaRebhe42U6CP3n5c5/Q=="
+        }
+      },
+      "changes": [
+        {
+          "release": "rc.25",
+          "subject": "カメラ開始の許可待ちが停止・再起動を妨げる問題を修正",
+          "appliesTo": [
+            "stop/disposeは保留中のstartCameraを待たずに古い要求を無効化",
+            "遅れて取得した不要なcameraを停止",
+            "フォーム編集後の緑の旗で空名ルートを再読込",
+            "app PR #899"
+          ]
+        },
+        {
+          "release": "rc.25",
+          "subject": "recognize actorのSTEPSをSchemaフォームで編集できるよう修正",
+          "appliesTo": [
+            "8種類の定義フォームに加えpose action用1フォーム",
+            "公開CLIでブロック台本SB3を再生成して利用",
+            "pose必須・skin/sound任意・1手順以上",
+            "Cancel・invalid・save・Undo/Redo・SB3保存再読込・canonical書戻しを実UIで確認"
+          ]
+        },
+        {
+          "release": "rc.25",
+          "subject": "定義・命令を可逆にオン／オフする編集用ブロックを追加",
+          "appliesTo": [
+            "sourceSections既定false・--block-sections trueでパレット表示",
+            "定義列とscene内命令が対象・sceneとincludeBlocksは対象外",
+            "外側OFF優先・最大32段・再開始時反映",
+            "YAML復元用コメントで無効部分も再生成・独立編集の競合を診断"
+          ]
+        }
+      ],
+      "verification": {
+        "verifiedOn": "2026-10-19",
+        "artifactBytes": "published-github-release-sb3-and-npm-registry-tarball-downloaded-and-hashed",
+        "publicSamples": "16-public-artifacts-downloaded-and-sha256-matched",
+        "sampleCommit": "c01ad9eb664b198ba7d421fa0e784cd99fdf56bf",
+        "samplePullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/179",
+        "samplePagesDeployment": "https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39207776239",
+        "sampleTests": 63,
+        "sampleBrowser": "public-fake-camera-web-and-real-editor-direct-block-story-passed",
+        "physicalCameraAndPose": "not-run-for-rc.25",
+        "upstreamSuite": "upstream-node24-ci-verify-full-passed; not-rerun-in-this-documentation-update",
+        "upstreamCi": "https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/39205538001",
+        "restartAfterFormEdit": "passed-at-fix-899; included-in-rc25-and-unit-regressions-passed",
+        "publishedPlayback": {
+          "status": "passed-in-published-pages",
+          "runtimeVersion": "4.0.0-rc.25",
+          "webWorks": ["urashima", "my-urashima", "tutorial"],
+          "editorPublicProjectUrl": true,
+          "myUrashimaNativeYamlPicker": true,
+          "pageErrors": 0,
+          "physicalCamera": false,
+          "evidenceUrls": [
+            "https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=en&blockEditorDialogs=1&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3",
+            "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/web-4.0/index.html",
+            "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/web-4.0/index.html",
+            "https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/web-4.0/index.html"
+          ]
+        }
+      },
+      "rollback": {
+        "reuseVersion": "4.0.0-rc.25",
+        "replacePublishedBytes": false,
+        "recommendedStableVersion": "3.2.3",
+        "previousPrerelease": "4.0.0-rc.23"
+      },
+      "tooling": {
+        "@kubohiroya/sb3-toolchain": "0.15.0",
+        "@kubohiroya/vite-plugin-turbowarp-extension": "0.5.0",
+        "typescript": "^6.0.3",
+        "vitest": "^5.0.3"
+      }
+    },
+    {
       "version": "4.0.0-rc.23",
       "publicationState": "published-prerelease",
       "publication": {

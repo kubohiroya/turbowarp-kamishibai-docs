@@ -8,7 +8,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 > **現在利用できるもの**
 >
 > ここで案内する4.0のサンプル作品はブラウザーで試せます。この説明は
-> `4.0.0-rc.23`基準の公開サンプルを対象にしています。安定版`4.0.0`は未公開です。
+> `4.0.0-rc.25`基準の公開サンプルを対象にしています。安定版`4.0.0`は未公開です。
 > 画面がこの説明と異なる場合は、作品に表示された版と、画面内の案内を優先してください。
 
 ## まず遊んでみる
@@ -95,6 +95,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 自分で台本を作っている方は、[私の浦島太郎 Web版](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/web-4.0/)で
 台本ファイルを選んで試せます。
+
+ブロック台本で実習する方は、[私の浦島太郎のポーズ数選択](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/#block-workshop)から
+2・3・4ポーズのいずれかを選び、フォーム編集を始められます。操作は[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#workshop-poses)を参照してください。
 
 YAMLは、場面や登場人物を項目ごとに記述するテキスト形式です。4.0の台本ファイルは`.k4.yml`という名前で
 保存します。画面の案内に従ってファイルを選び、エラーが表示されなければプレイを始めます。

@@ -3,14 +3,14 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 固定実装基準を説明する統合ガイド（正式リリース済みの意味ではない）\
-調査基準: TurboWarp-Kamishibai `2f2889f`（4.0.0-rc.23）、2026年10月19日
+調査基準: TurboWarp-Kamishibai `a68f8dc`（4.0.0-rc.25）、2026年10月19日
 
-> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.23`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。本書の統合境界はrc.23固定実装を説明します。
+> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.25`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。本書の統合境界はrc.25固定実装を説明します。
 
 このガイドは、TurboWarp紙芝居4.0のruntime capability、platform adapter、外部packageとの統合境界を
 保守する開発者向けの資料です。実装基準は`kubohiroya/turbowarp-kamishibai-app`のcommit
-[`2f2889fe9df88548a92b0925ca3008c5c62682e5`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/2f2889fe9df88548a92b0925ca3008c5c62682e5)
+[`a68f8dc4d38b4609c8387192d3be0376963735e3`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/a68f8dc4d38b4609c8387192d3be0376963735e3)
 です。本書のpath、関数、package version、診断code、test名はこのcommitで確認しています。
 
 YAMLの記述方法は[紙芝居DSL 4.0 台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)、
@@ -20,8 +20,8 @@ runtime coreまで含む内部構造は[紙芝居アプリ 4.0 内部仕様書](
 
 ## Schemaと公開runtimeの二つの基準
 
-公開runtimeの調査基準は`4.0.0-rc.23`（`2f2889fe`）です。Schemaリファレンスも同じ公開commitへ固定し、portraitの`placement`、`offset`、`cornerRadius`はrc.23で利用できます。
-公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.23.schema.json`を使い、
+公開runtimeの調査基準は`4.0.0-rc.25`（`a68f8dc4`）です。Schemaリファレンスも同じ公開commitへ固定し、portraitの`placement`、`offset`、`cornerRadius`はrc.25で利用できます。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.25.schema.json`を使い、
 現行Schemaの出典は`sources/dsl4/source-lock.json`で確認します。旧版の検証結果を現行版へ読み替えません。
 
 ## 読む前に
@@ -49,7 +49,7 @@ capabilityとplatform境界」を記録します。各providerが単体で公開
 
 ## 図版、source、licenseの境界
 
-本書では画像、editor capture、外部図版を新規使用しません。rc.23のStandard paletteには29個のcore action
+本書では画像、editor capture、外部図版を新規使用しません。rc.25のStandard paletteには29個のcore action
 blockがありますが、画面captureだけでは統合責務や失敗条件を検証できないためです。代わりに、固定commitの
 実装path、export関数、契約fixture、testを表で対応させます。
 
@@ -208,6 +208,12 @@ TensorFlow.jsで物理中断できない処理は完了を待って破棄し、�
 camera起動はモデル初期化と独立して開始できます。記述子decode、fileごとのSHA検証、classifier loadは
 依存範囲内で並行し、最初の推論だけがcamera準備とモデル登録の両方を待ちます。モデル初期化のcancelで
 cameraを停止してはいけません。`legacy`／`parallelModelInitialization: false`が既定のrollback経路です。
+
+rc.25の`src/dsl4/platform/story-camera-lifecycle.ts`は、物語がcameraを必要とする状態と実際の起動処理を管理します。
+`stop()`／`dispose()`は、未解決の`startCamera()`の後ろで待たずに古い要求を無効化し、
+次の起動を進めます。遅れて取得したcameraは、現在の物語が不要なら停止します。
+同じcompositionが引き続きcameraを必要とする場合は進行中の取得を共有し、新しい要求のcameraを古いcleanupで停止しません。
+確認testは`test/dsl4-story-camera-lifecycle.test.ts`です。
 
 `src/dsl4/platform/pose-action-port.ts`の`createDsl4PoseActionPort()`は、`waitForPose`と
 `poseInputToChangeScene`をTurboWarp Teachable Machine認識session、Async Input候補選択、`AbortSignal`へ接続します。入力は
