@@ -1,15 +1,15 @@
 {
   "capturedOn": "2026-10-19",
-  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/902",
-  "implementationCommit": "0f1654573ccb517805fe6512ca45e64bd471d163",
+  "implementationIssue": "https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/908",
+  "implementationCommit": "1c11ceffdaf880a8bbd31bd355d9c94363223354",
   "editor": "https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html",
   "editorQuery": "blockEditorDialogs=1&lang=ja",
   "locale": "ja",
   "capture": "Actual Editor workspace with a locally generated candidate SB3. Screenshots clipped to the source block stack; no reconstructed UI. Menu captured open, on/off captured after closing the menu.",
   "blockOpcode": "kubohiroyakamishibaiauthoring4_useSection",
   "menuValues": {
-    "オン": "on",
-    "オフ": "off"
+    "✅ オン": "on",
+    "🚫 オフ": "off"
   },
   "source": {
     "scene": "opening",
@@ -22,29 +22,37 @@
     "onExportWaitSeconds": [1, 2, 3],
     "offExportWaitSeconds": [1, 3],
     "exportRetainedSectionState": true,
+    "offScopeGrayAndHatched": true,
+    "outsideScopeRetainedColor": true,
     "documentedBaseAndAuthorCommandsPassed": true
   },
   "screenshots": [
     {
       "state": "menu",
       "path": "docs/images/block-authoring/section-menu.png",
-      "sha256": "76598016a929e9db32bc2aa448b640e114e22543178a40f88b49aa26b2066142",
-      "width": 273,
-      "height": 162
+      "sha256": "ee02e781709e26a5195b6c76128bca1792fcb21948b1845a48b533cf76138e51",
+      "width": 232,
+      "height": 180
     },
     {
       "state": "on",
       "path": "docs/images/block-authoring/section-on.png",
-      "sha256": "2d9e81b63cc547491c15e53eb461d11f956fb2ac391561aa9f3650d33d19701d",
-      "width": 270,
-      "height": 355
+      "sha256": "ede6baec882acc750d68c2e977ae0ea1d492de8f10f0d374522e5f82a93cbfc4",
+      "width": 246,
+      "height": 251
     },
     {
       "state": "off",
       "path": "docs/images/block-authoring/section-off.png",
-      "sha256": "4168c3e0a7b981f1c870a79f2232bed44cfbc5800ee6e9dbd952452dd081195c",
-      "width": 270,
-      "height": 355
+      "sha256": "a71ad1d385e1b691a39d9e8fa5cefa400ab159b9d855a691587078febe9394e7",
+      "width": 246,
+      "height": 251
     }
-  ]
+  ],
+  "sourceSectionCommit": "0f1654573ccb517805fe6512ca45e64bd471d163",
+  "implementationPullRequest": "https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/909",
+  "runtime": {
+    "version": "4.0.0-rc.25",
+    "commit": "a68f8dc4d38b4609c8387192d3be0376963735e3"
+  }
 }

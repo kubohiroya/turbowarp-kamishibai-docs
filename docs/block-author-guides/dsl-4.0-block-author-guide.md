@@ -30,8 +30,9 @@ Node.js 24.0.0以上で公開CLIをexact installすれば、実命令ブロッ�
 
 SVGのブロック図は実装のブロック名、入力値、接続を基に描いた説明図です。
 PNGのフォーム画面はIssue #891対応の編集用拡張を実Editorで開いて撮影したものです。
-オン／オフのPNGは、本体PR #903対応のブロック台本を実Extension Data Editorで開いて撮影しています。
-補助ブロックは紫、命令ブロックは青緑で区別し、入力欄の文字は実際の英語表記を使います。
+オン／オフのPNGは、本体PR #909の表示改善を含むCLIで生成し、実Extension Data Editorで撮影しています。
+補助ブロックは紫、命令ブロックは青緑で区別します。「この部分を使う」は専用のグレーです。
+入力欄の文字は実際の英語表記を使います。
 長い入力値は図の中だけで折り返しています。入力欄へは改行や省略を加えず、値全体を入力します。
 狭い画面では図を左右にスクロールできます。図が複数に分かれている場合も、番号順に同じハットの下へ接続します。
 
@@ -1087,27 +1088,35 @@ YAMLの行頭に`#`を付けて一時的に外す操作に対応します。複�
 [対応するCLI・ランタイムの準備と往復手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#section-roundtrip)で
 `author-block-dsl --block-sections true`を指定して生成したSB3を使います。パレット表示は既定OFFです。
 旧rc.23のベースは読み取りに対応しません。直接再生にはrc.25のランタイムを使います。
-以下の実画面はPR #903対応commitで撮影した記録で、rc.25で再撮影したものではありません。
+図の専用グレー・絵文字セレクタ・オフ範囲の灰色表示は、[本体PR #909](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/909)の
+表示改善を含むCLIで生成したSB3の画面です。この表示改善は公開npm版rc.25には未収録です。
+[表示改善版CLIの準備](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#section-appearance-cli)を参照してください。
+以前に生成した公開サンプルなどのSB3は、Editorを再読み込みするだけでは新しい表示になりません。
+元のYAMLまたはSB3から書き戻したYAMLを、対応CLIで再生成します。台本のオン／オフの意味は同じです。
 
 ### 命令を囲んで切り替える
 
 1. 対応SB3をExtension Data Editorで開き、ステージの「コード」を選びます。編集用拡張の読み込みも許可します。
-2. 紫色の「Kamishibai Block Script」から「この部分を使う」を取り出し、`scene`の内側へ接続します。
+2. 「Kamishibai Block Script」からグレーの「この部分を使う」を取り出し、`scene`の内側へ接続します。
 3. 一時的に外したい命令をC字の内側へ移します。続けて実行する命令は囲みの下につなぎます。
    複数命令を移すときは、その後も実行する末尾の命令を先に切り離してください。
-4. メニューを「オフ」にすると内側を読み飛ばし、「オン」に戻すと内側をその位置で実行します。
+4. メニューを「🚫 オフ」にすると内側を読み飛ばし、「✅ オン」に戻すと内側をその位置で実行します。
 5. SB3をコンピューターへ保存し、物語を開始し直して確認します。実行中の切り替えを自動反映する機能ではありません。
 
-<figure class="block-script-form"><img style="max-width:273px" src="../images/block-authoring/section-menu.png" alt="実Editorのこの部分を使うブロックでオンとオフを選ぶメニュー"><figcaption>プルダウンから「オン」「オフ」を選びます。値や条件式を入力する必要はありません。</figcaption></figure>
+<figure class="block-script-form"><img style="max-width:232px" src="../images/block-authoring/section-menu.png" alt="実Editorのグレーのこの部分を使うブロックで、✅ オンと🚫 オフを選ぶメニュー"><figcaption>プルダウンから「✅ オン」「🚫 オフ」を選びます。値や条件式を入力する必要はありません。</figcaption></figure>
 
 次の例は、1秒・2秒・3秒の待機のうち、2秒だけを囲んでいます。図は切り替え部分を示しています。
 再生する台本には、`production`のキーマップなど必要な設定も用意してください。
 
-<figure class="block-script-form"><img style="max-width:270px" src="../images/block-authoring/section-on.png" alt="openingの1秒、囲みの中の2秒、囲みの下の3秒の待機。選択値はオン"><figcaption>オン: 1秒 → 2秒 → 3秒の順に実行します。</figcaption></figure>
+<figure class="block-script-form"><img style="max-width:246px" src="../images/block-authoring/section-on.png" alt="openingの1秒、囲みの中の2秒、囲みの下の3秒の待機。選択値はオン"><figcaption>オン: 1秒 → 2秒 → 3秒の順に実行します。</figcaption></figure>
 
-<figure class="block-script-form"><img style="max-width:270px" src="../images/block-authoring/section-off.png" alt="同じ待機ブロックを残し、この部分を使うの選択値だけをオフにした実画面"><figcaption>オフ: 1秒 → 3秒の順に実行します。2秒の命令は囲みの中に残ります。</figcaption></figure>
+<figure class="block-script-form"><img style="max-width:246px" src="../images/block-authoring/section-off.png" alt="この部分を使うが🚫 オフで、囲み内の2秒の待機が灰色、背景が斜線。囲み外の1秒と3秒の待機は元の色"><figcaption>オフ: 1秒 → 3秒の順に実行します。2秒の命令は囲みの中に残ります。</figcaption></figure>
 
-オフでもブロックの色は変わりません。メニューの選択値を確認してください。
+本体はオン／オフともグレーです。「🚫 オフ」では、C字の内側に明るい灰色の斜線背景と破線の境界が現れ、
+囲まれた命令・定義・入力ブロックも灰色になります。囲みの下につないだ命令は元の色を保ちます。灰色の部分も編集でき、SB3にはそのまま残ります。
+「✅ オン」に戻すと内側の色と背景が戻ります。囲み外へ移したブロックも元の色へ戻り、元に戻す・やり直すにも追従します。
+入れ子では外側のオフが優先するため、内側がオンでも外側のオフ範囲に含まれるブロックは灰色です。
+これは編集を助ける表示で、通常のScratchの「ブロックを無効化」とは別の仕組みです。
 オフ部分を削除したり、通常のScratchの「もし」ブロックで囲んだりする必要はありません。
 
 ### 定義にも使う
@@ -1234,7 +1243,8 @@ Issue #886の種類別定義ブロックへ更新しています。
 フォームの実装基準は本体commit `0c1bf09f3285e1ea265037926a3465e550ab46c8`です。
 撮影条件・入力値・検証結果は`sources/dsl4-definition-forms.json`に記録しています。
 
-オン／オフブロックの実装基準は本体commit `0f1654573ccb517805fe6512ca45e64bd471d163`です。
+オン／オフの動作基準は本体commit `0f1654573ccb517805fe6512ca45e64bd471d163`です。
+グレー表示・絵文字メニューの図版は本体PR #909のcommit `1c11ceffdaf880a8bbd31bd355d9c94363223354`を基にしています。
 実画面の撮影条件・命令列・検証結果は`sources/dsl4-source-sections.json`に記録しています。
 
 公開状況やruntime側の実装根拠は[台本DSL版の付録](../dsl-author-guides/dsl-4.0-author-guide.md#付録-実装基準と実装根拠)を参照してください。
