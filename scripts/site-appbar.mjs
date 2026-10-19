@@ -1,6 +1,8 @@
 import {readFile, readdir, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 
+import appRelease from '../sources/dsl4/app-release.json' with {type: 'json'};
+import {injectAppReleaseNotice} from './app-release.mjs';
 import {renderSiteHeader, replaceSiteNavigation} from './site-navigation.mjs';
 
 const siteRoot = 'https://kubohiroya.github.io/turbowarp-kamishibai-app/';
@@ -55,10 +57,14 @@ export function injectSiteAppBar(
   const hasAppBar = /<header\b[^>]*\bclass=(["'])[^"']*\bsite-header\b[^"']*\1/iu.test(source);
   const hasFooter = /<footer\b[^>]*\bclass=(["'])[^"']*\bsite-footer\b[^"']*\1/iu.test(source);
   if (hasAppBar && hasFooter) {
-    return replaceSiteNavigation(source, {
-      site: 'turbowarp-kamishibai-docs',
+    return injectAppReleaseNotice(
+      replaceSiteNavigation(source, {
+        site: 'turbowarp-kamishibai-docs',
+        pathname,
+      }),
       pathname,
-    });
+      appRelease,
+    );
   }
 
   let updated = source;
@@ -100,7 +106,7 @@ export function injectSiteAppBar(
     }
     updated = withFooter;
   }
-  return updated;
+  return injectAppReleaseNotice(updated, pathname, appRelease);
 }
 
 async function findHtmlFiles(directory) {

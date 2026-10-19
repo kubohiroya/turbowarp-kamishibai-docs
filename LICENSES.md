@@ -65,6 +65,7 @@ CC BY-SA 4.0を適用します。
 - `docs/*.css`
 - `scripts/**`
 - `sources/dsl4/source-lock.json`
+- `sources/dsl4/app-release.json`
 - `site/**`
 - `test/**`
 

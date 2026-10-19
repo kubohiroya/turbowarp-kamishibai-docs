@@ -22,6 +22,7 @@
     "docs:dsl4:check": "node scripts/generate-dsl4-reference.mjs --check",
     "docs:dsl4:generate": "node scripts/generate-dsl4-reference.mjs",
     "docs:dsl4:sync": "node scripts/sync-dsl4-schema.mjs",
+    "docs:app:sync": "node scripts/app-release.mjs",
     "docs:ecosystem:check": "node scripts/generate-turbowarp-ecosystem.mjs --check",
     "docs:ecosystem:generate": "node scripts/generate-turbowarp-ecosystem.mjs",
     "lint": "eslint .",

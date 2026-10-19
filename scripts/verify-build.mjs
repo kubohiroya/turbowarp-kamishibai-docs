@@ -6,6 +6,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 import {documentationConfig, staffDocumentConfig, workshopDocumentConfig} from '../docs/config.mjs';
 import {NAVIGATION_CONTRACT} from './site-navigation.mjs';
 import sourceSnapshot from '../sources/turbowarp-kamishibai-app.json' with {type: 'json'};
+import appRelease from '../sources/dsl4/app-release.json' with {type: 'json'};
 import {referencedLocalAssets} from './build-freshness.mjs';
 import {legacyPublicationEntries} from './legacy-version-notices.mjs';
 
@@ -725,6 +726,16 @@ export async function verifyBuild() {
   const appBarHtmlCount = await verifySiteAppBars();
 
   const buildInfo = JSON.parse(await readFile(path.join(distRoot, 'build-info.json'), 'utf8'));
+  assert(buildInfo.appRelease.commit === appRelease.commit, 'Build app dependency differs.');
+  const publishedRelease = JSON.parse(
+    await readFile(path.join(distRoot, 'app-release.json'), 'utf8'),
+  );
+  assert(
+    publishedRelease.artifact.sha256 === appRelease.artifact.sha256,
+    'Published app dependency differs.',
+  );
+  const currentIndex = await readFile(path.join(distRoot, '4.0/index.html'), 'utf8');
+  assert(currentIndex.includes(appRelease.artifact.url), 'The 4.0 entry links an outdated SB3.');
   assert(
     buildInfo.source.commit === sourceSnapshot.commit,
     'Build metadata source commit differs.',

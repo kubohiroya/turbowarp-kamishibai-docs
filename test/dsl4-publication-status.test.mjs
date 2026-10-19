@@ -8,6 +8,7 @@ const read = (relativePath) => readFileSync(new URL(`../${relativePath}`, import
 
 const statusPolicy = read('DSL4-PUBLICATION-STATUS.md');
 const dsl4Index = read('site/4.0/index.html');
+const appRelease = JSON.parse(read('sources/dsl4/app-release.json'));
 const dsl4Documents = documentationConfig.documents
   .filter((document) => document.version === '4.0')
   .map((document) => ({
@@ -18,12 +19,12 @@ const dsl4Documents = documentationConfig.documents
 
 test('records the current implementation and publication state in config', () => {
   assert.deepEqual(dsl4PublicationStatus, {
-    verifiedOn: '2026-10-19',
-    implementationCommit: 'a68f8dc4d38b4609c8387192d3be0376963735e3',
-    schemaImplementationCommit: 'a68f8dc4d38b4609c8387192d3be0376963735e3',
-    latestPublishedRelease: 'v3.2.3',
-    publishedDsl4Prerelease: 'v4.0.0-rc.25',
-    officialDsl4Release: null,
+    verifiedOn: appRelease.checkedOn,
+    implementationCommit: appRelease.commit,
+    schemaImplementationCommit: appRelease.schema.commit,
+    latestPublishedRelease: appRelease.latestStableRelease,
+    publishedDsl4Prerelease: appRelease.prerelease ? appRelease.tag : null,
+    officialDsl4Release: appRelease.officialDsl4Release,
   });
 });
 
@@ -37,16 +38,13 @@ test('distinguishes current prerelease, stable, sample baseline, and document st
   assert.match(statusPolicy, /サンプル作品、スターター、Web版はrc\.25/u);
 });
 
-test('shows rc.25 on the 4.0 top and current public samples', () => {
-  assert.match(dsl4Index, /4\.0\.0-rc\.25を公開しています/u);
-  assert.match(dsl4Index, /kamishibai-4\.0\.0-rc\.25\.sb3/u);
-  assert.match(dsl4Index, /turbowarp-kamishibai-app\/v\/4\.0\.0-rc\.25/u);
-  assert.match(
-    dsl4Index,
-    /公開サンプル作品とチュートリアル成果物も、現在<code>rc\.25<\/code>基準/u,
-  );
-  assert.match(dsl4Index, /安定版<code>4\.0\.0<\/code>はまだ未公開/u);
-  assert.match(dsl4Index, /最新安定版は\s*<code>v3\.2\.3<\/code>/u);
+test('links the resolved public app without relabeling historical samples', () => {
+  assert.ok(dsl4Index.includes(`${appRelease.version}を公開しています`));
+  assert.ok(dsl4Index.includes(appRelease.artifact.url));
+  assert.ok(dsl4Index.includes(appRelease.releaseUrl));
+  assert.equal(dsl4Index.includes(appRelease.npm.url), appRelease.npm.published);
+  assert.match(dsl4Index, /公開サンプルや本文・図版の対象版/u);
+  assert.doesNotMatch(dsl4Index, /サンプル作品とチュートリアル成果物も、現在/u);
 
   assert.equal(dsl4Documents.length, 26);
   for (const {sourceFilename, source} of dsl4Documents) {
