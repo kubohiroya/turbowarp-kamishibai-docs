@@ -17,7 +17,8 @@ const surfaces = json('sources/dsl4/user-guide-4.0-public-surfaces.json');
 
 test('pins the public rc.25 runtime and schema independently of the stable publication channel', () => {
   const lock = json('sources/dsl4/source-lock.json');
-  assert.equal(lock.commit, implementationCommit);
+  const appRelease = json('sources/dsl4/app-release.json');
+  assert.equal(lock.commit, appRelease.commit);
   const releaseLock = json('sources/dsl4/release-source-lock-4.0-rc.25.json');
   assert.equal(releaseLock.commit, commit);
   const historySchema = json('sources/dsl4/release-history-4.0.json').entries[0].schema;
@@ -39,16 +40,19 @@ test('pins the public rc.25 runtime and schema independently of the stable publi
     rc23Lock.schemaSha256,
     createHash('sha256').update(read('sources/dsl4/dsl-4.0-rc.23.schema.json')).digest('hex'),
   );
-  assert.equal(dsl4PublicationStatus.schemaImplementationCommit, implementationCommit);
+  assert.equal(dsl4PublicationStatus.schemaImplementationCommit, appRelease.commit);
   assert.equal(
     lock.schemaSha256,
     createHash('sha256').update(read('sources/dsl4/dsl-4.schema.json')).digest('hex'),
   );
-  assert.equal(dsl4PublicationStatus.implementationCommit, commit);
+  assert.equal(dsl4PublicationStatus.implementationCommit, appRelease.commit);
   const developerGuide = read('docs/developer-guides/developer-guide-4.0.md');
   assert.ok(developerGuide.includes(`--commit ${implementationCommit}`));
-  assert.equal(dsl4PublicationStatus.publishedDsl4Prerelease, 'v4.0.0-rc.25');
-  assert.equal(dsl4PublicationStatus.officialDsl4Release, null);
+  assert.equal(
+    dsl4PublicationStatus.publishedDsl4Prerelease,
+    appRelease.prerelease ? appRelease.tag : null,
+  );
+  assert.equal(dsl4PublicationStatus.officialDsl4Release, appRelease.officialDsl4Release);
 });
 
 test('covers current recognition, transitions, variable actions and ruby with validated annotations', () => {

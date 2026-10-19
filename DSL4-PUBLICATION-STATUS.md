@@ -12,7 +12,19 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 | 公開サンプル基準 | サンプル作品、スターター、Web版を生成したruntimeの版                    |
 | 文書状態         | どの実装・成果物・画面を説明するかと、未確認の範囲                      |
 
-## 2026年10月19日の確認結果
+## 現在の公開版
+
+現在の公開appとSchemaの出典は`sources/dsl4/app-release.json`から取得する。
+Pages公開前にRCを含む最新DSL 4.0 Releaseを解決し、同じtagのcommit・release metadata・
+SB3のサイズとSHA-256を照合する。npmが404の場合は未公開として表示し、それ以外の取得失敗では公開を止める。
+公開サイトの`app-release.json`と`build-info.json`に実際の依存情報を保存する。
+Schema変更が日本語Annotationと適合しない場合も公開を止め、説明の更新を必要とする。
+
+手書き本文・画面・サンプルの対象版は各資料で明記した版を維持する。
+appの新しいリリースだけを理由に、資料の対象版や過去の検証結果を一括で書き換えない。
+4.0文書の先頭に現在の公開版と本文の対象版を区別する案内を表示する。
+
+## 2026年10月19日の確認結果（rc.25時点の履歴）
 
 - 公開runtimeの実装基準は公開プレリリース`v4.0.0-rc.25`のcommit
   [`a68f8dc4d38b4609c8387192d3be0376963735e3`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/a68f8dc4d38b4609c8387192d3be0376963735e3)。公開Schemaとその出典は`sources/dsl4/dsl-4.0-rc.25.schema.json`と`sources/dsl4/release-source-lock-4.0-rc.25.json`に固定する。
@@ -28,7 +40,8 @@ rc.10の旧manifestと実機確認は`previousVerification`、rc.22の公開確�
 
 ## 公開runtimeとSchemaの固定
 
-現行Schemaとruntimeは同じ公開commit `a68f8dc4d38b4609c8387192d3be0376963735e3`を基準にする。
+現在のSchemaは`app-release.json`に記録する公開commitを基準にする。
+rc.25時点のSchemaとruntimeは同じ公開commit `a68f8dc4d38b4609c8387192d3be0376963735e3`を基準とした。
 以前の実装基準`450a5bb`とSchemaのバイト列は同一だが、rc.25ではportraitの`placement`、`offset`、
 `cornerRadius`も公開配布物で利用できる。旧rc.23以前のSchemaとsource lockは当時の記録として保持する。
 構造に項目があることだけで実行対応を判定せず、固定runtimeとそのテストも照合する。

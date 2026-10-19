@@ -12,6 +12,7 @@ import {
   workshopDocumentConfig,
 } from '../docs/config.mjs';
 import sourceSnapshot from '../sources/turbowarp-kamishibai-app.json' with {type: 'json'};
+import appRelease from '../sources/dsl4/app-release.json' with {type: 'json'};
 import {
   collectSourceInputs,
   copyFileIfStale,
@@ -46,6 +47,8 @@ const commonPublicationInputs = [
   path.join(projectRoot, 'scripts/inline-document-toc.mjs'),
   path.join(projectRoot, 'scripts/publication-assets.mjs'),
   path.join(projectRoot, 'scripts/site-appbar.mjs'),
+  path.join(projectRoot, 'scripts/app-release.mjs'),
+  path.join(projectRoot, 'sources/dsl4/app-release.json'),
   path.join(projectRoot, 'docs/config.mjs'),
   path.join(projectRoot, 'docs/theme.css'),
   path.join(projectRoot, 'docs/fonts'),
@@ -262,6 +265,7 @@ function buildInfo(details = {}) {
   return {
     htmlAndPdfGenerator: 'Vivliostyle CLI 11.1.0',
     source: sourceSnapshot,
+    appRelease,
     ...details,
   };
 }
@@ -536,6 +540,10 @@ export async function buildDocs({force = false} = {}) {
     mkdir(path.join(distRoot, 'licenses'), {recursive: true}),
   ]);
   await writeFileIfChanged(path.join(distRoot, '.nojekyll'), '');
+  await writeFileIfChanged(
+    path.join(distRoot, 'app-release.json'),
+    `${JSON.stringify(appRelease, null, 2)}\n`,
+  );
   await Promise.all([
     writeStaticSiteHtml(
       path.join(projectRoot, 'site/index.html'),

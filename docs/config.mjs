@@ -1,10 +1,12 @@
+import appRelease from '../sources/dsl4/app-release.json' with {type: 'json'};
+
 export const dsl4PublicationStatus = Object.freeze({
-  verifiedOn: '2026-10-19',
-  implementationCommit: 'a68f8dc4d38b4609c8387192d3be0376963735e3',
-  schemaImplementationCommit: 'a68f8dc4d38b4609c8387192d3be0376963735e3',
-  latestPublishedRelease: 'v3.2.3',
-  publishedDsl4Prerelease: 'v4.0.0-rc.25',
-  officialDsl4Release: null,
+  verifiedOn: appRelease.checkedOn,
+  implementationCommit: appRelease.commit,
+  schemaImplementationCommit: appRelease.schema.commit,
+  latestPublishedRelease: appRelease.latestStableRelease,
+  publishedDsl4Prerelease: appRelease.prerelease ? appRelease.tag : null,
+  officialDsl4Release: appRelease.officialDsl4Release,
 });
 
 export const documentUpdatedAt = Object.freeze({

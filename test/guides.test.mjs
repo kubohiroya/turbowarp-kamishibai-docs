@@ -119,10 +119,13 @@ test('keeps the completed DSL 4.0 guide separate from the production 3.2 manual'
   );
   assert.match(dsl4AuthorGuide, /前sceneの値を持ち越しません/u);
   assert.match(dsl4SchemaReference, /固定実装基準を説明するSchemaリファレンス/u);
-  assert.match(dsl4SchemaReference, /v4\.0\.0-rc\.25`はprerelease/u);
+  assert.match(dsl4SchemaReference, /現在の公開版と配布状況は/u);
   assert.match(dsl4SchemaReference, /権威関係と配布状態/u);
   assert.match(dsl4SchemaReference, /Schemaはruntime実装から生成しません/u);
-  assert.match(dsl4SchemaReference, /Schema固定commit: \[`a68f8dc`\]/u);
+  const release = JSON.parse(
+    readFileSync(new URL('../sources/dsl4/app-release.json', import.meta.url), 'utf8'),
+  );
+  assert.ok(dsl4SchemaReference.includes(`Schema固定commit: [\`${release.commit.slice(0, 7)}\`]`));
   assert.match(dsl4SchemaReference, /関節とボーンのoverlay/u);
   assert.match(dsl4SchemaReference, /`visible` \| 任意 \| 真偽値 \| 既定値 `true`/u);
   assert.match(dsl4SchemaReference, /トップレベル15 field、action 30種類、Annotation 110項目/u);

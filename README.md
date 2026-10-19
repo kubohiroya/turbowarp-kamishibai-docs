@@ -46,10 +46,14 @@
 | `docs/workshops/`         | 体験会の参加者、スタッフ、運営者        |
 
 具体的なファイル対応、依存境界、実施記録は[MIGRATION.md](MIGRATION.md)を参照してください。
-`docs/tutorials/`と4.0文書は公開プレリリース`4.0.0-rc.25`を公開runtime基準にします。
-Schemaリファレンスと公開runtimeは同じrc.25のcommit `a68f8dc`へ固定し、旧rc.23以前のSchemaは履歴snapshotとして保存します。
+現在の公開版とSchemaの出典は、appの公開済みReleaseから生成する
+`sources/dsl4/app-release.json`で管理します。RCも対象とし、同じtagのcommit、release metadata、
+Standard SB3のサイズとSHA-256を照合します。npmの公開状態は独立して確認します。
+手書き本文・画面・サンプルの版は各文書に明記した基準です。公開版が進んでも、旧版の検証結果を
+新版の結果として読み替えません。4.0文書には現在の公開アプリへの案内を表示します。
 `/4.0/tutorials/`系列へ配置し、4.0一覧から「紙芝居を遊ぶ」「紙芝居を作る」へ案内します。
-公開サンプル、スターター、Web版のmanifestもrc.25基準です。samplesのWeb・実Editorでの直接再生と公開16ファイルのhashを確認済みです。実カメラ・実ポーズは再検証していません。
+rc.25時点の公開サンプル、スターター、Web版のmanifestと公開16ファイルの確認結果は履歴として保持します。
+現在のsamplesの版はsamples側で確認してください。実カメラ・実ポーズは再検証していません。
 固定commit、取得先、照合方法、過去の検証の適用範囲は`DSL4-PUBLICATION-STATUS.md`と
 `sources/dsl4/user-guide-4.0-public-surfaces.json`に記録します。
 
@@ -153,10 +157,26 @@ pnpm docs:dsl4:generate
 pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>
 ```
 
-上流を更新するときだけ`docs:dsl4:sync`を明示的に実行します。このコマンドは指定commitから
+開発中の候補Schemaを調べる場合だけ`docs:dsl4:sync`を明示的に実行します。このコマンドは指定commitから
 `schema/dsl-4.schema.json`を取得し、SHA-256とsource URLをlock fileへ記録してからリファレンスを
 再生成します。生成Markdownは直接編集せず、日本語の説明、掲載順、例は
 [`sources/dsl4/annotations.ja.json`](sources/dsl4/annotations.ja.json)で変更します。
+
+### app公開成果物への追従
+
+通常のローカルビルドは検証済みsnapshotを使い、ネットワーク接続を必要としません。
+公開版へ更新するときは`pnpm docs:app:sync`を実行します。依存情報・Schema・4.0入口を更新し、
+Schemaリファレンスを再生成します。取得・照合・Annotation検証の失敗は公開を停止させます。
+
+CIとPagesはこの同期を検証の前に実行します。Pagesはmain更新、手動実行、
+`app-release-published`のrepository dispatchに加え、毎時17分に上流を確認します。
+定期確認で依存情報に変化がなければ文書ビルドと公開を省略します。日付が変わった際は確認日も更新します。
+app側の変更だけでも次の定期確認から検証・公開へ進みます。GitHub Actionsの遅延を含むため即時反映は保証しません。
+実際に使用した依存情報を公開サイトの`app-release.json`と`build-info.json`へ保存します。
+
+appのリリースから取り込むのは、公開版の案内とSchemaです。手書き本文の仕様差分や新版の画面確認は
+別途レビューが必要です。自動同期によって未確認の本文を「最新版で検証済み」とは表示しません。
+ロールバックはこの変更と依存情報をrevertし、直前の確認済みdocsを再公開します。
 
 準備は[Issue #1](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/1)、
 本文移設は[Issue #3](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/3)、
