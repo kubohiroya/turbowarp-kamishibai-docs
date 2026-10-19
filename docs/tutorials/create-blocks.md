@@ -207,7 +207,8 @@ npx --no-install turbowarp-kamishibai validate-dsl4 \
 
 単一台本なので`exported/tutorial.k4.yml`ができます。書き出し後も、画像・音・モデルの正本は
 `tutorial-story`に置いたままです。書き出したYAMLだけを別フォルダーでビルドすると素材の相対パスが変わるため、
-新しいfile素材を加えた場合はStep 7のように編集用SB3と元の素材フォルダーを直接指定してbundleを更新します。
+file素材のbundleを更新する場合は、Step 7で最新の編集用SB3からYAMLを元の素材フォルダーへ書き出し、
+そのファイルを`--source`で明示指定します。
 
 検査に成功したら、TurboWarpの`instruction`シーンの背景入力を一度だけ`Classrom`へ変え、保存し、
 同じ書き出しを実行します。未定義の素材参照を示す`K4-REF-001`を確認します。
@@ -223,16 +224,31 @@ SB3を保存し直し、書き出しと検査が成功することを確かめ�
 不正な台本は診断を表示します。ファイル選択へ自動で切り替わったり、古い台本を代わりに再生したりしません。
 
 Step 5でfile素材を追加した場合、または既存file素材のパス・内容を変えた場合だけ、次のコマンドでbundleを更新します。
-編集したブロック台本をベースにし、元の素材フォルダーを指定します。
-`--source`と`--source-manifest`は付けず、SB3内の台本ブロックを入力にします。
+編集したSB3をベースにし、最新の台本をもう一度YAMLへ書き出します。この例は単一台本なので、
+元の素材フォルダーに`form-edited.k4.yml`を出力し、検査に成功してから`--source`で明示指定します。
+元の`story.kamishibai.yaml`は上書きしません。
 
 ```sh
+npx --no-install turbowarp-kamishibai export-block-dsl \
+  --input output/tutorial-blocks/tutorial-story/story-edited.sb3 \
+  --output-dir output/tutorial-blocks/tutorial-story --name form-edited
+
+npx --no-install turbowarp-kamishibai validate-dsl4 \
+  --input output/tutorial-blocks/tutorial-story/form-edited.k4.yml --format pretty
+
 npx --no-install turbowarp-kamishibai build-dsl4 \
   --base output/tutorial-blocks/tutorial-story/story-edited.sb3 \
   --project-root output/tutorial-blocks/tutorial-story \
+  --source form-edited.k4.yml \
   --output output/tutorial-blocks/tutorial-story-built.sb3 \
   --control-profile production --channel bundled --replace-existing
 ```
+
+`--source`は`--project-root`内のファイル名です。書き出したYAMLを素材と同じフォルダーに置くことで、
+`file`の相対パスを維持します。書き出しや検査に失敗した場合は、古いYAMLを使ってビルドせず、先にブロックを修正します。
+公開rc.23のCLIは、`--source`を省略しても編集後SB3の台本ブロックを自動選択しません。
+元の`project.source.json`がある場合は、そこから古いYAMLを読み、ビルドが成功しても変更した素材が反映されないことがあります。
+毎回、編集後SB3から書き出した最新のYAMLを明示してください。
 
 `--replace-existing`はベースにある同じchannelのランタイム部品を、生成する新しいSB3内で置き換える指定です。
 入力の編集用SB3は書き換えません。生成された`tutorial-story-built.sb3`は更新した素材と台本ブロックを保持します。

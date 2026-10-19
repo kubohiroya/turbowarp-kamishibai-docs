@@ -181,9 +181,31 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 
 生成物はベースの素材bundleを保持し、空名ルートの台本から直接再生できます。元の素材フォルダーも保持します。
 セリフ・待機・シーン接続などの編集は、同じSB3で物語を開始し直して確認できます。
-file素材を追加したり、そのパス・内容を変更したりした場合は、編集後SB3を`build-dsl4 --base`へ渡し、
-同じ`--project-root`を指定して別名のSB3へbundleを更新します。この場合は`--source`を付けず、台本ブロックを読み取らせます。
-手順は[ブロック版チュートリアル](../tutorials/create-blocks.md)を参照してください。
+file素材を追加したり、そのパス・内容を変更したりした場合は、編集後SB3から最新のYAMLを書き出し、
+元の素材フォルダーに置いて検査します。単一台本なら、次のように元の`story.k4.yml`とは別名で保存します。
+
+```sh
+npx --no-install turbowarp-kamishibai export-block-dsl \
+  --input output/block-script/story-edited.sb3 \
+  --output-dir output/block-script --name form-edited
+
+npx --no-install turbowarp-kamishibai validate-dsl4 \
+  --input output/block-script/form-edited.k4.yml --format pretty
+
+npx --no-install turbowarp-kamishibai build-dsl4 \
+  --base output/block-script/story-edited.sb3 \
+  --project-root output/block-script \
+  --source form-edited.k4.yml \
+  --output output/block-script/story-rebuilt.sb3 \
+  --control-profile production --channel bundled --replace-existing
+```
+
+書き出しと検査に成功してから、編集後SB3を`--base`、書き出したYAMLを`--source`へ渡します。
+`--source`は`--project-root`内のファイル名で、`file`の参照先も同じフォルダーからの相対位置に揃えます。
+公開rc.23のCLIは、`--source`を省略すると外部YAMLを探すため、元の`project.source.json`に記録された
+編集前の台本を読み込むことがあります。元のYAMLを再利用せず、最新の書き戻し結果を明示してください。
+検査に失敗した場合は、古いYAMLを代わりにビルドしません。
+実習手順は[ブロック版チュートリアル](../tutorials/create-blocks.md)を参照してください。
 
 ## ラベルとincludeBlocksで台本を分割する
 
