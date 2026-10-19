@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
 
-import surface from '../sources/dsl4/standard-surface-rc22.json' with {type: 'json'};
+import surface from '../sources/dsl4/standard-surface-rc23.json' with {type: 'json'};
 
 const read = (filename) =>
   readFileSync(new URL(`../docs/turbowarp-programmer-guides/${filename}`, import.meta.url), 'utf8');
@@ -29,9 +29,9 @@ test('explains exact broadcast-and-wait behavior from YAML through TurboWarp rec
   }
 });
 
-test('lists every public rc.22 bundled block with its member and arguments', () => {
+test('lists every public rc.23 bundled block with its member and arguments', () => {
   assert.equal(surface.extensionId, 'kubohiroyakamishibai4');
-  assert.equal(surface.blocks.length, 202);
+  assert.equal(surface.blocks.length, 200);
   const members = new Set(surface.blocks.map(({opcode}) => opcode.split('__')[0]));
   assert.equal(members.size, 8);
   const rows = [
@@ -72,7 +72,27 @@ test('lists every public rc.22 bundled block with its member and arguments', () 
   }
 });
 
-test('retains palette images as historical captures rather than presenting them as rc.22', () => {
+test('preserves the rc.22 surface and removes only its retired source blocks in rc.23', () => {
+  const previous = JSON.parse(
+    readFileSync(new URL('../sources/dsl4/standard-surface-rc22.json', import.meta.url), 'utf8'),
+  );
+  const removed = [
+    'kubohiroyakamishibairuntime4__whenDsl4Source',
+    'kubohiroyakamishibairuntime4__dsl4SourceFromYamlJson',
+  ];
+  assert.equal(previous.blocks.length, 202);
+  assert.deepEqual(
+    surface.blocks,
+    previous.blocks.filter(({opcode}) => !removed.includes(opcode)),
+  );
+  assert.match(blockReference, /名前（LABEL）が空欄の台本1個がルート/u);
+  assert.match(blockReference, /名前付き宣言だけでは、1個でもルートになりません/u);
+  assert.match(blockReference, /タイトルを閉じるとその台本を直接再生/u);
+  assert.match(blockReference, /「再読み込み」では、編集したブロックを読み直し/u);
+  assert.doesNotMatch(blockReference, /^\|\s+`(?:whenDsl4Source|dsl4SourceFromYamlJson)`/mu);
+});
+
+test('retains palette images as historical captures rather than presenting them as rc.23', () => {
   const appendix = blockReference.slice(blockReference.indexOf('## 旧版のパレット画像'));
   assert.match(appendix, /rc\.5／rc\.7/u);
   const images = [...appendix.matchAll(/!\[[^\]]+\]\(\.\.\/images\/([^\)]+)\)/gu)];
@@ -139,5 +159,5 @@ test('cross-links the author and programmer variable guides', () => {
     runtimeVariableReference.includes('../dsl-author-guides/dsl-4.0-runtime-variable-guide.md'),
   );
   for (const source of [runtimeVariableGuide, runtimeVariableReference])
-    assert.match(source, /4\.0\.0-rc\.22/u);
+    assert.match(source, /4\.0\.0-rc\.23/u);
 });

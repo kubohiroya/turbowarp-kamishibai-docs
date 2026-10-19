@@ -33,9 +33,75 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 | 安定版           | リリースが安定運用向けに推奨する版（npm latestとは別に確認）     |
 | 公開サンプル基準 | サンプル作品、starter、Web版を生成したruntimeの版                |
 
-2026年10月17日現在、公開プレリリースは`v4.0.0-rc.22`です。正式版`v4.0.0`は未公開です。
-リリースノート上の推奨安定版は`v3.2.3`ですが、現行packageのnpm `latest`／`next`はともにrc.22です。
-以下のrc.10以前の公開・検証記録は当時の事実として保存し、rc.22へ読み替えません。
+2026年10月19日現在、公開プレリリースは`v4.0.0-rc.23`です。正式版`v4.0.0`は未公開です。
+リリースノート上の推奨安定版は`v3.2.3`ですが、現行packageのnpm `latest`／`next`はともにrc.23です。
+以下のrc.22以前の公開・検証記録は当時の事実として保存し、rc.23へ読み替えません。
+
+## 4.0.0-rc.23
+
+状態: **公開プレリリース**。実装基準はcommit `2f2889fe9df88548a92b0925ca3008c5c62682e5`です。
+台本ブロックからの直接再生、8種類の定義ブロック、フォーム編集、名前付き台本の参照を公開版へ揃えました。
+公開サンプルも同じ版から再生成しています。
+
+### 固定revisionと公開先
+
+| 対象              | 固定値                                                                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| tag               | `v4.0.0-rc.23`                                                                                                                       |
+| commit            | `2f2889fe9df88548a92b0925ca3008c5c62682e5`                                                                                           |
+| source identity   | `sha256:1600bea27fccd29a22212fa12cf8f9ff30e947a8164f552429f8930b1720d93f`                                                            |
+| Schema SHA-256    | `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27`                                                                   |
+| GitHub prerelease | [v4.0.0-rc.23](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.23)                                     |
+| npm               | [@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.23](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.23) |
+| 公開サンプル基準  | rc.23、samples commit `d8deecfbd46b69a6787ec9e5deea936b8b54f0f0`                                                                     |
+
+公開版と文書用のSchemaは同じ内容です。公開版の固定snapshotは
+`sources/dsl4/dsl-4.0-rc.23.schema.json`、出典は`release-source-lock-4.0-rc.23.json`に記録します。
+rc.22の固定snapshotと出典は、そのまま履歴として残します。
+
+### rc.22からの変更
+
+- Stage上の名前が空の`kamishibai [4.0] [ラベル]`をルートとして、タイトルを閉じると
+  現在の台本ブロックから物語を開始します。名前付き台本1個だけをルートとは解釈しません。
+- 再開始時にはブロックを読み直します。不正な台本は診断し、ファイル選択へ自動で切り替えません。
+- 実命令ブロック、8種類の定義ブロック、`includeBlocks`、分割YAMLとの往復に対応します。
+  対応Editorの`blockEditorDialogs=1`では定義ブロックのJSON値をフォームで編集できます。
+- プロジェクト内の素材とリモート素材の変更は現在の宣言から反映します。
+  `file`素材にはSB3内の対応するバンドルが必要です。新しい画像や音を外部から追加した場合は、
+  素材を組み込んだSB3を作り直します。
+- portraitの`placement`、`offset`、`cornerRadius`と、`TMPoseURL`／`TMURL`の変換に対応します。
+- CLI・開発環境はNode.js 24.0.0以上が必要です。旧ハットを含む作品は元のYAMLから再生成します。
+
+### exact dependency pin
+
+主な拡張の固定値はrc.22と同じで、Teachable Machine `3.5.1`、Camera Source `0.15.0`、
+Bubble `0.13.0`です。依存関係の全件は機械可読な履歴のrc.23項目に記録します。
+
+### 公開成果物
+
+| 成果物       |  バイト数 | SHA-256                                                            |
+| ------------ | --------: | ------------------------------------------------------------------ |
+| Standard SB3 | 6,922,003 | `ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998` |
+| npm tarball  | 6,657,881 | `e917e13fccb42354167967f07d7d310d427f0885f115a0da744fae0cc728f728` |
+
+npm tarballのSHA-512 integrityは
+`sha512-m9TCa1ElwSC2BNk8i2iGBl5UzYKAMWyzNP4ATNF+EV60xconL9t3G3tgkap20m5wJWbuRVG+LDw+i59BIaNQOQ==`です。
+registryから公開tarballを取得してsize・SHA-256を計算し、SHA-1・SHA-512もregistryの公開値と照合しました。
+
+### 検証、制約、rollback
+
+上流の[凍結版CI](https://github.com/kubohiroya/turbowarp-kamishibai-app/actions/runs/39183520334)は
+Node.js 24で`pnpm verify:full`に成功しています。この文書更新では上流suiteを再実行していません。
+
+サンプルは[PR #173](https://github.com/kubohiroya/turbowarp-kamishibai-samples/pull/173)と
+[Pages実行](https://github.com/kubohiroya/turbowarp-kamishibai-samples/actions/runs/39188793571)に対応します。
+対象テスト57件、偽カメラを使ったWeb検証、実Editorでの台本ブロック編集・保存・直接再生を確認しました。
+公開URLから取得した12成果物のsize・SHA-256を照合し、配信されたブロック台本もEditorで検証しました。
+実カメラ・実ポーズの確認は今回行っていません。過去の実機測定や撮影結果をrc.23の成功へ読み替えません。
+
+問題時は依存版、lockfile、ベースSB3を公開済みrc.22へ戻します。公開済みrc.23のバイト列は差し替えません。
+元YAMLと編集前SB3を保持し、新形式を戻す場合は対応CLIでYAMLへ書き出してから旧形式を再生成します。
+フォーム編集だけを無効にする場合はEditor URLから`blockEditorDialogs=1`を外します。
 
 ## 4.0.0-rc.22
 

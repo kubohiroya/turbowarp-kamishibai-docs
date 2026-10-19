@@ -11,18 +11,18 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 増やすときに[紙芝居DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)の必要な節をお読みください。
 
 文書状態: **固定実装基準を説明するSchemaリファレンス（正式リリースの操作資料ではない）**\
-Schema固定commit: [`450a5bb`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/450a5bb950ef769241ec8258690e652b39b23bde)\
+Schema固定commit: [`2f2889f`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/2f2889fe9df88548a92b0925ca3008c5c62682e5)\
 Schema SHA-256: `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27`
 
-> **権威関係と配布状態:** 2026年10月17日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。公開runtimeはrc.22、Schema固定commitはそれより後の実装基準です。
-> portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応です。
+> **権威関係と配布状態:** 2026年10月19日時点で`v4.0.0-rc.23`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。公開runtimeとSchemaは、同じrc.23の公開commitを固定しています。
+> portraitの`placement`、`offset`、`cornerRadius`は公開rc.23で対応しています。
 > 同一の上流完成commitに含まれる規範JSON Schema、表層仕様、適合実装・testを固定しています。 Schemaはruntime実装から生成しません。公開アプリ、配布artifact、
 > feature flagがDSL 4.0を有効にしているかは利用するreleaseごとに確認してください。
 
 ## このリファレンスについて
 
-この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
+この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
 決定的に生成しています。型、必須性、既定値、数値範囲、列挙値、patternはSchemaから取得し、説明、掲載順、
 注意事項、例はAnnotationで管理します。Schemaで定義される項目についてSchemaと生成物が異なる場合はSchemaを
 優先します。include文はSchema検証前に処理されるためJSON Schema外であり、固定した表層仕様と実装に基づいて掲載します。
@@ -34,7 +34,7 @@ Schema SHA-256: `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec2
 
 - 上流repository: [`kubohiroya/turbowarp-kamishibai-app`](https://github.com/kubohiroya/turbowarp-kamishibai-app)
 - Schema path: `schema/dsl-4.schema.json`
-- 上流commit日時: `2026-10-16T16:53:31+09:00`
+- 上流commit日時: `2026-10-19T10:07:26+09:00`
 - 掲載範囲: トップレベル15 field、action 30種類、Annotation 110項目
 - 更新方法: `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>`
 - 差分確認: `pnpm docs:dsl4:check`
@@ -750,7 +750,7 @@ Schema位置: `#/$defs/bubblePortrait`
 - `placement`の省略時は`left`です。
 - `offset`は吹き出し本体の`offset`と同じ`[x, y]`または`[x, y, zoom]`です。zoomは0より大きい百分率で、省略時は`[0, 0, 100]`です。
 - `cornerRadius`の省略時は`0`です。runtimeはこれらの値を変換せずTurboWarp Bubbleへ渡します。
-- `placement`、`offset`、`cornerRadius`は実装基準450a5bbで追加された項目です。公開版4.0.0-rc.22のSchemaには含まれません。
+- `placement`、`offset`、`cornerRadius`は実装基準450a5bbで追加され、公開版4.0.0-rc.23のSchemaに含まれます。旧rc.22のSchemaには含まれません。
 
 Schemaで検証できる値の例:
 
@@ -926,7 +926,7 @@ Schema位置: `#/$defs/poseModelInitialization`
 
 - 省略時はpolicyがlegacy、parallelがfalseです。
 - latest-neededでは重い初期化を実行中1件と最新待機1件までに制限します。
-- 実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.22はTurboWarp Teachable Machine 3.5.1をexact pinします。
+- 実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.23はTurboWarp Teachable Machine 3.5.1をexact pinします。
 
 Schemaで検証できる値の例:
 

@@ -21,6 +21,35 @@ test('publishes a separate DSL 4.0 release history', () => {
   assert.match(dsl4Index, /dsl-author-guides\/dsl-4\.0-history\//u);
 });
 
+test('records rc.23 source and public artifacts while preserving earlier verification scope', () => {
+  const current = historyManifest.entries[0];
+  assert.equal(current.version, '4.0.0-rc.23');
+  assert.equal(current.publication.tagCommit, '2f2889fe9df88548a92b0925ca3008c5c62682e5');
+  assert.equal(current.schema.documentationReferenceCommit, current.publication.tagCommit);
+  assert.equal(current.schema.releaseReferenceCommit, current.publication.tagCommit);
+  assert.equal(current.artifacts.standardSb3.size, 6922003);
+  assert.equal(current.artifacts.npmTarball.size, 6657881);
+  assert.equal(current.verification.sampleTests, 57);
+  assert.equal(current.verification.physicalCameraAndPose, 'not-run-for-rc.23');
+  assert.match(current.verification.publicSamples, /^12-public-artifacts/u);
+  assert.match(current.verification.sampleBrowser, /fake-camera-web-and-real-editor/u);
+  for (const value of [
+    current.publication.tagCommit,
+    current.source.sourceIdentity,
+    current.schema.releaseSha256,
+    current.artifacts.standardSb3.sha256,
+    current.artifacts.npmTarball.sha256,
+    current.verification.sampleCommit,
+  ]) {
+    assert.ok(history.includes(value), value);
+  }
+  assert.match(history, /名前付き台本1個だけをルートとは解釈しません/u);
+  assert.match(history, /実カメラ・実ポーズの確認は今回行っていません/u);
+  const rc22 = historyManifest.entries.find(({version}) => version === '4.0.0-rc.22');
+  assert.equal(rc22.publication.tagCommit, 'f8048b8c4ebd0ecd6213bb87582862034b2b88ce');
+  assert.equal(rc22.verification.physicalCameraAndPose, 'not-run-for-rc.22');
+});
+
 test('records rc.10 as a published prerelease without claiming stable 4.0.0', () => {
   assert.equal(historyManifest.series, '4.0');
   assert.equal(entry.version, '4.0.0-rc.10');

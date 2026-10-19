@@ -2,10 +2,10 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書状態: 公開プレリリース`4.0.0-rc.22`の固定実装基準を説明する保守資料\
-調査基準: TurboWarp-Kamishibai `f8048b8`、2026年10月17日
+文書状態: 公開プレリリース`4.0.0-rc.23`の固定実装基準を説明する保守資料\
+調査基準: TurboWarp-Kamishibai `2f2889f`、2026年10月19日
 
-> **配布状態との区別:** `v4.0.0-rc.22`はnpm `next`、GitHub prerelease、Pagesのダウンロード導線として
+> **配布状態との区別:** `v4.0.0-rc.23`はnpm `next`、GitHub prerelease、Pagesのダウンロード導線として
 > 公開済みです。安定版の推奨は`3.2.3`で、正式版`v4.0.0`は未公開です。
 
 本書はソフトウェアを変更・公開する開発者向けであり、アプリの使い方や台本作成の入門書ではありません。
@@ -16,7 +16,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 このガイドは、TurboWarp紙芝居のDSL 4.0 source frontend、runtime、platform adapter、preview、ビルド、
 リリースを変更・検証・公開するソフトウェア開発者向けの作業資料です。対象となる実装基準は
 `kubohiroya/turbowarp-kamishibai-app`のコミット
-[`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)
+[`2f2889fe9df88548a92b0925ca3008c5c62682e5`](https://github.com/kubohiroya/turbowarp-kamishibai-app/tree/2f2889fe9df88548a92b0925ca3008c5c62682e5)
 です。本書中のpath、command、artifact名は、このコミットで確認しています。
 
 本書では、`kubohiroya/turbowarp-kamishibai-app`を「本体リポジトリ」、
@@ -26,10 +26,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## Schemaと公開runtimeの二つの基準
 
-公開runtimeの調査基準は`4.0.0-rc.22`（`f8048b8c`）です。Schemaリファレンスはmainの
-実装基準`450a5bb`を保持し、portraitの`placement`、`offset`、`cornerRadius`はrc.22未対応として区別します。
-公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、
-新しい実装Schemaの出典は`sources/dsl4/source-lock.json`で確認します。両者の検証結果を混同しません。
+公開runtimeの調査基準は`4.0.0-rc.23`（`2f2889fe`）です。Schemaリファレンスも同じ公開commitへ固定し、portraitの`placement`、`offset`、`cornerRadius`はrc.23で利用できます。
+公開版の入力を検査するときは`sources/dsl4/dsl-4.0-rc.23.schema.json`を使い、
+現行Schemaの出典は`sources/dsl4/source-lock.json`で確認します。旧版の検証結果を現行版へ読み替えません。
 
 ## このガイドの読み進め方
 
@@ -71,7 +70,7 @@ Schema、source frontend、StoryDocument、runtimeを同時に変更する必要
 大きな差分へ隠しません。Schemaとfixture、frontend、semantic validator、runtime、adapterの順に小さく分け、
 各PRに受け入れ基準とrollbackを記録します。
 
-## rc.22の保守境界
+## rc.23の保守境界
 
 本体はTypeScript strict・Vitest・Viteを使用し、公開subpathはcompile済みの`dist/`を指します。
 `src/`内部への直接importを公開APIとしません。ソースの相対importに`.js`が残っていても、調査対象のファイルは`.ts`です。
@@ -84,20 +83,18 @@ Standard productionは`dsl4TurboWarpStateSurface`・`dsl4ExpressionRuntimeState`
 プレビューと推論入力を分離します。DOM controlsの接続ができないhostは`K4-HOST-PREVIEW-CONTROLS-001`で拒否します。
 
 CLIは`validate-dsl4 --format canonical-json`・`author-block-dsl`・`export-block-dsl`でYAML／ブロック台本を往復できます。
-公開rc.22の生成はYAML文字列を保持する方式です。実命令ブロックの生成・編集後の書き戻しは、
-mainへマージ済みの本体Issue #881の修正で追加しています（npm未公開）。
-本体Issue #883の追加開発版は`kamishibai [4.0] [ラベル]`ハットと`includeBlocks`、include付きYAMLの生成・読取・分割exportに対応します。
+公開rc.23は実命令ブロックの生成・編集後の書き戻しに対応します。`kamishibai [4.0] [ラベル]`ハットと`includeBlocks`、include付きYAMLの生成・読取・分割exportに対応します。
 旧`when kamishibai DSL source`と旧YAML文字列方式の生成・読取互換は廃止します。
 コマンド例、編集・保存の手順、include文の制約は
 [YAMLとブロック台本SB3の相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
-ローカルプレビューはリモートassetを取得せず、rc.22では失敗ダイアログを表示します。
+ローカルプレビューはリモートassetを取得せず、rc.23では失敗ダイアログを表示します。
 リモート取得のOFFLINE／CORS／CONNECTとCLIのTLS診断、sandbox内で許可した場合の案内を確認します。
 
 ## 規範Schemaとsource lockを守る
 
 DSL 4.0の構造仕様は、本体リポジトリの`schema/dsl-4.schema.json`が規範です。runtime codeからSchemaを
 生成しません。それぞれの基準内では表層仕様、Schema、適合実装、testを同じ上流revisionで扱います。
-公開rc.22の検証へ450a5bbだけの項目を混ぜません。
+公開runtimeとSchemaを同じrc.23のcommitへ固定し、旧版の検証記録と区別します。
 
 文書リポジトリは上流revisionを次の二つで固定します。
 
@@ -109,12 +106,12 @@ DSL 4.0の構造仕様は、本体リポジトリの`schema/dsl-4.schema.json`�
 上流との差を隠してはいけません。
 
 上流を更新するときだけ、文書リポジトリで次を実行します。以下は実装Schema基準を再現する例です。
-公開rc.22の検査には別に固定した`sources/dsl4/dsl-4.0-rc.22.schema.json`を使い、現行Schemaを巻き戻しません。
+公開rc.23の検査には同じcommitの`sources/dsl4/dsl-4.0-rc.23.schema.json`を使います。旧rc.22のsnapshotは当時の記録として保持します。
 
 ```bash
 pnpm docs:dsl4:sync -- \
   --repository ../turbowarp-kamishibai-app \
-  --commit 450a5bb950ef769241ec8258690e652b39b23bde
+  --commit 2f2889fe9df88548a92b0925ca3008c5c62682e5
 pnpm docs:dsl4:check
 git diff -- \
   sources/dsl4/source-lock.json \
@@ -127,8 +124,7 @@ git diff -- \
 
 ## 開発環境を準備する
 
-固定コミットの本体リポジトリはNode.js 22.18.0以上とpnpm 11、文書リポジトリはNode.js 24.0.0以上と
-pnpm 11を要求します。それぞれのrepository rootでロックファイルを使用して依存を復元します。
+固定コミットの本体CLIと文書のビルドにはNode.js 24.0.0以上とpnpm 11を使用します。それぞれのrepository rootでロックファイルを使用して依存を復元します。
 
 ```bash
 corepack enable
@@ -173,9 +169,9 @@ pnpm test
 | `src/builder/dsl4-local-preview-command.ts`  | `preview-dsl4 --watch`のlifecycle                                  |
 | `src/builder/dsl4-local-preview-host.ts`     | loopback transport、session token、watcher                         |
 | `bin/turbowarp-kamishibai.mjs`               | 公開CLI entrypoint                                                 |
-| `release-metadata/4.0.0-rc.22.json`          | rc.22の状態、source identity、artifact、公開先                     |
+| `release-metadata/4.0.0-rc.23.json`          | rc.23の状態、source identity、artifact、公開先                     |
 | `scripts/sb3/dsl4-downloadable-release.ts`   | Standard Runtime release sourceの決定的生成と検査                  |
-| `scripts/download-catalog.ts`                | `kamishibai-4.0.0-rc.22.sb3`のバージョン、source identity、SHA-256 |
+| `scripts/download-catalog.ts`                | `kamishibai-4.0.0-rc.23.sb3`のバージョン、source identity、SHA-256 |
 | `test/fixtures/dsl4/`                        | Schema、adapter、リリース契約のfixture                             |
 
 文書リポジトリでは、次の境界を保ちます。
@@ -347,7 +343,7 @@ remote previewは常に禁止します。
 
 ### TurboWarp Teachable Machine上流との責務境界
 
-rc.22は`@kubohiroya/turbowarp-teachable-machine@3.5.1`をexact pinします。カメラ映像はCamera Sourceが所有し、
+rc.23は`@kubohiroya/turbowarp-teachable-machine@3.5.1`をexact pinします。カメラ映像はCamera Sourceが所有し、
 TurboWarp Teachable Machineはleaseした映像を認識に使います。推論用canvas、Canvas2D context、
 TensorFlow.jsへのreadback、SVG overlay要素はTurboWarp Teachable Machineが所有します。DSL runtimeは公開Composition APIへ
 正規化済みoverlay設定を渡すだけで、TurboWarp Teachable MachineのDOM、canvas、TensorFlow.js内部実装を検査・patchしません。
@@ -413,7 +409,7 @@ SVG Text、pose、asset lifecycleを注入し、`browser-turbowarp-platform.ts`�
 | CLI Preview host／transport                 | `pnpm exec vitest run test/dsl4-local-preview-cli.test.ts test/dsl4-local-preview-host.test.ts test/dsl4-preview-transport-policy.test.ts`                                                                                     | runtime-ready、SIGINT、ブラウザー切断、full rebuild    |
 | カメラ、pose、feedback、overlay             | `pnpm exec vitest run test/dsl4-camera-preview-controls.test.ts test/dsl4-pose-action-port.test.ts test/dsl4-pose-feedback-presenter.test.ts test/dsl4-tmpose-model-adapter.test.mjs test/dsl4-platform-asset-session.test.ts` | カメラ許可、mirroring、overlay、model解放              |
 | ビルド、component storage、自己完結SB3      | `pnpm exec vitest run test/dsl4-build-cli.test.ts test/dsl4-one-shot-build.test.ts test/dsl4-packaged-runtime-component.test.ts test/dsl4-source-sb3-storage.test.ts`                                                          | networkなしでembedded作品を起動                        |
-| Standard Runtime、capability pin、リリース  | `pnpm exec vitest run test/dsl4-capability-bundle-release-contract.test.ts test/dsl4-extension-pins.test.ts test/dsl4-downloadable-release.test.ts`                                                                            | `kamishibai-4.0.0-rc.22.sb3`のchecksumとTurboWarp起動  |
+| Standard Runtime、capability pin、リリース  | `pnpm exec vitest run test/dsl4-capability-bundle-release-contract.test.ts test/dsl4-extension-pins.test.ts test/dsl4-downloadable-release.test.ts`                                                                            | `kamishibai-4.0.0-rc.23.sb3`のchecksumとTurboWarp起動  |
 | Web Preview E2E                             | `pnpm e2e`                                                                                                                                                                                                                     | Chromiumでsource変更、asset変更、overlay、cleanup      |
 | npmパッケージのsurface                      | `pnpm pack:check`、`pnpm release:check`                                                                                                                                                                                        | tarballに`src/builder/`、`src/dsl4/*.js`、Schemaを確認 |
 | 文書、publication、公開導線                 | 文書リポジトリで`pnpm check`                                                                                                                                                                                                   | `/4.0/`のHTMLとVivliostyle Viewerを開く                |
@@ -435,17 +431,17 @@ pnpm verify:full
 同書は作成したcandidateを公開してよいか判定する手順を担当します。
 
 DSL 4.0 Standard Runtimeは、source-composedされた`kubohiroyakamishibairuntime4`と、完全固定したcapability
-パッケージから作ります。rc.22ではタグ、`release-metadata/4.0.0-rc.22.json`、GitHub Releaseの
-`kamishibai-4.0.0-rc.22.sb3`を不変の公開記録として管理します。現行branchへ展開済みrelease sourceを重複保持しません。
+パッケージから作ります。rc.23ではタグ、`release-metadata/4.0.0-rc.23.json`、GitHub Releaseの
+`kamishibai-4.0.0-rc.23.sb3`を不変の公開記録として管理します。現行branchへ展開済みrelease sourceを重複保持しません。
 composite IDは`kubohiroyakamishibai4`で、29個のcore actionは
-可視blockとして、source宣言2個と読取状態17個を加えます。内部の10 blockは非表示で登録されます。
+可視blockとして、読取状態17個を加えます。Runtimeは計46個、Standard bundle全体は200個です。内部の10 blockは非表示で登録されます。
 
 リリースは次の順で行います。
 
 1. capabilityパッケージを各repositoryで検証してリリースする
 2. 本体の`package.json`と`pnpm-lock.yaml`をexactなバージョンとintegrityへ更新する
 3. `LICENSES.md`のattributionとパッケージのprovenanceを同期する
-4. Standard Runtime ID、29個の可視core action、2個のsource宣言、17個の読取状態blockと10個の非表示block、remote code禁止をcontract testで確認する
+4. Standard Runtime ID、29個の可視core action、17個の読取状態blockと10個の非表示block、remote code禁止をcontract testで確認する
 5. `pnpm verify:full`を完走する
 6. `release-metadata/<version>.json`をcandidateとして作り、source identityと成果物を生成する
 7. source identityと成果物が正本と一致することを`pnpm release:dsl4:check`で確認する
@@ -454,13 +450,13 @@ composite IDは`kubohiroyakamishibai4`で、29個のcore actionは
 10. `pnpm release:check`でnpm 公開内容をdry runする
 11. GitHub Actions、download、パッケージ、Pagesの公開結果を確認してからIssueを完了する
 
-rc.22のrelease metadataと成果物を検査するcommandは次です。公開済みartifactを再生成して差し替えません。
+rc.23のrelease metadataと成果物を検査するcommandは次です。公開済みartifactを再生成して差し替えません。
 
 ```bash
 pnpm release:dsl4:check
 pnpm verify:full
 pnpm release:check
-git diff --exit-code -- release-metadata/4.0.0-rc.22.json
+git diff --exit-code -- release-metadata/4.0.0-rc.23.json
 ```
 
 安定版へ進める場合は、generator内のリリース ディレクトリ、パッケージ バージョン、download catalogを同じバージョンへ更新して
@@ -470,7 +466,7 @@ PRには少なくとも次を記録します。
 
 - 上流コミットと変更したSchema／source／adapter path
 - 実行したtargeted testと`pnpm verify:full`の結果
-- `kamishibai-4.0.0-rc.22.sb3`のSHA-256とsource identity
+- `kamishibai-4.0.0-rc.23.sb3`のSHA-256とsource identity
 - Browser／CLI Preview、カメラ、pose、offline smokeの対象
 - feature flagの既定値とrollback方法
 - パッケージ、artifact、Pagesの公開順
@@ -485,7 +481,7 @@ PRには少なくとも次を記録します。
 1. 問題のあるsurfaceのflagを起動時スナップショットでOFFにする
 2. npmの`next`を直前版へ戻し、PagesとGitHub prereleaseへ注意事項を追加する
 3. パッケージとロックファイルを直前のexact pinへ戻す
-4. 公開済みrc.22は上書きせず、修正版を新しいバージョンとしてビルドする
+4. 公開済みrc.23は上書きせず、修正版を新しいバージョンとしてビルドする
 5. `pnpm verify:full`と代表smokeを再実行する
 6. Pagesを再公開し、Issueとrelease noteへ影響範囲を記録する
 

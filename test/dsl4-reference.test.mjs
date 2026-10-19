@@ -25,7 +25,7 @@ test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
   assert.equal(actualHash, lock.schemaSha256);
   assert.equal(lock.repository, 'kubohiroya/turbowarp-kamishibai-app');
   assert.equal(lock.sourceKind, 'commit');
-  assert.equal(lock.commit, '450a5bb950ef769241ec8258690e652b39b23bde');
+  assert.equal(lock.commit, '2f2889fe9df88548a92b0925ca3008c5c62682e5');
   assert.equal(
     lock.schemaUrl,
     `https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/${lock.commit}/schema/dsl-4.schema.json`,
@@ -74,7 +74,7 @@ test('generates the checked-in reference byte-for-byte deterministically', () =>
   assert.match(generated, new RegExp(lock.schemaSha256, 'u'));
   assert.match(generated, /camera preview操作UI/u);
   assert.match(generated, /`cornerRadius` \| 任意/u);
-  assert.match(generated, /rc\.22未対応/u);
+  assert.match(generated, /公開rc\.23で対応/u);
   assert.match(generated, /\[数値, 数値\] または \[数値, 数値, 数値\]/u);
   assert.match(generated, /関節とボーンのoverlay/u);
   assert.match(generated, /TurboWarp Teachable Machine 3\.5\.1/u);

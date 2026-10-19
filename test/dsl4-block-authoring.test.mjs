@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
+import {parse} from 'yaml';
+import Ajv2020 from 'ajv/dist/2020.js';
 
 import {documentationConfig} from '../docs/config.mjs';
 
@@ -45,18 +47,88 @@ test('gives block and DSL authors exactly one tutorial and one guide, followed b
   assert.ok(index.indexOf(dsl) < index.indexOf(details));
 });
 
-test('keeps the block walkthrough explicit about development prerequisites and saved-block input', () => {
+test('uses the published CLI and keeps saved blocks as input when refreshing file bundles', () => {
   for (const source of [guide, tutorial]) {
     assert.doesNotMatch(source, /```ya?ml/iu);
-    assert.match(source, /Issue #891/u);
-    assert.match(source, /未公開の開発版/u);
-    assert.match(source, /公開rc\.22/u);
+    assert.match(source, /公開(?:プレリリース`4\.0\.0-rc\.23`|rc\.23)/u);
+    assert.match(source, /Node\.js 24\.0\.0以上/u);
+    assert.doesNotMatch(source, /未公開の開発版|開発版CLI|node bin\/turbowarp-kamishibai/u);
     assert.doesNotMatch(source, /when kamishibai DSL source|whenDsl4Source/u);
     assert.match(source, /kamishibai \[4\.0\]/u);
   }
-  assert.match(tutorial, /export-block-dsl[\s\S]*--input[^\n]+story-edited\.sb3/u);
+  assert.match(
+    tutorial,
+    /npm install --save-dev --save-exact @kubohiroya\/turbowarp-kamishibai-app@4\.0\.0-rc\.23/u,
+  );
+  assert.match(
+    tutorial,
+    /npx --no-install turbowarp-kamishibai export-block-dsl[\s\S]*--input[^\n]+story-edited\.sb3/u,
+  );
   assert.match(tutorial, /build-dsl4[\s\S]*--base[^\n]+story-edited\.sb3/u);
   assert.match(tutorial, /--replace-existing/u);
+  const preparation = tutorial.slice(tutorial.indexOf('## 2.'), tutorial.indexOf('## 3.'));
+  assert.match(
+    preparation,
+    /build-dsl4[\s\S]*--output[^\n]+tutorial-assets\.sb3[\s\S]*author-block-dsl[\s\S]*--base[^\n]+tutorial-assets\.sb3/u,
+  );
+  assert.match(tutorial, /file素材を追加した場合[\s\S]*場合だけ[\s\S]*bundleを更新/u);
+});
+
+test('prepares native actor targets and replaces existing runtime components in build examples', () => {
+  const conversion = read('docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md');
+  const preparation = tutorial.slice(tutorial.indexOf('## 2.'), tutorial.indexOf('## 3.'));
+  assert.match(
+    preparation,
+    /https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-samples\/stories\/tutorial\/tutorial-4\.0\.sb3/u,
+  );
+  assert.doesNotMatch(preparation, /releases\/download\/[^\n]+kamishibai-4\.0\.0-rc\.23\.sb3/u);
+  assert.match(preparation, /Student[\s\S]*Scratchスプライト/u);
+  assert.match(preparation, /build-dsl4[\s\S]*新規生成しません/u);
+  for (const match of conversion.matchAll(/```sh\n([\s\S]*?)```/gu)) {
+    if (match[1].includes('build-dsl4')) assert.match(match[1], /--replace-existing/u);
+  }
+  assert.match(guide, /control \[production\] = JSON \[\{"Space":"navigation.nextAction"\}\]/u);
+});
+
+test('validates complete standalone conversion examples against the published rc.23 schema', () => {
+  const conversion = read('docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md');
+  const examples = [...conversion.matchAll(/```yaml\n([\s\S]*?)```/gu)]
+    .map((match) => parse(match[1]))
+    .filter((source) => source?.kamishibai === '4.0' && source.include === undefined);
+  assert.equal(examples.length, 2);
+  const AjvConstructor = /** @type {any} */ (Ajv2020);
+  const ajv = new AjvConstructor({strict: true, allErrors: true});
+  const validate = ajv.compile(JSON.parse(read('sources/dsl4/dsl-4.0-rc.23.schema.json')));
+  for (const [index, source] of examples.entries()) {
+    assert.equal(
+      validate(source),
+      true,
+      `Example ${index + 1}: ${JSON.stringify(validate.errors)}`,
+    );
+    assert.ok(
+      Object.hasOwn(source.controls?.keymaps ?? {}, 'production'),
+      `Example ${index + 1} must define the profile selected by embedded block startup.`,
+    );
+  }
+});
+
+test('requires an empty Stage root and explains direct playback with explicit restart', () => {
+  const conversion = read('docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md');
+  for (const source of [guide, tutorial, conversion]) {
+    assert.match(source, /Stage[\s\S]*名前が空[\s\S]*ルート/u);
+    assert.match(
+      source,
+      /名前付き[\s\S]*1個[\s\S]*ルート[\s\S]*なりません|名前付き宣言だけなら、1個でもルート不在/u,
+    );
+    assert.match(source, /緑の旗[\s\S]*タイトルを閉じ/u);
+    assert.match(source, /開始し直す[\s\S]*現在のブロックを読み直/u);
+    assert.match(source, /file素材[\s\S]*アセットバンドル/u);
+    assert.doesNotMatch(source, /名前付きでも主台本にできます|ラベルが空欄でなくても主台本/u);
+  }
+  for (const source of [guide, conversion]) {
+    assert.match(source, /Sprite上の既存の空名宣言[\s\S]*互換/u);
+  }
+  assert.match(guide, /不正な台本[\s\S]*診断[\s\S]*ファイル選択へ自動で切り替えません/u);
 });
 
 test('ships every referenced block diagram with accessible SVG and complete JSON input values', () => {
