@@ -3,9 +3,10 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: 背景・コスチューム・音声などの素材を、SB3内、作品フォルダー、Web上の間で移し替える台本作者。\
-確認日: 2026年10月19日。コマンドの基準は公開プレリリース`4.0.0-rc.25`の固定実装
-[`a68f8dc`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/a68f8dc4d38b4609c8387192d3be0376963735e3)です。
+確認日: 2026年10月19日。コマンドの基準は公開プレリリース`4.0.0-rc.26`の固定実装
+[`10094a7`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/10094a781821269b54cd3e162332f30a3ad52953)です。
 正式版`4.0.0`の公開を意味しません。
+Schemaの参照は公開`4.0.0-rc.25`に固定し、rc.26でも同じSchemaを使います。
 
 ## 公開サンプルをフォーム編集で開く
 
@@ -58,10 +59,13 @@ Node.js 24以上を用意し、CLIを使う作業フォルダーで版を固定�
 以降のコマンドはすべて、このフォルダーから実行します。
 
 ```sh
-npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.25
+npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.26
 npx --no-install turbowarp-kamishibai --version
 npx --no-install turbowarp-kamishibai --help
 ```
+
+表示が`4.0.0-rc.26`であることを確認します。rc.26は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不要です。
+旧rc.23・rc.25でAjvのエラーが出る場合は、[旧版向けの回避手順](dsl-4.0-block-script-conversion-guide.md#cli-ajv-workaround)を参照してください。
 
 最初の例では、次の作品フォルダーを用意します。
 
@@ -75,7 +79,7 @@ work/
 ```
 
 `base.sb3`は、作品で使うスプライトと紙芝居ランタイムを含むベースSB3です。
-新規作品なら[rc.25のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.25)の
+新規作品なら[rc.26のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.26)の
 Standard SB3を使います。既存作品では、その作品の最新の素材・スプライトを保存したSB3を使ってください。
 変換後も入力のSB3と素材は保持されます。
 
@@ -344,12 +348,12 @@ SSH経由でアップロードする`--rsync-destination`＋`--remote-base-url`�
 
 ## 実装根拠と関連資料
 
-以下はすべてrc.25の固定commitを参照します。公開版の操作と、後続の開発版の変更を混同しないためです。
+以下はすべてrc.26の固定commitを参照します。公開版の操作と、後続の開発版の変更を混同しないためです。
 
-- [CLIの使用法と必須オプション](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/builder/cli.ts)
-- [アセット変換処理](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/builder/dsl4-asset-converter.ts)
-- [組み込み素材の登録・取り出し](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/src/builder/dsl4-asset-project-material.ts)
-- [変換方向、原本保持、取得失敗を検証するテスト](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/test/dsl4-asset-converter.test.ts)
-- [配布プロファイル・lock・vendorの仕様と実行例](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/docs/design/dsl-4-asset-distribution-profiles.md)
+- [CLIの使用法と必須オプション](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/10094a781821269b54cd3e162332f30a3ad52953/src/builder/cli.ts)
+- [アセット変換処理](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/10094a781821269b54cd3e162332f30a3ad52953/src/builder/dsl4-asset-converter.ts)
+- [組み込み素材の登録・取り出し](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/10094a781821269b54cd3e162332f30a3ad52953/src/builder/dsl4-asset-project-material.ts)
+- [変換方向、原本保持、取得失敗を検証するテスト](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/10094a781821269b54cd3e162332f30a3ad52953/test/dsl4-asset-converter.test.ts)
+- [配布プロファイル・lock・vendorの仕様と実行例](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/10094a781821269b54cd3e162332f30a3ad52953/docs/design/dsl-4-asset-distribution-profiles.md)
 - [紙芝居DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)
 - [DSL 4.0 YAMLとブロック台本SB3の相互変換ガイド](dsl-4.0-block-script-conversion-guide.md)

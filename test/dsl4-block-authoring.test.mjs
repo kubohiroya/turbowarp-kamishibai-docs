@@ -50,7 +50,7 @@ test('gives block and DSL authors exactly one tutorial and one guide, followed b
 test('uses the published CLI and keeps saved blocks as input when refreshing file bundles', () => {
   for (const source of [guide, tutorial]) {
     assert.doesNotMatch(source, /```ya?ml/iu);
-    assert.match(source, /公開(?:プレリリース`4\.0\.0-rc\.25`|rc\.25)/u);
+    assert.match(source, /公開(?:プレリリース`4\.0\.0-rc\.26`|rc\.26)/u);
     assert.match(source, /Node\.js 24\.0\.0以上/u);
     assert.doesNotMatch(source, /未公開の開発版|開発版CLI|node bin\/turbowarp-kamishibai/u);
     assert.doesNotMatch(source, /when kamishibai DSL source|whenDsl4Source/u);
@@ -58,7 +58,7 @@ test('uses the published CLI and keeps saved blocks as input when refreshing fil
   }
   assert.match(
     tutorial,
-    /npm install --save-dev --save-exact @kubohiroya\/turbowarp-kamishibai-app@4\.0\.0-rc\.25/u,
+    /npm install --save-dev --save-exact @kubohiroya\/turbowarp-kamishibai-app@4\.0\.0-rc\.26/u,
   );
   assert.match(
     tutorial,
