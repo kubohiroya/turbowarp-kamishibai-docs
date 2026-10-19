@@ -5,13 +5,13 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 対象: DSL 3.1／3.2の既存台本をDSL 4.0へ移行する方\
 対象コマンド: `turbowarp-kamishibai convert-dsl4`\
 文書状態: 固定実装基準を説明する変換ガイド（正式リリースの操作資料ではない）\
-調査基準: TurboWarp-Kamishibai `f8048b8`（4.0.0-rc.22）、2026年10月17日
+調査基準: TurboWarp-Kamishibai `2f2889f`（4.0.0-rc.23）、2026年10月19日
 
 このガイドは、すでに3.1／3.2の台本を持っている方のための移行手順です。初めてTurboWarp紙芝居を使う方や、
 4.0で最初の作品を作る方は、先に[大人向け概要](../user-guides/executive-summary-adult-4.0.md)と
 [「紙芝居を作る」チュートリアル](../tutorials/create.md)をお読みください。
 
-> **配布状態との区別:** 2026年10月17日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
+> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.23`はprereleaseとして公開されていますが、
 > 正式な`v4.0.0`ではありません。
 > `convert-dsl4`を含むパッケージのリリースを使用し、利用中のパッケージで`pnpm exec turbowarp-kamishibai --help`を
 > 実行して、コマンド一覧に`convert-dsl4`があることを確認してください。
@@ -44,11 +44,12 @@ pnpm exec turbowarp-kamishibai convert-dsl4 \
   --output story.k4.yml
 ```
 
+公開rc.23は`TMPoseURL`と互換表記`TMURL`を受理します。
 `TMPoseURL`は既定でlazy remoteの認識モデル（`kind: recognitionModel`）へ変換されます。内容を固定した自己完結SB3を作る場合だけ、
 `--pose-models`でローカルのモデルディレクトリへ置き換えます。
 
 > **4.0.0-rc.10〜rc.22を使う場合:** これらの版の`convert-dsl4`は`TMPoseURL`を受理せず、
-> `K4-CONVERT-COMMAND-UNSUPPORTED`で止まります（[turbowarp-kamishibai-app#880](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/880)で修正予定）。
+> `K4-CONVERT-COMMAND-UNSUPPORTED`で止まります（[turbowarp-kamishibai-app#880](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/880)で修正し、rc.23から公開済み）。
 > 変換用にコピーした台本で`TMPoseURL=`を`TMURL=`へ書き換えてから変換してください。元の3.2台本は変更しません。
 
 ```bash

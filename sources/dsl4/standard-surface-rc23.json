@@ -1,0 +1,2311 @@
+{
+  "formatVersion": 1,
+  "version": "4.0.0-rc.23",
+  "commit": "2f2889fe9df88548a92b0925ca3008c5c62682e5",
+  "standardSb3Sha256": "ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998",
+  "extraction": "getInfo() from the verified release SB3 bundle in a Node VM with a mocked Scratch host; no camera, browser playback or runtime semantics verified",
+  "extensionId": "kubohiroyakamishibai4",
+  "blocks": [
+    {
+      "opcode": "kubohiroyakamishibairuntime4__stage",
+      "blockType": "command",
+      "text": "set stage backdrop [BACKDROP]",
+      "arguments": {
+        "BACKDROP": {
+          "type": "string",
+          "defaultValue": "Backdrop"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__bgm",
+      "blockType": "command",
+      "text": "play BGM [SOUND]",
+      "arguments": {
+        "SOUND": {
+          "type": "string",
+          "defaultValue": "Music"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__stopBgm",
+      "blockType": "command",
+      "text": "stop BGM over [SECONDS] seconds",
+      "arguments": {
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__setBgmVolume",
+      "blockType": "command",
+      "text": "set BGM volume to [VOLUME] % over [SECONDS] seconds",
+      "arguments": {
+        "VOLUME": {
+          "type": "number",
+          "defaultValue": 100
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__sound",
+      "blockType": "command",
+      "text": "play sound [SOUND] until done",
+      "arguments": {
+        "SOUND": {
+          "type": "string",
+          "defaultValue": "Sound"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__wait",
+      "blockType": "command",
+      "text": "wait [SECONDS] seconds",
+      "arguments": {
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 1
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__debugger",
+      "blockType": "command",
+      "text": "debugger",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__broadcastMessageAndWait",
+      "blockType": "command",
+      "text": "broadcast [MESSAGE] and wait",
+      "arguments": {
+        "MESSAGE": {
+          "type": "string",
+          "defaultValue": "message"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__transition",
+      "blockType": "command",
+      "text": "transition [EFFECT] for [SECONDS] seconds",
+      "arguments": {
+        "EFFECT": {
+          "type": "string",
+          "defaultValue": "fadeOut",
+          "menu": "kubohiroyakamishibairuntime4__dsl4TransitionEffect"
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 1
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__goto",
+      "blockType": "command",
+      "text": "go to scene [SCENE]",
+      "arguments": {
+        "SCENE": {
+          "type": "string",
+          "defaultValue": "scene"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__branch",
+      "blockType": "command",
+      "text": "choose branch [BRANCH]",
+      "arguments": {
+        "BRANCH": {
+          "type": "string",
+          "defaultValue": "branch"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__setVariable",
+      "blockType": "command",
+      "text": "set story variable [NAME] to [VALUE] as [TYPE]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "variable"
+        },
+        "VALUE": {
+          "type": "string",
+          "defaultValue": ""
+        },
+        "TYPE": {
+          "type": "string",
+          "defaultValue": "string",
+          "menu": "kubohiroyakamishibairuntime4__dsl4VariableValueType"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__changeVariable",
+      "blockType": "command",
+      "text": "change story variable [NAME] by [BY]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "variable"
+        },
+        "BY": {
+          "type": "number",
+          "defaultValue": 1
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__toggleVariable",
+      "blockType": "command",
+      "text": "toggle story variable [NAME]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "variable"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__keyInputToChangeScene",
+      "blockType": "command",
+      "text": "wait for key routes [ROUTES]",
+      "arguments": {
+        "ROUTES": {
+          "type": "string",
+          "defaultValue": "{\"Space\":\"next\"}"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__touchInputToChangeScene",
+      "blockType": "command",
+      "text": "wait for actor touch routes [ROUTES]",
+      "arguments": {
+        "ROUTES": {
+          "type": "string",
+          "defaultValue": "{\"Actor\":\"next\"}"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__poseInputToChangeScene",
+      "blockType": "command",
+      "text": "wait for pose routes [ROUTES]",
+      "arguments": {
+        "ROUTES": {
+          "type": "string",
+          "defaultValue": "{\"pose\":\"next\"}"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__imageInputToChangeScene",
+      "blockType": "command",
+      "text": "wait for image label routes [ROUTES]",
+      "arguments": {
+        "ROUTES": {
+          "type": "string",
+          "defaultValue": "{\"label\":\"next\"}"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__show",
+      "blockType": "command",
+      "text": "show actor [TARGET] skin [SKIN] x [X] y [Y] scale [SCALE] %",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "SKIN": {
+          "type": "string",
+          "defaultValue": "Skin"
+        },
+        "X": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "Y": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "SCALE": {
+          "type": "number",
+          "defaultValue": 100
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__hide",
+      "blockType": "command",
+      "text": "hide actor [TARGET]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__setTransparency",
+      "blockType": "command",
+      "text": "set actor [TARGET] transparency spec [SPEC]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "SPEC": {
+          "type": "string",
+          "defaultValue": "50"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__moveTo",
+      "blockType": "command",
+      "text": "move actor [TARGET] to x [X] y [Y] in [SECONDS] seconds [EASING]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "X": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "Y": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 1
+        },
+        "EASING": {
+          "type": "string",
+          "defaultValue": "linear",
+          "menu": "kubohiroyakamishibairuntime4__dsl4MoveEasing"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__say",
+      "blockType": "command",
+      "text": "actor [TARGET] say spec [SPEC]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "SPEC": {
+          "type": "string",
+          "defaultValue": "{\"text\":\"Hello\",\"seconds\":1}"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__think",
+      "blockType": "command",
+      "text": "actor [TARGET] think spec [SPEC]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "SPEC": {
+          "type": "string",
+          "defaultValue": "{\"text\":\"Hmm\",\"seconds\":1}"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__setSkin",
+      "blockType": "command",
+      "text": "set actor [TARGET] skin [SKIN] optional scale [SCALE]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "SKIN": {
+          "type": "string",
+          "defaultValue": "Skin"
+        },
+        "SCALE": {
+          "type": "string",
+          "defaultValue": ""
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__setLayer",
+      "blockType": "command",
+      "text": "set actor [TARGET] layer [LAYER]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "LAYER": {
+          "type": "string",
+          "defaultValue": "front"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__loop",
+      "blockType": "command",
+      "text": "loop actor [TARGET] costume steps [STEPS]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "STEPS": {
+          "type": "string",
+          "defaultValue": "[{\"skin\":\"Skin\",\"seconds\":1}]"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__setText",
+      "blockType": "command",
+      "text": "set text actor [TARGET] to [TEXT] style [STYLE]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Caption"
+        },
+        "TEXT": {
+          "type": "string",
+          "defaultValue": "Text"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "style"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__pose",
+      "blockType": "command",
+      "text": "recognize actor [TARGET] pose steps [STEPS]",
+      "arguments": {
+        "TARGET": {
+          "type": "string",
+          "defaultValue": "Actor"
+        },
+        "STEPS": {
+          "type": "string",
+          "defaultValue": "[{\"pose\":\"pose\"}]"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__storyVariableReporter",
+      "blockType": "reporter",
+      "text": "story variable [NAME]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": ""
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__storyVariableExists",
+      "blockType": "Boolean",
+      "text": "story variable [NAME] exists?",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": ""
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__storyVariableType",
+      "blockType": "reporter",
+      "text": "story variable [NAME] type",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": ""
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__storyStatusReporter",
+      "blockType": "reporter",
+      "text": "story status"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__currentSceneIdReporter",
+      "blockType": "reporter",
+      "text": "current scene id"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__currentActionNumberReporter",
+      "blockType": "reporter",
+      "text": "current action number"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__currentActionPathReporter",
+      "blockType": "reporter",
+      "text": "current action path"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__lastRuntimeErrorCodeReporter",
+      "blockType": "reporter",
+      "text": "last runtime error code"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__lastRuntimeErrorStoryPathReporter",
+      "blockType": "reporter",
+      "text": "last runtime error story path"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__posePhaseReporter",
+      "blockType": "reporter",
+      "text": "pose phase"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__poseTargetReporter",
+      "blockType": "reporter",
+      "text": "pose target"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__poseNameReporter",
+      "blockType": "reporter",
+      "text": "pose name"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__poseStepNumberReporter",
+      "blockType": "reporter",
+      "text": "pose step number"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__runtimeVersionReporter",
+      "blockType": "reporter",
+      "text": "Kamishibai DSL 4.0 runtime version"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__applicationStatusReporter",
+      "blockType": "reporter",
+      "text": "application status"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__canNavigateToPreviousAction",
+      "blockType": "Boolean",
+      "text": "can navigate to previous action?"
+    },
+    {
+      "opcode": "kubohiroyakamishibairuntime4__canNavigateToNextAction",
+      "blockType": "Boolean",
+      "text": "can navigate to next action?"
+    },
+    {
+      "opcode": "kubohiroyaassetcache__registerAsset",
+      "blockType": "command",
+      "text": "register resource [RESOURCE_ID] as asset [NAME]",
+      "arguments": {
+        "RESOURCE_ID": {
+          "type": "string",
+          "defaultValue": "https://example.com/asset.png"
+        },
+        "NAME": {
+          "type": "string",
+          "defaultValue": "asset1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__assetErrorType",
+      "blockType": "reporter",
+      "text": "asset registration error type"
+    },
+    {
+      "opcode": "kubohiroyaassetcache__assetErrorLabel",
+      "blockType": "reporter",
+      "text": "asset registration error label"
+    },
+    {
+      "opcode": "kubohiroyaassetcache__deleteMemoryAsset",
+      "blockType": "command",
+      "text": "delete asset [NAME] from memory",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "asset1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__deleteAllMemoryAssets",
+      "blockType": "command",
+      "text": "delete all assets from memory"
+    },
+    {
+      "opcode": "kubohiroyaassetcache__deleteCachedAsset",
+      "blockType": "command",
+      "text": "delete asset [NAME] from cache",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "asset1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__deleteAllCachedAssets",
+      "blockType": "command",
+      "text": "delete all assets from cache"
+    },
+    {
+      "opcode": "kubohiroyaassetcache__isLoaded",
+      "blockType": "Boolean",
+      "text": "asset [NAME] is loaded",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "asset1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__setTextValue",
+      "blockType": "command",
+      "text": "set text asset [NAME] to [VALUE]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "Narration"
+        },
+        "VALUE": {
+          "type": "string",
+          "defaultValue": "Once upon a time..."
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__setTextStyle",
+      "blockType": "command",
+      "text": "set text asset [NAME] style [PROPERTY] to [VALUE]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "Narration"
+        },
+        "PROPERTY": {
+          "type": "string",
+          "defaultValue": "font"
+        },
+        "VALUE": {
+          "type": "string",
+          "defaultValue": "Sans Serif"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__setThisSpriteSkin",
+      "blockType": "command",
+      "text": "show asset [NAME] on this sprite",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "asset1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__setSpriteSkin",
+      "blockType": "command",
+      "text": "show asset [NAME] on [SPRITE] (compatibility)",
+      "arguments": {
+        "SPRITE": {
+          "type": "string",
+          "defaultValue": "Sprite1"
+        },
+        "NAME": {
+          "type": "string",
+          "defaultValue": "asset1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__startActorLoop",
+      "blockType": "command",
+      "text": "loop actor [ACTOR] through assets [ASSETS] for seconds [DURATIONS]",
+      "arguments": {
+        "ACTOR": {
+          "type": "string",
+          "defaultValue": "Sprite1"
+        },
+        "ASSETS": {
+          "type": "string",
+          "defaultValue": "asset1,asset2"
+        },
+        "DURATIONS": {
+          "type": "string",
+          "defaultValue": "0.5,0.5"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__startActorSequence",
+      "blockType": "command",
+      "text": "play actor [ACTOR] through assets [ASSETS] for seconds [DURATIONS] once in background",
+      "arguments": {
+        "ACTOR": {
+          "type": "string",
+          "defaultValue": "Sprite1"
+        },
+        "ASSETS": {
+          "type": "string",
+          "defaultValue": "asset1,asset2"
+        },
+        "DURATIONS": {
+          "type": "string",
+          "defaultValue": "0.5"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__stopActorAnimation",
+      "blockType": "command",
+      "text": "stop animation of actor [ACTOR]",
+      "arguments": {
+        "ACTOR": {
+          "type": "string",
+          "defaultValue": "Sprite1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__finishAllActorSequences",
+      "blockType": "command",
+      "text": "finish all actor sequences"
+    },
+    {
+      "opcode": "kubohiroyaassetcache__setStageSkin",
+      "blockType": "command",
+      "text": "set stage backdrop to asset [NAME]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "backdrop1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__playSound",
+      "blockType": "command",
+      "text": "play asset [NAME] as sound",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "sound1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__playSoundUntilDone",
+      "blockType": "command",
+      "text": "play asset [NAME] as sound until done",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "sound1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__stopSound",
+      "blockType": "command",
+      "text": "stop asset sound [NAME]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "sound1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__stopAllSounds",
+      "blockType": "command",
+      "text": "stop all asset sounds"
+    },
+    {
+      "opcode": "kubohiroyaassetcache__getAssetMimeType",
+      "blockType": "reporter",
+      "text": "MIME type of asset [NAME]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "asset1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaassetcache__getVersion",
+      "blockType": "reporter",
+      "text": "Asset Cache version"
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__listenForKey",
+      "blockType": "command",
+      "text": "listen for key [KEY_ID] set runtime var [RUNTIME_VAR] to [VALUE]",
+      "arguments": {
+        "KEY_ID": {
+          "type": "string",
+          "defaultValue": "KeyA"
+        },
+        "RUNTIME_VAR": {
+          "type": "string",
+          "defaultValue": "input"
+        },
+        "VALUE": {
+          "type": "string",
+          "defaultValue": "pressed"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__listenForKeyAndBroadcast",
+      "blockType": "command",
+      "text": "listen for key [KEY_ID] set runtime var [RUNTIME_VAR] to [VALUE] and broadcast [MESSAGE]",
+      "arguments": {
+        "KEY_ID": {
+          "type": "string",
+          "defaultValue": "KeyA"
+        },
+        "RUNTIME_VAR": {
+          "type": "string",
+          "defaultValue": "input"
+        },
+        "VALUE": {
+          "type": "string",
+          "defaultValue": "pressed"
+        },
+        "MESSAGE": {
+          "type": "string",
+          "defaultValue": "message1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__stopListeningForKey",
+      "blockType": "command",
+      "text": "stop listening for key [KEY_ID] for this target",
+      "arguments": {
+        "KEY_ID": {
+          "type": "string",
+          "defaultValue": "KeyA"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__stopAllKeyListeners",
+      "blockType": "command",
+      "text": "stop all key listeners registered by this target",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__listenForTouch",
+      "blockType": "command",
+      "text": "listen for touch on this sprite set runtime var [RUNTIME_VAR] to [VALUE]",
+      "arguments": {
+        "RUNTIME_VAR": {
+          "type": "string",
+          "defaultValue": "input"
+        },
+        "VALUE": {
+          "type": "string",
+          "defaultValue": "pressed"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__listenForTouchAndBroadcast",
+      "blockType": "command",
+      "text": "listen for touch on this sprite set runtime var [RUNTIME_VAR] to [VALUE] and broadcast [MESSAGE]",
+      "arguments": {
+        "RUNTIME_VAR": {
+          "type": "string",
+          "defaultValue": "input"
+        },
+        "VALUE": {
+          "type": "string",
+          "defaultValue": "pressed"
+        },
+        "MESSAGE": {
+          "type": "string",
+          "defaultValue": "message1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__stopListeningForTouch",
+      "blockType": "command",
+      "text": "stop listening for touch on this sprite",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__stopAllInputListeners",
+      "blockType": "command",
+      "text": "stop all input listeners registered by this target",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyaasyncinput__listenForActorTouchAndBroadcast",
+      "blockType": "command",
+      "text": "listen for touch on actor [ACTOR] set runtime var [RUNTIME_VAR] to [VALUE] and broadcast [MESSAGE]",
+      "arguments": {
+        "ACTOR": {
+          "type": "string",
+          "defaultValue": "Actor1"
+        },
+        "RUNTIME_VAR": {
+          "type": "string",
+          "defaultValue": "input"
+        },
+        "VALUE": {
+          "type": "string",
+          "defaultValue": "pressed"
+        },
+        "MESSAGE": {
+          "type": "string",
+          "defaultValue": "message1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__defineBubbleStyle",
+      "blockType": "command",
+      "text": "define bubble style [STYLE] using text style [TEXT_STYLE]",
+      "arguments": {
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        },
+        "TEXT_STYLE": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__defineBubbleClosePolicy",
+      "blockType": "command",
+      "text": "define bubble close policy [POLICY] trigger [TRIGGER] condition [CONDITION] timeout [TIMEOUT] seconds",
+      "arguments": {
+        "POLICY": {
+          "type": "string",
+          "defaultValue": "advance-or-timeout"
+        },
+        "TRIGGER": {
+          "type": "string",
+          "defaultValue": "condition-or-timeout",
+          "menu": "kubohiroyabubble__closePolicyTrigger"
+        },
+        "CONDITION": {
+          "type": "string",
+          "defaultValue": "input == \"pressed\""
+        },
+        "TIMEOUT": {
+          "type": "number",
+          "defaultValue": 10
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubblePlacement",
+      "blockType": "command",
+      "text": "set bubble placement [PLACEMENT] for bubble style [STYLE]",
+      "arguments": {
+        "PLACEMENT": {
+          "type": "string",
+          "defaultValue": "up-right",
+          "menu": "kubohiroyabubble__placement"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setPortraitBase",
+      "blockType": "command",
+      "text": "set portrait base [ASSET] for bubble style [STYLE]",
+      "arguments": {
+        "ASSET": {
+          "type": "string",
+          "defaultValue": "HeroFace"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setPortraitLayout",
+      "blockType": "command",
+      "text": "set portrait [PLACEMENT] offset x [X] y [Y] zoom [ZOOM] % corner radius [RADIUS] px for bubble style [STYLE]",
+      "arguments": {
+        "PLACEMENT": {
+          "type": "string",
+          "defaultValue": "left",
+          "menu": "kubohiroyabubble__portraitPlacement"
+        },
+        "X": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "Y": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "ZOOM": {
+          "type": "number",
+          "defaultValue": 100
+        },
+        "RADIUS": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleDistance",
+      "blockType": "command",
+      "text": "set bubble distance [DISTANCE] for bubble style [STYLE]",
+      "arguments": {
+        "DISTANCE": {
+          "type": "number",
+          "defaultValue": 12
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleVisualStyle",
+      "blockType": "command",
+      "text": "set bubble visual style [VISUAL_STYLE] for bubble style [STYLE]",
+      "arguments": {
+        "VISUAL_STYLE": {
+          "type": "string",
+          "defaultValue": "NORMAL",
+          "menu": "kubohiroyabubble__visualStyle"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleTailLength",
+      "blockType": "command",
+      "text": "set bubble tail length [LENGTH] for bubble style [STYLE]",
+      "arguments": {
+        "LENGTH": {
+          "type": "number",
+          "defaultValue": 18
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleOffset",
+      "blockType": "command",
+      "text": "set bubble offset x [X] y [Y] scale [SCALE] % for bubble style [STYLE]",
+      "arguments": {
+        "X": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "Y": {
+          "type": "number",
+          "defaultValue": 0
+        },
+        "SCALE": {
+          "type": "number",
+          "defaultValue": 100
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBlinkFrames",
+      "blockType": "command",
+      "text": "set blink frames [ASSETS] every [SECONDS] seconds for bubble style [STYLE]",
+      "arguments": {
+        "ASSETS": {
+          "type": "string",
+          "defaultValue": "EyesOpen,EyesClosed"
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0.4
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setLipSyncFrames",
+      "blockType": "command",
+      "text": "set lip-sync frames [ASSETS] every [SECONDS] seconds for bubble style [STYLE]",
+      "arguments": {
+        "ASSETS": {
+          "type": "string",
+          "defaultValue": "MouthClosed,MouthOpen"
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0.1
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setContinueFrames",
+      "blockType": "command",
+      "text": "set continue frames [ASSETS] every [SECONDS] seconds for bubble style [STYLE]",
+      "arguments": {
+        "ASSETS": {
+          "type": "string",
+          "defaultValue": "Next1,Next2"
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0.2
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleReveal",
+      "blockType": "command",
+      "text": "set bubble reveal unit [UNIT] every [SECONDS] seconds layout [LAYOUT] for bubble style [STYLE]",
+      "arguments": {
+        "UNIT": {
+          "type": "string",
+          "defaultValue": "CHARACTER",
+          "menu": "kubohiroyabubble__revealUnit"
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0.05
+        },
+        "LAYOUT": {
+          "type": "string",
+          "defaultValue": "DYNAMIC",
+          "menu": "kubohiroyabubble__revealLayout"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleWordDelimiters",
+      "blockType": "command",
+      "text": "set bubble word delimiters [DELIMITERS] show [SHOW] for bubble style [STYLE]",
+      "arguments": {
+        "DELIMITERS": {
+          "type": "string",
+          "defaultValue": " /"
+        },
+        "SHOW": {
+          "type": "string",
+          "defaultValue": "false",
+          "menu": "kubohiroyabubble__boolean"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleRevealSound",
+      "blockType": "command",
+      "text": "set bubble reveal sound [ASSET] for bubble style [STYLE]",
+      "arguments": {
+        "ASSET": {
+          "type": "string",
+          "defaultValue": "Typewriter"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleVoice",
+      "blockType": "command",
+      "text": "set bubble voice [ASSET] for bubble style [STYLE]",
+      "arguments": {
+        "ASSET": {
+          "type": "string",
+          "defaultValue": "Voice"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__finishBubbleReveal",
+      "blockType": "command",
+      "text": "finish [UNIT] with condition [CONDITION] or timeout after [TIMEOUT] seconds",
+      "arguments": {
+        "UNIT": {
+          "type": "string",
+          "defaultValue": "CHARACTER",
+          "menu": "kubohiroyabubble__revealUnit"
+        },
+        "CONDITION": {
+          "type": "string",
+          "defaultValue": "input == \"pressed\""
+        },
+        "TIMEOUT": {
+          "type": "number",
+          "defaultValue": 10
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleShowAnimation",
+      "blockType": "command",
+      "text": "set bubble show animation [MOTION] for [SECONDS] seconds for bubble style [STYLE]",
+      "arguments": {
+        "MOTION": {
+          "type": "string",
+          "defaultValue": "fadeIn",
+          "menu": "kubohiroyabubble__showMotion"
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0.2
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleHideAnimation",
+      "blockType": "command",
+      "text": "set bubble hide animation [MOTION] for [SECONDS] seconds for bubble style [STYLE]",
+      "arguments": {
+        "MOTION": {
+          "type": "string",
+          "defaultValue": "fadeOut",
+          "menu": "kubohiroyabubble__hideMotion"
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0.2
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "dialogue"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__animateBubble",
+      "blockType": "command",
+      "text": "animate this bubble [MOTION]",
+      "arguments": {
+        "MOTION": {
+          "type": "string",
+          "defaultValue": "shake",
+          "menu": "kubohiroyabubble__motion"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__shakeBubble",
+      "blockType": "command",
+      "text": "shake this bubble direction [DIRECTION] count [COUNT] ease [EASE]",
+      "arguments": {
+        "DIRECTION": {
+          "type": "number",
+          "defaultValue": 90
+        },
+        "COUNT": {
+          "type": "number",
+          "defaultValue": 2
+        },
+        "EASE": {
+          "type": "string",
+          "defaultValue": "easeInOut",
+          "menu": "kubohiroyabubble__ease"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__explodeBubble",
+      "blockType": "command",
+      "text": "explode this bubble relative scale [SCALE] count [COUNT] ease [EASE]",
+      "arguments": {
+        "SCALE": {
+          "type": "number",
+          "defaultValue": 1.15
+        },
+        "COUNT": {
+          "type": "number",
+          "defaultValue": 2
+        },
+        "EASE": {
+          "type": "string",
+          "defaultValue": "easeOut",
+          "menu": "kubohiroyabubble__ease"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__animateBubbleShape",
+      "blockType": "command",
+      "text": "animate bubble shape to [VISUAL_STYLE] speed [SPEED] for [SECONDS] seconds",
+      "arguments": {
+        "VISUAL_STYLE": {
+          "type": "string",
+          "defaultValue": "WAVY",
+          "menu": "kubohiroyabubble__visualStyle"
+        },
+        "SPEED": {
+          "type": "number",
+          "defaultValue": 1
+        },
+        "SECONDS": {
+          "type": "number",
+          "defaultValue": 0.5
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__say",
+      "blockType": "command",
+      "text": "say [MESSAGE]",
+      "arguments": {
+        "MESSAGE": {
+          "type": "string",
+          "defaultValue": "Hello!"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__think",
+      "blockType": "command",
+      "text": "think [MESSAGE]",
+      "arguments": {
+        "MESSAGE": {
+          "type": "string",
+          "defaultValue": "Hmm..."
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__showWithBubbleStyle",
+      "blockType": "command",
+      "text": "show [MESSAGE] with bubble style [STYLE]",
+      "arguments": {
+        "MESSAGE": {
+          "type": "string",
+          "defaultValue": "Hello!"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "say"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__setBubbleAnimationMode",
+      "blockType": "command",
+      "text": "set this bubble animation mode [MODE]",
+      "arguments": {
+        "MODE": {
+          "type": "string",
+          "defaultValue": "awaiting-continue",
+          "menu": "kubohiroyabubble__animationMode"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__waitForBubbleContinue",
+      "blockType": "command",
+      "text": "wait with this bubble until condition [CONDITION] or timeout after [TIMEOUT] seconds",
+      "arguments": {
+        "CONDITION": {
+          "type": "string",
+          "defaultValue": "input == \"pressed\""
+        },
+        "TIMEOUT": {
+          "type": "number",
+          "defaultValue": 10
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__waitAndCloseBubbleWithPolicy",
+      "blockType": "command",
+      "text": "wait and close this bubble using close policy [POLICY]",
+      "arguments": {
+        "POLICY": {
+          "type": "string",
+          "defaultValue": "advance-or-timeout"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyabubble__closeBubble",
+      "blockType": "command",
+      "text": "close this bubble",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyabubble__getVersion",
+      "blockType": "reporter",
+      "text": "Bubble version",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyacamerasource__startSharedCamera",
+      "blockType": "command",
+      "text": "start shared camera [CAMERA_ID] with device ID [DEVICE_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        },
+        "DEVICE_ID": {
+          "type": "string",
+          "defaultValue": ""
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__startRequestedSharedCamera",
+      "blockType": "command",
+      "text": "start shared camera [CAMERA_ID] requested by this page",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__stopSharedCamera",
+      "blockType": "command",
+      "text": "stop shared camera [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__isCameraRunning",
+      "blockType": "Boolean",
+      "text": "shared camera [CAMERA_ID] is running?",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraErrorCode",
+      "blockType": "reporter",
+      "text": "shared camera [CAMERA_ID] error code",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraError",
+      "blockType": "reporter",
+      "text": "shared camera [CAMERA_ID] error",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraDeviceIdReporter",
+      "blockType": "reporter",
+      "text": "shared camera [CAMERA_ID] device ID",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__showCameraPreview",
+      "blockType": "command",
+      "text": "show shared camera [CAMERA_ID] preview flipped [PREVIEW_FLIP]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        },
+        "PREVIEW_FLIP": {
+          "type": "string",
+          "defaultValue": "horizontal",
+          "menu": "kubohiroyacamerasource__flips"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__hideCameraPreview",
+      "blockType": "command",
+      "text": "hide shared camera [CAMERA_ID] preview",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraFrameWidth",
+      "blockType": "reporter",
+      "text": "shared camera [CAMERA_ID] frame width",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraFrameHeight",
+      "blockType": "reporter",
+      "text": "shared camera [CAMERA_ID] frame height",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraFrameRate",
+      "blockType": "reporter",
+      "text": "shared camera [CAMERA_ID] frame rate",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__refreshCameraDevices",
+      "blockType": "command",
+      "text": "refresh camera devices",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraDeviceCount",
+      "blockType": "reporter",
+      "text": "camera device count",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraDeviceIdAt",
+      "blockType": "reporter",
+      "text": "camera device ID at [INDEX]",
+      "arguments": {
+        "INDEX": {
+          "type": "string",
+          "defaultValue": "1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraDeviceLabelAt",
+      "blockType": "reporter",
+      "text": "camera device label at [INDEX]",
+      "arguments": {
+        "INDEX": {
+          "type": "string",
+          "defaultValue": "1"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__registerCameraProfile",
+      "blockType": "command",
+      "text": "register camera profile [PROFILE_JSON]",
+      "arguments": {
+        "PROFILE_JSON": {
+          "type": "string",
+          "defaultValue": "{}"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__registerCameraProfileAs",
+      "blockType": "command",
+      "text": "register camera profile [PROFILE_JSON] as [CAMERA_ID]",
+      "arguments": {
+        "PROFILE_JSON": {
+          "type": "string",
+          "defaultValue": "{}"
+        },
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__forgetCameraProfile",
+      "blockType": "command",
+      "text": "forget camera profile for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileRegistered",
+      "blockType": "Boolean",
+      "text": "camera [CAMERA_ID] is calibrated?",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileJson",
+      "blockType": "reporter",
+      "text": "camera profile JSON for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileYaml",
+      "blockType": "reporter",
+      "text": "camera profile YAML for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileError",
+      "blockType": "reporter",
+      "text": "camera profile error",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileErrorDetail",
+      "blockType": "reporter",
+      "text": "camera profile error detail",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileCompatibility",
+      "blockType": "reporter",
+      "text": "camera profile compatibility for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileCompatibilityDetail",
+      "blockType": "reporter",
+      "text": "camera profile compatibility detail for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileAdaptation",
+      "blockType": "reporter",
+      "text": "camera profile adaptation for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileIntrinsicsJson",
+      "blockType": "reporter",
+      "text": "camera intrinsics JSON for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraConditionsJson",
+      "blockType": "reporter",
+      "text": "camera conditions JSON for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraConditionsGeneration",
+      "blockType": "reporter",
+      "text": "camera conditions generation for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__saveCameraProfile",
+      "blockType": "command",
+      "text": "save camera profile for [CAMERA_ID] to browser storage",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__restoreStoredCameraProfile",
+      "blockType": "command",
+      "text": "restore stored camera profile for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__restoreStoredCameraProfileForDevice",
+      "blockType": "command",
+      "text": "restore stored camera profile calibrated on the device of [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__bindCameraProfileToDevice",
+      "blockType": "command",
+      "text": "bind camera profile for [CAMERA_ID] to its current device",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__cameraProfileOnDevice",
+      "blockType": "Boolean",
+      "text": "camera profile for [CAMERA_ID] belongs to its current device?",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__storedCameraProfileResult",
+      "blockType": "reporter",
+      "text": "stored camera profile result for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__storedCameraProfileDetail",
+      "blockType": "reporter",
+      "text": "stored camera profile detail for [CAMERA_ID]",
+      "arguments": {
+        "CAMERA_ID": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyacamerasource__storedCameraProfilesGeneration",
+      "blockType": "reporter",
+      "text": "stored camera profiles generation",
+      "arguments": {}
+    },
+    {
+      "opcode": "kubohiroyaruntimeexpression__runtimeCondition",
+      "blockType": "Boolean",
+      "text": "condition [EXPRESSION]",
+      "arguments": {
+        "EXPRESSION": {
+          "type": "string",
+          "defaultValue": "state == \"ready\""
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaruntimeexpression__registerConditionalBroadcast",
+      "blockType": "command",
+      "text": "register [ID] conditional broadcast [CONDITION] [MESSAGE_ON_TRUE] / [MESSAGE_ON_FALSE] with [TIMEOUT] seconds timeout",
+      "arguments": {
+        "ID": {
+          "type": "string",
+          "defaultValue": "watcher"
+        },
+        "CONDITION": {
+          "type": "string",
+          "defaultValue": "state == \"ready\""
+        },
+        "MESSAGE_ON_TRUE": {
+          "type": "string",
+          "defaultValue": "state ready"
+        },
+        "MESSAGE_ON_FALSE": {
+          "type": "string",
+          "defaultValue": "state not ready"
+        },
+        "TIMEOUT": {
+          "type": "number",
+          "defaultValue": 0
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyaruntimeexpression__unregisterConditionalBroadcast",
+      "blockType": "command",
+      "text": "unregister [ID] conditional broadcast",
+      "arguments": {
+        "ID": {
+          "type": "string",
+          "defaultValue": "watcher"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyasvgtext__defineStyle",
+      "blockType": "command",
+      "text": "define text style [STYLE] background [BACKGROUND] text [TEXT_COLOR] font [FONT] size [SIZE] align [ALIGN]",
+      "arguments": {
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "default"
+        },
+        "BACKGROUND": {
+          "type": "color",
+          "defaultValue": "#ffffff"
+        },
+        "TEXT_COLOR": {
+          "type": "color",
+          "defaultValue": "#575e75"
+        },
+        "FONT": {
+          "type": "string",
+          "defaultValue": "Helvetica"
+        },
+        "SIZE": {
+          "type": "number",
+          "defaultValue": 100
+        },
+        "ALIGN": {
+          "type": "string",
+          "defaultValue": "left",
+          "menu": "kubohiroyasvgtext__alignment"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyasvgtext__setText",
+      "blockType": "command",
+      "text": "set this sprite text [TEXT] with style [STYLE]",
+      "arguments": {
+        "TEXT": {
+          "type": "string",
+          "defaultValue": "Title\\nSubtitle"
+        },
+        "STYLE": {
+          "type": "string",
+          "defaultValue": "default"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__versionReporter",
+      "blockType": "reporter",
+      "text": "Teachable Machine version"
+    },
+    {
+      "opcode": "kubohiroyatm__setRecognitionMode",
+      "blockType": "command",
+      "text": "set recognition mode to [MODE]",
+      "arguments": {
+        "MODE": {
+          "type": "string",
+          "defaultValue": "pose",
+          "menu": "kubohiroyatm__recognitionModeMenu"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__recognitionModeReporter",
+      "blockType": "reporter",
+      "text": "recognition mode"
+    },
+    {
+      "opcode": "kubohiroyatm__setComputeMode",
+      "blockType": "command",
+      "text": "set compute mode to [MODE]",
+      "arguments": {
+        "MODE": {
+          "type": "string",
+          "defaultValue": "auto",
+          "menu": "kubohiroyatm__computeModeMenu"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__computeModeReporter",
+      "blockType": "reporter",
+      "text": "compute mode"
+    },
+    {
+      "opcode": "kubohiroyatm__computeBackendReporter",
+      "blockType": "reporter",
+      "text": "active compute backend"
+    },
+    {
+      "opcode": "kubohiroyatm__setModelURL",
+      "blockType": "command",
+      "text": "set model URL to [URL]",
+      "arguments": {
+        "URL": {
+          "type": "string",
+          "defaultValue": "https://teachablemachine.withgoogle.com/models/XXXX/"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__startCamera",
+      "blockType": "command",
+      "text": "start camera"
+    },
+    {
+      "opcode": "kubohiroyatm__stopCamera",
+      "blockType": "command",
+      "text": "stop camera"
+    },
+    {
+      "opcode": "kubohiroyatm__isCameraRunning",
+      "blockType": "Boolean",
+      "text": "camera is running?"
+    },
+    {
+      "opcode": "kubohiroyatm__refreshCameraList",
+      "blockType": "command",
+      "text": "refresh camera list"
+    },
+    {
+      "opcode": "kubohiroyatm__setCameraSelection",
+      "blockType": "command",
+      "text": "set camera to [CAMERA]",
+      "arguments": {
+        "CAMERA": {
+          "type": "string",
+          "defaultValue": "default",
+          "menu": "kubohiroyatm__cameraMenu"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__cameraCountReporter",
+      "blockType": "reporter",
+      "text": "camera count"
+    },
+    {
+      "opcode": "kubohiroyatm__cameraDeviceIdReporter",
+      "blockType": "reporter",
+      "text": "camera device ID"
+    },
+    {
+      "opcode": "kubohiroyatm__cameraDeviceNameReporter",
+      "blockType": "reporter",
+      "text": "camera device name"
+    },
+    {
+      "opcode": "kubohiroyatm__showPreview",
+      "blockType": "command",
+      "text": "show camera preview"
+    },
+    {
+      "opcode": "kubohiroyatm__hidePreview",
+      "blockType": "command",
+      "text": "hide camera preview"
+    },
+    {
+      "opcode": "kubohiroyatm__isPreviewVisible",
+      "blockType": "Boolean",
+      "text": "camera preview is visible?"
+    },
+    {
+      "opcode": "kubohiroyatm__setPreviewOpacity",
+      "blockType": "command",
+      "text": "set camera preview opacity to [OPACITY]",
+      "arguments": {
+        "OPACITY": {
+          "type": "number",
+          "defaultValue": 0.6
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__setPreviewPosition",
+      "blockType": "command",
+      "text": "set camera preview position to [POSITION]",
+      "arguments": {
+        "POSITION": {
+          "type": "string",
+          "defaultValue": "bottom-right",
+          "menu": "kubohiroyatm__positionMenu"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__setPreviewMirroring",
+      "blockType": "command",
+      "text": "set camera preview to [MIRRORING]",
+      "arguments": {
+        "MIRRORING": {
+          "type": "string",
+          "defaultValue": "mirrored",
+          "menu": "kubohiroyatm__previewMirroringMenu"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__previewMirroringReporter",
+      "blockType": "reporter",
+      "text": "camera preview mirroring"
+    },
+    {
+      "opcode": "kubohiroyatm__setPoseOverlayVisibility",
+      "blockType": "command",
+      "text": "set pose overlay [VISIBILITY]",
+      "arguments": {
+        "VISIBILITY": {
+          "type": "string",
+          "defaultValue": "on",
+          "menu": "kubohiroyatm__poseOverlayVisibilityMenu"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__isPoseOverlayVisible",
+      "blockType": "Boolean",
+      "text": "pose overlay is visible?"
+    },
+    {
+      "opcode": "kubohiroyatm__setPoseJointStyle",
+      "blockType": "command",
+      "text": "set [PART] joint color [COLOR] opacity [OPACITY] radius [RADIUS]",
+      "arguments": {
+        "PART": {
+          "type": "string",
+          "defaultValue": "nose",
+          "menu": "kubohiroyatm__poseKeypointMenu"
+        },
+        "COLOR": {
+          "type": "string",
+          "defaultValue": "#00e5ff"
+        },
+        "OPACITY": {
+          "type": "number",
+          "defaultValue": 1
+        },
+        "RADIUS": {
+          "type": "number",
+          "defaultValue": 4
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__setPoseBoneStyle",
+      "blockType": "command",
+      "text": "set pose bone color [COLOR] opacity [OPACITY] width [WIDTH]",
+      "arguments": {
+        "COLOR": {
+          "type": "string",
+          "defaultValue": "#00e5ff"
+        },
+        "OPACITY": {
+          "type": "number",
+          "defaultValue": 0.9
+        },
+        "WIDTH": {
+          "type": "number",
+          "defaultValue": 3
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__setPoseOverlayMinimumConfidence",
+      "blockType": "command",
+      "text": "set pose overlay minimum confidence to [CONFIDENCE]",
+      "arguments": {
+        "CONFIDENCE": {
+          "type": "number",
+          "defaultValue": 0.5
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__setPoseConfidenceScaling",
+      "blockType": "command",
+      "text": "set pose [PROPERTY] confidence scaling [STATE]",
+      "arguments": {
+        "PROPERTY": {
+          "type": "string",
+          "defaultValue": "joint-opacity",
+          "menu": "kubohiroyatm__poseConfidencePropertyMenu"
+        },
+        "STATE": {
+          "type": "string",
+          "defaultValue": "off",
+          "menu": "kubohiroyatm__poseOverlayVisibilityMenu"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__loadModel",
+      "blockType": "command",
+      "text": "load model"
+    },
+    {
+      "opcode": "kubohiroyatm__isModelLoaded",
+      "blockType": "Boolean",
+      "text": "model is loaded?"
+    },
+    {
+      "opcode": "kubohiroyatm__startRecognition",
+      "blockType": "command",
+      "text": "start recognition"
+    },
+    {
+      "opcode": "kubohiroyatm__stopRecognition",
+      "blockType": "command",
+      "text": "stop recognition"
+    },
+    {
+      "opcode": "kubohiroyatm__isRecognizing",
+      "blockType": "Boolean",
+      "text": "recognition is running?"
+    },
+    {
+      "opcode": "kubohiroyatm__currentPoseReporter",
+      "blockType": "reporter",
+      "text": "current label"
+    },
+    {
+      "opcode": "kubohiroyatm__scoreReporter",
+      "blockType": "reporter",
+      "text": "confidence"
+    },
+    {
+      "opcode": "kubohiroyatm__poseScoreReporter",
+      "blockType": "reporter",
+      "text": "confidence of [NAME]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "jump"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__setAccumulatedPoseParameters",
+      "blockType": "command",
+      "text": "set accumulated pose accumulation [ACCUMULATION] decay [DECAY]",
+      "arguments": {
+        "ACCUMULATION": {
+          "type": "number",
+          "defaultValue": 1
+        },
+        "DECAY": {
+          "type": "number",
+          "defaultValue": 0.9
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__setAccumulatedPoseThreshold",
+      "blockType": "command",
+      "text": "set accumulated pose threshold [THRESHOLD]",
+      "arguments": {
+        "THRESHOLD": {
+          "type": "number",
+          "defaultValue": 0
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__resetAccumulatedPose",
+      "blockType": "command",
+      "text": "reset accumulated pose scores"
+    },
+    {
+      "opcode": "kubohiroyatm__accumulatedPoseReporter",
+      "blockType": "reporter",
+      "text": "accumulated pose"
+    },
+    {
+      "opcode": "kubohiroyatm__accumulatedScoreReporter",
+      "blockType": "reporter",
+      "text": "accumulated score"
+    },
+    {
+      "opcode": "kubohiroyatm__accumulatedPoseScoreReporter",
+      "blockType": "reporter",
+      "text": "accumulated score of [NAME]",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "jump"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__isPose",
+      "blockType": "Boolean",
+      "text": "label is [NAME]?",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "jump"
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__isPoseWithThreshold",
+      "blockType": "Boolean",
+      "text": "label is [NAME] with confidence at least [THRESHOLD]?",
+      "arguments": {
+        "NAME": {
+          "type": "string",
+          "defaultValue": "jump"
+        },
+        "THRESHOLD": {
+          "type": "number",
+          "defaultValue": 0.75
+        }
+      }
+    },
+    {
+      "opcode": "kubohiroyatm__cameraMsReporter",
+      "blockType": "reporter",
+      "text": "camera startup time (ms)"
+    },
+    {
+      "opcode": "kubohiroyatm__modelLoadMsReporter",
+      "blockType": "reporter",
+      "text": "model load time (ms)"
+    },
+    {
+      "opcode": "kubohiroyatm__firstRecognitionMsReporter",
+      "blockType": "reporter",
+      "text": "first recognition time (ms)"
+    },
+    {
+      "opcode": "kubohiroyatm__lastErrorReporter",
+      "blockType": "reporter",
+      "text": "last error"
+    }
+  ],
+  "snapshotLicense": "MPL-2.0"
+}

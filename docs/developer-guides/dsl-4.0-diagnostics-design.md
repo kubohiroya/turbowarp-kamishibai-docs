@@ -3,22 +3,22 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 文書状態: 固定実装基準を説明する設計レビュー（正式リリース済みの意味ではない）\
-調査基準: TurboWarp-Kamishibai `f8048b8`（4.0.0-rc.22）、2026年10月17日
+調査基準: TurboWarp-Kamishibai `2f2889f`（4.0.0-rc.23）、2026年10月19日
 
-> **配布状態との区別:** 2026年10月17日時点で`v4.0.0-rc.22`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。本書はrc.22固定コミットの失敗経路を説明します。
+> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.23`はprereleaseとして公開されていますが、
+> 正式な`v4.0.0`ではありません。本書はrc.23固定コミットの失敗経路を説明します。
 
 この文書は、DSL 4.0のYAML読込からproduction実行まで、失敗をどこで分類し、どの状態をcommitせず、
 どのresourceを停止・解放するかを実装からレビューできるようにまとめたものです。対象となる完成実装は
 `kubohiroya/turbowarp-kamishibai-app`のcommit
-[`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)
+[`2f2889fe9df88548a92b0925ca3008c5c62682e5`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/2f2889fe9df88548a92b0925ca3008c5c62682e5)
 です。本文のpath、関数、code、event、testはこのcommitで確認しています。
 
 対象アプリ: TurboWarp-Kamishibai 4.0.x
 
 受理するDSL宣言: `kamishibai: '4.0'`
 
-## rc.22のリモート取得とプレビュー失敗
+## rc.23のリモート取得とプレビュー失敗
 
 ブラウザーは取得失敗を`K4-ASSET-REMOTE-OFFLINE-001`、`K4-ASSET-REMOTE-CORS-001`、
 `K4-ASSET-REMOTE-CONNECT-001`に分類します。CONNECTは証明書障害の確定診断ではなく、TLS・DNS・サーバ停止等を含みます。
@@ -395,11 +395,11 @@ producerだけへ追加せず`diagnostic-sequence-policy.js`、projection、wire
 
 ## 固定実装への参照
 
-- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-frontend.ts)と[diagnostic sequence policy](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/diagnostic-sequence-policy.ts)
-- [diagnostic projection](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/diagnostic-projection.ts)と[expression diagnostics](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/expression-diagnostics.ts)
-- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-graph.ts)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/source-graph-frontend.ts)
-- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/live-reload-session.ts)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/asset-reload-transaction.ts)
-- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/runtime-controller.ts)と[runtime startup](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/runtime-startup.ts)
-- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/platform/turbowarp-runtime-host.ts)と[preview session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/platform/turbowarp-preview-session.ts)
-- [preview generation wire](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/dsl4/preview-source-generation-wire.ts)
-- [production build](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/builder/dsl4-build.ts)と[atomic output](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f8048b8c4ebd0ecd6213bb87582862034b2b88ce/src/builder/atomic-output.ts)
+- [source frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/source-frontend.ts)と[diagnostic sequence policy](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/diagnostic-sequence-policy.ts)
+- [diagnostic projection](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/diagnostic-projection.ts)と[expression diagnostics](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/expression-diagnostics.ts)
+- [Source Graph](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/source-graph.ts)と[graph frontend](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/source-graph-frontend.ts)
+- [live reload session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/live-reload-session.ts)と[asset reload transaction](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/asset-reload-transaction.ts)
+- [runtime controller](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/runtime-controller.ts)と[runtime startup](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/runtime-startup.ts)
+- [TurboWarp runtime host](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/platform/turbowarp-runtime-host.ts)と[preview session](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/platform/turbowarp-preview-session.ts)
+- [preview generation wire](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/dsl4/preview-source-generation-wire.ts)
+- [production build](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/builder/dsl4-build.ts)と[atomic output](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/2f2889fe9df88548a92b0925ca3008c5c62682e5/src/builder/atomic-output.ts)

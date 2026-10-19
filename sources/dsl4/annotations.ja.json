@@ -294,7 +294,7 @@
             "`placement`の省略時は`left`です。",
             "`offset`は吹き出し本体の`offset`と同じ`[x, y]`または`[x, y, zoom]`です。zoomは0より大きい百分率で、省略時は`[0, 0, 100]`です。",
             "`cornerRadius`の省略時は`0`です。runtimeはこれらの値を変換せずTurboWarp Bubbleへ渡します。",
-            "`placement`、`offset`、`cornerRadius`は実装基準450a5bbで追加された項目です。公開版4.0.0-rc.22のSchemaには含まれません。"
+            "`placement`、`offset`、`cornerRadius`は実装基準450a5bbで追加され、公開版4.0.0-rc.23のSchemaに含まれます。旧rc.22のSchemaには含まれません。"
           ]
         },
         {
@@ -351,7 +351,7 @@
           "notes": [
             "省略時はpolicyがlegacy、parallelがfalseです。",
             "latest-neededでは重い初期化を実行中1件と最新待機1件までに制限します。",
-            "実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.22はTurboWarp Teachable Machine 3.5.1をexact pinします。"
+            "実行にはTurboWarp Teachable Machine 1.10.0以降が必要です。4.0.0-rc.23はTurboWarp Teachable Machine 3.5.1をexact pinします。"
           ]
         },
         {

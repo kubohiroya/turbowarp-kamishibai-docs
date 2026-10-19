@@ -12,30 +12,30 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 | 公開サンプル基準 | サンプル作品、スターター、Web版を生成したruntimeの版                    |
 | 文書状態         | どの実装・成果物・画面を説明するかと、未確認の範囲                      |
 
-## 2026年10月17日の確認結果
+## 2026年10月19日の確認結果
 
-- 公開runtimeの実装基準は公開プレリリース`v4.0.0-rc.22`のcommit
-  [`f8048b8c4ebd0ecd6213bb87582862034b2b88ce`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f8048b8c4ebd0ecd6213bb87582862034b2b88ce)。公開版のSchemaは`sources/dsl4/dsl-4.0-rc.22.schema.json`、出典は`sources/dsl4/release-source-lock-4.0-rc.22.json`に固定する。
-- GitHub Releaseとnpm `@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.22`を照合した。npmの`next`と`latest`はいずれもrc.22を指す。
-- 正式版`v4.0.0`は未公開。rc.22のリリースノートが示す推奨安定版は`v3.2.3`。
-- Standard SB3の取得先は[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.22)。6,911,464 bytes、SHA-256は`3731ed3a58c000d40f65057fbe5e27b340bae915df11e863fd55c98ba061b5c9`。
-- Pagesの`downloads/kamishibai-4.0.0-rc.22.sb3`は確認時に404だった。未確認のPages配布を成功と記録せず、本文では取得確認済みのGitHub Releaseへ案内する。
-- 浦島太郎、私の浦島太郎、チュートリアルの公開manifestはいずれもrc.22の同じruntime commitを参照する。サンプル作品、スターター、Web版はrc.22基準の公開manifestと照合したが、今回それぞれのバイト列の再hashや再生・実カメラ検証は行っていない。
+- 公開runtimeの実装基準は公開プレリリース`v4.0.0-rc.23`のcommit
+  [`2f2889fe9df88548a92b0925ca3008c5c62682e5`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/2f2889fe9df88548a92b0925ca3008c5c62682e5)。公開Schemaとその出典は`sources/dsl4/dsl-4.0-rc.23.schema.json`と`sources/dsl4/release-source-lock-4.0-rc.23.json`に固定する。
+- GitHub Releaseとnpm `@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.23`は公開済み。npmの`next`と`latest`はいずれもrc.23を指す。
+- 正式版`v4.0.0`は未公開。推奨安定版は`v3.2.3`。
+- Standard SB3は[GitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.23)と[Pages](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/kamishibai-4.0.0-rc.23.sb3)から取得できる。6,922,003 bytes、SHA-256は`ecbb74f950f74236a0bbe38c6b821745d8d100fc02075c634881ab1d837c7998`。
+- 浦島太郎、私の浦島太郎、チュートリアルのサンプル作品、スターター、Web版はrc.23基準。samples PR #173、commit `d8deecfbd46b69a6787ec9e5deea936b8b54f0f0`、Pages run `39188793571`で公開し、配布12ファイルのsizeとSHA-256を照合した。starterとaddition kitは再生成して同じバイト列であることを確認した。
+- 上流samplesの全57テスト、Web作品、実TurboWarp Editorでの表示・編集・保存・ブロック台本の直接再生を確認した。カメラの自動検証は模擬入力であり、rc.23の実カメラ・実ポーズ測定は未実施。
 
-公開URL、manifest由来のsize／checksum、照合方法、未確認範囲は
+公開URL、size／checksum、照合方法、未確認範囲は
 [`sources/dsl4/user-guide-4.0-public-surfaces.json`](sources/dsl4/user-guide-4.0-public-surfaces.json)へ記録する。
-rc.10の旧manifestと実機確認は`previousVerification`に保存し、rc.22の実機成功として利用しない。
+rc.10の旧manifestと実機確認は`previousVerification`、rc.22の公開確認は履歴として保存し、rc.23の実機成功へ読み替えない。
 
-## 公開runtimeとSchema実装基準の区別
+## 公開runtimeとSchemaの固定
 
-mainのSchemaリファレンスは実装commit `450a5bb950ef769241ec8258690e652b39b23bde`を維持します。
-`sources/dsl4/source-lock.json`と`dsl-4.schema.json`はこの実装基準です。portraitの`placement`、
-`offset`、`cornerRadius`はrc.22より後の追加項目であり、**rc.22の公開配布物では利用できません**。
-作者ガイドと生成リファレンスで適用範囲を明記し、公開版の例は別に保存したrc.22のSchemaでも検査します。
-実装Schemaに項目があることを、公開runtimeの対応済み判定には使いません。
+現行Schemaとruntimeは同じ公開commit `2f2889fe9df88548a92b0925ca3008c5c62682e5`を基準にする。
+以前の実装基準`450a5bb`とSchemaのバイト列は同一だが、rc.23ではportraitの`placement`、`offset`、
+`cornerRadius`も公開配布物で利用できる。旧rc.22のSchemaとsource lockは当時の記録として保持する。
+構造に項目があることだけで実行対応を判定せず、固定runtimeとそのテストも照合する。
 
-変換CLIについてはmainの回避策を保持します。rc.10〜rc.22の`convert-dsl4`で`TMPoseURL`が
-`K4-CONVERT-COMMAND-UNSUPPORTED`になる場合、変換用コピーだけを`TMURL`へ直し、元の3.2台本は変更しません。
+公開rc.23の変換CLIは`TMPoseURL`と互換表記`TMURL`を受理する。
+旧rc.10〜rc.22で`TMPoseURL`が`K4-CONVERT-COMMAND-UNSUPPORTED`になる場合だけ、
+変換用コピーを`TMURL`へ直す。元の3.2台本は変更しない。
 
 ## 現行文書へ反映する契約
 
@@ -44,11 +44,17 @@ mainのSchemaリファレンスは実装commit `450a5bb950ef769241ec8258690e652b
 表示・BGMのcrossfade、BGMの音量と停止、台本変数を書き換えるcore action、`Actor.setText`のルビを説明する。
 `Actor.say`／`Actor.think`のtextは文字列のまま。吹き出し終了条件は`bubbleClosePolicies`と`closePolicy`を使う。
 
+rc.23のブロック台本は公開CLIで生成・書き戻しできる。Stage上の名前が空の`kamishibai [4.0] []`を
+ルートとし、名前付き台本は`includeBlocks`から参照する。ハット自体はScratchのイベントとして発火せず、
+ランタイムが起動時と開始し直すときに接続されたブロックを読み取る。緑の旗で起動し、タイトルを閉じると
+その台本の物語を開始する。編集しただけで実行中の物語へ自動反映するわけではない。
+file素材を使う作品は対応する素材バンドルを同梱する。新しいfile素材の追加・変更には再ビルドが必要。
+
 Standard bundleはAsset Cache、Camera Source、Teachable Machine 3.5.1等を同梱する。
 カメラはCamera Sourceが所有し、認識側はleaseを使う。プレビューと推論入力の経路を区別し、
 タイトルでのカメラ許可は対応ブラウザー・機能フラグ・ポーズ作品の条件が揃った場合だけ表示する。
 
-ローカルプレビューはリモートassetを取得しない。rc.22の失敗ダイアログ、ブラウザーでの
+ローカルプレビューはリモートassetを取得しない。rc.23の失敗ダイアログ、ブラウザーでの
 OFFLINE／CORS／CONNECT、CLIでのTLS診断を説明し、ブラウザーのCONNECTを証明書障害の確定診断としない。
 
 ## 履歴・画像・検証の保存

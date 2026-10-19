@@ -45,7 +45,7 @@ test('explains seeing, moving, making, and safe participation without technical 
     '困ったとき',
     'キーや画面のタッチで進める方法',
     '名前、学校、住所、電話番号、パスワード',
-    '4.0.0-rc.22は公開プレリリース',
+    '4.0.0-rc.23は公開プレリリース',
   ]) {
     assert.match(dsl4Summary, new RegExp(expected, 'u'));
   }

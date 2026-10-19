@@ -3,53 +3,41 @@
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: YAML台本をTurboWarpのブロックで編集し、編集結果をYAMLへ戻したい方。\
-確認日: 2026年10月19日。コマンドの公開版基準は`4.0.0-rc.22`、命令単位のブロック生成・読取は
-[本体Issue #881](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/881)（PR #882でmainへマージ済み）の未公開開発版、
-ラベルとincludeBlocksは[本体Issue #883](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883)、
-種類別の定義ブロックは[本体Issue #886](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/886)
-（PR #887）の追加開発版を対象にします。専用ブロックのフォーム編集は
-[本体Issue #891](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/891)
-（commit `0c1bf09f3285e1ea265037926a3465e550ab46c8`）の修正を含む開発版が必要です。開発版CLIはNode.js 24.0.0以上で実行します。
+確認日: 2026年10月19日。公開プレリリース`4.0.0-rc.23`を対象にします。正式版4.0.0は未公開です。
 
 ## 最初に利用する版を確認する
 
-**実命令ブロックを編集する手順には、Issue #881の修正を含む開発版が必要です。**
-この修正はmainへマージ済みですが、確認時点の公開npm版には含まれていません。公開版rc.22を
-インストールするだけでは、後述するシーンごとの命令ブロックを生成できません。
-
-| 機能                                           | 公開版rc.22                              | Issue #881の開発版                                   |
-| ---------------------------------------------- | ---------------------------------------- | ---------------------------------------------------- |
-| `author-block-dsl`                             | YAML全文を宣言ブロックの文字列入力へ保存 | シーンごとに実命令ブロックを接続して配置             |
-| `export-block-dsl`                             | 従来の台本宣言を読み取り、YAMLを出力     | 従来形式に加え、編集した実命令ブロックからYAMLを復元 |
-| シーン内の命令を追加・削除・並べ替えて書き戻す | 対応しない                               | 対応する                                             |
-
-修正の公開版が決まるまでは、この表を公開済みの機能一覧と読み替えないでください。
-開発版の利用環境を持たない場合は、次節の公開CLIの使い方と対応範囲を確認してください。
+公開rc.23には、実命令ブロックの生成・読取、ラベルとincludeBlocks、8種類の定義ブロック、
+専用定義のフォーム編集、組み込み台本からの直接再生が含まれます。
+Node.js 24.0.0以上で公開CLIを版固定して使います。本体リポジトリのcheckoutや`build:lib`は不要です。
+旧rc.22のハットとYAML全文を文字列で持つ方式は、rc.23の読取対象ではありません。元YAMLから再生成してください。
 
 ## 二つのコマンドの使い分け
 
 | 目的                                | コマンド           | 必要な入力                          | 出力                                            |
 | ----------------------------------- | ------------------ | ----------------------------------- | ----------------------------------------------- |
 | SB3内の台本ブロックをYAMLへ書き出す | `export-block-dsl` | 台本宣言を含むSB3                   | 単一の`.k4.yml`、またはinclude文がある場合はZIP |
-| YAMLからブロック台本SB3を作る       | `author-block-dsl` | YAML台本、ランタイム入りのベースSB3 | 編集用のSB3                                     |
+| YAMLからブロック台本SB3を作る       | `author-block-dsl` | YAML台本、ランタイム入りのベースSB3 | 編集・再生できるSB3                             |
 
 対象は、本アプリの台本宣言ハットから接続されたブロックです。ハットは、台本の始まりを示す先頭の
-ブロックを指します。従来形式ではStage（ステージ）の宣言が主台本、Sprite（スプライト）の宣言が参照可能な別台本です。
-Issue #883の形式では、同じStageに主台本と名前付き台本を並べ、ラベルで参照できます。
-通常のScratchプログラム全体をYAMLへ翻訳するコマンドではありません。
+ブロックを指します。Stage（ステージ）の名前が空の宣言がルートです。名前付き宣言はStage/Spriteに置ける
+モジュールで、includeBlocksから参照します。通常のScratchプログラム全体をYAMLへ翻訳するコマンドではありません。
 
-ブロック台本SB3は、台本を読む・編集するためのソースです。作品の再生用SB3を作る場合は、編集後の
-台本を`build-dsl4`へ渡します。素材を含む作品のビルドは[台本作成ガイド](dsl-4.0-author-guide.md)を参照してください。
+rc.23のブロック台本SB3は、緑の旗で起動してタイトルを閉じると、その台本から物語を開始します。
+編集後に物語を開始し直すと現在のブロックを読み直します。実行中の自動反映ではありません。
+不正な台本は診断を表示し、ファイル選択へ自動で切り替えません。
+file素材には対応するアセットバンドルがSB3内に必要です。素材の準備は下の「file素材を含む台本を準備する」と
+[台本作成ガイド](dsl-4.0-author-guide.md)を参照してください。
 
 ### 公開CLIを使う場合
 
-Node.js 22.18.0以上の環境で、作業用フォルダーにCLIの版を固定してインストールします。
-以下は公開rc.22の例で、生成される台本は従来の文字列方式です。
-`base.sb3`には[rc.22のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.22)から
+Node.js 24.0.0以上の環境で、作業用フォルダーにCLIの版を固定してインストールします。
+以下は公開rc.23で、素材を使わない単一台本を生成・書き戻しする例です。
+`base.sb3`には[rc.23のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.23)から
 取得したStandard SB3を使用します。YAMLとベースSB3は、次のコマンドを実行するフォルダーへ置きます。
 
 ```sh
-npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.22
+npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.23
 npx --no-install turbowarp-kamishibai --version
 
 npx --no-install turbowarp-kamishibai author-block-dsl \
@@ -63,29 +51,28 @@ include文がない台本なら、最後のコマンドは`exported/story.k4.yml
 `--name`を省略すると、入力SB3のファイル名から出力名を決めます。
 `--output`は生成するSB3のファイル名、`--output-dir`はYAMLの出力先フォルダーです。
 
-## 開発版で実命令ブロックを編集して書き戻す
+## 実命令ブロックを編集して書き戻す
 
-以下の手順は、Issue #881の修正を含む本体リポジトリの作業ツリーで実行します。
-公開版を入れたフォルダーで`npx`を実行する方法とは切り替え、各コマンドを同じ開発版CLIで実行してください。
+以下も、上で公開rc.23をインストールした作業用フォルダーで実行します。
+各コマンドは`npx --no-install`でローカルの固定CLIを使います。
 
-### 1. 開発版CLIと最小台本を準備する
-
-本体リポジトリの直下で依存を復元し、CLIをビルドします。`output/block-script`を作業用フォルダーにします。
+### 1. 最小台本を準備する
 
 ```sh
-pnpm install --frozen-lockfile
-pnpm run build:lib
 mkdir -p output/block-script
-node bin/turbowarp-kamishibai.mjs --version
+npx --no-install turbowarp-kamishibai --version
 ```
 
-開発版は公開版と同じ版番号を表示する場合があります。`--version`だけで修正の有無を判定せず、
-Issue #881の修正がその作業ツリーに含まれることを確認してください。
+表示が`4.0.0-rc.23`であることを確認します。
 
 `output/block-script/story.k4.yml`をUTF-8で保存します。この例は素材やカメラを使いません。
 
 ```yaml
 kamishibai: '4.0'
+controls:
+  keymaps:
+    production:
+      Space: navigation.nextAction
 scenes:
   opening:
     - wait: 1
@@ -94,13 +81,16 @@ scenes:
     - wait: 0
 ```
 
+ルートからの再生は`production`を選ぶため、この名前の操作プロファイルを定義します。
+例では`Space`を`navigation.nextAction`へ割り当てます。空のキーマップはSchemaで受理しません。
+
 ランタイム入りのベースSB3を`output/block-script/base.sb3`として置きます。
 ベースは新規の空白Scratchプロジェクトではなく、公開Standard SB3など、紙芝居ランタイムが入ったものを選びます。
 
 ### 2. YAMLをブロック台本SB3へ変換する
 
 ```sh
-node bin/turbowarp-kamishibai.mjs author-block-dsl \
+npx --no-install turbowarp-kamishibai author-block-dsl \
   --input output/block-script/story.k4.yml \
   --base output/block-script/base.sb3 \
   --output output/block-script/story-blocks.sb3
@@ -115,24 +105,24 @@ node bin/turbowarp-kamishibai.mjs author-block-dsl \
    `output/block-script/story-blocks.sb3`を読み込みます。既存の作品を編集している場合は先に保存してください。
 2. 拡張の読み込みを許可し、ランタイムの案内が出た場合は「サンドボックスなしで実行する」を有効にして開き直します。
 3. ステージのコードを選び、台本ハットからつながるシーンのまとまりを探します。
-   Issue #883の形式は`kamishibai [4.0] []`です。旧`when kamishibai DSL source`はこの開発版では廃止しています。
+   ルートのハットは`kamishibai [4.0] []`で、名前欄を空にします。旧`when kamishibai DSL source`は廃止しています。
    `opening`の内側に「1秒待つ」「endingへ移動する」に相当する命令があり、`ending`にも待機命令があります。
 4. `opening`の待機時間を`1`から`2`へ変更します。命令の追加・削除・並べ替えも、同じシーンの内側で接続して行えます。
 5. ファイルメニューからコンピューターへ保存し、保存されたファイルを
    `output/block-script/story-edited.sb3`へ移動します。次の手順では、この編集後のファイルを指定します。
 
-緑の旗を押すことは書き戻しの条件ではありません。台本宣言は自動実行されず、保存されたブロックの入力と接続を
-変換CLIが読み取ります。台本ハットから切り離した命令は書き出されません。
+緑の旗を押すことは書き戻しの条件ではありません。ハット自体はイベントとして発火せず、ランタイムと
+変換CLIがブロックの入力と接続を読み取ります。緑の旗で起動してタイトルを閉じ、変更した待機時間でも再生を確認します。台本ハットから切り離した命令は書き出されません。
 シーン名を変更した場合は、`goto`や入力経路の参照先も変更してください。
 
 ### 4. 編集後のSB3からYAMLへ書き戻す
 
 ```sh
-node bin/turbowarp-kamishibai.mjs export-block-dsl \
+npx --no-install turbowarp-kamishibai export-block-dsl \
   --input output/block-script/story-edited.sb3 \
   --output-dir output/block-script/exported --name story
 
-node bin/turbowarp-kamishibai.mjs validate-dsl4 \
+npx --no-install turbowarp-kamishibai validate-dsl4 \
   --input output/block-script/exported/story.k4.yml --format pretty
 ```
 
@@ -141,6 +131,10 @@ node bin/turbowarp-kamishibai.mjs validate-dsl4 \
 
 ```yaml
 kamishibai: '4.0'
+controls:
+  keymaps:
+    production:
+      Space: navigation.nextAction
 scenes:
   opening:
     - wait: 2
@@ -153,10 +147,36 @@ scenes:
 元のYAML全文を別に保存して、その文字列へ戻す方式ではありません。
 元ファイルはそのままにし、確認した書き戻し結果を次の制作に使ってください。
 
-## ラベルとincludeBlocksで台本を分割する（Issue #883の開発版）
+## file素材を含む台本を準備する
 
-この節は[本体Issue #883](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883)の修正を含む開発版CLIが対象です。
-公開npm版rc.22や、Issue #881だけを含む版では使用できません。生成・読取・書き戻しは同じ開発版で行います。
+`author-block-dsl`はfile素材の実体を新しく埋め込む処理ではありません。
+まずYAMLと元の素材からアセットバンドル入りのSB3を作り、そのSB3を`--base`にしてブロック台本を生成します。
+以下は単一台本の例です。`file`は`--project-root`で指定したフォルダーからの相対位置に揃えます。
+登場人物を使う場合は、台本のアクターIDと同名のScratchスプライトを先にベースSB3へ用意します。
+`build-dsl4`はfile素材や`actors`宣言からScratchスプライトを新規生成しません。
+
+```sh
+npx --no-install turbowarp-kamishibai build-dsl4 \
+  --base output/block-script/base.sb3 \
+  --project-root output/block-script --source story.k4.yml \
+  --output output/block-script/story-assets.sb3 \
+  --control-profile production --channel bundled --replace-existing
+
+npx --no-install turbowarp-kamishibai author-block-dsl \
+  --input output/block-script/story.k4.yml \
+  --base output/block-script/story-assets.sb3 \
+  --output output/block-script/story-blocks.sb3
+```
+
+生成物はベースの素材bundleを保持し、空名ルートの台本から直接再生できます。元の素材フォルダーも保持します。
+セリフ・待機・シーン接続などの編集は、同じSB3で物語を開始し直して確認できます。
+file素材を追加したり、そのパス・内容を変更したりした場合は、編集後SB3を`build-dsl4 --base`へ渡し、
+同じ`--project-root`を指定して別名のSB3へbundleを更新します。この場合は`--source`を付けず、台本ブロックを読み取らせます。
+手順は[ブロック版チュートリアル](../tutorials/create-blocks.md)を参照してください。
+
+## ラベルとincludeBlocksで台本を分割する
+
+公開rc.23のCLIで生成・読取・書き戻しを行います。
 
 ### 1. include付きのYAMLを準備する
 
@@ -186,7 +206,7 @@ scenes:
 ### 2. ラベル付きブロック台本を生成する
 
 ```sh
-node bin/turbowarp-kamishibai.mjs author-block-dsl \
+npx --no-install turbowarp-kamishibai author-block-dsl \
   --input output/block-script/story.k4.yml \
   --base output/block-script/base.sb3 \
   --output output/block-script/story-blocks.sb3
@@ -209,8 +229,7 @@ kamishibai [4.0] [shared.k4.yml]
 `kamishibai [4.0] [ラベル]`が台本ソースの入口と版・識別名の宣言を兼ねます。
 再生開始やイベント受信のブロックではありません。旧`when kamishibai DSL source`と併用しません。
 
-ベースはランタイムのJavaScriptを埋め込んだSB3を使います。公開rc.22のベースに含まれる旧sourceハットと
-文字列命令も、生成SB3では登録から除去し、編集用の入口を新ハットに統一します。
+ベースは公開rc.23のランタイムを埋め込んだSB3を使います。file素材がある場合は、先に対応bundleを埋め込んだSB3を使います。
 ランタイムを外部URLから参照するベースは使えません。ベース自体や公開済み配布物は書き換えません。
 
 入れ子のincludeもたどり、各ファイルを別の台本宣言にします。
@@ -223,10 +242,10 @@ kamishibai [4.0] [shared.k4.yml]
 
 - 同じStageに複数の台本を置けます。名前付き台本をSpriteへ移しても、同じSB3内ならラベルで参照できます。
 - ラベルは大文字・小文字や空白を区別する完全一致です。日本語も使えます。空文字以外のラベルはSB3全体で一意にします。
-- Stage上のラベル空欄の宣言を主台本にします。Stageに宣言が1個だけなら、そのラベルが空欄でなくても主台本にできます。
-  Stageに名前付き宣言だけを複数置いた場合は入口が曖昧なためエラーです。ラベル空欄の宣言は各targetに1個までです。
+- Stage上の名前が空の宣言を1個だけルートにします。名前付き宣言だけなら、1個でもルート不在のエラーです。
+  ラベル空欄の宣言は各targetに1個までです。Sprite上の既存の空名宣言は従来のモジュール読取互換を保ち、ルートにはしません。
 - `includeBlocks`は台本宣言直下へ接続します。シーンや命令の内側には置けません。宣言直下ではシーンの前後に置けます。
-  参照は台本全体に対するビルド時のincludeです。その位置で再生を中断して別台本を呼び出す命令ではありません。
+  参照は物語開始時やCLIの処理時に台本全体を合成するincludeです。その位置で再生を中断して別台本を呼び出す命令ではありません。
 - 複数の`includeBlocks`は接続順に処理します。YAMLのincludeと同じ合成規則を使い、同名シーンなどを上書きしません。
 - ラベルを`共通`へ変更したら、参照元の`includeBlocks`も`共通`へ変更します。参照を自動で付け替える機能はありません。
 - `ending`の待機時間を`1`から`2`へ変更し、`story-edited.sb3`として保存します。
@@ -234,7 +253,7 @@ kamishibai [4.0] [shared.k4.yml]
 ### 4. 分割YAMLへ書き戻す
 
 ```sh
-node bin/turbowarp-kamishibai.mjs export-block-dsl \
+npx --no-install turbowarp-kamishibai export-block-dsl \
   --input output/block-script/story-edited.sb3 \
   --output-dir output/block-script/exported --name story
 ```
@@ -257,13 +276,13 @@ story-k4/
 再生用SB3は、書き戻したYAMLから次のようにビルドできます。例ではZIPを`exported/`へ展開済みとします。
 
 ```sh
-node bin/turbowarp-kamishibai.mjs build-dsl4 \
+npx --no-install turbowarp-kamishibai build-dsl4 \
   --base output/block-script/base.sb3 \
   --project-root output/block-script/exported/story-k4 \
   --source story.k4.yml --enable-source-includes \
   --max-source-files 64 --max-total-source-bytes 1048576 --max-include-depth 32 \
   --output output/block-script/story-play.sb3 \
-  --control-profile production --channel bundled
+  --control-profile production --channel bundled --replace-existing
 ```
 
 素材がある台本では、補正された`file:`が指すファイルを、このプロジェクトの同じ相対位置に配置します。
@@ -289,7 +308,7 @@ node bin/turbowarp-kamishibai.mjs build-dsl4 \
 
 命令には既存ランタイムの29種類のcore actionブロックを使います。台本の構造や、命令の標準入力にない属性は、
 生成SB3に同梱する編集用拡張「Kamishibai Block Script」の補助ブロックで保持します。
-これらをrc.22のランタイムパレットの公開ブロック数へ加えないでください。
+これらは生成SB3の編集用拡張に属し、通常ランタイムのcore actionの数とは分けて扱います。
 
 | 補助ブロック                                                 | 編集する内容                                                       |
 | ------------------------------------------------------------ | ------------------------------------------------------------------ |
@@ -307,15 +326,15 @@ JSONは、`{"seconds": 2}`のように名前と値を記述する形式です。
 `actionOptions`で、実命令の入力値を重ねて指定することはできません。
 入力欄とJSONの意味は[ランタイム ブロックリファレンス](../turbowarp-programmer-guides/dsl-4.0-runtime-block-reference.md)を参照してください。
 
-## 種類別定義ブロックと旧SB3の移行（Issue #886の開発版）
+## 種類別定義ブロックと旧SB3の移行
 
-Issue #886対応CLIは素材を`asset`、登場人物を`actor`などの専用ブロックで生成します。
+公開rc.23のCLIは素材を`asset`、登場人物を`actor`などの専用ブロックで生成します。
 例えば`asset`は`NAME`に`HeroIdle`、`VALUE`に`"costume:Hero"`を、`actor`は
 `NAME`に`Hero`、`VALUE`に`"HeroIdle"`を入力します。`NAME`にJSONパスや引用符は不要です。
 `control`はキーマップごとに1個、`variable`の値は数値・真偽値・文字列です。
 フォームは対応Editorの`blockEditorDialogs=1`で有効になります。編集用拡張をサンドボックスなしで読み込み、
 配置した専用ブロックの左端の書類アイコンを押します。古い編集用SB3は、専用ブロックを持つものも含め、
-Issue #891対応CLIでYAMLへ書き戻して再生成してください。
+公開rc.23のCLIでYAMLへ書き戻して再生成してください。
 8種類の実フォーム画面・用途・入力例は[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#種類別の定義ブロック)を参照してください。
 
 `story property [PATH] = JSON [VALUE]`は旧形式の読取と、専用ブロックがない設定の保持に使います。
@@ -324,7 +343,7 @@ Issue #891対応CLIでYAMLへ書き戻して再生成してください。
 `story property`を編集します。`PATH`は1〜2要素のJSON配列、`VALUE`はJSON値です。
 名前付き項目がない明示的な空マッピングも、この形式で保持します。
 
-旧`story property`を含む編集用SB3は、Issue #886対応CLIの`export-block-dsl`でYAMLへ戻し、
+旧`story property`を含む編集用SB3は、公開rc.23のCLIの`export-block-dsl`でYAMLへ戻し、
 `author-block-dsl`で再生成すると専用ブロックへ移行できます。古いSB3に埋め込まれた編集用拡張は
 パレットが自動更新されないため、CLIを更新するだけでは専用ブロックを追加できません。
 旧ハットやYAML全文の文字列方式は読取対象外なので、元のYAMLから再生成します。
@@ -336,12 +355,12 @@ Issue #891対応CLIでYAMLへ書き戻して再生成してください。
 
 ## include文・対象形式・書き戻しの制約
 
-- **YAMLからの生成:** 公開rc.22とIssue #881の形式はinclude付き生成に未対応です。Issue #883の形式では、前節のラベル付き宣言とincludeBlocksで生成できます。
+- **YAMLからの生成:** 公開rc.23では、前節のラベル付き宣言とincludeBlocksでinclude付き台本を生成できます。
 - **SB3からの書き出し:** `export-block-dsl`は、Stageの主台本とSpriteの参照台本を読み取れます。
   include文がある場合は、主台本と参照先を`story-k4.zip`へまとめ、内部の`story-k4/`へ保存します。
   参照されない台本、重複、参照先不明、循環はエラーになります。
-- **対象形式:** Issue #883のCLIは新ハット配下の実ブロックだけを読み取ります。旧ハットとYAML文字列方式は非対応です。
-  元のYAMLから新形式を生成し、同じ修正を含むCLIで編集結果を書き戻します。
+- **対象形式:** 公開rc.23のCLIは新ハット配下の実ブロックだけを読み取ります。旧ハットとYAML文字列方式は非対応です。
+  元のYAMLから新形式を生成し、同じ公開rc.23のCLIで編集結果を書き戻します。
 - **対象のSB3:** 実行用の「台本埋め込みSB3」に台本宣言がない場合、このコマンドでは書き出せません。
 - **保持するもの:** 台本の命令・順序・値を保持します。YAMLのコメント、空行、引用符の種類は保持しません。
 - **入力の制約:** 動的なScratchの変数・リストや式は評価しません。ブロック数・入力長にも上限があります。
@@ -351,22 +370,25 @@ Issue #891対応CLIでYAMLへ書き戻して再生成してください。
 
 ## 変換に失敗したとき
 
-| 表示・状態                       | 確認すること                                                         |
-| -------------------------------- | -------------------------------------------------------------------- |
-| `K4-BLOCK-SOURCE-MISSING-001`    | ステージに台本宣言ハットがあるか。実行用SB3と取り違えていないか。    |
-| `K4-BLOCK-SOURCE-GRAPH-001`      | シーン内の接続、重複した宣言、使っているブロックの種類を確認する。   |
-| `K4-BLOCK-SOURCE-LABEL-001`      | 参照ラベルが空欄・未定義でないか。入力が静的な文字列か。             |
-| `K4-BLOCK-SOURCE-CYCLE-001`      | includeBlocksの自己参照・循環を解消する。                            |
-| `K4-BLOCK-SOURCE-DUPLICATE-001`  | ラベル・入口・出力ファイル名の重複を解消する。                       |
-| `K4-BLOCK-SOURCE-VERSION-001`    | 新しい台本ハットのバージョン欄を文字列4.0にする。                    |
-| `K4-BLOCK-SOURCE-REMOVED-001`    | 旧ハットは非対応。元のYAMLから新ハットのSB3を再生成する。            |
-| JSONのエラー                     | 引用符・カンマ・括弧を確認する。JSON中の文字列には二重引用符を使う。 |
-| シーンや素材の参照エラー         | 改名したシーンや素材に合わせ、命令側の参照も変更する。               |
-| 命令単位のブロックが生成されない | 公開rc.22と開発版のCLIを混同していないか確認する。                   |
+| 表示・状態                       | 確認すること                                                           |
+| -------------------------------- | ---------------------------------------------------------------------- |
+| `K4-BLOCK-SOURCE-MISSING-001`    | Stageに名前が空のルート台本が1個あるか。名前付きだけになっていないか。 |
+| `K4-BLOCK-SOURCE-GRAPH-001`      | シーン内の接続、重複した宣言、使っているブロックの種類を確認する。     |
+| `K4-BLOCK-SOURCE-LABEL-001`      | 参照ラベルが空欄・未定義でないか。入力が静的な文字列か。               |
+| `K4-BLOCK-SOURCE-CYCLE-001`      | includeBlocksの自己参照・循環を解消する。                              |
+| `K4-BLOCK-SOURCE-DUPLICATE-001`  | ラベル・入口・出力ファイル名の重複を解消する。                         |
+| `K4-BLOCK-SOURCE-VERSION-001`    | 新しい台本ハットのバージョン欄を文字列4.0にする。                      |
+| `K4-BLOCK-SOURCE-REMOVED-001`    | 旧ハットは非対応。元のYAMLから新ハットのSB3を再生成する。              |
+| JSONのエラー                     | 引用符・カンマ・括弧を確認する。JSON中の文字列には二重引用符を使う。   |
+| シーンや素材の参照エラー         | 改名したシーンや素材に合わせ、命令側の参照も変更する。                 |
+| 命令単位のブロックが生成されない | 固定CLIが4.0.0-rc.23か確認し、旧YAMLから再生成する。                   |
 
 不正な編集結果から、それらしいYAMLを生成することはありません。表示された原因を修正し、編集後のSB3を保存して再実行します。
 
 ## 関連資料
+
+- [公開チュートリアルの素材入りブロック台本SB3](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-blocks-4.0.sb3)
+- [公開浦島太郎の素材入りブロック台本SB3](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/urashima-blocks-4.0.sb3)
 
 - [DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)
 - [DSL 4.0ランタイム ブロックリファレンス](../turbowarp-programmer-guides/dsl-4.0-runtime-block-reference.md)

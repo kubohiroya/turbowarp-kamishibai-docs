@@ -42,22 +42,51 @@ test('covers the public start-to-finish operation path', () => {
 test('keeps live-surface evidence in the machine-readable manifest', () => {
   assert.equal(surfaces.formatVersion, 1);
   assert.equal(surfaces.releaseState.formalGitHubReleasePublished, false);
-  assert.equal(surfaces.samples.pagesDeploymentRun, 38306212564);
-  assert.equal(surfaces.releaseState.publishedPrerelease, 'v4.0.0-rc.22');
+  assert.equal(surfaces.samples.pagesDeploymentRun, 39188793571);
+  assert.equal(surfaces.releaseState.publishedPrerelease, 'v4.0.0-rc.23');
   assert.equal(surfaces.releaseState.sampleBaselineDiffersFromPublishedPrerelease, false);
-  assert.equal(surfaces.samples.runtime.version, '4.0.0-rc.22');
-  assert.equal(surfaces.samples.runtime.commit, 'f8048b8c4ebd0ecd6213bb87582862034b2b88ce');
-  assert.equal(surfaces.samples.tutorial.version, '4.0.0-rc.22');
+  assert.equal(surfaces.samples.runtime.version, '4.0.0-rc.23');
+  assert.equal(surfaces.samples.runtime.commit, '2f2889fe9df88548a92b0925ca3008c5c62682e5');
+  assert.equal(surfaces.samples.tutorial.version, '4.0.0-rc.23');
   assert.equal(surfaces.samples.tutorial.status, 'published');
   assert.equal(surfaces.samples.tutorial.license, 'MPL-2.0');
-  assert.equal(surfaces.physicalVerification.camera, 'not-run-for-rc.22');
-  assert.equal(surfaces.physicalVerification.pose, 'not-run-for-rc.22');
+  assert.equal(surfaces.samples.publicationCommit, 'd8deecfbd46b69a6787ec9e5deea936b8b54f0f0');
+  assert.equal(surfaces.samples.publicArtifactVerification.artifactCount, 12);
+  assert.equal(surfaces.samples.publicArtifactVerification.artifacts.length, 12);
+  const publicArtifacts = new Map(
+    surfaces.samples.publicArtifactVerification.artifacts.map((artifact) => [
+      artifact.path,
+      artifact,
+    ]),
+  );
+  for (const [key, path] of [
+    ['urashima', 'stories/urashima/urashima-blocks-4.0.sb3'],
+    ['tutorial', 'stories/tutorial/tutorial-blocks-4.0.sb3'],
+  ]) {
+    const sample = surfaces.samples[key];
+    const blocks = sample.blocksSb3 ?? sample.sb3Blocks;
+    assert.equal(blocks.sha256, publicArtifacts.get(path).sha256);
+    assert.equal(blocks.size, publicArtifacts.get(path).size);
+  }
+  assert.equal(Object.hasOwn(surfaces.samples.myUrashima, 'blocksSb3Url'), false);
+  assert.equal(surfaces.samples.automatedVerification.savedYamlMatches, true);
+  assert.match(surfaces.samples.automatedVerification.editorBlockStory, /^passed;/u);
+  assert.equal(surfaces.physicalVerification.camera, 'not-run-for-rc.23');
+  assert.equal(surfaces.physicalVerification.pose, 'not-run-for-rc.23');
   assert.equal(surfaces.physicalVerification.appliesToPublishedPrerelease, false);
   assert.equal(
     surfaces.previousVerification.physicalVerification.rc8Verification,
     'previous-camera-context-measurement; recognition-and-overlay-browser-verified',
   );
   assert.equal(surfaces.visuals.formalUiCapturesIncluded, false);
+  const rc22 = surfaces.historicalVerifications.find(
+    ({releaseState}) => releaseState.publishedPrerelease === 'v4.0.0-rc.22',
+  );
+  assert.equal(rc22.samples.publicationCommit, '536173448d235d33d300df2542404e123ae9667b');
+  assert.equal(
+    rc22.releaseState.standardSb3Sha256,
+    '3731ed3a58c000d40f65057fbe5e27b340bae915df11e863fd55c98ba061b5c9',
+  );
 
   for (const sample of [surfaces.samples.urashima, surfaces.samples.myUrashima]) {
     assert.match(guide, new RegExp(sample.webUrl.replaceAll('.', '\\.'), 'u'));
