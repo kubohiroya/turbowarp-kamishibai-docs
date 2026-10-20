@@ -9,7 +9,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 [npm](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.37)、
 [アプリ Issue #780](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/780)を参照してください。
 
-台本の版は `kamishibai: '4.0'` のままです。rc.37のStandard SB3と制作プレビューでは動画が標準で有効です。
+台本の版は `kamishibai: '4.0'` のままです。rc.37のStandard SB3と制作プレビューでは動画が標準ONです。
 Editor / Player / Packagerの起動URLへ有効化用パラメータを付けたり、台本へ有効化設定を書いたりする必要はありません。
 既存のSB3は自動更新されないため、動画を使う場合は対応版のStandard SB3を使用してください。
 4.0の安定版公開を示すものではなく、安定版の推奨は3.2.3です。

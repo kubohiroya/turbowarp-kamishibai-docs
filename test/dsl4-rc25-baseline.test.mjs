@@ -100,14 +100,18 @@ test('covers current recognition, transitions, variable actions and ruby with va
   }
 });
 
-test('gives each current 4.0 guide its explicit publication scope', () => {
+test('gives each current 4.0 guide its reviewed release scope', () => {
   for (const document of documentationConfig.documents.filter(
     ({version, sourceFilename}) => version === '4.0' && sourceFilename !== 'turbowarp-ecosystem.md',
   )) {
     const source = read(`docs/${document.sourceDirectory}/${document.sourceFilename}`);
-    const baseline =
+    const reviewedVersion =
       document.sourceFilename === 'dsl-4.0-video-guide.md' ? '4.0.0-rc.37' : '4.0.0-rc.25';
-    assert.ok(source.includes(baseline), document.sourceFilename);
+    assert.ok(source.includes(reviewedVersion), document.sourceFilename);
+    if (document.sourceFilename === 'dsl-4.0-video-guide.md') {
+      assert.match(source, /標準ON/u);
+      assert.doesNotMatch(source, /既定値は無効/u);
+    }
   }
 });
 

@@ -35,7 +35,7 @@ Schema SHA-256: `112c72069acb94f65d0f52e57ac88874a96cdf331a6ffb6d035b8c06ffc0922
 - 上流repository: [`kubohiroya/turbowarp-kamishibai-app`](https://github.com/kubohiroya/turbowarp-kamishibai-app)
 - Schema path: `schema/dsl-4.schema.json`
 - 上流commit日時: `2026-10-20T16:06:31Z`
-- 掲載範囲: トップレベル15 field、action 32種類、Annotation 112項目
+- 掲載範囲: トップレベル15 field、action 32種類、Annotation 113項目
 - 更新方法: `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>`
 - 差分確認: `pnpm docs:dsl4:check`
 
@@ -91,7 +91,7 @@ Schema位置: `#/properties/kamishibai`
 
 ### `assets` — asset登録
 
-背景、音、costume、認識モデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。
+背景、音、動画、costume、認識モデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。
 
 Schema位置: `#/properties/assets`
 
@@ -398,7 +398,7 @@ assetは短縮文字列または名前付きobjectで記述します。名前付
 
 ### assetで選べる形式
 
-各asset IDの値は、短縮形式、背景、音、costume、認識モデル、UI画像のいずれかです。
+各asset IDの値は、短縮形式、背景、音、動画、costume、認識モデル、UI画像のいずれかです。
 
 Schema位置: `#/$defs/asset`
 
@@ -566,6 +566,33 @@ Schemaで検証できる値の例:
 kind: image
 file: select-camera.svg
 loading: eager
+```
+
+### 名前付き動画
+
+動画ファイルを相対fileまたはremote sourceから読み込み、`video`命令の`asset`で参照します。
+
+Schema位置: `#/$defs/namedVideo`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `kind` | 必須 | 固定値 `video` | — |
+| `file` | 任意 | 文字列（`filePath`） | 1文字以上、pattern `^(?!/)(?![A-Za-z]:[\\/])(?![A-Za-z][A-Za-z0-9+.-]*:)[^\\\u0000]+$` |
+| `source` | 任意 | object（`remoteAssetSource`） | 未知field不可 |
+| `delivery` | 任意 | `embedded` / `remote`（`deliveryPolicy`） | 既定値 `embedded` |
+| `loading` | 任意 | `eager` / `lazy`（`loadingPolicy`） | 既定値 `eager` |
+| `retention` | 任意 | `scene` / `story`（`retentionPolicy`） | — |
+
+- 動画ファイルは作品へ同梱するか、配布profileに合う取得元を指定します。
+- 再生できる形式・コーデック、音声付き自動再生の可否は利用するブラウザにも依存します。
+
+Schemaで検証できる値の例:
+
+```yaml
+kind: video
+file: assets/opening.mp4
+loading: eager
+retention: scene
 ```
 
 ## actor・表示・認識・分岐設定
@@ -2234,7 +2261,7 @@ imageInputToChangeScene:
 
 ### `video`
 
-ID付きの矩形動画領域を停止状態で表示します。assetまたは直接HTTP(S) URLを一つ選び、位置・大きさ・plane・zIndexを指定します。
+ID付きの動画領域を、指定位置・大きさで停止状態として表示します。動画assetまたは直接URLのどちらか一つを指定します。
 
 Schema位置: `#/$defs/videoAction`
 
@@ -2242,16 +2269,16 @@ Schema位置: `#/$defs/videoAction`
 | --- | --- | --- | --- |
 | `video` | 必須 | object または object | 未知field不可 |
 
-- rc.37のStandard SB3と制作プレビューでは標準ONです。有効化用URLパラメータは不要で、台本の版は4.0のままです。
-- planeはfrontまたはbackground。同じplaneではzIndexが大きいほど手前で、plane境界は越えません。
-- 素材はkind: videoのMP4/WebMです。直接URLは動画ファイルを返すHTTP(S) URLとし、オフライン配布には同梱素材を使います。
-- シーン切替・終了・停止・disposeで領域と再生リソースを解放します。
+- `asset`は`kind: video`のasset ID、`url`は動画ファイルを返すHTTP(S) URLです。同時には指定できません。
+- `plane: front`はステージ前面、`background`は背景とスプライトの間です。`zIndex`は同じplane内の動画同士の順序であり、plane境界を越えません。
+- 同じIDを再表示すると前の領域を置き換えます。シーン切替・台本終了時に停止して領域を解放します。
+- 公開rc.37のStandard SB3では動画が標準ONです。操作・制約は[動画再生ガイド](dsl-4.0-video-guide.md)を参照してください。
 
 Schemaで検証できる値の例:
 
 ```yaml
 video:
-  id: movie
+  id: openingMovie
   asset: OpeningMovie
   x: 0
   y: 0
@@ -2259,12 +2286,11 @@ video:
   height: 180
   plane: background
   zIndex: 10
-  muted: true
 ```
 
 ### `videoControl`
 
-同じシーンの動画領域をIDで参照し、再生・停止・一時停止・再開・シーク・音量・消音・速度を操作します。
+同じシーンで作成した動画領域のIDを参照し、再生・停止・位置・音量などを操作します。
 
 Schema位置: `#/$defs/videoControlAction`
 
@@ -2272,16 +2298,16 @@ Schema位置: `#/$defs/videoControlAction`
 | --- | --- | --- | --- |
 | `videoControl` | 必須 | object または object または object または object または object または object または object または object または object または object | — |
 
-- playUntilDoneは先頭から1回再生して終了を待ちます。playは先頭から1回のバックグラウンド再生、loopはループ再生です。
-- pauseは現在位置で一時停止、resumeは現在位置から再開します。stopは停止して先頭へ戻し、領域は残します。
-- seekはseconds、setVolumeはvolume（0〜100）、setMutedはmuted（真偽値）、setPlaybackRateはrate（0.25〜4）を指定します。
-- 音声付き動画の開始はブラウザのautoplay制限で拒否される場合があります。音が不要ならvideo側でmuted: trueを指定します。
+- `playUntilDone`は先頭から1回再生して終了を待ちます。`play`は1回、`loop`は繰り返し再生を開始し、開始に成功すると次の命令へ進みます。
+- `pause`は一時停止、`resume`は現在位置から再開、`stop`は停止して先頭へ戻します。
+- `seek`には`seconds`、`setVolume`には`volume`、`setMuted`には`muted`、`setPlaybackRate`には`rate`が必要です。
+- 未作成のIDは診断されます。音声付き自動再生が拒否された場合は、ブラウザのメディア再生許可と操作起点を確認してください。
 
 Schemaで検証できる値の例:
 
 ```yaml
 videoControl:
-  id: movie
+  id: openingMovie
   operation: playUntilDone
 ```
 

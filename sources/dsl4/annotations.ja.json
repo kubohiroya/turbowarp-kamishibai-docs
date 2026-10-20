@@ -35,7 +35,7 @@
           "pointer": "#/properties/assets",
           "order": 20,
           "title": "`assets` — asset登録",
-          "summary": "背景、音、costume、認識モデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。",
+          "summary": "背景、音、動画、costume、認識モデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。",
           "example": "Beach: backdrop\nHeroIdle: costume:Hero\nCameraMenuButton:\n  kind: image\n  file: select-camera.svg\n  loading: eager",
           "exampleContext": "`assets` fieldの値:"
         },
@@ -169,7 +169,7 @@
           "pointer": "#/$defs/asset",
           "order": 10,
           "title": "assetで選べる形式",
-          "summary": "各asset IDの値は、短縮形式、背景、音、costume、認識モデル、UI画像のいずれかです。",
+          "summary": "各asset IDの値は、短縮形式、背景、音、動画、costume、認識モデル、UI画像のいずれかです。",
           "example": "backdrop",
           "notes": [
             "短縮形式はproject内に同名のassetがある場合に使います。",
@@ -223,6 +223,17 @@
           "example": "kind: image\nfile: select-camera.svg\nloading: eager",
           "notes": [
             "camera preview controlから参照する画像は、preview開始時に必要なため`loading: eager`にします。"
+          ]
+        },
+        {
+          "pointer": "#/$defs/namedVideo",
+          "order": 80,
+          "title": "名前付き動画",
+          "summary": "動画ファイルを相対fileまたはremote sourceから読み込み、`video`命令の`asset`で参照します。",
+          "example": "kind: video\nfile: assets/opening.mp4\nloading: eager\nretention: scene",
+          "notes": [
+            "動画ファイルは作品へ同梱するか、配布profileに合う取得元を指定します。",
+            "再生できる形式・コーデック、音声付き自動再生の可否は利用するブラウザにも依存します。"
           ]
         }
       ]
@@ -870,26 +881,26 @@
           "pointer": "#/$defs/videoAction",
           "order": 190,
           "title": "`video`",
-          "summary": "ID付きの矩形動画領域を停止状態で表示します。assetまたは直接HTTP(S) URLを一つ選び、位置・大きさ・plane・zIndexを指定します。",
-          "example": "video:\n  id: movie\n  asset: OpeningMovie\n  x: 0\n  y: 0\n  width: 320\n  height: 180\n  plane: background\n  zIndex: 10\n  muted: true",
+          "summary": "ID付きの動画領域を、指定位置・大きさで停止状態として表示します。動画assetまたは直接URLのどちらか一つを指定します。",
+          "example": "video:\n  id: openingMovie\n  asset: OpeningMovie\n  x: 0\n  y: 0\n  width: 320\n  height: 180\n  plane: background\n  zIndex: 10",
           "notes": [
-            "rc.37のStandard SB3と制作プレビューでは標準ONです。有効化用URLパラメータは不要で、台本の版は4.0のままです。",
-            "planeはfrontまたはbackground。同じplaneではzIndexが大きいほど手前で、plane境界は越えません。",
-            "素材はkind: videoのMP4/WebMです。直接URLは動画ファイルを返すHTTP(S) URLとし、オフライン配布には同梱素材を使います。",
-            "シーン切替・終了・停止・disposeで領域と再生リソースを解放します。"
+            "`asset`は`kind: video`のasset ID、`url`は動画ファイルを返すHTTP(S) URLです。同時には指定できません。",
+            "`plane: front`はステージ前面、`background`は背景とスプライトの間です。`zIndex`は同じplane内の動画同士の順序であり、plane境界を越えません。",
+            "同じIDを再表示すると前の領域を置き換えます。シーン切替・台本終了時に停止して領域を解放します。",
+            "公開rc.37のStandard SB3では動画が標準ONです。操作・制約は[動画再生ガイド](dsl-4.0-video-guide.md)を参照してください。"
           ]
         },
         {
           "pointer": "#/$defs/videoControlAction",
           "order": 200,
           "title": "`videoControl`",
-          "summary": "同じシーンの動画領域をIDで参照し、再生・停止・一時停止・再開・シーク・音量・消音・速度を操作します。",
-          "example": "videoControl:\n  id: movie\n  operation: playUntilDone",
+          "summary": "同じシーンで作成した動画領域のIDを参照し、再生・停止・位置・音量などを操作します。",
+          "example": "videoControl:\n  id: openingMovie\n  operation: playUntilDone",
           "notes": [
-            "playUntilDoneは先頭から1回再生して終了を待ちます。playは先頭から1回のバックグラウンド再生、loopはループ再生です。",
-            "pauseは現在位置で一時停止、resumeは現在位置から再開します。stopは停止して先頭へ戻し、領域は残します。",
-            "seekはseconds、setVolumeはvolume（0〜100）、setMutedはmuted（真偽値）、setPlaybackRateはrate（0.25〜4）を指定します。",
-            "音声付き動画の開始はブラウザのautoplay制限で拒否される場合があります。音が不要ならvideo側でmuted: trueを指定します。"
+            "`playUntilDone`は先頭から1回再生して終了を待ちます。`play`は1回、`loop`は繰り返し再生を開始し、開始に成功すると次の命令へ進みます。",
+            "`pause`は一時停止、`resume`は現在位置から再開、`stop`は停止して先頭へ戻します。",
+            "`seek`には`seconds`、`setVolume`には`volume`、`setMuted`には`muted`、`setPlaybackRate`には`rate`が必要です。",
+            "未作成のIDは診断されます。音声付き自動再生が拒否された場合は、ブラウザのメディア再生許可と操作起点を確認してください。"
           ]
         }
       ]
