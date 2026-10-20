@@ -19,7 +19,7 @@ export const documentUpdatedAt = Object.freeze({
   'dsl-manual.md': '2026-08-08',
   'command-reference.md': '2026-08-08',
   'history.md': '2026-08-04',
-  'dsl-4.0-video-guide.md': '2026-10-20',
+  'dsl-4.0-video-guide.md': '2026-10-21',
   'dsl-4.0-author-guide.md': '2026-10-20',
   'dsl-4.0-block-script-conversion-guide.md': '2026-10-19',
   'dsl-4.0-asset-conversion-guide.md': '2026-10-19',
@@ -182,7 +182,7 @@ export const documentCollections = [
         title: 'DSL 4.0 動画再生ガイド（実験機能）',
         audience: '動画を台本やブロックで使う作者と、組み込む開発者',
         description:
-          '既定OFFの動画機能について、表示領域、planeとz-index、再生制御、素材とURL、有効化と制約を説明します。',
+          '公開rc.37で標準ONの動画機能について、表示領域、planeとz-index、再生制御、素材とURL、組み込み時の設定と制約を説明します。',
       },
       {
         sourceFilename: 'dsl-4.0-block-script-conversion-guide.md',

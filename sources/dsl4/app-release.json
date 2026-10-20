@@ -1,35 +1,35 @@
 {
   "formatVersion": 1,
-  "checkedOn": "2026-10-19",
+  "checkedOn": "2026-10-20",
   "repository": "kubohiroya/turbowarp-kamishibai-app",
-  "version": "4.0.0-rc.30",
-  "tag": "v4.0.0-rc.30",
-  "commit": "6c64de6b5f96c4368d1ba1d4456d543dc8c301f3",
-  "publishedAt": "2026-10-19T19:28:32Z",
+  "version": "4.0.0-rc.37",
+  "tag": "v4.0.0-rc.37",
+  "commit": "b0c12cd73ec23bc22787121c6a3e179a9e138293",
+  "publishedAt": "2026-10-20T16:07:21Z",
   "prerelease": true,
   "latestStableRelease": "v3.2.3",
   "officialDsl4Release": null,
-  "releaseUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.30",
+  "releaseUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.37",
   "artifact": {
-    "filename": "kamishibai-4.0.0-rc.30.sb3",
-    "sha256": "96d2876808ba0d2e8e4d61bad3109d1a9265eff23b81299bf2be30db7f082f06",
-    "size": 6928512,
-    "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.30/kamishibai-4.0.0-rc.30.sb3"
+    "filename": "kamishibai-4.0.0-rc.37.sb3",
+    "sha256": "e8afba5a1efe8acba9404527080d1266895ce3bcb03f22fc459389a42c558068",
+    "size": 6949650,
+    "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.37/kamishibai-4.0.0-rc.37.sb3"
   },
-  "sourceIdentity": "sha256:c680790eec062d9f41897a9b44d332025aa95108741ce16d1962c816c14cfcb9",
+  "sourceIdentity": "sha256:0c0d81f74f63883548aba0a3ed07dc5f19d1968da46439e6fd14dfcd10c36c67",
   "schema": {
     "repository": "kubohiroya/turbowarp-kamishibai-app",
     "sourceKind": "commit",
-    "commit": "6c64de6b5f96c4368d1ba1d4456d543dc8c301f3",
-    "commitDate": "2026-10-19T19:27:47Z",
+    "commit": "b0c12cd73ec23bc22787121c6a3e179a9e138293",
+    "commitDate": "2026-10-20T16:06:31Z",
     "schemaPath": "schema/dsl-4.schema.json",
-    "schemaSha256": "55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27",
-    "schemaUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/6c64de6b5f96c4368d1ba1d4456d543dc8c301f3/schema/dsl-4.schema.json",
-    "surfaceSpecificationUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/6c64de6b5f96c4368d1ba1d4456d543dc8c301f3/docs/design/dsl-4-surface.md",
+    "schemaSha256": "112c72069acb94f65d0f52e57ac88874a96cdf331a6ffb6d035b8c06ffc09225",
+    "schemaUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/b0c12cd73ec23bc22787121c6a3e179a9e138293/schema/dsl-4.schema.json",
+    "surfaceSpecificationUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/b0c12cd73ec23bc22787121c6a3e179a9e138293/docs/design/dsl-4-surface.md",
     "snapshotLicense": "MPL-2.0"
   },
   "npm": {
-    "published": false,
-    "url": "https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.30"
+    "published": true,
+    "url": "https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.37"
   }
 }

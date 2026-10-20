@@ -12,6 +12,7 @@ const expectedStaticSectionPointers = {
     '#/$defs/namedCostume',
     '#/$defs/namedRecognitionModel',
     '#/$defs/namedImage',
+    '#/$defs/namedVideo',
   ],
   settings: [
     '#/$defs/actors',
