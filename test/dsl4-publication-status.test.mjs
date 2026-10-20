@@ -49,7 +49,12 @@ test('links the resolved public app without relabeling historical samples', () =
   assert.equal(dsl4Documents.length, 27);
   for (const {sourceFilename, source} of dsl4Documents) {
     if (sourceFilename === 'turbowarp-ecosystem.md') continue;
-    assert.match(source, /4\.0\.0-rc\.25|v4\.0\.0-rc\.25/u, sourceFilename);
+    if (sourceFilename === 'dsl-4.0-video-guide.md') {
+      assert.match(source, /4\.0\.0-rc\.37/u, sourceFilename);
+      assert.match(source, /標準ON/u);
+    } else {
+      assert.match(source, /4\.0\.0-rc\.25|v4\.0\.0-rc\.25/u, sourceFilename);
+    }
   }
 });
 
