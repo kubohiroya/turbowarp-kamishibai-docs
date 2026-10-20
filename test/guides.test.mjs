@@ -128,7 +128,7 @@ test('keeps the completed DSL 4.0 guide separate from the production 3.2 manual'
   assert.ok(dsl4SchemaReference.includes(`Schema固定commit: [\`${release.commit.slice(0, 7)}\`]`));
   assert.match(dsl4SchemaReference, /関節とボーンのoverlay/u);
   assert.match(dsl4SchemaReference, /`visible` \| 任意 \| 真偽値 \| 既定値 `true`/u);
-  assert.match(dsl4SchemaReference, /トップレベル15 field、action 30種類、Annotation 110項目/u);
+  assert.match(dsl4SchemaReference, /トップレベル15 field、action 32種類、Annotation 112項目/u);
   assert.doesNotMatch(dslManual, /kamishibai: '4\.0'/u);
   assert.doesNotMatch(dsl4AuthorGuide, /DSL 3\.[12]|kamishibai=3\.[12]/u);
   assert.doesNotMatch(dsl4SchemaReference, /DSL 3\.[12]|kamishibai=3\.[12]/u);

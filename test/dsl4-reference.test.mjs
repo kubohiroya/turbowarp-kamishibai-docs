@@ -40,8 +40,8 @@ test('pins the upstream DSL 4.0 Schema with its source and SHA-256', () => {
 
 test('covers every top-level field and every Schema action with validated annotations', () => {
   assert.deepEqual(validateReferenceInputs({schema, annotations}), {
-    actionCount: 30,
-    annotationCount: 110,
+    actionCount: 32,
+    annotationCount: 112,
     topLevelFieldCount: 15,
   });
 });

@@ -23,7 +23,7 @@ export const documentUpdatedAt = Object.freeze({
   'dsl-4.0-author-guide.md': '2026-10-21',
   'dsl-4.0-block-script-conversion-guide.md': '2026-10-19',
   'dsl-4.0-asset-conversion-guide.md': '2026-10-19',
-  'dsl-4.0-schema-reference.md': '2026-10-19',
+  'dsl-4.0-schema-reference.md': '2026-10-21',
   'dsl-4.0-history.md': '2026-10-19',
   'dsl-3.2-to-4.0-conversion-guide.md': '2026-10-19',
   'dsl-4.0-turbowarp-broadcast-guide.md': '2026-10-19',

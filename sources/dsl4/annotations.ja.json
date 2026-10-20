@@ -865,6 +865,32 @@
           "summary": "画像認識で選ばれたclass IDに応じてsceneを選びます。引数の形は`poseInputToChangeScene`と同じです。",
           "example": "imageInputToChangeScene:\n  apple: appleScene\n  banana: bananaScene",
           "notes": ["sceneのlong formで`recognitionModel`と`recognitionMode: image`を指定します。"]
+        },
+        {
+          "pointer": "#/$defs/videoAction",
+          "order": 190,
+          "title": "`video`",
+          "summary": "ID付きの矩形動画領域を停止状態で表示します。assetまたは直接HTTP(S) URLを一つ選び、位置・大きさ・plane・zIndexを指定します。",
+          "example": "video:\n  id: movie\n  asset: OpeningMovie\n  x: 0\n  y: 0\n  width: 320\n  height: 180\n  plane: background\n  zIndex: 10\n  muted: true",
+          "notes": [
+            "rc.37のStandard SB3と制作プレビューでは標準ONです。有効化用URLパラメータは不要で、台本の版は4.0のままです。",
+            "planeはfrontまたはbackground。同じplaneではzIndexが大きいほど手前で、plane境界は越えません。",
+            "素材はkind: videoのMP4/WebMです。直接URLは動画ファイルを返すHTTP(S) URLとし、オフライン配布には同梱素材を使います。",
+            "シーン切替・終了・停止・disposeで領域と再生リソースを解放します。"
+          ]
+        },
+        {
+          "pointer": "#/$defs/videoControlAction",
+          "order": 200,
+          "title": "`videoControl`",
+          "summary": "同じシーンの動画領域をIDで参照し、再生・停止・一時停止・再開・シーク・音量・消音・速度を操作します。",
+          "example": "videoControl:\n  id: movie\n  operation: playUntilDone",
+          "notes": [
+            "playUntilDoneは先頭から1回再生して終了を待ちます。playは先頭から1回のバックグラウンド再生、loopはループ再生です。",
+            "pauseは現在位置で一時停止、resumeは現在位置から再開します。stopは停止して先頭へ戻し、領域は残します。",
+            "seekはseconds、setVolumeはvolume（0〜100）、setMutedはmuted（真偽値）、setPlaybackRateはrate（0.25〜4）を指定します。",
+            "音声付き動画の開始はブラウザのautoplay制限で拒否される場合があります。音が不要ならvideo側でmuted: trueを指定します。"
+          ]
         }
       ]
     },
