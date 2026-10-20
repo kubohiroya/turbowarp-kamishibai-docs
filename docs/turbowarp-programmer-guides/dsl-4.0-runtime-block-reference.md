@@ -339,6 +339,12 @@ rc.25の素材保持はAsset Cacheが担当し、
 | `firstRecognitionMsReporter`      | reporter | first recognition time (ms)                                      | —                            |
 | `lastErrorReporter`               | reporter | last error                                                       | —                            |
 
+## 動画の実験機能
+
+`video` と `videoControl` は、DSL 4.0の動画対応実装で追加する既定OFFの実験機能です。
+動画領域の `plane` と `zIndex`、再生操作、有効化の条件は[動画再生ガイド](../dsl-author-guides/dsl-4.0-video-guide.md)を参照してください。
+このページの公開rc.25のブロック件数と一覧には含めていません。
+
 ## 互換性と安全な使い方
 
 この一覧の版と異なる拡張JavaScriptを単独で差し替えないでください。version付きStandard SB3、

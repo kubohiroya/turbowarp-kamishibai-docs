@@ -887,6 +887,13 @@ BGMが鳴っていないときの`stopBgm`と`setBgmVolume`は何もしません
 ありません。fade-inは、BGMが鳴っていない状態で`bgm`へcrossfadeの`transition`を指定すると得られます。
 同じBGMが鳴っている間の`bgm`は、`restart: true`を指定しない限り何もしません。BGMのloop指定は4.0ではできません。
 
+### 動画を表示・操作する（実験機能）
+
+動画に対応した実装では、`video` でID付きの矩形領域を表示し、`videoControl` で再生・停止などを操作できます。
+台本の版は4.0のままで、起動時に `dsl4Video` を有効にする既定OFFの実験機能です。
+背景／前面を選ぶ `plane` と、同じ面での重なり順を決める `zIndex` も指定できます。
+公開rc.25のブロック一覧とは分けて、[動画再生ガイド](../dsl-author-guides/dsl-4.0-video-guide.md)で対応実装、入力欄、使い方と制約を説明します。
+
 ### debug停止とTurboWarp message
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-43.svg" alt="debug停止とTurboWarp message（1/2）の台本ブロック"></figure>
