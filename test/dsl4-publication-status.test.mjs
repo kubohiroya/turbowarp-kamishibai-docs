@@ -46,7 +46,7 @@ test('links the resolved public app without relabeling historical samples', () =
   assert.match(dsl4Index, /公開サンプルや本文・図版の対象版/u);
   assert.doesNotMatch(dsl4Index, /サンプル作品とチュートリアル成果物も、現在/u);
 
-  assert.equal(dsl4Documents.length, 26);
+  assert.equal(dsl4Documents.length, 27);
   for (const {sourceFilename, source} of dsl4Documents) {
     if (sourceFilename === 'turbowarp-ecosystem.md') continue;
     assert.match(source, /4\.0\.0-rc\.25|v4\.0\.0-rc\.25/u, sourceFilename);
