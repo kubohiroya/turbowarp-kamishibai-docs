@@ -339,11 +339,12 @@ rc.25の素材保持はAsset Cacheが担当し、
 | `firstRecognitionMsReporter`      | reporter | first recognition time (ms)                                      | —                            |
 | `lastErrorReporter`               | reporter | last error                                                       | —                            |
 
-## 動画の実験機能
+## rc.37で利用できる動画ブロック
 
-`video` と `videoControl` は、DSL 4.0の動画対応実装で追加する既定OFFの実験機能です。
-動画領域の `plane` と `zIndex`、再生操作、有効化の条件は[動画再生ガイド](../dsl-author-guides/dsl-4.0-video-guide.md)を参照してください。
-このページの公開rc.25のブロック件数と一覧には含めていません。
+`video` と `videoControl` は公開済みrc.37のStandard SB3と制作プレビューで標準ONです。
+台本の版は4.0のままで、有効化用URLパラメータは不要です。
+動画領域の `plane` と `zIndex`、再生操作、使い方と制約は[動画再生ガイド](../dsl-author-guides/dsl-4.0-video-guide.md)を参照してください。
+このページの固定基準rc.25のブロック件数と一覧には、後から追加された動画ブロックを含めていません。
 
 ## 互換性と安全な使い方
 

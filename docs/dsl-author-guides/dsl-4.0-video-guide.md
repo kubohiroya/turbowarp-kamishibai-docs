@@ -1,16 +1,18 @@
-# DSL 4.0 動画再生ガイド（実験機能）
+# DSL 4.0 動画再生ガイド
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
 対象: 台本やブロックで動画を表示し、ほかの命令と組み合わせる作者と、動画機能を組み込む開発者。
 
-文書基準: アプリの `feat/dsl4/video-blocks` 作業ツリー、2026年10月20日。
-追跡は [アプリ Issue #780](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/780) です。
-本書は公開ブロック一覧の基準である `4.0.0-rc.25` とは別に、動画の実験実装を説明します。
-公開済みのアプリ・CLI・Standard SB3が対応済みであることを示すものではありません。
+文書基準: 公開済みのアプリ・npm・Standard SB3 `4.0.0-rc.37`、2026年10月21日。
+[リリースノートとSB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.37)、
+[npm](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.37)、
+[アプリ Issue #780](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/780)を参照してください。
 
-台本の版は `kamishibai: '4.0'` のままです。対応実装を使用し、起動設定の `dsl4Video` を有効にする必要があります。
-既定値は無効です。台本に動画命令を書くだけでは有効になりません。
+台本の版は `kamishibai: '4.0'` のままです。rc.37のStandard SB3と制作プレビューでは動画が標準で有効です。
+Editor / Player / Packagerの起動URLへ有効化用パラメータを付けたり、台本へ有効化設定を書いたりする必要はありません。
+既存のSB3は自動更新されないため、動画を使う場合は対応版のStandard SB3を使用してください。
+4.0の安定版公開を示すものではなく、安定版の推奨は3.2.3です。
 
 ## 動画領域と再生操作
 
@@ -198,25 +200,24 @@ video [ID] [OPERATION] value [VALUE]
 `fit`、初期音量、消音、速度は、ブロック台本の既存の命令オプションから設定できます。
 素材IDで表示する場合は、動画ファイルの内容を作品に同梱する準備も必要です。
 
-## 開発者による有効化と切り戻し
+## 開発者向けの設定と切り戻し
 
-対応実装でランタイムまたはStandard app shellを作成するとき、既存の起動設定 `featureFlags` に次の値を追加します。
-ほかの起動設定は維持してください。
+通常のStandard SB3と制作プレビューは設定なしで動画を利用できます。
+npm APIで独自hostを構成する場合は、既存の `dsl4StandardProductionFeatureFlags` または
+`dsl4NonEmbeddedDevelopmentFeatureFlags` を使います。
+低水準APIで起動設定全体を明示構成する契約は維持しています。この設定を台本のYAMLへ書く必要はありません。
 
-```json
-{"dsl4Runtime": true, "dsl4Video": true}
-```
-
-この設定は台本のYAMLに書くものではありません。起動時に固定し、再生途中に変更しません。
-公開済みStandard SB3のスイッチや、既存CLIのオプションとしては案内していません。
-無効に戻す場合は `dsl4Video: false` にして起動し直します。
-動画命令・動画素材を含む台本は `K4-VIDEO-DISABLED` で拒否し、動画を使わない台本の実行経路を維持します。
+問題が起きた場合は既知のSB3 rc.34、npm rc.27へ戻します。独自hostでは既存の `featureFlags` に
+`dsl4Video: false` を上書きして次回起動時に無効化できます。切り戻し用のURLスイッチは設けません。
+動画が無効な独自hostでは、動画命令・動画素材を含む台本を `K4-VIDEO-DISABLED` で拒否し、
+動画を使わない既存台本の実行経路を維持します。
+公開済みの同じ版の成果物は差し替えず、不具合の修正は次のRCで公開します。
 
 ## 再生できないとき
 
 | 状況・診断                         | 確認すること                                                 |
 | ---------------------------------- | ------------------------------------------------------------ |
-| `K4-VIDEO-DISABLED`                | 動画に対応した実装と、起動時の `dsl4Video` 設定を確認する    |
+| `K4-VIDEO-DISABLED`                | Standard SB3の版、または独自hostが動画を無効化していないか確認する    |
 | `K4-VIDEO-ID`                      | 同じシーンで、そのIDの領域を先に作成したか確認する           |
 | `K4-VIDEO-ASSET`                   | 素材ID、`kind: video`、ファイルの同梱・準備を確認する        |
 | `K4-VIDEO-AUTOPLAY`                | 音声付き動画の自動再生がブラウザに拒否されていないか確認する |
@@ -228,8 +229,21 @@ video [ID] [OPERATION] value [VALUE]
 利用するブラウザのメディア再生許可と、利用者の操作を起点とした再生条件を確認してください。
 動画の音量・ミュートは、その動画だけに適用し、BGMや効果音には適用しません。
 
-## 検証範囲
+## 検証済みの範囲と今後の統合
 
-動画の操作、素材の読み込み・解放、台本とブロックの対応を自動検証します。
-Chromiumでは実動画の再生と描画を検証します。各公開アプリ画面、端末別の音声付き自動再生条件、
-アセットグループ・保存データ・分割台本との実接続は、それぞれの依存機能と合わせて確認する項目です。
+動画命令・素材参照・配布設定の検証、ブロックとYAMLの相互変換、素材の読み込み・解放を自動検証しています。
+Chromiumでは同梱WebMの実デコードを使い、終了待ち・バックグラウンド再生・ループ・一時停止と再開・停止・解放を確認しています。
+固定バージョンの実rendererを使い、背景と前面の描画、同じplane内のz-index、同値・ID置換時の順序、
+planeの境界、DOMの重なり、GPUリソースの解放も確認しています。
+Standard SB3の動画命令が、有効化URLなしで実行されることも自動検証しています。
+
+次の内容は今後の統合・追加検証です。公開済みの基本再生機能とは分けて、#780と各依存Issueで追跡します。
+
+| 対象 | 残る内容 |
+| --- | --- |
+| [asset group / memory lifecycle #775](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/775) | group purgeと動画decoder・buffer・Object URLの解放を接続する |
+| [保存・復元 #771](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/771) | 動画portの状態取得・復元を保存データへ接続する |
+| [viewport #779](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/779) | 可変viewportと動画の座標・拡大縮小を統合する |
+| [segment loader #773](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/773) | segment prefetchと配布方式別の読込・解放を統合する |
+| 実画面・ブラウザ | Editor / Player / Packagerの各実画面、音声付き動画のautoplay、codec互換性を対象環境ごとに追加検証する |
+| スプライト間への挿入 | 描画コストを測定し、任意のスプライト間へ挿入する方式を採るか判断する |
