@@ -61,7 +61,7 @@ test('covers current recognition, transitions, variable actions and ruby with va
     annotations: json('sources/dsl4/annotations.ja.json'),
   });
   assert.equal(counts.topLevelFieldCount, 15);
-  assert.equal(counts.actionCount, 30);
+  assert.equal(counts.actionCount, 32);
   const AjvConstructor = /** @type {any} */ (Ajv2020);
   const ajv = new AjvConstructor({strict: true, allErrors: true});
   const validate = ajv.compile(schema);
@@ -100,12 +100,18 @@ test('covers current recognition, transitions, variable actions and ruby with va
   }
 });
 
-test('gives each current 4.0 guide an explicit rc.25 scope', () => {
+test('gives each current 4.0 guide its reviewed release scope', () => {
   for (const document of documentationConfig.documents.filter(
     ({version, sourceFilename}) => version === '4.0' && sourceFilename !== 'turbowarp-ecosystem.md',
   )) {
     const source = read(`docs/${document.sourceDirectory}/${document.sourceFilename}`);
-    assert.ok(source.includes('4.0.0-rc.25'), document.sourceFilename);
+    const reviewedVersion =
+      document.sourceFilename === 'dsl-4.0-video-guide.md' ? '4.0.0-rc.37' : '4.0.0-rc.25';
+    assert.ok(source.includes(reviewedVersion), document.sourceFilename);
+    if (document.sourceFilename === 'dsl-4.0-video-guide.md') {
+      assert.match(source, /標準ON/u);
+      assert.doesNotMatch(source, /既定値は無効/u);
+    }
   }
 });
 

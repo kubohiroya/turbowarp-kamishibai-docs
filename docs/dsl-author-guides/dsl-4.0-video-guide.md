@@ -4,13 +4,13 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 対象: 台本やブロックで動画を表示し、ほかの命令と組み合わせる作者と、動画機能を組み込む開発者。
 
-文書基準: アプリの `feat/dsl4/video-blocks` 作業ツリー、2026年10月20日。
+文書基準: 公開済みアプリ `4.0.0-rc.37`、2026年10月21日。
 追跡は [アプリ Issue #780](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/780) です。
-本書は公開ブロック一覧の基準である `4.0.0-rc.25` とは別に、動画の実験実装を説明します。
-公開済みのアプリ・CLI・Standard SB3が対応済みであることを示すものではありません。
+[公開Standard SB3](https://kubohiroya.github.io/turbowarp-kamishibai-app/downloads/)と
+[npm版rc.37](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.37)に動画機能が含まれます。
 
-台本の版は `kamishibai: '4.0'` のままです。対応実装を使用し、起動設定の `dsl4Video` を有効にする必要があります。
-既定値は無効です。台本に動画命令を書くだけでは有効になりません。
+台本の版は `kamishibai: '4.0'` のままです。rc.37のStandard SB3は動画が標準ONで、有効化用のURL指定は不要です。
+独自のランタイムを組み込む開発者は、後述の起動設定を確認してください。
 
 ## 動画領域と再生操作
 
@@ -198,9 +198,9 @@ video [ID] [OPERATION] value [VALUE]
 `fit`、初期音量、消音、速度は、ブロック台本の既存の命令オプションから設定できます。
 素材IDで表示する場合は、動画ファイルの内容を作品に同梱する準備も必要です。
 
-## 開発者による有効化と切り戻し
+## 独自ランタイムの起動設定と切り戻し
 
-対応実装でランタイムまたはStandard app shellを作成するとき、既存の起動設定 `featureFlags` に次の値を追加します。
+独自にランタイムまたはStandard app shellを作成し、動画を有効にするときは、起動設定 `featureFlags` に次の値を指定します。
 ほかの起動設定は維持してください。
 
 ```json
@@ -208,7 +208,7 @@ video [ID] [OPERATION] value [VALUE]
 ```
 
 この設定は台本のYAMLに書くものではありません。起動時に固定し、再生途中に変更しません。
-公開済みStandard SB3のスイッチや、既存CLIのオプションとしては案内していません。
+rc.37のStandard SB3ではこの有効化操作は不要です。YAMLのfieldやCLIオプションとしては指定しません。
 無効に戻す場合は `dsl4Video: false` にして起動し直します。
 動画命令・動画素材を含む台本は `K4-VIDEO-DISABLED` で拒否し、動画を使わない台本の実行経路を維持します。
 

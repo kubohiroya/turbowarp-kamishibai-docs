@@ -11,8 +11,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 増やすときに[紙芝居DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)の必要な節をお読みください。
 
 文書状態: **固定実装基準を説明するSchemaリファレンス（正式リリースの操作資料ではない）**\
-Schema固定commit: [`6c64de6`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/6c64de6b5f96c4368d1ba1d4456d543dc8c301f3)\
-Schema SHA-256: `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec27`
+Schema固定commit: [`b0c12cd`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/b0c12cd73ec23bc22787121c6a3e179a9e138293)\
+Schema SHA-256: `112c72069acb94f65d0f52e57ac88874a96cdf331a6ffb6d035b8c06ffc09225`
 
 > **権威関係と配布状態:** このSchemaの出典は上記の固定commitです。
 > 現在の公開版と配布状況は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認してください。
@@ -22,7 +22,7 @@ Schema SHA-256: `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec2
 
 ## このリファレンスについて
 
-この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/6c64de6b5f96c4368d1ba1d4456d543dc8c301f3/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
+この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/b0c12cd73ec23bc22787121c6a3e179a9e138293/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
 決定的に生成しています。型、必須性、既定値、数値範囲、列挙値、patternはSchemaから取得し、説明、掲載順、
 注意事項、例はAnnotationで管理します。Schemaで定義される項目についてSchemaと生成物が異なる場合はSchemaを
 優先します。include文はSchema検証前に処理されるためJSON Schema外であり、固定した表層仕様と実装に基づいて掲載します。
@@ -34,8 +34,8 @@ Schema SHA-256: `55221950a3649c6f97594e3b2dd54e0d623f97fee67842e179ab99347bf0ec2
 
 - 上流repository: [`kubohiroya/turbowarp-kamishibai-app`](https://github.com/kubohiroya/turbowarp-kamishibai-app)
 - Schema path: `schema/dsl-4.schema.json`
-- 上流commit日時: `2026-10-19T19:27:47Z`
-- 掲載範囲: トップレベル15 field、action 30種類、Annotation 110項目
+- 上流commit日時: `2026-10-20T16:06:31Z`
+- 掲載範囲: トップレベル15 field、action 32種類、Annotation 113項目
 - 更新方法: `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>`
 - 差分確認: `pnpm docs:dsl4:check`
 
@@ -91,13 +91,13 @@ Schema位置: `#/properties/kamishibai`
 
 ### `assets` — asset登録
 
-背景、音、costume、認識モデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。
+背景、音、動画、costume、認識モデル、app shell UI用画像へ安定したIDを割り当てます。実体の指定方法はasset種別を参照してください。
 
 Schema位置: `#/properties/assets`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 任意のID key | 任意 | 文字列（`compactAsset`） または object または object または object（`namedBackdrop`） または object または object または object（`namedSound`） または object または object または object（`namedCostume`） または object または object（`namedRecognitionModel`） または object または object（`namedImage`）（`asset`） | — |
+| 任意のID key | 任意 | 文字列（`compactAsset`） または object または object または object（`namedBackdrop`） または object または object または object（`namedSound`） または object または object または object（`namedCostume`） または object または object（`namedRecognitionModel`） または object または object（`namedImage`） または object または object（`namedVideo`）（`asset`） | — |
 
 `assets` fieldの値:
 
@@ -339,7 +339,7 @@ Schema位置: `#/properties/scenes`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 任意のID key | 1件以上 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） または object（`longScene`）（`scene`） | — |
+| 任意のID key | 1件以上 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`videoAction`） または object（`videoControlAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） または object（`longScene`）（`scene`） | — |
 
 `scenes` fieldの値:
 
@@ -398,7 +398,7 @@ assetは短縮文字列または名前付きobjectで記述します。名前付
 
 ### assetで選べる形式
 
-各asset IDの値は、短縮形式、背景、音、costume、認識モデル、UI画像のいずれかです。
+各asset IDの値は、短縮形式、背景、音、動画、costume、認識モデル、UI画像のいずれかです。
 
 Schema位置: `#/$defs/asset`
 
@@ -410,6 +410,7 @@ Schema位置: `#/$defs/asset`
 | 形式4 | いずれか一つ | object または object または object（`namedCostume`） | 未知field不可 |
 | 形式5 | いずれか一つ | object または object（`namedRecognitionModel`） | 未知field不可 |
 | 形式6 | いずれか一つ | object または object（`namedImage`） | 未知field不可 |
+| 形式7 | いずれか一つ | object または object（`namedVideo`） | 未知field不可 |
 
 - 短縮形式はproject内に同名のassetがある場合に使います。
 - remote sourceはHTTPS URLを指定し、内容を固定する場合はSHA-256、content type、byte sizeを三つとも指定します。
@@ -565,6 +566,33 @@ Schemaで検証できる値の例:
 kind: image
 file: select-camera.svg
 loading: eager
+```
+
+### 名前付き動画
+
+動画ファイルを相対fileまたはremote sourceから読み込み、`video`命令の`asset`で参照します。
+
+Schema位置: `#/$defs/namedVideo`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `kind` | 必須 | 固定値 `video` | — |
+| `file` | 任意 | 文字列（`filePath`） | 1文字以上、pattern `^(?!/)(?![A-Za-z]:[\\/])(?![A-Za-z][A-Za-z0-9+.-]*:)[^\\\u0000]+$` |
+| `source` | 任意 | object（`remoteAssetSource`） | 未知field不可 |
+| `delivery` | 任意 | `embedded` / `remote`（`deliveryPolicy`） | 既定値 `embedded` |
+| `loading` | 任意 | `eager` / `lazy`（`loadingPolicy`） | 既定値 `eager` |
+| `retention` | 任意 | `scene` / `story`（`retentionPolicy`） | — |
+
+- 動画ファイルは作品へ同梱するか、配布profileに合う取得元を指定します。
+- 再生できる形式・コーデック、音声付き自動再生の可否は利用するブラウザにも依存します。
+
+Schemaで検証できる値の例:
+
+```yaml
+kind: video
+file: assets/opening.mp4
+loading: eager
+retention: scene
 ```
 
 ## actor・表示・認識・分岐設定
@@ -1705,7 +1733,7 @@ Schema位置: `#/$defs/actions`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 各項目 | 任意件数 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`） | — |
+| 各項目 | 任意件数 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`videoAction`） または object（`videoControlAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`） | — |
 
 Schemaで検証できる値の例:
 
@@ -1726,7 +1754,7 @@ Schema位置: `#/$defs/longScene`
 | `recognitionMode` | 任意 | `pose` / `image` | — |
 | `posePreview` | 任意 | object（`scenePosePreview`） | 未知field不可 |
 | `entryTransition` | 任意 | 数値 または object または object（`visualTransition`） | — |
-| `actions` | 必須 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） | — |
+| `actions` | 必須 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`videoAction`） または object（`videoControlAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） | — |
 
 - `posePreview`はそのsceneだけの非stickyな上書きです。次のsceneに指定がなければstory既定へ戻ります。
 - `recognitionModel`は`kind: recognitionModel`のasset IDを参照します。旧名の`poseModel`は受理しません。
@@ -1753,7 +1781,7 @@ Schema位置: `#/$defs/scene`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 形式1 | いずれか一つ | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） | — |
+| 形式1 | いずれか一つ | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`videoAction`） または object（`videoControlAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） | — |
 | 形式2 | いずれか一つ | object（`longScene`） | 未知field不可 |
 
 Schemaで検証できる値の例:
@@ -1770,7 +1798,7 @@ Schema位置: `#/$defs/scenes`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
-| 任意のID key | 1件以上 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） または object（`longScene`）（`scene`） | — |
+| 任意のID key | 1件以上 | object（`stageAction`） または object（`bgmAction`） または object（`stopBgmAction`） または object（`setBgmVolumeAction`） または object（`soundAction`） または object（`videoAction`） または object（`videoControlAction`） または object（`waitAction`） または object（`debuggerAction`） または object（`broadcastMessageAndWaitAction`） または object（`transitionAction`） または object（`gotoAction`） または object（`branchAction`） または object（`setVariableAction`） または object（`changeVariableAction`） または object（`toggleVariableAction`） または object（`keyInputAction`） または object（`touchInputAction`） または object（`poseInputAction`） または object（`imageInputAction`） または mapping（`showAction`） または mapping（`setTransparencyAction`） または mapping（`moveToAction`） または mapping（`sayAction`） または mapping（`thinkAction`） または mapping（`setSkinAction`） または mapping（`hideAction`） または mapping（`setLayerAction`） または mapping（`loopAction`） または mapping（`setTextAction`） または mapping（`poseAction`） または mapping（`customActorAction`）（`action`）の配列（`actions`） または object（`longScene`）（`scene`） | — |
 
 - YAML 1.2一般ではmappingのkey順にapplication上の意味はありません（[YAML 1.2.2 Mapping Key Order](https://yaml.org/spec/1.2.2/#3221-mapping-key-order)）。DSL 4.0は固有規則として、source YAMLのserialization treeに現れるpair順をscene順として使用します。JSON Schemaはmappingのshapeを検証しますが、この順序セマンティクスは検証しません。
 - scene keyをsortするformatter、serializer、editorを使用しないでください。並べ替え後もSchema検証には成功しますが、台本の実行順が変わります。
@@ -2229,6 +2257,58 @@ Schemaで検証できる値の例:
 imageInputToChangeScene:
   apple: appleScene
   banana: bananaScene
+```
+
+### `video`
+
+ID付きの動画領域を、指定位置・大きさで停止状態として表示します。動画assetまたは直接URLのどちらか一つを指定します。
+
+Schema位置: `#/$defs/videoAction`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `video` | 必須 | object または object | 未知field不可 |
+
+- `asset`は`kind: video`のasset ID、`url`は動画ファイルを返すHTTP(S) URLです。同時には指定できません。
+- `plane: front`はステージ前面、`background`は背景とスプライトの間です。`zIndex`は同じplane内の動画同士の順序であり、plane境界を越えません。
+- 同じIDを再表示すると前の領域を置き換えます。シーン切替・台本終了時に停止して領域を解放します。
+- 公開rc.37のStandard SB3では動画が標準ONです。操作・制約は[動画再生ガイド](dsl-4.0-video-guide.md)を参照してください。
+
+Schemaで検証できる値の例:
+
+```yaml
+video:
+  id: openingMovie
+  asset: OpeningMovie
+  x: 0
+  y: 0
+  width: 320
+  height: 180
+  plane: background
+  zIndex: 10
+```
+
+### `videoControl`
+
+同じシーンで作成した動画領域のIDを参照し、再生・停止・位置・音量などを操作します。
+
+Schema位置: `#/$defs/videoControlAction`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `videoControl` | 必須 | object または object または object または object または object または object または object または object または object または object | — |
+
+- `playUntilDone`は先頭から1回再生して終了を待ちます。`play`は1回、`loop`は繰り返し再生を開始し、開始に成功すると次の命令へ進みます。
+- `pause`は一時停止、`resume`は現在位置から再開、`stop`は停止して先頭へ戻します。
+- `seek`には`seconds`、`setVolume`には`volume`、`setMuted`には`muted`、`setPlaybackRate`には`rate`が必要です。
+- 未作成のIDは診断されます。音声付き自動再生が拒否された場合は、ブラウザのメディア再生許可と操作起点を確認してください。
+
+Schemaで検証できる値の例:
+
+```yaml
+videoControl:
+  id: openingMovie
+  operation: playUntilDone
 ```
 
 ## Actor action
