@@ -71,9 +71,12 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 rc.41のEditorでは停止ボタンの後ろ、HTMLではDockの「カメラ」を押します。未起動なら許可・開始、起動中ならカメラ選択と左右反転の設定を開きます。別のカメラを選ぶときも、同じ入口を使います。
 
-![rc.41の共通カメラ設定画面](../images/runtime-rc41/camera-settings.png)
+<figure class="runtime-settings-detail" tabindex="0">
+  <img src="../images/runtime-rc41/camera-settings.png" alt="rc.41の共通カメラ設定。使用するカメラの選択欄と左右反転ボタン、その下にカメラの入口を表示">
+  <figcaption>公開rc.41 HTMLのカメラ設定と入口の拡大です。「使用するカメラ」で機器を選び、「左右反転」で映像の向きを切り替えます。幅が狭い画面では、画像を左右に動かせます。</figcaption>
+</figure>
 
-_公開rc.41 HTMLの実画面です。背景は撮影用YAML台本、カメラはChromeの模擬入力です。_
+撮影には操作確認用YAML台本とChromeの模擬カメラを使っています。
 
 HTMLのDockは画面端の「ツール」から表示できます。「設定」で配置を上下左右に変更し、「自動的に隠す」を切り替えます。設定画面を開いている間はDockが隠れません。
 

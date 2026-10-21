@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
   "verifiedOn": "2026-10-21",
-  "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/236",
+  "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/238",
   "runtimeVersion": "4.0.0-rc.41",
   "runtimeCommit": "7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b",
   "url": "https://kubohiroya.github.io/turbowarp-kamishibai-app/players/4.0.0-rc.41/",
@@ -10,29 +10,121 @@
     "height": 800
   },
   "locale": "ja-JP",
-  "captureMethod": "Actual Chrome page screenshots of the published HTML; no image composition or source/VM overrides. Real OPFS YAML fixture and SVG backdrop; file picker selection points to the OPFS directory; camera uses test media.",
+  "captureMethod": "Actual Chrome clipped screenshots of the published HTML, captured at 2 device pixels per CSS pixel after layout settles. Each clip contains the complete target controls, with unrelated stage space removed. No image composition, generated text, or source/VM overrides. Real OPFS YAML fixture; file picker selection points to the OPFS directory; camera uses test media.",
   "camera": "synthetic-browser-input",
   "story": "Operation verification YAML fixture, not a tutorial story scene.",
   "screenshots": [
     {
       "path": "docs/images/runtime-rc41/update-detection.png",
-      "size": 54944,
-      "sha256": "86ea2bc60660981d5d979b638a26d6632c7f857944761a9f401205052e278c74"
-    },
-    {
-      "path": "docs/images/runtime-rc41/reload-settings.png",
-      "size": 112872,
-      "sha256": "91935483ebe6b86d5e26154bf22e5e5fcfec82649dd45d654a1a34d4df801094"
-    },
-    {
-      "path": "docs/images/runtime-rc41/dock-settings.png",
-      "size": 66286,
-      "sha256": "0568379bcd8d44038fd9396acff9d8806702d3e24db53b09dce979a3d140b1c7"
+      "size": 17626,
+      "sha256": "c2b8ce1253de650771c98e96120e21452659129862b16cbff00909edae6364c3",
+      "width": 416,
+      "height": 220,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "clip": {
+        "x": 536,
+        "y": 690,
+        "width": 208,
+        "height": 110
+      },
+      "targets": [
+        {
+          "x": 548,
+          "y": 702,
+          "width": 184,
+          "height": 98
+        }
+      ]
     },
     {
       "path": "docs/images/runtime-rc41/camera-settings.png",
-      "size": 67682,
-      "sha256": "02ec5d297c76ca626a319acfdbe5b6c29310eddbcab65639954a58f551a35434"
+      "size": 48384,
+      "sha256": "cd7ac4f02c51627a0d8afb6e105611a8a3285b526c12ae217a28edcbb336189c",
+      "width": 688,
+      "height": 684,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "clip": {
+        "x": 468,
+        "y": 458,
+        "width": 344,
+        "height": 342
+      },
+      "targets": [
+        {
+          "x": 480,
+          "y": 470,
+          "width": 320,
+          "height": 224
+        },
+        {
+          "x": 548,
+          "y": 702,
+          "width": 184,
+          "height": 98
+        }
+      ]
+    },
+    {
+      "path": "docs/images/runtime-rc41/reload-settings.png",
+      "size": 165535,
+      "sha256": "190c5112e8caa8e1e6acf1fbb4610f161ad399020377b50000b231a45ef4006f",
+      "width": 946,
+      "height": 1370,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "clip": {
+        "x": 510,
+        "y": 21,
+        "width": 473,
+        "height": 685
+      },
+      "targets": [
+        {
+          "x": 522.75,
+          "y": 33,
+          "width": 448,
+          "height": 661
+        }
+      ]
+    },
+    {
+      "path": "docs/images/runtime-rc41/dock-settings.png",
+      "size": 44051,
+      "sha256": "3dc05b744a5e1e725c632e210b8f831462d0cac27d5fd34a59a79365cf15ca91",
+      "width": 608,
+      "height": 598,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "clip": {
+        "x": 488,
+        "y": 501,
+        "width": 304,
+        "height": 299
+      },
+      "targets": [
+        {
+          "x": 500,
+          "y": 513,
+          "width": 280,
+          "height": 181.1875
+        },
+        {
+          "x": 548,
+          "y": 702,
+          "width": 184,
+          "height": 98
+        }
+      ]
     }
   ],
   "checks": [
@@ -40,10 +132,58 @@
     "カメラ・更新検知・設定の全ボタンを48px以上で表示",
     "設定ラベルと24pxアイコンを表示",
     "共通カメラ入口と設定パネルを確認",
-    "更新検知ラベル・台本ファイルを明示する説明・再開位置設定の保存と開閉を確認",
-    "上下左右の配置変更を確認",
-    "自動非表示のON/OFFを確認",
-    "390px幅で設定ボタンの表示とタッチ開閉を確認"
+    "更新検知ラベル・台本ファイルを明示する説明・再開位置設定の保存と開閉を確認"
   ],
-  "publicHtmlSha256": "7bd58a9e8dd7d239886691ade2bc0a9a08b1eba165723d19d068bc42cfe06f59"
+  "publicHtmlSha256": "7bd58a9e8dd7d239886691ade2bc0a9a08b1eba165723d19d068bc42cfe06f59",
+  "deviceScaleFactor": 2,
+  "previousCapture": {
+    "formatVersion": 1,
+    "verifiedOn": "2026-10-21",
+    "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/236",
+    "runtimeVersion": "4.0.0-rc.41",
+    "runtimeCommit": "7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b",
+    "url": "https://kubohiroya.github.io/turbowarp-kamishibai-app/players/4.0.0-rc.41/",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "locale": "ja-JP",
+    "captureMethod": "Actual Chrome page screenshots of the published HTML; no image composition or source/VM overrides. Real OPFS YAML fixture and SVG backdrop; file picker selection points to the OPFS directory; camera uses test media.",
+    "camera": "synthetic-browser-input",
+    "story": "Operation verification YAML fixture, not a tutorial story scene.",
+    "screenshots": [
+      {
+        "path": "docs/images/runtime-rc41/update-detection.png",
+        "size": 54944,
+        "sha256": "86ea2bc60660981d5d979b638a26d6632c7f857944761a9f401205052e278c74"
+      },
+      {
+        "path": "docs/images/runtime-rc41/reload-settings.png",
+        "size": 112872,
+        "sha256": "91935483ebe6b86d5e26154bf22e5e5fcfec82649dd45d654a1a34d4df801094"
+      },
+      {
+        "path": "docs/images/runtime-rc41/dock-settings.png",
+        "size": 66286,
+        "sha256": "0568379bcd8d44038fd9396acff9d8806702d3e24db53b09dce979a3d140b1c7"
+      },
+      {
+        "path": "docs/images/runtime-rc41/camera-settings.png",
+        "size": 67682,
+        "sha256": "02ec5d297c76ca626a319acfdbe5b6c29310eddbcab65639954a58f551a35434"
+      }
+    ],
+    "checks": [
+      "タイトル/メニューでは不要なDockを非表示",
+      "カメラ・更新検知・設定の全ボタンを48px以上で表示",
+      "設定ラベルと24pxアイコンを表示",
+      "共通カメラ入口と設定パネルを確認",
+      "更新検知ラベル・台本ファイルを明示する説明・再開位置設定の保存と開閉を確認",
+      "上下左右の配置変更を確認",
+      "自動非表示のON/OFFを確認",
+      "390px幅で設定ボタンの表示とタッチ開閉を確認"
+    ],
+    "publicHtmlSha256": "7bd58a9e8dd7d239886691ade2bc0a9a08b1eba165723d19d068bc42cfe06f59",
+    "documentationCommit": "6ef4f63a68d8700c46099a476e73570a86be9405"
+  }
 }

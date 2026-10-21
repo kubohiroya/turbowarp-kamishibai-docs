@@ -139,17 +139,23 @@ rc.41では、台本ファイルや関連素材の保存を検知する状態を
 
 Editorでは停止ボタンの後ろ、HTMLでは画面端の「ツール」から表示するDockにあります。「更新検知」を押すと、変更後の再開位置やデバッグ実行の設定を開けます。通常の保存は自動で検知されるため、変更のたびに押す必要はありません。
 
-![rc.41の実HTMLで表示した更新検知と共通Dock](../images/runtime-rc41/update-detection.png)
+![共通Dockの「更新検知」「カメラ」「設定」と、Dockを表示する「ツール」](../images/runtime-rc41/update-detection.png)
 
-_公開rc.41 HTMLを実Chromeで開いた補助画面です。背景は操作確認用のYAML台本で、チュートリアル作品の場面とは異なります。_
+_公開rc.41 HTMLの操作部分を拡大しています。「ツール」でDockを表示し、「更新検知」を押すと台本の設定を開きます。撮影には操作確認用のYAML台本を使っています。_
 
-![台本ファイルや関連素材が対象だと説明するrc.41の自動リロード設定](../images/runtime-rc41/reload-settings.png)
+<figure class="runtime-settings-detail runtime-reload-detail" tabindex="0">
+  <img src="../images/runtime-rc41/reload-settings.png" alt="台本ファイルや関連素材の更新検知、再開位置、デバッグ実行、閉じるボタンを示すrc.41の自動リロード設定">
+  <figcaption>「更新検知」から開いた設定画面の拡大です。画面幅が狭いときは、この画像を左右に動かすと設定項目を原寸以上の文字で確認できます。</figcaption>
+</figure>
 
-_再開位置を選び、今回の再開へ適用するか、次回以降の設定として保存するかを選びます。通常の閲覧では操作は不要です。_
+再開位置を選び、今回の再開へ適用するか、次回以降の設定として保存するかを選びます。通常の閲覧では操作は不要です。
 
 HTMLのDock自体の「設定」は、台本の再開位置とは別です。表示位置を上下左右に変え、自動非表示を切り替えます。
 
-![rc.41のDockの配置と自動非表示設定](../images/runtime-rc41/dock-settings.png)
+<figure class="runtime-settings-detail" tabindex="0">
+  <img src="../images/runtime-rc41/dock-settings.png" alt="rc.41のDockの設定。表示位置の選択欄と自動的に隠すチェックボックス、その下に設定ボタンを表示">
+  <figcaption>Dockの「設定」から開いた画面の拡大です。「表示位置」で上下左右を選び、「自動的に隠す」のチェックで自動非表示を切り替えます。</figcaption>
+</figure>
 
 ## 4. セリフを変更する
 
