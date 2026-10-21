@@ -375,3 +375,15 @@ rc.25の素材保持はAsset Cacheが担当し、
 ![TurboWarpの集約パレットに表示されたSVG Text 0.5.0の2ブロック](../images/dsl4-palette-svg-text.jpg)
 
 ![TurboWarpの集約パレットに表示されたTurboWarp Teachable Machine 3.5.1の37ブロック](../images/dsl4-palette-tmpose.png)
+
+
+## 次回4.0プレリリースの音声再生
+
+rc.38の次の4.0プレリリース向けに、`audio`で停止状態の音声をIDへ準備し、`audioControl`で個別に再生・停止・一時停止・再開・シーク・音量・ミュート・速度を操作する構成を追加します。再生時は`fadeIn`・`volume`・`fadeOut`、停止時は`fadeOut`を指定できます。音量は100が既定で0以上の有限数、100超は増幅です。
+
+対応するブロックは次の2つです。空の追加入力は省略・継承を表します。
+
+- `prepare audio [ID] from [SOURCE_TYPE] [SOURCE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds`
+- `audio [ID] [OPERATION] value [VALUE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds`
+
+旧BGM/SEの命令と寿命・crossfadeは維持します。scene単位の新しい音声IDと、sceneを跨ぐ旧BGMは寿命が異なるため、既存作品のBGMを一律に置換しません。詳細は[音声再生ガイド](../dsl-author-guides/dsl-4.0-audio-guide.md)を参照してください。

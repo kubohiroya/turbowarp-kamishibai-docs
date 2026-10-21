@@ -28,6 +28,7 @@ const expectedCollections = {
   'block-author-guides': ['dsl-4.0-block-author-guide.md'],
   'dsl-4.0-guides': ['dsl-4.0-author-guide.md'],
   'dsl-4.0-detail-guides': [
+    'dsl-4.0-audio-guide.md',
     'dsl-4.0-video-guide.md',
     'dsl-4.0-block-script-conversion-guide.md',
     'dsl-4.0-asset-conversion-guide.md',

@@ -105,6 +105,12 @@ test('gives each current 4.0 guide its reviewed release scope', () => {
     ({version, sourceFilename}) => version === '4.0' && sourceFilename !== 'turbowarp-ecosystem.md',
   )) {
     const source = read(`docs/${document.sourceDirectory}/${document.sourceFilename}`);
+    if (document.sourceFilename === 'dsl-4.0-audio-guide.md') {
+      assert.match(source, /開発中の追加仕様/u);
+      assert.match(source, /rc\.38の次の4\.0プレリリース/u);
+      assert.match(source, /rc\.37とrc\.38には含めません/u);
+      continue;
+    }
     const reviewedVersion =
       document.sourceFilename === 'dsl-4.0-video-guide.md' ? '4.0.0-rc.37' : '4.0.0-rc.25';
     assert.ok(source.includes(reviewedVersion), document.sourceFilename);

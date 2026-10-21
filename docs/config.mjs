@@ -20,6 +20,7 @@ export const documentUpdatedAt = Object.freeze({
   'command-reference.md': '2026-08-08',
   'history.md': '2026-08-04',
   'dsl-4.0-video-guide.md': '2026-10-21',
+  'dsl-4.0-audio-guide.md': '2026-10-21',
   'dsl-4.0-author-guide.md': '2026-10-21',
   'dsl-4.0-block-script-conversion-guide.md': '2026-10-19',
   'dsl-4.0-asset-conversion-guide.md': '2026-10-19',
@@ -175,6 +176,15 @@ export const documentCollections = [
     version: '4.0',
     title: '台本作りについて詳しく知りたい人向けドキュメント',
     documents: [
+      {
+        sourceFilename: 'dsl-4.0-audio-guide.md',
+        sourceDirectory: 'dsl-author-guides',
+        outputDirectory: 'dsl-author-guides',
+        title: 'DSL 4.0 音声再生ガイド',
+        audience: '音声を台本やブロックで使う作者と、組み込む開発者',
+        description:
+          'rc.38の次の4.0プレリリース向け。IDごとの再生、音量、フェード、旧BGM/SE互換性と制約を説明します。',
+      },
       {
         sourceFilename: 'dsl-4.0-video-guide.md',
         sourceDirectory: 'dsl-author-guides',
