@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-追跡: [アプリ #776](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/776)、[共通controller #6](https://github.com/kubohiroya/turbowarp-asset-cache/issues/6)。この文書は開発中の追加仕様です。rc.38の次の4.0プレリリースに向けた追加仕様です。rc.37とrc.38には含めません。台本の版は `4.0` のままです。
+追跡: [アプリ #776](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/776)、[共通controller #6](https://github.com/kubohiroya/turbowarp-asset-cache/issues/6)。この文書は公開プレリリース4.0.0-rc.39の音声機能に対応します。rc.38以前は未対応です。台本の版は `4.0` のままです。
 
 ## DSLとブロック
 
@@ -82,15 +82,15 @@ scenes:
 
 ## 導入・検証・切り戻し
 
-共通ライブラリ `@kubohiroya/turbowarp-asset-cache@0.3.0` を使用し、依存とlockfileを固定して配布runtimeへ組み込みます。アプリのnpm/SB3公開は、別途新しいRCを作成して行います。公開済みrc.37のnpm/SB3は差し替えません。開発中のローカル連携結果だけで公開済みartifactの対応を主張しません。
+共通ライブラリ `@kubohiroya/turbowarp-asset-cache@0.3.0` を使用し、依存とlockfileを固定して配布runtimeへ組み込みます。アプリのnpmとStandard SB3は4.0.0-rc.39を使用します。公開Schema・素材・生成物は同じ公開版へ揃えます。公開済みrc.38以前のnpm/SB3は差し替えません。
 
 検証対象はcontrollerの再利用・abort・自然終了・解放、素材参照とSchema、2種類の構造化ブロックの往復、旧BGM/SE、scene寿命、オフラインURL拒否、Editor/Player/Packagerの実再生です。実画面の測定ログはIssueへ記録します。
 
 切り戻す場合はアプリの追加と依存更新を先にrevertし、必要なら共通ライブラリの依存も前版へ戻します。新構文を含む台本は旧版では読めないため、台本を旧4コマンドへ戻すか、対応版を継続利用してください。既存4.0台本には書き換えを要求しません。
 
 
-## サンプルと次回リリース
+## 対応サンプル
 
-サンプルリポジトリの `stories/audio-playback/` に、合成音と背景を含む自己完結の台本を用意します。再生時の3項目、停止時フェード、終了待ち、バックグラウンド、ループ、一時停止・再開、シーク、音量・ミュート・速度を確認できます。
+[音声再生サンプル](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/audio-playback/)に、合成音と背景を含む自己完結の台本を用意しています。再生時の3項目、停止時フェード、終了待ち、バックグラウンド、ループ、一時停止・再開、シーク、音量・ミュート・速度を確認できます。
 
-rc.38の次の4.0プレリリースで対応するnpmとStandard SB3を公開してから、Schemaの固定commit・配布SB3・ブロック版・Web版を同じ版へ合わせます。この開発ガイドは現在の公開Schemaや公開済みサンプルの対応を示すものではありません。旧BGM/SEは互換入口として維持されるため、既存作品を一律に書き換える必要はありません。
+CLIを使う場合も `@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.39` を固定します。サンプルのSchema・Standard SB3・ブロック版・Web版は同じrc.39の公開commitを参照します。旧BGM/SEは互換入口として維持されるため、既存作品を一律に書き換える必要はありません。

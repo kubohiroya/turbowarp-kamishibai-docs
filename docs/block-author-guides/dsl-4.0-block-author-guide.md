@@ -4,7 +4,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 対象: TurboWarpで台本ブロックを編集する作者、教材作成者、授業設計者\
 扱う台本: `kamishibai [4.0] [ラベル]`からつながるブロック台本SB3\
-確認日: 2026年10月19日
+確認日: 2026年10月21日
 
 このガイドは、[台本DSL版の台本作成ガイド](../dsl-author-guides/dsl-4.0-author-guide.md)と同じ
 場面・素材・命令を、台本ブロックの図版で説明します。最初に一作品を完成させる方は
@@ -23,7 +23,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 利用する版と図版の読み方
 
-公開プレリリース`4.0.0-rc.26`のCLIとStandard SB3を使います。正式版4.0.0は未公開です。
+公開プレリリース`4.0.0-rc.39`のCLIとStandard SB3を使います。正式版4.0.0は未公開です。
 Node.js 24.0.0以上で公開CLIをexact installすれば、実命令ブロック、統一ハット、includeBlocks、
 8種類の定義ブロックとフォーム編集が使えます。本体のcheckoutやCLIのビルドは不要です。
 準備方法は[相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
@@ -39,7 +39,7 @@ PNGのフォーム画面はIssue #891対応の編集用拡張を実Editorで開�
 長い入力値は図の中だけで折り返しています。入力欄へは改行や省略を加えず、値全体を入力します。
 狭い画面では図を左右にスクロールできます。図が複数に分かれている場合も、番号順に同じハットの下へ接続します。
 
-台本のデータ・素材・実行の規則はDSL版と共通です。ランタイムは公開rc.26を使います。Schemaの参照は従来の公開`4.0.0-rc.25`に固定し、rc.26でも同じSchemaを使います。
+台本のデータ・素材・実行の規則はDSL版と共通です。ランタイムとSchemaは同じ公開rc.39を使います。図版と旧版の説明は作成当時のものを保持します。音声の2命令はrc.39から利用できます。
 portraitの`placement`、`offset`、`cornerRadius`も公開rc.26で使えます。
 
 ## チュートリアルと本書の使い分け
@@ -1272,9 +1272,9 @@ Issue #886の種類別定義ブロックへ更新しています。
 - [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例
 
 
-## 次回4.0プレリリースの音声再生
+## rc.39の音声再生
 
-rc.38の次の4.0プレリリース向けに、`audio`で停止状態の音声をIDへ準備し、`audioControl`で個別に再生・停止・一時停止・再開・シーク・音量・ミュート・速度を操作する構成を追加します。再生時は`fadeIn`・`volume`・`fadeOut`、停止時は`fadeOut`を指定できます。音量は100が既定で0以上の有限数、100超は増幅です。
+4.0.0-rc.39では、`audio`で停止状態の音声をIDへ準備し、`audioControl`で個別に再生・停止・一時停止・再開・シーク・音量・ミュート・速度を操作できます。再生時は`fadeIn`・`volume`・`fadeOut`、停止時は`fadeOut`を指定できます。音量は100が既定で0以上の有限数、100超は増幅です。
 
 対応するブロックは次の2つです。空の追加入力は省略・継承を表します。
 

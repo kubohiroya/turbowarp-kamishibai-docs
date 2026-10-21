@@ -61,7 +61,7 @@ test('covers current recognition, transitions, variable actions and ruby with va
     annotations: json('sources/dsl4/annotations.ja.json'),
   });
   assert.equal(counts.topLevelFieldCount, 15);
-  assert.equal(counts.actionCount, 32);
+  assert.equal(counts.actionCount, 34);
   const AjvConstructor = /** @type {any} */ (Ajv2020);
   const ajv = new AjvConstructor({strict: true, allErrors: true});
   const validate = ajv.compile(schema);
@@ -106,13 +106,19 @@ test('gives each current 4.0 guide its reviewed release scope', () => {
   )) {
     const source = read(`docs/${document.sourceDirectory}/${document.sourceFilename}`);
     if (document.sourceFilename === 'dsl-4.0-audio-guide.md') {
-      assert.match(source, /開発中の追加仕様/u);
-      assert.match(source, /rc\.38の次の4\.0プレリリース/u);
-      assert.match(source, /rc\.37とrc\.38には含めません/u);
+      assert.match(source, /4\.0\.0-rc\.39/u);
+      assert.match(source, /rc\.38以前は未対応/u);
       continue;
     }
-    const reviewedVersion =
-      document.sourceFilename === 'dsl-4.0-video-guide.md' ? '4.0.0-rc.37' : '4.0.0-rc.25';
+    const reviewedVersion = [
+      'dsl-4.0-author-guide.md',
+      'dsl-4.0-block-author-guide.md',
+      'dsl-4.0-runtime-block-reference.md',
+    ].includes(document.sourceFilename)
+      ? '4.0.0-rc.39'
+      : document.sourceFilename === 'dsl-4.0-video-guide.md'
+        ? '4.0.0-rc.37'
+        : '4.0.0-rc.25';
     assert.ok(source.includes(reviewedVersion), document.sourceFilename);
     if (document.sourceFilename === 'dsl-4.0-video-guide.md') {
       assert.match(source, /標準ON/u);

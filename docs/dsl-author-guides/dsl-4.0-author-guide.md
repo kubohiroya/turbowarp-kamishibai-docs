@@ -35,19 +35,16 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 公開プレリリースと文書基準
 
-文書状態: 公開プレリリースrc.25の固定実装基準を説明する台本作成ガイド\
-調査基準: TurboWarp-Kamishibai `a68f8dc`（`v4.0.0-rc.25`）、2026年10月19日
+文書状態: 公開プレリリース`4.0.0-rc.39`の固定実装基準を説明する台本作成ガイド\
+調査基準: TurboWarp-Kamishibai `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`、2026年10月21日
 
-> **配布状態との区別:** 2026年10月19日時点で`v4.0.0-rc.25`はprereleaseとして公開されていますが、
-> 正式な`v4.0.0`ではありません。ポーズoverlayはrc.25と、同版がexact pinするTurboWarp Teachable Machine 3.5.1で利用できます。
+正式な`v4.0.0`は未公開です。公開runtimeと[Schemaリファレンス](dsl-4.0-schema-reference.md)を
+同じrc.39へ揃えています。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
+`audio` / `audioControl`はrc.39から利用できます。旧BGM/SE命令も引き続き使えます。
 
-このガイドの公開runtime基準はrc.25です。[紙芝居DSL 4.0 Schemaリファレンス](dsl-4.0-schema-reference.md)は、
-同じ公開commit `a68f8dc`のSchemaを保持します。Schemaはruntime実装から生成するものではありません。どの実装がどこまで入っているか、
-根拠となる資料はどれかを確認したい方は、巻末の「付録: 実装基準と実装根拠」を参照してください。
-
-Schema基準: `a68f8dc4d38b4609c8387192d3be0376963735e3`（rc.25公開tag）。
-portraitの`placement`、`offset`、`cornerRadius`はrc.25の公開Schemaとランタイムで利用できます。
-公開版向けの台本は同じrc.25のSchemaで検査します。旧rc.22のsnapshotは履歴として保持します。
+Schema基準: `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`（rc.39公開tag）。
+本文中のrc.25などの表記は、その機能が公開された時点や図版の作成基準を示します。
+旧版のSchema snapshotは履歴として保持し、新しい台本は現在のSchemaで検査します。
 
 ## rc.25の制作・カメラ・失敗表示
 
@@ -1973,9 +1970,9 @@ rc.8より後には、crossfade（[#652](https://github.com/kubohiroya/turbowarp
 - [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例
 
 
-## 次回4.0プレリリースの音声再生
+## rc.39の音声再生
 
-rc.38の次の4.0プレリリース向けに、`audio`で停止状態の音声をIDへ準備し、`audioControl`で個別に再生・停止・一時停止・再開・シーク・音量・ミュート・速度を操作する構成を追加します。再生時は`fadeIn`・`volume`・`fadeOut`、停止時は`fadeOut`を指定できます。音量は100が既定で0以上の有限数、100超は増幅です。
+4.0.0-rc.39では、`audio`で停止状態の音声をIDへ準備し、`audioControl`で個別に再生・停止・一時停止・再開・シーク・音量・ミュート・速度を操作できます。再生時は`fadeIn`・`volume`・`fadeOut`、停止時は`fadeOut`を指定できます。音量は100が既定で0以上の有限数、100超は増幅です。
 
 対応するブロックは次の2つです。空の追加入力は省略・継承を表します。
 

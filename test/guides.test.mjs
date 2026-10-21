@@ -71,7 +71,7 @@ const theme = readFileSync(new URL('../docs/general-theme.css', import.meta.url)
 test('keeps the completed DSL 4.0 guide separate from the production 3.2 manual', () => {
   assert.match(dslManual, /対象アプリ: TurboWarp-Kamishibai 3\.2\.x/u);
   assert.match(dsl4AuthorGuide, /固定実装基準を説明する台本作成ガイド/u);
-  assert.match(dsl4AuthorGuide, /v4\.0\.0-rc\.25`はprerelease/u);
+  assert.match(dsl4AuthorGuide, /4\.0\.0-rc\.39/u);
   assert.match(dsl4AuthorGuide, /Schemaはruntime実装から生成するものではありません/u);
   assert.match(dsl4AuthorGuide, /kamishibai: '4\.0'/u);
   assert.match(dsl4AuthorGuide, /\.kamishibai\.yaml/u);
@@ -128,7 +128,7 @@ test('keeps the completed DSL 4.0 guide separate from the production 3.2 manual'
   assert.ok(dsl4SchemaReference.includes(`Schema固定commit: [\`${release.commit.slice(0, 7)}\`]`));
   assert.match(dsl4SchemaReference, /関節とボーンのoverlay/u);
   assert.match(dsl4SchemaReference, /`visible` \| 任意 \| 真偽値 \| 既定値 `true`/u);
-  assert.match(dsl4SchemaReference, /トップレベル15 field、action 32種類、Annotation 113項目/u);
+  assert.match(dsl4SchemaReference, /トップレベル15 field、action 34種類、Annotation 115項目/u);
   assert.doesNotMatch(dslManual, /kamishibai: '4\.0'/u);
   assert.doesNotMatch(dsl4AuthorGuide, /DSL 3\.[12]|kamishibai=3\.[12]/u);
   assert.doesNotMatch(dsl4SchemaReference, /DSL 3\.[12]|kamishibai=3\.[12]/u);
