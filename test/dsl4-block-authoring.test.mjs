@@ -36,7 +36,7 @@ test('gives block and DSL authors exactly one tutorial and one guide, followed b
   const advanced = documentationConfig.documents.filter(
     ({collectionId}) => collectionId === 'dsl-4.0-detail-guides',
   );
-  assert.equal(advanced.length, 7);
+  assert.equal(advanced.length, 8);
   for (const document of advanced) {
     const path = document.publicationOutputDirectory.replace('4.0/', '');
     assert.ok(details.includes(`href="${path}/"`));

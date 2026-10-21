@@ -46,10 +46,13 @@ test('links the resolved public app without relabeling historical samples', () =
   assert.match(dsl4Index, /公開サンプルや本文・図版の対象版/u);
   assert.doesNotMatch(dsl4Index, /サンプル作品とチュートリアル成果物も、現在/u);
 
-  assert.equal(dsl4Documents.length, 27);
+  assert.equal(dsl4Documents.length, 28);
   for (const {sourceFilename, source} of dsl4Documents) {
     if (sourceFilename === 'turbowarp-ecosystem.md') continue;
-    if (sourceFilename === 'dsl-4.0-video-guide.md') {
+    if (sourceFilename === 'dsl-4.0-audio-guide.md') {
+      assert.match(source, /rc\.38の次の4\.0プレリリース/u);
+      assert.match(source, /rc\.37とrc\.38には含めません/u);
+    } else if (sourceFilename === 'dsl-4.0-video-guide.md') {
       assert.match(source, /4\.0\.0-rc\.37/u, sourceFilename);
       assert.match(source, /標準ON/u);
     } else {
