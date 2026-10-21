@@ -1507,7 +1507,35 @@ h2.application-sheet {
   height: auto;
 }
 
+/* Preserve readable runtime labels when the settings screenshot exceeds the column width. */
+.runtime-settings-detail {
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  break-inside: avoid;
+}
+
+.runtime-settings-detail img {
+  display: block;
+  width: 640px;
+  min-width: 344px;
+  max-width: 100%;
+  height: auto;
+}
+
+.runtime-reload-detail img {
+  min-width: 473px;
+}
+
 @media print {
+  .runtime-settings-detail {
+    overflow: visible;
+  }
+
+  .runtime-settings-detail img {
+    min-width: 0;
+    width: 100%;
+  }
+
   .block-script-diagram {
     overflow: visible;
     break-inside: avoid;
