@@ -35,18 +35,18 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 公開プレリリースと文書基準
 
-文書状態: 公開プレリリース`4.0.0-rc.39`の固定実装基準を説明する台本作成ガイド\
+文書状態: 公開プレリリース`4.0.0-rc.41`の固定実装基準を説明する台本作成ガイド\
 調査基準: TurboWarp-Kamishibai `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`、2026年10月21日
 
 正式な`v4.0.0`は未公開です。公開runtimeと[Schemaリファレンス](dsl-4.0-schema-reference.md)を
-同じrc.39へ揃えています。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
+同じrc.41へ揃えています。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
 `audio` / `audioControl`はrc.39から利用できます。旧BGM/SE命令も引き続き使えます。
 
-Schema基準: `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`（rc.39公開tag）。
+Schema基準: `7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b`（rc.41公開tag）。
 本文中のrc.25などの表記は、その機能が公開された時点や図版の作成基準を示します。
 旧版のSchema snapshotは履歴として保持し、新しい台本は現在のSchemaで検査します。
 
-## rc.25の制作・カメラ・失敗表示
+## rc.25以降の制作・カメラ・失敗表示
 
 YAMLとブロック台本は同じ`StoryDocument`へ正規化されます。CLIでは
 `validate-dsl4 --format canonical-json`で正規形を取得し、`author-block-dsl`でYAMLからブロック台本SB3を作り、
@@ -61,7 +61,7 @@ include文付きのYAMLから、ラベル付き台本と`includeBlocks`を持つ
 カメラはCamera Sourceが所有し、認識側が映像を借ります。プレビューは映像をそのまま表示し、推論には中央の
 正方形を切り出して左右反転した入力を使います。プレビューの左右反転と推論入力の処理を同一視しないでください。
 タイトルのカメラ許可は、対応ブラウザー・ポーズ作品・有効な機能フラグの条件が揃った場合に表示されます。
-rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わずrc.25を選びます。
+rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行のrc.41を選びます。
 
 ローカルプレビューはリモート素材を読み込みません。rc.25では失敗時にダイアログが表示されます。
 `K4-ASSET-REMOTE-DISABLED`ならローカル配信へ変更するか、ビルドした作品で確認してください。
@@ -760,6 +760,14 @@ camera menuは開くたびに利用可能な入力を列挙します。`default`
 UIの選択状態はapp shellがsession内だけで保持し、camera切替失敗時は以前のcameraと表示へ戻します。
 起動時固定・既定OFFの`dsl4CameraPreviewControls`がOFFならcontrol画像、DOM、listener、上流camera APIへ
 接続しません。
+
+#### rc.41の共通カメラ入口とDock
+
+Standard SB3では、Camera Sourceがカメラの共通入口を管理します。Editorでは停止ボタンの後ろの「カメラ」、Packager HTMLでは共通Dockの「カメラ」を使います。未起動時は許可・開始、起動中は使用するカメラとミラーリングの設定を開きます。カメラを許可する入口と設定用の入口を別々に探す必要はありません。
+
+上記の`controls`に残る画像・8方向anchorは、従来の描画API向けの互換設定です。rc.41のStandard SB3で共通入口を左右の隅へ配置する指定ではありません。Editorの入口は停止ボタン後ろに固定し、HTMLではDockの「設定」から上下左右の配置と自動非表示を選びます。`recognition.preview.mirroring`やsceneの`posePreview.mirroring`は引き続きプレビューの左右反転を指定します。
+
+YAML台本を外部ファイルから開いて制作している間は、同じ操作領域に「更新検知」が表示されます。台本ファイルや関連素材の更新を検知してプレビューへ反映する機能です。人やカメラ映像を対象にするものではありません。タイトル画面やメニュー、自己完結の完成作品を再生するだけの場面では、このボタンを操作する必要はありません。
 
 #### ポーズの関節とボーンを重ねる
 
@@ -1968,7 +1976,6 @@ rc.8より後には、crossfade（[#652](https://github.com/kubohiroya/turbowarp
 - [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
 - [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624): Schema、TurboWarp Teachable Machine 1.12.0 composition API mapping、YAML opt-in、rollback
 - [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/a68f8dc4d38b4609c8387192d3be0376963735e3/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例
-
 
 ## rc.39の音声再生
 

@@ -13,7 +13,13 @@ const json = (name) => JSON.parse(read(name));
 const commit = 'a68f8dc4d38b4609c8387192d3be0376963735e3';
 const implementationCommit = 'a68f8dc4d38b4609c8387192d3be0376963735e3';
 const schema = json('sources/dsl4/dsl-4.schema.json');
-const surfaces = json('sources/dsl4/user-guide-4.0-public-surfaces.json');
+const currentSurfaces = json('sources/dsl4/user-guide-4.0-public-surfaces.json');
+const surfaces =
+  currentSurfaces.releaseState.publishedPrerelease === 'v4.0.0-rc.25'
+    ? currentSurfaces
+    : currentSurfaces.historicalVerifications.find(
+        ({releaseState}) => releaseState.publishedPrerelease === 'v4.0.0-rc.25',
+      );
 
 test('pins the public rc.25 runtime and schema independently of the stable publication channel', () => {
   const lock = json('sources/dsl4/source-lock.json');
@@ -105,6 +111,23 @@ test('gives each current 4.0 guide its reviewed release scope', () => {
     ({version, sourceFilename}) => version === '4.0' && sourceFilename !== 'turbowarp-ecosystem.md',
   )) {
     const source = read(`docs/${document.sourceDirectory}/${document.sourceFilename}`);
+    if (
+      [
+        'user-guide-4.0.md',
+        'play.md',
+        'create.md',
+        'create-blocks.md',
+        'dsl-4.0-author-guide.md',
+        'dsl-4.0-block-author-guide.md',
+        'dsl-4.0-block-script-conversion-guide.md',
+      ].includes(document.sourceFilename)
+    ) {
+      assert.ok(
+        source.includes(json('sources/dsl4/app-release.json').version),
+        document.sourceFilename,
+      );
+      continue;
+    }
     if (document.sourceFilename === 'dsl-4.0-audio-guide.md') {
       assert.match(source, /4\.0\.0-rc\.39/u);
       assert.match(source, /rc\.38以前は未対応/u);
@@ -127,7 +150,7 @@ test('gives each current 4.0 guide its reviewed release scope', () => {
   }
 });
 
-test('records current public sample provenance without reusing historical physical passes', () => {
+test('retains rc.25 sample provenance without reusing historical physical passes', () => {
   assert.equal(surfaces.releaseState.publishedPrereleaseCommit, commit);
   assert.equal(surfaces.releaseState.publicSampleBaseline, 'v4.0.0-rc.25');
   assert.equal(surfaces.samples.runtime.commit, commit);
@@ -135,7 +158,7 @@ test('records current public sample provenance without reusing historical physic
   assert.equal(surfaces.physicalVerification.appliesToPublishedPrerelease, false);
   assert.equal(surfaces.physicalVerification.camera, 'not-run-for-rc.25');
   assert.equal(surfaces.physicalVerification.pose, 'not-run-for-rc.25');
-  let previous = surfaces.previousVerification;
+  let previous = currentSurfaces.previousVerification;
   while (previous.releaseState.publishedPrerelease !== 'v4.0.0-rc.10') {
     previous = previous.previousVerification;
     assert.ok(previous, 'Historical rc.10 verification must remain available.');

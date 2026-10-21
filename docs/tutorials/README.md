@@ -106,9 +106,15 @@ include文、複雑な分岐、custom action、runtimeやextensionの開発は�
 YAMLはコピー可能なcode blockを正本とします。画像はTurboWarp Editorでの画面操作、正常状態、
 失敗状態を示す補助として使用します。CLI commandは高度な利用者向けの任意手順だけに置きます。
 
-### rc.25の現行基準
+### rc.41の現行基準
 
-現在の本文・公開サンプルは`4.0.0-rc.25`を対象にします。実装commitは`a68f8dc4d38b4609c8387192d3be0376963735e3`、
+現在の操作説明と公開サンプルは`4.0.0-rc.41`を対象にします。appの公開commitは`7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b`です。samplesのベース・再生用/編集用ビルダーと配布物を同じ版へ揃え、公開20ファイルをsize/SHA-256で照合しています。
+
+「更新検知」・カメラ・Dock設定は公開rc.41 HTMLの実画面を追加し、撮影条件と画像hashを`sources/dsl4/runtime-ui-rc41.json`へ記録しています。背景は操作確認用のYAML台本で、チュートリアルの作品場面ではありません。旧画像は以下の撮影時の版の証跡として残し、rc.41の実画面へ読み替えません。
+
+### 過去の確認基準（rc.25）
+
+2026年10月19日時点の本文・公開サンプルは`4.0.0-rc.25`を対象にしました。実装commitは`a68f8dc4d38b4609c8387192d3be0376963735e3`、
 公開SB3のSHA-256は`d6b8d73e27685ac8359a17ade7c5c9cb4596ab22413eae9bf33d060351d0ab29`です。
 npm packageは`@kubohiroya/turbowarp-kamishibai-app`です。GitHub ReleaseのSB3とnpm配布物は取得して照合しました。
 サンプル3作品の公開manifestと、samples commit `c01ad9eb664b198ba7d421fa0e784cd99fdf56bf`の

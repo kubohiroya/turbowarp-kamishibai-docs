@@ -2,8 +2,8 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-作者用実行環境: `4.0.0-rc.25`（公開プレリリース）\
-スターター基準: `4.0.0-rc.25`（公開成果物）\
+作者用実行環境: `4.0.0-rc.41`（公開プレリリース）\
+スターター基準: `4.0.0-rc.41`（公開成果物）\
 対象: 初めて紙芝居DSL 4.0を書く人\
 扱う台本: 4.0用のYAML台本\
 想定時間: 60〜90分
@@ -27,7 +27,7 @@ Node.js、pnpm、ターミナルは使いません。Scratchのブロックは�
 - File System Access APIに対応したChromium系ブラウザー
 - ポーズ場面を確かめるためのカメラと、全身を映せる少しの空間
 
-この手順では`4.0.0-rc.25`の非埋め込みStandard SB3と、同じrelease入力から生成したスターターを使用します。
+この手順では`4.0.0-rc.41`の非埋め込みStandard SB3と、同じrelease入力から生成したスターターを使用します。
 安定版`4.0.0`ではないため、ほかの作品と分けた作業フォルダーで
 進めてください。
 
@@ -57,14 +57,14 @@ Node.js、pnpm、ターミナルは使いません。Scratchのブロックは�
 次の二つをダウンロードします。
 
 - [チュートリアル用スターター](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip)
-- [紙芝居4.0.0-rc.25のStandard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.25/kamishibai-4.0.0-rc.25.sb3)
+- [紙芝居4.0.0-rc.41のStandard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.41/kamishibai-4.0.0-rc.41.sb3)
 
 新しい作業フォルダーを作り、スターターのZIPをその中へ展開します。Standard SB3も同じ作業フォルダーへ
 保存します。インストール作業はありません。展開後の主なファイルは次の配置になります。
 
 ```text
 作業フォルダー/
-├── kamishibai-4.0.0-rc.25.sb3
+├── kamishibai-4.0.0-rc.41.sb3
 └── tutorial-story/
     ├── README.md
     ├── LICENSES.md
@@ -98,17 +98,20 @@ _スターターを開き、編集する台本と後で使う追加素材を確�
 ## 3. TurboWarpで作品フォルダーを開く
 
 1. [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開く
-2. 「ファイル」から`kamishibai-4.0.0-rc.25.sb3`を読み込む
-3. 緑の旗を押す
-4. タイトル画面を閉じ、メニューの「台本を開く」（以後「開く」）を押す
-5. フォルダー選択画面で、スターターを展開した`tutorial-story`フォルダーを選ぶ
-6. ブラウザーから確認を求められたら、このフォルダーの読み取りを許可する
+2. 「ファイル」から`kamishibai-4.0.0-rc.41.sb3`を読み込む
+3. スプライト一覧に`Student`がなければ、スプライトを一つ追加し、名前を`Student`にする。コードは追加しない
+4. 緑の旗を押す
+5. タイトル画面を閉じ、メニューの「台本を開く」（以後「開く」）を押す
+6. フォルダー選択画面で、スターターを展開した`tutorial-story`フォルダーを選ぶ
+7. ブラウザーから確認を求められたら、このフォルダーの読み取りを許可する
 
 <!-- screenshot:C-02 -->
 
 ![TurboWarp Editorで非埋め込みStandard SB3を開き、緑の旗を押す位置](../images/tutorials/dsl4/create/tutorial-create-02-project-open.png)
 
 _Standard SB3をTurboWarp Editorで開き、緑の旗から作者用プレビューを開始します。_
+
+Standard SB3は台本の`actors`だけからScratchスプライトを自動作成しません。スターターは`Student`を参照するため、この名前のスプライトを先に用意します。衣装は読み込む台本の`student-ready.svg`へ差し替わるので、追加時の絵柄は問いません。
 
 「開く」はYAMLファイル一つではなく、`project.source.json`がある`tutorial-story`フォルダーを選びます。
 選択したフォルダーの外は読み取りません。フォルダーの名前や端末内の絶対パスは、作成するSB3へ保存されません。
@@ -120,13 +123,33 @@ _Standard SB3をTurboWarp Editorで開き、緑の旗から作者用プレビュ
 _メニューの「台本を開く」を押し、続いて表示される選択画面で`tutorial-story`フォルダーを選びます。_
 
 台本と素材の読み取りが完了すると、作品が始まります。以後、選択したフォルダー内の台本と宣言済み素材が
-監視されます。通常の保存は自動で検査され、問題がなければ安全な区切りで作品へ反映されます。
+更新検知の対象になります。通常の保存は自動で検査され、問題がなければ安全な区切りで作品へ反映されます。
 
 <!-- screenshot:C-04 -->
 
-![スターターを開き、最初のセリフとWatching表示を示したローカルプレビュー](../images/tutorials/dsl4/create/tutorial-create-04-first-preview.png)
+![スターターを開き、最初のセリフと旧版のWatching表示を示したローカルプレビュー](../images/tutorials/dsl4/create/tutorial-create-04-first-preview.png)
 
-_作品の最初の画面と、変更を待つ状態を確認します。_
+_この画像は旧版の固定証跡です。rc.41の状態名は「更新検知」で、配置と設定画面は以下の実画面を参照してください。_
+
+<a id="update-detection"></a>
+
+### 「更新検知」と設定を確認する
+
+rc.41では、台本ファイルや関連素材の保存を検知する状態を「更新検知」と表示します。人やカメラ映像を対象とする表示ではありません。YAML台本の実行中だけ表示され、タイトル画面やメニューでは表示されません。
+
+Editorでは停止ボタンの後ろ、HTMLでは画面端の「ツール」から表示するDockにあります。「更新検知」を押すと、変更後の再開位置やデバッグ実行の設定を開けます。通常の保存は自動で検知されるため、変更のたびに押す必要はありません。
+
+![rc.41の実HTMLで表示した更新検知と共通Dock](../images/runtime-rc41/update-detection.png)
+
+_公開rc.41 HTMLを実Chromeで開いた補助画面です。背景は操作確認用のYAML台本で、チュートリアル作品の場面とは異なります。_
+
+![台本ファイルや関連素材が対象だと説明するrc.41の自動リロード設定](../images/runtime-rc41/reload-settings.png)
+
+_再開位置を選び、今回の再開へ適用するか、次回以降の設定として保存するかを選びます。通常の閲覧では操作は不要です。_
+
+HTMLのDock自体の「設定」は、台本の再開位置とは別です。表示位置を上下左右に変え、自動非表示を切り替えます。
+
+![rc.41のDockの配置と自動非表示設定](../images/runtime-rc41/dock-settings.png)
 
 ## 4. セリフを変更する
 
@@ -366,7 +389,7 @@ scenes:
 カメラ映像へ重ね、confidenceが低い部分を薄くします。プレビューを先頭から更新し、カメラを許可します。
 見本のポーズ、カメラ映像、関節とボーン、進み具合が表示され、ポーズを保つと次へ進むことを確認します。
 
-> **rc.11以降のリリースを使う場合:** この手順はrc.8の名前で書いています。rc.11以降では
+> **旧rc.8の台本を移す場合:** rc.11以降では
 > `kind: poseModel`を`kind: recognitionModel`へ、`poseRecognition`を`recognition`へ、sceneの`poseModel`を
 > `recognitionModel`へ変更します。値の書き方は変わりません。
 
@@ -374,7 +397,7 @@ scenes:
 
 ![合成人物のポーズ認識中にカメラ操作と更新状態が重ならず表示されたローカルプレビュー](../images/tutorials/dsl4/create/tutorial-create-10-pose-preview-controls.png)
 
-_カメラ操作を右上、更新状態を上中央へ分けた固定layoutを確認します。人物は合成fixtureです。_
+_この画像は旧版の配置を再現した合成fixtureです。rc.41ではカメラと更新検知をEditorの停止ボタン後ろ、HTMLのDockへまとめます。現行の配置は上のrc.41実画面を参照してください。_
 
 ## 7. 診断を読んで修正する
 
@@ -432,7 +455,7 @@ _完成したSB3をTurboWarpで開き、緑の旗から再生します。画像�
 
 ## 完了チェック
 
-- [ ] rc.25基準の公開スターターと`4.0.0-rc.25`の非埋め込みStandard SB3を用意した
+- [ ] rc.41基準の公開スターターと`4.0.0-rc.41`の非埋め込みStandard SB3を用意した
 - [ ] TurboWarp Editorで緑の旗を押し、「開く」から作品フォルダーを選んだ
 - [ ] セリフを一行変更し、自動検査後にプレビューへ反映した
 - [ ] 新しい背景、登場人物、場面を追加した
