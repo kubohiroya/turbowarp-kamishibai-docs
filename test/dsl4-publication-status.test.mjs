@@ -56,6 +56,8 @@ test('links the resolved public app without relabeling historical samples', () =
         'create.md',
         'create-blocks.md',
         'dsl-4.0-author-guide.md',
+        'dsl-4.0-block-author-guide.md',
+        'dsl-4.0-block-script-conversion-guide.md',
       ].includes(sourceFilename)
     ) {
       assert.ok(source.includes(appRelease.version), sourceFilename);
