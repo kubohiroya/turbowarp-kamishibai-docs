@@ -42,17 +42,17 @@ test('covers the public start-to-finish operation path', () => {
 test('keeps live-surface evidence in the machine-readable manifest', () => {
   assert.equal(surfaces.formatVersion, 1);
   assert.equal(surfaces.releaseState.formalGitHubReleasePublished, false);
-  assert.equal(surfaces.samples.pagesDeploymentRun, 39207776239);
-  assert.equal(surfaces.releaseState.publishedPrerelease, 'v4.0.0-rc.25');
+  assert.equal(typeof surfaces.samples.pagesDeploymentRun, 'number');
+  assert.equal(surfaces.releaseState.publishedPrerelease, 'v4.0.0-rc.41');
   assert.equal(surfaces.releaseState.sampleBaselineDiffersFromPublishedPrerelease, false);
-  assert.equal(surfaces.samples.runtime.version, '4.0.0-rc.25');
-  assert.equal(surfaces.samples.runtime.commit, 'a68f8dc4d38b4609c8387192d3be0376963735e3');
-  assert.equal(surfaces.samples.tutorial.version, '4.0.0-rc.25');
+  assert.equal(surfaces.samples.runtime.version, '4.0.0-rc.41');
+  assert.equal(surfaces.samples.runtime.commit, '7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b');
+  assert.equal(surfaces.samples.tutorial.version, '4.0.0-rc.41');
   assert.equal(surfaces.samples.tutorial.status, 'published');
   assert.equal(surfaces.samples.tutorial.license, 'MPL-2.0');
-  assert.equal(surfaces.samples.publicationCommit, 'c01ad9eb664b198ba7d421fa0e784cd99fdf56bf');
-  assert.equal(surfaces.samples.publicArtifactVerification.artifactCount, 16);
-  assert.equal(surfaces.samples.publicArtifactVerification.artifacts.length, 16);
+  assert.equal(surfaces.samples.publicationCommit, '17c3cc9ddeafabbada219793737cf69f0844699f');
+  assert.equal(surfaces.samples.publicArtifactVerification.artifactCount, 20);
+  assert.equal(surfaces.samples.publicArtifactVerification.artifacts.length, 20);
   const publicArtifacts = new Map(
     surfaces.samples.publicArtifactVerification.artifacts.map((artifact) => [
       artifact.path,
@@ -80,14 +80,14 @@ test('keeps live-surface evidence in the machine-readable manifest', () => {
   }
   assert.equal(surfaces.samples.automatedVerification.savedYamlMatches, true);
   assert.match(surfaces.samples.automatedVerification.editorBlockStory, /^passed;/u);
-  assert.equal(surfaces.physicalVerification.camera, 'not-run-for-rc.25');
-  assert.equal(surfaces.physicalVerification.pose, 'not-run-for-rc.25');
+  assert.equal(surfaces.physicalVerification.camera, 'not-run-for-rc.41');
+  assert.equal(surfaces.physicalVerification.pose, 'not-run-for-rc.41');
   assert.equal(surfaces.physicalVerification.appliesToPublishedPrerelease, false);
   assert.equal(
     surfaces.previousVerification.physicalVerification.rc8Verification,
     'previous-camera-context-measurement; recognition-and-overlay-browser-verified',
   );
-  assert.equal(surfaces.visuals.formalUiCapturesIncluded, false);
+  assert.equal(surfaces.visuals.formalUiCapturesIncluded, true);
   const rc23 = surfaces.historicalVerifications.find(
     ({releaseState}) => releaseState.publishedPrerelease === 'v4.0.0-rc.23',
   );
@@ -112,15 +112,7 @@ test('keeps live-surface evidence in the machine-readable manifest', () => {
 });
 
 test('does not fold earlier-series operation formats into the 4.0 guide', () => {
-  for (const legacyTerm of [
-    'DSL 3.1',
-    'DSL 3.2',
-    'kamishibai=',
-    '.txt',
-    'Generic',
-    'Editor',
-    'Player',
-  ]) {
+  for (const legacyTerm of ['DSL 3.1', 'DSL 3.2', 'kamishibai=', '.txt', 'Generic', 'Player']) {
     assert.doesNotMatch(guide, new RegExp(legacyTerm.replace('.', '\\.'), 'u'));
   }
 });

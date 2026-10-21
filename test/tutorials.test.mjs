@@ -22,10 +22,9 @@ const publicationPlan = JSON.parse(
   readFileSync(path.join(tutorialRoot, 'publication-plan.json'), 'utf8'),
 );
 const packageManifest = JSON.parse(readFileSync(path.join(projectRoot, 'package.json'), 'utf8'));
-// The tutorial targets the published rc.8 SB3, so it validates against the rc.8 Schema snapshot
-// rather than the newer Schema pinned for the reference.
+// Current tutorial examples use the Schema synchronized from the verified public app release.
 const dsl4Schema = JSON.parse(
-  readFileSync(path.join(projectRoot, 'sources/dsl4/dsl-4.0-rc.25.schema.json'), 'utf8'),
+  readFileSync(path.join(projectRoot, 'sources/dsl4/dsl-4.schema.json'), 'utf8'),
 );
 const tutorialSources = Object.fromEntries(
   ['README.md', 'play.md', 'create.md'].map((filename) => [
@@ -507,7 +506,7 @@ test('maps every planned screenshot to a draft marker and a release gate', () =>
 });
 
 test('keeps the published prerelease reviewable with its fixed captures', () => {
-  assert.match(tutorialSources['README.md'], /### rc\.25の現行基準/u);
+  assert.match(tutorialSources['README.md'], /### 過去の確認基準（rc\.25）/u);
   assert.match(tutorialSources['README.md'], /### 過去の実装追跡（rc\.8）/u);
   assert.match(tutorialSources['README.md'], /rc\.25の検証へ読み替えません/u);
   assert.match(tutorialSources['README.md'], /公開プレリリース/u);
@@ -529,7 +528,7 @@ test('keeps the published prerelease reviewable with its fixed captures', () => 
   assert.match(tutorialSources['create.md'], /preview-dsl4 --help/u);
   assert.match(tutorialSources['create.md'], /validate-dsl4/u);
   assert.match(tutorialSources['create.md'], /build-dsl4/u);
-  assert.match(tutorialSources['create.md'], /4\.0\.0-rc\.25/u);
+  assert.match(tutorialSources['create.md'], /4\.0\.0-rc\.41/u);
   assert.match(tutorialSources['create.md'], /addition-kit\/earthquake-classroom\.svg/u);
   assert.match(tutorialSources['create.md'], /addition-kit\/add-pose-scene\.yml\.txt/u);
   assert.match(tutorialSources['create.md'], /file: classroom\.svg/u);

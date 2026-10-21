@@ -1,0 +1,49 @@
+{
+  "formatVersion": 1,
+  "verifiedOn": "2026-10-21",
+  "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/236",
+  "runtimeVersion": "4.0.0-rc.41",
+  "runtimeCommit": "7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b",
+  "url": "https://kubohiroya.github.io/turbowarp-kamishibai-app/players/4.0.0-rc.41/",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "locale": "ja-JP",
+  "captureMethod": "Actual Chrome page screenshots of the published HTML; no image composition or source/VM overrides. Real OPFS YAML fixture and SVG backdrop; file picker selection points to the OPFS directory; camera uses test media.",
+  "camera": "synthetic-browser-input",
+  "story": "Operation verification YAML fixture, not a tutorial story scene.",
+  "screenshots": [
+    {
+      "path": "docs/images/runtime-rc41/update-detection.png",
+      "size": 54944,
+      "sha256": "86ea2bc60660981d5d979b638a26d6632c7f857944761a9f401205052e278c74"
+    },
+    {
+      "path": "docs/images/runtime-rc41/reload-settings.png",
+      "size": 112872,
+      "sha256": "91935483ebe6b86d5e26154bf22e5e5fcfec82649dd45d654a1a34d4df801094"
+    },
+    {
+      "path": "docs/images/runtime-rc41/dock-settings.png",
+      "size": 66286,
+      "sha256": "0568379bcd8d44038fd9396acff9d8806702d3e24db53b09dce979a3d140b1c7"
+    },
+    {
+      "path": "docs/images/runtime-rc41/camera-settings.png",
+      "size": 67682,
+      "sha256": "02ec5d297c76ca626a319acfdbe5b6c29310eddbcab65639954a58f551a35434"
+    }
+  ],
+  "checks": [
+    "タイトル/メニューでは不要なDockを非表示",
+    "カメラ・更新検知・設定の全ボタンを48px以上で表示",
+    "設定ラベルと24pxアイコンを表示",
+    "共通カメラ入口と設定パネルを確認",
+    "更新検知ラベル・台本ファイルを明示する説明・再開位置設定の保存と開閉を確認",
+    "上下左右の配置変更を確認",
+    "自動非表示のON/OFFを確認",
+    "390px幅で設定ボタンの表示とタッチ開閉を確認"
+  ],
+  "publicHtmlSha256": "7bd58a9e8dd7d239886691ade2bc0a9a08b1eba165723d19d068bc42cfe06f59"
+}
