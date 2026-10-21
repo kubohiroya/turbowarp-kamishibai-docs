@@ -1270,3 +1270,15 @@ Issue #886の種類別定義ブロックへ更新しています。
 - [DSL 4.0 include文の複数ファイル対応](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/docs/design/dsl-4-source-include-preview.md): include、transaction、有限上限、rollback
 - [DSL 4.0 ポーズoverlay実装 Issue #624](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/624): Schema、TurboWarp Teachable Machine 1.12.0 composition API mapping、YAML opt-in、rollback
 - [DSL 4.0総合fixture](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/450a5bb950ef769241ec8258690e652b39b23bde/test/fixtures/dsl4/valid/comprehensive.kamishibai.yaml): schemaと意味検証を通る総合例
+
+
+## 次回4.0プレリリースの音声再生
+
+rc.38の次の4.0プレリリース向けに、`audio`で停止状態の音声をIDへ準備し、`audioControl`で個別に再生・停止・一時停止・再開・シーク・音量・ミュート・速度を操作する構成を追加します。再生時は`fadeIn`・`volume`・`fadeOut`、停止時は`fadeOut`を指定できます。音量は100が既定で0以上の有限数、100超は増幅です。
+
+対応するブロックは次の2つです。空の追加入力は省略・継承を表します。
+
+- `prepare audio [ID] from [SOURCE_TYPE] [SOURCE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds`
+- `audio [ID] [OPERATION] value [VALUE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds`
+
+旧BGM/SEの命令と寿命・crossfadeは維持します。scene単位の新しい音声IDと、sceneを跨ぐ旧BGMは寿命が異なるため、既存作品のBGMを一律に置換しません。詳細は[音声再生ガイド](../dsl-author-guides/dsl-4.0-audio-guide.md)を参照してください。
