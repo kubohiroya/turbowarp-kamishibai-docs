@@ -902,6 +902,33 @@
             "`seek`には`seconds`、`setVolume`には`volume`、`setMuted`には`muted`、`setPlaybackRate`には`rate`が必要です。",
             "未作成のIDは診断されます。音声付き自動再生が拒否された場合は、ブラウザのメディア再生許可と操作起点を確認してください。"
           ]
+        },
+        {
+          "pointer": "#/$defs/audioAction",
+          "order": 210,
+          "title": "`audio`",
+          "summary": "sound素材または直接URLから、ID付きの音声instanceを停止状態で準備します。",
+          "example": "audio:\n  id: music\n  asset: Theme\n  volume: 100\n  fadeIn: 0.2\n  fadeOut: 0.4",
+          "notes": [
+            "素材にはkind: soundを使います。assetとurlはどちらか一つです。",
+            "音量は既定100の0以上の有限数で、100超は増幅します。",
+            "IDはscene単位で、scene切替・終了・素材解放時に停止と資源回収を行います。旧BGMのstory寿命は維持します。",
+            "4.0.0-rc.39のStandard SB3/npmで利用できます。rc.38以前の公開版は対応しません。"
+          ]
+        },
+        {
+          "pointer": "#/$defs/audioControlAction",
+          "order": 220,
+          "title": "`audioControl`",
+          "summary": "音声IDを指定し、再生・停止・一時停止・再開・位置・音量・ミュート・速度を操作します。",
+          "example": "audioControl:\n  id: music\n  operation: play\n  fadeIn: 0.2\n  volume: 150\n  fadeOut: 0.4",
+          "notes": [
+            "playUntilDoneは終了待ち、playはバックグラウンド、loopは繰り返し再生です。pause・resume・seek・setVolume・setMuted・setPlaybackRateも使用できます。",
+            "playUntilDone/play/loop/resumeにはfadeIn・volume・fadeOut、stopにはfadeOutを指定できます。秒数は0以上の有限数です。",
+            "再生音量の省略時は現在値を保持します。setVolumeはvolumeを指定します。ブロックではVALUE欄を使用し、再生用VOLUME欄を空にします。",
+            "loopの周回ごとにはfadeOutせず、stopで指定秒数を待って停止します。scene終了時は即時解放です。",
+            "CORSとブラウザのautoplay許可に従い、拒否はK4-AUDIO-AUTOPLAYとして診断します。詳細は[音声再生ガイド](dsl-4.0-audio-guide.md)を参照してください。"
+          ]
         }
       ]
     },

@@ -35,9 +35,11 @@ test('lists every public rc.25 bundled block with its member and arguments', () 
   const members = new Set(surface.blocks.map(({opcode}) => opcode.split('__')[0]));
   assert.equal(members.size, 8);
   const rows = [
-    ...blockReference.matchAll(
-      /^\|\s+`([^`]+)`\s+\|\s+(command|reporter|Boolean|boolean|hat)\s+\|\s+(.+?)\s+\|\s+(.+?)\s+\|$/gmu,
-    ),
+    ...blockReference
+      .split('## 履歴: rc.25の構成')[1]
+      .matchAll(
+        /^\|\s+`([^`]+)`\s+\|\s+(command|reporter|Boolean|boolean|hat)\s+\|\s+(.+?)\s+\|\s+(.+?)\s+\|$/gmu,
+      ),
   ];
   assert.equal(rows.length, surface.blocks.length);
   assert.deepEqual(
@@ -160,4 +162,27 @@ test('cross-links the author and programmer variable guides', () => {
   );
   for (const source of [runtimeVariableGuide, runtimeVariableReference])
     assert.match(source, /4\.0\.0-rc\.25/u);
+});
+
+test('records rc.39 audio inputs without relabeling the historical rc.25 surface', () => {
+  const current = JSON.parse(
+    readFileSync(new URL('../sources/dsl4/standard-surface-rc39.json', import.meta.url), 'utf8'),
+  );
+  assert.equal(current.version, '4.0.0-rc.39');
+  assert.equal(current.blocks.length, 207);
+  const runtime = current.blocks.filter(({opcode}) =>
+    opcode.startsWith('kubohiroyakamishibairuntime4__'),
+  );
+  assert.equal(runtime.length, 50);
+  for (const opcode of ['audio', 'audioControl']) {
+    const block = runtime.find((block) => block.opcode.endsWith('__' + opcode));
+    assert.ok(block);
+    for (const name of ['ID', 'FADEIN', 'VOLUME', 'FADEOUT'])
+      assert.ok(Object.hasOwn(block.arguments, name));
+    assert.ok(blockReference.includes(block.text));
+    assert.equal(
+      surface.blocks.some((block) => block.opcode.endsWith('__' + opcode)),
+      false,
+    );
+  }
 });

@@ -2,6 +2,31 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
+文書基準: 公開プレリリース`4.0.0-rc.39`、commit `367a9498`、2026年10月21日。正式版4.0.0は未公開です。
+
+## rc.39の構成とrc.25からの追加
+
+rc.39の再生runtimeをChromium/Packagerへ読み込み、表示対象のopcode付きブロック207個、8 memberを照合しました。
+Runtime memberは50個、Camera Sourceは41個です。その他6 memberの個数は下記のrc.25一覧と同じです。
+編集用拡張の補助ブロック、見出し、ドキュメントボタン、非表示ブロックは含めません。
+抽出結果は`sources/dsl4/standard-surface-rc39.json`へ記録しています。
+
+rc.25の一覧から追加されたブロックは次のとおりです。音声の引数・省略値・寿命は[音声再生ガイド](../dsl-author-guides/dsl-4.0-audio-guide.md)、動画は[動画再生ガイド](../dsl-author-guides/dsl-4.0-video-guide.md)を参照してください。
+
+| member内opcode | 種類 | ブロック文 |
+| --- | --- | --- |
+| `audio` | command | prepare audio [ID] from [SOURCE_TYPE] [SOURCE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds |
+| `audioControl` | command | audio [ID] [OPERATION] value [VALUE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds |
+| `video` | command | show video [ID] from [SOURCE_TYPE] [SOURCE] x [X] y [Y] width [WIDTH] height [HEIGHT] plane [PLANE] z-index [ZINDEX] |
+| `videoControl` | command | video [ID] [OPERATION] value [VALUE] |
+| `startSharedCameraFromCameraButton` | command | start shared camera [CAMERA_ID] from the browser's camera button |
+| `hideCameraButton` | command | hide the camera button for shared camera [CAMERA_ID] |
+| `cameraButtonAvailable` | Boolean | browser's camera button available? |
+
+以降の200個の表と依存versionは、比較用に保持するrc.25時点の履歴です。現在の個数や依存versionとしては使いません。
+
+## 履歴: rc.25の構成
+
 文書基準: 公開プレリリース`4.0.0-rc.25`、commit `a68f8dc4`、2026年10月19日。正式版4.0.0は未公開です。
 
 対象: DSL 4.0ランタイムをTurboWarp Editorで開き、集約されたブロックからプログラムを書く方。
@@ -377,9 +402,9 @@ rc.25の素材保持はAsset Cacheが担当し、
 ![TurboWarpの集約パレットに表示されたTurboWarp Teachable Machine 3.5.1の37ブロック](../images/dsl4-palette-tmpose.png)
 
 
-## 次回4.0プレリリースの音声再生
+## rc.39の音声再生
 
-rc.38の次の4.0プレリリース向けに、`audio`で停止状態の音声をIDへ準備し、`audioControl`で個別に再生・停止・一時停止・再開・シーク・音量・ミュート・速度を操作する構成を追加します。再生時は`fadeIn`・`volume`・`fadeOut`、停止時は`fadeOut`を指定できます。音量は100が既定で0以上の有限数、100超は増幅です。
+4.0.0-rc.39では、`audio`で停止状態の音声をIDへ準備し、`audioControl`で個別に再生・停止・一時停止・再開・シーク・音量・ミュート・速度を操作できます。再生時は`fadeIn`・`volume`・`fadeOut`、停止時は`fadeOut`を指定できます。音量は100が既定で0以上の有限数、100超は増幅です。
 
 対応するブロックは次の2つです。空の追加入力は省略・継承を表します。
 
