@@ -14,8 +14,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 次のリンクから、公開済みのブロック台本SB3を日本語のExtension Data Editorへ直接読み込めます。
 
-- [地震安全チュートリアルのブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3)
-- [浦島太郎のブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3)
+- [地震安全チュートリアルのブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3)
+- [浦島太郎のブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3)
 
 拡張の読み込み確認では、それぞれ「サンドボックスなしで実行する」を有効にして許可します。
 ステージのコードにある専用定義ブロックの白い書類アイコンを押すと、JSONをフォームで編集できます。
@@ -134,7 +134,7 @@ Princessスプライトの仮衣装`p1`、`p2`…を参加者のポーズ画像�
 
 ## フォームでJSONを編集する
 
-1. [編集ダイアログ付き日本語Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?blockEditorDialogs=1&lang=ja)を開き、公開rc.41のCLIで生成した編集用SB3を読み込む
+1. [編集ダイアログ付き日本語Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開き、公開rc.41のCLIで生成した編集用SB3を読み込む
 2. 編集用拡張をサンドボックスなしで読み込む
 3. 配置した専用ブロックの左端にある白い書類のアイコンを押す。キーボードではアイコンへフォーカスしてEnterを押す
 4. フォームの項目を編集し、「保存」を押す。「キャンセル」では入力欄へ反映しない
