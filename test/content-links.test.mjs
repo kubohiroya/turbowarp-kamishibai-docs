@@ -39,6 +39,21 @@ test('resolves local links and images in every Markdown source', () => {
 
   for (const sourcePath of sources) {
     const source = readFileSync(sourcePath, 'utf8');
+    for (const match of source.matchAll(
+      /https:\/\/kubohiroya\.github\.io\/(?:scratch-gui|turbowarp-extension-data-editor)\/editor\.html[^)\s\]]*/gu,
+    )) {
+      const editor = new URL(match[0]);
+      assert.equal(editor.pathname, '/turbowarp-extension-data-editor/editor.html', sourcePath);
+      assert.equal(editor.searchParams.get('lang'), 'ja', sourcePath);
+      assert.equal(editor.searchParams.has('blockEditorDialogs'), false, sourcePath);
+      if (editor.searchParams.has('project_url')) {
+        assert.match(
+          editor.searchParams.get('project_url'),
+          /^https:\/\/kubohiroya\.github\.io\/turbowarp-kamishibai-samples\/stories\//u,
+          sourcePath,
+        );
+      }
+    }
     for (const reference of localReferences(source)) {
       assert(
         existsSync(path.resolve(path.dirname(sourcePath), reference)),
