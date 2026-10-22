@@ -122,10 +122,7 @@ test('gives each current 4.0 guide its reviewed release scope', () => {
         'dsl-4.0-block-script-conversion-guide.md',
       ].includes(document.sourceFilename)
     ) {
-      assert.ok(
-        source.includes(json('sources/dsl4/app-release.json').version),
-        document.sourceFilename,
-      );
+      assert.ok(source.includes(currentSurfaces.samples.runtime.version), document.sourceFilename);
       continue;
     }
     if (document.sourceFilename === 'dsl-4.0-audio-guide.md') {

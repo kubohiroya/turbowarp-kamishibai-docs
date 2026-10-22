@@ -9,6 +9,9 @@ const read = (relativePath) => readFileSync(new URL(`../${relativePath}`, import
 const statusPolicy = read('DSL4-PUBLICATION-STATUS.md');
 const dsl4Index = read('site/4.0/index.html');
 const appRelease = JSON.parse(read('sources/dsl4/app-release.json'));
+// Reviewed guide content follows its verification snapshot, not the floating app release.
+const reviewedSampleVersion = JSON.parse(read('sources/dsl4/user-guide-4.0-public-surfaces.json'))
+  .samples.runtime.version;
 const dsl4Documents = documentationConfig.documents
   .filter((document) => document.version === '4.0')
   .map((document) => ({
@@ -60,7 +63,7 @@ test('links the resolved public app without relabeling historical samples', () =
         'dsl-4.0-block-script-conversion-guide.md',
       ].includes(sourceFilename)
     ) {
-      assert.ok(source.includes(appRelease.version), sourceFilename);
+      assert.ok(source.includes(reviewedSampleVersion), sourceFilename);
     } else if (sourceFilename === 'dsl-4.0-audio-guide.md') {
       assert.match(source, /4\.0\.0-rc\.39/u);
       assert.match(source, /rc\.38以前は未対応/u);
