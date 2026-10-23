@@ -929,6 +929,17 @@
             "loopの周回ごとにはfadeOutせず、stopで指定秒数を待って停止します。scene終了時は即時解放です。",
             "CORSとブラウザのautoplay許可に従い、拒否はK4-AUDIO-AUTOPLAYとして診断します。詳細は[音声再生ガイド](dsl-4.0-audio-guide.md)を参照してください。"
           ]
+        },
+        {
+          "pointer": "#/$defs/gotoSegmentAction",
+          "order": 85,
+          "title": "`gotoSegment`",
+          "summary": "publication manifestで現在の章のnextに宣言した章へ、台本から明示的に移ります。章末で自動遷移せず、同じ台本内のsceneへ移るgotoとは区別します。",
+          "example": "gotoSegment: chapter2",
+          "notes": [
+            "publication hostが必要です。単一台本hostでは能力検証で拒否します。",
+            "entryPointsは初期読込用で、章の自由選択や過去状態の復元を提供するものではありません。章の変数はその章の初期値から開始します。"
+          ]
         }
       ]
     },

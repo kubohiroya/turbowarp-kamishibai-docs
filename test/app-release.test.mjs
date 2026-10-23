@@ -55,6 +55,7 @@ function upstream({npmStatus = 404, corrupt = false, version = '4.0.0-rc.30'} = 
       ],
       [`${raw}/package.json`, {name: '@kubohiroya/turbowarp-kamishibai-app', version}],
       [`${raw}/schema/dsl-4.schema.json`, schema],
+      [`${raw}/schema/dsl-4-narrative-control.schema.json`, null],
       [artifact.url, corrupt ? Buffer.from('x'.repeat(bytes.length)) : bytes],
       [
         `https://registry.npmjs.org/@kubohiroya%2Fturbowarp-kamishibai-app/${version}`,
@@ -70,7 +71,8 @@ function upstream({npmStatus = 404, corrupt = false, version = '4.0.0-rc.30'} = 
     calls.push({url, options});
     assert(routes.has(url), `Unexpected upstream URL: ${url}`);
     const value = routes.get(url);
-    const status = url.startsWith('https://registry.npmjs.org/') ? npmStatus : 200;
+    const status =
+      value === null ? 404 : url.startsWith('https://registry.npmjs.org/') ? npmStatus : 200;
     return new Response(
       typeof value === 'string'
         ? value
@@ -217,4 +219,18 @@ test('scheduled updates compare against the deployed release rather than a stale
     }),
     /HTTP 503/u,
   );
+});
+
+test('pins the narrative structure schema to the same verified release commit without requiring npm', async () => {
+  const fixture = upstream({version: '4.0.0-rc.44'});
+  const source = '{"$id":"dsl-4-narrative-control","type":"object"}\n';
+  fixture.routes.set(
+    `https://raw.githubusercontent.com/${repository}/${fixture.commit}/schema/dsl-4-narrative-control.schema.json`,
+    source,
+  );
+  const {lock, narrativeSchemaSource} = await resolveAppRelease(fixture);
+  assert.equal(lock.narrativeSchema.commit, lock.commit);
+  assert.equal(lock.narrativeSchema.sha256, sha256(source));
+  assert.equal(narrativeSchemaSource, source);
+  assert.equal(lock.npm.published, false);
 });

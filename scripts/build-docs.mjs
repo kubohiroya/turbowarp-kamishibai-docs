@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {existsSync} from 'node:fs';
 import {copyFile, cp, mkdir, readFile, readdir, rename, rm, writeFile} from 'node:fs/promises';
@@ -540,6 +541,22 @@ export async function buildDocs({force = false} = {}) {
     mkdir(path.join(distRoot, 'licenses'), {recursive: true}),
   ]);
   await writeFileIfChanged(path.join(distRoot, '.nojekyll'), '');
+  const narrativeSchema =
+    'narrativeSchema' in appRelease
+      ? /** @type {{sha256: string}} */ (appRelease.narrativeSchema)
+      : undefined;
+  if (narrativeSchema) {
+    const schema = await readFile(
+      path.join(projectRoot, 'sources/dsl4/dsl-4-narrative-control.schema.json'),
+    );
+    if (createHash('sha256').update(schema).digest('hex') !== narrativeSchema.sha256)
+      throw new Error('Narrative schema differs from its release lock.');
+    await mkdir(path.join(distRoot, '4.0/schema'), {recursive: true});
+    await writeFileIfChanged(
+      path.join(distRoot, '4.0/schema/dsl-4-narrative-control.schema.json'),
+      schema,
+    );
+  }
   await writeFileIfChanged(
     path.join(distRoot, 'app-release.json'),
     `${JSON.stringify(appRelease, null, 2)}\n`,

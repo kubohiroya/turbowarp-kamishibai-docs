@@ -543,9 +543,11 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 
 ## DSL 4.0 RC改訂の物語反復と条件分岐
 
-`if`／`repeat`／`forEach`の専用囲み、型付き参照、各回の一覧表は開発中・未配布です。
+`if`／`repeat`／`forEach`の専用囲み、型付き参照、各回の一覧表は、App 4.0.0-rc.44以降のStandardで利用できます。
 [作者ガイドの4.0 RC改訂仕様](dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
-公開4.0.0-rc.43、既存4.0 Schema、公開配布物の対応範囲は変わりません。
-起動時固定・既定OFFの`dsl4NarrativeControl`と対応する開発runnerが必要です。
-変換・検証・build・previewでは開発CLIに`--narrative-control`を明示し、旧runnerとの混在を拒否します。
+宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
+Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。rc.44のnpm版は未公開のため、CLIは対応Release tagからbuildしてください。
 標準Scratch制御ブロックは引き続き非対応です。
+
+[三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、公開Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
