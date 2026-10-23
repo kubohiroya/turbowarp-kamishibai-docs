@@ -35,14 +35,15 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 公開プレリリースと文書基準
 
-文書状態: 公開プレリリース`4.0.0-rc.41`の固定実装基準を説明する台本作成ガイド\
+文書状態: 公開プレリリース`4.0.0-rc.46`のruntime・Schemaに対応する台本作成ガイド\
 調査基準: TurboWarp-Kamishibai `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`、2026年10月21日
 
 正式な`v4.0.0`は未公開です。公開runtimeと[Schemaリファレンス](dsl-4.0-schema-reference.md)を
-同じrc.41へ揃えています。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
+同じrc.46へ揃えています。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
 `audio` / `audioControl`はrc.39から利用できます。旧BGM/SE命令も引き続き使えます。
 
-Schema基準: `7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b`（rc.41公開tag）。
+Schema基準: `55893d6206df0ee1db54bfdf2080c91f4d6e198c`（rc.46公開tag）。
+本文・図版の個別検証記録は`4.0.0-rc.41`など作成当時の版を保持します。公開サンプルの参照版は各作品の生成記録で確認してください。
 本文中のrc.25などの表記は、その機能が公開された時点や図版の作成基準を示します。
 旧版のSchema snapshotは履歴として保持し、新しい台本は現在のSchemaで検査します。
 
@@ -61,7 +62,7 @@ include文付きのYAMLから、ラベル付き台本と`includeBlocks`を持つ
 カメラはCamera Sourceが所有し、認識側が映像を借ります。プレビューは映像をそのまま表示し、推論には中央の
 正方形を切り出して左右反転した入力を使います。プレビューの左右反転と推論入力の処理を同一視しないでください。
 タイトルのカメラ許可は、対応ブラウザー・ポーズ作品・有効な機能フラグの条件が揃った場合に表示されます。
-rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行のrc.41を選びます。
+rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行のrc.46を選びます。
 
 ローカルプレビューはリモート素材を読み込みません。rc.25では失敗時にダイアログが表示されます。
 `K4-ASSET-REMOTE-DISABLED`ならローカル配信へ変更するか、ビルドした作品で確認してください。
@@ -1997,9 +1998,9 @@ App **4.0.0-rc.44以降のStandard**では、物語の有限反復・条件分�
 
 [三人の訪問の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)から、
 Web再生・ブロック台本SB3のダウンロード・公開Editorでの編集を始められます。
-**rc.44のnpm版は未公開**です。旧npm版や`@next`が物語制御に対応するとは限りません。
-CLIが必要ならAppの`v4.0.0-rc.44`タグを別checkoutへ取得し、`pnpm install --frozen-lockfile`、
-`pnpm build:lib`を実行して`node bin/turbowarp-kamishibai.mjs`を使います。追加の`--narrative-control`は不要です。
+現在の公開版は**4.0.0-rc.46**です。[npmの同一版](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.46)を利用できます。
+CLIは`npm exec --package=@kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.46 -- turbowarp-kamishibai --help`で起動できます。
+ベースSB3も同じrc.46へ揃えます。追加の`--narrative-control`は不要です。
 安定版3.2系列の既存作品・導線は引き続き利用できます。
 
 ### 同じ展開と各回の違いを分ける

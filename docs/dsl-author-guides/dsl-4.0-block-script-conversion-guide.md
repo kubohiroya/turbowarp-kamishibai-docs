@@ -2,6 +2,8 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.46**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.46)と[npmの同一版](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.46)を使います。以下のrc.41などの検証記録・図版は作成当時の版を示します。
+
 対象: YAML台本をTurboWarpのブロックで編集し、編集結果をYAMLへ戻したい方。\
 確認日: 2026年10月21日。公開プレリリース`4.0.0-rc.41`を対象にします。正式版4.0.0は未公開です。
 
@@ -49,12 +51,12 @@ file素材には対応するアセットバンドルがSB3内に必要です。�
 
 Node.js 24.0.0以上の環境で、作業用フォルダーにCLIの版を固定してインストールします。
 以下は公開rc.41で、素材を使わない単一台本を生成・書き戻しする例です。
-`base.sb3`には[rc.41のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.41)から
+`base.sb3`には[rc.46のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.46)から
 取得したStandard SB3を使用します。YAMLとベースSB3は、次のコマンドを実行するフォルダーへ置きます。
 rc.41は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不要です。
 
 ```sh
-npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.41
+npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.46
 npx --no-install turbowarp-kamishibai --version
 
 npx --no-install turbowarp-kamishibai author-block-dsl \
@@ -91,7 +93,7 @@ npx --no-install turbowarp-kamishibai --version
 表示が利用中の固定版（`4.0.0-rc.23`または`4.0.0-rc.25`）のままであることを確認し、
 書き出し・検査・ビルドを再実行します。CLIの版を下げる必要はありません。
 既存の公開rc.23・rc.25の依存宣言は、後続版で修正しても変わりません。
-新規導入では前節のrc.41を使ってください。
+新規導入では前節のrc.46を使ってください。
 
 ## 実命令ブロックを編集して書き戻す
 
@@ -105,7 +107,7 @@ mkdir -p output/block-script
 npx --no-install turbowarp-kamishibai --version
 ```
 
-表示が`4.0.0-rc.41`であることを確認します。
+表示が`4.0.0-rc.46`であることを確認します。
 
 `output/block-script/story.k4.yml`をUTF-8で保存します。この例は素材やカメラを使いません。
 
@@ -522,7 +524,7 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 | `K4-BLOCK-SOURCE-REMOVED-001`    | 旧ハットは非対応。元のYAMLから新ハットのSB3を再生成する。              |
 | JSONのエラー                     | 引用符・カンマ・括弧を確認する。JSON中の文字列には二重引用符を使う。   |
 | シーンや素材の参照エラー         | 改名したシーンや素材に合わせ、命令側の参照も変更する。                 |
-| 命令単位のブロックが生成されない | 固定CLIが4.0.0-rc.41か確認し、旧YAMLから再生成する。                   |
+| 命令単位のブロックが生成されない | 固定CLIが4.0.0-rc.46か確認し、旧YAMLから再生成する。                   |
 
 不正な編集結果から、それらしいYAMLを生成することはありません。表示された原因を修正し、編集後のSB3を保存して再実行します。
 
@@ -547,7 +549,7 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 [作者ガイドの4.0 RC改訂仕様](dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
 宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
 Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
-通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。rc.44のnpm版は未公開のため、CLIは対応Release tagからbuildしてください。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.46です。[npmの同一版](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.46)のCLIと、同じrc.46のベースSB3を使います。
 標準Scratch制御ブロックは引き続き非対応です。
 
 [三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、公開Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
