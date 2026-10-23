@@ -8,7 +8,8 @@ on:
   repository_dispatch:
     types: [app-release-published]
   schedule:
-    - cron: '17 * * * *'
+    # More opportunities to recover when GitHub delays or drops a scheduled event.
+    - cron: '17,47 * * * *'
 
 permissions:
   contents: read

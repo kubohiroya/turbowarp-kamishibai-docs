@@ -248,19 +248,45 @@ export async function publishedAppReleaseDiffers(current, {fetchImplementation =
   return JSON.stringify(published) !== JSON.stringify(current);
 }
 
+/** Record a successful dependency check without implying a deployment succeeded. */
+export function appReleaseCheckSummary(lock, {changed, comparedWithPublished, checkedAt}) {
+  const comparison = comparedWithPublished ? '公開済みmanifest' : 'checkoutのsnapshot';
+  return `## App公開版の確認
+
+- 確認時刻: ${checkedAt}
+- 検証済みRelease: ${lock.tag}
+- source commit: \`${lock.commit}\`
+- SB3 SHA-256: \`${lock.artifact.sha256}\`
+- 比較先: ${comparison}
+- 比較結果: ${changed ? '差分あり' : '差分なし'}
+
+これは依存の取得・照合結果です。公開完了はdeploy jobと公開URLで確認してください。
+
+`;
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   assert.equal(process.argv.length, 2, 'Usage: node scripts/app-release.mjs');
   const changed = await syncAppRelease();
+  const current = JSON.parse(
+    await readFile(path.join(projectRoot, 'sources/dsl4/app-release.json'), 'utf8'),
+  );
+  const comparedWithPublished = process.env.COMPARE_PUBLISHED_APP_RELEASE === 'true';
   let publish = changed;
   // Scheduled runs compare with deployed bytes, which can be newer than this checkout.
-  if (process.env.COMPARE_PUBLISHED_APP_RELEASE === 'true') {
-    const current = JSON.parse(
-      await readFile(path.join(projectRoot, 'sources/dsl4/app-release.json'), 'utf8'),
+  if (comparedWithPublished) publish = await publishedAppReleaseDiffers(current);
+  const {appendFile} = await import('node:fs/promises');
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    await appendFile(
+      process.env.GITHUB_STEP_SUMMARY,
+      appReleaseCheckSummary(current, {
+        changed: publish,
+        comparedWithPublished,
+        checkedAt: new Date().toISOString(),
+      }),
     );
-    publish = await publishedAppReleaseDiffers(current);
   }
   if (process.env.GITHUB_OUTPUT) {
-    const {appendFile} = await import('node:fs/promises');
     await appendFile(process.env.GITHUB_OUTPUT, `changed=${publish}\n`);
   }
 }

@@ -169,10 +169,25 @@ pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit
 Schemaリファレンスを再生成します。取得・照合・Annotation検証の失敗は公開を停止させます。
 
 CIとPagesはこの同期を検証の前に実行します。Pagesはmain更新、手動実行、
-`app-release-published`のrepository dispatchに加え、毎時17分に上流を確認します。
+`app-release-published`のrepository dispatchに加え、毎時17分・47分に上流を確認します。
 定期確認で依存情報に変化がなければ文書ビルドと公開を省略します。日付が変わった際は確認日も更新します。
-app側の変更だけでも次の定期確認から検証・公開へ進みます。GitHub Actionsの遅延を含むため即時反映は保証しません。
+上流更新を検出した実行から検証・公開へ進みます。GitHub Actionsの定期実行は遅延・欠落する場合があり、反映時刻は保証しません。
 実際に使用した依存情報を公開サイトの`app-release.json`と`build-info.json`へ保存します。
+
+`app-release-published`は受信口です。他repoのReleaseは自動伝播せず、調査時点のAppにはこの通知の送信処理がないため、通常は定期確認に依存します。
+確認が実行されるとActionsのjob summaryに時刻・検証済みRelease・source commit・SB3 hash・比較先・差分判定を記録します。
+「差分なし」と「実行が作成されていない」を区別し、summaryの成功を公開完了と扱わないでください。
+
+公開が古い場合は、[Actionsの実行履歴](https://github.com/kubohiroya/turbowarp-kamishibai-docs/actions)と
+[公開app-release.json](https://kubohiroya.github.io/turbowarp-kamishibai-docs/app-release.json)を照合します。
+定期実行がない場合は、write権限のある担当者が次の既存workflowを手動起動します。起動後はdeploy成功と公開URLの版・commit・hashを再確認します。
+
+```bash
+gh workflow run pages.yml --repo kubohiroya/turbowarp-kamishibai-docs --ref main
+```
+
+workflowがactiveでも起動しない場合の確認事項は[GitHub公式の説明](https://docs.github.com/en/actions/how-tos/troubleshoot-workflows)を参照してください。
+cronの編集はscheduleの再登録にもなりますが、GitHub内部での実行を保証する修正ではありません。定期実行の欠落理由は、記録がないだけでは断定できません。
 
 appのリリースから取り込むのは、公開版の案内とSchemaです。手書き本文の仕様差分や新版の画面確認は
 別途レビューが必要です。自動同期によって未確認の本文を「最新版で検証済み」とは表示しません。

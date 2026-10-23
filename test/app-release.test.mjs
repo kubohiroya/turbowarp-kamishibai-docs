@@ -1,9 +1,11 @@
+import {parse} from 'yaml';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import test from 'node:test';
 
 import {
+  appReleaseCheckSummary,
   injectAppReleaseNotice,
   publishedAppReleaseDiffers,
   renderAppReleaseStatus,
@@ -233,4 +235,41 @@ test('pins the narrative structure schema to the same verified release commit wi
   assert.equal(lock.narrativeSchema.sha256, sha256(source));
   assert.equal(narrativeSchemaSource, source);
   assert.equal(lock.npm.published, false);
+});
+
+test('dependency check summary distinguishes no change, update and checkout comparison', async () => {
+  const {lock} = await resolveAppRelease(upstream());
+  const options = {changed: false, comparedWithPublished: true, checkedAt: '2026-10-23T12:00:00Z'};
+  const unchanged = appReleaseCheckSummary(lock, options);
+  assert.match(unchanged, /公開済みmanifest/u);
+  assert.match(unchanged, /差分なし/u);
+  assert.ok(unchanged.includes(lock.commit));
+  assert.ok(unchanged.includes(lock.artifact.sha256));
+  assert.ok(unchanged.includes(options.checkedAt));
+  assert.match(unchanged, /公開完了はdeploy jobと公開URL/u);
+  assert.match(appReleaseCheckSummary(lock, {...options, changed: true}), /差分あり/u);
+  assert.match(
+    appReleaseCheckSummary(lock, {...options, comparedWithPublished: false}),
+    /checkoutのsnapshot/u,
+  );
+});
+
+test('release polling retains manual recovery and skips deployment when a scheduled check has no change', () => {
+  const workflow = parse(
+    readFileSync(new URL('../.github/workflows/pages.yml', import.meta.url), 'utf8'),
+  );
+  assert.ok('workflow_dispatch' in workflow.on);
+  assert.ok('repository_dispatch' in workflow.on);
+  const [minute, ...rest] = workflow.on.schedule[0].cron.split(' ');
+  assert.deepEqual(rest, ['*', '*', '*', '*']);
+  const minutes = minute
+    .split(',')
+    .map(Number)
+    .sort((a, b) => a - b);
+  assert.ok(minutes.every((value) => Number.isInteger(value) && value > 0 && value < 60));
+  const gaps = minutes.map((value, index) => (minutes[index + 1] ?? minutes[0] + 60) - value);
+  assert.ok(Math.max(...gaps) <= 30, 'A skipped poll needs another opportunity within the hour.');
+  assert.match(workflow.jobs.build.outputs.publish, /github.event_name != 'schedule'/u);
+  assert.match(workflow.jobs.build.outputs.publish, /steps.release.outputs.changed == 'true'/u);
+  assert.match(workflow.jobs.deploy.if, /needs.build.outputs.publish == 'true'/u);
 });
