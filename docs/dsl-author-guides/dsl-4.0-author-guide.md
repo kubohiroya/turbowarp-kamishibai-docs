@@ -1987,3 +1987,95 @@ rc.8より後には、crossfade（[#652](https://github.com/kubohiroya/turbowarp
 - `audio [ID] [OPERATION] value [VALUE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds`
 
 旧BGM/SEの命令と寿命・crossfadeは維持します。scene単位の新しい音声IDと、sceneを跨ぐ旧BGMは寿命が異なるため、既存作品のBGMを一律に置換しません。詳細は[音声再生ガイド](dsl-4.0-audio-guide.md)を参照してください。
+
+## 物語の反復と条件分岐（開発DSL 4.1）
+
+この節は**開発中・未配布**の仕様です。公開版4.0.0-rc.43では使えません。
+App [Issue #980](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/980)で段階導入し、
+`kamishibai: '4.1'`と起動時固定・既定OFFの`dsl4NarrativeControl`で明示します。
+通常の4.0作品、公開Editorのpin、配布SB3、npm版はこの改訂では変更しません。
+
+### 同じ展開と各回の違いを分ける
+
+説話には、同じ訪問を繰り返し、人物の態度によって結末が少しずつ異なる構成があります。
+共通の展開を`forEach.do`へ一度だけ書き、人物と態度を`items`の表で指定します。
+次の例では`Narrator`と衣装をベース作品で用意します。
+
+```yaml
+kamishibai: '4.1'
+controls:
+  keymaps:
+    production:
+      Space: navigation.nextAction
+assets:
+  NarratorIdle: costume:Narrator
+actors:
+  Narrator: NarratorIdle
+scenes:
+  visits:
+    - forEach:
+        as: visit
+        items:
+          - {name: 長兄, kind: false}
+          - {name: 次兄, kind: false}
+          - {name: 末弟, kind: true}
+        do:
+          - Narrator.say: {text: {ref: visit.name}, seconds: 0}
+          - if:
+              condition: {ref: visit.kind}
+              then:
+                - Narrator.say: {text: 贈り物, seconds: 0}
+              else:
+                - Narrator.say: {text: 何もなし, seconds: 0}
+```
+
+台詞は「長兄 → 何もなし → 次兄 → 何もなし → 末弟 → 贈り物」の順です。
+行の`kind`を変えると、共通の展開を複製せず各人物の結果を比較できます。
+完全な開発例は[Samplesの三人の訪問](https://github.com/kubohiroya/turbowarp-kamishibai-samples/tree/main/examples/narrative-control)にあります。
+
+### 3種類の囲みと参照
+
+| 構造      | 書く内容                              | 再生時の意味                               |
+| --------- | ------------------------------------- | ------------------------------------------ |
+| `if`      | `condition`、`then`、省略可能な`else` | 到達時に一度判定し、選んだ側の後で合流する |
+| `repeat`  | `times`、省略可能な`as`、`do`         | 固定の整数回だけ同じ展開を繰り返す         |
+| `forEach` | `as`、`items`、`do`                   | 固定一覧の各行の値で共通の展開を再生する   |
+
+`repeat: {times: 3, as: round, do: [{wait: {ref: round.number}}]}`は1秒・2秒・3秒と待ちます。
+`round.index`は0から、`round.number`は1から始まります。
+`{ref: visit.name}`は反復内だけで使える型付き・読み取り専用の値です。
+任意のJavaScriptやScratch式としては実行しません。未知の列、型の不一致、重複するスコープはエラーです。
+
+条件には真偽値、既存の条件式、真偽値の行参照を使えます。ブロックでは作品変数・比較・論理の専用入力も使えます。
+例えば`{compare: {left: {variable: score}, operator: ">=", right: 2}}`です。
+評価器は既存のRuntime Expressionを再利用します。
+
+### ブロックで一覧を編集する
+
+`if`は2つ、`repeat`と`forEach`は1つの囲みを持ちます。
+一覧フォームでは列名・型・値、行の追加・削除・並べ替えを表で編集します。
+編集中は下書きだけを変え、保存時に入力へ一度反映します。キャンセルは元の入力を保ちます。
+列名を変えた場合は、その列を使う参照ブロックも更新してください。対応フォームのないホストはSchemaフォームを使います。
+
+`useSection`は編集時に使う部分の採否です。再生時に判定する`if`とは区別します。
+標準Scratchの「もし」「くりかえす」がそのまま台本として動く仕様にはなりません。
+エラーの日本語ブロック名・ステージ／スプライト名と移動・強調表示から修正箇所へ戻ります。
+
+### 上限・中断・切戻し
+
+固定回数・一覧は最大1024、入れ子は最大16、列は最大32です。
+通常のシーン1024／作品4096アクション上限には内部境界も含みます。
+0回・空一覧は何も再生しませんが、その本体や`if`の未選択側も検証します。
+未選択側の音声・入力を実行しません。素材の事前読み込みは両側を含みます。
+反復中に`goto`、`branch`、入力で別シーンへ移ると残りの反復を終了します。暗黙には戻りません。
+巻き戻しは回次と選択分岐を復元し、作品変数は既存方針どおり巻き戻しません。
+停止・reloadは既存の中断と資源解放へ接続します。
+
+開発AppをbuildしたCLIでは`validate-dsl4`、`author-block-dsl`、`export-block-dsl`、
+`build-dsl4`、`preview-dsl4`に`--narrative-control`を明示します。
+対応runnerのない4.1作品は起動・出力を拒否します。公開SB3へ新台本だけを移しても動きません。
+切戻しはflag OFFと旧台本・旧SB3への復帰を一緒に行います。
+新しいnpm公開・Release・配布SB3更新は別の公開判断です。
+
+正確な制限、位置復元、回帰・開発配布検証は[Appの仕様正本](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/main/docs/design/dsl-4-narrative-control.md)を参照してください。
+無限反復、再帰、名前付き共通エピソードの呼出しは初期版の対象外です。
