@@ -1988,11 +1988,13 @@ rc.8より後には、crossfade（[#652](https://github.com/kubohiroya/turbowarp
 
 旧BGM/SEの命令と寿命・crossfadeは維持します。scene単位の新しい音声IDと、sceneを跨ぐ旧BGMは寿命が異なるため、既存作品のBGMを一律に置換しません。詳細は[音声再生ガイド](dsl-4.0-audio-guide.md)を参照してください。
 
-## 物語の反復と条件分岐（開発DSL 4.1）
+## 物語の反復と条件分岐（DSL 4.0 RC改訂）
 
 この節は**開発中・未配布**の仕様です。公開版4.0.0-rc.43では使えません。
 App [Issue #980](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/980)で段階導入し、
-`kamishibai: '4.1'`と起動時固定・既定OFFの`dsl4NarrativeControl`で明示します。
+[App #986](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/986)で4.0 RC改訂へ統合しました。
+宣言は`kamishibai: '4.0'`のまま、起動時固定・既定OFFの`dsl4NarrativeControl`と対応runnerで機能を有効化します。
+版宣言だけで対応能力を判断しません。通常の4.0作品は従来どおりです。
 通常の4.0作品、公開Editorのpin、配布SB3、npm版はこの改訂では変更しません。
 
 ### 同じ展開と各回の違いを分ける
@@ -2002,7 +2004,7 @@ App [Issue #980](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/9
 次の例では`Narrator`と衣装をベース作品で用意します。
 
 ```yaml
-kamishibai: '4.1'
+kamishibai: '4.0'
 controls:
   keymaps:
     production:
@@ -2073,9 +2075,22 @@ scenes:
 
 開発AppをbuildしたCLIでは`validate-dsl4`、`author-block-dsl`、`export-block-dsl`、
 `build-dsl4`、`preview-dsl4`に`--narrative-control`を明示します。
-対応runnerのない4.1作品は起動・出力を拒否します。公開SB3へ新台本だけを移しても動きません。
+対応runnerのない物語制御構文を使う4.0作品は起動・出力を拒否します。公開SB3へ新台本だけを移しても動きません。
 切戻しはflag OFFと旧台本・旧SB3への復帰を一緒に行います。
 新しいnpm公開・Release・配布SB3更新は別の公開判断です。
 
 正確な制限、位置復元、回帰・開発配布検証は[Appの仕様正本](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/main/docs/design/dsl-4-narrative-control.md)を参照してください。
 無限反復、再帰、名前付き共通エピソードの呼出しは初期版の対象外です。
+
+
+### 開発用4.1形式からの移行と公開までの区別
+
+4.1は公開系列として新設しません。以前の開発YAML・SB3の原本を保存し、必要なら旧開発ツールでYAMLを書き出します。
+作業コピーの宣言を`kamishibai: '4.0'`へ直し、対応CLIで`--narrative-control`を付けて検証し、対応runnerで別名のSB3を生成し直します。
+新しいfrontendは旧4.1宣言を移行案内付きで拒否します。hatだけを直して旧runnerへ渡しても対応できません。
+構造のSchemaはAppの`schema/dsl-4-narrative-control.schema.json`、通常命令は展開後に4.0 Schemaで検証します。
+
+標準配布への切替は、Appの候補固定と回帰検証、公開Editorでの編集・再生・エラー位置の確認、
+新しい4.0 RCの配布、SamplesのSB3／Web再生成、Docsの参照更新、公開先の実物照合の順に判定します。
+この文書更新だけでは通常配布SB3・公開npm版は更新されません。安定版3.2系と開発版4.0 RC系の最新公開版は別々に案内します。
+未公開mainの開発例を最新公開版と扱わず、切戻しも台本・対応SB3・公開導線を揃えて行います。
