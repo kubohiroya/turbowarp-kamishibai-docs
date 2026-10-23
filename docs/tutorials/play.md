@@ -2,10 +2,10 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.46**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.46)と[npmの同一版](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.46)を使います。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.47**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.47)のSB3を使います。rc.47のnpmパッケージは未公開のため、CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)を使います。npmだけで導入する場合は公開済みrc.46が対象です。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
 
-標準実行環境: `4.0.0-rc.46`（公開プレリリース）\
-このチュートリアルの公開サンプル: `4.0.0-rc.46`（公開成果物）\
+標準実行環境: `4.0.0-rc.47`（公開プレリリース）\
+このチュートリアルの公開サンプル: `4.0.0-rc.47`（公開成果物）\
 対象: 初めてTurboWarp紙芝居を再生する人\
 想定時間: 10〜15分
 
@@ -47,7 +47,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 ## 1. サンプル作品を選ぶ
 
 [チュートリアル用サンプル作品](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/)を開き、
-「Web版を開く」を押します。作品の説明で、この公開サンプルの対象バージョンが`4.0.0-rc.41`であることと、カメラを
+「Web版を開く」を押します。作品の説明で、この公開サンプルの対象バージョンが`4.0.0-rc.47`であることと、カメラを
 使うことを確認してから開きます。
 
 <!-- screenshot:P-01 -->
@@ -62,14 +62,14 @@ Web版へ直接進む場合は、
 ## 2. 紙芝居を開始する
 
 Web版を開くと、最初に黒い読み込み画面が表示され、その後にバージョンとライセンスの画面が
-表示されます。これは公開サンプル自身の版表示です。`Version 4.0.0-rc.41`を確認し、右上の「閉じる」を押すと
+表示されます。これは公開サンプル自身の版表示です。`Version 4.0.0-rc.47`を確認し、右上の「閉じる」を押すと
 作品が始まります。
 
 <!-- screenshot:P-02 -->
 
 ![Version 4.0.0-rc.3とライセンスを表示したWeb版の初期画面](../images/tutorials/dsl4/play/tutorial-play-02-title.png)
 
-_この画像は旧rc.3画面の固定証跡です。現在の公開Web版ではVersion 4.0.0-rc.41と利用条件を確認し、右上の「閉じる」を押します。_
+_この画像は旧rc.3画面の固定証跡です。現在の公開Web版ではVersion 4.0.0-rc.47と利用条件を確認し、右上の「閉じる」を押します。_
 
 黒い画面と進捗バーが表示されている間は、画面を閉じずに待ちます。読み込みが長く続く場合は、
 ネットワーク接続を確認してページを再読み込みします。
