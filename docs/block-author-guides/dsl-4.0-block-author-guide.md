@@ -1281,3 +1281,12 @@ Issue #886の種類別定義ブロックへ更新しています。
 - `audio [ID] [OPERATION] value [VALUE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds`
 
 旧BGM/SEの命令と寿命・crossfadeは維持します。scene単位の新しい音声IDと、sceneを跨ぐ旧BGMは寿命が異なるため、既存作品のBGMを一律に置換しません。詳細は[音声再生ガイド](../dsl-author-guides/dsl-4.0-audio-guide.md)を参照してください。
+
+## 開発DSL 4.1の物語反復と条件分岐
+
+`if`／`repeat`／`forEach`の専用囲み、型付き参照、各回の一覧表は開発中・未配布です。
+[作者ガイドの4.1開発仕様](../dsl-author-guides/dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
+公開4.0.0-rc.43、既存4.0 Schema、公開配布物の対応範囲は変わりません。
+起動時固定・既定OFFの`dsl4NarrativeControl`と対応する開発runnerが必要です。
+変換・検証・build・previewでは開発CLIに`--narrative-control`を明示し、旧runnerとの混在を拒否します。
+標準Scratch制御ブロックは引き続き非対応です。

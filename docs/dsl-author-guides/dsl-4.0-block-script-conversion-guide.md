@@ -540,3 +540,12 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 - [本体Issue #883: ラベル付き台本とincludeBlocks](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/883)
 - [本体Issue #886: 種類別の定義ブロック](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/886)
 - [本体Issue #891: 専用定義ブロックのフォーム編集](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/891)
+
+## 開発DSL 4.1の物語反復と条件分岐
+
+`if`／`repeat`／`forEach`の専用囲み、型付き参照、各回の一覧表は開発中・未配布です。
+[作者ガイドの4.1開発仕様](dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
+公開4.0.0-rc.43、既存4.0 Schema、公開配布物の対応範囲は変わりません。
+起動時固定・既定OFFの`dsl4NarrativeControl`と対応する開発runnerが必要です。
+変換・検証・build・previewでは開発CLIに`--narrative-control`を明示し、旧runnerとの混在を拒否します。
+標準Scratch制御ブロックは引き続き非対応です。
