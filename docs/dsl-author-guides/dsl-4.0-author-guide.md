@@ -35,7 +35,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 公開プレリリースと文書基準
 
-文書状態: 公開プレリリース`4.0.0-rc.46`のruntime・Schemaに対応する台本作成ガイド\
+文書状態: 公開プレリリース`4.0.0-rc.46`の固定実装基準を説明する台本作成ガイド\
 調査基準: TurboWarp-Kamishibai `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`、2026年10月21日
 
 正式な`v4.0.0`は未公開です。公開runtimeと[Schemaリファレンス](dsl-4.0-schema-reference.md)を
