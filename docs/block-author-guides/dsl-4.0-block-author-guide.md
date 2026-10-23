@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.46**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.46)と[npmの同一版](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.46)を使います。以下のrc.41などの検証記録・図版は作成当時の版を示します。
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.46**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.46)と[npmの同一版](https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.46)を使います。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
 
 対象: TurboWarpで台本ブロックを編集する作者、教材作成者、授業設計者\
 扱う台本: `kamishibai [4.0] [ラベル]`からつながるブロック台本SB3\
@@ -25,7 +25,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 利用する版と図版の読み方
 
-公開プレリリース`4.0.0-rc.41`のCLIとStandard SB3を使います。正式版4.0.0は未公開です。
+公開プレリリース`4.0.0-rc.46`のCLIとStandard SB3を使います。正式版4.0.0は未公開です。
 Node.js 24.0.0以上で公開CLIをexact installすれば、実命令ブロック、統一ハット、includeBlocks、
 8種類の定義ブロックとフォーム編集が使えます。本体のcheckoutやCLIのビルドは不要です。
 準備方法は[相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
@@ -41,7 +41,7 @@ PNGのフォーム画面はIssue #891対応の編集用拡張を実Editorで開�
 長い入力値は図の中だけで折り返しています。入力欄へは改行や省略を加えず、値全体を入力します。
 狭い画面では図を左右にスクロールできます。図が複数に分かれている場合も、番号順に同じハットの下へ接続します。
 
-台本のデータ・素材・実行の規則はDSL版と共通です。ランタイムとSchemaは同じ公開rc.41を使います。図版と旧版の説明は作成当時のものを保持します。音声の2命令はrc.39から利用できます。
+台本のデータ・素材・実行の規則はDSL版と共通です。ランタイムとSchemaは同じ公開rc.46を使います。図版と旧版の説明は作成当時のものを保持します。音声の2命令はrc.39から利用できます。
 portraitの`placement`、`offset`、`cornerRadius`も公開rc.41で使えます。
 
 ## チュートリアルと本書の使い分け
@@ -136,11 +136,11 @@ Princessスプライトの仮衣装`p1`、`p2`…を参加者のポーズ画像�
 
 ## フォームでJSONを編集する
 
-1. [編集ダイアログ付き日本語Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開き、公開rc.41のCLIで生成した編集用SB3を読み込む
+1. [編集ダイアログ付き日本語Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開き、公開rc.46のCLIで生成した編集用SB3を読み込む
 2. 編集用拡張をサンドボックスなしで読み込む
 3. 配置した専用ブロックの左端にある白い書類のアイコンを押す。キーボードではアイコンへフォーカスしてEnterを押す
 4. フォームの項目を編集し、「保存」を押す。「キャンセル」では入力欄へ反映しない
-5. EditorのファイルメニューからSB3を保存し、同じ公開rc.41のCLIで書き戻し・検査する。file素材の更新がある場合はbundleを再ビルドする
+5. EditorのファイルメニューからSB3を保存し、同じ公開rc.46のCLIで書き戻し・検査する。file素材の更新がある場合はbundleを再ビルドする
 
 名前付き定義の`NAME`はブロック上で編集し、フォームでは`VALUE`だけを編集します。
 文字列はフォームの欄へそのまま入力し、JSON用の二重引用符は加えません。
@@ -181,7 +181,7 @@ rc.41で生成した編集用SB3では、`recognize actor [TARGET] pose steps [S
 白い書類アイコンからフォームで編集できます。「ポーズ認識の手順」の各行に、必須の`pose`と
 任意の`skin`・`sound`を指定します。少なくとも1行が必要です。必須値がない場合は保存できません。
 「キャンセル」は元の値を保ち、「保存」はブロックへ反映します。Editorの元に戻す・やり直すも使えます。
-保存後はSB3もファイルへ保存してください。以前のSB3では、rc.41のCLIで編集用SB3を再生成すると利用できます。
+保存後はSB3もファイルへ保存してください。以前のSB3では、rc.46のCLIで編集用SB3を再生成すると利用できます。
 すべての設定が専用の選択メニューになっているわけではありません。素材の`kind`や入力値の範囲は
 [Schemaリファレンス](../dsl-author-guides/dsl-4.0-schema-reference.md)で調べます。
 動的なScratchの変数や演算ブロックの評価は行いません。対応する静的な入力値を使用します。
@@ -194,7 +194,7 @@ rc.41で生成した編集用SB3では、`recognize actor [TARGET] pose steps [S
 `story property`を編集します。`PATH`は1〜2要素のJSON配列、`VALUE`はJSON値です。
 名前付き項目がない明示的な空マッピングも、この形式で保持します。
 
-旧`story property`を含む編集用SB3は、公開rc.41のCLIの`export-block-dsl`でYAMLへ戻し、
+旧`story property`を含む編集用SB3は、公開rc.46のCLIの`export-block-dsl`でYAMLへ戻し、
 `author-block-dsl`で再生成すると専用ブロックへ移行できます。古いSB3に埋め込まれた編集用拡張は
 パレットが自動更新されないため、CLIを更新するだけでは専用ブロックを追加できません。
 旧ハットやYAML全文の文字列方式は読取対象外なので、元のYAMLから再生成します。
@@ -223,7 +223,7 @@ rc.41で生成した編集用SB3では、`recognize actor [TARGET] pose steps [S
 file素材を追加したり、パス・内容を変更したりした場合だけ、編集後SB3から最新のYAMLを書き出してbundleを再ビルドします。
 単一台本なら、元の作品フォルダーに別名のYAMLを出力し、編集後SB3を`--base`、そのYAMLを`--source`へ明示指定します。
 `file`の基準位置と`--project-root`を揃え、更新前のSB3と元の素材も保持してください。
-公開rc.41のCLIは、`--source`を省略してもSB3内の台本ブロックを自動選択しません。
+公開rc.46のCLIは、`--source`を省略してもSB3内の台本ブロックを自動選択しません。
 元の`project.source.json`から編集前のYAMLを読み込むことがあるため、最新の書き戻し結果を指定します。
 
 YAMLからの生成、ブロックからYAMLへの書き戻しは[相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
@@ -1095,7 +1095,7 @@ inline形式も使用できます。
 台本の一部を残したまま試さずにおきたいときは、C字型の「この部分を使う［オン／オフ］」で囲みます。
 YAMLの行頭に`#`を付けて一時的に外す操作に対応します。複数の行に相当するブロックも一度に切り替えられます。
 
-公開rc.41のCLIとStandard SB3は、本体[PR #903](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/903)の
+公開rc.46のCLIとStandard SB3は、本体[PR #903](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/903)の
 オン／オフに対応しています。Editorを開き直すだけでは編集用ブロックは増えません。
 [対応するCLI・ランタイムの準備と往復手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#section-roundtrip)で
 `author-block-dsl --block-sections true`を指定して生成したSB3を使います。パレット表示は既定OFFです。
@@ -1158,7 +1158,7 @@ YAMLの直接編集へ移る場合は、編集用SB3を退避してから復元�
 1. 素材bundleを含むブロック台本SB3をTurboWarpで開き、台本ハットからつながるブロックを変更する
 2. 緑の旗で起動してタイトルを閉じ、空名ルートから変更後の物語が始まることを確認する
 3. ファイルメニューから`story-edited.sb3`としてコンピューターへ保存する
-4. 同じ公開rc.41のCLIで`export-block-dsl`を実行し、書き出したYAMLを検査する
+4. 同じ公開rc.46のCLIで`export-block-dsl`を実行し、書き出したYAMLを検査する
 5. file素材の追加・パス変更・内容変更がある場合だけ、書き出した最新YAMLを元の素材フォルダーに置き、
    編集後SB3を`--base`、そのYAMLを`--source`へ明示指定して`build-dsl4`でbundleを更新する
 
