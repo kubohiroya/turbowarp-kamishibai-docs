@@ -190,12 +190,11 @@ test('publication workflows resolve the app before verification and deployment',
     );
   }
   const pages = read('.github/workflows/pages.yml');
-  assert.match(pages, /schedule:/u);
+  assert.equal(parse(pages).on.schedule, undefined);
   assert.match(pages, /repository_dispatch:/u);
-  assert.match(pages, /if: needs\.build\.outputs\.publish == 'true'/u);
 });
 
-test('scheduled updates compare against the deployed release rather than a stale checkout', async () => {
+test('release comparison checks the deployed manifest rather than a stale checkout', async () => {
   const {lock} = await resolveAppRelease(upstream());
   assert.equal(
     await publishedAppReleaseDiffers(lock, {
@@ -254,22 +253,15 @@ test('dependency check summary distinguishes no change, update and checkout comp
   );
 });
 
-test('release polling retains manual recovery and skips deployment when a scheduled check has no change', () => {
+test('release publication uses explicit events without a polling gate', () => {
   const workflow = parse(
     readFileSync(new URL('../.github/workflows/pages.yml', import.meta.url), 'utf8'),
   );
+  assert.equal(workflow.on.schedule, undefined);
+  assert.deepEqual(workflow.on.push.branches, ['main']);
   assert.ok('workflow_dispatch' in workflow.on);
   assert.ok('repository_dispatch' in workflow.on);
-  const [minute, ...rest] = workflow.on.schedule[0].cron.split(' ');
-  assert.deepEqual(rest, ['*', '*', '*', '*']);
-  const minutes = minute
-    .split(',')
-    .map(Number)
-    .sort((a, b) => a - b);
-  assert.ok(minutes.every((value) => Number.isInteger(value) && value > 0 && value < 60));
-  const gaps = minutes.map((value, index) => (minutes[index + 1] ?? minutes[0] + 60) - value);
-  assert.ok(Math.max(...gaps) <= 30, 'A skipped poll needs another opportunity within the hour.');
-  assert.match(workflow.jobs.build.outputs.publish, /github.event_name != 'schedule'/u);
-  assert.match(workflow.jobs.build.outputs.publish, /steps.release.outputs.changed == 'true'/u);
-  assert.match(workflow.jobs.deploy.if, /needs.build.outputs.publish == 'true'/u);
+  assert.equal(workflow.jobs.build.outputs, undefined);
+  assert.equal(workflow.jobs.deploy.if, undefined);
+  assert.equal(workflow.jobs.deploy.needs, 'build');
 });
