@@ -50,7 +50,7 @@ test('gives block and DSL authors exactly one tutorial and one guide, followed b
 test('uses the published release-source CLI and keeps saved blocks as input when refreshing file bundles', () => {
   for (const source of [guide, tutorial]) {
     assert.doesNotMatch(source, /```ya?ml/iu);
-    assert.match(source, /公開(?:プレリリース`4\.0\.0-rc\.47`|rc\.47)/u);
+    assert.match(source, /公開(?:プレリリース`4\.0\.0-rc\.48`|rc\.48)/u);
     assert.match(source, /Node\.js 24\.0\.0以上/u);
     assert.doesNotMatch(source, /未公開の開発版|開発版CLI|node bin\/turbowarp-kamishibai/u);
     assert.doesNotMatch(source, /when kamishibai DSL source|whenDsl4Source/u);
@@ -58,13 +58,13 @@ test('uses the published release-source CLI and keeps saved blocks as input when
   }
   assert.match(
     tutorial,
-    /git clone --depth 1 --branch v4\.0\.0-rc\.47[\s\S]*pnpm --dir \.tools\/kamishibai-rc47 run build:lib[\s\S]*npm install --save-dev --save-exact \.\/\.tools\/kamishibai-rc47/u,
+    /git clone --depth 1 --branch v4\.0\.0-rc\.48[\s\S]*pnpm --dir \.tools\/kamishibai-rc48 run build:lib[\s\S]*npm install --save-dev --save-exact \.\/\.tools\/kamishibai-rc48/u,
   );
   assert.doesNotMatch(
     tutorial,
-    /npm install[^\n]+@kubohiroya\/turbowarp-kamishibai-app@4\.0\.0-rc\.47/u,
+    /npm install[^\n]+@kubohiroya\/turbowarp-kamishibai-app@4\.0\.0-rc\.48/u,
   );
-  assert.match(tutorial, /rc\.47のnpmパッケージは未公開/u);
+  assert.match(tutorial, /rc\.48のnpmパッケージは未公開/u);
   assert.match(
     tutorial,
     /npx --no-install turbowarp-kamishibai export-block-dsl[\s\S]*--input[^\n]+story-edited\.sb3/u,

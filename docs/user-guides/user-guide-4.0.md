@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.47**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.47)のSB3を使います。rc.47のnpmパッケージは未公開のため、CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)を使います。npmだけで導入する場合は公開済みrc.46が対象です。以下の`4.0.0-rc.41`などの検証記録・図版は作成当時の版を示します。
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.48**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.48)のSB3を使います。rc.48のnpmパッケージは未公開のため、CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)を使います。npmだけで導入する場合は公開済みrc.46が対象です。以下の`4.0.0-rc.41`などの検証記録・図版は作成当時の版を示します。
 
 この説明書は、TurboWarp紙芝居4.0のサンプル作品を初めてプレイする方と、進行を手伝う方のための案内です。
 まずは「浦島太郎」を開き、作品を始める、進める、終えるという一連の操作を試します。
@@ -10,7 +10,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 > **現在利用できるもの**
 >
 > ここで案内する4.0のサンプル作品はブラウザーで試せます。この説明は
-> `4.0.0-rc.47`基準の公開サンプルを対象にしています。安定版`4.0.0`は未公開です。
+> `4.0.0-rc.48`基準の公開サンプルを対象にしています。安定版`4.0.0`は未公開です。
 > 画面がこの説明と異なる場合は、作品に表示された版と、画面内の案内を優先してください。
 
 ## まず遊んでみる
