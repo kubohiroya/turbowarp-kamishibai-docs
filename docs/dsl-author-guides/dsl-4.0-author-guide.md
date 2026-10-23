@@ -1990,12 +1990,17 @@ rc.8より後には、crossfade（[#652](https://github.com/kubohiroya/turbowarp
 
 ## 物語の反復と条件分岐（DSL 4.0 RC改訂）
 
-この節は**開発中・未配布**の仕様です。公開版4.0.0-rc.43では使えません。
-App [Issue #980](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/980)で段階導入し、
-[App #986](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/986)で4.0 RC改訂へ統合しました。
-宣言は`kamishibai: '4.0'`のまま、起動時固定・既定OFFの`dsl4NarrativeControl`と対応runnerで機能を有効化します。
-版宣言だけで対応能力を判断しません。通常の4.0作品は従来どおりです。
-通常の4.0作品、公開Editorのpin、配布SB3、npm版はこの改訂では変更しません。
+App **4.0.0-rc.44以降のStandard**では、物語の有限反復・条件分岐・型付き参照を実験flagなしで利用できます。
+宣言は`kamishibai: '4.0'`のままです。rc.43以前の配布物は対応しないため、台本・ベースSB3・CLIの対応版を揃えます。
+[App #989](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/989)で標準配布へ昇格しました。
+低水準APIの`dsl4NarrativeControl`は既定OFFを維持し、Standardは起動時固定でONにします。通常の4.0作品の意味は維持します。
+
+[三人の訪問の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)から、
+Web再生・ブロック台本SB3のダウンロード・公開Editorでの編集を始められます。
+**rc.44のnpm版は未公開**です。旧npm版や`@next`が物語制御に対応するとは限りません。
+CLIが必要ならAppの`v4.0.0-rc.44`タグを別checkoutへ取得し、`pnpm install --frozen-lockfile`、
+`pnpm build:lib`を実行して`node bin/turbowarp-kamishibai.mjs`を使います。追加の`--narrative-control`は不要です。
+安定版3.2系列の既存作品・導線は引き続き利用できます。
 
 ### 同じ展開と各回の違いを分ける
 
@@ -2033,7 +2038,7 @@ scenes:
 
 台詞は「長兄 → 何もなし → 次兄 → 何もなし → 末弟 → 贈り物」の順です。
 行の`kind`を変えると、共通の展開を複製せず各人物の結果を比較できます。
-完全な開発例は[Samplesの三人の訪問](https://github.com/kubohiroya/turbowarp-kamishibai-samples/tree/main/examples/narrative-control)にあります。
+素材を含む完全な例は[Samplesの三人の訪問](https://github.com/kubohiroya/turbowarp-kamishibai-samples/tree/main/stories/three-visits)にあります。
 
 ### 3種類の囲みと参照
 
@@ -2073,24 +2078,25 @@ scenes:
 巻き戻しは回次と選択分岐を復元し、作品変数は既存方針どおり巻き戻しません。
 停止・reloadは既存の中断と資源解放へ接続します。
 
-開発AppをbuildしたCLIでは`validate-dsl4`、`author-block-dsl`、`export-block-dsl`、
-`build-dsl4`、`preview-dsl4`に`--narrative-control`を明示します。
-対応runnerのない物語制御構文を使う4.0作品は起動・出力を拒否します。公開SB3へ新台本だけを移しても動きません。
-切戻しはflag OFFと旧台本・旧SB3への復帰を一緒に行います。
-新しいnpm公開・Release・配布SB3更新は別の公開判断です。
+対応Releaseからbuildした通常CLIの`validate-dsl4`、`author-block-dsl`、`export-block-dsl`、
+`build-dsl4`、`preview-dsl4`で利用できます。明示的な`--no-narrative-control`は互換性の切り分け用です。
+対応runnerのない物語制御構文を使う4.0作品は起動・出力を拒否します。rc.43以前のSB3へ新台本だけを移しても動きません。
+切戻しはrc.43の台本・SB3・Docs／Samples導線を一式で戻します。新構文を残したままflagだけOFFにしません。
+npmの公開・dist-tag変更と4系の正式安定版化は別の公開判断です。
 
-正確な制限、位置復元、回帰・開発配布検証は[Appの仕様正本](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/main/docs/design/dsl-4-narrative-control.md)を参照してください。
+正確な制限、位置復元、回帰・配布検証は[Appの仕様正本](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/main/docs/design/dsl-4-narrative-control.md)を参照してください。
 無限反復、再帰、名前付き共通エピソードの呼出しは初期版の対象外です。
 
 
-### 開発用4.1形式からの移行と公開までの区別
+### 開発用4.1形式からの移行と対応版
 
 4.1は公開系列として新設しません。以前の開発YAML・SB3の原本を保存し、必要なら旧開発ツールでYAMLを書き出します。
-作業コピーの宣言を`kamishibai: '4.0'`へ直し、対応CLIで`--narrative-control`を付けて検証し、対応runnerで別名のSB3を生成し直します。
+作業コピーの宣言を`kamishibai: '4.0'`へ直し、対応CLIの通常コマンドで検証し、対応runnerで別名のSB3を生成し直します。
 新しいfrontendは旧4.1宣言を移行案内付きで拒否します。hatだけを直して旧runnerへ渡しても対応できません。
 構造のSchemaはAppの`schema/dsl-4-narrative-control.schema.json`、通常命令は展開後に4.0 Schemaで検証します。
 
-標準配布への切替は、Appの候補固定と回帰検証、公開Editorでの編集・再生・エラー位置の確認、
-新しい4.0 RCの配布、SamplesのSB3／Web再生成、Docsの参照更新、公開先の実物照合の順に判定します。
-この文書更新だけでは通常配布SB3・公開npm版は更新されません。安定版3.2系と開発版4.0 RC系の最新公開版は別々に案内します。
-未公開mainの開発例を最新公開版と扱わず、切戻しも台本・対応SB3・公開導線を揃えて行います。
+Standard配布は、Appの公開Releaseのcommitと固定SB3を正本に、SamplesのSB3／WebとDocsの参照を既存workflowで更新します。
+公開ページの対応App版と生成記録を確認してください。安定版3.2系と開発版4.0 RC系の最新公開版を別々に案内します。
+未公開mainを最新公開版と扱わず、npmが未公開でも同じ版のCLIをRelease tagからbuildできます。
+構造Schemaは[公開スナップショット](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/schema/dsl-4-narrative-control.schema.json)で確認できます。
+構造を解決・有限展開した後、通常命令を従来の4.0 Schemaで検証します。通常命令Schemaだけで未展開の物語構造を検証することはできません。

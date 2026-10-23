@@ -1,0 +1,2 @@
+# Preserve the exact upstream bytes recorded by the release lock.
+sources/dsl4/dsl-4-narrative-control.schema.json

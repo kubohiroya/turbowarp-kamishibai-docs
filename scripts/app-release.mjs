@@ -102,6 +102,11 @@ export async function resolveAppRelease({
   assert.equal(bytes.length, artifact.size, 'Downloaded SB3 size differs.');
   assert.equal(sha256(bytes), artifact.sha256, 'Downloaded SB3 hash differs.');
   JSON.parse(schemaSource);
+  const narrativeResponse = await request(`${raw}/schema/dsl-4-narrative-control.schema.json`, {
+    allowMissing: true,
+  });
+  const narrativeSchemaSource = narrativeResponse ? await narrativeResponse.text() : undefined;
+  if (narrativeSchemaSource) JSON.parse(narrativeSchemaSource);
   const npmResponse = await request(
     `https://registry.npmjs.org/@kubohiroya%2Fturbowarp-kamishibai-app/${version}`,
     {allowMissing: true},
@@ -137,12 +142,22 @@ export async function resolveAppRelease({
     artifact,
     sourceIdentity: metadata.sourceIdentity,
     schema,
+    ...(narrativeSchemaSource
+      ? {
+          narrativeSchema: {
+            commit: commit.sha,
+            path: 'schema/dsl-4-narrative-control.schema.json',
+            sha256: sha256(narrativeSchemaSource),
+            url: `${repositoryUrl}/blob/${commit.sha}/schema/dsl-4-narrative-control.schema.json`,
+          },
+        }
+      : {}),
     npm: {
       published: npm !== null,
       url: `https://www.npmjs.com/package/${packageJson.name}/v/${version}`,
     },
   };
-  return {lock, schemaSource};
+  return {lock, schemaSource, narrativeSchemaSource};
 }
 
 export function renderAppReleaseStatus(lock) {
@@ -181,13 +196,15 @@ export function injectAppReleaseNotice(html, pathname, lock) {
 }
 
 export async function syncAppRelease(options = {}) {
-  const {lock, schemaSource} = await resolveAppRelease(options);
+  const {lock, schemaSource, narrativeSchemaSource} = await resolveAppRelease(options);
   const {format, resolveConfig} = await import('prettier');
   const files = new Map([
     ['sources/dsl4/app-release.json', `${JSON.stringify(lock, null, 2)}\n`],
     ['sources/dsl4/source-lock.json', `${JSON.stringify(lock.schema, null, 2)}\n`],
     ['sources/dsl4/dsl-4.schema.json', schemaSource],
   ]);
+  if (narrativeSchemaSource)
+    files.set('sources/dsl4/dsl-4-narrative-control.schema.json', narrativeSchemaSource);
   const indexPath = path.join(projectRoot, 'site/4.0/index.html');
   const index = await readFile(indexPath, 'utf8');
   assert.equal((index.match(/<section class="release-status"/gu) ?? []).length, 1);
