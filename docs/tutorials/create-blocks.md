@@ -2,12 +2,12 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.49**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.49)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.50**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.50)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
 
 対象: 初めて台本ブロックで紙芝居を作る方\
 扱う台本: TurboWarp上のブロック台本SB3\
-実装基準: 公開プレリリース`4.0.0-rc.49`、2026年10月24日\
-スターターとベースSB3: 公開プレリリース`4.0.0-rc.49`対応の公開サンプルとCLI
+実装基準: 公開プレリリース`4.0.0-rc.50`、2026年10月24日\
+スターターとベースSB3: 公開プレリリース`4.0.0-rc.50`対応の公開サンプルとCLI
 
 入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
 
@@ -30,16 +30,16 @@ SVGのブロック図は入力欄と接続を基に描いた説明図、PNGの�
 
 ## 利用する版を先に確認する
 
-公開rc.49には、命令単位のブロック編集、8種類の専用定義ブロック、フォーム編集、
+公開rc.50には、命令単位のブロック編集、8種類の専用定義ブロック、フォーム編集、
 組み込み台本からの直接再生が含まれます。正式版4.0.0は未公開です。
 Node.js 24.0.0以上で作業用フォルダーに公開CLIを版固定してインストールします。
-[公開tagからCLIを準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)でrc.49を一度ビルドしてローカル導入できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+[公開tagからCLIを準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)でrc.50を一度ビルドしてローカル導入できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 
 ```sh
-git clone --depth 1 --branch v4.0.0-rc.49 https://github.com/kubohiroya/turbowarp-kamishibai-app.git .tools/kamishibai-rc49
-pnpm --dir .tools/kamishibai-rc49 install --frozen-lockfile
-pnpm --dir .tools/kamishibai-rc49 run build:lib
-npm install --save-dev --save-exact ./.tools/kamishibai-rc49
+git clone --depth 1 --branch v4.0.0-rc.50 https://github.com/kubohiroya/turbowarp-kamishibai-app.git .tools/kamishibai-rc50
+pnpm --dir .tools/kamishibai-rc50 install --frozen-lockfile
+pnpm --dir .tools/kamishibai-rc50 run build:lib
+npm install --save-dev --save-exact ./.tools/kamishibai-rc50
 npx --no-install turbowarp-kamishibai --version
 ```
 
@@ -47,15 +47,15 @@ rc.41は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不
 旧rc.23・rc.25を固定して使い、`ajv/dist/2020.js`が見つからずCLIが起動しない場合は、
 [rc.23・rc.25向けのAjv追加導入手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-ajv-workaround)を参照してください。
 
-表示が`4.0.0-rc.49`であることを確認します。以後のコマンドはすべて、この作業用フォルダーで実行します。
-古い編集用SB3の埋込拡張は自動更新されません。統一ハットの台本は公開rc.49でYAMLへ書き戻して再生成し、
+表示が`4.0.0-rc.50`であることを確認します。以後のコマンドはすべて、この作業用フォルダーで実行します。
+古い編集用SB3の埋込拡張は自動更新されません。統一ハットの台本は公開rc.50でYAMLへ書き戻して再生成し、
 旧ハットやYAML全文の文字列方式のSB3は元YAMLから再生成してください。
 準備済みの素材入りブロック台本SB3が配られた場合は、Step 3から始められます。
 
 ## 用意するものと完成までの流れ
 
 - [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開くブラウザー
-- 公開rc.49のCLIを動かす環境（Node.js 24.0.0以上）
+- 公開rc.50のCLIを動かす環境（Node.js 24.0.0以上）
 - スターター、Studentスプライト入りのチュートリアル完成版SB3、作業用フォルダー
 - ポーズ場面も試す場合はカメラと、周囲にぶつからない空間
 
@@ -79,7 +79,7 @@ rc.41は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不
 次の二つをダウンロードします。
 
 - [チュートリアル用スターター](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip)
-- [rc.49対応のチュートリアル完成版SB3](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-4.0.sb3)
+- [rc.50対応のチュートリアル完成版SB3](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-4.0.sb3)
 
 CLIをインストールした作業用フォルダーに`output/tutorial-blocks`を作り、ZIPを展開して、その直下へ`tutorial-story`を置きます。
 完成版SB3は`output/tutorial-blocks/base.sb3`へ保存します。完成版には`Student`というScratchスプライトが入っています。
@@ -175,7 +175,7 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 <figure class="block-script-form"><img src="../images/block-authoring/form-asset.png" alt="assetの実フォーム。背景のファイルパスを編集して保存する"></figure>
 
 フォームの「保存」の後、EditorのファイルメニューからSB3も保存します。
-フォームが開かない場合は、公開rc.49のCLIで編集用SB3を再生成し、編集用拡張をサンドボックスなしで読み込んだことを確認します。
+フォームが開かない場合は、公開rc.50のCLIで編集用SB3を再生成し、編集用拡張をサンドボックスなしで読み込んだことを確認します。
 フォームの操作と8種類の画面は[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#フォームでjsonを編集する)を参照してください。
 
 `NAME`はそれぞれ`EarthquakeClassroom`と`ProtectHead`です。名前欄に引用符やJSONパスは入力しません。
@@ -262,7 +262,7 @@ npx --no-install turbowarp-kamishibai build-dsl4 \
 
 `--source`は`--project-root`内のファイル名です。書き出したYAMLを素材と同じフォルダーに置くことで、
 `file`の相対パスを維持します。書き出しや検査に失敗した場合は、古いYAMLを使ってビルドせず、先にブロックを修正します。
-公開rc.49のCLIは、`--source`を省略しても編集後SB3の台本ブロックを自動選択しません。
+公開rc.50のCLIは、`--source`を省略しても編集後SB3の台本ブロックを自動選択しません。
 元の`project.source.json`がある場合は、そこから古いYAMLを読み、ビルドが成功しても変更した素材が反映されないことがあります。
 毎回、編集後SB3から書き出した最新のYAMLを明示してください。
 
@@ -279,7 +279,7 @@ npx --no-install turbowarp-kamishibai build-dsl4 \
 対応するCLIとランタイムでは、「この部分を使う［オン／オフ］」で命令や定義を囲み、
 中身を削除せずに一時的に外せます。YAMLの行頭`#`によるコメントアウトに対応する操作です。
 [ブロック版ガイドの実画面付き手順](../block-author-guides/dsl-4.0-block-author-guide.md#use-section)を参照してください。
-公開rc.49はこの機能と表示改善に対応しています。パレット表示は既定OFFのため、
+公開rc.50はこの機能と表示改善に対応しています。パレット表示は既定OFFのため、
 ガイドに従い`author-block-dsl --block-sections true`で編集用SB3を生成して使います。
 
 今回のmy-urashimaワークショップは、この追加機能の準備をせずに進められます。
@@ -288,7 +288,7 @@ npx --no-install turbowarp-kamishibai build-dsl4 \
 
 ## 完了チェック
 
-- [ ] 公開rc.49のCLIとStudent入り完成版SB3を使い、スターターの台本とfile素材をbundleへまとめた
+- [ ] 公開rc.50のCLIとStudent入り完成版SB3を使い、スターターの台本とfile素材をbundleへまとめた
 - [ ] セリフを変更し、次のシーンを接続した
 - [ ] 編集したSB3をコンピューターへ保存した
 - [ ] 保存したSB3から書き出して検査した
