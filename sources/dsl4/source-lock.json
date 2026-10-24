@@ -1,11 +1,11 @@
 {
   "repository": "kubohiroya/turbowarp-kamishibai-app",
   "sourceKind": "commit",
-  "commit": "84bc52470f73a23c7cea14f713c2cc27bf8ec2cd",
-  "commitDate": "2026-10-24T01:03:52Z",
+  "commit": "c28f1d39d6edd0c2a4ebbc65793645f8fdcc4329",
+  "commitDate": "2026-10-24T13:15:19Z",
   "schemaPath": "schema/dsl-4.schema.json",
   "schemaSha256": "d6b04e59da65506162bda2f6a178e0a90cfc47672a4eee684e56671bf6a1e4eb",
-  "schemaUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/84bc52470f73a23c7cea14f713c2cc27bf8ec2cd/schema/dsl-4.schema.json",
-  "surfaceSpecificationUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/84bc52470f73a23c7cea14f713c2cc27bf8ec2cd/docs/design/dsl-4-surface.md",
+  "schemaUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/c28f1d39d6edd0c2a4ebbc65793645f8fdcc4329/schema/dsl-4.schema.json",
+  "surfaceSpecificationUrl": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/c28f1d39d6edd0c2a4ebbc65793645f8fdcc4329/docs/design/dsl-4-surface.md",
   "snapshotLicense": "MPL-2.0"
 }
