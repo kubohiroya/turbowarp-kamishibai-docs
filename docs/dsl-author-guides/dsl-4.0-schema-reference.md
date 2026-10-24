@@ -11,7 +11,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 増やすときに[紙芝居DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)の必要な節をお読みください。
 
 文書状態: **固定実装基準を説明するSchemaリファレンス（正式リリースの操作資料ではない）**\
-Schema固定commit: [`f3a5db1`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/f3a5db14ab7d46457e015197236a73ef59188480)\
+Schema固定commit: [`8c133f7`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/8c133f7cb11afc2af060fad8b68ac346f59b1800)\
 Schema SHA-256: `d6b04e59da65506162bda2f6a178e0a90cfc47672a4eee684e56671bf6a1e4eb`
 
 > **権威関係と配布状態:** このSchemaの出典は上記の固定commitです。
@@ -22,7 +22,7 @@ Schema SHA-256: `d6b04e59da65506162bda2f6a178e0a90cfc47672a4eee684e56671bf6a1e4e
 
 ## このリファレンスについて
 
-この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/f3a5db14ab7d46457e015197236a73ef59188480/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
+この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/8c133f7cb11afc2af060fad8b68ac346f59b1800/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
 決定的に生成しています。型、必須性、既定値、数値範囲、列挙値、patternはSchemaから取得し、説明、掲載順、
 注意事項、例はAnnotationで管理します。Schemaで定義される項目についてSchemaと生成物が異なる場合はSchemaを
 優先します。include文はSchema検証前に処理されるためJSON Schema外であり、固定した表層仕様と実装に基づいて掲載します。
@@ -34,7 +34,7 @@ Schema SHA-256: `d6b04e59da65506162bda2f6a178e0a90cfc47672a4eee684e56671bf6a1e4e
 
 - 上流repository: [`kubohiroya/turbowarp-kamishibai-app`](https://github.com/kubohiroya/turbowarp-kamishibai-app)
 - Schema path: `schema/dsl-4.schema.json`
-- 上流commit日時: `2026-10-24T21:05:10Z`
+- 上流commit日時: `2026-10-24T22:11:14Z`
 - 掲載範囲: トップレベル15 field、action 35種類、Annotation 116項目
 - 更新方法: `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>`
 - 差分確認: `pnpm docs:dsl4:check`
