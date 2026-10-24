@@ -14,7 +14,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 - [地震安全チュートリアルのブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3)
 - [浦島太郎のブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3)
 
-拡張の読み込み確認では、それぞれ「サンドボックスなしで実行する」を有効にして許可します。
+拡張の読み込み確認では、名前と配布元を確認し、「動作に必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
+アイコンの意味、選べない理由、拒否・キャンセルの操作は[機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を参照してください。
 ステージのコードにある専用定義ブロックの白い書類アイコンを押すと、JSONをフォームで編集できます。
 編集後は、EditorのファイルメニューからSB3をコンピューターへ保存します。
 
@@ -152,7 +153,7 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 
 1. [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開き、ファイルメニューから
    `output/block-script/story-blocks.sb3`を読み込みます。既存の作品を編集している場合は先に保存してください。
-2. 拡張の読み込みを許可し、ランタイムの案内が出た場合は「サンドボックスなしで実行する」を有効にして開き直します。
+2. 拡張の名前と配布元を確認し、「動作に必要」と表示された「サンドボックスなし」を選んで「OK」を押します。
 3. ステージのコードを選び、台本ハットからつながるシーンのまとまりを探します。
    ルートのハットは`kamishibai [4.0] []`で、名前欄を空にします。旧`when kamishibai DSL source`は廃止しています。
    `opening`の内側に「1秒待つ」「endingへ移動する」に相当する命令があり、`ending`にも待機命令があります。

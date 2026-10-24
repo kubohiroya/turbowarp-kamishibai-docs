@@ -375,8 +375,9 @@ rc.25の素材保持はAsset Cacheが担当し、
 
 この一覧の版と異なる拡張JavaScriptを単独で差し替えないでください。version付きStandard SB3、
 保存済みopcode、member構成とmanifestを組にして管理します。rc.16はCamera Sourceのlease経路に不具合があるため、
-ポーズ作品には使いません。サンドボックスで開いた場合はパレットの案内に従い、開き直して
-「サンドボックスなしで実行する」を有効にします。
+ポーズ作品には使いません。公開Editorでは[機能拡張セキュリティ](../user-guides/user-guide-4.0.md#extension-security)で
+非対応のモードと理由が表示されます。名前と配布元を確認し、「動作に必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
+旧Editorでサンドボックス内の実行を選び動かなかった場合は、パレットの案内に従い開き直します。
 
 汎用feature flagは既定OFFです。Standard productionは`dsl4TurboWarpActionSurface`と
 `dsl4TurboWarpStateSurface`を含む起動時snapshotを明示して有効にします。

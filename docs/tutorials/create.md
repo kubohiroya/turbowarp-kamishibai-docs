@@ -101,11 +101,17 @@ _スターターを開き、編集する台本と後で使う追加素材を確�
 
 1. [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開く
 2. 「ファイル」から`kamishibai-4.0.0-rc.50.sb3`を読み込む
-3. スプライト一覧に`Student`がなければ、スプライトを一つ追加し、名前を`Student`にする。コードは追加しない
-4. 緑の旗を押す
-5. タイトル画面を閉じ、メニューの「台本を開く」（以後「開く」）を押す
-6. フォルダー選択画面で、スターターを展開した`tutorial-story`フォルダーを選ぶ
-7. ブラウザーから確認を求められたら、このフォルダーの読み取りを許可する
+3. [機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を読み、名前と配布元を確認する。「動作に必要」と表示された「サンドボックスなし」を自分で選び「OK」を押す
+4. スプライト一覧に`Student`がなければ、スプライトを一つ追加し、名前を`Student`にする。コードは追加しない
+5. 緑の旗を押す
+6. タイトル画面を閉じ、メニューの「台本を開く」（以後「開く」）を押す
+7. フォルダー選択画面で、スターターを展開した`tutorial-story`フォルダーを選ぶ
+8. ブラウザーから確認を求められたら、このフォルダーの読み取りを許可する
+
+<figure class="security-dialog-detail" tabindex="0">
+  <img src="../images/security-dialog/rc41-mode-detail.png" alt="機能拡張の選択部分の拡大。サンドボックスありは非対応で選べず、名前の下に動作しない理由、サンドボックスなしに動作に必要と表示">
+  <figcaption>公開Editorでrc.41を開いた選択部分の実画面です。「非対応」のモードは選べません。「動作に必要」は必要な実行方法を示し、安全性の保証ではありません。撮影に使ったrc.41と現在の配布版は区別してください。</figcaption>
+</figure>
 
 <!-- screenshot:C-02 -->
 

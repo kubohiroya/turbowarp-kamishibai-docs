@@ -22,7 +22,8 @@ SVGのブロック図は入力欄と接続を基に描いた説明図、PNGの�
 - [地震安全チュートリアルのブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3)
 - [浦島太郎のブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3)
 
-拡張の読み込み確認では、それぞれ「サンドボックスなしで実行する」を有効にして許可します。
+拡張の読み込み確認では、名前と配布元を確認し、「動作に必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
+アイコンの意味、選べない理由、拒否・キャンセルの操作は[機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を参照してください。
 ステージのコードにある専用定義ブロックの白い書類アイコンを押すと、JSONをフォームで編集できます。
 編集後は、EditorのファイルメニューからSB3をコンピューターへ保存します。
 
@@ -123,7 +124,7 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 ## 3. セリフを変更して保存する
 
 1. TurboWarp Editorのファイルメニューから`story-blocks.sb3`を開く
-2. 拡張の読み込みを許可する。案内が出た場合は「サンドボックスなしで実行する」を有効にして開き直す
+2. 拡張の名前と配布元を確認し、「動作に必要」と表示された「サンドボックスなし」を選んで「OK」を押す
 3. ステージのコードで`kamishibai [4.0] []`を探す
    版の入力は文字列`4.0`、名前欄は空欄です。Stage上の名前が空の台本がルートです。名前付きハットは
    `includeBlocks`から参照するモジュールで、1個だけでもルートにはなりません。版を別の`story property`へ入力しません。

@@ -29,7 +29,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 - [地震安全チュートリアルのブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3)
 - [浦島太郎のブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3)
 
-拡張の読み込み確認では、それぞれ「サンドボックスなしで実行する」を有効にして許可します。
+拡張の読み込み確認では、名前と配布元を確認し、「動作に必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
+アイコンの意味、選べない理由、拒否・キャンセルの操作は[機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を参照してください。
 ステージのコードにある専用定義ブロックの白い書類アイコンを押すと、JSONをフォームで編集できます。
 編集後は、EditorのファイルメニューからSB3をコンピューターへ保存します。
 
@@ -67,8 +68,8 @@ rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行�
 ローカルプレビューはリモート素材を読み込みません。rc.25では失敗時にダイアログが表示されます。
 `K4-ASSET-REMOTE-DISABLED`ならローカル配信へ変更するか、ビルドした作品で確認してください。
 ブラウザーの取得失敗はOFFLINE／CORS／CONNECTに分かれ、CONNECTでは証明書・DNS・サーバ停止などの可能性を確認します。
-CLIはTLSエラーを`K4-ASSET-REMOTE-TLS-001`で報告します。拡張機能をサンドボックス内で許可した場合は、
-パレットの案内に従い「サンドボックスなしで実行する」を有効にして開き直します。
+CLIはTLSエラーを`K4-ASSET-REMOTE-TLS-001`で報告します。公開Editorでは必要な実行モードと非対応理由を表示します。
+旧Editorでサンドボックス内の実行を選び動かなかった場合は、パレットの案内に従い開き直し、信頼できる拡張の「サンドボックスなし」を選んで許可します。
 
 ## チュートリアルと本書の使い分け
 

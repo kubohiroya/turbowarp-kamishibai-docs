@@ -1,0 +1,59 @@
+{
+  "formatVersion": 1,
+  "verifiedOn": "2026-10-24",
+  "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/266",
+  "url": "https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja",
+  "editorBuild": {
+    "repository": "https://github.com/kubohiroya/scratch-gui",
+    "revision": "3755f76bbba2bcbe8dfef159652c377756e15b23",
+    "coreRepository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+    "coreRevision": "8b03b9e9b281fd01220a7e36540178c1c7d4fa95",
+    "siteRepository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+    "siteRevision": "71fa9b1402ba7deb6c1923b672a0575f1bda8e93"
+  },
+  "runtime": {
+    "version": "4.0.0-rc.41",
+    "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.41/kamishibai-4.0.0-rc.41.sb3",
+    "size": 7016827,
+    "sha256": "7333d53c79deeb61254bbb660b3c9c1c1acf4ff21107f60553bf3bf681b4d867"
+  },
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "deviceScaleFactor": 2,
+  "locale": "ja-JP",
+  "browser": "Google Chrome via Playwright, headless, Android user agent with desktop viewport to use actual File menu / filechooser fallback. Native OS picker not tested.",
+  "captureMethod": "Native browser screenshots of the public Editor: full modal and choice header/row clip. No image composition, generated labels, source overrides, or VM modifications.",
+  "detailClip": {
+    "x": 200,
+    "y": 249,
+    "width": 880,
+    "height": 256
+  },
+  "screenshots": [
+    {
+      "path": "docs/images/security-dialog/rc41-modes.png",
+      "size": 181561,
+      "sha256": "895edd7864292e936fe4b0bf2760a21a2fea987f720fbff0f142abf3e1fd1bc0",
+      "width": 1760,
+      "height": 1186
+    },
+    {
+      "path": "docs/images/security-dialog/rc41-mode-detail.png",
+      "size": 87260,
+      "sha256": "3ca1d4b4e4d74ca5840f983fd014a08f3c349c8fb8db47982ed46eecddb90c24",
+      "width": 1760,
+      "height": 512
+    }
+  ],
+  "checks": [
+    "禁止・盾・警告アイコンの順序",
+    "サンドボックスありの無効化と非対応理由",
+    "サンドボックスなしの動作に必要表示",
+    "明示的な選択・OK後に拡張読み込み",
+    "緑の旗でrc.41のタイトルへ正常起動"
+  ],
+  "pageErrors": [],
+  "replaceUnsafeCharsErrors": []
+}
