@@ -11,6 +11,7 @@ const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf
 const index = read('site/4.0/index.html');
 const guide = read('docs/block-author-guides/dsl-4.0-block-author-guide.md');
 const tutorial = read('docs/tutorials/create-blocks.md');
+const appRelease = JSON.parse(read('sources/dsl4/app-release.json'));
 
 function section(id) {
   return (
@@ -50,21 +51,24 @@ test('gives block and DSL authors exactly one tutorial and one guide, followed b
 test('uses the published release-source CLI and keeps saved blocks as input when refreshing file bundles', () => {
   for (const source of [guide, tutorial]) {
     assert.doesNotMatch(source, /```ya?ml/iu);
-    assert.match(source, /公開(?:プレリリース`4\.0\.0-rc\.48`|rc\.48)/u);
+    assert.ok(
+      source.includes(`公開プレリリース\`${appRelease.version}\``) ||
+        source.includes(`公開${appRelease.version.replace('4.0.0-', '')}`),
+    );
     assert.match(source, /Node\.js 24\.0\.0以上/u);
     assert.doesNotMatch(source, /未公開の開発版|開発版CLI|node bin\/turbowarp-kamishibai/u);
     assert.doesNotMatch(source, /when kamishibai DSL source|whenDsl4Source/u);
     assert.match(source, /kamishibai \[4\.0\]/u);
   }
-  assert.match(
-    tutorial,
-    /git clone --depth 1 --branch v4\.0\.0-rc\.48[\s\S]*pnpm --dir \.tools\/kamishibai-rc48 run build:lib[\s\S]*npm install --save-dev --save-exact \.\/\.tools\/kamishibai-rc48/u,
+  const clone = tutorial.match(
+    /git clone --depth 1 --branch (\S+) https:\/\/github\.com\/kubohiroya\/turbowarp-kamishibai-app\.git (\.tools\/\S+)/u,
   );
-  assert.doesNotMatch(
-    tutorial,
-    /npm install[^\n]+@kubohiroya\/turbowarp-kamishibai-app@4\.0\.0-rc\.48/u,
-  );
-  assert.match(tutorial, /rc\.48のnpmパッケージは未公開/u);
+  assert.ok(clone);
+  assert.equal(clone[1], appRelease.tag);
+  assert.ok(tutorial.includes(`pnpm --dir ${clone[2]} run build:lib`));
+  assert.ok(tutorial.includes(`npm install --save-dev --save-exact ./${clone[2]}`));
+  assert.match(tutorial, /同版のnpm公開状態は\[4\.0の入口\]/u);
+  assert.doesNotMatch(tutorial, /rc\.\d+のnpmパッケージは未公開/u);
   assert.match(
     tutorial,
     /npx --no-install turbowarp-kamishibai export-block-dsl[\s\S]*--input[^\n]+story-edited\.sb3/u,
