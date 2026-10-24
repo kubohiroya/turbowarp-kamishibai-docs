@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.50**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.50)のSB3を使います。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.51**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.51)のSB3を使います。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
 
 対象: YAML台本をTurboWarpのブロックで編集し、編集結果をYAMLへ戻したい方。\
 確認日: 2026年10月21日。公開プレリリース`4.0.0-rc.41`を対象にします。正式版4.0.0は未公開です。
@@ -25,7 +25,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 専用定義のフォーム編集、組み込み台本からの直接再生が含まれます。
 rc.41では、8種類の定義フォームに加え、`recognize actor [TARGET] pose steps [STEPS]`の
 `STEPS`を編集する「ポーズ認識の手順」フォームを利用できます。各手順の`pose`は必須、`skin`・`sound`は任意です。
-以前に作ったSB3の編集用拡張は自動更新されません。rc.50のCLIで編集用SB3を再生成してください。
+以前に作ったSB3の編集用拡張は自動更新されません。rc.51のCLIで編集用SB3を再生成してください。
 Node.js 24.0.0以上で公開CLIを版固定して使います。公開npmパッケージを使う場合は、本体リポジトリのcheckoutや`build:lib`は不要です。公開tagから準備する場合は、後述のビルド手順に従います。
 旧rc.22のハットとYAML全文を文字列で持つ方式は、rc.41の読取対象ではありません。元YAMLから再生成してください。
 
@@ -52,17 +52,17 @@ file素材には対応するアセットバンドルがSB3内に必要です。�
 
 ### 公開tagのCLIを使う場合
 
-Node.js 24.0.0以上とpnpm 11の環境で、作業用フォルダーに公開tagのCLIを固定します。rc.50のGitHub ReleaseとSB3に揃えて、次の手順で公開tagのソースをビルドしてローカル導入します。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認できます。mainや別作業ブランチは使いません。
-以下は公開rc.50で、素材を使わない単一台本を生成・書き戻しする例です。
-`base.sb3`には[rc.50のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.50)から
+Node.js 24.0.0以上とpnpm 11の環境で、作業用フォルダーに公開tagのCLIを固定します。rc.51のGitHub ReleaseとSB3に揃えて、次の手順で公開tagのソースをビルドしてローカル導入します。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認できます。mainや別作業ブランチは使いません。
+以下は公開rc.51で、素材を使わない単一台本を生成・書き戻しする例です。
+`base.sb3`には[rc.51のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.51)から
 取得したStandard SB3を使用します。YAMLとベースSB3は、次のコマンドを実行するフォルダーへ置きます。
 rc.41は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不要です。
 
 ```sh
-git clone --depth 1 --branch v4.0.0-rc.50 https://github.com/kubohiroya/turbowarp-kamishibai-app.git .tools/kamishibai-rc50
-pnpm --dir .tools/kamishibai-rc50 install --frozen-lockfile
-pnpm --dir .tools/kamishibai-rc50 run build:lib
-npm install --save-dev --save-exact ./.tools/kamishibai-rc50
+git clone --depth 1 --branch v4.0.0-rc.51 https://github.com/kubohiroya/turbowarp-kamishibai-app.git .tools/kamishibai-rc51
+pnpm --dir .tools/kamishibai-rc51 install --frozen-lockfile
+pnpm --dir .tools/kamishibai-rc51 run build:lib
+npm install --save-dev --save-exact ./.tools/kamishibai-rc51
 npx --no-install turbowarp-kamishibai --version
 
 npx --no-install turbowarp-kamishibai author-block-dsl \
@@ -99,11 +99,11 @@ npx --no-install turbowarp-kamishibai --version
 表示が利用中の固定版（`4.0.0-rc.23`または`4.0.0-rc.25`）のままであることを確認し、
 書き出し・検査・ビルドを再実行します。CLIの版を下げる必要はありません。
 既存の公開rc.23・rc.25の依存宣言は、後続版で修正しても変わりません。
-新規導入では前節のrc.50を使ってください。
+新規導入では前節のrc.51を使ってください。
 
 ## 実命令ブロックを編集して書き戻す
 
-以下も、上で公開rc.50をインストールした作業用フォルダーで実行します。
+以下も、上で公開rc.51をインストールした作業用フォルダーで実行します。
 各コマンドは`npx --no-install`でローカルの固定CLIを使います。
 
 ### 1. 最小台本を準備する
@@ -113,7 +113,7 @@ mkdir -p output/block-script
 npx --no-install turbowarp-kamishibai --version
 ```
 
-表示が`4.0.0-rc.50`であることを確認します。
+表示が`4.0.0-rc.51`であることを確認します。
 
 `output/block-script/story.k4.yml`をUTF-8で保存します。この例は素材やカメラを使いません。
 
@@ -241,14 +241,14 @@ npx --no-install turbowarp-kamishibai build-dsl4 \
 
 書き出しと検査に成功してから、編集後SB3を`--base`、書き出したYAMLを`--source`へ渡します。
 `--source`は`--project-root`内のファイル名で、`file`の参照先も同じフォルダーからの相対位置に揃えます。
-公開rc.50のCLIは、`--source`を省略すると外部YAMLを探すため、元の`project.source.json`に記録された
+公開rc.51のCLIは、`--source`を省略すると外部YAMLを探すため、元の`project.source.json`に記録された
 編集前の台本を読み込むことがあります。元のYAMLを再利用せず、最新の書き戻し結果を明示してください。
 検査に失敗した場合は、古いYAMLを代わりにビルドしません。
 実習手順は[ブロック版チュートリアル](../tutorials/create-blocks.md)を参照してください。
 
 ## ラベルとincludeBlocksで台本を分割する
 
-公開rc.50のCLIで生成・読取・書き戻しを行います。
+公開rc.51のCLIで生成・読取・書き戻しを行います。
 
 ### 1. include付きのYAMLを準備する
 
@@ -400,13 +400,13 @@ JSONは、`{"seconds": 2}`のように名前と値を記述する形式です。
 
 ## 種類別定義ブロックと旧SB3の移行
 
-公開rc.50のCLIは素材を`asset`、登場人物を`actor`などの専用ブロックで生成します。
+公開rc.51のCLIは素材を`asset`、登場人物を`actor`などの専用ブロックで生成します。
 例えば`asset`は`NAME`に`HeroIdle`、`VALUE`に`"costume:Hero"`を、`actor`は
 `NAME`に`Hero`、`VALUE`に`"HeroIdle"`を入力します。`NAME`にJSONパスや引用符は不要です。
 `control`はキーマップごとに1個、`variable`の値は数値・真偽値・文字列です。
 フォームは対応Editorの`blockEditorDialogs=1`で有効になります。編集用拡張をサンドボックスなしで読み込み、
 配置した専用ブロックの左端の書類アイコンを押します。古い編集用SB3は、専用ブロックを持つものも含め、
-公開rc.50のCLIでYAMLへ書き戻して再生成してください。
+公開rc.51のCLIでYAMLへ書き戻して再生成してください。
 8種類の実フォーム画面・用途・入力例は[ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#種類別の定義ブロック)を参照してください。
 
 `story property [PATH] = JSON [VALUE]`は旧形式の読取と、専用ブロックがない設定の保持に使います。
@@ -415,7 +415,7 @@ JSONは、`{"seconds": 2}`のように名前と値を記述する形式です。
 `story property`を編集します。`PATH`は1〜2要素のJSON配列、`VALUE`はJSON値です。
 名前付き項目がない明示的な空マッピングも、この形式で保持します。
 
-旧`story property`を含む編集用SB3は、公開rc.50のCLIの`export-block-dsl`でYAMLへ戻し、
+旧`story property`を含む編集用SB3は、公開rc.51のCLIの`export-block-dsl`でYAMLへ戻し、
 `author-block-dsl`で再生成すると専用ブロックへ移行できます。古いSB3に埋め込まれた編集用拡張は
 パレットが自動更新されないため、CLIを更新するだけでは専用ブロックを追加できません。
 旧ハットやYAML全文の文字列方式は読取対象外なので、元のYAMLから再生成します。
@@ -429,15 +429,15 @@ JSONは、`{"seconds": 2}`のように名前と値を記述する形式です。
 
 ## オン／オフを保持して往復する（本体PR #903対応）
 
-公開rc.50のCLIとベースSB3は、本体[PR #903](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/903)の
+公開rc.51のCLIとベースSB3は、本体[PR #903](https://github.com/kubohiroya/turbowarp-kamishibai-app/pull/903)の
 「この部分を使う［オン／オフ］」に対応しています。操作と実画面は
 [ブロック版ガイド](../block-author-guides/dsl-4.0-block-author-guide.md#use-section)を参照してください。
 旧rc.23には`--block-sections`と対応する読み取り処理がありません。
 
 ### 対応するCLIとベースSB3を準備する
 
-前節の公開rc.50のCLIを版固定した作業用フォルダーで実行します。CLIは最初に公開tagから一度ビルドし、以後は同じ固定CLIを使います。
-公開rc.50のStandard SB3を`base.sb3`として用意し、元の台本・SB3を保持してください。
+前節の公開rc.51のCLIを版固定した作業用フォルダーで実行します。CLIは最初に公開tagから一度ビルドし、以後は同じ固定CLIを使います。
+公開rc.51のStandard SB3を`base.sb3`として用意し、元の台本・SB3を保持してください。
 以下は素材を使わない単一台本`story.k4.yml`を使う例です。台本は前の最小例のように`production`のキーマップを定義します。
 まず台本を組み込んだベースを生成し、編集用拡張のパレット表示を有効にします。
 
@@ -452,7 +452,7 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 
 `sourceSections`は生成時に固定するパレット表示フラグで、既定falseです。
 `--block-sections true`は新規ブロックをパレットに表示します。古いベースへこの指定だけを加えても、
-そのベースの再生ランタイムは更新されません。rc.50のベースを使ってください。
+そのベースの再生ランタイムは更新されません。rc.51のベースを使ってください。
 file素材やScratchスプライトがある作品は、前節の素材準備の条件も適用します。
 
 <a id="section-appearance-cli"></a>
@@ -471,7 +471,7 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 ```
 
 公開rc.41のランタイムで直接再生でき、保存値や復元用コメントの形式は従来と同じです。
-書き戻したYAMLから再生成するときも、同じ公開rc.50のCLIを使います。
+書き戻したYAMLから再生成するときも、同じ公開rc.51のCLIを使います。
 rc.25以前のCLIで生成すると、オン／オフの意味を保ったまま以前の表示になります。
 エディターの`Scratch.gui.getBlockly()` APIがない場合は、専用色と絵文字セレクタを表示し、
 オフ範囲の灰色・斜線装飾は追加しません。
@@ -508,8 +508,8 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 - **SB3からの書き出し:** `export-block-dsl`は、Stageの主台本とSpriteの参照台本を読み取れます。
   include文がある場合は、主台本と参照先を`story-k4.zip`へまとめ、内部の`story-k4/`へ保存します。
   参照されない台本、重複、参照先不明、循環はエラーになります。
-- **対象形式:** 公開rc.50のCLIは新ハット配下の実ブロックだけを読み取ります。旧ハットとYAML文字列方式は非対応です。
-  元のYAMLから新形式を生成し、同じ公開rc.50のCLIで編集結果を書き戻します。
+- **対象形式:** 公開rc.51のCLIは新ハット配下の実ブロックだけを読み取ります。旧ハットとYAML文字列方式は非対応です。
+  元のYAMLから新形式を生成し、同じ公開rc.51のCLIで編集結果を書き戻します。
 - **対象のSB3:** 実行用の「台本埋め込みSB3」に台本宣言がない場合、このコマンドでは書き出せません。
 - **保持するもの:** 台本の命令・順序・値を保持します。通常のYAMLコメント、空行、引用符の種類は保持しません。オン／オフの復元情報だけは専用コメントとして書き出します。
 - **入力の制約:** 動的なScratchの変数・リストや式は評価しません。ブロック数・入力長にも上限があります。
@@ -530,7 +530,7 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 | `K4-BLOCK-SOURCE-REMOVED-001`    | 旧ハットは非対応。元のYAMLから新ハットのSB3を再生成する。              |
 | JSONのエラー                     | 引用符・カンマ・括弧を確認する。JSON中の文字列には二重引用符を使う。   |
 | シーンや素材の参照エラー         | 改名したシーンや素材に合わせ、命令側の参照も変更する。                 |
-| 命令単位のブロックが生成されない | 固定CLIが4.0.0-rc.50か確認し、旧YAMLから再生成する。                   |
+| 命令単位のブロックが生成されない | 固定CLIが4.0.0-rc.51か確認し、旧YAMLから再生成する。                   |
 
 不正な編集結果から、それらしいYAMLを生成することはありません。表示された原因を修正し、編集後のSB3を保存して再実行します。
 
@@ -555,7 +555,7 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 [作者ガイドの4.0 RC改訂仕様](dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
 宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
 Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
-通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.50です。CLIとベースSB3を同じrc.50へ揃えます。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.51です。CLIとベースSB3を同じrc.51へ揃えます。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
 [三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、公開Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。

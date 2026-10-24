@@ -519,15 +519,25 @@ DSL 4.0の保守変更は、次をすべて満たしたときに完了です。
 [作者ガイドの4.0 RC改訂仕様](../dsl-author-guides/dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
 宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
 Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
-通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.50です。CLIとベースSB3を同じrc.50へ揃えます。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.51です。CLIとベースSB3を同じrc.51へ揃えます。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
 [三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、公開Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
 
-## rc.50の配布・資源管理
+## rc.51の配布・資源管理
 
-rc.50は共有素材のownerと保持予算/LRU、publication読込時の常駐予算、章間の素材ファイル重複排除、次章remote動画の検証済みcacheへの先読みを含みます。先読みはmaterializeせず、章遷移の失敗・cancel時には現章の再生を保持します。これらはDSL 4.0の改訂であり、新しいURLスイッチは不要です。
+rc.51は共有素材のownerと保持予算/LRU、publication読込時の常駐予算、章間の素材ファイル重複排除、次章remote動画の検証済みcacheへの先読みを含みます。先読みはmaterializeせず、章遷移の失敗・cancel時には現章の再生を保持します。これらはDSL 4.0の改訂であり、新しいURLスイッチは不要です。
 
 CLIの`build-dsl4 --distribution-profile compiled`、または`buildDsl4RuntimeComponent({distributionProfile: 'compiled'})`で、YAMLや作者用hatを含めず検証済みStory IRを配布できます。既定の`source` profileは従来どおりです。`compiled`は暗号化ではなく、`sealed`は未提供です。編集用の原本YAML・素材は別途保持してください。
 
-本版の依存はCamera Source 0.19.2、Teachable Machine 3.5.5です。npm rc.50は未公開のため、前節の公開tagから対応CLIをbuildし、rc.50のSB3と組み合わせます。詳細は[rc.50リリースノート](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.50/docs/releases/v4.0.0-rc.50.md)と[compiled配布仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.50/docs/design/dsl-4-compiled-distribution.md)を参照してください。
+本版の依存はCamera Source 0.19.2、Teachable Machine 3.5.5です。npm rc.51は未公開のため、前節の公開tagから対応CLIをbuildし、rc.51のSB3と組み合わせます。詳細は[rc.51リリースノート](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.51/docs/releases/v4.0.0-rc.51.md)と[compiled配布仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.51/docs/design/dsl-4-compiled-distribution.md)を参照してください。
+
+## rc.51のcompiled保存とsealed配布 {#compiled-sealed-rc51}
+
+Standardのメニューでは通常の配布用SB3の作成と「YAMLなし」の作成を選べます。publicationでは「Save SB3 without YAML / YAMLなしでSB3を保存」を選びます。compiledは検証済みStory IRを保存する形式で、暗号化ではありません。元のYAMLや編集用ファイルは別に保持してください。
+
+台本・素材をパスワードで保護して配布する場合は、rc.51のCLIで`build-dsl4`に`--distribution-profile sealed --sealed-password-env KAMISHIBAI_SEALED_PASSWORD`を指定します。パスワードは環境変数へ設定し、SB3や公開リポジトリには記録しません。sealed生成はCLIのみで、StandardメニューのYAMLなし保存はcompiledです。生成に使ったパスワードを受け手へ別経路で伝えてください。暗号化は再生中の画面・素材の複製を防ぐ保証ではありません。
+
+受け手がsealed作品を公開EditorやPlayerで開くとパスワード入力画面が表示されます。誤入力時は再試行でき、「キャンセル」で中断できます。成功したパスワードは同じ作品の再起動用にページ内のメモリで再利用し、永続保存しません。公開元の作品・パスワードが正しいことを確認してから入力してください。
+
+rc.51はpublicationの解放失敗後もcleanup ownerを保持し、disposeの競合を直列化して再試行します。後続のcreation cleanup作業はこの版へ含めません。

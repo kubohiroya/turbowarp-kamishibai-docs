@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.50**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.50)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。以下の`4.0.0-rc.41`などの検証記録・図版は作成当時の版を示します。
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.51**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.51)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。以下の`4.0.0-rc.41`などの検証記録・図版は作成当時の版を示します。
 
 この説明書は、TurboWarp紙芝居4.0のサンプル作品を初めてプレイする方と、進行を手伝う方のための案内です。
 まずは「浦島太郎」を開き、作品を始める、進める、終えるという一連の操作を試します。
@@ -10,7 +10,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 > **現在利用できるもの**
 >
 > ここで案内する4.0のサンプル作品はブラウザーで試せます。この説明は
-> `4.0.0-rc.50`基準の公開サンプルを対象にしています。安定版`4.0.0`は未公開です。
+> `4.0.0-rc.51`基準の公開サンプルを対象にしています。安定版`4.0.0`は未公開です。
 > 画面がこの説明と異なる場合は、作品に表示された版と、画面内の案内を優先してください。
 
 ## まず遊んでみる
@@ -35,6 +35,12 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 実行中の物語へ編集が自動反映されるわけではありません。素材を新しく加える場合は作者用のビルド手順が必要です。
 詳しくは[ブロック版「紙芝居を作る」](../tutorials/create-blocks.md)を参照してください。
+
+## パスワード付きの作品を開く
+
+rc.51から、sealed形式の作品では「この紙芝居はパスワードで保護されています」と表示されます。配布元から別途受け取ったパスワードを入力して「開く」を押してください。誤入力時は再入力でき、「キャンセル」で中断できます。成功したパスワードはそのページを開いている間、同じ作品の再起動に使われます。ページを閉じた後はもう一度入力してください。
+
+作者向けの通常の配布用SB3と、メニューの「YAMLなし」で作るcompiled形式には、このパスワード保護は付きません。sealedの作成手順は[開発者ガイド](../developer-guides/developer-guide-4.0.md#compiled-sealed-rc51)を参照してください。
 
 ## 機能拡張セキュリティ {#extension-security}
 
