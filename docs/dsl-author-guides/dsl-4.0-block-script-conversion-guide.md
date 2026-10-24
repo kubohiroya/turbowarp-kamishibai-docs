@@ -54,7 +54,7 @@ file素材には対応するアセットバンドルがSB3内に必要です。�
 
 Node.js 24.0.0以上とpnpm 11の環境で、作業用フォルダーに公開tagのCLIを固定します。rc.53のGitHub ReleaseとSB3に揃えて、次の手順で公開tagのソースをビルドしてローカル導入します。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認できます。mainや別作業ブランチは使いません。
 以下は公開rc.53で、素材を使わない単一台本を生成・書き戻しする例です。
-`base.sb3`には[rc.51のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.53)から
+`base.sb3`には[rc.53のGitHub Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.53)から
 取得したStandard SB3を使用します。YAMLとベースSB3は、次のコマンドを実行するフォルダーへ置きます。
 rc.41は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不要です。
 

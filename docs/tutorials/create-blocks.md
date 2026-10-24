@@ -34,7 +34,7 @@ SVGのブロック図は入力欄と接続を基に描いた説明図、PNGの�
 公開rc.53には、命令単位のブロック編集、8種類の専用定義ブロック、フォーム編集、
 組み込み台本からの直接再生が含まれます。正式版4.0.0は未公開です。
 Node.js 24.0.0以上で作業用フォルダーに公開CLIを版固定してインストールします。
-[公開tagからCLIを準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)でrc.51を一度ビルドしてローカル導入できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+[公開tagからCLIを準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)でrc.53を一度ビルドしてローカル導入できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 
 ```sh
 git clone --depth 1 --branch v4.0.0-rc.53 https://github.com/kubohiroya/turbowarp-kamishibai-app.git .tools/kamishibai-rc53
@@ -80,7 +80,7 @@ rc.41は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不
 次の二つをダウンロードします。
 
 - [チュートリアル用スターター](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip)
-- [rc.51対応のチュートリアル完成版SB3](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-4.0.sb3)
+- [rc.53対応のチュートリアル完成版SB3](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-4.0.sb3)
 
 CLIをインストールした作業用フォルダーに`output/tutorial-blocks`を作り、ZIPを展開して、その直下へ`tutorial-story`を置きます。
 完成版SB3は`output/tutorial-blocks/base.sb3`へ保存します。完成版には`Student`というScratchスプライトが入っています。
