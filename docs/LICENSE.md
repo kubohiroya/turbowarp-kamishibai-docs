@@ -67,6 +67,15 @@ SVG text actorの使用例を同一範囲で撮影した画面キャプチャで
 block実装には、それぞれの権利者によるライセンスまたは利用条件が適用されます。
 この文書のCC BY-SA 4.0表示は、それら第三者要素を別途再許諾するものではありません。
 
+## 共通セキュリティダイアログの実画面
+
+`images/security-dialog/rc41-modes.png`と`images/security-dialog/rc41-mode-detail.png`は、
+2026年10月24日に[公開Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)で
+公開済みの無改変rc.41 SB3を開いて撮影した画面です。操作対象部分だけをブラウザーで直接撮影し、文字やアイコンを合成していません。
+Editor build、公開SB3の取得元・hash、撮影条件、画像hashは`sources/dsl4/security-dialog-20261024.json`に記録しています。
+画面内のUI・アイコン・ロゴ等には、それぞれの権利者のライセンスまたは利用条件が適用されます。
+図版としての選択とcaptionには本書のCC BY-SA 4.0を適用しますが、画面内の要素を別途再許諾するものではありません。
+
 ## DSL 4.0 rc.5実装スナップショットと図
 
 次の3図版は、2026年8月15日に`tmpose-kamishibai@v4.0.0-rc.5`のlocal previewを実行して取得した

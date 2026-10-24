@@ -15,7 +15,8 @@ Schemaの参照は公開`4.0.0-rc.25`に固定し、rc.26でも同じSchemaを�
 - [地震安全チュートリアルのブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3)
 - [浦島太郎のブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3)
 
-拡張の読み込み確認では、それぞれ「サンドボックスなしで実行する」を有効にして許可します。
+拡張の読み込み確認では、名前と配布元を確認し、「動作に必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
+アイコンの意味、選べない理由、拒否・キャンセルの操作は[機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を参照してください。
 ステージのコードにある専用定義ブロックの白い書類アイコンを押すと、JSONをフォームで編集できます。
 編集後は、EditorのファイルメニューからSB3をコンピューターへ保存します。
 
