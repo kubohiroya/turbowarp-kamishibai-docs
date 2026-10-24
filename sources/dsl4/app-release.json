@@ -35,7 +35,7 @@
     "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/84bc52470f73a23c7cea14f713c2cc27bf8ec2cd/schema/dsl-4-narrative-control.schema.json"
   },
   "npm": {
-    "published": false,
+    "published": true,
     "url": "https://www.npmjs.com/package/@kubohiroya/turbowarp-kamishibai-app/v/4.0.0-rc.49"
   }
 }
