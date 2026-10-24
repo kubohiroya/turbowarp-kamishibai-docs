@@ -36,11 +36,11 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 ## 公開プレリリースと文書基準
 
-文書状態: 公開プレリリース`4.0.0-rc.51`の固定実装基準を説明する台本作成ガイド\
+文書状態: 公開プレリリース`4.0.0-rc.53`の固定実装基準を説明する台本作成ガイド\
 個別検証の調査基準: TurboWarp-Kamishibai `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`、2026年10月21日
 
 正式な`v4.0.0`は未公開です。公開runtimeと[Schemaリファレンス](dsl-4.0-schema-reference.md)を
-同じrc.51へ揃えています。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
+同じrc.53へ揃えています。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
 `audio` / `audioControl`はrc.39から利用できます。旧BGM/SE命令も引き続き使えます。
 
 Schema基準: `f3a5db14ab7d46457e015197236a73ef59188480`（rc.51公開tag）。
@@ -1999,9 +1999,9 @@ App **4.0.0-rc.44以降のStandard**では、物語の有限反復・条件分�
 
 [三人の訪問の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)から、
 Web再生・ブロック台本SB3のダウンロード・公開Editorでの編集を始められます。
-現在の公開版は**4.0.0-rc.51**です。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)でビルドして使えます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+現在の公開版は**4.0.0-rc.53**です。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)でビルドして使えます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 CLIは前記手順でローカル導入後、`npx --no-install turbowarp-kamishibai --help`で起動できます。
-ベースSB3も同じrc.51へ揃えます。追加の`--narrative-control`は不要です。
+ベースSB3も同じrc.53へ揃えます。追加の`--narrative-control`は不要です。
 安定版3.2系列の既存作品・導線は引き続き利用できます。
 
 ### 同じ展開と各回の違いを分ける

@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-文書状態: 公開プレリリース`4.0.0-rc.25`のブラウザー完結作者flowとrc.25公開サンプルの管理\
+文書状態: 公開プレリリース`4.0.0-rc.53`の作者操作と公開サンプルの管理\
 関連Issue: [ブラウザー作者flow #118](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/118) / [本体実装 #555](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/555) / [正式公開 #111](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/111) / [準備 #31](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/31)
 
 読者向け入口: [TurboWarp紙芝居 4.0 ドキュメント](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)
@@ -10,8 +10,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 このREADMEは、チュートリアルを公開する人のための管理メモです。初めて紙芝居を遊ぶ人や台本を作る人は、
 上の読者向け入口から始めてください。
 
-このディレクトリは、公開プレリリース`4.0.0-rc.25`を作者用実行環境とするチュートリアル本文、
-スクリーンショット台帳、4.0ドキュメント一覧への公開計画を保持します。公開中のsample成果物もrc.25から
+このディレクトリは、公開プレリリース`4.0.0-rc.53`を作者用実行環境とするチュートリアル本文、
+スクリーンショット台帳、4.0ドキュメント一覧への公開計画を保持します。公開中のsample成果物もrc.53から
 再生成し、作者用runtimeの版とsample成果物の完全性情報を別々に固定します。
 
 3ページを`docs/config.mjs`へ登録し、4.0トップには「紙芝居を遊ぶ」を見る人向け、
@@ -106,9 +106,9 @@ include文、複雑な分岐、custom action、runtimeやextensionの開発は�
 YAMLはコピー可能なcode blockを正本とします。画像はTurboWarp Editorでの画面操作、正常状態、
 失敗状態を示す補助として使用します。CLI commandは高度な利用者向けの任意手順だけに置きます。
 
-### rc.41の現行基準
+### 過去の確認基準（rc.41）
 
-現在の操作説明と公開サンプルは`4.0.0-rc.41`を対象にします。appの公開commitは`7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b`です。samplesのベース・再生用/編集用ビルダーと配布物を同じ版へ揃え、公開20ファイルをsize/SHA-256で照合しています。
+2026年10月21日時点の操作説明と公開サンプルは`4.0.0-rc.41`を対象にしました。appの公開commitは`7bd9a2b34bf7b0cf2f8992cdfe27d0ae55f9224b`です。samplesのベース・再生用/編集用ビルダーと配布物を同じ版へ揃え、公開20ファイルをsize/SHA-256で照合しています。
 
 「更新検知」・カメラ・Dock設定は公開rc.41 HTMLの実画面を追加し、撮影条件と画像hashを`sources/dsl4/runtime-ui-rc41.json`へ記録しています。背景は操作確認用のYAML台本で、チュートリアルの作品場面ではありません。旧画像は以下の撮影時の版の証跡として残し、rc.41の実画面へ読み替えません。
 
@@ -240,3 +240,7 @@ docs/images/tutorials/dsl4/create/
 
 - [4.0.0-rc.25の公開](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/900)
 - [4.0.0-rc.25のサンプル同期](https://github.com/kubohiroya/turbowarp-kamishibai-samples/issues/175)
+
+### rc.53の現行基準
+
+現在のApp・Schema・公開サンプルは`4.0.0-rc.53`へ揃えます。App公開元commitは`8c133f7cb11afc2af060fad8b68ac346f59b1800`です。日英の3拡張ダイアログとStandard SB3の許可後起動画面は`sources/dsl4/security-dialog-20261025.json`に取得元・画像hash・検証条件を記録しています。過去の撮影記録は当時の版の証跡として保持します。

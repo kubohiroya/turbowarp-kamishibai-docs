@@ -1,0 +1,124 @@
+{
+  "formatVersion": 1,
+  "verifiedOn": "2026-10-25",
+  "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/270",
+  "editorUrl": "https://kubohiroya.github.io/turbowarp-extension-data-editor/",
+  "editorBuild": {
+    "repository": "https://github.com/kubohiroya/scratch-gui",
+    "revision": "3755f76bbba2bcbe8dfef159652c377756e15b23",
+    "coreRepository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+    "coreRevision": "8b03b9e9b281fd01220a7e36540178c1c7d4fa95",
+    "siteRepository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+    "siteRevision": "71fa9b1402ba7deb6c1923b672a0575f1bda8e93"
+  },
+  "runtime": {
+    "version": "4.0.0-rc.53",
+    "commit": "8c133f7cb11afc2af060fad8b68ac346f59b1800",
+    "sha256": "e1c5e5fb7935fdc051bbff9ef2facb9b50e6126c991325f01894c6d0a17b79a0",
+    "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.53/kamishibai-4.0.0-rc.53.sb3"
+  },
+  "extensions": [
+    {
+      "name": "Camera Source",
+      "sha256": "05cc4840bea4c4187811d7617c3e268d7108c0290c3533cbda3eaa1a1ddcb99c",
+      "size": 189758
+    },
+    {
+      "name": "Asset Cache",
+      "sha256": "b7e89e35d2473f72d0d94cb34306d1758b8c13ffbffce0b662f1d679b93157b6",
+      "size": 179683
+    },
+    {
+      "name": "Bubble",
+      "sha256": "b9f237a0706a5cace798169841358b4443ab66d7f46c388c504804df6a8b3833",
+      "size": 570405
+    }
+  ],
+  "extensionVersions": {
+    "Camera Source": "0.19.3",
+    "Asset Cache": "0.3.1",
+    "Bubble": "0.13.4"
+  },
+  "captureMethod": "Unmodified native public Editor screenshots; modal-only capture for dialogs and full Editor for startup. No image composition or source/VM/UI overrides.",
+  "browser": "Actual File menu and filechooser fallback, Android UA and desktop viewport; no source/VM/UI overrides. Published npm bundles loaded in the published Editor.",
+  "locales": ["ja-JP", "en-US"],
+  "screenshots": [
+    {
+      "path": "docs/images/security-dialog/rc53-multiple-ja.png",
+      "size": 317677,
+      "sha256": "0e919ee4babb6857b2e817f5a4f48c2ae108e3465a21e583316e5291bebb415c",
+      "width": 1760,
+      "height": 1966
+    },
+    {
+      "path": "docs/images/security-dialog/rc53-multiple-en.png",
+      "size": 283910,
+      "sha256": "1c0a9775d82f986a1be739e8e7427bf2294c741cd8ab65ddedadf564e024df30",
+      "width": 1760,
+      "height": 1788
+    },
+    {
+      "path": "docs/images/security-dialog/rc53-runtime-ja.png",
+      "size": 181561,
+      "sha256": "895edd7864292e936fe4b0bf2760a21a2fea987f720fbff0f142abf3e1fd1bc0",
+      "width": 1760,
+      "height": 1186
+    },
+    {
+      "path": "docs/images/security-dialog/rc53-startup-ja.png",
+      "size": 390267,
+      "sha256": "4707785f483ac0ed21c4b4904f354a53155aa95dc8e3d5bc65697bd75b614c3c",
+      "width": 2560,
+      "height": 2000
+    }
+  ],
+  "checks": [
+    {
+      "lang": "ja",
+      "case": "individual/bulk selection, disabled mode/reason/required labels, cancel No/Yes",
+      "success": true
+    },
+    {
+      "lang": "ja",
+      "case": "bulk deny and confirmation; all extensions remain unloaded",
+      "success": true
+    },
+    {
+      "lang": "ja",
+      "case": "explicit bulk unsandboxed approval loads all three published extensions",
+      "success": true
+    },
+    {
+      "lang": "en",
+      "case": "individual/bulk selection, disabled mode/reason/required labels, cancel No/Yes",
+      "success": true
+    },
+    {
+      "lang": "en",
+      "case": "bulk deny and confirmation; all extensions remain unloaded",
+      "success": true
+    },
+    {
+      "lang": "en",
+      "case": "explicit bulk unsandboxed approval loads all three published extensions",
+      "success": true
+    }
+  ],
+  "runtimeChecks": [
+    {
+      "lang": "ja",
+      "requiredAndDisabled": true,
+      "approvedStartup": true,
+      "titleAndMenu": true
+    },
+    {
+      "lang": "en",
+      "requiredAndDisabled": true,
+      "approvedStartup": true,
+      "titleAndMenu": true
+    }
+  ],
+  "pageErrors": [],
+  "replaceUnsafeCharsErrors": [],
+  "physicalCameraTested": false
+}
