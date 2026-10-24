@@ -2,10 +2,10 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.50**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.50)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.51**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.51)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
 
-作者用実行環境: `4.0.0-rc.50`（公開プレリリース）\
-スターター基準: `4.0.0-rc.50`（公開成果物）\
+作者用実行環境: `4.0.0-rc.51`（公開プレリリース）\
+スターター基準: `4.0.0-rc.51`（公開成果物）\
 対象: 初めて紙芝居DSL 4.0を書く人\
 扱う台本: 4.0用のYAML台本\
 想定時間: 60〜90分
@@ -29,7 +29,7 @@ Node.js、pnpm、ターミナルは使いません。Scratchのブロックは�
 - File System Access APIに対応したChromium系ブラウザー
 - ポーズ場面を確かめるためのカメラと、全身を映せる少しの空間
 
-この手順では`4.0.0-rc.50`の非埋め込みStandard SB3と、同じrelease入力から生成したスターターを使用します。
+この手順では`4.0.0-rc.51`の非埋め込みStandard SB3と、同じrelease入力から生成したスターターを使用します。
 安定版`4.0.0`ではないため、ほかの作品と分けた作業フォルダーで
 進めてください。
 
@@ -59,14 +59,14 @@ Node.js、pnpm、ターミナルは使いません。Scratchのブロックは�
 次の二つをダウンロードします。
 
 - [チュートリアル用スターター](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/tutorial-story-starter-4.0.zip)
-- [紙芝居4.0.0-rc.50のStandard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.50/kamishibai-4.0.0-rc.50.sb3)
+- [紙芝居4.0.0-rc.51のStandard SB3](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.51/kamishibai-4.0.0-rc.51.sb3)
 
 新しい作業フォルダーを作り、スターターのZIPをその中へ展開します。Standard SB3も同じ作業フォルダーへ
 保存します。インストール作業はありません。展開後の主なファイルは次の配置になります。
 
 ```text
 作業フォルダー/
-├── kamishibai-4.0.0-rc.50.sb3
+├── kamishibai-4.0.0-rc.51.sb3
 └── tutorial-story/
     ├── README.md
     ├── LICENSES.md
@@ -100,7 +100,7 @@ _スターターを開き、編集する台本と後で使う追加素材を確�
 ## 3. TurboWarpで作品フォルダーを開く
 
 1. [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開く
-2. 「ファイル」から`kamishibai-4.0.0-rc.50.sb3`を読み込む
+2. 「ファイル」から`kamishibai-4.0.0-rc.51.sb3`を読み込む
 3. [機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を読み、名前と配布元を確認する。「動作に必要」と表示された「サンドボックスなし」を自分で選び「OK」を押す
 4. スプライト一覧に`Student`がなければ、スプライトを一つ追加し、名前を`Student`にする。コードは追加しない
 5. 緑の旗を押す
@@ -469,7 +469,7 @@ _完成したSB3をTurboWarpで開き、緑の旗から再生します。画像�
 
 ## 完了チェック
 
-- [ ] rc.50基準の公開スターターと`4.0.0-rc.50`の非埋め込みStandard SB3を用意した
+- [ ] rc.51基準の公開スターターと`4.0.0-rc.51`の非埋め込みStandard SB3を用意した
 - [ ] TurboWarp Editorで緑の旗を押し、「開く」から作品フォルダーを選んだ
 - [ ] セリフを一行変更し、自動検査後にプレビューへ反映した
 - [ ] 新しい背景、登場人物、場面を追加した
