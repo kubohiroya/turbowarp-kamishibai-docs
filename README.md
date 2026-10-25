@@ -26,13 +26,13 @@ For each version-specific document, the ordinary HTML (`index.html`), the Viewer
 
 Rather than reproducing the `docs/general/` it came from, the material is split by reader and purpose:
 
-| Directory                 | Readers                                                      |
-| ------------------------- | ------------------------------------------------------------ |
-| `docs/user-guides/`       | general users, parents, teachers, workshop participants      |
-| `docs/tutorials/`         | people playing through, and building, DSL 4.0 in order       |
-| `docs/dsl-author-guides/` | people authoring or migrating works in the Kamishibai DSL    |
-| `docs/developer-guides/`  | people maintaining the app, SB3 files and extensions         |
-| `docs/workshops/`         | workshop participants, staff and organisers                  |
+| Directory                 | Readers                                                   |
+| ------------------------- | --------------------------------------------------------- |
+| `docs/user-guides/`       | general users, parents, teachers, workshop participants   |
+| `docs/tutorials/`         | people playing through, and building, DSL 4.0 in order    |
+| `docs/dsl-author-guides/` | people authoring or migrating works in the Kamishibai DSL |
+| `docs/developer-guides/`  | people maintaining the app, SB3 files and extensions      |
+| `docs/workshops/`         | workshop participants, staff and organisers               |
 
 For the exact file mapping, the dependency boundaries and the record of what was done, see [MIGRATION.md](MIGRATION.md).
 
