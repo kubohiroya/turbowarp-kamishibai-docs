@@ -519,7 +519,7 @@ DSL 4.0の保守変更は、次をすべて満たしたときに完了です。
 [作者ガイドの4.0 RC改訂仕様](../dsl-author-guides/dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
 宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
 Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
-通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.55です。CLIとベースSB3を同じrc.55へ揃えます。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.56です。CLIとベースSB3を同じrc.56へ揃えます。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
 [三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、公開Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
@@ -528,17 +528,17 @@ Standardは起動時固定で物語制御を有効にします。低水準APIの
 
 rc.51は共有素材のownerと保持予算/LRU、publication読込時の常駐予算、章間の素材ファイル重複排除、次章remote動画の検証済みcacheへの先読みを含みます。先読みはmaterializeせず、章遷移の失敗・cancel時には現章の再生を保持します。これらはDSL 4.0の改訂であり、新しいURLスイッチは不要です。
 
-CLIの`build-dsl4 --distribution-profile compiled`、または`buildDsl4RuntimeComponent({distributionProfile: 'compiled'})`で、YAMLや作者用hatを含めず検証済みStory IRを配布できます。既定の`source` profileは従来どおりです。`compiled`は暗号化ではなく、`sealed`は未提供です。編集用の原本YAML・素材は別途保持してください。
+CLIの`build-dsl4 --distribution-profile compiled`、または`buildDsl4RuntimeComponent({distributionProfile: 'compiled'})`で、YAMLや作者用hatを含めず検証済みStory IRを配布できます。既定の`source` profileは従来どおりです。`compiled`は暗号化ではなく、rc.56では`sealed`配布を撤去しました。rc.51〜rc.55の旧sealed作品は非対応です。編集用の原本YAML・素材は別途保持してください。
 
-rc.55の依存はCamera Source 0.19.3、Asset Cache 0.3.1、Bubble 0.13.4、Async Input 0.8.1、Teachable Machine 3.5.6です。これらの拡張のnpm版は公開済みですが、App rc.55のnpm公開は保留です。CLIは公開tagから準備し、Standard SB3とrc.55へ揃えて使ってください。詳細は[rc.55リリースノート](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.55/docs/releases/v4.0.0-rc.55.md)と[compiled配布仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.55/docs/design/dsl-4-compiled-distribution.md)を参照してください。
+rc.56の依存はCamera Source 0.19.3、Asset Cache 0.3.1、Bubble 0.13.4、Async Input 0.8.1、Teachable Machine 3.5.6です。これらの拡張のnpm版は公開済みですが、App rc.56のnpm公開は保留です。CLIは公開tagから準備し、Standard SB3とrc.56へ揃えて使ってください。詳細は[rc.56リリースノート](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.56/docs/releases/v4.0.0-rc.56.md)と[compiled配布仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.56/docs/design/dsl-4-compiled-distribution.md)を参照してください。
 
-## rc.51のcompiled保存とsealed配布 {#compiled-sealed-rc51}
+## source・compiled保存と旧sealed作品の移行 {#compiled-sealed-rc51}
 
 Standardのメニューでは通常の配布用SB3の作成と「YAMLなし」の作成を選べます。publicationでは「Save SB3 without YAML / YAMLなしでSB3を保存」を選びます。compiledは検証済みStory IRを保存する形式で、暗号化ではありません。元のYAMLや編集用ファイルは別に保持してください。
 
-台本・素材をパスワードで保護して配布する場合は、rc.55のCLIで`build-dsl4`に`--distribution-profile sealed --sealed-password-env KAMISHIBAI_SEALED_PASSWORD`を指定します。パスワードは環境変数へ設定し、SB3や公開リポジトリには記録しません。sealed生成はCLIのみで、StandardメニューのYAMLなし保存はcompiledです。生成に使ったパスワードを受け手へ別経路で伝えてください。暗号化は再生中の画面・素材の複製を防ぐ保証ではありません。
+rc.56ではsealed生成・パスワード入力画面・解錠cacheを撤去しました。sealed用のCLI引数は利用できません。rc.51〜rc.55でsealedにした作品は`K4-SEALED-UNSUPPORTED-001`で拒否され、旧sealed publicationも非対応です。受け手へパスワードの再入力を案内せず、作者が元のYAML・素材を使ってsourceまたはcompiledとして再buildしてください。公開済みの旧版artifactは履歴として保持します。
 
-受け手がsealed作品を公開EditorやPlayerで開くとパスワード入力画面が表示されます。誤入力時は再試行でき、「キャンセル」で中断できます。成功したパスワードは同じ作品の再起動用にページ内のメモリで再利用し、永続保存しません。公開元の作品・パスワードが正しいことを確認してから入力してください。
+compiledは引き続き利用でき、既定のsource形式も従来どおりです。編集原本を別途保持し、閲覧者の制限は配布先のアクセス制御で行ってください。
 
 rc.51はpublicationの解放失敗後もcleanup ownerを保持し、disposeの競合を直列化して再試行します。rc.55には、PR #1033の起動失敗・破棄時の資源解放修正も含まれます。
 
@@ -546,10 +546,14 @@ rc.51はpublicationの解放失敗後もcleanup ownerを保持し、disposeの�
 
 Camera Source 0.19.3・Asset Cache 0.3.1・Bubble 0.13.4は、ビルド設定で`Unsandboxed: required`を出力します。共通ダイアログはその宣言から対応モードを判断し、動作しないサンドボックス実行を無効化します。実行コードを読んで動作要件を推測する方式ではありません。
 
-日英の実画面と各拡張の用途は[操作説明書](../user-guides/user-guide-4.0.md#extension-security)を参照してください。宣言欠落の回帰検査を各拡張の配布物検証へ追加しています。rc.55にはパスワード付き作品の複数章保存・読込（PR #1031）も含まれます。
+日英の実画面と各拡張の用途は[操作説明書](../user-guides/user-guide-4.0.md#extension-security)を参照してください。宣言欠落の回帰検査を各拡張の配布物検証へ追加しています。過去のrc.55はパスワード付き作品の複数章保存・読込（PR #1031）を含みましたが、rc.56ではsealed機能自体を撤去しています。
 
 ## rc.55のcleanup所有権と再試行
 
 Standard shell・TurboWarp preview・Web Previewで、解放に失敗したownerを保持し、後の明示disposeで未完了stepだけを再試行します（App PR #1036・#1039）。通常操作を先に閉じ、同時呼出しや同期再入は同じ試行へ合流させ、他ownerの解放は継続します。専用の再試行UIは追加していません。製品module接続の障害注入テストと、公開Editor/Playerの通常操作検証を区別し、native資源回収の測定結果とは扱いません。
 
-rc.55はGitHub Release・SB3・Player・公開サンプルの対象で、今回npm公開は行いません。同じCLIが必要な場合は公開tagのsourceから準備します。
+rc.56はGitHub Release・SB3・Player・公開サンプルの対象で、今回npm公開は行いません。同じCLIが必要な場合は公開tagのsourceから準備します。
+
+## rc.56のbuilder preview終了処理
+
+builder previewでも、解放に失敗したownerを保持して次の明示disposeで未完了stepを再試行します（App PR #1045）。candidateのcancelと親previewの終了を扱い、同時呼出し・同期再入は同じ試行へ合流します。Standard shell・Web Previewの既存の再試行も継続します。asset pipeline等の未マージのcleanup作業とは区別します。公開Editorでの通常操作の確認は、native資源回収の測定結果を意味しません。

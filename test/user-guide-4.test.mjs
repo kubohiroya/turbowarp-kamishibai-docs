@@ -116,3 +116,16 @@ test('does not fold earlier-series operation formats into the 4.0 guide', () => 
     assert.doesNotMatch(guide, new RegExp(legacyTerm.replace('.', '\\.'), 'u'));
   }
 });
+
+test('explains legacy sealed refusal and preserves source and compiled recovery', () => {
+  const developerGuide = read('docs/developer-guides/developer-guide-4.0.md');
+  for (const source of [guide, developerGuide]) {
+    assert.match(source, /rc\.51〜rc\.55/u);
+    assert.match(source, /K4-SEALED-UNSUPPORTED-001/u);
+    assert.match(source, /sourceまたはcompiled/u);
+    assert.match(source, /配布先のアクセス制/u);
+    assert.doesNotMatch(source, /--sealed-password-env|パスワードを入力して「開く」/u);
+  }
+  assert.match(developerGuide, /--distribution-profile compiled/u);
+  assert.match(developerGuide, /\{#compiled-sealed-rc51\}/u);
+});
