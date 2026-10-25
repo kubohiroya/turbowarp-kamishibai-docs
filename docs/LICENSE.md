@@ -75,6 +75,8 @@ block実装には、それぞれの権利者によるライセンスまたは利
 Editor build、公開SB3の取得元・hash、撮影条件、画像hashは`sources/dsl4/security-dialog-20261024.json`に記録しています。
 `images/security-dialog/rc53-multiple-ja.png`、`rc53-multiple-en.png`、`rc53-runtime-ja.png`、`rc53-startup-ja.png`は、2026年10月25日に同じ公開Editorで撮影した実画面です。公開npmのCamera Source 0.19.3・Asset Cache 0.3.1・Bubble 0.13.4と、公開rc.53 SB3を使用しています。日英ダイアログ、無効化理由と必須表示、許可後の起動を確認し、撮影条件と画像hashを`sources/dsl4/security-dialog-20261025.json`へ記録しています。画像の合成や表示内容の差し替えは行っていません。
 
+`images/security-dialog/rc55-runtime-ja.png`と`rc55-startup-ja.png`は、2026年10月25日に公開rc.55 SB3を同じ公開Editorで開いて撮影した無改変の実画面です。取得元・SB3 hash・Editor build・画像hash・日英の起動と停止/再起動の確認条件は`sources/dsl4/security-dialog-rc55-20261025.json`へ記録しています。
+
 画面内のUI・アイコン・ロゴ等には、それぞれの権利者のライセンスまたは利用条件が適用されます。
 図版としての選択とcaptionには本書のCC BY-SA 4.0を適用しますが、画面内の要素を別途再許諾するものではありません。
 
