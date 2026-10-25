@@ -120,3 +120,5 @@ build環境や閲覧環境によって文字が四角形へ置換されること
 このフォントにはCC BY-SA 4.0ではなく、
 [SIL Open Font License 1.1](fonts/NotoSansJP-OFL.txt)（OFL-1.1）が適用されます。
 フォントを含む生成PDFやHTMLでも、フォント部分のライセンスは変わりません。
+
+`images/security-dialog/rc56-runtime-ja.png`と`rc56-startup-ja.png`は、2026年10月25日に公開rc.56 SB3を公開Editorで開いて撮影した無改変の実画面です。取得元・SB3 hash・Editor build・画像hash・日英の起動と停止/再起動の確認条件は`sources/dsl4/security-dialog-rc56-20261025.json`へ記録しています。旧版の画像と証跡は保持しています。

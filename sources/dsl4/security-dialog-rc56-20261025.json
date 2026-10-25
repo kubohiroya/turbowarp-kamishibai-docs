@@ -1,0 +1,64 @@
+{
+  "formatVersion": 1,
+  "verifiedOn": "2026-10-25",
+  "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/278",
+  "editorUrl": "https://kubohiroya.github.io/turbowarp-extension-data-editor/",
+  "editorBuild": {
+    "repository": "https://github.com/kubohiroya/scratch-gui",
+    "revision": "d2867e8b5db79297f599e541c5cc87679660de14",
+    "coreRepository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+    "coreRevision": "8b03b9e9b281fd01220a7e36540178c1c7d4fa95",
+    "siteRepository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+    "siteRevision": "1c42ae3ee080b3502b41b1e49c3f2a0a28cd106e"
+  },
+  "runtime": {
+    "version": "4.0.0-rc.56",
+    "commit": "7a51d51ea9bb98127d9b858cd19533972c1f8146",
+    "sha256": "ac738a213c49dd5347edd129cbda29ec0d053da31d7882478b6b951df62f66e5",
+    "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.56/kamishibai-4.0.0-rc.56.sb3"
+  },
+  "captureMethod": "Actual File menu/filechooser fallback, Android UA with desktop viewport. No extension source, VM, or UI overrides.",
+  "screenshots": [
+    {
+      "path": "docs/images/security-dialog/rc56-runtime-ja.png",
+      "size": 181561,
+      "sha256": "895edd7864292e936fe4b0bf2760a21a2fea987f720fbff0f142abf3e1fd1bc0",
+      "width": 1760,
+      "height": 1186
+    },
+    {
+      "path": "docs/images/security-dialog/rc56-startup-ja.png",
+      "size": 389953,
+      "sha256": "f4627beb8266abb15b51682d07e84c4bf8ca6b1045f61cd6e115283b2c6764c8",
+      "width": 2560,
+      "height": 2000
+    }
+  ],
+  "runtimeChecks": [
+    {
+      "lang": "ja",
+      "requiredAndDisabled": true,
+      "approvedStartup": true,
+      "titleAndMenu": true,
+      "stopAndRestart": true,
+      "runtime": {
+        "version": "4.0.0-rc.56",
+        "error": ""
+      }
+    },
+    {
+      "lang": "en",
+      "requiredAndDisabled": true,
+      "approvedStartup": true,
+      "titleAndMenu": true,
+      "stopAndRestart": true,
+      "runtime": {
+        "version": "4.0.0-rc.56",
+        "error": ""
+      }
+    }
+  ],
+  "pageErrors": [],
+  "replaceUnsafeCharsErrors": [],
+  "physicalCameraTested": false
+}
