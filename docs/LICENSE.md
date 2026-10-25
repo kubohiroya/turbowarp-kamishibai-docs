@@ -77,6 +77,8 @@ Editor build、公開SB3の取得元・hash、撮影条件、画像hashは`sourc
 
 `images/security-dialog/rc55-runtime-ja.png`と`rc55-startup-ja.png`は、2026年10月25日に公開rc.55 SB3を同じ公開Editorで開いて撮影した無改変の実画面です。取得元・SB3 hash・Editor build・画像hash・日英の起動と停止/再起動の確認条件は`sources/dsl4/security-dialog-rc55-20261025.json`へ記録しています。
 
+`images/security-dialog/localized-descriptions-ja-20261025.png`と`localized-descriptions-en-20261025.png`は、2026年10月25日に更新後の公開Editorで撮影した未加工の実画面です。単体公開版Camera Source 0.19.4・Asset Cache 0.3.2・Bubble 0.13.5の説明を日英で表示しています。取得元・各版・Editor revision・画像hashを`sources/dsl4/security-dialog-descriptions-20261025.json`に記録しています。以前のrc.53/rc.55の同梱版を示す画像・台帳とは別の証跡です。
+
 画面内のUI・アイコン・ロゴ等には、それぞれの権利者のライセンスまたは利用条件が適用されます。
 図版としての選択とcaptionには本書のCC BY-SA 4.0を適用しますが、画面内の要素を別途再許諾するものではありません。
 
