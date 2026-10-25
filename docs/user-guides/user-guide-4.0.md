@@ -69,8 +69,6 @@ rc.51から、sealed形式の作品では「この紙芝居はパスワードで
 
 ### Camera Source・Asset Cache・Bubbleで必要なモード
 
-3拡張の一覧画像はrc.53公開時の固定証跡で、rc.55も同じ依存版・必須モード宣言を使用します。Standard SB3の許可画面と起動画面は、公開rc.55から取得した実画面へ更新しています。今回rc.55はnpm未公開のため、CLIは公開tagから準備してください。
-
 rc.55が同梱する次の3拡張は、いずれも「サンドボックスなし」を必要とします。単体で読み込む場合も同じです。
 
 | 拡張と対応版         | サンドボックス外の実行が必要な理由                                                                                               |
@@ -83,18 +81,29 @@ rc.55が同梱する次の3拡張は、いずれも「サンドボックスな�
 「サンドボックスなし」はアクセス権限の広い実行方法です。必要な機能と配布元を確認し、自分で許可してください。
 Camera Sourceの拡張実行を許可しても、ブラウザーのカメラ使用許可が自動で与えられることはありません。
 
+### 説明文の表示言語
+
+公開Editorは、表示言語に合う説明が拡張に用意されている場合、その言語で説明を表示します。
+次の日英画像では、日本語説明に対応した単体公開版のCamera Source **0.19.4**・Asset Cache **0.3.2**・Bubble **0.13.5**を使用しています。
+日本語では日本語の説明、英語では従来の英語の説明が表示されます。翻訳がない場合は元の説明を表示します。
+説明文の言語が変わっても、必要な実行モードや許可の選択は変わりません。
+
+上の表はrc.55の同梱版、下の一覧画像は日本語対応の単体版を示します。
+既存SB3に埋め込まれた拡張コードは、単体パッケージが更新されても自動で差し替わりません。
+埋め込みコードに翻訳が含まれていなければ、元の説明のままです。
+
 **日本語の表示**では「非対応」「動作に必要」と、オレンジ色の「この拡張はサンドボックス内では動作しません。」を確認します。
 
 <figure class="security-dialog-detail" tabindex="0">
-  <img src="../images/security-dialog/rc53-multiple-ja.png" alt="Camera Source、Asset Cache、Bubbleの日本語ダイアログ。3行すべてでサンドボックスありが非対応で無効、サンドボックスなしに動作に必要、その下にサンドボックス内では動作しない理由を表示">
-  <figcaption>2026年10月25日の公開Editorで、公開npmの3拡張を同時に開いた実画面です。個別の選択と一括選択の両方で、非対応のモードは選べません。幅が狭い画面では画像を左右に動かせます。</figcaption>
+  <img src="../images/security-dialog/localized-descriptions-ja-20261025.png" alt="Camera Source、Asset Cache、Bubbleの説明が日本語になったダイアログ。3行すべてでサンドボックスありが非対応で無効、サンドボックスなしに動作に必要、その下にサンドボックス内では動作しない理由を表示">
+  <figcaption>2026年10月25日の公開Editorで、日本語説明に対応した単体公開版の3拡張を同時に開いた実画面です。個別の選択と一括選択の両方で、非対応のモードは選べません。幅が狭い画面では画像を左右に動かせます。</figcaption>
 </figure>
 
 **英語の表示**では「Unsupported」「Required to run」と、「This extension cannot run inside the sandbox.」が同じ意味です。
 
 <figure class="security-dialog-detail" tabindex="0">
-  <img src="../images/security-dialog/rc53-multiple-en.png" alt="同じ3拡張の英語ダイアログ。With sandboxがUnsupportedで無効、Without sandboxにRequired to runと表示し、This extension cannot run inside the sandbox.と理由を表示">
-  <figcaption>同じ公開Editorを英語で開いた実画面です。Required to runは実行要件を表し、信頼性の認定ではありません。</figcaption>
+  <img src="../images/security-dialog/localized-descriptions-en-20261025.png" alt="同じ3拡張の説明を英語で表示したダイアログ。With sandboxがUnsupportedで無効、Without sandboxにRequired to runと表示し、This extension cannot run inside the sandbox.と理由を表示">
+  <figcaption>同じ公開Editorを英語で開き、3拡張の説明も英語で表示した実画面です。Required to runは実行要件を表し、信頼性の認定ではありません。</figcaption>
 </figure>
 
 rc.55のStandard SB3では、これらを含む拡張が「Kamishibai DSL 4.0 Runtime」の1つの同梱拡張として表示されます。
