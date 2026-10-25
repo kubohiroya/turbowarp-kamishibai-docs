@@ -1,3 +1,13 @@
+// The shared TurboWarp Plus header, which every page of this site carries.
+// Loaded from here rather than added to each page: the build already requires
+// every page to reference this script, so one place reaches all of them.
+// Guarded, because this module is also imported by the tests under Node.
+if (typeof document !== 'undefined') {
+  import('https://kubohiroya.github.io/turbowarp-plus-site-header/dist/auto.js').catch(() => {
+    /* The page stands on its own without the family bar. */
+  });
+}
+
 const topRevealOffset = 8;
 const downwardThreshold = 24;
 const upwardThreshold = 12;
