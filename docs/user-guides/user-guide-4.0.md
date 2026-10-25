@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.53**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.53)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。以下の`4.0.0-rc.41`などの検証記録・図版は作成当時の版を示します。
+現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.55**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.55)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。以下の`4.0.0-rc.41`などの検証記録・図版は作成当時の版を示します。
 
 この説明書は、TurboWarp紙芝居4.0のサンプル作品を初めてプレイする方と、進行を手伝う方のための案内です。
 まずは「浦島太郎」を開き、作品を始める、進める、終えるという一連の操作を試します。
@@ -10,7 +10,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 > **現在利用できるもの**
 >
 > ここで案内する4.0のサンプル作品はブラウザーで試せます。この説明は
-> `4.0.0-rc.53`基準の公開サンプルを対象にしています。安定版`4.0.0`は未公開です。
+> `4.0.0-rc.55`基準の公開サンプルを対象にしています。安定版`4.0.0`は未公開です。
 > 画面がこの説明と異なる場合は、作品に表示された版と、画面内の案内を優先してください。
 
 ## まず遊んでみる
@@ -69,7 +69,9 @@ rc.51から、sealed形式の作品では「この紙芝居はパスワードで
 
 ### Camera Source・Asset Cache・Bubbleで必要なモード
 
-rc.53が同梱する次の3拡張は、いずれも「サンドボックスなし」を必要とします。単体で読み込む場合も同じです。
+3拡張の一覧画像はrc.53公開時の固定証跡で、rc.55も同じ依存版・必須モード宣言を使用します。Standard SB3の許可画面と起動画面は、公開rc.55から取得した実画面へ更新しています。今回rc.55はnpm未公開のため、CLIは公開tagから準備してください。
+
+rc.55が同梱する次の3拡張は、いずれも「サンドボックスなし」を必要とします。単体で読み込む場合も同じです。
 
 | 拡張と対応版         | サンドボックス外の実行が必要な理由                                                                                               |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -95,17 +97,17 @@ Camera Sourceの拡張実行を許可しても、ブラウザーのカメラ使�
   <figcaption>同じ公開Editorを英語で開いた実画面です。Required to runは実行要件を表し、信頼性の認定ではありません。</figcaption>
 </figure>
 
-rc.53のStandard SB3では、これらを含む拡張が「Kamishibai DSL 4.0 Runtime」の1つの同梱拡張として表示されます。
+rc.55のStandard SB3では、これらを含む拡張が「Kamishibai DSL 4.0 Runtime」の1つの同梱拡張として表示されます。
 単体3拡張の画像と行数が違っていても、「サンドボックスなし」が必要な点は同じです。
 
 <figure class="security-dialog-detail" tabindex="0">
-  <img src="../images/security-dialog/rc53-runtime-ja.png" alt="rc.53のStandard SB3のダイアログ。Kamishibai DSL 4.0 Runtimeのサンドボックスありは非対応で無効、サンドボックスなしは動作に必要">
-  <figcaption>公開rc.53のStandard SB3を開いた画面です。配布元を確認し、「サンドボックスなし」を選んで「OK」を押します。</figcaption>
+  <img src="../images/security-dialog/rc55-runtime-ja.png" alt="rc.55のStandard SB3のダイアログ。Kamishibai DSL 4.0 Runtimeのサンドボックスありは非対応で無効、サンドボックスなしは動作に必要">
+  <figcaption>公開rc.55のStandard SB3を開いた画面です。配布元を確認し、「サンドボックスなし」を選んで「OK」を押します。</figcaption>
 </figure>
 
 <figure class="security-dialog-detail" tabindex="0">
-  <img src="../images/security-dialog/rc53-startup-ja.png" alt="公開Editorでrc.53の拡張実行を許可し、緑の旗を押した後のタイトル画面。Version 4.0.0-rc.53と表示">
-  <figcaption>許可後に緑の旗を押したrc.53の起動画面です。タイトルの「閉じる」を押すと作品またはメニューへ進みます。</figcaption>
+  <img src="../images/security-dialog/rc55-startup-ja.png" alt="公開Editorでrc.55の拡張実行を許可し、緑の旗を押した後のタイトル画面。Version 4.0.0-rc.55と表示">
+  <figcaption>許可後に緑の旗を押したrc.55の起動画面です。タイトルの「閉じる」を押すと作品またはメニューへ進みます。</figcaption>
 </figure>
 
 拡張の読み込み後、緑の旗で作品を起動します。保存済みの選択がある場合も「OK」での確認が必要です。

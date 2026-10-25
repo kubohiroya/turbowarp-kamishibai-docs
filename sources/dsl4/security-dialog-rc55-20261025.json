@@ -1,0 +1,64 @@
+{
+  "formatVersion": 1,
+  "verifiedOn": "2026-10-25",
+  "issue": "https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/272",
+  "editorUrl": "https://kubohiroya.github.io/turbowarp-extension-data-editor/",
+  "editorBuild": {
+    "repository": "https://github.com/kubohiroya/scratch-gui",
+    "revision": "3755f76bbba2bcbe8dfef159652c377756e15b23",
+    "coreRepository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+    "coreRevision": "8b03b9e9b281fd01220a7e36540178c1c7d4fa95",
+    "siteRepository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+    "siteRevision": "2d51668f34d9a88a7a5faaf5a69398a41159a30e"
+  },
+  "runtime": {
+    "version": "4.0.0-rc.55",
+    "commit": "2e6fbfbcfd7fc411ce91e0aad1300bff3f116856",
+    "sha256": "b9441fa3c168825f49e495837533d04a431269ab7e05016f5c9f0e87f8b0efb0",
+    "url": "https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/download/v4.0.0-rc.55/kamishibai-4.0.0-rc.55.sb3"
+  },
+  "captureMethod": "Unmodified native public Editor screenshots. Actual File menu/filechooser fallback, Android UA and desktop viewport; no source/VM/UI overrides.",
+  "screenshots": [
+    {
+      "path": "docs/images/security-dialog/rc55-runtime-ja.png",
+      "size": 181561,
+      "sha256": "895edd7864292e936fe4b0bf2760a21a2fea987f720fbff0f142abf3e1fd1bc0",
+      "width": 1760,
+      "height": 1186
+    },
+    {
+      "path": "docs/images/security-dialog/rc55-startup-ja.png",
+      "size": 388977,
+      "sha256": "e1fd93d43b2164d1065ac192fb6ce93aeef9998447d02fd9bc0d0ab30b88c739",
+      "width": 2560,
+      "height": 2000
+    }
+  ],
+  "runtimeChecks": [
+    {
+      "lang": "ja",
+      "requiredAndDisabled": true,
+      "approvedStartup": true,
+      "titleAndMenu": true,
+      "stopAndRestart": true,
+      "runtime": {
+        "version": "4.0.0-rc.55",
+        "error": ""
+      }
+    },
+    {
+      "lang": "en",
+      "requiredAndDisabled": true,
+      "approvedStartup": true,
+      "titleAndMenu": true,
+      "stopAndRestart": true,
+      "runtime": {
+        "version": "4.0.0-rc.55",
+        "error": ""
+      }
+    }
+  ],
+  "pageErrors": [],
+  "replaceUnsafeCharsErrors": [],
+  "physicalCameraTested": false
+}
