@@ -1,155 +1,86 @@
-# TurboWarp紙芝居ドキュメント
+# TurboWarp Kamishibai Documentation
 
-このリポジトリは、[TurboWarp紙芝居](https://github.com/kubohiroya/turbowarp-kamishibai-app)の
-一般文書、紙芝居DSL作成者向け文書、開発者向け文書、体験会資料を管理し、
-独立したGitHub Pagesとして公開するためのリポジトリです。
+English | [日本語](README.ja.md)
 
-文書sourceは、現行 `turbowarp-kamishibai-app` の履歴上にある旧 repository 名のPR #238 merge commit
-`8166edb3a8b7ed360685bdcd6534c000054105bd`から履歴付きで移設しています。
-同commitで`docs/design/`、`docs/development/`に残っていた開発者向け3文書も、
-読者別ディレクトリへ追加移設しています。文書の表示順は`docs/config.mjs`で管理し、
-ファイル名には旧来の番号接頭辞を付けません。
+This repository holds the general documents, the documents for Kamishibai DSL authors, the documents for developers and the workshop material of [TurboWarp Kamishibai](https://github.com/kubohiroya/turbowarp-kamishibai-app), and publishes them as a GitHub Pages site of their own.
 
-## 公開サイトの役割
+The document sources were moved here with their history from merge commit `8166edb3a8b7ed360685bdcd6534c000054105bd` of PR #238, made under the earlier repository name and still in the history of the current `turbowarp-kamishibai-app`. The three developer documents that had stayed behind in `docs/design/` and `docs/development/` at that commit were moved as well. The display order of the documents is kept in `docs/config.mjs`, and file names no longer carry the old numeric prefixes.
 
-- `turbowarp-kamishibai-app`: アプリ本体と、アプリ・文書・サンプルへ移動する公開入口
-- `turbowarp-kamishibai-docs`: 全文書のHTMLとVivliostyle Viewer、体験会資料のPDF
-- `turbowarp-kamishibai-samples`: サンプル台本と実行可能な作品
+## What each published site is for
 
-公開入口は `https://kubohiroya.github.io/turbowarp-kamishibai-app/` に固定します。
-このリポジトリのPagesは `https://kubohiroya.github.io/turbowarp-kamishibai-docs/` を予定しています。
+- `turbowarp-kamishibai-app`: the application itself, and the public entry point that leads to the app, the documents and the samples
+- `turbowarp-kamishibai-docs`: the HTML of every document, the Vivliostyle Viewer, and the workshop material as PDF
+- `turbowarp-kamishibai-samples`: the sample scripts and the works that can be run
 
-ドキュメントサイトの公開rootは版選択バナーだけを表示します。ワークショップ、サンプル、
-ダウンロードへの共通導線はAppBarと公式トップで提供し、版固有の文書一覧は混在させず、
-次の専用topで提供します。
+The public entry point stays at `https://kubohiroya.github.io/turbowarp-kamishibai-app/`. The Pages site of this repository is planned at `https://kubohiroya.github.io/turbowarp-kamishibai-docs/`.
 
-- `/3.2/`: TXT台本、3.2.xアプリ、既存作品・教材を保守するための文書
-- `/4.0/`: YAML project、include文、preview／build toolchainで新しく制作するための文書
-- `/workshops/`: 体験会資料を開催時期とDSL系列ごとに一覧表示する独立した入口
+The published root of the documentation site shows nothing but the version-selection banner. The shared routes to the workshops, the samples and the downloads are offered by the AppBar and the official front page; the version-specific document lists are not mixed together, but offered by these dedicated tops:
 
-各版固有文書の通常HTML（`index.html`）、Viewer用本文（`document.html`）、
-`publication.json`、local assetは、
-`/3.2/`または`/4.0/`以下へ生成します。以前のversion番号なしURLには自動転送を置かず、
-対応する新URLと版選択rootを案内するページを残します。以前のVivliostyle Viewer URLが参照する
-`publication.json`も、同じ移転案内を表示するWeb Publicationとして維持します。
+- `/3.2/`: documents for maintaining TXT scripts, the 3.2.x app, and existing works and teaching material
+- `/4.0/`: documents for authoring anew with YAML projects, include statements and the preview/build toolchain
+- `/workshops/`: a separate entry point listing the workshop material by date and DSL series
 
-## 文書の分類
+For each version-specific document, the ordinary HTML (`index.html`), the Viewer body (`document.html`), `publication.json` and the local assets are generated under `/3.2/` or `/4.0/`. The earlier URLs without a version number get no automatic redirect; a page is left there pointing at the corresponding new URL and the version-selection root. The `publication.json` that the earlier Vivliostyle Viewer URLs refer to is kept as well, as a Web Publication that shows the same notice about the move.
 
-移設元の`docs/general/`をそのまま再現せず、読者と用途により次のように分割します。
+## How the documents are grouped
 
-| ディレクトリ              | 対象読者                                |
-| ------------------------- | --------------------------------------- |
-| `docs/user-guides/`       | 一般利用者、保護者、教員、体験参加者    |
-| `docs/tutorials/`         | DSL 4.0を順番に遊ぶ人・作る人           |
-| `docs/dsl-author-guides/` | 紙芝居DSLで作品を作成・移行する人       |
-| `docs/developer-guides/`  | アプリ、SB3、機能拡張を保守・開発する人 |
-| `docs/workshops/`         | 体験会の参加者、スタッフ、運営者        |
+Rather than reproducing the `docs/general/` it came from, the material is split by reader and purpose:
 
-具体的なファイル対応、依存境界、実施記録は[MIGRATION.md](MIGRATION.md)を参照してください。
-現在の公開版とSchemaの出典は、appの公開済みReleaseから生成する
-`sources/dsl4/app-release.json`で管理します。RCも対象とし、同じtagのcommit、release metadata、
-Standard SB3のサイズとSHA-256を照合します。npmの公開状態は独立して確認します。
-手書き本文・画面・サンプルの版は各文書に明記した基準です。公開版が進んでも、旧版の検証結果を
-新版の結果として読み替えません。4.0文書には現在の公開アプリへの案内を表示します。
-`/4.0/tutorials/`系列へ配置し、4.0一覧から「紙芝居を遊ぶ」「紙芝居を作る」へ案内します。
-rc.25時点の公開サンプル、スターター、Web版のmanifestと公開16ファイルの確認結果は履歴として保持します。
-現在のsamplesの版はsamples側で確認してください。実カメラ・実ポーズは再検証していません。
-固定commit、取得先、照合方法、過去の検証の適用範囲は`DSL4-PUBLICATION-STATUS.md`と
-`sources/dsl4/user-guide-4.0-public-surfaces.json`に記録します。
+| Directory                 | Readers                                                   |
+| ------------------------- | --------------------------------------------------------- |
+| `docs/user-guides/`       | general users, parents, teachers, workshop participants   |
+| `docs/tutorials/`         | people playing through, and building, DSL 4.0 in order    |
+| `docs/dsl-author-guides/` | people authoring or migrating works in the Kamishibai DSL |
+| `docs/developer-guides/`  | people maintaining the app, SB3 files and extensions      |
+| `docs/workshops/`         | workshop participants, staff and organisers               |
 
-本文の用語、コード表記、固有概念の初出説明、図表の使い分けは
-[TurboWarp紙芝居ドキュメント表記ガイド](WRITING-STYLE.md)に従います。
-DSL 4.0の固定実装、正式リリース、公開画面、文書状態の区別は
-[DSL 4.0 文書・公開状態の表記基準](DSL4-PUBLICATION-STATUS.md)で管理します。
-概念図の通常HTML、狭幅、印刷、フラグメントの確認結果は
-[DSL 4.0 概念図・フラグメントQA記録](DSL4-DIAGRAM-QA.md)へ記録します。
-公開rc.5から再現したDSL 4.0実画面と、source、runtime、live reload transactionの実装追跡図は
-[DSL 4.0 実装ビジュアル記録](DSL4-IMPLEMENTATION-VISUALS.md)で管理します。
+For the exact file mapping, the dependency boundaries and the record of what was done, see [MIGRATION.md](MIGRATION.md).
 
-## 開発
+The provenance of the current published version and of the Schema is kept in `sources/dsl4/app-release.json`, generated from the app's published releases. Release candidates count too, and the commit, the release metadata and the size and SHA-256 of the Standard SB3 of the same tag are verified. Whether something is published to npm is confirmed separately. For hand-written prose, screens and samples, the version is the one each document states. When the published version moves on, an older version's verification result is not reread as the new version's. The 4.0 documents carry a pointer to the currently published app. They live under `/4.0/tutorials/`, and the 4.0 list leads to "play a kamishibai" and "make a kamishibai". The manifest of the published samples, starter and web build as of rc.25, and the check of the 16 published files, are kept as history. For the current version of the samples, look at the samples repository. Real cameras and real poses have not been verified again. The pinned commit, where things were fetched from, how they were verified, and what past verification covers are recorded in `DSL4-PUBLICATION-STATUS.md` and `sources/dsl4/user-guide-4.0-public-surfaces.json`.
 
-Node.js 24.0.0以降とpnpm 11を使用します。
+Terminology, code notation, how a specific concept is introduced the first time, and when to use which kind of figure follow the [TurboWarp Kamishibai documentation writing-style guide](WRITING-STYLE.md). The distinction between a pinned DSL 4.0 implementation, an official release, a published screen and a document's status is kept in [the notation standard for DSL 4.0 document and publication status](DSL4-PUBLICATION-STATUS.md). The checks of the concept diagrams in ordinary HTML, at narrow widths, in print and as fragments are recorded in [the DSL 4.0 diagram and fragment QA record](DSL4-DIAGRAM-QA.md). The real DSL 4.0 screens reproduced from published rc.5, and the diagrams tracking the implementation of source, runtime and the live reload transaction, are kept in [the DSL 4.0 implementation visual record](DSL4-IMPLEMENTATION-VISUALS.md).
+
+## Development
+
+Node.js 24.0.0 or newer and pnpm 11.
 
 ```bash
 pnpm install
 pnpm check
 ```
 
-`pnpm build`は、増分buildと生成物検証を実行します。生成だけを実行する場合は
-`pnpm build:publications`、全publicationを強制的に再生成する場合は
-`pnpm build:publications:full`（検証も含める場合は`pnpm build:full`）を使用します。
+`pnpm build` runs an incremental build and verifies its output. To generate only, use `pnpm build:publications`; to force every publication to be regenerated, `pnpm build:publications:full` (with verification as well, `pnpm build:full`).
 
-増分buildはpublication種別に依存しない共通処理で、Markdown、そこから参照する図版、
-共通theme、font、Vivliostyle設定、build scriptを入力として収集します。完了markerの
-`build-info.json`と必須出力のうち最も古い更新日時を、入力の最も新しい更新日時と比較し、
-必須出力の欠落、metadata不一致、または新しい入力があるpublicationだけを再生成します。
-同じ内容の共通assetと後処理済みHTMLは再書き込みしません。
+The incremental build is common to every kind of publication: it collects as input the Markdown, the figures it refers to, the shared theme, the fonts, the Vivliostyle settings and the build scripts. It compares the oldest modification time among the `build-info.json` completion marker and the required outputs against the newest modification time among the inputs, and regenerates only the publications with a missing required output, mismatched metadata, or a newer input. Shared assets and post-processed HTML whose content has not changed are not written again.
 
-各文書のWeb Publicationは`dist/`へ生成します。PDFを生成するのは
-`docs/workshops/`配下の体験会資料だけで、公開用PDFを`dist/`、確認用PDFを
-`output/pdf/`へ出力します。
-移設元の固定情報と機能拡張一覧は
-[`sources/turbowarp-kamishibai-app.json`](sources/turbowarp-kamishibai-app.json)で管理します。
+Each document's Web Publication is generated into `dist/`. The only PDFs are the workshop material under `docs/workshops/`, which produces a PDF for publication in `dist/` and a PDF for checking in `output/pdf/`. The pinned information about where the material came from, and the list of extensions, are kept in [`sources/turbowarp-kamishibai-app.json`](sources/turbowarp-kamishibai-app.json).
 
-### DSLリファレンスの保守と出版
+### Maintaining and publishing the DSL reference
 
-DSL 3系とDSL 4.0では、リファレンスの正本と保守方法を分けます。
+The DSL 3 series and DSL 4.0 differ in where their reference's source of truth lives and how it is maintained.
 
-公開サイトではDSL 3.2とDSL 4.0を並列の正式サポート対象として扱い、版ごとの専用セクションと
-専用ページを提供します。既存のTXT台本と3.2.xを保守する場合は3.2、新しいYAML project、
-include文、preview／build toolchainで制作する場合は4.0を選びます。
+The published site treats DSL 3.2 and DSL 4.0 as officially supported in parallel, with a dedicated section and dedicated pages per version. To maintain existing TXT scripts and 3.2.x, choose 3.2; to author anew with YAML projects, include statements and the preview/build toolchain, choose 4.0.
 
-- DSL 3系（現行実装が受理する宣言は3.1／3.2）: 過去リリースから引き継いだ手書きMarkdown
-  [`docs/dsl-author-guides/command-reference.md`](docs/dsl-author-guides/command-reference.md)を、
-  このリポジトリで引き続き保守します。
-- DSL 4.0: 上流JSON Schemaの固定snapshot、source lock、日本語Annotationから
-  [`docs/dsl-author-guides/dsl-4.0-schema-reference.md`](docs/dsl-author-guides/dsl-4.0-schema-reference.md)を
-  決定的に生成します。
+- DSL 3 series (the declarations the current implementation accepts are 3.1 and 3.2): the hand-written Markdown carried over from past releases, [`docs/dsl-author-guides/command-reference.md`](docs/dsl-author-guides/command-reference.md), continues to be maintained in this repository.
+- DSL 4.0: [`docs/dsl-author-guides/dsl-4.0-schema-reference.md`](docs/dsl-author-guides/dsl-4.0-schema-reference.md) is generated deterministically from a pinned snapshot of the upstream JSON Schema, a source lock, and Japanese annotations.
 
-どちらのMarkdownも`pnpm build`で同じVivliostyle Web Publication工程へ入力し、通常のHTML版
-（各公開ディレクトリの`index.html`）とVivliostyle Viewer版（`publication.json`）を同時に
-用意します。通常HTMLは目次と本文を同一ページに収め、広い画面では目次を左上へ固定し、
-見出しの子階層を展開・折りたたみできるツリーとして表示します。Viewerのreading orderには
-`document.html`だけを含め、統合HTMLとの二重表示を防ぎます。DSL 3系をJSON Schemaへ置き換えたり、
-DSL 4.0と同じ生成方式へ擬似的に統一したりはしません。
+Both Markdown files go into the same Vivliostyle Web Publication process in `pnpm build`, which prepares the ordinary HTML version (the `index.html` of each published directory) and the Vivliostyle Viewer version (`publication.json`) at once. The ordinary HTML holds the table of contents and the body on one page; on a wide screen the contents is pinned to the top left and shown as a tree whose heading levels expand and collapse. The Viewer's reading order contains only `document.html`, which keeps it from being shown twice alongside the combined HTML. The DSL 3 series is not replaced by a JSON Schema, nor made to look as though it is generated the same way as DSL 4.0.
 
-2026年8月1日のワークショップ資料も、参加者向けは表紙・目次・本文、スタッフ向けは目次・本文を
-それぞれ通常HTMLの`index.html`へ統合します。画面用の目次ツリーは一般文書と同じCSS／JavaScriptを
-共有します。ViewerとPDFでは統合HTMLをreading orderへ入れず、参加者向けの表紙・目次・本文と、
-スタッフ向けの本文だけという既存の組版単位を維持します。
+The material for the workshop on 1 August 2026 is combined into the ordinary HTML `index.html` as well: cover, contents and body for participants, contents and body for staff. The on-screen contents tree shares its CSS and JavaScript with the general documents. In the Viewer and in PDF the combined HTML is kept out of the reading order, which preserves the existing typesetting units: cover, contents and body for participants, and body only for staff.
 
-「TurboWarp紙芝居 アプリ・教材・ツールチェインガイド」も3.2版と4.0版を別のMarkdownとして保守し、
-それぞれに通常HTML版とVivliostyle Viewer版を用意します。3.2版は`/3.2/`、4.0版は`/4.0/`以下の
-独立した開発者向けpublicationとして提供し、以前のversion番号なしURLには移転案内を残します。
+"The TurboWarp Kamishibai app, teaching material and toolchain guide" is also maintained as separate Markdown for 3.2 and for 4.0, each with an ordinary HTML version and a Vivliostyle Viewer version. The 3.2 version is offered as an independent developer publication under `/3.2/` and the 4.0 version under `/4.0/`, and the earlier URLs without a version number keep a notice about the move.
 
-release smokeも3.x版と4.0版を別のMarkdown、URL、publicationとして保守します。4.0版は
-[`docs/developer-guides/release-smoke-4.0.md`](docs/developer-guides/release-smoke-4.0.md)と
-[`sources/dsl4/release-smoke-4.0-candidate.json`](sources/dsl4/release-smoke-4.0-candidate.json)を正本にし、
-候補commit、Schema、feature flag、SB3、Web版、実機確認、release-stop、rollbackを一組で固定します。
+The release smoke is likewise maintained as separate Markdown, URLs and publications for 3.x and 4.0. The 4.0 version takes [`docs/developer-guides/release-smoke-4.0.md`](docs/developer-guides/release-smoke-4.0.md) and [`sources/dsl4/release-smoke-4.0-candidate.json`](sources/dsl4/release-smoke-4.0-candidate.json) as its source of truth, pinning the candidate commit, the Schema, the feature flags, the SB3, the web build, the checks on real devices, the release stop and the rollback as one set.
 
-操作説明書も3.x版と4.0版を別のMarkdown、URL、publicationとして保守します。4.0版は
-[`docs/user-guides/user-guide-4.0.md`](docs/user-guides/user-guide-4.0.md)と
-[`sources/dsl4/user-guide-4.0-public-surfaces.json`](sources/dsl4/user-guide-4.0-public-surfaces.json)を正本にし、
-一般向け本文には開始、入力、終了、再実行、失敗時の復旧を、機械可読データには公開URL、版、checksum、
-実機確認を分けて記録します。
+The user guide is likewise maintained as separate Markdown, URLs and publications for 3.x and 4.0. The 4.0 version takes [`docs/user-guides/user-guide-4.0.md`](docs/user-guides/user-guide-4.0.md) and [`sources/dsl4/user-guide-4.0-public-surfaces.json`](sources/dsl4/user-guide-4.0-public-surfaces.json) as its source of truth: the prose for general readers covers starting, input, finishing, running again and recovering from a failure, while the machine-readable data records the published URL, the version, the checksum and the checks on real devices separately.
 
-リリース履歴も3.x版と4.0版を別のMarkdown、URL、publicationとして保守します。4.0版は
-[`docs/dsl-author-guides/dsl-4.0-history.md`](docs/dsl-author-guides/dsl-4.0-history.md)と
-[`sources/dsl4/release-history-4.0.json`](sources/dsl4/release-history-4.0.json)を正本にし、実装・検証済みcandidateと
-tag、GitHub Release、npm、production Pagesの正式公開状態を分けて追跡します。
+The release history is likewise maintained as separate Markdown, URLs and publications for 3.x and 4.0. The 4.0 version takes [`docs/dsl-author-guides/dsl-4.0-history.md`](docs/dsl-author-guides/dsl-4.0-history.md) and [`sources/dsl4/release-history-4.0.json`](sources/dsl4/release-history-4.0.json) as its source of truth, tracking implemented and verified candidates separately from the official publication status across tags, GitHub Releases, npm and production Pages.
 
-4.0の素材の置き方を変更する手順は、
-[DSL 4.0 アセット変換ガイド](docs/dsl-author-guides/dsl-4.0-asset-conversion-guide.md)で保守します。
-組み込み素材とローカル素材の相互変換、リモート素材の取り込み、変換後のビルドと切り戻しを扱い、
-`/4.0/dsl-author-guides/dsl-4.0-asset-conversion-guide/`へHTML・Viewer用本文を生成します。
+How to change the way 4.0 material is arranged is maintained in [the DSL 4.0 asset conversion guide](docs/dsl-author-guides/dsl-4.0-asset-conversion-guide.md). It covers converting between embedded and local material, taking in remote material, and the build and rollback that follow a conversion, and generates its HTML and Viewer body into `/4.0/dsl-author-guides/dsl-4.0-asset-conversion-guide/`.
 
-### DSL 4.0 Schemaリファレンスの生成
+### Generating the DSL 4.0 Schema reference
 
-DSL 4.0のリファレンスは、上流JSON Schemaの固定snapshot、source lock、日本語Annotationから
-決定的に生成します。現在は、規範JSON Schema、表層仕様、適合実装・testを含むDSL 4.0完成commitを
-同一revisionとして固定します。Schemaはruntime実装から生成しません。通常のbuildはnetworkへ接続せず、
-固定snapshotだけを読みます。Schema外でcompose前に処理するinclude文の作者向け契約は、
-固定した表層仕様と適合実装・testを根拠に台本作成ガイドで管理します。
+The DSL 4.0 reference is generated deterministically from a pinned snapshot of the upstream JSON Schema, a source lock and Japanese annotations. At present the DSL 4.0 completion commit — which carries the normative JSON Schema, the surface specification, and the conforming implementation and its tests — is pinned as one revision. The Schema is not generated from the runtime implementation. An ordinary build makes no network connection and reads only the pinned snapshot. The author-facing contract for include statements, which are handled outside the Schema before composition, is kept in the script-authoring guide, on the evidence of the pinned surface specification and the conforming implementation and tests.
 
 ```bash
 pnpm docs:dsl4:check
@@ -157,52 +88,32 @@ pnpm docs:dsl4:generate
 pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>
 ```
 
-開発中の候補Schemaを調べる場合だけ`docs:dsl4:sync`を明示的に実行します。このコマンドは指定commitから
-`schema/dsl-4.schema.json`を取得し、SHA-256とsource URLをlock fileへ記録してからリファレンスを
-再生成します。生成Markdownは直接編集せず、日本語の説明、掲載順、例は
-[`sources/dsl4/annotations.ja.json`](sources/dsl4/annotations.ja.json)で変更します。
+Run `docs:dsl4:sync` explicitly only to look into a candidate Schema under development. It fetches `schema/dsl-4.schema.json` from the given commit, records the SHA-256 and the source URL in the lock file, and then regenerates the reference. Do not edit the generated Markdown; change the Japanese descriptions, the order and the examples in [`sources/dsl4/annotations.ja.json`](sources/dsl4/annotations.ja.json).
 
-### app公開成果物への追従
+### Following the app's published artifacts
 
-通常のローカルビルドは検証済みsnapshotを使い、ネットワーク接続を必要としません。
-公開版へ更新するときは`pnpm docs:app:sync`を実行します。依存情報・Schema・4.0入口を更新し、
-Schemaリファレンスを再生成します。取得・照合・Annotation検証の失敗は公開を停止させます。
+An ordinary local build uses the verified snapshot and needs no network connection. To update to the published version, run `pnpm docs:app:sync`. It updates the dependency information, the Schema and the 4.0 entry point, and regenerates the Schema reference. A failure to fetch, to verify, or to validate the annotations stops publication.
 
-Pagesはmain更新・手動実行・`app-release-published`のrepository dispatchから実行します。
-App公開版の定期pollは行いません。各起動で公開Appの取得・照合・検証を行い、成功した成果物を公開します。
-取得・照合・Annotation検証に失敗した場合は公開を停止し、直前の検証済み公開物を保持します。
+Pages runs on updates to main, on manual dispatch, and on an `app-release-published` repository dispatch. There is no scheduled poll of the app's published version. Every run fetches, verifies and checks the published app, and publishes only artifacts that passed. If fetching, verification or annotation validation fails, publication stops and the previously verified published artifacts stay in place.
 
-`app-release-published`は受信口です。他repoのReleaseは自動伝播せず、調査時点のAppにはこの通知の送信処理がありません。
-Appの新版公開後は、承認された手動起動またはmain更新によってDocs・Samplesを更新し、実際の公開反映まで確認します。
-各実行のjob summaryに確認時刻・検証済みRelease・source commit・SB3 hash・比較先・差分判定を記録します。
-summaryは依存の照合結果であり、公開完了はdeploy jobと公開URLで確認します。
+`app-release-published` is a receiving end. Releases in other repositories do not propagate automatically, and at the time this was investigated the app had no code to send that notification. After the app publishes a new version, Docs and Samples are updated by an approved manual dispatch or by an update to main, and the publication is confirmed as actually live. Each run records in its job summary the time of the check, the verified release, the source commit, the SB3 hash, what it was compared against, and the difference verdict. The summary is the result of comparing dependencies; publication itself is confirmed from the deploy job and the published URL.
 
-[Actionsの実行履歴](https://github.com/kubohiroya/turbowarp-kamishibai-docs/actions)と
-[公開app-release.json](https://kubohiroya.github.io/turbowarp-kamishibai-docs/app-release.json)を照合します。
-write権限のある担当者が手動で更新する場合は次を実行し、deploy成功と公開URLの版・commit・hashを確認します。
+Compare the [Actions history](https://github.com/kubohiroya/turbowarp-kamishibai-docs/actions) with the [published `app-release.json`](https://kubohiroya.github.io/turbowarp-kamishibai-docs/app-release.json). A maintainer with write access who updates it by hand runs the following, then confirms that deploy succeeded and checks the version, commit and hash at the published URL:
 
 ```bash
 gh workflow run pages.yml --repo kubohiroya/turbowarp-kamishibai-docs --ref main
 ```
 
-appのリリースから取り込むのは、公開版の案内とSchemaです。手書き本文の仕様差分や新版の画面確認は
-別途レビューが必要です。自動同期によって未確認の本文を「最新版で検証済み」とは表示しません。
-ロールバックはこの変更と依存情報をrevertし、直前の確認済みdocsを再公開します。
+What is taken from an app release is the pointer to the published version, and the Schema. A specification difference in hand-written prose, or a check of a new version's screens, needs its own review. Automatic syncing never presents unchecked prose as "verified against the latest version". To roll back, revert this change and the dependency information, and publish the last checked docs again.
 
-準備は[Issue #1](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/1)、
-本文移設は[Issue #3](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/3)、
-残存文書と生成機構の移設は[Issue #5](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/5)で管理します。
+The preparation is tracked in [issue #1](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/1), moving the prose in [issue #3](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/3), and moving the remaining documents and the generation machinery in [issue #5](https://github.com/kubohiroya/turbowarp-kamishibai-docs/issues/5).
 
-## ライセンス
+## License
 
-- 一般・DSL作成者・開発者向け文書、共有画像とその生成物: CC BY-SA 4.0
-- 体験会資料とその生成物: Copyright © 2026 Hiroya Kubo. All rights reserved.
-- 明示的に列挙したbuild script、site shell、設定、テスト: MPL-2.0
+- documents for general readers, DSL authors and developers, the shared images and what is generated from them: CC BY-SA 4.0
+- the workshop material and what is generated from it: Copyright © 2026 Hiroya Kubo. All rights reserved.
+- the build scripts, site shell, settings and tests that are explicitly listed: MPL-2.0
 
-このリポジトリ全体に適用される単一のライセンスはありません。ファイルごとの正確な
-適用範囲は[LICENSES.md](LICENSES.md)を参照してください。
+There is no single license that applies to this repository as a whole. For exactly what applies to each file, see [LICENSES.md](LICENSES.md).
 
-4.0の作者向け入口は、台本ブロック、台本DSL、台本作りの詳細資料に分けています。
-各作成経路に「紙芝居を作る」と「紙芝居DSL 4.0 台本作成ガイド」を置き、既存のDSL版URLは維持します。
-ブロック図版は`sources/dsl4-authoring-blocks.json`から`node scripts/render-authoring-blocks.mjs`で再生成できます。
-命令単位の編集と空名ルートからの直接再生は、公開プレリリース4.0.0-rc.25を基準にします。素材入りのブロック台本SB3を開き、緑の旗で起動してタイトルを閉じると再生できます。
+The 4.0 author-facing entry point is split into script blocks, the script DSL, and the detailed material on writing a script. Each authoring path carries "make a kamishibai" and "the Kamishibai DSL 4.0 script authoring guide", and the existing DSL-version URLs are kept. The block figures can be regenerated from `sources/dsl4-authoring-blocks.json` with `node scripts/render-authoring-blocks.mjs`. Editing one instruction at a time, and playing directly from the empty-named root, are described against published prerelease 4.0.0-rc.25: open a block-script SB3 with its material, start it with the green flag, and close the title to play.
