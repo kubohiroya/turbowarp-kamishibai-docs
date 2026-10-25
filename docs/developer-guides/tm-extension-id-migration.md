@@ -36,6 +36,22 @@ DSL 4.0の固定公開基準は `v4.0.0-rc.8` で、current migrationはこの�
 artifact migrationを扱います。固定済みの3.2 / 4.0 prerelease snapshotやrelease historyは履歴として維持し、
 current guideでは新しいIDだけを案内します。
 
+TurboWarp-Kamishibaiが同梱するExtension IDは `v4.0.0-rc.10` で切り替わりました。手元の配布物がどの系列かで移行の要否が変わります。
+
+| 系列                        | Extension ID   | 移行の要否                    |
+| --------------------------- | -------------- | ----------------------------- |
+| 3.2系（3.2.3の固定release） | `tmpose`       | 対象外。凍結releaseとして維持 |
+| 4.0系 `v4.0.0-rc.9` 以前    | `tmpose`       | 移行が必要                    |
+| 4.0系 `v4.0.0-rc.10` 以降   | `kubohiroyatm` | 移行済み                      |
+
+`v4.0.0-rc.10` は TurboWarp Teachable Machine の依存を `@kubohiroya/turbowarp-tm@2.0.0` へ更新し、SB3内のExtension IDを `kubohiroyatm` へ切り替えた版です。`v4.0.0-rc.9` 以前は `tmpose` のままです。
+
+DSL 4.0の固定公開基準 `v4.0.0-rc.8` はこの境界より前のため、Extension IDは `tmpose` のままです。現行実装基準 `4.0.0-rc.25` は `kubohiroyatm` なので、固定公開基準を参照した配布物と現行実装では識別子が異なります。固定公開基準のSB3を新しいIDの拡張と組み合わせる場合も移行が必要です。恒久aliasは導入しないため、識別子が一致しないSB3はmissing blockになります。
+
+手元のSB3がどちらの識別子を使っているかは、`sb3-toolchain` の移行planで extension entry を一覧化すると判定できます（「手順」の2）。planは変更対象を列挙するだけで、SB3を書き換えません。
+
+3.2系は移行対象ではありません。凍結releaseとして `tmpose` のまま維持し、変換しないでください。
+
 ### 手順
 
 1. 対象SB3と対応するTurboWarp-Kamishibai versionを固定する
@@ -69,6 +85,22 @@ Use the `sb3-toolchain` migration plan to inspect each SB3 first, then rewrite t
 The new boundary is defined by TurboWarp Teachable Machine #79 and followed by the TurboWarp-Kamishibai runtime / artifact migration in
 TurboWarp-Kamishibai #661. Versioned 3.2 and 4.0 prerelease snapshots remain historical records; current guides should point
 to `kubohiroyatm` only.
+
+The bundled Extension ID changed in TurboWarp-Kamishibai `v4.0.0-rc.10`. Whether a distribution needs migration depends on which line it came from.
+
+| Line                                  | Extension ID   | Migration                       |
+| ------------------------------------- | -------------- | ------------------------------- |
+| 3.2 series (the frozen 3.2.3 release) | `tmpose`       | Out of scope; kept frozen as is |
+| 4.0 series `v4.0.0-rc.9` and earlier  | `tmpose`       | Required                        |
+| 4.0 series `v4.0.0-rc.10` and later   | `kubohiroyatm` | Already migrated                |
+
+`v4.0.0-rc.10` is the release that moved the TurboWarp Teachable Machine dependency to `@kubohiroya/turbowarp-tm@2.0.0` and switched the SB3 Extension ID to `kubohiroyatm`.
+
+The fixed publication baseline for DSL 4.0, `v4.0.0-rc.8`, predates that boundary, so it still carries `tmpose`. The current implementation baseline `4.0.0-rc.25` carries `kubohiroyatm`, so the two baselines do not share an identifier. An SB3 built against the fixed baseline still needs migration before it runs with a current extension build, because no permanent alias keeps the old identifier loadable; a mismatched identifier shows up as missing blocks.
+
+To tell which identifier an SB3 uses, list its extension entries with the `sb3-toolchain` migration plan. The plan only reports the pending changes and never rewrites the SB3.
+
+The 3.2 series is not a migration target. Keep it on `tmpose` as a frozen release and do not convert it.
 
 Verification requires the converted SB3 to contain one `kubohiroyatm` extension entry, use the `kubohiroyatm_` opcode
 prefix, show TurboWarp Teachable Machine blocks in the TurboWarp Editor, pass camera/model recognition, and deliver recognition events

@@ -49,7 +49,7 @@ export const documentUpdatedAt = Object.freeze({
   'release-smoke.md': '2026-08-04',
   'release-smoke-4.0.md': '2026-10-24',
   'upstream-fork-policy.md': '2026-10-19',
-  'tm-extension-id-migration.md': '2026-10-19',
+  'tm-extension-id-migration.md': '2026-10-25',
   'turbowarp-ecosystem.md': '2026-08-26',
 });
 
