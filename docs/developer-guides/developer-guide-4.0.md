@@ -127,6 +127,7 @@ git diff -- \
 固定コミットの本体CLIと文書のビルドにはNode.js 24.0.0以上とpnpm 11を使用します。それぞれのrepository rootでロックファイルを使用して依存を復元します。
 
 ```bash
+npm install --global corepack@latest
 corepack enable
 pnpm install --frozen-lockfile
 ```

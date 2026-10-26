@@ -35,7 +35,7 @@ local previewであり、配布作品の通常再生画面とは役割が異な�
 
 ## 1. runtimeを固定する
 
-Node.js 22.12.0以上とCorepackを使用します。既存checkoutを上書きしない作業用directoryで実行します。
+Node.js 24以上とCorepackを使用します。既存checkoutを上書きしない作業用directoryで実行します。
 
 ```bash
 git clone https://github.com/kubohiroya/turbowarp-kamishibai-app.git
