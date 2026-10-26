@@ -13,7 +13,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 - 監査日: 2026-08-03
 - 対象コミット: `main`の`e884bea`を起点とする#227の依存更新
-- パッケージマネージャー: `pnpm@11.18.0`
+- パッケージマネージャー: `pnpm@11.28.8`
 - Node.js: リポジトリの`engines`で定める22.12.0以上
 - 追跡Issue: #204、legacy Webpack経路の除去は#212、バージョン更新は#227
 

@@ -86,6 +86,7 @@ git diff -- package.json pnpm-lock.yaml
 - Gitと、GitHub操作に利用するGitHub CLI
 
 ```bash
+npm install --global corepack@latest
 corepack enable
 pnpm install
 ```

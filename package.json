@@ -10,7 +10,7 @@
     "./site-shell.css": "./site/site-shell.css"
   },
   "license": "SEE LICENSE IN LICENSES.md",
-  "packageManager": "pnpm@11.18.0",
+  "packageManager": "pnpm@11.28.8",
   "engines": {
     "node": ">=24.0.0"
   },
