@@ -11,8 +11,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 増やすときに[紙芝居DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)の必要な節をお読みください。
 
 文書状態: **固定実装基準を説明するSchemaリファレンス（正式リリースの操作資料ではない）**\
-Schema固定commit: [`7a51d51`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/7a51d51ea9bb98127d9b858cd19533972c1f8146)\
-Schema SHA-256: `d6b04e59da65506162bda2f6a178e0a90cfc47672a4eee684e56671bf6a1e4eb`
+Schema固定commit: [`9fe9d93`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/9fe9d9335e5cca82c430a1d557bc26c6dd6d8a3f)\
+Schema SHA-256: `8ad96fbb122dc7422a7c50f59e89f631d7f81072cbf63837e5d2dd8bccdcad29`
 
 > **権威関係と配布状態:** このSchemaの出典は上記の固定commitです。
 > 現在の公開版と配布状況は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認してください。
@@ -22,7 +22,7 @@ Schema SHA-256: `d6b04e59da65506162bda2f6a178e0a90cfc47672a4eee684e56671bf6a1e4e
 
 ## このリファレンスについて
 
-この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/7a51d51ea9bb98127d9b858cd19533972c1f8146/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
+この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/9fe9d9335e5cca82c430a1d557bc26c6dd6d8a3f/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
 決定的に生成しています。型、必須性、既定値、数値範囲、列挙値、patternはSchemaから取得し、説明、掲載順、
 注意事項、例はAnnotationで管理します。Schemaで定義される項目についてSchemaと生成物が異なる場合はSchemaを
 優先します。include文はSchema検証前に処理されるためJSON Schema外であり、固定した表層仕様と実装に基づいて掲載します。
@@ -34,8 +34,8 @@ Schema SHA-256: `d6b04e59da65506162bda2f6a178e0a90cfc47672a4eee684e56671bf6a1e4e
 
 - 上流repository: [`kubohiroya/turbowarp-kamishibai-app`](https://github.com/kubohiroya/turbowarp-kamishibai-app)
 - Schema path: `schema/dsl-4.schema.json`
-- 上流commit日時: `2026-10-25T07:10:25Z`
-- 掲載範囲: トップレベル15 field、action 35種類、Annotation 116項目
+- 上流commit日時: `2026-10-26T00:30:48Z`
+- 掲載範囲: トップレベル16 field、action 35種類、Annotation 117項目
 - 更新方法: `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>`
 - 差分確認: `pnpm docs:dsl4:check`
 
@@ -390,6 +390,33 @@ bgm:
     effect: crossfade
     seconds: 1.5
     curve: equalPower
+```
+
+### `viewport` — 作品の画面寸法
+
+作品の論理的な画面寸法と、表示領域への収め方を指定します。省略すると480×360・`landscape`・`contain`です。
+
+Schema位置: `#/properties/viewport`
+
+| field／形式 | 必須性 | 型 | 既定値・制約 |
+| --- | --- | --- | --- |
+| `width` | 必須 | 整数 | 1以上、4096以下 |
+| `height` | 必須 | 整数 | 1以上、4096以下 |
+| `orientation` | 任意 | `landscape` / `portrait` | — |
+| `fit` | 任意 | `contain` / `cover` | 既定値 `contain` |
+
+- `width`と`height`は1〜4096の整数で、面積は4,194,304以下です。
+- `orientation`を省略すると寸法から決まります。寸法と矛盾する宣言は拒否されます。
+- `fit: contain`は全体を収めて余白を作り、`cover`は比率を保って広げて外側を切り取ります。動画の矩形に指定する`fit`とは別の設定です。
+- 作品の論理寸法は、ウィンドウを回転しても変わりません。
+
+`viewport` fieldの値:
+
+```yaml
+width: 360
+height: 640
+orientation: portrait
+fit: contain
 ```
 
 ## asset種別

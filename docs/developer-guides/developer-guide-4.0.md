@@ -520,7 +520,7 @@ DSL 4.0の保守変更は、次をすべて満たしたときに完了です。
 [作者ガイドの4.0 RC改訂仕様](../dsl-author-guides/dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
 宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
 Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
-通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.56です。CLIとベースSB3を同じrc.56へ揃えます。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.58です。CLIとベースSB3を同じrc.58へ揃えます。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
 [三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、公開Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
@@ -531,7 +531,7 @@ rc.51は共有素材のownerと保持予算/LRU、publication読込時の常駐�
 
 CLIの`build-dsl4 --distribution-profile compiled`、または`buildDsl4RuntimeComponent({distributionProfile: 'compiled'})`で、YAMLや作者用hatを含めず検証済みStory IRを配布できます。既定の`source` profileは従来どおりです。`compiled`は暗号化ではなく、rc.56では`sealed`配布を撤去しました。rc.51〜rc.55の旧sealed作品は非対応です。編集用の原本YAML・素材は別途保持してください。
 
-rc.56の依存はCamera Source 0.19.3、Asset Cache 0.3.1、Bubble 0.13.4、Async Input 0.8.1、Teachable Machine 3.5.6です。これらの拡張のnpm版は公開済みですが、App rc.56のnpm公開は保留です。CLIは公開tagから準備し、Standard SB3とrc.56へ揃えて使ってください。詳細は[rc.56リリースノート](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.56/docs/releases/v4.0.0-rc.56.md)と[compiled配布仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.56/docs/design/dsl-4-compiled-distribution.md)を参照してください。
+rc.58の依存はCamera Source 0.20.0、Asset Cache 0.4.0、Bubble 0.14.0、Async Input 0.9.0、Teachable Machine 3.6.0です。App rc.58はnpmの`next`にprovenance付きで公開済みです。CLIは公開tagから準備するか、同じ版のnpmを使い、Standard SB3とrc.58へ揃えて使ってください。詳細は[rc.58リリースノート](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.58/docs/releases/v4.0.0-rc.58.md)と[compiled配布仕様](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/v4.0.0-rc.58/docs/design/dsl-4-compiled-distribution.md)を参照してください。
 
 ## source・compiled保存と旧sealed作品の移行 {#compiled-sealed-rc51}
 
@@ -553,7 +553,7 @@ Camera Source 0.19.3・Asset Cache 0.3.1・Bubble 0.13.4は、ビルド設定で
 
 Standard shell・TurboWarp preview・Web Previewで、解放に失敗したownerを保持し、後の明示disposeで未完了stepだけを再試行します（App PR #1036・#1039）。通常操作を先に閉じ、同時呼出しや同期再入は同じ試行へ合流させ、他ownerの解放は継続します。専用の再試行UIは追加していません。製品module接続の障害注入テストと、公開Editor/Playerの通常操作検証を区別し、native資源回収の測定結果とは扱いません。
 
-rc.56はGitHub Release・SB3・Player・公開サンプルの対象で、今回npm公開は行いません。同じCLIが必要な場合は公開tagのsourceから準備します。
+rc.58はGitHub Release・SB3・Player・公開サンプルに加え、npmの`next`でも公開しています。同じCLIは公開tagのsourceから準備するか、npmの同じ版を使います。
 
 ## rc.56のbuilder preview終了処理
 

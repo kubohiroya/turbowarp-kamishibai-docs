@@ -157,6 +157,20 @@
           "summary": "BGMを切り替えるときのcrossfadeの作品既定値を指定します。`bgm` actionの`transition`が既定値を上書きします。",
           "example": "bgm:\n  transition:\n    effect: crossfade\n    seconds: 1.5\n    curve: equalPower",
           "exampleContext": "`audio` fieldの値:"
+        },
+        {
+          "pointer": "#/properties/viewport",
+          "order": 160,
+          "title": "`viewport` — 作品の画面寸法",
+          "summary": "作品の論理的な画面寸法と、表示領域への収め方を指定します。省略すると480×360・`landscape`・`contain`です。",
+          "example": "width: 360\nheight: 640\norientation: portrait\nfit: contain",
+          "exampleContext": "`viewport` fieldの値:",
+          "notes": [
+            "`width`と`height`は1〜4096の整数で、面積は4,194,304以下です。",
+            "`orientation`を省略すると寸法から決まります。寸法と矛盾する宣言は拒否されます。",
+            "`fit: contain`は全体を収めて余白を作り、`cover`は比率を保って広げて外側を切り取ります。動画の矩形に指定する`fit`とは別の設定です。",
+            "作品の論理寸法は、ウィンドウを回転しても変わりません。"
+          ]
         }
       ]
     },
