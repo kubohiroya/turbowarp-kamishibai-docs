@@ -4,6 +4,19 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 文書基準: 公開プレリリース`4.0.0-rc.39`、commit `367a9498`、2026年10月21日。正式版4.0.0は未公開です。
 
+## 簡易say/thinkの追加（実装中）
+
+[App #1084](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1084)で次の入力形式を追加しています。下記の公開版のブロック数には含めません。
+
+| opcode    | 表示                                               | 対応する命令                          |
+| --------- | -------------------------------------------------- | ------------------------------------- |
+| sayText   | actor [TARGET] say text [TEXT] seconds [SECONDS]   | 対象actorのsay、引数はtextとseconds   |
+| thinkText | actor [TARGET] think text [TEXT] seconds [SECONDS] | 対象actorのthink、引数はtextとseconds |
+
+TEXTにはJSON用の引用符を付けず、SECONDSに0以上の秒数を入力します。実行・検証は既存say/thinkと共通です。装飾や入力待ちを指定するSPEC版も維持します。生成時はベースの対応能力を確認し、旧ランタイムではSPEC版を維持します。
+
+[宣言を省く簡易方式](../block-author-guides/dsl-4.0-block-author-guide.md#simple-native-blocks)で、asset・actor・cover・startSceneIndexの省略条件と互換性を説明します。
+
 ## rc.39の構成とrc.25からの追加
 
 rc.39の再生runtimeをChromium/Packagerへ読み込み、表示対象のopcode付きブロック207個、8 memberを照合しました。
@@ -13,15 +26,15 @@ Runtime memberは50個、Camera Sourceは41個です。その他6 memberの個�
 
 rc.25の一覧から追加されたブロックは次のとおりです。音声の引数・省略値・寿命は[音声再生ガイド](../dsl-author-guides/dsl-4.0-audio-guide.md)、動画は[動画再生ガイド](../dsl-author-guides/dsl-4.0-video-guide.md)を参照してください。
 
-| member内opcode | 種類 | ブロック文 |
-| --- | --- | --- |
-| `audio` | command | prepare audio [ID] from [SOURCE_TYPE] [SOURCE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds |
-| `audioControl` | command | audio [ID] [OPERATION] value [VALUE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds |
-| `video` | command | show video [ID] from [SOURCE_TYPE] [SOURCE] x [X] y [Y] width [WIDTH] height [HEIGHT] plane [PLANE] z-index [ZINDEX] |
-| `videoControl` | command | video [ID] [OPERATION] value [VALUE] |
-| `startSharedCameraFromCameraButton` | command | start shared camera [CAMERA_ID] from the browser's camera button |
-| `hideCameraButton` | command | hide the camera button for shared camera [CAMERA_ID] |
-| `cameraButtonAvailable` | Boolean | browser's camera button available? |
+| member内opcode                      | 種類    | ブロック文                                                                                                           |
+| ----------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| `audio`                             | command | prepare audio [ID] from [SOURCE_TYPE] [SOURCE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds |
+| `audioControl`                      | command | audio [ID] [OPERATION] value [VALUE] fade in [FADEIN] seconds volume [VOLUME] % fade out [FADEOUT] seconds           |
+| `video`                             | command | show video [ID] from [SOURCE_TYPE] [SOURCE] x [X] y [Y] width [WIDTH] height [HEIGHT] plane [PLANE] z-index [ZINDEX] |
+| `videoControl`                      | command | video [ID] [OPERATION] value [VALUE]                                                                                 |
+| `startSharedCameraFromCameraButton` | command | start shared camera [CAMERA_ID] from the browser's camera button                                                     |
+| `hideCameraButton`                  | command | hide the camera button for shared camera [CAMERA_ID]                                                                 |
+| `cameraButtonAvailable`             | Boolean | browser's camera button available?                                                                                   |
 
 以降の200個の表と依存versionは、比較用に保持するrc.25時点の履歴です。現在の個数や依存versionとしては使いません。
 
@@ -401,7 +414,6 @@ rc.25の素材保持はAsset Cacheが担当し、
 ![TurboWarpの集約パレットに表示されたSVG Text 0.5.0の2ブロック](../images/dsl4-palette-svg-text.jpg)
 
 ![TurboWarpの集約パレットに表示されたTurboWarp Teachable Machine 3.5.1の37ブロック](../images/dsl4-palette-tmpose.png)
-
 
 ## rc.39の音声再生
 
