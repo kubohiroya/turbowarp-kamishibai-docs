@@ -9,6 +9,11 @@
     "./navigation-contract.json": "./docs/tutorials/navigation-contract.json",
     "./site-shell.css": "./site/site-shell.css"
   },
+  "author": {
+    "name": "Hiroya Kubo",
+    "email": "hiroya@cuc.ac.jp",
+    "url": "https://github.com/kubohiroya"
+  },
   "license": "SEE LICENSE IN LICENSES.md",
   "packageManager": "pnpm@11.28.8",
   "engines": {
