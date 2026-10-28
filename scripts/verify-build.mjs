@@ -178,12 +178,24 @@ async function verifyLocalFragments() {
 
 async function verifySiteAppBars() {
   const htmlFiles = await findHtmlFiles(distRoot);
+  const siteShellScript = await readFile(siteShellScriptPath, 'utf8');
+  assert(
+    !siteShellScript.includes('turbowarp-plus-site-header'),
+    'The documentation shell must not load the TurboWarp Plus header.',
+  );
   const favicon = await readFile(faviconPath);
   const pngSignature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
   assert(favicon.subarray(0, 8).equals(pngSignature), 'The documentation favicon is not a PNG.');
 
   for (const htmlFile of htmlFiles) {
     const html = await readFile(htmlFile, 'utf8');
+    assert(
+      !/<turbowarp-plus-header\b/iu.test(html) &&
+        ![...html.matchAll(/<script\b[\s\S]*?<\/script>/giu)].some(([script]) =>
+          script.includes('turbowarp-plus-site-header'),
+        ),
+      `${path.relative(distRoot, htmlFile)} must not install the TurboWarp Plus header.`,
+    );
     const relativeCss = path
       .relative(path.dirname(htmlFile), siteShellCssPath)
       .split(path.sep)

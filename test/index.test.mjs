@@ -3,6 +3,8 @@ import {readFileSync} from 'node:fs';
 import test from 'node:test';
 
 import {documentationConfig} from '../docs/config.mjs';
+import {injectSiteAppBar} from '../scripts/site-appbar.mjs';
+import {shouldHideAppBarForFragment, updateAppBarScrollState} from '../site/site-shell.js';
 
 const rootIndex = readFileSync(new URL('../site/index.html', import.meta.url), 'utf8');
 const dsl32Index = readFileSync(new URL('../site/3.2/index.html', import.meta.url), 'utf8');
@@ -16,6 +18,51 @@ const documentIndexCss = readFileSync(
   new URL('../site/document-index.css', import.meta.url),
   'utf8',
 );
+
+test('keeps only the native Kamishibai header on static and generated documentation pages', () => {
+  const siteShell = readFileSync(new URL('../site/site-shell.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(siteShell, /turbowarp-plus-site-header|turbowarp-plus-header/u);
+  for (const html of [
+    rootIndex,
+    dsl32Index,
+    dsl40Index,
+    workshopIndex,
+    licensesIndex,
+    injectSiteAppBar('<html><head></head><body><main>文書本文</main></body></html>', '../../../', {
+      pathname: '/turbowarp-kamishibai-docs/4.0/user-guides/user-guide-4.0/',
+    }),
+  ]) {
+    assert.equal((html.match(/<header class="site-header">/gu) ?? []).length, 1);
+    assert.match(html, /<span>TurboWarp紙芝居<\/span>/u);
+    assert.match(html, /src="(?:\.\.\/)*site-shell\.js"/u);
+    assert.doesNotMatch(html, /turbowarp-plus-site-header|<turbowarp-plus-header\b/u);
+  }
+});
+
+test('preserves native header scrolling, focus visibility and document fragment behavior', () => {
+  const initial = {lastY: 0, accumulatedDelta: 0, hidden: false};
+  const hidden = updateAppBarScrollState(initial, {
+    scrollY: 120,
+    headerHeight: 64,
+    hasFocus: false,
+  });
+  assert.equal(hidden.hidden, true);
+  assert.equal(
+    updateAppBarScrollState(hidden, {scrollY: 100, headerHeight: 64, hasFocus: false}).hidden,
+    false,
+  );
+  assert.equal(
+    updateAppBarScrollState(hidden, {scrollY: 120, headerHeight: 64, hasFocus: true}).hidden,
+    false,
+  );
+  assert.equal(
+    updateAppBarScrollState(hidden, {scrollY: 0, headerHeight: 64, hasFocus: false}).hidden,
+    false,
+  );
+  assert.equal(shouldHideAppBarForFragment({hash: '#section', isDocumentPage: true}), true);
+  assert.equal(shouldHideAppBarForFragment({hash: '#main-content', isDocumentPage: true}), false);
+  assert.equal(shouldHideAppBarForFragment({hash: '#section', isDocumentPage: false}), false);
+});
 
 test('keeps version selection and camera privacy guidance on the site root', () => {
   assert.match(rootIndex, /<h1>紙芝居DSLの版を選ぶ<\/h1>/u);
