@@ -11,7 +11,8 @@ const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf
 const index = read('site/4.0/index.html');
 const guide = read('docs/block-author-guides/dsl-4.0-block-author-guide.md');
 const tutorial = read('docs/tutorials/create-blocks.md');
-const appRelease = JSON.parse(read('sources/dsl4/app-release.json'));
+// These guides retain their documented CLI version when the current release advances.
+const blockAuthoringVersion = '4.0.0-rc.58';
 
 function section(id) {
   return (
@@ -52,8 +53,8 @@ test('uses the published release-source CLI and keeps saved blocks as input when
   for (const source of [guide, tutorial]) {
     assert.doesNotMatch(source, /```ya?ml/iu);
     assert.ok(
-      source.includes(`公開プレリリース\`${appRelease.version}\``) ||
-        source.includes(`公開${appRelease.version.replace('4.0.0-', '')}`),
+      source.includes(`公開プレリリース\`${blockAuthoringVersion}\``) ||
+        source.includes(`公開${blockAuthoringVersion.replace('4.0.0-', '')}`),
     );
     assert.match(source, /Node\.js 24\.0\.0以上/u);
     assert.doesNotMatch(source, /未公開の開発版|開発版CLI|node bin\/turbowarp-kamishibai/u);
@@ -64,7 +65,7 @@ test('uses the published release-source CLI and keeps saved blocks as input when
     /git clone --depth 1 --branch (\S+) https:\/\/github\.com\/kubohiroya\/turbowarp-kamishibai-app\.git (\.tools\/\S+)/u,
   );
   assert.ok(clone);
-  assert.equal(clone[1], appRelease.tag);
+  assert.equal(clone[1], `v${blockAuthoringVersion}`);
   assert.ok(tutorial.includes(`pnpm --dir ${clone[2]} run build:lib`));
   assert.ok(tutorial.includes(`npm install --save-dev --save-exact ./${clone[2]}`));
   assert.match(tutorial, /同版のnpm公開状態は\[4\.0の入口\]/u);
