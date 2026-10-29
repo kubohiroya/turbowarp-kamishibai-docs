@@ -385,8 +385,9 @@ sceneの内側のpose命令で待つクラス名を指定します。** 三つ�
 作品に「キリギリス」というスプライトと「バイオリンを持つキリギリス」というコスチュームがある例を使います。
 自分の作品では、URL・スプライト名・コスチューム名・クラス名を実物に合わせます。
 
-**この例のURLを使う方へ:** 入力形式は以下のとおりですが、このモデルには現行ランタイムの重みパス読込問題があります。
-設定を変える前に、手順5の[本体Issue #1090についての説明](#remote-recognition-errors)も確認してください。
+**この例のURLを使う方へ:** 重みパスが`./`で始まるモデルを使うには、AppのCLIと埋込ランタイムを
+[4.0.0-rc.70](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.70)以降へ揃えます。
+既存SB3での更新方法は、手順5の[モデル読込についての説明](#remote-recognition-errors)も確認してください。
 
 | 入力する名前       | この例の値        | 参照する場所                                                       |
 | ------------------ | ----------------- | ------------------------------------------------------------------ |
@@ -499,10 +500,12 @@ pose命令はsceneのC字の内側につなぎます。独立した名前付き�
 | `Remote pose model.json must declare exactly one root-level .bin weights file` | 下記のモデル読込の問題。assetやsceneの名前を変えても解消しない                                                        |
 
 2026年10月29日の確認では、上記URLのモデルはポーズモデルで、クラス名は`pose1`と`pose2`でした。
-ただし重みの参照名が`./model.weights.bin`となっており、現行の読込処理が先頭の`./`を拒否する問題を
-[本体Issue #1090](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1090)で追跡しています。
-この形式のモデルは、修正を含むランタイムでの再確認が必要です。Editorのページを開き直すだけで、
-SB3内のランタイムが修正版へ置き換わるわけではありません。
+重みの参照名は`./model.weights.bin`です。この先頭の`./`を拒否する問題は、
+[App 4.0.0-rc.70](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.70)で修正しています
+（[本体Issue #1090](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1090)）。
+旧版のSB3は、元の台本・素材を退避してから、同じ公開版のCLI・ランタイムで再生成します。
+Editorのページを開き直すだけでは、SB3内のランタイムは更新されません。
+モデルの読込修正と、カメラで実際のポーズを認識できるかの確認は分けて行ってください。
 
 ### eagerとlazy
 
