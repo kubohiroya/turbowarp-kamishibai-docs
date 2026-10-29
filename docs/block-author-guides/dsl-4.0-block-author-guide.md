@@ -85,11 +85,11 @@ rc.41では、前の再生でカメラ許可への応答を待っていても、
 
 ## 宣言を省く簡易方式 {#simple-native-blocks}
 
-この節は[App #1083](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1083)・[#1084](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1084)で実装中の方式です。現在案内している公開版の機能とは区別してください。対応するCLIと埋込ランタイムを揃えた候補SB3で使います。既存のSB3の拡張は自動では更新されません。
+この方式は公開プレリリース[4.0.0-rc.68](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.68)から利用できます（[App #1083](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1083)・[#1084](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1084)）。CLIと埋込ランタイムを同じ公開版へ揃えて使います。以下の旧版向けの実習・記録とは版を区別してください。既存のSB3の拡張は自動では更新されないため、元の台本・素材から再生成します。
 
 SB3のStageに背景Beachがあり、Heroスプライトの最初の衣装がHeroIdleなら、次の図ではasset・actor・cover・startSceneIndexの定義ブロックを書きません。
 
-<figure class="block-script-diagram"><img src="../images/block-authoring/simple-native.svg" alt="簡易方式の候補。素材とスプライトの実名で指定し、JSONなしでセリフと心の声を入力する台本"></figure>
+<figure class="block-script-diagram"><img src="../images/block-authoring/simple-native.svg" alt="公開rc.68からの簡易方式。素材とスプライトの実名で指定し、JSONなしでセリフと心の声を入力する台本"></figure>
 
 | 省略できる定義               | 省略した場合の動作                                                                     | 明示定義を残す場合                                                    |
 | ---------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
@@ -99,6 +99,8 @@ SB3のStageに背景Beachがあり、Heroスプライトの最初の衣装がHer
 | variable startSceneIndex     | 初期値1を補う                                                                          | 1以外の値を保持する                                                   |
 
 明示した値が優先されます。不正な宣言を省略扱いで修復しません。衣装名は別スプライトから探しません。音はStageの同名素材を優先し、Stageになければ一意に決まるスプライトの音を使います。存在しない名前や曖昧な候補は診断されます。actor名には従来の識別子制約があり、空白を含むスプライト名はそのままactor名にできません。
+
+公開サンプルのブロック版では、制作元YAMLの画像・音を先にSB3の背景・コスチューム・音として設定し、同じ素材のバイト列であることを照合してからasset定義を省略します。たとえばUrashimaのUrashima-walk-1は、そのスプライトの同名コスチュームを参照します。元のYAMLでfile素材を指定することと、配布SB3の台本からfile宣言を省くことは両立します。poseモデル等の必要な宣言は保持します。
 
 startSceneIndexは作品変数の既定値です。値を変えるだけで開始シーンが切り替わる指定ではありません。control、独自変数、必要なtextStyle・loading・recognitionまで自動で定義されるわけではありません。
 
