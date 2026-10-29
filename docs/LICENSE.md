@@ -70,14 +70,14 @@ block実装には、それぞれの権利者によるライセンスまたは利
 ## 共通セキュリティダイアログの実画面
 
 `images/security-dialog/rc41-modes.png`と`images/security-dialog/rc41-mode-detail.png`は、
-2026年10月24日に[公開Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)で
+2026年10月24日に[TurboWarp-Plus-Editorの旧配信サイト](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)で
 公開済みの無改変rc.41 SB3を開いて撮影した画面です。操作対象部分だけをブラウザーで直接撮影し、文字やアイコンを合成していません。
 Editor build、公開SB3の取得元・hash、撮影条件、画像hashは`sources/dsl4/security-dialog-20261024.json`に記録しています。
-`images/security-dialog/rc53-multiple-ja.png`、`rc53-multiple-en.png`、`rc53-runtime-ja.png`、`rc53-startup-ja.png`は、2026年10月25日に同じ公開Editorで撮影した実画面です。公開npmのCamera Source 0.19.3・Asset Cache 0.3.1・Bubble 0.13.4と、公開rc.53 SB3を使用しています。日英ダイアログ、無効化理由と必須表示、許可後の起動を確認し、撮影条件と画像hashを`sources/dsl4/security-dialog-20261025.json`へ記録しています。画像の合成や表示内容の差し替えは行っていません。
+`images/security-dialog/rc53-multiple-ja.png`、`rc53-multiple-en.png`、`rc53-runtime-ja.png`、`rc53-startup-ja.png`は、2026年10月25日に同じTurboWarp-Plus-Editorの旧配信サイトで撮影した実画面です。公開npmのCamera Source 0.19.3・Asset Cache 0.3.1・Bubble 0.13.4と、公開rc.53 SB3を使用しています。日英ダイアログ、無効化理由と必須表示、許可後の起動を確認し、撮影条件と画像hashを`sources/dsl4/security-dialog-20261025.json`へ記録しています。画像の合成や表示内容の差し替えは行っていません。
 
-`images/security-dialog/rc55-runtime-ja.png`と`rc55-startup-ja.png`は、2026年10月25日に公開rc.55 SB3を同じ公開Editorで開いて撮影した無改変の実画面です。取得元・SB3 hash・Editor build・画像hash・日英の起動と停止/再起動の確認条件は`sources/dsl4/security-dialog-rc55-20261025.json`へ記録しています。
+`images/security-dialog/rc55-runtime-ja.png`と`rc55-startup-ja.png`は、2026年10月25日に公開rc.55 SB3を同じTurboWarp-Plus-Editorの旧配信サイトで開いて撮影した無改変の実画面です。取得元・SB3 hash・Editor build・画像hash・日英の起動と停止/再起動の確認条件は`sources/dsl4/security-dialog-rc55-20261025.json`へ記録しています。
 
-`images/security-dialog/localized-descriptions-ja-20261025.png`と`localized-descriptions-en-20261025.png`は、2026年10月25日に更新後の公開Editorで撮影した未加工の実画面です。単体公開版Camera Source 0.19.4・Asset Cache 0.3.2・Bubble 0.13.5の説明を日英で表示しています。取得元・各版・Editor revision・画像hashを`sources/dsl4/security-dialog-descriptions-20261025.json`に記録しています。以前のrc.53/rc.55の同梱版を示す画像・台帳とは別の証跡です。
+`images/security-dialog/localized-descriptions-ja-20261025.png`と`localized-descriptions-en-20261025.png`は、2026年10月25日に更新後のTurboWarp-Plus-Editorの旧配信サイトで撮影した未加工の実画面です。単体公開版Camera Source 0.19.4・Asset Cache 0.3.2・Bubble 0.13.5の説明を日英で表示しています。取得元・各版・Editor revision・画像hashを`sources/dsl4/security-dialog-descriptions-20261025.json`に記録しています。以前のrc.53/rc.55の同梱版を示す画像・台帳とは別の証跡です。
 
 画面内のUI・アイコン・ロゴ等には、それぞれの権利者のライセンスまたは利用条件が適用されます。
 図版としての選択とcaptionには本書のCC BY-SA 4.0を適用しますが、画面内の要素を別途再許諾するものではありません。
@@ -121,4 +121,4 @@ build環境や閲覧環境によって文字が四角形へ置換されること
 [SIL Open Font License 1.1](fonts/NotoSansJP-OFL.txt)（OFL-1.1）が適用されます。
 フォントを含む生成PDFやHTMLでも、フォント部分のライセンスは変わりません。
 
-`images/security-dialog/rc56-runtime-ja.png`と`rc56-startup-ja.png`は、2026年10月25日に公開rc.56 SB3を公開Editorで開いて撮影した無改変の実画面です。取得元・SB3 hash・Editor build・画像hash・日英の起動と停止/再起動の確認条件は`sources/dsl4/security-dialog-rc56-20261025.json`へ記録しています。旧版の画像と証跡は保持しています。
+`images/security-dialog/rc56-runtime-ja.png`と`rc56-startup-ja.png`は、2026年10月25日に公開rc.56 SB3をTurboWarp-Plus-Editorの旧配信サイトで開いて撮影した無改変の実画面です。取得元・SB3 hash・Editor build・画像hash・日英の起動と停止/再起動の確認条件は`sources/dsl4/security-dialog-rc56-20261025.json`へ記録しています。旧版の画像と証跡は保持しています。

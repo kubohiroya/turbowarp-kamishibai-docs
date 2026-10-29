@@ -28,7 +28,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 [浦島太郎](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/)と
 [チュートリアル](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/)の「ブロック台本SB3」は、台本と必要な素材を同梱しています。
 
-1. 配布SB3を[公開Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)で開き、[機能拡張セキュリティ](#extension-security)の情報を確認して、必要なモードを明示的に選び「OK」を押す
+1. 配布SB3を<a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>で開き、[機能拡張セキュリティ](#extension-security)の情報を確認して、必要なモードを明示的に選び「OK」を押す
 2. ステージ上の`kamishibai [4.0] []`の名前が空欄であることを確認する。これがルート台本になる
 3. 緑の旗で起動し、タイトルの「閉じる」を押すと、つながっている台本ブロックの物語が始まる
 4. セリフや待機時間を編集したら、もう一度緑の旗から開始し、タイトルを閉じて確認する
@@ -44,7 +44,7 @@ rc.56では、パスワード付きのsealed配布とパスワード入力画面
 
 ## 機能拡張セキュリティ {#extension-security}
 
-公開EditorでSB3を開くと、埋め込み拡張の実行方法をまとめて確認する画面が表示されます。
+TurboWarp-Plus-EditorでSB3を開くと、埋め込み拡張の実行方法をまとめて確認する画面が表示されます。
 名前・ID・作者・説明・ライセンスを確認し、信頼できる配布元の拡張だけ実行してください。
 「詳細」でソースコードも確認できます。メタデータは作者の自己申告です。
 
@@ -83,7 +83,7 @@ Camera Sourceの拡張実行を許可しても、ブラウザーのカメラ使�
 
 ### 説明文の表示言語
 
-公開Editorは、表示言語に合う説明が拡張に用意されている場合、その言語で説明を表示します。
+TurboWarp-Plus-Editorは、表示言語に合う説明が拡張に用意されている場合、その言語で説明を表示します。
 次の日英画像では、日本語説明に対応した単体公開版のCamera Source **0.19.4**・Asset Cache **0.3.2**・Bubble **0.13.5**を使用しています。
 日本語では日本語の説明、英語では従来の英語の説明が表示されます。翻訳がない場合は元の説明を表示します。
 説明文の言語が変わっても、必要な実行モードや許可の選択は変わりません。
@@ -96,14 +96,14 @@ Camera Sourceの拡張実行を許可しても、ブラウザーのカメラ使�
 
 <figure class="security-dialog-detail" tabindex="0">
   <img src="../images/security-dialog/localized-descriptions-ja-20261025.png" alt="Camera Source、Asset Cache、Bubbleの説明が日本語になったダイアログ。3行すべてでサンドボックスありが非対応で無効、サンドボックスなしに動作に必要、その下にサンドボックス内では動作しない理由を表示">
-  <figcaption>2026年10月25日の公開Editorで、日本語説明に対応した単体公開版の3拡張を同時に開いた実画面です。個別の選択と一括選択の両方で、非対応のモードは選べません。幅が狭い画面では画像を左右に動かせます。</figcaption>
+  <figcaption>2026年10月25日のTurboWarp-Plus-Editorで、日本語説明に対応した単体公開版の3拡張を同時に開いた実画面です。個別の選択と一括選択の両方で、非対応のモードは選べません。幅が狭い画面では画像を左右に動かせます。</figcaption>
 </figure>
 
 **英語の表示**では「Unsupported」「Required to run」と、「This extension cannot run inside the sandbox.」が同じ意味です。
 
 <figure class="security-dialog-detail" tabindex="0">
   <img src="../images/security-dialog/localized-descriptions-en-20261025.png" alt="同じ3拡張の説明を英語で表示したダイアログ。With sandboxがUnsupportedで無効、Without sandboxにRequired to runと表示し、This extension cannot run inside the sandbox.と理由を表示">
-  <figcaption>同じ公開Editorを英語で開き、3拡張の説明も英語で表示した実画面です。Required to runは実行要件を表し、信頼性の認定ではありません。</figcaption>
+  <figcaption>同じTurboWarp-Plus-Editorを英語で開き、3拡張の説明も英語で表示した実画面です。Required to runは実行要件を表し、信頼性の認定ではありません。</figcaption>
 </figure>
 
 rc.56のStandard SB3では、これらを含む拡張が「Kamishibai DSL 4.0 Runtime」の1つの同梱拡張として表示されます。
@@ -115,7 +115,7 @@ rc.56のStandard SB3では、これらを含む拡張が「Kamishibai DSL 4.0 Ru
 </figure>
 
 <figure class="security-dialog-detail" tabindex="0">
-  <img src="../images/security-dialog/rc56-startup-ja.png" alt="公開Editorでrc.56の拡張実行を許可し、緑の旗を押した後のタイトル画面。Version 4.0.0-rc.56と表示">
+  <img src="../images/security-dialog/rc56-startup-ja.png" alt="TurboWarp-Plus-Editorでrc.56の拡張実行を許可し、緑の旗を押した後のタイトル画面。Version 4.0.0-rc.56と表示">
   <figcaption>許可後に緑の旗を押したrc.56の起動画面です。タイトルの「閉じる」を押すと作品またはメニューへ進みます。</figcaption>
 </figure>
 

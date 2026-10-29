@@ -99,9 +99,9 @@ _スターターを開き、編集する台本と後で使う追加素材を確�
 
 ## 3. TurboWarpで作品フォルダーを開く
 
-1. [TurboWarp Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開く
+1. <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>を開く
 2. 「ファイル」から`kamishibai-4.0.0-rc.58.sb3`を読み込む
-3. [機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を読み、名前と配布元を確認する。「動作に必要」と表示された「サンドボックスなし」を自分で選び「OK」を押す
+3. [機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を読み、名前と配布元を確認する。「必要」と表示された「サンドボックスなし」を自分で選び「OK」を押す
 4. スプライト一覧に`Student`がなければ、スプライトを一つ追加し、名前を`Student`にする。コードは追加しない
 5. 緑の旗を押す
 6. タイトル画面を閉じ、メニューの「台本を開く」（以後「開く」）を押す
@@ -110,7 +110,7 @@ _スターターを開き、編集する台本と後で使う追加素材を確�
 
 <figure class="security-dialog-detail" tabindex="0">
   <img src="../images/security-dialog/rc53-runtime-ja.png" alt="機能拡張の選択部分の拡大。サンドボックスありは非対応で選べず、名前の下に動作しない理由、サンドボックスなしに動作に必要と表示">
-  <figcaption>公開Editorでrc.53のStandard SB3を開いた実画面です。「非対応」のモードは選べません。「動作に必要」は必要な実行方法を示し、安全性の保証ではありません。単体のCamera Source・Asset Cache・Bubbleも同じ実行モードが必要です。詳しくは<a href="../user-guides/user-guide-4.0.md#extension-security">機能拡張セキュリティの説明</a>を参照してください。</figcaption>
+  <figcaption>TurboWarp-Plus-Editorでrc.53のStandard SB3を開いた実画面です。「非対応」のモードは選べません。「動作に必要」は必要な実行方法を示し、安全性の保証ではありません。単体のCamera Source・Asset Cache・Bubbleも同じ実行モードが必要です。詳しくは<a href="../user-guides/user-guide-4.0.md#extension-security">機能拡張セキュリティの説明</a>を参照してください。</figcaption>
 </figure>
 
 <!-- screenshot:C-02 -->
