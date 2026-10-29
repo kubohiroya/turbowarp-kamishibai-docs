@@ -336,6 +336,8 @@ _図: 書き方によって、データの入手元と、配布するSB3へ中�
 入手元を明示する場合や、`loading`等を指定する場合は名前付き形式を使います。次の例は、三つの入手元と
 二つの準備時期を組み合わせています。
 
+Web上の認識モデルを実際に使うときは、[asset・scene・poseをつなぐ手順](#remote-recognition-steps)へ進んでください。
+
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-05.svg" alt="名前付き形式（1/2）の台本ブロック"></figure>
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-06.svg" alt="名前付き形式（2/2）の台本ブロック"></figure>
@@ -373,6 +375,134 @@ include文を使う場合は、正規化後のパスとsymlink実体の両方が
 recognitionModelのURLは、検証情報を省略した場合は通常のTurboWarp Teachable Machineのディレクトリ、検証情報を指定した場合は
 model archiveを指します。ネットワークなしで動かす必要がある作品では、remoteではなく②の`file`を指定し、
 ビルダーでSB3へ埋め込みます。
+
+### Web公開のポーズモデルを使う：asset → scene → pose {#remote-recognition-steps}
+
+モデルを登録するだけでは認識は始まりません。**assetでモデルに名前を付け、sceneでその名前を選び、
+sceneの内側のpose命令で待つクラス名を指定します。** 三つの入力先を、次の順番で設定してください。
+
+ここでは、Teachable Machineで公開したモデルのクラス名が`pose1`、`pose2`で、
+作品に「キリギリス」というスプライトと「バイオリンを持つキリギリス」というコスチュームがある例を使います。
+自分の作品では、URL・スプライト名・コスチューム名・クラス名を実物に合わせます。
+
+**この例のURLを使う方へ:** 入力形式は以下のとおりですが、このモデルには現行ランタイムの重みパス読込問題があります。
+設定を変える前に、手順5の[本体Issue #1090についての説明](#remote-recognition-errors)も確認してください。
+
+| 入力する名前       | この例の値        | 参照する場所                                                       |
+| ------------------ | ----------------- | ------------------------------------------------------------------ |
+| モデルのアセットID | `kirigirisuPoses` | assetの`NAME`とsceneの`recognitionModel`を一致させる               |
+| アクターID         | `キリギリス`      | actorの`NAME`とposeの`TARGET`を一致させる                          |
+| モデル内のクラス名 | `pose1`、`pose2`  | poseの`STEPS`に書く。モデルの`metadata.json`の`labels`と一致させる |
+
+#### 1. assetのNAMEとVALUEにモデルを登録する
+
+`asset [NAME] = JSON [VALUE]`の`NAME`へ、次の文字列を入力します。
+
+```text
+kirigirisuPoses
+```
+
+同じブロックの`VALUE`へは、次のJSONオブジェクト全体を入力します。
+
+```json
+{
+  "kind": "recognitionModel",
+  "delivery": "remote",
+  "source": {"url": "https://teachablemachine.withgoogle.com/models/IfApApW4t/"},
+  "loading": "lazy"
+}
+```
+
+`VALUE`に`"kirigirisuPoses": {...}`や`{"kirigirisuPoses": {...}}`とは書きません。
+名前はすでに`NAME`欄へ入力しているためです。引用符には半角の`"`を使います。URLの`:`をエスケープする必要はありません。
+
+この例の`source.url`は公開モデルのディレクトリURLです。`model.json`や`metadata.json`自体のURLではありません。
+実行時にその下の`model.json`、`metadata.json`、モデルが指定する重みファイルを取得します。
+`delivery`はassetの直下、`url`は`source`の内側に置きます。`file`は併記しません。
+`loading: lazy`は、そのモデルを使うシーンの直前に準備する指定であり、認識の開始命令ではありません。
+
+#### 2. poseの対象になるアクターと衣装を用意する
+
+公開rc.68以降の[宣言を省く簡易方式](#simple-native-blocks)では、`TARGET`と完全に同名のスプライトがあれば
+actor定義を省略できます。その場合は、そのスプライトの最初の衣装が使われます。
+初期衣装を選びたい場合や明示定義方式で作る場合は、次の二つを追加します。
+
+| ブロック | `NAME`           | `VALUE`に入力するJSON                                                          |
+| -------- | ---------------- | ------------------------------------------------------------------------------ |
+| `asset`  | `KirigirisuIdle` | `{"kind":"costume","target":"キリギリス","name":"バイオリンを持つキリギリス"}` |
+| `actor`  | `キリギリス`     | `"KirigirisuIdle"`                                                             |
+
+コスチュームは「キリギリス」スプライトに登録済みのものを使います。
+actorの`VALUE`はコスチュームのアセットIDを表す**JSON文字列**なので、引用符も含めて入力します。
+モデルのアセットIDをactorの`VALUE`へ入れる必要はありません。
+
+#### 3. sceneのPROPERTIESで使うモデルを選ぶ
+
+認識を行う`scene`ブロックの`PROPERTIES`へ、次のJSONを入力します。
+
+```json
+{"recognitionModel": "kirigirisuPoses"}
+```
+
+URLではなく、手順1で付けたモデルのアセットIDを指定します。
+ポーズモデルでは`recognitionMode`は省略できます。画像モデルでは`"recognitionMode":"image"`が必要で、
+ここで扱うpose手順とは別の画像認識用の命令を使います。
+「ポーズ1」「ポーズ2」のようにシーンを分ける場合は、**両方のsceneに同じ設定を入れます**。
+前のシーンのモデル指定は、次のシーンへ引き継がれません。
+
+#### 4. sceneの内側へpose命令を接続する
+
+`recognize actor [TARGET] pose steps [STEPS]`の`TARGET`へ`キリギリス`を入力し、
+`STEPS`へ次の**JSON配列**を入力します。
+
+```json
+[{"pose": "pose1"}, {"pose": "pose2"}]
+```
+
+これは`pose1`を認識してから、`pose2`を認識するまで順番に待つ指定です。
+一つ目のシーンで`pose1`だけ待つなら`[{"pose":"pose1"}]`、二つ目で`pose2`だけ待つなら
+`[{"pose":"pose2"}]`にします。モデル名の`kirigirisuPoses`を`pose`へ入れてもクラス名にはなりません。
+
+まずは任意の`skin`と`sound`を省略した例で確認できます。認識後にコスチュームを変える場合は`skin`、
+音を鳴らす場合は`sound`へ、assetで登録したアセットIDを指定します。
+公開rc.68以降の簡易方式では、対象スプライトの同名衣装やSB3内の同名音を参照する定義を省略できます。
+file・remote素材や別名を使う場合は、asset定義が必要です。詳しい照合規則は[簡易方式の説明](#simple-native-blocks)を参照してください。
+アクターを表示したい場合は、同じsceneのpose命令の前にshow命令を接続します。
+
+接続する位置は次のとおりです。設定を分離しない場合は、asset・actorをラベル空欄の主台本ハットへ直接つなぐこともできます。
+
+```text
+kamishibaiConfig []
+  asset [kirigirisuPoses] = JSON [手順1のオブジェクト]
+  asset [KirigirisuIdle] = JSON [手順2のコスチューム定義]
+  actor [キリギリス] = JSON ["KirigirisuIdle"]
+
+kamishibai [4.0] []
+  scene [ポーズ練習] properties [{"recognitionModel":"kirigirisuPoses"}]
+    recognize actor [キリギリス] pose steps [[{"pose":"pose1"},{"pose":"pose2"}]]
+```
+
+pose命令はsceneのC字の内側につなぎます。独立した名前付きの台本へsceneを置いた場合は、
+主台本からその台本を`includeBlocks`で参照してください。
+
+#### 5. 保存し、エラーの種類を確認する {#remote-recognition-errors}
+
+フォームの「保存」で入力値を反映した後、SB3も保存します。再生時にはカメラの利用を許可し、
+認識シーンでモデルの読込が終わってからポーズを取ります。ネットワーク接続が必要です。
+
+| 表示・症状                                                                     | 確認する場所                                                                                                          |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `/assets/...`のSchemaエラー、`must be string`                                  | assetの`VALUE`。名前で包んでいないか、`url`が`source`の内側か、`delivery: remote`があるかを確認する                   |
+| `Unknown reference`、`Unknown actor`                                           | 参照名とSB3内の素材・スプライト名、または明示したasset・actor定義。サンプルから残した未使用の不正定義も検証対象になる |
+| `recognitionModel`の指定が必要                                                 | pose命令を入れたscene自身の`PROPERTIES`。複数sceneでそれぞれ指定したかを確認する                                      |
+| 読込は終わったが次へ進まない                                                   | `STEPS`の`pose`とモデルのクラス名の一致、およびカメラ映像・認識状態を確認する                                         |
+| `Remote pose model.json must declare exactly one root-level .bin weights file` | 下記のモデル読込の問題。assetやsceneの名前を変えても解消しない                                                        |
+
+2026年10月29日の確認では、上記URLのモデルはポーズモデルで、クラス名は`pose1`と`pose2`でした。
+ただし重みの参照名が`./model.weights.bin`となっており、現行の読込処理が先頭の`./`を拒否する問題を
+[本体Issue #1090](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1090)で追跡しています。
+この形式のモデルは、修正を含むランタイムでの再確認が必要です。Editorのページを開き直すだけで、
+SB3内のランタイムが修正版へ置き換わるわけではありません。
 
 ### eagerとlazy
 
@@ -806,6 +936,7 @@ profile間の継承、merge、fallbackはありません。
 ### シーン固有の設定
 
 認識モデルなどのシーン固有設定は`scene`ブロックの`PROPERTIES`へJSONで入力します。
+Web公開モデルの登録からpose命令までの一連の例は、[asset → scene → poseの手順](#remote-recognition-steps)を参照してください。
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-31.svg" alt="長形式（1/2）の台本ブロック"></figure>
 
@@ -1098,6 +1229,9 @@ inline形式も使用できます。
 文字列だけで、rubyはまだ使えません。
 
 ### ポーズを認識する
+
+モデルの登録・sceneでの選択・この命令の接続をまとめて確認する場合は、
+[Web公開のポーズモデルを使う手順](#remote-recognition-steps)を参照してください。
 
 <figure class="block-script-diagram"><img src="../images/block-authoring/guide-64.svg" alt="ポーズを認識するの台本ブロック"></figure>
 
