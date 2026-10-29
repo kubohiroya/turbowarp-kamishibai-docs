@@ -7,6 +7,10 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 対象: YAML台本をTurboWarpのブロックで編集し、編集結果をYAMLへ戻したい方。\
 確認日: 2026年10月21日。公開プレリリース`4.0.0-rc.41`を対象にします。正式版4.0.0は未公開です。
 
+## 簡易方式の候補について
+
+asset・actor・cover・startSceneIndexの省略と、JSON不要のsay/thinkは、[簡易方式の説明](../block-author-guides/dsl-4.0-block-author-guide.md#simple-native-blocks)を参照してください。対応Appを使うローカル候補を対象とし、以下の公開済みサンプルと版を混同しません。簡易版ではセリフをTEXT欄、秒数をSECONDS欄で編集します。旧SPEC版の編集手順と台本も引き続き利用できます。
+
 ## 公開サンプルをフォーム編集で開く
 
 次のリンクから、公開済みのブロック台本SB3を日本語のExtension Data Editorへ直接読み込めます。

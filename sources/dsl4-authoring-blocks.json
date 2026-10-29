@@ -2467,6 +2467,88 @@
           ]
         }
       ]
+    },
+    {
+      "id": "simple-native",
+      "title": "宣言を省く簡易方式（実装中）",
+      "nodes": [
+        {
+          "opcode": "kamishibai",
+          "text": "kamishibai [VERSION] [LABEL]",
+          "inputs": {
+            "VERSION": "4.0",
+            "LABEL": ""
+          },
+          "kind": "hat",
+          "color": "authoring"
+        },
+        {
+          "opcode": "control",
+          "text": "control [NAME] = JSON [VALUE]",
+          "inputs": {
+            "NAME": "production",
+            "VALUE": "{\"Space\":\"navigation.nextAction\"}"
+          },
+          "kind": "stack",
+          "color": "authoring"
+        },
+        {
+          "opcode": "scene",
+          "text": "scene [SCENE] properties JSON [PROPERTIES]",
+          "inputs": {
+            "SCENE": "opening",
+            "PROPERTIES": "{}"
+          },
+          "kind": "c",
+          "color": "authoring",
+          "children": [
+            {
+              "opcode": "stage",
+              "text": "set stage backdrop [BACKDROP]",
+              "inputs": {
+                "BACKDROP": "Beach"
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "show",
+              "text": "show actor [TARGET] skin [SKIN] x [X] y [Y] scale [SCALE] %",
+              "inputs": {
+                "TARGET": "Hero",
+                "SKIN": "HeroIdle",
+                "X": 0,
+                "Y": 0,
+                "SCALE": 100
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "sayText",
+              "text": "actor [TARGET] say text [TEXT] seconds [SECONDS]",
+              "inputs": {
+                "TARGET": "Hero",
+                "TEXT": "こんにちは！",
+                "SECONDS": 2
+              },
+              "kind": "stack",
+              "color": "action"
+            },
+            {
+              "opcode": "thinkText",
+              "text": "actor [TARGET] think text [TEXT] seconds [SECONDS]",
+              "inputs": {
+                "TARGET": "Hero",
+                "TEXT": "どうしよう",
+                "SECONDS": 1
+              },
+              "kind": "stack",
+              "color": "action"
+            }
+          ]
+        }
+      ]
     }
   ],
   "implementationCommit": "33594634ff19aebcde596c8be05730c0817b5ac6"
