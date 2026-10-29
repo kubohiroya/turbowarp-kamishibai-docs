@@ -18,6 +18,29 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 受理するDSL宣言: `kamishibai: '4.0'`
 
+## rc.71のエラー画面と位置対応（追補）
+
+この節は公開rc.71、commit
+[`86c78aec97dfaafcaa8ca375ab760fc6dd5b0e81`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/86c78aec97dfaafcaa8ca375ab760fc6dd5b0e81)
+で追加された表示の説明です。以降のrc.25固定の調査・測定結果はそのまま保持します。
+利用者向けの操作は[エラー画面の案内](../user-guides/user-guide-4.0.md#runtime-error-dialog)を参照してください。
+
+JSON Schemaの検証は、型・必須項目・未知の項目・許容値等を実行前に調べます。
+診断の任意の`validation`には`keyword`・`field`・`expected`を保持し、説明と対処へ使います。
+`oneOf`／`anyOf`の候補に属する違反を`alternative`で区別し、一つの候補の条件を必須の修正方法と断定しません。
+参照の意味検証や、カメラの利用許可・実行中の素材読込はSchemaとは別の検証・失敗経路です。
+
+ブロックの対応は、元の`sourceId`とソース範囲を組にして保持します。
+合成後の行番号だけで推定せず、設定合成時の一時IDを元のステージ／スプライトとブロックIDへ戻します。
+値が文字列や数値の定義も位置を記録します。これにより`includeBlocks`と別スプライトの
+`kamishibaiConfig`を併用したときの誤強調を修正しています。編集・削除・作品切替後の古い位置へは移動しません。
+
+実行時は、canonical diagnosticと別の`failureContext`に場面・処理・関係する素材と上限付きの原因例外を保持します。
+元例外とcleanup例外を分け、URLの資格情報や秘密値を除去して表示・コピーへ渡します。
+例外や作品全体を無制限にシリアライズする変更ではありません。
+画面は説明・場所・対処を先に示し、技術詳細を折りたたみます。メニュー復帰で不正な台本を再実行しません。
+新表示の切替フラグはなく、以前のSB3への反映にはrc.71での再生成が必要です。
+
 ## rc.25のリモート取得とプレビュー失敗
 
 ブラウザーは取得失敗を`K4-ASSET-REMOTE-OFFLINE-001`、`K4-ASSET-REMOTE-CORS-001`、

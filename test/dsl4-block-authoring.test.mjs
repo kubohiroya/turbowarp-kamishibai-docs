@@ -12,7 +12,7 @@ const index = read('site/4.0/index.html');
 const guide = read('docs/block-author-guides/dsl-4.0-block-author-guide.md');
 const tutorial = read('docs/tutorials/create-blocks.md');
 // These guides retain their documented CLI version when the current release advances.
-const blockAuthoringVersion = '4.0.0-rc.58';
+const blockAuthoringVersion = '4.0.0-rc.71';
 
 function section(id) {
   return (
