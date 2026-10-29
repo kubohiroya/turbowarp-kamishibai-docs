@@ -2470,7 +2470,7 @@
     },
     {
       "id": "simple-native",
-      "title": "宣言を省く簡易方式（実装中）",
+      "title": "宣言を省く簡易方式（rc.68）",
       "nodes": [
         {
           "opcode": "kamishibai",

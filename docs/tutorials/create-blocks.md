@@ -15,9 +15,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 最初にセリフを変え、次の場面を加え、検査して配布用SB3を作ります。最初のセリフ変更ができてから、背景やポーズへ進みます。
 SVGのブロック図は入力欄と接続を基に描いた説明図、PNGのフォーム図は実Editorの画面キャプチャです。狭い画面では図を左右にスクロールできます。
 
-## 簡易方式の候補について
+## rc.68からの簡易方式について
 
-asset・actor・cover・startSceneIndexの省略と、JSON不要のsay/thinkは、[簡易方式の説明](../block-author-guides/dsl-4.0-block-author-guide.md#simple-native-blocks)を参照してください。対応Appを使うローカル候補を対象とし、以下の公開済みサンプルと版を混同しません。簡易版ではセリフをTEXT欄、秒数をSECONDS欄で編集します。旧SPEC版の編集手順と台本も引き続き利用できます。
+asset・actor・cover・startSceneIndexの省略と、JSON不要のsay/thinkは、[簡易方式の説明](../block-author-guides/dsl-4.0-block-author-guide.md#simple-native-blocks)を参照してください。公開rc.68以降のCLI・Standard SB3・サンプルを同じ版へ揃えて使います。以下の旧版に固定した実習・検証記録とは版を区別し、現在の対応版は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認してください。簡易版ではセリフをTEXT欄、秒数をSECONDS欄で編集します。旧SPEC版の編集手順と台本も引き続き利用できます。
 
 ## 公開サンプルをフォーム編集で開く
 

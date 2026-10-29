@@ -11,8 +11,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 増やすときに[紙芝居DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)の必要な節をお読みください。
 
 文書状態: **固定実装基準を説明するSchemaリファレンス（正式リリースの操作資料ではない）**\
-Schema固定commit: [`8c1fe6d`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/8c1fe6dba79eee66e67f69c876f1e32f2c0bec9b)\
-Schema SHA-256: `8ad96fbb122dc7422a7c50f59e89f631d7f81072cbf63837e5d2dd8bccdcad29`
+Schema固定commit: [`26a0d28`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/26a0d28385361a3881f6235bffc6494aa92ce72b)\
+Schema SHA-256: `d04cf1b08635d2b939b5d1e8623f3bf3043f750c21b9be5a059808a502a614ca`
 
 > **権威関係と配布状態:** このSchemaの出典は上記の固定commitです。
 > 現在の公開版と配布状況は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認してください。
@@ -22,7 +22,7 @@ Schema SHA-256: `8ad96fbb122dc7422a7c50f59e89f631d7f81072cbf63837e5d2dd8bccdcad2
 
 ## このリファレンスについて
 
-この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/8c1fe6dba79eee66e67f69c876f1e32f2c0bec9b/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
+この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/26a0d28385361a3881f6235bffc6494aa92ce72b/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
 決定的に生成しています。型、必須性、既定値、数値範囲、列挙値、patternはSchemaから取得し、説明、掲載順、
 注意事項、例はAnnotationで管理します。Schemaで定義される項目についてSchemaと生成物が異なる場合はSchemaを
 優先します。include文はSchema検証前に処理されるためJSON Schema外であり、固定した表層仕様と実装に基づいて掲載します。
@@ -34,7 +34,7 @@ Schema SHA-256: `8ad96fbb122dc7422a7c50f59e89f631d7f81072cbf63837e5d2dd8bccdcad2
 
 - 上流repository: [`kubohiroya/turbowarp-kamishibai-app`](https://github.com/kubohiroya/turbowarp-kamishibai-app)
 - Schema path: `schema/dsl-4.schema.json`
-- 上流commit日時: `2026-10-28T22:57:15Z`
+- 上流commit日時: `2026-10-29T05:38:22Z`
 - 掲載範囲: トップレベル16 field、action 35種類、Annotation 117項目
 - 更新方法: `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>`
 - 差分確認: `pnpm docs:dsl4:check`
@@ -499,6 +499,7 @@ Schema位置: `#/$defs/namedSound`
 
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
+| `target` | 任意 | 文字列（`literalId`） | 1文字以上 |
 | `kind` | 必須 | 固定値 `sound` | — |
 | `name` | 任意 | 文字列 | 1文字以上 |
 | `file` | 任意 | 文字列（`filePath`） | 1文字以上、pattern `^(?!/)(?![A-Za-z]:[\\/])(?![A-Za-z][A-Za-z0-9+.-]*:)[^\\\u0000]+$` |

@@ -4,9 +4,9 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 文書基準: 公開プレリリース`4.0.0-rc.39`、commit `367a9498`、2026年10月21日。正式版4.0.0は未公開です。
 
-## 簡易say/thinkの追加（実装中）
+## rc.68からの簡易say/think
 
-[App #1084](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1084)で次の入力形式を追加しています。下記の公開版のブロック数には含めません。
+公開プレリリース[4.0.0-rc.68](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.68)で次の入力形式を追加しました（[App #1084](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/1084)）。下記の旧rc.39／rc.25の検証記録のブロック数には含めません。
 
 | opcode    | 表示                                               | 対応する命令                          |
 | --------- | -------------------------------------------------- | ------------------------------------- |
