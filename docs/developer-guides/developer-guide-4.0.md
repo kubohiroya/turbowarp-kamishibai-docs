@@ -523,7 +523,7 @@ Standardは起動時固定で物語制御を有効にします。低水準APIの
 通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.58です。CLIとベースSB3を同じrc.58へ揃えます。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
-[三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、公開Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
+[三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、TurboWarp-Plus-Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
 
 ## rc.51の配布・資源管理
 
@@ -551,10 +551,10 @@ Camera Source 0.19.3・Asset Cache 0.3.1・Bubble 0.13.4は、ビルド設定で
 
 ## rc.55のcleanup所有権と再試行
 
-Standard shell・TurboWarp preview・Web Previewで、解放に失敗したownerを保持し、後の明示disposeで未完了stepだけを再試行します（App PR #1036・#1039）。通常操作を先に閉じ、同時呼出しや同期再入は同じ試行へ合流させ、他ownerの解放は継続します。専用の再試行UIは追加していません。製品module接続の障害注入テストと、公開Editor/Playerの通常操作検証を区別し、native資源回収の測定結果とは扱いません。
+Standard shell・TurboWarp preview・Web Previewで、解放に失敗したownerを保持し、後の明示disposeで未完了stepだけを再試行します（App PR #1036・#1039）。通常操作を先に閉じ、同時呼出しや同期再入は同じ試行へ合流させ、他ownerの解放は継続します。専用の再試行UIは追加していません。製品module接続の障害注入テストと、TurboWarp-Plus-Editor/Playerの通常操作検証を区別し、native資源回収の測定結果とは扱いません。
 
 rc.58はGitHub Release・SB3・Player・公開サンプルに加え、npmの`next`でも公開しています。同じCLIは公開tagのsourceから準備するか、npmの同じ版を使います。
 
 ## rc.56のbuilder preview終了処理
 
-builder previewでも、解放に失敗したownerを保持して次の明示disposeで未完了stepを再試行します（App PR #1045）。candidateのcancelと親previewの終了を扱い、同時呼出し・同期再入は同じ試行へ合流します。Standard shell・Web Previewの既存の再試行も継続します。asset pipeline等の未マージのcleanup作業とは区別します。公開Editorでの通常操作の確認は、native資源回収の測定結果を意味しません。
+builder previewでも、解放に失敗したownerを保持して次の明示disposeで未完了stepを再試行します（App PR #1045）。candidateのcancelと親previewの終了を扱い、同時呼出し・同期再入は同じ試行へ合流します。Standard shell・Web Previewの既存の再試行も継続します。asset pipeline等の未マージのcleanup作業とは区別します。TurboWarp-Plus-Editorでの通常操作の確認は、native資源回収の測定結果を意味しません。

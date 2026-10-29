@@ -73,7 +73,7 @@ Teachable Machineは3.5.1、Bubbleは0.13.0、Camera Sourceは0.15.0、素材保
 ローカルプレビューはリモートassetを取得しません。`K4-ASSET-REMOTE-DISABLED`の場合はローカル配信またはbuild済み作品を使います。
 ブラウザーのOFFLINE／CORS／CONNECTと、CLIの`K4-ASSET-REMOTE-TLS-001`を区別します。
 CONNECTでは証明書障害の可能性とDNS・サーバ停止等の可能性を分けて説明します。
-公開Editorでは[機能拡張セキュリティ](../user-guides/user-guide-4.0.md#extension-security)でアイコン順・非対応理由・「動作に必要」を確認します。
+TurboWarp-Plus-Editorでは[機能拡張セキュリティ](../user-guides/user-guide-4.0.md#extension-security)でアイコン順・非対応理由・「動作に必要」を確認します。
 必須宣言のある拡張で「サンドボックスあり」を選べないことと、明示的な選択・OKまで実行されないことを確認します。
 旧Editorでサンドボックス内の実行を選べた場合は、パレットの再読込案内も確認します。
 

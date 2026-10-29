@@ -12,14 +12,16 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 場面・素材・命令を、台本ブロックの図版で説明します。最初に一作品を完成させる方は
 [ブロック版「紙芝居を作る」](../tutorials/create-blocks.md)から始め、機能を増やすときに本書を参照してください。
 
-## 公開サンプルをフォーム編集で開く
+<a id="公開サンプルをフォーム編集で開く"></a>
 
-次のリンクから、公開済みのブロック台本SB3を日本語のExtension Data Editorへ直接読み込めます。
+## 公開サンプルをTurboWarp-Plus-Editorで編集する
 
-- [地震安全チュートリアルのブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3)
-- [浦島太郎のブロック台本をフォーム編集で開く](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja&project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3)
+次のボタンから、公開済みのブロック台本SB3を日本語のTurboWarp-Plus-Editorへ直接読み込めます。
 
-拡張の読み込み確認では、名前と配布元を確認し、「動作に必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
+- 地震安全チュートリアルのブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
+- 浦島太郎のブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
+
+拡張の読み込み確認では、名前と配布元を確認し、「必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
 アイコンの意味、選べない理由、拒否・キャンセルの操作は[機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を参照してください。
 ステージのコードにある専用定義ブロックの白い書類アイコンを押すと、JSONをフォームで編集できます。
 編集後は、EditorのファイルメニューからSB3をコンピューターへ保存します。
@@ -36,7 +38,7 @@ rc.41は`ajv@8.20.0`を実行時依存に含むため、Ajvの追加導入は不
 
 SVGのブロック図は実装のブロック名、入力値、接続を基に描いた説明図です。
 PNGのフォーム画面はIssue #891対応の編集用拡張を実Editorで開いて撮影したものです。
-オン／オフのPNGは、本体PR #909の表示改善を含むCLIで生成し、実Extension Data Editorで撮影しています。
+オン／オフのPNGは、本体PR #909の表示改善を含むCLIで生成し、実TurboWarp-Plus-Editorで撮影しています。
 補助ブロックは紫、命令ブロックは青緑で区別します。「この部分を使う」は専用のグレーです。
 入力欄の文字は実際の英語表記を使います。
 長い入力値は図の中だけで折り返しています。入力欄へは改行や省略を加えず、値全体を入力します。
@@ -131,7 +133,7 @@ startSceneIndexは作品変数の既定値です。値を変えるだけで開�
 
 [私の浦島太郎の詳細ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/my-urashima/#block-workshop)の
 「台本ブロックでワークショップを行う場合」から、2・3・4ポーズを選びます。
-選んだ数のasset定義と`Princess.pose`の手順を設定したSB3が、日本語のExtension Data Editorで開きます。
+選んだ数のasset定義と`Princess.pose`の手順を設定したSB3が、日本語のTurboWarp-Plus-Editorで開きます。
 台本の行頭の`#`を外して候補を選ぶ二つの操作は不要です。ポーズ列は2回繰り返します。
 
 Princessスプライトの仮衣装`p1`、`p2`…を参加者のポーズ画像に置き換え、衣装名を保ちます。
@@ -162,7 +164,7 @@ Princessスプライトの仮衣装`p1`、`p2`…を参加者のポーズ画像�
 
 ## フォームでJSONを編集する
 
-1. [編集ダイアログ付き日本語Editor](https://kubohiroya.github.io/turbowarp-extension-data-editor/editor.html?lang=ja)を開き、公開rc.71のCLIで生成した編集用SB3を読み込む
+1. <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>を開き、公開rc.71のCLIで生成した編集用SB3を読み込む
 2. 編集用拡張をサンドボックスなしで読み込む
 3. 配置した専用ブロックの左端にある白い書類のアイコンを押す。キーボードではアイコンへフォーカスしてEnterを押す
 4. フォームの項目を編集し、「保存」を押す。「キャンセル」では入力欄へ反映しない
@@ -1271,7 +1273,7 @@ YAMLの行頭に`#`を付けて一時的に外す操作に対応します。複�
 
 ### 命令を囲んで切り替える
 
-1. 対応SB3をExtension Data Editorで開き、ステージの「コード」を選びます。編集用拡張の読み込みも許可します。
+1. 対応SB3をTurboWarp-Plus-Editorで開き、ステージの「コード」を選びます。編集用拡張の読み込みも許可します。
 2. 「Kamishibai Block Script」からグレーの「この部分を使う」を取り出し、`scene`の内側へ接続します。
 3. 一時的に外したい命令をC字の内側へ移します。続けて実行する命令は囲みの下につなぎます。
    複数命令を移すときは、その後も実行する末尾の命令を先に切り離してください。
@@ -1470,4 +1472,4 @@ Standardは起動時固定で物語制御を有効にします。低水準APIの
 通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.71です。CLIとベースSB3を同じrc.71へ揃えます。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
-[三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、公開Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
+[三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、TurboWarp-Plus-Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
