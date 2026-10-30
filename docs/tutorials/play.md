@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.58**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.58)のSB3を使います。CLIは[公開tagから準備する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
+現在の公開App・Schemaの参照版は**4.0.0-rc.79**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.79)のSB3を使います。CLIは[公開版を固定する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
 
 標準実行環境: `4.0.0-rc.58`（公開プレリリース）\
 このチュートリアルの公開サンプル: `4.0.0-rc.58`（公開成果物）\
@@ -22,7 +22,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 1. サンプル作品を開く
 2. タイトル画面で紙芝居を始める
-3. ポーズを求められたときだけカメラを許可する
+3. カメラで参加するときは共通の「カメラ」を押し、ブラウザーの使用許可を確認する
 4. 画面の見本に合わせてポーズを取る
 5. 物語を最後まで進める
 
@@ -69,7 +69,7 @@ Web版を開くと、最初に黒い読み込み画面が表示され、その�
 
 ![Version 4.0.0-rc.3とライセンスを表示したWeb版の初期画面](../images/tutorials/dsl4/play/tutorial-play-02-title.png)
 
-_この画像は旧rc.3画面の固定証跡です。現在の公開Web版ではVersion 4.0.0-rc.58と利用条件を確認し、右上の「閉じる」を押します。_
+_この画像は旧rc.3画面の固定証跡です。公開Web版では、タイトルに表示された対応版と利用条件を確認し、右上の「閉じる」を押します。_
 
 黒い画面と進捗バーが表示されている間は、画面を閉じずに待ちます。読み込みが長く続く場合は、
 ネットワーク接続を確認してページを再読み込みします。
@@ -82,7 +82,7 @@ _公開Web版が台本と素材を読み込むまで待ちます。_
 
 ## 3. カメラを許可する
 
-ポーズを使う場面になると、Webブラウザーがカメラ利用の許可を求めます。「許可」を選びます。
+ポーズで参加するときは、共通Dockの「カメラ」を押します。Editorで開いている場合は停止ボタンの後ろの「カメラ」を使います。未起動ならブラウザーのカメラ使用許可を確認し、「許可」を選んで開始します。起動後のカメラ選択と左右反転も、同じ入口で設定します。
 
 <!-- screenshot:P-04 -->
 

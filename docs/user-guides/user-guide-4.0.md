@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schemaの参照版は**4.0.0-rc.71**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.71)のSB3を使い、CLIも同じ版に揃えてください。公開サンプルの対応版は[作品一覧](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)で確認できます。エラー画面の案内はrc.71へ更新しています。以下の`4.0.0-rc.41`やrc.58などの操作確認・図版は作成当時の記録として保持します。
+現在の公開App・Schemaの参照版は**4.0.0-rc.79**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.79)のSB3を使い、CLIも同じ版に揃えてください。公開サンプルの対応版は[作品一覧](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)で確認できます。エラー画面の案内はrc.71へ更新しています。以下の`4.0.0-rc.41`やrc.58などの操作確認・図版は作成当時の記録として保持します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
 
 この説明書は、TurboWarp紙芝居4.0のサンプル作品を初めてプレイする方と、進行を手伝う方のための案内です。
 まずは「浦島太郎」を開き、作品を始める、進める、終えるという一連の操作を試します。
@@ -28,13 +28,13 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 [浦島太郎](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/)と
 [チュートリアル](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/)の「ブロック台本SB3」は、台本と必要な素材を同梱しています。
 
-1. 配布SB3を<a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>で開き、[機能拡張セキュリティ](#extension-security)の情報を確認して、必要なモードを明示的に選び「OK」を押す
-2. ステージ上の`kamishibai [4.0] []`の名前が空欄であることを確認する。これがルート台本になる
+1. 配布SB3を<a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;twPlusYamlEditor=1"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>で開き、[機能拡張セキュリティ](#extension-security)の情報を確認して、必要なモードを明示的に選び「OK」を押す
+2. rc.79では、独立した`embedded YAML root [4.0] [ファイル名]`が開始文書を指していることを確認する。本文は同じファイル名の通常文書の下にある。rc.71までの旧SB3は、ステージ上の`kamishibai [4.0] []`という空名ルートを使う
 3. 緑の旗で起動し、タイトルの「閉じる」を押すと、つながっている台本ブロックの物語が始まる
-4. セリフや待機時間を編集したら、もう一度緑の旗から開始し、タイトルを閉じて確認する
+4. セリフや待機時間を編集したら、文書の書類アイコンからダイアログを開いて検証・保存してから、もう一度緑の旗で開始し、タイトルを閉じて確認する
 
-実行中の物語へ編集が自動反映されるわけではありません。素材を新しく加える場合は作者用のビルド手順が必要です。
-詳しくは[ブロック版「紙芝居を作る」](../tutorials/create-blocks.md)を参照してください。
+未編集で原文と等価なブロック台本は、その形式のまま再生できます。実行中の物語へ編集が自動反映されるわけではありません。素材を新しく加える場合は作者用のビルド手順が必要です。
+詳しくは[ブロック版「紙芝居を作る」](../tutorials/create-blocks.md)と、[文書の3形式編集・保存・旧SB3移行](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。
 
 ## 旧パスワード付き作品について
 
@@ -45,8 +45,8 @@ rc.56では、パスワード付きのsealed配布とパスワード入力画面
 ## 機能拡張セキュリティ {#extension-security}
 
 TurboWarp-Plus-EditorでSB3を開くと、埋め込み拡張の実行方法をまとめて確認する画面が表示されます。
-名前・ID・作者・説明・ライセンスを確認し、信頼できる配布元の拡張だけ実行してください。
-「詳細」でソースコードも確認できます。メタデータは作者の自己申告です。
+名前・ID・製作者・説明・ライセンスを確認し、信頼できる配布元の拡張だけ実行してください。
+表示されている説明ページ、GitHub・npmのリンクも配布元の確認に使えます。メタデータは製作者の自己申告です。
 
 選択肢は左から次の順です。画面では絵文字に相当する線画アイコンで表示されます。
 
@@ -56,14 +56,13 @@ TurboWarp-Plus-EditorでSB3を開くと、埋め込み拡張の実行方法を�
 | 🛡️ サンドボックスあり | Editorから分離された、アクセス権限に制限のある環境で実行します。盾は制限された実行環境を表し、安全性の認定ではありません。                                           |
 | ⚠️ サンドボックスなし | 分離による制限を外して実行します。プロジェクトやブラウザーの情報にアクセスできるため、信頼できる拡張かを確認して選びます。警告は広いアクセス権限への注意を表します。 |
 
-### 選べないモードと「動作に必要」
+### 選べないモードと「必要」
 
-作者がサンドボックス外での実行を必須と宣言した拡張（`Unsandboxed: required`）では、
+製作者がサンドボックス外での実行を必須と宣言した拡張（`Unsandboxed: required`）では、
 「サンドボックスあり」が灰色の「非対応」になり、選べません。
-名前の下に「この拡張はサンドボックス内では動作しません。」と理由が表示されます。
-「サンドボックスなし」には「動作に必要」と表示されます。
+実行方法を選ぶ欄の上に「⚠️サンドボックスなし：必要」と表示され、対応する選択肢には「必要」と表示されます。
 
-「動作に必要」は、その拡張を動かすために必要な実行モードを示します。
+「必要」は、その拡張を動かすために必要な実行モードを示します。
 安全性や配布元の信頼性を保証する表示ではなく、自動で許可されることもありません。
 必要な機能と配布元を確認したうえで、自分で選びます。
 
@@ -82,6 +81,8 @@ rc.58が同梱する次の3拡張は、いずれも「サンドボックスな�
 Camera Sourceの拡張実行を許可しても、ブラウザーのカメラ使用許可が自動で与えられることはありません。
 
 ### 説明文の表示言語
+
+以下の2026年10月25日以前の図版は旧画面の記録です。図中の「動作に必要」「作者」「詳細」などの表記は当時のもので、現行画面の「必要」「製作者」やリンク配置と区別してください。
 
 TurboWarp-Plus-Editorは、表示言語に合う説明が拡張に用意されている場合、その言語で説明を表示します。
 次の日英画像では、日本語説明に対応した単体公開版のCamera Source **0.19.4**・Asset Cache **0.3.2**・Bubble **0.13.5**を使用しています。
@@ -151,7 +152,7 @@ rc.56のStandard SB3では、これらを含む拡張が「Kamishibai DSL 4.0 Ru
 
 1. 参加する人に、カメラを使うことを説明して同意を得る
 2. 人や物にぶつからない場所を確保する
-3. ブラウザーがカメラの使用を尋ねたら「許可」を選ぶ
+3. 共通の「カメラ」を押し、ブラウザーが使用を尋ねたら「許可」を選ぶ
 4. 体が画面に収まる位置へ移動する
 5. 画面の見本に合わせ、判定されるまで少し姿勢を保つ
 
@@ -163,7 +164,7 @@ rc.56のStandard SB3では、これらを含む拡張が「Kamishibai DSL 4.0 Ru
 
 ## カメラと制作ツールの共通入口
 
-rc.41のEditorでは停止ボタンの後ろ、HTMLではDockの「カメラ」を押します。未起動なら許可・開始、起動中ならカメラ選択と左右反転の設定を開きます。別のカメラを選ぶときも、同じ入口を使います。
+Editorでは停止ボタンの後ろ、HTMLでは共通Dockの「カメラ」を押します。未起動なら許可・開始、起動中ならカメラ選択と左右反転の設定を開きます。別のカメラを選ぶときも、同じ入口を使います。
 
 <figure class="runtime-settings-detail" tabindex="0">
   <img src="../images/runtime-rc41/camera-settings.png" alt="rc.41の共通カメラ設定。使用するカメラの選択欄と左右反転ボタン、その下にカメラの入口を表示">

@@ -86,6 +86,12 @@ test('uses the published release-source CLI and keeps saved blocks as input when
 
 test('prepares native actor targets and replaces existing runtime components in build examples', () => {
   const conversion = read('docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md');
+  assert.match(conversion, /4\.0\.0-rc\.79/u);
+  assert.match(
+    conversion,
+    /原文と等価な共通YAMLブロック・台本ブロックは、その形式のまま再生・配布できます/u,
+  );
+  assert.match(conversion, /未保存の変更や競合がある場合[\s\S]*古い原文で再生を続けず/u);
   const preparation = tutorial.slice(tutorial.indexOf('## 2.'), tutorial.indexOf('## 3.'));
   assert.match(
     preparation,
@@ -122,9 +128,13 @@ test('validates complete standalone conversion examples against the published rc
   }
 });
 
-test('requires an empty Stage root and explains direct playback with explicit restart', () => {
+test('explains named independent roots and retains empty-root playback as versioned compatibility', () => {
   const conversion = read('docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md');
   for (const source of [guide, tutorial, conversion]) {
+    assert.match(source, /embedded YAML root \[4\.0\]/u);
+    assert.match(source, /空欄でないファイル名/u);
+    assert.match(source, /rc\.71まで/u);
+    assert.match(source, /表示されている形式に変換して検証・保存/u);
     assert.match(source, /Stage[\s\S]*名前が空[\s\S]*ルート/u);
     assert.match(
       source,
@@ -265,4 +275,15 @@ test('publishes real form screenshots for all eight definitions with traceable c
   assert.match(guide, /フォームでJSONを編集する/u);
   assert.match(guide, /SB3ファイル自体の保存とは別/u);
   assert.match(tutorial, /書類アイコン/u);
+});
+
+test('separates historical Schema baselines from current release guidance', () => {
+  const author = read('docs/dsl-author-guides/dsl-4.0-author-guide.md');
+  const sourceLock = JSON.parse(read('sources/dsl4/source-lock.json'));
+  const reference = read('docs/dsl-author-guides/dsl-4.0-schema-reference.md');
+  assert.ok(reference.includes(sourceLock.commit));
+  assert.match(author, /同期したSchemaの固定commitとハッシュは\[Schemaリファレンス\]/u);
+  assert.match(author, /旧rc\.58のSchema調査基準:[^\n]+現在の同期参照を示すものではありません/u);
+  assert.doesNotMatch(author, /公開runtimeと[^\n]+\n同じrc\.58へ揃えています/u);
+  assert.match(author, /ベースSB3もCLIと同じ公開版へ揃えます/u);
 });
