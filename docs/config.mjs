@@ -151,7 +151,7 @@ export const documentCollections = [
         title: '紙芝居DSL 4.0 台本作成ガイド',
         audience: '台本ブロックでDSL 4.0の作品を作る方',
         description:
-          '台本宣言、シーン、設定、命令、入力、分岐をブロック図版で調べるガイドです。命令単位の編集と空名ルートからの直接再生は公開rc.25で利用できます。',
+          '名前付き文書、独立した開始点、設定、シーン、命令を説明します。旧版のブロック図版は互換資料として保持します。',
       },
     ],
   },
@@ -201,7 +201,7 @@ export const documentCollections = [
         title: 'DSL 4.0 YAMLとブロック台本SB3の相互変換ガイド',
         audience: 'YAML台本とTurboWarpのブロック台本を相互に編集する方',
         description:
-          'author-block-dslとexport-block-dslの使い方、ブロックを編集・保存してYAMLへ書き戻す手順、公開rc.25での直接再生と素材の条件を説明します。',
+          '原文YAML・共通YAMLブロック・台本ブロックの切替、文書の保存、旧SB3の移行、従来CLIの固定例を説明します。',
       },
       {
         sourceFilename: 'dsl-4.0-asset-conversion-guide.md',
@@ -278,7 +278,7 @@ export const documentCollections = [
         title: '紙芝居を作る',
         audience: '初めて台本ブロックで紙芝居を作る方',
         description:
-          '公開rc.25で台本ブロックを編集・保存し、空名ルートから直接再生します。素材の追加時はビルドで同梱します。',
+          '名前付き文書を開き、3つの形式でプレビューして検証・保存します。旧版実習と移行手順も案内します。',
       },
     ],
   },

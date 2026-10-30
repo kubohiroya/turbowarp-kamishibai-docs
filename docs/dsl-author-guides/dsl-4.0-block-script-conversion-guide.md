@@ -2,10 +2,94 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schema・サンプルの参照版は**4.0.0-rc.71**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.71)のSB3を使います。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。
+現在の公開App・Schemaの参照版は**4.0.0-rc.75**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.75)のSB3を使います。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
 
 対象: YAML台本をTurboWarpのブロックで編集し、編集結果をYAMLへ戻したい方。\
 確認日: 2026年10月21日。公開プレリリース`4.0.0-rc.41`を対象にします。正式版4.0.0は未公開です。
+
+## rc.75の名前付き文書と3つの編集形式 {#named-document-root}
+
+この節はApp **4.0.0-rc.75**で提供する文書方式を説明します。対応するApp、Samples、TurboWarp-Plus-Editorを揃えて使います。以前のSB3に埋め込まれた拡張は、Webページを開き直すだけでは更新されません。旧SB3は後述の移行コマンドで別ファイルへ変換してください。DSLの版は引き続き`4.0`です。3.2系列の作品はこの移行の対象にしません。
+
+### 開始点と文書本体を分ける
+
+| ブロック                                       | 指定するもの                          | 接続                                            |
+| ---------------------------------------------- | ------------------------------------- | ----------------------------------------------- |
+| `embedded YAML root [4.0] [main.k4.yml]`       | DSLの版と、最初に読む文書のファイル名 | 上下とも接続しない独立したハット。作品に1個置く |
+| `embedded YAML [main.k4.yml]`                  | 編集する文書                          | 下へ文書の内容を接続する通常のハット            |
+| `embedded YAML include [parts/opening.k4.yml]` | 同じ作品に含まれる参照先文書          | 文書内のinclude位置へ接続する                   |
+
+開始点のファイル名と、参照先文書のファイル名を一致させます。`main.k4.yml`は例です。文書名を空欄にして開始点を表す規則は使いません。通常文書は空欄でないファイル名が必須です。階層がある場合は、`parts/opening.k4.yml`のように作品内の相対パスで区別します。同じ`opening.k4.yml`でも、所属するフォルダーが違えば別の文書です。
+
+文書名や開始文書が不正な場合は保存・実行前の検査で知らせます。設定だけの文書とシーンを含む文書も、同じ通常文書で扱います。新しく作る台本に`kamishibaiConfig`は置きません。設定とシーンは、それぞれが属する文書の下へ順に接続します。旧`kamishibai`・`kamishibaiConfig`・`includeBlocks`は、旧SB3の読み取りと移行のために扱います。
+
+YAMLの`include: ./parts/opening.k4.yml`などの参照は、同じ文書を指す参照としてブロックに対応付けます。編集していない相対パスの綴りは保持します。参照先がない場合や循環する場合は変換を拒否します。古いSB3に元の分割YAMLがない場合、実在しない原文ファイルをあったことにはしません。
+
+### 同じ文書を3つの形式で見る
+
+この文書の編集ボタンは、起動URLに`twPlusYamlEditor=1`を付けて文書操作を有効にします。指定がない通常起動では既定OFFです。Appの文書機能とEditorの操作画面は同じ起動時の指定に揃い、作品内の変数では切り替えません。通常の`embedded YAML`ハットの書類アイコンを押すと、「組み込み文書」ダイアログが開きます。共通YAMLブロックには、四角の中に`YAML`と書かれたアイコンが付きます。
+
+| タブ             | 表示する内容                                                      |
+| ---------------- | ----------------------------------------------------------------- |
+| 原文YAML         | SB3に組み込まれたYAMLテキスト。文書ごとのコメントや改行を保持する |
+| 共通YAMLブロック | キー、一覧、型付きの値、行コメントを表すブロック                  |
+| 台本ブロック     | 紙芝居の設定、シーン、命令として表すブロック                      |
+
+タブの上には「💽=現在保存されている形式」と表示します。💽が付くタブが現在の形式です。別のタブを選んだだけでは作品を書き換えません。表示の準備中は待機表示になり、準備ができるまで保存できません。各タブには、その文書を選んだ形式にした実際のプレビューを表示します。ブロックのプレビューは確認用です。ブロックを編集する場合は、その形式で保存してダイアログを閉じ、Editor上の実際のブロックを編集します。再び文書アイコンを開き、同じ形式で検証・保存すると、変更を原文と再生用データへ反映したままブロック形式を維持します。
+
+別形式を表示して右下の「表示されている形式に変換して検証・保存」を押すと、「○○形式に変換しますか？」と確認します。「OK」で検証して反映し、「Cancel」で選択したタブへ戻ります。同じ形式で保存する場合も、表示中の内容を検証して原文と再生用データへ反映し、その形式を維持します。表示後に文書の状態が変わっていなければ、プレビュー時に作成した変換結果を保存でも使います。文書ごとに編集内容を保持するため、別の文書がブロック形式でも、選択した文書を個別に保存・変換できます。変換できない構造、同じ文書の競合、includeや参照先の不整合がある場合は理由を表示し、原本を上書きしません。
+
+共通YAMLブロックの独立したコメント行は「行コメント」ブロック、行末のコメントは対応する行末コメントで表します。複数行の文字列は行ごとのブロックで表し、改行を空白へ置き換えません。台本ブロックでは、シーンや命令などに一意に対応する独立行コメントを、該当位置の行コメントブロックで表示します。JSON入力の内部など、位置を安全に対応付けられないコメントを含む場合は台本ブロックへの変換を拒否します。原文を隠れた別データにだけ残して、コメントが変換できたことにはしません。
+
+変換は、文書・設定・シーン・命令の意味を検査します。変更のない原文はそのまま保持します。表記を保持できない操作や未対応構文は理由を表示し、勝手に削除しません。変換を試す前にも、元の作品ファイルを残してください。
+
+### 保存と取消し
+
+原文と等価な共通YAMLブロック・台本ブロックは、その形式のまま再生・配布できます。未編集の作品を再生するために、原文YAMLタブへ戻す必要はありません。ブロックの値や行コメントを編集した場合は、再生・配布の前に文書ダイアログで検証して保存します。未保存の変更や競合がある場合は、古い原文で再生を続けず、理由を表示します。
+
+ダイアログ右下の「表示されている形式に変換して検証・保存」は、Editorで開いている作品へ反映する操作です。SB3ファイルはダウンロードしません。変換で必要なブロックと文書データの差分を更新し、作品全体を保存し直して読み込み直す操作は行いません。無関係なブロック・画像・音・実行状態を変更しません。
+
+作品ファイルを手元へ残すには、反映後にEditorの通常のファイルメニューから「コンピューターに保存する」を選びます。ダイアログ右上のXと右下の「キャンセル」は、未保存の選択や草稿を破棄して閉じ、Editor内の作品を書き換えません。反映中は完了まで待ちます。
+
+### VSCodeで原文を編集する
+
+「VSCodeで編集」は原文YAMLタブで使います。文書操作を有効にしたローカルのTurboWarp-Plus-Editorと、専用の補助プロセスが必要です。GitHub Pages上のページから、任意のローカルアプリを直接起動する機能ではありません。準備手順は[TurboWarp-Plus-EditorのREADME](https://github.com/kubohiroya/turbowarp-plus-editor#組み込みyaml文書をvscodeで編集するローカル試験)を参照してください。
+
+1. 文書の書類アイコンから原文YAMLタブを開き、「VSCodeで編集」を押す。
+2. VSCodeで文書を編集して保存する。提供されるJSON Schemaで補完と診断を確認する。
+3. Editorへ戻り、表示内容を確認して「表示されている形式に変換して検証・保存」を押す。
+4. 検証成功後、必要ならEditorの通常メニューから作品をSB3で保存する。
+
+外部編集中は、別文書や別形式へ切り替えません。ブロック側の変更を原文へ反映していない場合は、先に原文YAML形式へ保存してからVSCodeを開きます。VSCodeで保存しただけでは作品へ反映されません。検証失敗や取消しの場合も専用の作業ファイルは残るので、そこで修正できます。既存のVSCode設定や他の作品の文書へ混ぜません。
+
+### 旧SB3を別ファイルへ移行する {#migrate-embedded-yaml}
+
+rc.75のCLIを同じ版に固定して使います。対応する公開Releaseを確認し、作業用フォルダーへ次の版を導入します。
+
+```sh
+npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.75
+npx --no-install turbowarp-kamishibai --version
+```
+
+以下は、元の`old-story.sb3`を残して`named-story.sb3`を作る例です。
+
+```sh
+npx --no-install turbowarp-kamishibai migrate-embedded-yaml \
+  --input old-story.sb3 \
+  --output named-story.sb3 \
+  --entry-file story.k4.yml \
+  --report migration-report.json
+```
+
+`--entry-file`を省略したときの名前はCLIの案内に従います。入力と同じファイルへの出力や、既存の出力ファイルの上書きはしません。旧主台本と同じラベルの設定を通常文書へまとめ、独立した`embedded YAML root`に版`4.0`と開始ファイル名を設定し、includeを文書参照へ移します。
+
+移行前後で台本全体の意味、画像・音などの資産のバイト列、無関係なブロックの保持を検査します。ラベルの衝突や対応付けの曖昧さがあれば、出力せずに理由を報告します。旧Scratchの付箋はそのまま保持し、YAMLの行コメントへ自動変換しません。
+
+ブロックだけを持つ旧作品から、失われた元YAMLのコメントや引用符を復元することはできません。その場合は新しく生成したYAMLであることを移行レポートに記録します。移行後の作品をEditorで開き、開始文書・各文書・素材を確認してから利用してください。元作品は切り戻し用に残します。
+
+## rc.71までのCLIと図版を参照する
+
+ここから下は、それぞれに記載した旧版の固定例です。空名の`kamishibai`ルート、`kamishibaiConfig`、`includeBlocks`を含む説明は旧SB3の構造です。rc.75で新しく作る作品の配置は、上の「開始点と文書本体を分ける」を使ってください。過去版の図版と検証記録は、当時の内容のまま残しています。
 
 ## rc.68からの簡易方式について
 
@@ -17,8 +101,8 @@ asset・actor・cover・startSceneIndexの省略と、JSON不要のsay/thinkは�
 
 次のボタンから、公開済みのブロック台本SB3を日本語のTurboWarp-Plus-Editorへ直接読み込めます。
 
-- 地震安全チュートリアルのブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
-- 浦島太郎のブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
+- 地震安全チュートリアルのブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;twPlusYamlEditor=1&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
+- 浦島太郎のブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;twPlusYamlEditor=1&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
 
 拡張の読み込み確認では、名前と配布元を確認し、「必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
 アイコンの意味、選べない理由、拒否・キャンセルの操作は[機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を参照してください。
@@ -105,7 +189,7 @@ npx --no-install turbowarp-kamishibai --version
 表示が利用中の固定版（`4.0.0-rc.23`または`4.0.0-rc.25`）のままであることを確認し、
 書き出し・検査・ビルドを再実行します。CLIの版を下げる必要はありません。
 既存の公開rc.23・rc.25の依存宣言は、後続版で修正しても変わりません。
-新規導入では前節のrc.71を使ってください。
+この旧形式の実習には前節のrc.71を固定して使います。新しい文書操作の導入には、冒頭のrc.75の手順を使ってください。
 
 ## 実命令ブロックを編集して書き戻す
 
@@ -157,7 +241,7 @@ npx --no-install turbowarp-kamishibai author-block-dsl \
 
 ### 3. TurboWarpでブロックを編集して保存する
 
-1. <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>を開き、ファイルメニューから
+1. <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;twPlusYamlEditor=1"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>を開き、ファイルメニューから
    `output/block-script/story-blocks.sb3`を読み込みます。既存の作品を編集している場合は先に保存してください。
 2. 拡張の名前と配布元を確認し、「必要」と表示された「サンドボックスなし」を選んで「OK」を押します。
 3. ステージのコードを選び、台本ハットからつながるシーンのまとまりを探します。
@@ -561,7 +645,7 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 [作者ガイドの4.0 RC改訂仕様](dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
 宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
 Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
-通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.71です。CLIとベースSB3を同じrc.71へ揃えます。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.75です。CLIとベースSB3を同じrc.75へ揃えます。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
 [三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、TurboWarp-Plus-Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。

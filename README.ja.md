@@ -207,4 +207,4 @@ appのリリースから取り込むのは、公開版の案内とSchemaです�
 4.0の作者向け入口は、台本ブロック、台本DSL、台本作りの詳細資料に分けています。
 各作成経路に「紙芝居を作る」と「紙芝居DSL 4.0 台本作成ガイド」を置き、既存のDSL版URLは維持します。
 ブロック図版は`sources/dsl4-authoring-blocks.json`から`node scripts/render-authoring-blocks.mjs`で再生成できます。
-命令単位の編集と空名ルートからの直接再生は、公開プレリリース4.0.0-rc.25を基準にします。素材入りのブロック台本SB3を開き、緑の旗で起動してタイトルを閉じると再生できます。
+rc.75の文書方式は、独立した開始点と空欄でないファイル名の通常文書を使います。[名前付き文書・3形式編集・旧SB3移行](docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。旧版の空名ルートと図版は、版を明示した固定例として保持します。

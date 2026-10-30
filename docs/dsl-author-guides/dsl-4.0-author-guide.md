@@ -28,8 +28,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 
 次のボタンから、公開済みのブロック台本SB3を日本語のTurboWarp-Plus-Editorへ直接読み込めます。
 
-- 地震安全チュートリアルのブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
-- 浦島太郎のブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
+- 地震安全チュートリアルのブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;twPlusYamlEditor=1&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Ftutorial%2Ftutorial-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
+- 浦島太郎のブロック台本： <a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;twPlusYamlEditor=1&amp;project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-kamishibai-samples%2Fstories%2Furashima%2Furashima-blocks-4.0.sb3"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>
 
 拡張の読み込み確認では、名前と配布元を確認し、「必要」と表示された「サンドボックスなし」を明示的に選んで「OK」を押します。
 アイコンの意味、選べない理由、拒否・キャンセルの操作は[機能拡張セキュリティの説明](../user-guides/user-guide-4.0.md#extension-security)を参照してください。
@@ -55,17 +55,17 @@ Schema基準: `9fe9d9335e5cca82c430a1d557bc26c6dd6d8a3f`（rc.58公開tag）。
 YAMLとブロック台本は同じ`StoryDocument`へ正規化されます。CLIでは
 `validate-dsl4 --format canonical-json`で正規形を取得し、`author-block-dsl`でYAMLからブロック台本SB3を作り、
 `export-block-dsl`でYAMLへ戻せます。include文のあるSB3からの書き出しは、主台本と参照先を一緒に扱います。
-include文付きのYAMLから、ラベル付き台本と`includeBlocks`を持つブロック台本を生成できます。
+rc.71までの方式では、include文付きのYAMLからラベル付き台本と`includeBlocks`を生成します。rc.75の名前付き文書・独立した開始点・3つの編集形式は、[新しい文書方式](dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。
 サンプルの4形式はYAML台本、台本埋め込みSB3、ブロック台本SB3、Web版です。
 
 両コマンドの実行例と、TurboWarpで編集・保存してYAMLへ書き戻す手順は、
 [「YAMLとブロック台本SB3の相互変換ガイド」](dsl-4.0-block-script-conversion-guide.md)を参照してください。
-公開rc.25はシーンと命令を実ブロックで配置し、編集・保存・YAMLへの書き戻しに対応します。Stage上の名前が空の`kamishibai [4.0] []`がルートです。対応するfile素材を同梱したSB3なら、緑の旗で起動してタイトルを閉じると、そのブロック台本を再生します。編集後に開始し直すと現在のブロックを読み直します。素材の追加・変更には素材バンドルの再ビルドが必要です。
+**旧形式の互換説明:** 公開rc.25はシーンと命令を実ブロックで配置し、編集・保存・YAMLへの書き戻しに対応します。Stage上の名前が空の`kamishibai [4.0] []`がルートです。対応するfile素材を同梱したSB3なら、緑の旗で起動してタイトルを閉じると、そのブロック台本を再生します。編集後に開始し直すと現在のブロックを読み直します。素材の追加・変更には素材バンドルの再ビルドが必要です。
 
 カメラはCamera Sourceが所有し、認識側が映像を借ります。プレビューは映像をそのまま表示し、推論には中央の
 正方形を切り出して左右反転した入力を使います。プレビューの左右反転と推論入力の処理を同一視しないでください。
 タイトルのカメラ許可は、対応ブラウザー・ポーズ作品・有効な機能フラグの条件が揃った場合に表示されます。
-rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行のrc.58を選びます。
+rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行のrc.75を選びます。
 
 ローカルプレビューはリモート素材を読み込みません。rc.25では失敗時にダイアログが表示されます。
 `K4-ASSET-REMOTE-DISABLED`ならローカル配信へ変更するか、ビルドした作品で確認してください。
@@ -2001,7 +2001,7 @@ App **4.0.0-rc.44以降のStandard**では、物語の有限反復・条件分�
 
 [三人の訪問の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)から、
 Web再生・ブロック台本SB3のダウンロード・TurboWarp-Plus-Editorでの編集を始められます。
-現在の公開版は**4.0.0-rc.58**です。CLIは[公開tagから準備する手順](dsl-4.0-block-script-conversion-guide.md#cli-from-release-source)でビルドして使えます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+現在の公開版は**4.0.0-rc.75**です。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)でビルドして使えます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 CLIは前記手順でローカル導入後、`npx --no-install turbowarp-kamishibai --help`で起動できます。
 ベースSB3も同じrc.58へ揃えます。追加の`--narrative-control`は不要です。
 安定版3.2系列の既存作品・導線は引き続き利用できます。

@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schemaの参照版は**4.0.0-rc.71**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.71)のSB3を使い、CLIも同じ版に揃えてください。公開サンプルの対応版は[作品一覧](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)で確認できます。エラー画面の案内はrc.71へ更新しています。以下の`4.0.0-rc.41`やrc.58などの操作確認・図版は作成当時の記録として保持します。
+現在の公開App・Schemaの参照版は**4.0.0-rc.75**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.75)のSB3を使い、CLIも同じ版に揃えてください。公開サンプルの対応版は[作品一覧](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)で確認できます。エラー画面の案内はrc.71へ更新しています。以下の`4.0.0-rc.41`やrc.58などの操作確認・図版は作成当時の記録として保持します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
 
 この説明書は、TurboWarp紙芝居4.0のサンプル作品を初めてプレイする方と、進行を手伝う方のための案内です。
 まずは「浦島太郎」を開き、作品を始める、進める、終えるという一連の操作を試します。
@@ -28,13 +28,13 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 [浦島太郎](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/urashima/)と
 [チュートリアル](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/tutorial/)の「ブロック台本SB3」は、台本と必要な素材を同梱しています。
 
-1. 配布SB3を<a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>で開き、[機能拡張セキュリティ](#extension-security)の情報を確認して、必要なモードを明示的に選び「OK」を押す
-2. ステージ上の`kamishibai [4.0] []`の名前が空欄であることを確認する。これがルート台本になる
+1. 配布SB3を<a class="twpe-edit-button" href="https://kubohiroya.github.io/turbowarp-plus-editor/editor.html?lang=ja&amp;twPlusYamlEditor=1"><img src="https://kubohiroya.github.io/turbowarp-plus-editor/assets/icon.svg" width="32" height="32" alt="" aria-hidden="true">TurboWarp-Plus-Editorで編集</a>で開き、[機能拡張セキュリティ](#extension-security)の情報を確認して、必要なモードを明示的に選び「OK」を押す
+2. rc.75では、独立した`embedded YAML root [4.0] [ファイル名]`が開始文書を指していることを確認する。本文は同じファイル名の通常文書の下にある。rc.71までの旧SB3は、ステージ上の`kamishibai [4.0] []`という空名ルートを使う
 3. 緑の旗で起動し、タイトルの「閉じる」を押すと、つながっている台本ブロックの物語が始まる
-4. セリフや待機時間を編集したら、もう一度緑の旗から開始し、タイトルを閉じて確認する
+4. セリフや待機時間を編集したら、文書の書類アイコンからダイアログを開いて検証・保存してから、もう一度緑の旗で開始し、タイトルを閉じて確認する
 
-実行中の物語へ編集が自動反映されるわけではありません。素材を新しく加える場合は作者用のビルド手順が必要です。
-詳しくは[ブロック版「紙芝居を作る」](../tutorials/create-blocks.md)を参照してください。
+未編集で原文と等価なブロック台本は、その形式のまま再生できます。実行中の物語へ編集が自動反映されるわけではありません。素材を新しく加える場合は作者用のビルド手順が必要です。
+詳しくは[ブロック版「紙芝居を作る」](../tutorials/create-blocks.md)と、[文書の3形式編集・保存・旧SB3移行](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。
 
 ## 旧パスワード付き作品について
 
