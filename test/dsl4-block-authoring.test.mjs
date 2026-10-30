@@ -86,7 +86,7 @@ test('uses the published release-source CLI and keeps saved blocks as input when
 
 test('prepares native actor targets and replaces existing runtime components in build examples', () => {
   const conversion = read('docs/dsl-author-guides/dsl-4.0-block-script-conversion-guide.md');
-  assert.match(conversion, /4\.0\.0-rc\.75/u);
+  assert.match(conversion, /4\.0\.0-rc\.79/u);
   assert.match(
     conversion,
     /原文と等価な共通YAMLブロック・台本ブロックは、その形式のまま再生・配布できます/u,
@@ -275,4 +275,15 @@ test('publishes real form screenshots for all eight definitions with traceable c
   assert.match(guide, /フォームでJSONを編集する/u);
   assert.match(guide, /SB3ファイル自体の保存とは別/u);
   assert.match(tutorial, /書類アイコン/u);
+});
+
+test('separates historical Schema baselines from current release guidance', () => {
+  const author = read('docs/dsl-author-guides/dsl-4.0-author-guide.md');
+  const sourceLock = JSON.parse(read('sources/dsl4/source-lock.json'));
+  const reference = read('docs/dsl-author-guides/dsl-4.0-schema-reference.md');
+  assert.ok(reference.includes(sourceLock.commit));
+  assert.match(author, /同期したSchemaの固定commitとハッシュは\[Schemaリファレンス\]/u);
+  assert.match(author, /旧rc\.58のSchema調査基準:[^\n]+現在の同期参照を示すものではありません/u);
+  assert.doesNotMatch(author, /公開runtimeと[^\n]+\n同じrc\.58へ揃えています/u);
+  assert.match(author, /ベースSB3もCLIと同じ公開版へ揃えます/u);
 });

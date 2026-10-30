@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schemaの参照版は**4.0.0-rc.75**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.75)のSB3を使います。CLIは[公開版を固定する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
+現在の公開App・Schemaの参照版は**4.0.0-rc.79**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.79)のSB3を使います。CLIは[公開版を固定する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
 
 対象: 初めて台本ブロックで紙芝居を作る方\
 扱う台本: TurboWarp上のブロック台本SB3\
@@ -19,9 +19,9 @@ SVGのブロック図は入力欄と接続を基に描いた説明図、PNGの�
 
 asset・actor・cover・startSceneIndexの省略と、JSON不要のsay/thinkは、[簡易方式の説明](../block-author-guides/dsl-4.0-block-author-guide.md#simple-native-blocks)を参照してください。公開rc.68以降のCLI・Standard SB3・サンプルを同じ版へ揃えて使います。以下の旧版に固定した実習・検証記録とは版を区別し、現在の対応版は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認してください。簡易版ではセリフをTEXT欄、秒数をSECONDS欄で編集します。旧SPEC版の編集手順と台本も引き続き利用できます。
 
-## rc.75で使う文書と開始点 {#named-document-root}
+## rc.79で使う文書と開始点 {#named-document-root}
 
-rc.75では、`embedded YAML root [4.0] [main.k4.yml]`を上下につながらない独立した開始点として置きます。本文は、空欄でないファイル名を選んだ通常の`embedded YAML [main.k4.yml]`の下へ接続します。設定も同じ文書に含め、新しく`kamishibaiConfig`を作りません。別文書は`embedded YAML include`で参照します。
+rc.79では、`embedded YAML root [4.0] [main.k4.yml]`を上下につながらない独立した開始点として置きます。本文は、空欄でないファイル名を選んだ通常の`embedded YAML [main.k4.yml]`の下へ接続します。設定も同じ文書に含め、新しく`kamishibaiConfig`を作りません。別文書は`embedded YAML include`で参照します。
 
 [名前付き文書・3形式編集・保存・旧SB3移行の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を先に確認してください。原文YAML、共通YAMLブロック、台本ブロックは同じ文書の表示形式です。💽が付くタブが現在保存されている形式で、タブ切替だけでは作品を変更しません。文書の書類アイコンからプレビューし、「表示されている形式に変換して検証・保存」でEditorへ反映します。SB3の書き出しはEditorの通常メニューを使います。
 

@@ -2,14 +2,14 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schemaの参照版は**4.0.0-rc.75**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.75)のSB3を使います。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
+現在の公開App・Schemaの参照版は**4.0.0-rc.79**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.79)のSB3を使います。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
 
 対象: YAML台本をTurboWarpのブロックで編集し、編集結果をYAMLへ戻したい方。\
-確認日: 2026年10月21日。公開プレリリース`4.0.0-rc.41`を対象にします。正式版4.0.0は未公開です。
+旧版のCLI・図版の確認日: 2026年10月21日。これらの記録は公開プレリリース`4.0.0-rc.41`を対象にしています。新しい文書方式は次節を参照してください。正式版4.0.0は未公開です。
 
-## rc.75の名前付き文書と3つの編集形式 {#named-document-root}
+## rc.79の名前付き文書と3つの編集形式 {#named-document-root}
 
-この節はApp **4.0.0-rc.75**で提供する文書方式を説明します。対応するApp、Samples、TurboWarp-Plus-Editorを揃えて使います。以前のSB3に埋め込まれた拡張は、Webページを開き直すだけでは更新されません。旧SB3は後述の移行コマンドで別ファイルへ変換してください。DSLの版は引き続き`4.0`です。3.2系列の作品はこの移行の対象にしません。
+この節はApp **4.0.0-rc.79**で提供する文書方式を説明します。対応するApp、Samples、TurboWarp-Plus-Editorを揃えて使います。以前のSB3に埋め込まれた拡張は、Webページを開き直すだけでは更新されません。旧SB3は後述の移行コマンドで別ファイルへ変換してください。DSLの版は引き続き`4.0`です。3.2系列の作品はこの移行の対象にしません。
 
 ### 開始点と文書本体を分ける
 
@@ -64,10 +64,10 @@ YAMLの`include: ./parts/opening.k4.yml`などの参照は、同じ文書を指�
 
 ### 旧SB3を別ファイルへ移行する {#migrate-embedded-yaml}
 
-rc.75のCLIを同じ版に固定して使います。対応する公開Releaseを確認し、作業用フォルダーへ次の版を導入します。
+rc.79のCLIを同じ版に固定して使います。対応する公開Releaseを確認し、作業用フォルダーへ次の版を導入します。
 
 ```sh
-npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.75
+npm install --save-dev --save-exact @kubohiroya/turbowarp-kamishibai-app@4.0.0-rc.79
 npx --no-install turbowarp-kamishibai --version
 ```
 
@@ -89,7 +89,7 @@ npx --no-install turbowarp-kamishibai migrate-embedded-yaml \
 
 ## rc.71までのCLIと図版を参照する
 
-ここから下は、それぞれに記載した旧版の固定例です。空名の`kamishibai`ルート、`kamishibaiConfig`、`includeBlocks`を含む説明は旧SB3の構造です。rc.75で新しく作る作品の配置は、上の「開始点と文書本体を分ける」を使ってください。過去版の図版と検証記録は、当時の内容のまま残しています。
+ここから下は、それぞれに記載した旧版の固定例です。空名の`kamishibai`ルート、`kamishibaiConfig`、`includeBlocks`を含む説明は旧SB3の構造です。rc.79で新しく作る作品の配置は、上の「開始点と文書本体を分ける」を使ってください。過去版の図版と検証記録は、当時の内容のまま残しています。
 
 ## rc.68からの簡易方式について
 
@@ -189,7 +189,7 @@ npx --no-install turbowarp-kamishibai --version
 表示が利用中の固定版（`4.0.0-rc.23`または`4.0.0-rc.25`）のままであることを確認し、
 書き出し・検査・ビルドを再実行します。CLIの版を下げる必要はありません。
 既存の公開rc.23・rc.25の依存宣言は、後続版で修正しても変わりません。
-この旧形式の実習には前節のrc.71を固定して使います。新しい文書操作の導入には、冒頭のrc.75の手順を使ってください。
+この旧形式の実習には前節のrc.71を固定して使います。新しい文書操作の導入には、冒頭のrc.79の手順を使ってください。
 
 ## 実命令ブロックを編集して書き戻す
 
@@ -645,7 +645,7 @@ SB3を保持してブロック側で編集するか、YAML直接編集へ移る�
 [作者ガイドの4.0 RC改訂仕様](dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
 宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
 Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
-通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.75です。CLIとベースSB3を同じrc.75へ揃えます。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.79です。CLIとベースSB3を同じrc.79へ揃えます。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
 [三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、TurboWarp-Plus-Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。

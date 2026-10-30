@@ -41,11 +41,11 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 文書状態: 公開プレリリース`4.0.0-rc.58`の固定実装基準を説明する台本作成ガイド\
 個別検証の調査基準: TurboWarp-Kamishibai `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`、2026年10月21日
 
-正式な`v4.0.0`は未公開です。公開runtimeと[Schemaリファレンス](dsl-4.0-schema-reference.md)を
-同じrc.58へ揃えています。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
+正式な`v4.0.0`は未公開です。公開runtimeとSchemaの対応版は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認します。
+同期したSchemaの固定commitとハッシュは[Schemaリファレンス](dsl-4.0-schema-reference.md)を正本とします。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
 `audio` / `audioControl`はrc.39から利用できます。旧BGM/SE命令も引き続き使えます。
 
-Schema基準: `9fe9d9335e5cca82c430a1d557bc26c6dd6d8a3f`（rc.58公開tag）。
+旧rc.58のSchema調査基準: `9fe9d9335e5cca82c430a1d557bc26c6dd6d8a3f`（当時の公開tag）。現在の同期参照を示すものではありません。
 本文・図版の個別検証記録は`4.0.0-rc.41`など作成当時の版を保持します。公開サンプルの参照版は各作品の生成記録で確認してください。
 本文中のrc.25などの表記は、その機能が公開された時点や図版の作成基準を示します。
 旧版のSchema snapshotは履歴として保持し、新しい台本は現在のSchemaで検査します。
@@ -55,7 +55,7 @@ Schema基準: `9fe9d9335e5cca82c430a1d557bc26c6dd6d8a3f`（rc.58公開tag）。
 YAMLとブロック台本は同じ`StoryDocument`へ正規化されます。CLIでは
 `validate-dsl4 --format canonical-json`で正規形を取得し、`author-block-dsl`でYAMLからブロック台本SB3を作り、
 `export-block-dsl`でYAMLへ戻せます。include文のあるSB3からの書き出しは、主台本と参照先を一緒に扱います。
-rc.71までの方式では、include文付きのYAMLからラベル付き台本と`includeBlocks`を生成します。rc.75の名前付き文書・独立した開始点・3つの編集形式は、[新しい文書方式](dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。
+rc.71までの方式では、include文付きのYAMLからラベル付き台本と`includeBlocks`を生成します。rc.79の名前付き文書・独立した開始点・3つの編集形式は、[新しい文書方式](dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。
 サンプルの4形式はYAML台本、台本埋め込みSB3、ブロック台本SB3、Web版です。
 
 両コマンドの実行例と、TurboWarpで編集・保存してYAMLへ書き戻す手順は、
@@ -64,8 +64,8 @@ rc.71までの方式では、include文付きのYAMLからラベル付き台本�
 
 カメラはCamera Sourceが所有し、認識側が映像を借ります。プレビューは映像をそのまま表示し、推論には中央の
 正方形を切り出して左右反転した入力を使います。プレビューの左右反転と推論入力の処理を同一視しないでください。
-タイトルのカメラ許可は、対応ブラウザー・ポーズ作品・有効な機能フラグの条件が揃った場合に表示されます。
-rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行のrc.75を選びます。
+カメラを使うときは、Editorの停止ボタンの後ろ、またはHTMLの共通Dockにある「カメラ」を押します。未起動時はブラウザーの許可と開始、起動中はカメラ選択と左右反転の設定を、同じ入口から操作します。
+rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行のrc.79を選びます。
 
 ローカルプレビューはリモート素材を読み込みません。rc.25では失敗時にダイアログが表示されます。
 `K4-ASSET-REMOTE-DISABLED`ならローカル配信へ変更するか、ビルドした作品で確認してください。
@@ -2001,9 +2001,9 @@ App **4.0.0-rc.44以降のStandard**では、物語の有限反復・条件分�
 
 [三人の訪問の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)から、
 Web再生・ブロック台本SB3のダウンロード・TurboWarp-Plus-Editorでの編集を始められます。
-現在の公開版は**4.0.0-rc.75**です。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)でビルドして使えます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+現在の公開版は**4.0.0-rc.79**です。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 CLIは前記手順でローカル導入後、`npx --no-install turbowarp-kamishibai --help`で起動できます。
-ベースSB3も同じrc.58へ揃えます。追加の`--narrative-control`は不要です。
+ベースSB3もCLIと同じ公開版へ揃えます。追加の`--narrative-control`は不要です。
 安定版3.2系列の既存作品・導線は引き続き利用できます。
 
 ### 同じ展開と各回の違いを分ける
