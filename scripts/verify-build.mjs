@@ -446,8 +446,9 @@ async function verifyIndex() {
 
   assert(workshopIndex.includes('DSL 4.0系'), 'The DSL 4.0 workshop group is missing.');
   assert(
-    workshopIndex.includes('現在公開中の資料はありません'),
-    'The unpublished DSL 4.0 workshop state is missing.',
+    workshopIndex.includes('id="workshop-tekona"') &&
+      /\[準備中\]\s+手児奈にプロポーズ！\s+AIと演じる参加型紙芝居/u.test(workshopIndex),
+    'The upcoming DSL 4.0 workshop card is missing.',
   );
   assert(workshopIndex.includes('DSL 3.2系'), 'The DSL 3.2 workshop group is missing.');
   assert(workshopIndex.includes('datetime="2026-08-01"'), 'The workshop date is missing.');
