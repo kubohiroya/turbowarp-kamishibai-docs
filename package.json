@@ -40,13 +40,13 @@
     "preview:staff": "vivliostyle preview --config docs/vivliostyle.staff.config.mjs"
   },
   "devDependencies": {
+    "@kubohiroya/rubygana": "0.9.0",
     "@types/node": "26.1.2",
     "@vivliostyle/cli": "11.1.0",
     "ajv": "8.18.0",
     "eslint": "10.8.0",
     "globals": "17.8.0",
     "prettier": "3.9.6",
-    "rubygana": "github:kubohiroya/rubygana#649cba1138f73f71f514711716e9a61a858ba712",
     "typescript": "7.0.2",
     "yaml": "2.8.1"
   }

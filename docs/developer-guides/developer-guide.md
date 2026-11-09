@@ -645,7 +645,7 @@ TurboWarp紙芝居の開発から分離し、他のTurboWarp作品や開発環�
 
 ### その他のライブラリ
 
-- [`rubygana`](https://github.com/kubohiroya/rubygana):
+- [`@kubohiroya/rubygana`](https://www.npmjs.com/package/@kubohiroya/rubygana)（[ソース](https://github.com/kubohiroya/rubygana)）:
   日本語テキストの読み仮名を生成するNode.jsライブラリ
 
 <div class="print-page-break" aria-hidden="true"></div>
