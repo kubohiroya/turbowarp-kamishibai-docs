@@ -37,11 +37,11 @@ const vivliostyleBin = path.join(
 const vivliostyleRequire = createRequire(require.resolve('@vivliostyle/cli/package.json'));
 const {PDFDocument} = vivliostyleRequire('pdf-lib');
 const rubyganaBin = path.join(
-  path.dirname(require.resolve('rubygana/package.json')),
+  path.dirname(require.resolve('@kubohiroya/rubygana/package.json')),
   'bin/rubygana.js',
 );
-const rubyganaPackage = require('rubygana/package.json');
-const rubyganaGradeData = require('rubygana/lib/学年別漢字.js').metadata;
+const rubyganaPackage = require('@kubohiroya/rubygana/package.json');
+const rubyganaGradeData = require('@kubohiroya/rubygana/lib/学年別漢字.js').metadata;
 const commonPublicationInputs = [
   fileURLToPath(import.meta.url),
   path.join(projectRoot, 'scripts/build-freshness.mjs'),
