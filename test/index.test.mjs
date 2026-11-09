@@ -313,7 +313,12 @@ test('lists workshop material chronologically with explicit DSL families', () =>
   assert.ok(dsl40Position >= 0);
   assert.ok(dsl32Position > dsl40Position);
   assert.match(workshopIndex, /<h2 id="workshops-40">DSL 4\.0系<\/h2>/u);
-  assert.match(workshopIndex, /現在公開中の資料はありません/u);
+  assert.doesNotMatch(workshopIndex, /現在公開中の資料はありません|workshop-release--empty/u);
+  const dsl40Section = workshopIndex.slice(dsl40Position, dsl32Position);
+  assert.match(dsl40Section, /\[準備中\]\s+手児奈にプロポーズ！\s+AIと演じる参加型紙芝居/u);
+  assert.match(dsl40Section, /開催日・対象年齢・会場: 未定/u);
+  assert.match(dsl40Section, /資料は準備が整い次第、このページで公開します。/u);
+  assert.doesNotMatch(dsl40Section, /<a\s|class="actions"|class="button/u);
   assert.match(workshopIndex, /<h2 id="workshops-32">DSL 3\.2系<\/h2>/u);
   assert.match(workshopIndex, /<time datetime="2026-08-01">2026年8月1日<\/time>/u);
   assert.equal((workshopIndex.match(/class="document-updated"/gu) ?? []).length, 2);
