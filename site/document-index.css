@@ -547,6 +547,15 @@ main {
   width: 40px;
   height: 40px;
 }
+.turbowarp-plus-family__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.turbowarp-plus-family__note {
+  color: #4a4f86;
+  font-size: 0.86rem;
+}
 .turbowarp-plus-family__text strong {
   color: #3b55e0;
 }

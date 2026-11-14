@@ -403,4 +403,17 @@ test('states TurboWarp Plus family membership with its icon on the documentation
   assert.match(rootIndex, /<strong>TurboWarp Plus<\/strong\s*>ファミリーのプロジェクトの一つです/u);
   assert.match(rootIndex, /href="https:\/\/kubohiroya\.github\.io\/turbowarp-plus-packages\/"/u);
   assert.match(documentIndexCss, /\.turbowarp-plus-family__icon\s*\{/u);
+  assert.match(
+    rootIndex,
+    /TurboWarpに機能を足す拡張・ツールチェーン・アプリケーション・ドキュメントサイト群です/u,
+  );
+  for (const readme of ['../README.md', '../README.ja.md']) {
+    const text = readFileSync(new URL(readme, import.meta.url), 'utf8');
+    assert.match(text, /<img src="site\/turbowarp-plus-icon\.svg"/u);
+    assert.match(text, /\]\(https:\/\/kubohiroya\.github\.io\/turbowarp-plus-packages\/\)/u);
+  }
+  assert.match(
+    readFileSync(new URL('../README.ja.md', import.meta.url), 'utf8'),
+    /TurboWarp紙芝居は、\[TurboWarp Plus\]\([^)]+\)ファミリーのプロジェクトの一つです/u,
+  );
 });
