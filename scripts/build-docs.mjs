@@ -588,6 +588,10 @@ export async function buildDocs({force = false} = {}) {
     ),
     copyFileIfStale(path.join(projectRoot, 'site/favicon.png'), path.join(distRoot, 'favicon.png')),
     copyFileIfStale(
+      path.join(projectRoot, 'site/turbowarp-plus-icon.svg'),
+      path.join(distRoot, 'turbowarp-plus-icon.svg'),
+    ),
+    copyFileIfStale(
       path.join(projectRoot, 'site/document-index.css'),
       path.join(distRoot, 'document-index.css'),
     ),

@@ -12,6 +12,10 @@
 読者別ディレクトリへ追加移設しています。文書の表示順は`docs/config.mjs`で管理し、
 ファイル名には旧来の番号接頭辞を付けません。
 
+## <img src="site/turbowarp-plus-icon.svg" width="32" height="32" alt=""> TurboWarp Plusファミリー
+
+TurboWarp紙芝居は、[TurboWarp Plus](https://kubohiroya.github.io/turbowarp-plus-packages/)ファミリーのプロジェクトの一つです。TurboWarp Plusは、[TurboWarp](https://turbowarp.org/)に機能を足す拡張・ツールチェーン・アプリケーション・ドキュメントサイト群です。ファミリーに属するパッケージと依存関係は[TurboWarp Plusダッシュボード](https://kubohiroya.github.io/turbowarp-plus-packages/)で確認できます。TurboWarp PlusもTurboWarpプロジェクトおよびScratch財団とは提携しておらず、承認も受けていない非公式のプロジェクトです。
+
 ## 公開サイトの役割
 
 - `turbowarp-kamishibai-app`: アプリ本体と、アプリ・文書・サンプルへ移動する公開入口

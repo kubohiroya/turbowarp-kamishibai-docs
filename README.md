@@ -6,6 +6,10 @@ This repository holds the general documents, the documents for Kamishibai DSL au
 
 The document sources were moved here with their history from merge commit `8166edb3a8b7ed360685bdcd6534c000054105bd` of PR #238, made under the earlier repository name and still in the history of the current `turbowarp-kamishibai-app`. The three developer documents that had stayed behind in `docs/design/` and `docs/development/` at that commit were moved as well. The display order of the documents is kept in `docs/config.mjs`, and file names no longer carry the old numeric prefixes.
 
+## <img src="site/turbowarp-plus-icon.svg" width="32" height="32" alt=""> Part of the TurboWarp Plus family
+
+TurboWarp Kamishibai is one of the projects in the [TurboWarp Plus](https://kubohiroya.github.io/turbowarp-plus-packages/) family. TurboWarp Plus is a set of extensions, toolchains, applications and documentation sites that add features to [TurboWarp](https://turbowarp.org/). The packages in the family and their dependencies are listed on the [TurboWarp Plus dashboard](https://kubohiroya.github.io/turbowarp-plus-packages/). TurboWarp Plus is likewise unofficial: it is not affiliated with or endorsed by the TurboWarp project or the Scratch Foundation.
+
 ## What each published site is for
 
 - `turbowarp-kamishibai-app`: the application itself, and the public entry point that leads to the app, the documents and the samples
