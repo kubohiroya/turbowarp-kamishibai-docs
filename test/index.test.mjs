@@ -394,3 +394,13 @@ function linkLabels(actions) {
     label.replace(/\s+/gu, ' ').trim(),
   );
 }
+
+test('states TurboWarp Plus family membership with its icon on the documentation top page', () => {
+  const icon = readFileSync(new URL('../site/turbowarp-plus-icon.svg', import.meta.url), 'utf8');
+  assert.match(icon, /aria-label="TurboWarp Plus"/u);
+  assert.match(rootIndex, /<p class="turbowarp-plus-family">/u);
+  assert.match(rootIndex, /src="turbowarp-plus-icon\.svg"/u);
+  assert.match(rootIndex, /<strong>TurboWarp Plus<\/strong\s*>ファミリーのプロジェクトの一つです/u);
+  assert.match(rootIndex, /href="https:\/\/kubohiroya\.github\.io\/turbowarp-plus-packages\/"/u);
+  assert.match(documentIndexCss, /\.turbowarp-plus-family__icon\s*\{/u);
+});
