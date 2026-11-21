@@ -11,8 +11,8 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 増やすときに[紙芝居DSL 4.0 台本作成ガイド](dsl-4.0-author-guide.md)の必要な節をお読みください。
 
 文書状態: **固定実装基準を説明するSchemaリファレンス（正式リリースの操作資料ではない）**\
-Schema固定commit: [`962337f`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/962337f0fd8c77191453cc51c4b27e136f911731)\
-Schema SHA-256: `d04cf1b08635d2b939b5d1e8623f3bf3043f750c21b9be5a059808a502a614ca`
+Schema固定commit: [`465963b`](https://github.com/kubohiroya/turbowarp-kamishibai-app/commit/465963ba37d38c98a4b8c6c7e87f8263eee5768f)\
+Schema SHA-256: `d296cffffaf1234fdd16a0d437d8906aef8268b00cb29a410dbd6a0525d998b9`
 
 > **権威関係と配布状態:** このSchemaの出典は上記の固定commitです。
 > 現在の公開版と配布状況は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認してください。
@@ -22,7 +22,7 @@ Schema SHA-256: `d04cf1b08635d2b939b5d1e8623f3bf3043f750c21b9be5a059808a502a614c
 
 ## このリファレンスについて
 
-この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/962337f0fd8c77191453cc51c4b27e136f911731/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
+この文書は、固定snapshotの[DSL 4.0 JSON Schema](https://github.com/kubohiroya/turbowarp-kamishibai-app/blob/465963ba37d38c98a4b8c6c7e87f8263eee5768f/schema/dsl-4.schema.json)とCC BY-SA 4.0の日本語Annotationから
 決定的に生成しています。型、必須性、既定値、数値範囲、列挙値、patternはSchemaから取得し、説明、掲載順、
 注意事項、例はAnnotationで管理します。Schemaで定義される項目についてSchemaと生成物が異なる場合はSchemaを
 優先します。include文はSchema検証前に処理されるためJSON Schema外であり、固定した表層仕様と実装に基づいて掲載します。
@@ -34,7 +34,7 @@ Schema SHA-256: `d04cf1b08635d2b939b5d1e8623f3bf3043f750c21b9be5a059808a502a614c
 
 - 上流repository: [`kubohiroya/turbowarp-kamishibai-app`](https://github.com/kubohiroya/turbowarp-kamishibai-app)
 - Schema path: `schema/dsl-4.schema.json`
-- 上流commit日時: `2026-10-30T18:09:06Z`
+- 上流commit日時: `2026-11-21T21:08:56Z`
 - 掲載範囲: トップレベル16 field、action 35種類、Annotation 117項目
 - 更新方法: `pnpm docs:dsl4:sync -- --repository ../turbowarp-kamishibai-app --commit <commit>`
 - 差分確認: `pnpm docs:dsl4:check`
@@ -2522,7 +2522,7 @@ Schema位置: `#/$defs/sayAction`
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
 | `stableId` | 任意 | 文字列（`id`）（`stableId`） | — |
-| `text` | 必須 | 文字列 | — |
+| `text` | 必須 | 文字列 または 文字列 または object（`rubyContentRun`）（`contentRun`）の配列（`contentRuns`）（`bodyText`） | — |
 | `closePolicy` | 任意 | 文字列（`bubbleStyleName`）（`bubbleClosePolicyName`） | — |
 | `seconds` | 任意 | 数値 | 0以上 |
 | `waitFor` | 任意 | 固定値 `advance` | — |
@@ -2564,7 +2564,7 @@ Schema位置: `#/$defs/thinkAction`
 | field／形式 | 必須性 | 型 | 既定値・制約 |
 | --- | --- | --- | --- |
 | `stableId` | 任意 | 文字列（`id`）（`stableId`） | — |
-| `text` | 必須 | 文字列 | — |
+| `text` | 必須 | 文字列 または 文字列 または object（`rubyContentRun`）（`contentRun`）の配列（`contentRuns`）（`bodyText`） | — |
 | `closePolicy` | 任意 | 文字列（`bubbleStyleName`）（`bubbleClosePolicyName`） | — |
 | `seconds` | 任意 | 数値 | 0以上 |
 | `waitFor` | 任意 | 固定値 `advance` | — |
