@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schemaの参照版は**4.0.0-rc.79**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.79)のSB3を使います。CLIは[公開版を固定する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
+現在の公開App・Schemaの参照版は**4.0.1**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.1)のSB3を使います。CLIは[公開版を固定する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
 
 標準実行環境: `4.0.0-rc.58`（公開プレリリース）\
 このチュートリアルの公開サンプル: `4.0.0-rc.58`（公開成果物）\
@@ -82,7 +82,7 @@ _公開Web版が台本と素材を読み込むまで待ちます。_
 
 ## 3. カメラを許可する
 
-ポーズで参加するときは、共通Dockの「カメラ」を押します。Editorで開いている場合は停止ボタンの後ろの「カメラ」を使います。未起動ならブラウザーのカメラ使用許可を確認し、「許可」を選んで開始します。起動後のカメラ選択と左右反転も、同じ入口で設定します。
+ポーズで参加するときは、カメラの入口を押します。4.0.1のWeb版とHTMLでは、タイトルの「設定 / Config」または再生中の`Esc`で開く[再生設定画面](../user-guides/user-guide-4.0.md#playback-settings)に「カメラ」があります。4.0.0以前のHTMLでは共通Dockの「カメラ」、Editorで開いている場合は停止ボタンの後ろの「カメラ」を使います。未起動ならブラウザーのカメラ使用許可を確認し、「許可」を選んで開始します。起動後のカメラ選択と左右反転も、同じ入口で設定します。
 
 <!-- screenshot:P-04 -->
 
@@ -151,6 +151,8 @@ _メニューへ戻る前に、できたことと次の行動を伝えます。�
 | チャージが途中で戻る   | ポーズを大きく作り、同じ姿勢を少し長く保つ                      |
 | 想定と左右が逆に見える | 共通の「カメラ」で左右反転を切り替える                          |
 | 別のカメラを使いたい   | 共通の「カメラ」から、接続中のカメラを選び直す                  |
+| 音が大きい・小さい     | 再生設定画面でBGMと効果音の音量を変える（4.0.1以降）            |
+| ポーズを飛ばしたい     | 再生設定画面でポーズ待ちのスキップを許可する（4.0.1以降）       |
 
 <!-- capture-note: カメラ選択と左右反転が公開版へ採用された場合は、この位置へ操作画像を置く。 -->
 

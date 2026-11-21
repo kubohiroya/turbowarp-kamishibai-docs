@@ -41,7 +41,7 @@ Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecom
 文書状態: 公開プレリリース`4.0.0-rc.58`の固定実装基準を説明する台本作成ガイド\
 個別検証の調査基準: TurboWarp-Kamishibai `367a94986b4f7232d7b996eb6c21c86ee90d7c4d`、2026年10月21日
 
-正式な`v4.0.0`は未公開です。公開runtimeとSchemaの対応版は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認します。
+正式版は`v4.0.0`（2026年11月20日）から公開しています。公開runtimeとSchemaの対応版は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認します。
 同期したSchemaの固定commitとハッシュは[Schemaリファレンス](dsl-4.0-schema-reference.md)を正本とします。Schemaはruntime実装から生成するものではありません。台本の宣言は`kamishibai: '4.0'`のままです。
 `audio` / `audioControl`はrc.39から利用できます。旧BGM/SE命令も引き続き使えます。
 
@@ -65,7 +65,7 @@ rc.71までの方式では、include文付きのYAMLからラベル付き台本�
 カメラはCamera Sourceが所有し、認識側が映像を借ります。プレビューは映像をそのまま表示し、推論には中央の
 正方形を切り出して左右反転した入力を使います。プレビューの左右反転と推論入力の処理を同一視しないでください。
 カメラを使うときは、Editorの停止ボタンの後ろ、またはHTMLの共通Dockにある「カメラ」を押します。未起動時はブラウザーの許可と開始、起動中はカメラ選択と左右反転の設定を、同じ入口から操作します。
-rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行のrc.79を選びます。
+rc.16にはカメラleaseの不具合があるため、ポーズ作品の実行には使わず現行の4.0.1を選びます。
 
 ローカルプレビューはリモート素材を読み込みません。rc.25では失敗時にダイアログが表示されます。
 `K4-ASSET-REMOTE-DISABLED`ならローカル配信へ変更するか、ビルドした作品で確認してください。
@@ -1128,6 +1128,17 @@ profile間の継承、merge、fallbackはありません。
 `rehearsal.skipScene`は現在のsceneを完了します。これらは実行履歴を移動しません。keymapへ明示したprofileで
 だけ有効になります。
 
+### 再生する人が変えられる設定（4.0.1） {#playback-settings}
+
+4.0.1から、作品を再生する人はタイトルの「設定 / Config」または再生中の`Esc`で再生設定画面を開けます。
+台本の書き方と作品ファイルの形式は変わりません。台本の値は初期値として使われ、再生する人がその場で変えられます。
+
+- ポーズ待ちのスキップ: `recognition.navigation.allowSkip`が初期値です。再生する人は許可・禁止を上書きできます。上書きはその作品の再生中だけ有効で、保存されません。
+- BGMと効果音: 台本が指定した音量とフェードに、再生する人が選んだ係数（オン／オフと0〜100）を掛けます。台本の音量指定は変わりません。
+- `Esc`: 再生中の`Esc`は設定画面を開きます。`controls`や`keyInputToChangeScene`で`Esc`を割り当てても、再生中はこちらが優先されます。
+
+画面に出る項目は、作品が使う機能から決まります。詳しくは[操作説明書の再生設定画面](../user-guides/user-guide-4.0.md#playback-settings)を参照してください。
+
 ## シーンを書く
 
 `scenes`の下には、シーンIDをキーとしてシーンを並べます。シーンの書き方には、アクション列だけを書く短形式と、シーン固有の設定を添える長形式の二つがあります。どちらで書いても、検証後には同じ内部表現へ正規化されます。
@@ -2001,7 +2012,7 @@ App **4.0.0-rc.44以降のStandard**では、物語の有限反復・条件分�
 
 [三人の訪問の公開ページ](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)から、
 Web再生・ブロック台本SB3のダウンロード・TurboWarp-Plus-Editorでの編集を始められます。
-現在の公開版は**4.0.0-rc.79**です。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+現在の公開版は**4.0.1**です。CLIは[公開版を固定する手順](dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 CLIは前記手順でローカル導入後、`npx --no-install turbowarp-kamishibai --help`で起動できます。
 ベースSB3もCLIと同じ公開版へ揃えます。追加の`--narrative-control`は不要です。
 安定版3.2系列の既存作品・導線は引き続き利用できます。

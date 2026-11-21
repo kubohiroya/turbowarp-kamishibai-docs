@@ -2,7 +2,7 @@
 
 Copyright © 2026 Hiroya Kubo. この文書は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)で提供します。
 
-現在の公開App・Schemaの参照版は**4.0.0-rc.79**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.0-rc.79)のSB3と同じ版のCLIを使います。公開サンプルの対応版は[作品一覧](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)で確認してください。rc.71のエラー画面と元ブロックへの案内を追記しています。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
+現在の公開App・Schemaの参照版は**4.0.1**です。[対応Release](https://github.com/kubohiroya/turbowarp-kamishibai-app/releases/tag/v4.0.1)のSB3と同じ版のCLIを使います。公開サンプルの対応版は[作品一覧](https://kubohiroya.github.io/turbowarp-kamishibai-samples/)で確認してください。rc.71のエラー画面と元ブロックへの案内を追記しています。個別検証記録・図版の`4.0.0-rc.41`などは作成当時の版を示します。新しい文書操作・CLI導入と旧SB3の移行は[名前付き文書の手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#named-document-root)を参照してください。以下の旧版CLI・図版は、それぞれに明記した版の固定例です。
 
 対象: TurboWarpで台本ブロックを編集する作者、教材作成者、授業設計者\
 扱う台本: rc.79の名前付きembedded YAML文書と台本ブロック。旧図版は各版の読み取り互換を説明\
@@ -36,7 +36,7 @@ rc.79では、`embedded YAML root [4.0] [main.k4.yml]`を上下につながら�
 
 ## 利用する版と図版の読み方
 
-公開プレリリース`4.0.0-rc.71`のCLIとStandard SB3を使います。正式版4.0.0は未公開です。
+以下の図版と手順は公開プレリリース`4.0.0-rc.71`のCLIとStandard SB3で確認しました。現在は正式版`4.0.1`のCLIとStandard SB3を使えます。
 Node.js 24.0.0以上で公開CLIをexact installすれば、実命令ブロック、統一ハット、includeBlocks、
 8種類の定義ブロックとフォーム編集が使えます。CLIは最初に公開tagから一度ビルドし、以後は同じ固定CLIを使います。
 準備方法は[相互変換ガイド](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md)を参照してください。
@@ -1477,7 +1477,7 @@ Issue #886の種類別定義ブロックへ更新しています。
 [作者ガイドの4.0 RC改訂仕様](../dsl-author-guides/dsl-4.0-author-guide.md)に構文・一覧編集・上限・中断・切戻しをまとめました。
 宣言は4.0のままです。rc.43以前は対応しないため、ベースSB3・台本・CLIの対応版を揃えます。
 Standardは起動時固定で物語制御を有効にします。低水準APIの既定OFFと明示的な無効化は維持します。
-通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.0-rc.79です。CLIとベースSB3を同じrc.79へ揃えます。CLIは[公開版を固定する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
+通常の対応CLIで変換・検証・build・previewでき、追加の実験flagは不要です。旧runnerとの混在は拒否します。現在の公開版は4.0.1です。CLIとベースSB3を同じ4.0.1へ揃えます。CLIは[公開版を固定する手順](../dsl-author-guides/dsl-4.0-block-script-conversion-guide.md#migrate-embedded-yaml)で準備できます。同版のnpm公開状態は[4.0の入口](https://kubohiroya.github.io/turbowarp-kamishibai-docs/4.0/)で確認し、公開済みnpmを使う場合もSB3と版を揃えてください。
 標準Scratch制御ブロックは引き続き非対応です。
 
 [三人の訪問](https://kubohiroya.github.io/turbowarp-kamishibai-samples/stories/three-visits/)で、TurboWarp-Plus-Editorの一覧フォーム・保存／キャンセル・再生を試せます。非対応ブロックの診断には日本語名・ステージ／スプライト名を表示し、該当箇所へ移動・強調できます。
