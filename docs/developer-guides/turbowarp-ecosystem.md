@@ -33,7 +33,7 @@ flowchart LR
   vite --> bundles[standalone bundle / manifest / Composition API]
   bundles --> sb3[SB3 Toolchain]
   camera[TurboWarp-Camera-Source] --> tm[TurboWarp Teachable Machine]
-  camera --> jsqr[jsQR]
+  camera --> zxing[ZXing]
   tm --> async[TurboWarp-Async-Input]
   named[TurboWarp Named Data] --> asset[TurboWarp Asset Cache]
   asset --> bubble[Bubble]
@@ -50,7 +50,7 @@ flowchart LR
   app --> samples[Samples]
 ```
 
-図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp Teachable MachineとjsQRへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
+図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp Teachable MachineとZXingへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
 
 ## Inventory Policy
 
@@ -66,7 +66,7 @@ flowchart LR
 | ------------------------------------------------------------------------------------------------ | ------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------- |
 | [TurboWarp Teachable Machine](https://github.com/kubohiroya/turbowarp-teachable-machine)         | Standalone extension, Composition API | カメラ由来の姿勢・動作状態をTurboWarp blockとComposition APIへ渡す。                 | `@kubohiroya/turbowarp-teachable-machine`     |
 | [TurboWarp-Camera-Source](https://github.com/kubohiroya/turbowarp-camera-source)                 | Standalone extension, Composition API | ブラウザーのカメラ入力を他の機能拡張が扱える映像sourceとして提供する。               | `@kubohiroya/turbowarp-camera-source`         |
-| [TurboWarp jsQR](https://github.com/kubohiroya/turbowarp-jsqr)                                   | Standalone extension, Composition API | カメラ画像からQR codeを読み取り、作品内の入力として扱う。                            | `@kubohiroya/turbowarp-jsqr`                  |
+| [TurboWarp ZXing](https://github.com/kubohiroya/turbowarp-zxing)                                 | Standalone extension, Composition API | カメラ画像からQR codeを読み取り、作品内の入力として扱う。                            | `@kubohiroya/turbowarp-zxing`                 |
 | [TurboWarp-WebUSB-Pasori](https://github.com/kubohiroya/turbowarp-webusb-pasori)                 | Standalone extension, Composition API | PaSoRiなどのWebUSB機器から読み取った入力をTurboWarpへ接続する。                      | `@kubohiroya/turbowarp-webusb-pasori`         |
 | [TurboWarp-Async-Input](https://github.com/kubohiroya/turbowarp-async-input)                     | Standalone extension, Composition API | 非同期の入力eventを一時保持し、Scratch/TurboWarpの実行tickから参照できる形へ整える。 | `@kubohiroya/turbowarp-async-input`           |
 | [TurboWarp-Extended-Notification](https://github.com/kubohiroya/turbowarp-extended-notification) | Standalone extension, Composition API | 作品やhost applicationから利用する通知・状態表示の入口を提供する。                   | `@kubohiroya/turbowarp-extended-notification` |
@@ -94,15 +94,15 @@ flowchart LR
 - Input: MediaDevices camera stream
 - Output: video frame source
 - Direct dependencies: none
-- Optional integrations: turbowarp-teachable-machine, turbowarp-jsqr
+- Optional integrations: turbowarp-teachable-machine, turbowarp-zxing
 - Representative use case: 認識系拡張へ共通のカメラ入力を渡す。
 - License policy: MPL-2.0 for software.
 - Status: current
 
-### TurboWarp jsQR
+### TurboWarp ZXing
 
-- Repository: [kubohiroya/turbowarp-jsqr](https://github.com/kubohiroya/turbowarp-jsqr)
-- Package: `@kubohiroya/turbowarp-jsqr`
+- Repository: [kubohiroya/turbowarp-zxing](https://github.com/kubohiroya/turbowarp-zxing)
+- Package: `@kubohiroya/turbowarp-zxing`
 - Surface: Standalone extension, Composition API
 - Input: video frame source
 - Output: QR payload
@@ -350,7 +350,7 @@ flowchart LR
 - Input: script, asset, extension bundle, runtime setting
 - Output: web application, SB3 artifact, publication artifact
 - Direct dependencies: turbowarp-teachable-machine, turbowarp-asset-cache, turbowarp-kvs, turbowarp-async-input, turbowarp-runtime-expression, turbowarp-bubble, turbowarp-diagnostic-overlay, sb3-toolchain
-- Optional integrations: turbowarp-jsqr, turbowarp-webrtc
+- Optional integrations: turbowarp-zxing, turbowarp-webrtc
 - Representative use case: 教材、作品、ワークショップ用の紙芝居を配布・実行する。
 - License policy: Software is MPL-2.0; documents and content follow their own notices.
 - Status: current

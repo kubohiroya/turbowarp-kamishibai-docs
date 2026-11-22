@@ -42,7 +42,7 @@
       "inputs": ["MediaDevices camera stream"],
       "outputs": ["video frame source"],
       "dependencies": [],
-      "optionalIntegrations": ["turbowarp-teachable-machine", "turbowarp-jsqr"],
+      "optionalIntegrations": ["turbowarp-teachable-machine", "turbowarp-zxing"],
       "useCase": "認識系拡張へ共通のカメラ入力を渡す。",
       "packageName": "@kubohiroya/turbowarp-camera-source",
       "repository": "kubohiroya/turbowarp-camera-source",
@@ -51,9 +51,9 @@
       "status": "current"
     },
     {
-      "id": "turbowarp-jsqr",
+      "id": "turbowarp-zxing",
       "category": "recognition-input-network",
-      "productName": "TurboWarp jsQR",
+      "productName": "TurboWarp ZXing",
       "responsibility": "カメラ画像からQR codeを読み取り、作品内の入力として扱う。",
       "surface": ["Standalone extension", "Composition API"],
       "inputs": ["video frame source"],
@@ -61,9 +61,9 @@
       "dependencies": ["turbowarp-camera-source"],
       "optionalIntegrations": ["turbowarp-kamishibai-app"],
       "useCase": "会場や教材でQR codeから作品・台本・設定を選ぶ。",
-      "packageName": "@kubohiroya/turbowarp-jsqr",
-      "repository": "kubohiroya/turbowarp-jsqr",
-      "guideUrl": "https://github.com/kubohiroya/turbowarp-jsqr#readme",
+      "packageName": "@kubohiroya/turbowarp-zxing",
+      "repository": "kubohiroya/turbowarp-zxing",
+      "guideUrl": "https://github.com/kubohiroya/turbowarp-zxing#readme",
       "licensePolicy": "MPL-2.0 for software.",
       "status": "current"
     },
@@ -353,7 +353,7 @@
         "turbowarp-diagnostic-overlay",
         "sb3-toolchain"
       ],
-      "optionalIntegrations": ["turbowarp-jsqr", "turbowarp-webrtc"],
+      "optionalIntegrations": ["turbowarp-zxing", "turbowarp-webrtc"],
       "useCase": "教材、作品、ワークショップ用の紙芝居を配布・実行する。",
       "packageName": "@kubohiroya/turbowarp-kamishibai-app",
       "repository": "kubohiroya/turbowarp-kamishibai-app",

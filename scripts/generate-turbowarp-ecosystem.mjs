@@ -74,7 +74,7 @@ flowchart LR
   vite --> bundles[standalone bundle / manifest / Composition API]
   bundles --> sb3[SB3 Toolchain]
   camera[TurboWarp-Camera-Source] --> tm[TurboWarp Teachable Machine]
-  camera --> jsqr[jsQR]
+  camera --> zxing[ZXing]
   tm --> async[TurboWarp-Async-Input]
   named[TurboWarp Named Data] --> asset[TurboWarp Asset Cache]
   asset --> bubble[Bubble]
@@ -118,7 +118,7 @@ ${bulletList(inventory.overview.learningPath)}
 
 ${mermaidFlow()}
 
-図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp Teachable MachineとjsQRへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
+図は次の関係を示します。TypeScriptで書いた機能拡張はVite pluginでstandalone bundle、manifest、Composition API向け出力へ分かれ、SB3 ToolchainでScratch/TurboWarp projectのsource管理と再現可能buildへ接続します。Camera SourceはTurboWarp Teachable MachineとZXingへ映像sourceを渡し、Async Inputは認識・device・application eventを作品の実行tickから扱える状態へ整えます。SVG Text、Text Lines、Asset CacheはBubbleの表示素材と台詞を支え、KVSはbinary stateを保存し、Diagnostic Overlayは停止理由や検証結果を画面へ出します。TurboWarp-Kamishibaiはこれらを統合し、DocsとSamplesが利用者・教材作者・開発者の入口を提供します。
 
 ## Inventory Policy
 
