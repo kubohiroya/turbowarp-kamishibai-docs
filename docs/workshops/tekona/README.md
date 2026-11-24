@@ -12,6 +12,7 @@ Copyright © 2026 Hiroya Kubo. All rights reserved.
 | ------------------------------------- | -------------------------------------------------- |
 | `tekona-workshop-cover.md`   | 参加者向け資料の表紙（下案）                       |
 | `tekona-workshop.md`         | 参加者向け資料の本体（下案）                       |
+| `tekona-workshop-worksheet.md` | 参加者が記入するワークシート（下案）             |
 | `tekona-workshop-staff.md`   | スタッフ向け資料（下案）                           |
 
 2026年8月1日の「親子AIプログラミング体験会」資料
