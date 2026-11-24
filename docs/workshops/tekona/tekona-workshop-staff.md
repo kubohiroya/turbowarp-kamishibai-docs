@@ -59,7 +59,7 @@ Copyright © 2026 Hiroya Kubo. All rights reserved.
 * USBカメラ：参加者1人につき1台（PC内蔵カメラでも可。**上半身が大きく映る画角**が確保できるか事前確認）
 * ネットワーク：参加者全員が同時にTeachable Machineへモデルをアップロードできる上り帯域
 * 配布資料フォルダのZIPファイルと配布URL（事前にアクセス確認）
-* 印刷したワークシート（作者名・求婚者の名前・求婚の言葉・手児奈の断りの言葉・断られたときの一言・`kime`と`rejected`のポーズの説明・心が揺れたか・モデルURLの記入欄。言葉の欄はいずれも40字まで）
+* 印刷したワークシート（`tekona-workshop-worksheet.md`から作成。作者名・求婚者の名前・求婚の言葉・手児奈の断りの言葉・断られたときの一言・`kime`と`rejected`のポーズの説明・心が揺れたか・モデルURLの記入欄。言葉の欄はいずれも40字まで）
 * 席番号（`01`〜`20`）の割り当て表と、各席に貼る番号札
 * 印刷した参加者向け資料
 * アカウント：PCログオン用【要確定：ゲストアカウントの方式】
@@ -152,7 +152,7 @@ tekona/
 │   └── pose2.png
 ├── tekona-workshop-blocks-4.0.sb3 席番号ごとの枠を持つベース作品（ブロック台本）
 ├── tekona-complete-sample.sb3     完成見本（デモ用・救済用）
-├── worksheet.pdf                  ワークシート
+├── worksheet.pdf                  ワークシート（`tekona-workshop-worksheet.md`から作成）
 └── tekona-workshop.pdf   参加者向け資料
 ```
 
@@ -365,7 +365,7 @@ tekona/
 | 完成見本SB3                                 | Samples                               | 未着手 |
 | Web版と公開URL                              | Samples                               | 未着手 |
 | 救済用ポーズモデル（`stand`／`kime`／`rejected`、複数本） | スタッフ事前作成         | 未着手 |
-| ワークシート（2.1の記入欄にそろえる）       | Docs                                  | 未着手 |
+| ワークシート（`tekona-workshop-worksheet.md`） | Docs                                | 下案あり（印刷体裁は未定） |
 | 参加者向け資料の図版（スクリーンショット等） | Docs（`docs/images`）                | 未着手 |
 | 会場見取り図                                | Docs                                  | 未着手 |
 | 技術構成図                                  | Docs                                  | 未着手 |
