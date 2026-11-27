@@ -67,7 +67,7 @@ test('covers current recognition, transitions, variable actions and ruby with va
     annotations: json('sources/dsl4/annotations.ja.json'),
   });
   assert.equal(counts.topLevelFieldCount, 16);
-  assert.equal(counts.actionCount, 35);
+  assert.equal(counts.actionCount, 37);
   const AjvConstructor = /** @type {any} */ (Ajv2020);
   const ajv = new AjvConstructor({strict: true, allErrors: true});
   const validate = ajv.compile(schema);

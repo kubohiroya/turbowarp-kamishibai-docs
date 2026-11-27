@@ -804,6 +804,16 @@
           "example": "transition:\n  effect: fadeOut\n  seconds: 0.5"
         },
         {
+          "pointer": "#/$defs/presentationEffectAction",
+          "order": 75,
+          "title": "`presentationEffect`",
+          "summary": "stageまたはpresentation全体へ時間付きの演出を適用します。effectはshake・zoom・wipe・fadeから選び、対応するparamsを指定します。",
+          "example": "presentationEffect:\n  scope: stage\n  effect: shake\n  seconds: 0.5\n  params:\n    amplitude: 8\n    axis: x\n    cycles: 3",
+          "notes": [
+            "secondsは0〜30秒です。shakeのamplitudeは0〜64、cyclesは1〜12、zoomのscaleは1〜3の範囲で指定します。"
+          ]
+        },
+        {
           "pointer": "#/$defs/gotoAction",
           "order": 80,
           "title": "`goto`",
@@ -1046,6 +1056,16 @@
           "title": "`Actor.pose`",
           "summary": "一つ以上のpose stepを順に認識し、任意のcostumeとsoundでfeedbackします。",
           "example": "Hero.pose:\n  steps:\n    - pose: wave\n      skin: HeroWave\n      sound: Success"
+        },
+        {
+          "pointer": "#/$defs/animateAction",
+          "order": 115,
+          "title": "`Actor.animate`",
+          "summary": "位置・大きさ・向き・透明度のうち指定した値を、秒数とeasingに従って変化させます。toには一つ以上の値を指定します。",
+          "example": "Hero.animate:\n  to:\n    x: 100\n    y: 20\n    scale: 1.2\n  seconds: 1\n  easing: easeInOut\n  delaySeconds: 0.2\n  repeat: 1\n  alternate: true\n  background: true",
+          "notes": [
+            "secondsとdelaySecondsは0〜60秒、repeatは0〜20です。scaleは0より大きい値、transparencyは0〜100で指定します。"
+          ]
         },
         {
           "pointer": "#/$defs/customActorAction",
