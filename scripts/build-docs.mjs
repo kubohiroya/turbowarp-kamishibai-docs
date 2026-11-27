@@ -34,8 +34,7 @@ const vivliostyleBin = path.join(
   path.dirname(require.resolve('@vivliostyle/cli/package.json')),
   'dist/cli.js',
 );
-const vivliostyleRequire = createRequire(require.resolve('@vivliostyle/cli/package.json'));
-const {PDFDocument} = vivliostyleRequire('pdf-lib');
+const {PDFDocument} = require('pdf-lib');
 const rubyganaBin = path.join(
   path.dirname(require.resolve('@kubohiroya/rubygana/package.json')),
   'bin/rubygana.js',
