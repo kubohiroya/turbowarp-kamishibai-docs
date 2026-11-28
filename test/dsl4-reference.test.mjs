@@ -104,7 +104,8 @@ test('generates the checked-in reference byte-for-byte deterministically', () =>
   assert.match(generated, /### `include` — 別の台本ファイルを読み込む/u);
   assert.match(generated, /include:\n  - chapters\/opening\.k4\.yml/u);
   assert.match(generated, /JSON Schemaのfieldではなく/u);
-  assert.match(generated, /--enable-source-includes/u);
+  assert.match(generated, /top-levelに`include`を宣言したときだけ/u);
+  assert.match(generated, /4\.0\.24（公開前の候補）で廃止します/u);
   assert.doesNotMatch(generated, /DSL 3\.[12]|kamishibai=3\.[12]/u);
 });
 

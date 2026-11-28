@@ -206,15 +206,17 @@ YAMLの実行用Schemaにfieldを追加せず、無効部分の復元状態は�
 主な依存関係は次のとおりです。
 
 - `dsl4AppShell`は`dsl4Runtime`を必要とする
-- `dsl4SourceIncludes`は`dsl4Runtime`を必要とする
 - `dsl4WebPreviewAdapter`は`dsl4Runtime`と`dsl4AppShell`を必要とする
 - `dsl4WebPreviewAssetLiveReload`はruntime、app shell、Web Preview adapterを必要とする
 - `dsl4PreviewReloadOverlay`はruntimeとapp shellを必要とする
 - `dsl4SpeechAdvanceTypewriter`はruntimeを必要とする
 
-`build-dsl4`と`preview-dsl4`のSource Graph経路は`--enable-source-includes`を指定したときだけ有効になり、
-source件数、graph合計byte数、include depthの有限上限も必須になります。問題を切り分ける場合はflagを既定OFFへ
-戻し、単一sourceでruntime、adapter、artifactの基線を確認します。flagの既定値自体を文書変更と一緒に変えません。
+4.0.24から（公開前の候補）、includeはflagなしの正式な機能です。`build-dsl4`と`preview-dsl4`は、entry sourceが
+top-levelに`include`を宣言したときだけSource Graph経路で合成し、宣言しない台本は単一sourceとして読みます。
+判定は`src/dsl4/source-include-detection.ts`の`dsl4SourceDeclaresIncludes`に一本化されています。
+graph上限の`--max-source-files`、`--max-total-source-bytes`、`--max-include-depth`は任意で、省略時は
+`dsl4SourceGraphDefaultLimits`（64ファイル、4 MiB、深さ32）を使います。問題を切り分ける場合は、entryの
+`include`を外した単一sourceでruntime、adapter、artifactの基線を確認します。flagの既定値自体を文書変更と一緒に変えません。
 
 ## projectとsource manifestを準備する
 
@@ -252,8 +254,8 @@ pnpm exec turbowarp-kamishibai validate-dsl4 \
 端末の絶対pathを出力しません。
 
 `include`はJSON Schemaのfieldではなく、Schema検証前のSource Graph directiveです。そのため複数source全体は、
-`validate-dsl4`へ`include`付きentryを直接渡すのではなく、次節の`preview-dsl4`または`build-dsl4`で
-`--enable-source-includes`とgraph上限を指定して検証します。
+`validate-dsl4`へ`include`付きentryを直接渡すのではなく、次節の`preview-dsl4`または`build-dsl4`で検証します。
+entryが`include`を宣言していれば、追加の指定なしで合成されます。
 
 ## CLI Previewを実行する
 
@@ -273,14 +275,11 @@ pnpm exec turbowarp-kamishibai preview-dsl4 \
   --max-asset-file-bytes 16777216 \
   --max-asset-files 64 \
   --max-total-asset-bytes 67108864 \
-  --enable-source-includes \
-  --max-source-files 32 \
-  --max-total-source-bytes 262144 \
-  --max-include-depth 8 \
   --port 0
 ```
 
-includeを使わないprojectでは、`--enable-source-includes`と三つのgraph上限をまとめて外します。`--port 0`は
+entryが`include`を宣言していれば、included sourceも監視して合成します。graph上限を既定値より狭めたい場合だけ
+`--max-source-files`、`--max-total-source-bytes`、`--max-include-depth`を追加します。`--port 0`は
 OSに空いているloopback portを選択させます。hostは`127.0.0.1`または`::1`にだけbindし、許可originと
 one-use session tokenを検査します。CLIはbrowser runtime-ready acknowledgmentを受け取るまでreadyを表示しません。
 SIGINT／SIGTERM、ブラウザー切断、full rebuild要求ではwatcher、transport、runtimeを有限時間で終了します。
@@ -291,7 +290,8 @@ full rebuildとしてcommandを再起動します。
 
 ## 自己完結SB3をビルドする
 
-配布candidateは`build-dsl4`で一つの`.sb3`へ出力します。次の例はSource Graphを有効にする場合の完全なCLI契約です。
+配布candidateは`build-dsl4`で一つの`.sb3`へ出力します。次の例はgraph上限を明示する場合の完全なCLI契約です。
+graph上限は任意で、省略時は64ファイル、4 MiB、深さ32を使います。
 
 ```bash
 pnpm exec turbowarp-kamishibai build-dsl4 \
@@ -305,7 +305,6 @@ pnpm exec turbowarp-kamishibai build-dsl4 \
   --max-asset-file-bytes 16777216 \
   --max-asset-files 64 \
   --max-total-asset-bytes 67108864 \
-  --enable-source-includes \
   --max-source-files 32 \
   --max-total-source-bytes 262144 \
   --max-include-depth 8
@@ -494,7 +493,7 @@ PRには少なくとも次を記録します。
 6. Pagesを再公開し、Issueとrelease noteへ影響範囲を記録する
 
 npmへ公開済みのversionは上書きせず、必要に応じてdeprecateと修正版バージョンを使用します。Source Graphだけを止める
-場合は`dsl4SourceIncludes`をOFFにし、`--enable-source-includes`を外した単一source経路へ戻します。Browser Previewの
+場合は、entryの`include`を外して単一sourceへまとめた台本でビルドします。Browser Previewの
 問題ではpreview adapterをOFFにしても、検証済み自己完結SB3のproduction runtimeを同時に変更しません。
 
 文書だけをrollbackする場合は、本書のMarkdown、`docs/config.mjs`の4.0 publication、`site/4.0/index.html`のカード、
@@ -528,6 +527,7 @@ Standardは起動時固定で物語制御を有効にします。低水準APIの
 ## rc.51の配布・資源管理
 
 rc.51は共有素材のownerと保持予算/LRU、publication読込時の常駐予算、章間の素材ファイル重複排除、次章remote動画の検証済みcacheへの先読みを含みます。先読みはmaterializeせず、章遷移の失敗・cancel時には現章の再生を保持します。これらはDSL 4.0の改訂であり、新しいURLスイッチは不要です。
+なお、publication（章）による読込は4.0.24で廃止しました。台本の分割はinclude、ファイルをまたぐ移動は`goto`で書きます。
 
 CLIの`build-dsl4 --distribution-profile compiled`、または`buildDsl4RuntimeComponent({distributionProfile: 'compiled'})`で、YAMLや作者用hatを含めず検証済みStory IRを配布できます。既定の`source` profileは従来どおりです。`compiled`は暗号化ではなく、rc.56では`sealed`配布を撤去しました。rc.51〜rc.55の旧sealed作品は非対応です。編集用の原本YAML・素材は別途保持してください。
 

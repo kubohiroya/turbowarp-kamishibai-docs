@@ -441,11 +441,14 @@ story-k4/
 npx --no-install turbowarp-kamishibai build-dsl4 \
   --base output/block-script/base.sb3 \
   --project-root output/block-script/exported/story-k4 \
-  --source story.k4.yml --enable-source-includes \
-  --max-source-files 64 --max-total-source-bytes 1048576 --max-include-depth 32 \
+  --source story.k4.yml \
   --output output/block-script/story-play.sb3 \
   --control-profile production --channel bundled --replace-existing
 ```
+
+主台本が`include`を宣言していれば、4.0.24（公開前の候補）以降のCLIは追加の指定なしで合成します。
+graph上限は任意で、省略時は64ファイル、合計4 MiB、深さ32です。4.0.23以前のCLIでは
+`--enable-source-includes`と`--max-source-files`、`--max-total-source-bytes`、`--max-include-depth`も指定します。
 
 素材がある台本では、補正された`file:`が指すファイルを、このプロジェクトの同じ相対位置に配置します。
 `validate-dsl4`は単一ソースの検証なので、include付き主台本だけの検証では参照先を合成しません。

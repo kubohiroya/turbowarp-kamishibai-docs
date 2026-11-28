@@ -385,8 +385,8 @@ runtime／app-shell flagから明示起動します。rollbackはhostを停止�
 quiesce／commitし、失敗時はcurrent generationを維持します。
 
 `dsl4PreviewReloadOverlay`は既定OFFです。OFFでも診断そのものは失われず、overlay UIだけを構成しません。
-`dsl4SourceIncludes`も既定OFFで、OFF時は単一sourceへ戻ります。includeの一部だけを無視して同名宣言を
-後勝ちにするfallbackはありません。
+includeはflagなしの正式な機能で、entry sourceが`include`を宣言したときだけ合成します（4.0.24から）。
+includeの一部だけを無視して同名宣言を後勝ちにするfallbackはありません。
 
 共通rollback順は次のとおりです。
 
@@ -405,7 +405,6 @@ quiesce／commitし、失敗時はcurrent generationを維持します。
 | flag                               | 有効化する境界                          | 依存・OFF時のfallback              |
 | ---------------------------------- | --------------------------------------- | ---------------------------------- |
 | `dsl4Runtime`                      | DSL 4.0 runtime                         | coreを起動しない                   |
-| `dsl4SourceIncludes`               | include文の複数source読込               | 単一source                         |
 | `dsl4AppShell`                     | Standard app shell                      | shell／runtime hostを作らない      |
 | `dsl4WebPreviewAdapter`            | read-only Browser Web Preview           | CLI previewまたはone-shot          |
 | `dsl4WebPreviewAssetLiveReload`    | Browser asset reload                    | source reloadまたはfull rebuild    |

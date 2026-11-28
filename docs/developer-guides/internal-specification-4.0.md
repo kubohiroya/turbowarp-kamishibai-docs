@@ -206,7 +206,9 @@ pathはproject rootから脱出できず、source suffixも検査します。cyc
 `K4-DECLARATION-DUPLICATE`で停止します。`order`はdependency order、`discoveryOrder`はentryを
 先頭とする安定した発見順です。
 
-`createDsl4SourceGraphFrontend(sourceFrontend)`は`dsl4SourceIncludes`がONのときだけ動作します。
+`createDsl4SourceGraphFrontend(sourceFrontend)`は、entry sourceがtop-levelに`include`を宣言したときだけ使います。
+判定は`src/dsl4/source-include-detection.ts`の`dsl4SourceDeclaresIncludes`に一本化され、build、asset audit／lock、
+Nodeとbrowserのpreviewが共有します。4.0.24から（公開前の候補）feature flagは要りません。
 各nodeへrestricted YAML policyを適用し、named declarationとsingletonを一つへ構成します。
 root優先や後勝ち規則はありません。構成後のcanonical sourceにも明示上限を適用し、その後は単一sourceと
 同じfrontendへ渡します。
@@ -642,7 +644,6 @@ session途中で切り替えません。
 | flag                               | 前提                              | OFF時の境界                               |
 | ---------------------------------- | --------------------------------- | ----------------------------------------- |
 | `dsl4Runtime`                      | なし                              | runtime dependencyを初期化しない          |
-| `dsl4SourceIncludes`               | `dsl4Runtime`                     | 単一source frontendへ戻る                 |
 | `dsl4AppShell`                     | `dsl4Runtime`                     | Standard shell DOMを作らない              |
 | `dsl4WebPreviewAdapter`            | runtime + app shell               | directory pickerとbrowser watchを作らない |
 | `dsl4WebPreviewAssetLiveReload`    | runtime + app shell + Web Preview | source-only reload／full rebuildへ戻る    |

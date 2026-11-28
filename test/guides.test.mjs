@@ -161,7 +161,6 @@ test('grounds the DSL 4.0 internal specification in the completed implementation
   }
   for (const flag of [
     'dsl4Runtime',
-    'dsl4SourceIncludes',
     'dsl4AppShell',
     'dsl4WebPreviewAdapter',
     'dsl4WebPreviewAssetLiveReload',
@@ -347,7 +346,8 @@ test('publishes a DSL 4.0-only software maintenance contract from the completed 
   assert.match(developerGuide4, /pnpm exec turbowarp-kamishibai validate-dsl4/u);
   assert.match(developerGuide4, /pnpm exec turbowarp-kamishibai preview-dsl4/u);
   assert.match(developerGuide4, /pnpm exec turbowarp-kamishibai build-dsl4/u);
-  assert.match(developerGuide4, /--enable-source-includes/u);
+  assert.match(developerGuide4, /dsl4SourceDeclaresIncludes/u);
+  assert.doesNotMatch(developerGuide4, /--enable-source-includes|dsl4SourceIncludes/u);
   assert.match(developerGuide4, /--max-total-source-bytes/u);
   assert.match(developerGuide4, /deep-frozen StoryDocument/u);
   assert.match(developerGuide4, /remote extension codeと\nremote previewは常に禁止/u);

@@ -244,6 +244,5 @@ Standard SB3の動画命令が、有効化URLなしで実行されることも�
 | [asset group / memory lifecycle #775](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/775) | group purgeと動画decoder・buffer・Object URLの解放を接続する |
 | [保存・復元 #771](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/771) | 動画portの状態取得・復元を保存データへ接続する |
 | [viewport #779](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/779) | 可変viewportと動画の座標・拡大縮小を統合する |
-| [segment loader #773](https://github.com/kubohiroya/turbowarp-kamishibai-app/issues/773) | segment prefetchと配布方式別の読込・解放を統合する |
 | 実画面・ブラウザ | Editor / Player / Packagerの各実画面、音声付き動画のautoplay、codec互換性を対象環境ごとに追加検証する |
 | スプライト間への挿入 | 描画コストを測定し、任意のスプライト間へ挿入する方式を採るか判断する |
