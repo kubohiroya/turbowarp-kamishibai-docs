@@ -389,7 +389,6 @@ CLIの通常出力やbrowser DOMへ直接文字列化しません。
 | flag                            | 診断・停止との関係                           | OFF時の安全動作                            |
 | ------------------------------- | -------------------------------------------- | ------------------------------------------ |
 | `dsl4Runtime`                   | packaged component検証とruntimeを有効化      | dependency、adapter、runtimeを初期化しない |
-| `dsl4SourceIncludes`            | Source Graphとorigin投影を有効化             | 単一source frontendへ戻る                  |
 | `dsl4AppShell`                  | Standard shellを有効化                       | shell DOMを作らない                        |
 | `dsl4WebPreviewAdapter`         | read-only Browser Preview sourceを有効化     | directory picker、browser watchを作らない  |
 | `dsl4WebPreviewAssetLiveReload` | transactional asset reloadを有効化           | source-only reloadまたはfull rebuildへ戻る |

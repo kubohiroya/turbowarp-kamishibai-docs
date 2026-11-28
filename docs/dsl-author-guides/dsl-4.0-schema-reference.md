@@ -57,7 +57,7 @@ include文を取り除いてSchema検証へ渡します。
 Schema位置: JSON Schema外（Schema検証前に処理）
 
 - `include`はJSON Schemaのfieldではなく、Schema検証前に処理されます。
-- `dsl4SourceIncludes`またはCLIの`--enable-source-includes`を明示的に有効にした環境だけで使用できます。
+- 4.0.24（公開前の候補）からは、起点の台本がtop-levelに`include`を宣言したときだけ合成し、機能フラグやCLIの指定は要りません。4.0.23以前は`--enable-source-includes`などで明示的に有効にします。
 - pathは記述したファイルを基準にproject内へ解決し、循環、重複宣言、root外path、件数・byte数・深さの上限違反はエラーになります。
 - `kamishibai`は起点の台本だけに書きます。
 
@@ -2077,7 +2077,7 @@ goto: ending
 
 ### `gotoSegment`
 
-publication manifestで現在の章のnextに宣言した章へ、台本から明示的に移ります。章末で自動遷移せず、同じ台本内のsceneへ移るgotoとは区別します。
+4.0.24（公開前の候補）で廃止します。以前はpublication manifestで宣言した次の章へ移りました。
 
 Schema位置: `#/$defs/gotoSegmentAction`
 
@@ -2085,8 +2085,8 @@ Schema位置: `#/$defs/gotoSegmentAction`
 | --- | --- | --- | --- |
 | `gotoSegment` | 必須 | 文字列（`id`） | pattern `^[\p{L}_][\p{L}\p{N}_-]*$` |
 
-- publication hostが必要です。単一台本hostでは能力検証で拒否します。
-- entryPointsは初期読込用で、章の自由選択や過去状態の復元を提供するものではありません。章の変数はその章の初期値から開始します。
+- 4.0.24以降は、台本の分割は`include`、ファイルをまたぐ場面の移動は`goto`で書きます。合成後はすべてのsceneが一つの名前空間に入り、変数も物語全体で引き継がれます。
+- この項目は固定した公開版のSchemaに残っているため掲載しています。新しい台本では使いません。
 
 Schemaで検証できる値の例:
 

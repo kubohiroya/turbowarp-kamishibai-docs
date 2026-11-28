@@ -216,8 +216,13 @@ Web Previewはプロジェクトルート直下の`project.source.json`を読み
 
 ## 台本を複数ファイルへ分ける（`include`）
 
-`dsl4SourceIncludes`を起動時に明示ONにすると、エントリーソースのinclude文から複数ソースを読み込み、
-一つの台本として合成できます。`include`は一件の文字列またはlistで指定します。
+エントリーソースのtop-levelに`include`を書くと、指定したファイルを読み込み、一つの台本として合成します。
+機能フラグやCLIの指定は要りません（4.0.24から、公開前の候補）。`include`を書かない台本は、これまでどおり
+一つのファイルとして読みます。`include`は一件の文字列またはlistで指定します。
+
+長い物語を章ごとのファイルに分けるときもincludeを使います。合成後はすべてのsceneが一つの名前空間に入るため、
+別のファイルで宣言したsceneへも`goto`で移れます。変数も物語全体で引き継がれます。以前の章（segment）、
+`gotoSegment`ブロック、`publication.json`による複数章の作品は4.0.24で廃止しました。
 
 ```yaml
 # story.k4.yml
@@ -264,9 +269,9 @@ include文には次の規則があります。
 合成後ソース、宣言元の論理ソースID／range、ローカルアセットを保持する自己完結SB3で、端末の絶対パスや
 ブラウザーのファイルハンドルを保存しません。
 
-CLIプレビューでinclude文を使う場合は`--enable-source-includes`を指定し、`--max-source-bytes`、
-`--max-source-files`、`--max-total-source-bytes`、`--max-include-depth`とasset上限を有限値で指定します。
-機能フラグがOFFの場合は単一ソース経路を維持します。
+CLIプレビューとビルドは、エントリーソースが`include`を宣言していれば追加の指定なしで合成します。
+graph上限の`--max-source-files`、`--max-total-source-bytes`、`--max-include-depth`は任意で、省略時は
+64ファイル、合計4 MiB、深さ32です。一つのソースの上限`--max-source-bytes`とasset上限は従来どおり指定します。
 
 ## ファイル全体の構造
 
